@@ -6,18 +6,13 @@
 		<artifactId>boardGames</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>web-layer</artifactId>
-	<packaging>war</packaging>
-
-	<build>
-		<finalName>boardGames</finalName>
-	</build>
+	<artifactId>service</artifactId>
 
 	<dependencies>
-		<!-- service-layer module of boardGames application -->
+		<!-- persistence-layer module of boardGames application -->
 		<dependency>
 			<groupId>com.softserveinc.edu.boardgames</groupId>
-			<artifactId>service-layer</artifactId>
+			<artifactId>persistence</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
