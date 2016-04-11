@@ -6,7 +6,7 @@
 		<artifactId>boardGames</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>persistence-layer</artifactId>
+	<artifactId>persistence</artifactId>
 
 	<properties>
 		<hibernate.version>5.0.0.Final</hibernate.version>
