@@ -10,7 +10,16 @@
 	<packaging>war</packaging>
 
 	<build>
-		<finalName>boardGames</finalName>
+		<finalName>CrossGames</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.3.7.v20160115</version>
+			</plugin>
+		</plugins>
+
 	</build>
 
 	<properties>
@@ -19,11 +28,8 @@
 
 	<dependencies>
 		<!-- service-layer module of boardGames application -->
-		<!-- <dependency>
-			<groupId>com.softserveinc.edu.boardgames</groupId>
-			<artifactId>service</artifactId>
-			<version>${project.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.softserveinc.edu.boardgames</groupId> <artifactId>service</artifactId> 
+			<version>${project.version}</version> </dependency> -->
 
 		<!-- Spring mvc -->
 		<dependency>
@@ -81,7 +87,8 @@
 		</dependency>
 
 
-
 	</dependencies>
+
+
 
 </project>
