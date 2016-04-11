@@ -9,9 +9,10 @@
 	<name>boardGames</name>
 
 	<modules>
-		<module>persistence-layer</module>
-		<module>service-layer</module>
-		<module>web-layer</module>
+		<module>persistence</module>
+		<module>service</module>
+		<module>web</module>
+		
 	</modules>
 	
 	<build>
