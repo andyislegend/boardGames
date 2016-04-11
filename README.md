@@ -4,6 +4,6 @@ SoftServe IT Academy
 
 
 to acces home.jsp use following instructions
-# login: root ;
+# login: root 
 # pword: 123
 
