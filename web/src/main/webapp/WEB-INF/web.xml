@@ -3,7 +3,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>Magic Museum</display-name>
+	<display-name>Board Games Exchange</display-name>
 
 	<!-- context loader listener -->
 	<context-param>
@@ -34,7 +34,7 @@
 		<welcome-file>/WEB-INF/views/index.html</welcome-file>
 	</welcome-file-list>
 
-	<error-page>
+	<!-- <error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/jsp/errors/404.jsp</location>
 	</error-page>
@@ -45,5 +45,5 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/jsp/errors/500.jsp</location>
-	</error-page>
+	</error-page> -->
 </web-app>
