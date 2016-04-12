@@ -1,3 +1,23 @@
+body {
+    color: black;
+    background-color:floralwhite;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
 table {
 	border-style: none;
+}
+.navbar-default {
+    background-color:deepskyblue;
+}
+.my-game-container{
+    background-color: #90EE90;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
 }
