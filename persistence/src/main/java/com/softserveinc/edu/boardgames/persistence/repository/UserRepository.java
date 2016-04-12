@@ -6,4 +6,5 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	public User findByFirstName(String firstName);
 }
