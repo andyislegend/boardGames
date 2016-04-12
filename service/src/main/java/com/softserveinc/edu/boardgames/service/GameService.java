@@ -25,12 +25,12 @@ public class GameService {
 	}
 
 	@Transactional
-	public void update(Game Game) {
-		gameRepo.saveAndFlush(Game);
+	public void update(Game game) {
+		gameRepo.saveAndFlush(game);
 	}
 
 	@Transactional
-	public void create(Game Game) {
-		gameRepo.save(Game);
+	public void create(Game game) {
+		gameRepo.save(game);
 	}
 }

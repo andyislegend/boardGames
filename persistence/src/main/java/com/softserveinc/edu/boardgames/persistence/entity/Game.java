@@ -16,34 +16,73 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * This class represents data model to game entity
+ * Contains data about all kind of games available in system
+ * Has ManyToOne relationship to Category,
+ * OneToMany relationship to GameUser,
+ * OneToOne relationship to GameRating
+ * @author Taras Varvariuk
+ */
 @Entity
 @Table(name = "game")
 public class Game implements Serializable{
 
+	/**
+	 * unique value, primary key
+	 */
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)       
 	private Integer id;
 	
+	/**
+	 * the name of the game
+	 */
 	@Column(name = "name")
 	private String name;
 	
+	/**
+	 * description of game
+	 * may contain general rules
+	 * and game class info
+	 */
 	@Column(name = "description")
 	private String description;
 	
+	/**
+	 * minimum number of players
+	 */
 	@Column(name = "minPlayers")
 	private Integer minPlayers;
 	
+	/**
+	 * maximum number of players in the game
+	 */
 	@Column(name = "maxPlayers")
 	private Integer maxPlayers;
 	
+	/**
+	 * foreign key
+	 * ManyToOne relationship to Category 
+	 */
 	@ManyToOne(fetch=FetchType.LAZY, optional=false, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name="categoryId")
 	private Category category;
 	
+	/**
+	 * foreign key
+	 * OneToMany relationship to GameUser
+	 * set of games of particular user that belongs to this kind of game 
+	 */
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
 	
+	/**
+	 * foreign key
+	 * OneToOne relationship to GameRating
+	 * Every game has it's position in ratings
+	 */
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.ALL)
 	private GameRating gameRating;
 

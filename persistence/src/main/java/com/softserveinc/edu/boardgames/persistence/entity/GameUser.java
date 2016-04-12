@@ -15,25 +15,52 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * This entity contains data model describing games of particular user
+ * Has ManyToOne relationship to game
+ * ManyToMany relationship to user
+ * @author Taras Varvariuk
+ *
+ */
 @Entity
 @Table(name = "gameUser")
 public class GameUser {
 
+	/**
+	 * unique value, primary key
+	 */
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)       
 	private Integer id;
 	
+	/**
+	 * edition - one game can have different editions with
+	 * a little difference 
+	 */
 	@Column(name = "edition")
 	private String edition;
 	
+	/**
+	 * year of production - when game was made
+	 */
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 	
+	/**
+	 * foreign key
+	 * ManyToOne relationship to Game
+	 * global game to the type of which current game belongs 
+	 */
 	@ManyToOne(fetch=FetchType.LAZY, optional=false, targetEntity=Game.class, cascade={CascadeType.ALL})
 	@JoinColumn(name="gameId")
 	private Game game;
 	
+	/**
+	 * foreign key
+	 * ManyTomany relationship to users
+	 * several users can actualy have several games  
+	 */
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user", joinColumns = { 
 			@JoinColumn(name = "userId", nullable = false, updatable = false) }, 
