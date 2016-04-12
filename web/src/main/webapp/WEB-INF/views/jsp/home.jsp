@@ -32,6 +32,8 @@
 		</div>
 	</nav>
 
+	Dear
+	<strong>${user}</strong>, Welcome to Home Page.
 
 
 </body>
