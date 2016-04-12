@@ -13,3 +13,4 @@ buildNumber.properties
 target
 .settings/*
 .metadata/*
+Servers/
