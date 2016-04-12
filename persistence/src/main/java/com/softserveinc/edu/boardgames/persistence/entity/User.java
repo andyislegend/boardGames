@@ -80,6 +80,10 @@ public class User {
 	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
 	
+//	@OneToOne(fetch = FetchType.LAZY, targetEntity = Rating.class, cascade = { CascadeType.ALL })
+//	@JoinColumn(name = "ratingId", referencedColumnName = "id")
+//	private Rating rating;
+	
 //	/**
 //	 * Describes address where user lives. Has a many to one relationship to
 //	 * address table.
