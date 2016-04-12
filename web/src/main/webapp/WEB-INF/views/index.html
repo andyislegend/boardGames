@@ -5,9 +5,9 @@
     <link href="../../resources/css/bootstrap.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../../resources/css/mainStyleSheet.css"
     />
-    <script src="../../resources/js/angular.js"></script>
-    <script src="../../resources/js/bootstrap.js"></script>
-    <script src="../../resources/js/gamesApp.js"></script>
+    <script src="resources/js/angular.js"></script>
+    <script src="resources/js/bootstrap.js"></script>
+    <script src="resources/js/gamesApp.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -63,9 +63,27 @@
                     </tbody>
                 </table>    
             </div>
-            <div class="col-sm-3">
-                <div class="well col-md-offset-0">
-                    <p>Here Vasia will place a list of friends</p>
+            <div class="col-sm-3" ng-controller="listOfFriendsCtrl">
+               <div class="well col-md-offset-0">
+                    <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Friends</th>
+                            <td><a href="#"><img src="resources/ico/add_user.png" width="25"></a></td>
+                            <td><a href="#"><img src="resources/ico/bell.png" width="25"></a></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="friend in friends">
+                            <td> <img src="resources/images/{{friend.img}}.jpg"/></td>
+                            <td>{{ friend.name }}</td>
+                            <td>{{ friend.lastName }}</td>
+                            <td><a href="#"><img src="resources/ico/messages.png" width="25"></a></td>
+                            <td><a href="#"><img src="resources/ico/trophy.png" width="25"></a></td>
+   
+                        </tr>
+                    </tbody>
+                </table>  
                 </div>
             </div>
         </div>
