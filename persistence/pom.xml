@@ -12,7 +12,21 @@
 		<hibernate.version>5.0.0.Final</hibernate.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>spring-milestone</id>
+			<name>Spring Maven MILESTONE Repository</name>
+			<url>http://repo.springsource.org/libs-milestone</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
+		<!-- Spring data JPA -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.10.1.RELEASE</version>
+		</dependency>
 
 		<!-- spring beans -->
 		<dependency>
@@ -60,7 +74,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.36</version>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>
