@@ -64,13 +64,7 @@ public class User {
 	 * Describes users phoneNumber.
 	 */
 	@Column(name = "phoneNumber")
-	private Integer phoneNumber;
-	
-	/**
-	 * Describes users login to website.
-	 */
-	@Column(name = "login")
-	private String login;
+	private String phoneNumber;
 	
 	/**
 	 * Describes users password to website.
@@ -93,6 +87,14 @@ public class User {
 //	@OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade = { CascadeType.ALL })
 //	@JoinColumn(name = "friendId", referencedColumnName = "id")
 //	private Set <Friend> friends;
+	
+//	/**
+//	 * Describes users role. Has a one to many relationship to
+//	 * roles table.
+//	 */
+//	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = { CascadeType.ALL })
+//	@JoinColumn(name = "roleId", referencedColumnName = "id")
+//	private Role role;
 
 	/**
 	 * Constructor without parameters.
@@ -219,7 +221,7 @@ public class User {
 	 * 
 	 * @return value of column phoneNumber.
 	 */
-	public Integer getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
@@ -229,27 +231,8 @@ public class User {
 	 * @param phoneNumber
 	 *            value of column phoneNumber.
 	 */
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	/**
-	 * Get value of column login.
-	 * 
-	 * @return value of column login.
-	 */
-	public String getLogin() {
-		return login;
-	}
-	
-	/**
-	 * Set value of column login.
-	 * 
-	 * @param login
-	 *            value of column login.
-	 */
-	public void setLogin(String login) {
-		this.login = login;
 	}
 	
 	/**
@@ -323,9 +306,6 @@ public class User {
 		if (phoneNumber != other.phoneNumber) {
 			return false;
 		}
-		if (login != other.login) {
-			return false;
-		}
 		if (password != other.password) {
 			return false;
 		}
@@ -347,7 +327,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + 
 				", sex=" + sex + ", age=" + age + ", email="	+ email + ", phoneNumber=" + phoneNumber + 
-				", login=" + login + ", password=" + password + ", adress=" + address + "]";
+				", password=" + password + ", adress=" + address + "]";
 	}
 }
 
