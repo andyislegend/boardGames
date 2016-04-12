@@ -21,3 +21,11 @@ app.controller('getGamesMyController', function($scope) {
         {Name:"Awesome dudes"}
     ];
 });
+
+app.controller("listOfFriendsCtrl", function($scope, $http){
+    $http.get('resources/json/friends.json').success(function(data) { 
+    $scope.friends = data;
+    }).error(function(error){
+        console.log(error);
+    }); 
+});
