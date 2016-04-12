@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link href="../../resources/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../resources/css/mainStyleSheet.css"
+    />
+    <script src="../../resources/js/angular.js"></script>
+    <script src="../../resources/js/bootstrap.js"></script>
+    <script src="../../resources/js/gamesApp.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+      <a class="navbar-brand" href="#">Bla Bla Game</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Championship</a></li>
+      <li><a href="#">All Games</a></li>
+      <li><a href="#">Events</a></li> 
+    </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+        <div class="container-fluid" ng-app="boardGamesApp">
+        <div class="row">
+            <div class="col-sm-3" ng-controller="getGamesMyController">
+                <div class="well col-md-offset-0">
+                    
+                    <h3 class="text-center">My Games</h3>
+                    <br/>
+                    <ul class="list-group" ng-repeat="x in gamesMy">
+                        <li class="list-group-item">{{ x.Name }}</li>
+                    </ul>
+                    
+                </div>
+            </div>
+            <div class="col-sm-6" ng-controller="getGamesGlobalController">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Game</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Min players</th>
+                            <th>Max players</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in gamesGlobal">
+                            <td>{{ x.Name }}</td>
+                            <td>{{ x.Category }}</td>
+                            <td>{{ x.Description }}</td>
+                            <td>{{ x.MinPlayers }}</td>
+                            <td>{{ x.MaxPlayers }}</td>
+                            <td><button>Actions</button></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+            <div class="col-sm-3">
+                <div class="well col-md-offset-0">
+                    <p>Here Vasia will place a list of friends</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
