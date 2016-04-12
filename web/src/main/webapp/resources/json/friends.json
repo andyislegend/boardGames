@@ -1,0 +1,22 @@
+[
+    {
+        "img": "vasyl",
+        "name": "Vasyl",
+        "lastName": "Bera"
+    },
+    {
+        "img": "vova",
+        "name": "Vova",
+        "lastName": "Tutar"
+    },
+    {
+        "img": "stepa",
+        "name": "Stepa",
+        "lastName": "Makar"
+    },
+    {
+        "img": "ulia",
+        "name": "Ulia",
+        "lastName": "Zuk"
+    }
+]
