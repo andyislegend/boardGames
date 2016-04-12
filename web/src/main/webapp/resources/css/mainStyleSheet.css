@@ -1,5 +1,6 @@
 body {
-    background-color:aliceblue;
+    color: black;
+    background-color:floralwhite;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
@@ -7,8 +8,7 @@ table {
 	border-style: none;
 }
 .navbar-default {
-    background-color:aliceblue;
-    color: black;
+    background-color:deepskyblue;
 }
 .my-game-container{
     background-color: #90EE90;
