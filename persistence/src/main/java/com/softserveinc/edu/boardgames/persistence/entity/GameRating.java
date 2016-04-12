@@ -39,8 +39,8 @@ public class GameRating implements Serializable{
 	 * "User has a rating"
 	 * 
 	 */
-//	@OneToOne(fetch = FetchType.LAZY)
-//	private Game game;
+	@OneToOne(fetch = FetchType.LAZY)
+	private Game game;
 
 	/**
 	 * Default constructor
