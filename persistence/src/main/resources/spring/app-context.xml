@@ -11,8 +11,8 @@ http://www.springframework.org/schema/data/jpa http://www.springframework.org/sc
 http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 	
 	<context:annotation-config />
-	<context:component-scan
-		base-package="com.softserveinc.edu.boardgames.persistence.implementation" />		
+	<!-- <context:component-scan
+		base-package="com.softserveinc.edu.boardgames.persistence.implementation" /> -->		
 
 	<import resource="classpath*:database/DataSource.xml" />
 

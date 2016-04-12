@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table (name = "address")
-public class Address {
+public class Address implements Serializable{
 
 	/**
      * Describes the address id. Unique value.

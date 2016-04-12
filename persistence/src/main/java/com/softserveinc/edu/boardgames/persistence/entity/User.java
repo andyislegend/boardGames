@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable{
 
 	/**
 	 * Describes the user id. Unique value.
@@ -47,7 +49,7 @@ public class User {
 	 */
 	@Column(name = "sex")
 	private String sex;
-	
+
 	/**
 	 * Describes users sex.
 	 */
@@ -55,7 +57,8 @@ public class User {
 	private Integer age;
 
 	/**
-	 * Describes users email.
+	 * Describes users email. Also is used as a login.
+	 * 
 	 */
 	@Column(name = "email")
 	private String email;
@@ -65,7 +68,7 @@ public class User {
 	 */
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
-	
+
 	/**
 	 * Describes users password to website.
 	 */
@@ -79,26 +82,24 @@ public class User {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Address.class, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
-	
-//	@OneToOne(fetch = FetchType.LAZY, targetEntity = Rating.class, cascade = { CascadeType.ALL })
-//	@JoinColumn(name = "ratingId", referencedColumnName = "id")
-//	private Rating rating;
-	
-//	/**
-//	 * Describes address where user lives. Has a many to one relationship to
-//	 * address table.
-//	 */
-//	@OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade = { CascadeType.ALL })
-//	@JoinColumn(name = "friendId", referencedColumnName = "id")
-//	private Set <Friend> friends;
-	
-//	/**
-//	 * Describes users role. Has a one to many relationship to
-//	 * roles table.
-//	 */
-//	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = { CascadeType.ALL })
-//	@JoinColumn(name = "roleId", referencedColumnName = "id")
-//	private Role role;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, mappedBy = "user")
+	private UserRating rating;
+
+	// /**
+	// * Describes address where user lives. Has a many to one relationship to
+	// * address table.
+	// */
+	// @OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
+	// { CascadeType.ALL })
+	// @JoinColumn(name = "friendId", referencedColumnName = "id")
+	// private Set <Friend> friends;
+
+	/**
+	 * Describes users role. Has a one to many relationship to roles table.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Role role;
 
 	/**
 	 * Constructor without parameters.
@@ -190,7 +191,7 @@ public class User {
 	public Integer getAge() {
 		return age;
 	}
-	
+
 	/**
 	 * Set value of column age.
 	 * 
@@ -200,7 +201,7 @@ public class User {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	
+
 	/**
 	 * Get value of column email.
 	 * 
@@ -238,7 +239,7 @@ public class User {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+
 	/**
 	 * Get value of column password.
 	 * 
@@ -247,7 +248,7 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	/**
 	 * Set value of column password.
 	 * 
@@ -257,7 +258,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	/**
 	 * Get value of column address.
 	 * 
@@ -329,9 +330,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + 
-				", sex=" + sex + ", age=" + age + ", email="	+ email + ", phoneNumber=" + phoneNumber + 
-				", password=" + password + ", adress=" + address + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", age="
+				+ age + ", email=" + email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", adress="
+				+ address + "]";
 	}
 }
-
