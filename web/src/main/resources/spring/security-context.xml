@@ -13,7 +13,8 @@
         <form-login  login-page="/login" 
         username-parameter="ssoId" 
         password-parameter="password" 
-        authentication-failure-url="/access_denied" 
+        authentication-failure-url="/login?error"
+        login-processing-url="/j_spring_security_check" 
         default-target-url="/home"
 		always-use-default-target="true"/>
         <csrf/>
