@@ -1,3 +1,30 @@
+body {
+    color: black;
+    background-image: url("../../resources/images/Background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 table {
 	border-style: none;
+    background-color: #EEE8AA;
+    border-radius: 10px;
+}
+.navbar-default {
+    background-color:#EEE8AA;
+}
+.my-game-container{
+    background-color: #90EE90;
+}
+div.well {
+    background-color: 	#FFDEAD;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+
 }
