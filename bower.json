@@ -1,0 +1,11 @@
+{
+  "name": "board-games",
+  "description": "service for sharing games",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6"
+  }
+}
