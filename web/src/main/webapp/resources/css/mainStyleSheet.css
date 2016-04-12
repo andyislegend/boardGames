@@ -1,15 +1,21 @@
 body {
     color: black;
-    background-color:floralwhite;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    background-image: url("../../resources/images/Background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 table {
 	border-style: none;
+    background-color: #EEE8AA;
+    border-radius: 10px;
 }
 .navbar-default {
-    background-color:deepskyblue;
+    background-color:#EEE8AA;
 }
 .my-game-container{
     background-color: #90EE90;
+}
+div.well {
+    background-color: 	#FFDEAD;
 }
