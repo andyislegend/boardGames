@@ -25,7 +25,7 @@
                   <div class="form-group">
                      <input type="text" class="form-control" placeholder="Search Game">
                   </div>
-                  <button type="submit" class="btn btn-default">Search</button>
+                  <button type="submit" class="btn btn-success">Search</button>
                </form>
                <li><a href="#"><span class="glyphicon glyphicon-user"></span> User</a></li>
                <li><a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="col-sm-6" ng-controller="getGamesGlobalController">
-               <table class="table table-striped">
+               <table class="table">
                   <thead>
                      <tr>
                         <th>Game</th>
@@ -68,7 +68,7 @@
                         <td>{{ x.Description }}</td>
                         <td>{{ x.MinPlayers }}</td>
                         <td>{{ x.MaxPlayers }}</td>
-                        <td><button>Actions</button></td>
+                        <td><button class="btn btn-success">Actions</button></td>
                      </tr>
                   </tbody>
                </table>
@@ -76,26 +76,25 @@
             <div class="col-sm-3" ng-controller="listOfFriendsCtrl">
                <div class="well col-md-offset-0">
                     <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Friends</th>
-                            <td><a href="#"><img src="resources/ico/add_user.png" width="25"></a></td>
-                            <td><a href="#"><img src="resources/ico/bell.png" width="25"></a></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="friend in friends">
-                            <td> <img src="resources/images/{{friend.img}}.jpg"/></td>
-                            <td>{{ friend.name }}</td>
-                            <td>{{ friend.lastName }}</td>
-                            <td><a href="#"><img src="resources/ico/messages.png" width="25"></a></td>
-                            <td><a href="#"><img src="resources/ico/trophy.png" width="25"></a></td>
-   
-                        </tr>
-                    </tbody>
-                </table>  
-                </div>
+                        <thead>
+                            <tr>
+                                <th>Friends</th>
+                                <td><a href="#"><img src="resources/ico/add_user.png" width="25"></a></td>
+                                <td><a href="#"><img src="resources/ico/bell.png" width="25"></a></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="friend in friends">
+                                <td> <img src="../../resources/images/{{friend.img}}.jpg"/></td>
+                                <td>{{ friend.name }}</td>
+                                <td>{{ friend.lastName }}</td>
+                                <td><a href="#"><img src="resources/ico/messages.png" width="25"></a></td>
+                                <td><a href="#"><img src="resources/ico/trophy.png" width="25"></a></td>
 
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
             </div>
          </div>
       </div>
