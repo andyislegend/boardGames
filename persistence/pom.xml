@@ -12,17 +12,7 @@
 		<hibernate.version>5.0.0.Final</hibernate.version>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>spring-milestone</id>
-			<name>Spring Maven MILESTONE Repository</name>
-			<url>http://repo.springsource.org/libs-milestone</url>
-		</repository>
-	</repositories>
-
 	<dependencies>
-		<!-- Spring data JPA -->
-
 		<!-- spring beans -->
 		<dependency>
 			<groupId>org.springframework</groupId>
