@@ -16,7 +16,9 @@
 		<class>com.softserveinc.edu.boardgames.persistence.entity.Tournament</class>
 		<class>com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition</class>
 		<class>com.softserveinc.edu.boardgames.persistence.entity.User</class> 
-		<class>com.softserveinc.edu.boardgames.persistence.entity.UserRating</class>   
+		<class>com.softserveinc.edu.boardgames.persistence.entity.UserRating</class>
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Friend</class>
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Event</class>       
 		
 
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
