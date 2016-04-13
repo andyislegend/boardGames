@@ -1,8 +1,13 @@
 package com.softserveinc.edu.boardgames.service;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
+import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentCompositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author Daria Bondar
@@ -14,4 +19,27 @@ public class TournamentCompositionService {
 
     @Autowired
     TournamentCompositionRepository tournamentCompositionRepository;
+
+    @Transactional
+    public void save(TournamentComposition tournamentComposition){
+        tournamentCompositionRepository.save(tournamentComposition);
+    }
+
+    @Transactional
+    public void update(TournamentComposition tournamentComposition){
+        tournamentCompositionRepository.saveAndFlush(tournamentComposition);
+    }
+
+    @Transactional
+    public void delete(TournamentComposition tournamentComposition){
+        tournamentCompositionRepository.delete(tournamentComposition);
+    }
+
+    List<TournamentComposition> findAll(){
+        return tournamentCompositionRepository.findAll();
+    }
+
+    TournamentComposition findById(Long id){
+        return tournamentCompositionRepository.findOne(id);
+    }
 }

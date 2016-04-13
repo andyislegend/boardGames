@@ -6,17 +6,26 @@ import java.io.Serializable;
 /**
  * @author Daria Bondar
  * @since 12.04.2016
+ * This entity is for storing information about users which take part in tournaments
  */
+@Entity
+@Table(name = "tournament_composition")
 public class TournamentComposition implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
+    /**
+     * tournament which users take part in
+     */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Tournament.class)
     @JoinColumn(name = "tournamentId", referencedColumnName = "id")
     private Tournament tournament;
 
+    /**
+     * Discribe user that takes part in this tournament
+     */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "userGuestId",referencedColumnName = "id")
     private User userGuest;
@@ -24,11 +33,11 @@ public class TournamentComposition implements Serializable {
     public TournamentComposition() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * @author Daria Bondar
  * @since 12.04.2016
+ *
+ * This entity is for storing information abot tournament which users want to hold
  */
 @Entity
 @Table(name = "tournament")
@@ -14,18 +16,30 @@ public class Tournament implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
+    /**
+     * Discribes tournament's name
+     */
     @Column
     private String name;
 
+    /**
+     * User that created this tournament
+     */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "idUserCreator", referencedColumnName = "id")
     private User userCreator;
 
+    /**
+     * List of tournament compositions (users) that take part in this tounament
+     */
     @OneToMany(fetch = FetchType.LAZY, targetEntity = TournamentComposition.class, cascade = CascadeType.ALL)
     private List<TournamentComposition> tournamentComposition;
 
+    /**
+     * Kind of game which is tournament organized on
+     */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
     @JoinColumn(name = "gameid", referencedColumnName = "id")
     private Game game;
@@ -38,7 +52,7 @@ public class Tournament implements Serializable {
         return name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -46,7 +60,7 @@ public class Tournament implements Serializable {
         return userCreator;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
