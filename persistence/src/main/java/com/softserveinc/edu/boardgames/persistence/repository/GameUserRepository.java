@@ -7,5 +7,5 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 
 @Repository
 public interface GameUserRepository extends JpaRepository<GameUser, Long> {
-
+	
 }

@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:context="http://www.springframework.org/schema/context"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
-xsi:schemaLocation="
-http://www.springframework.org/schema/beans http://www.springframework.org/schem...ring-beans.xsd
-http://www.springframework.org/schema/context http://www.springframework.org/schem...ng-context.xsd
-http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-http://www.springframework.org/schema/data/jpa http://www.springframework.org/schem...spring-jpa.xsd
-http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
-	
-	<context:annotation-config />
-	<!-- <context:component-scan
-		base-package="com.softserveinc.edu.boardgames.persistence.implementation" /> -->		
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+     http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<context:component-scan
+		base-package="com.softserveinc.edu.boardgames.persistence.repository" />
 
 	<import resource="classpath*:database/DataSource.xml" />
 
@@ -45,7 +42,8 @@ http://www.springframework.org/schema/jdbc http://www.springframework.org/schema
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-		
-	<jpa:repositories base-package="com.softserveinc.edu.boardgames.persistence.repository" />
+
+	<jpa:repositories
+		base-package="com.softserveinc.edu.boardgames.persistence.repository" />
 
 </beans>

@@ -7,7 +7,16 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:/DefaultDS</jta-data-source>
 
-		<!-- <class>com.softserveinc.edu.boardgames.*</class> -->
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Address</class> 
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Category</class> 
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Game</class> 
+		<class>com.softserveinc.edu.boardgames.persistence.entity.GameRating</class>
+		<class>com.softserveinc.edu.boardgames.persistence.entity.GameUser</class>
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Role</class>   
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Tournament</class>
+		<class>com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition</class>
+		<class>com.softserveinc.edu.boardgames.persistence.entity.User</class> 
+		<class>com.softserveinc.edu.boardgames.persistence.entity.UserRating</class>   
 		
 
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
