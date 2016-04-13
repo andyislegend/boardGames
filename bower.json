@@ -5,7 +5,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "^1.5.3",
     "bootstrap": "^3.3.6",
     "normalize-css": "normalize.css#^4.1.0"
   }
