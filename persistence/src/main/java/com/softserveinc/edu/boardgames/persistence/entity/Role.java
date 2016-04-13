@@ -24,6 +24,11 @@ import javax.persistence.Table;
 public class Role implements Serializable{
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7191833983129011150L;
+
+	/**
 	 * Describes the role id. Unique value. Primary Key
 	 */
 	@Id
