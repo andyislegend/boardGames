@@ -8,6 +8,7 @@
 		<jta-data-source>java:/DefaultDS</jta-data-source>
 
 		<class>com.softserveinc.edu.boardgames.persistence.entity.Address</class> 
+		<class>com.softserveinc.edu.boardgames.persistence.entity.Event</class>
 		<class>com.softserveinc.edu.boardgames.persistence.entity.Category</class> 
 		<class>com.softserveinc.edu.boardgames.persistence.entity.Game</class> 
 		<class>com.softserveinc.edu.boardgames.persistence.entity.GameRating</class>
