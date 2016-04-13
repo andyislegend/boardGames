@@ -106,13 +106,13 @@ public class User implements Serializable{
     /**
      * List of tounaments that were organized by user
      */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tournament")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idUserCreator")
     private List<Tournament> createdTounaments;
 
     /**
      * List if tounaments which user take part in
      */
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "tournament_composition")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "userGuestId")
     private List<TournamentComposition> takenpartTounaments;
 
 	/**
