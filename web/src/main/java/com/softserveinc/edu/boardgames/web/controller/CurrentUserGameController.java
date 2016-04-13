@@ -19,6 +19,6 @@ public class CurrentUserGameController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Object> showGames(){
-		return ;
+		return new  ;
 	}
 }
