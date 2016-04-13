@@ -34,7 +34,7 @@ public class Tournament implements Serializable {
     /**
      * List of tournament compositions (users) that take part in this tounament
      */
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = TournamentComposition.class, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "tournament")
     private List<TournamentComposition> tournamentComposition;
 
     /**
