@@ -77,6 +77,13 @@ public class User implements Serializable{
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, mappedBy = "user")
 	private UserRating rating;
+	
+	/*
+	 * by Anna for Events
+	 * in case you need to change smth, please let me know
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+    private Set<Event> events;
 
 	// /**
 	// * Describes address where user lives. Has a many to one relationship to
@@ -283,6 +290,16 @@ public class User implements Serializable{
 	 */
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	
+
+	public Set<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(Set<Event> events) {
+		this.events = events;
 	}
 
 	@Override

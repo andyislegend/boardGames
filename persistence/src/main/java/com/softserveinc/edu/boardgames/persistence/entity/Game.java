@@ -71,6 +71,13 @@ public class Game implements Serializable{
 	private Category category;
 	
 	/**
+	 * by Anna for Events connections 
+	 */
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="game")
+    private Set<Event> events;
+	
+	/**
 	 * foreign key
 	 * OneToMany relationship to GameUser
 	 * set of games of particular user that belongs to this kind of game 
@@ -187,7 +194,15 @@ public class Game implements Serializable{
         return true;
     }
     
-    @Override
+    public Set<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(Set<Event> events) {
+		this.events = events;
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
