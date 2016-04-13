@@ -33,5 +33,4 @@ public class GameUserService {
 	public void create(GameUser gameUser) {
 		gameUserRepo.save(gameUser);
 	}
-
 }
