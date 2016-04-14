@@ -12,9 +12,8 @@
 		<module>persistence</module>
 		<module>service</module>
 		<module>web</module>
-		
 	</modules>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -25,8 +24,29 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
+
+	<dependencies>
+		<!-- Tomcat -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>7.0.61</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>

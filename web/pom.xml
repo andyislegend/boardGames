@@ -19,7 +19,6 @@
 				<version>9.3.7.v20160115</version>
 			</plugin>
 		</plugins>
-
 	</build>
 
 	<properties>
