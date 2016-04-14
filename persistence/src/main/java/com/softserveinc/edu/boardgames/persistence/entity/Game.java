@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -84,6 +85,9 @@ public class Game implements Serializable{
 	 */
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
+
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
+    private List<Tournament> tournaments;
 	
 	/**
 	 * foreign key
