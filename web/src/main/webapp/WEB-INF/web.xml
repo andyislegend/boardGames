@@ -31,7 +31,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/views/jsp/home.jsp</welcome-file>
+		<welcome-file>/WEB-INF/views/index.html</welcome-file>
 	</welcome-file-list>
 
 	<!-- Spring Security -->
