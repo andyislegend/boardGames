@@ -44,14 +44,19 @@ public class Friend {
     @JoinColumn(name = "user_two", referencedColumnName = "id")
 	private User userTwo;
 	
-	
 	/**
 	 * Describes url where is ava
 	 */
 	@Column(name="pathToAva")
 	private String pathToAva;
 	
-
+	/**
+	 * Describes status of friendship
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Status.class)
+    @JoinColumn(name = "status", referencedColumnName = "id")
+	private Status status;
+	
 	public long getId() {
 		return id;
 	}
@@ -83,6 +88,14 @@ public class Friend {
 
 	public void setPathToAva(String pathToAva) {
 		this.pathToAva = pathToAva;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 
