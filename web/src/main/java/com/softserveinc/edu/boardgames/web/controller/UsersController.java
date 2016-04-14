@@ -14,9 +14,9 @@ public class UsersController {
 	
 	UserService userSevice;
 	
-	@RequestMapping(value = {"/getAllUsers"}, method = RequestMethod.GET)
-    public final String getAllUsers() {
+	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
+    public List<User> getAllUsers() {
 		List<User> userList = userSevice.findAll();
-        return "users";
+        return userList;
     }
 }

@@ -16,6 +16,7 @@
                <li><a href="#">Championship</a></li>
                <li><a href="#">All Games</a></li>
                <li><a href="#">Events</a></li>
+               <li><a href="users">Users</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                <form class="navbar-form navbar-left" role="search">
