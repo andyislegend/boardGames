@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login page</title>
-<link href="<c:url value='/resources/css/bootstrap.css' />"
+<link href="<c:url value='/resources/bower_components/bootstrap/dist/css/bootstrap.css' />"
 	rel="stylesheet"></link>
 <link href="<c:url value='/resources/css/login.css' />" rel="stylesheet"></link>
 <link rel="stylesheet" type="text/css"
