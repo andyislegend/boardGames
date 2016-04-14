@@ -26,6 +26,7 @@
 	</properties>
 
 	<dependencies>
+
 		<!-- service-layer module of boardGames application -->
 		<dependency>
 			<groupId>com.softserveinc.edu.boardgames</groupId>
