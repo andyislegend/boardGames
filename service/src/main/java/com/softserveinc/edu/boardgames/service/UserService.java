@@ -26,5 +26,9 @@ public class UserService {
     public User findByFirstName(String firstName) {
         return userRepository.findByFirstName (firstName);
     }
+    
+    public User findById(int id){
+    	return userRepository.findOne(id);
+    }
 
 }

@@ -312,35 +312,33 @@ public class User implements Serializable{
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
 		User other = (User) obj;
-		if (id != other.id) {
+		if (id.equals(other.id)) {
+			
 			return false;
 		}
-		if (firstName != other.firstName) {
+		if (firstName.equals(other.firstName)) {
 			return false;
 		}
-		if (lastName != other.lastName) {
+		if (lastName.equals(other.lastName)) {
 			return false;
 		}
-		if (sex != other.sex) {
+		if (sex.equals(other.sex)) {
 			return false;
 		}
-		if (age != other.age) {
+		if (age.equals(other.age)) {
 			return false;
 		}
-		if (email != other.email) {
+		if (email.equals(other.email)) {
 			return false;
 		}
-		if (phoneNumber != other.phoneNumber) {
+		if (phoneNumber.equals(other.phoneNumber)) {
 			return false;
 		}
-		if (password != other.password) {
+		if (password.equals(other.password)) {
 			return false;
 		}
-		if (address != other.address) {
+		if (address.equals(other.address)) {
 			return false;
 		}
 		return true;

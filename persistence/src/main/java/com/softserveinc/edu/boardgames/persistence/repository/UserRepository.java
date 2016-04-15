@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 	public User findByFirstName(String firstName);
 }
