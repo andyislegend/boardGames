@@ -18,7 +18,7 @@
         default-target-url="/home"
 		always-use-default-target="true"/>
         <csrf disabled="true"/>
-        <logout logout-success-url="/" />
+       <!-- <logout logout-success-url="/" /> -->
     </http>
   
     <authentication-manager >

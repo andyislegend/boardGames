@@ -29,7 +29,7 @@
                <li><a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                   <span class="badge">1</span></a>
                </li>
-               <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+               <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> GET STARTED </a></li>
             </ul>
          </div>
       </nav>
