@@ -21,10 +21,26 @@ INSERT INTO `boardgames`.`address` (`id`, `city`, `country`, `houseNumber`, `pos
 INSERT INTO `boardgames`.`address` (`id`, `city`, `country`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES ('4', 'Odessa', 'Ukraine', '86', '98765', '49', 'Shyroka');
 
 --  inserts to table user
-INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('1', '18', 'stepa@ukr.net', 'Stepa', 'Makar', '1111', '101', 'male', '1', '2');
-INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('2', '19', 'body@ukr.net', 'Body', 'Makar', '12345', '102', 'male', '4', '2');
-INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('3', '27', 'ulia@ukr.net', 'Ulia', 'Bondar', 'qwerty', '103', 'female', '2', '2');
-INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('4', '18', 'andry@ukr.net', 'Andry', 'Bakaim', '112233', '104', 'male', '3', '2');
+insert into users (age, email, firstName, lastName, password, phoneNumber, rating, sex, state, username) values
+(99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000', 'GODLIKE', 'none', 'ACTIVE', 'root');
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, rating, sex, state, username) values
+(25, 'kravets@gmail.com', 'Artem', 'Kravets', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 'NOOB', 'male', 'ACTIVE', 'kravets');
+
+
+-- inserts into user_role table
+insert into user_role (username, value) values
+(1, 'ADMIN'),
+(2, 'USER'),
+(1, 'SUPERADMIN'),
+(1, 'USER');
+
+
+--INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('1', '18', 'stepa@ukr.net', 'Stepa', 'Makar', '1111', '101', 'male', '1', '2');
+--INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('2', '19', 'body@ukr.net', 'Body', 'Makar', '12345', '102', 'male', '4', '2');
+--INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('3', '27', 'ulia@ukr.net', 'Ulia', 'Bondar', 'qwerty', '103', 'female', '2', '2');
+--INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('4', '18', 'andry@ukr.net', 'Andry', 'Bakaim', '112233', '104', 'male', '3', '2');
+
 
 
 --  inserts to table game
