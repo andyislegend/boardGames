@@ -9,25 +9,26 @@
 	<http auto-config="true" >
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/index" access="permitAll" />
-        <intercept-url pattern="/home**" access="hasRole('ADMIN') and hasRole('USER')" />
+        <intercept-url pattern="/home**" access="hasRole('ROLE_USER')" />
         <form-login  login-page="/login" 
-        username-parameter="ssoId" 
+        username-parameter="username" 
         password-parameter="password" 
         authentication-failure-url="/login?error"
         login-processing-url="/j_spring_security_check" 
         default-target-url="/home"
 		always-use-default-target="true"/>
-        <csrf/>
-        <logout logout-url="/logout" logout-success-url="/index" />
+        <csrf disabled="true"/>
+        <logout logout-success-url="/" />
     </http>
   
     <authentication-manager >
-        <authentication-provider>
-            <user-service>
-                <user name="user"  password="123"  authorities="ROLE_USER" />
-                <user name="root" password="123" authorities="ROLE_ADMIN, ROLE_USER" />
-            </user-service>
+        <authentication-provider user-service-ref="customUserDetailsService">
+            <password-encoder ref="bcryptEncoder"/>
         </authentication-provider>
     </authentication-manager>
+    
+    <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+ 
+    <beans:bean id="customUserDetailsService" class="com.softserveinc.edu.boardgames.service.configuration.CustomUserDetailsService" />
 	
 </beans:beans>  
