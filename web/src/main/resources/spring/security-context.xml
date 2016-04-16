@@ -9,6 +9,7 @@
 	<http auto-config="true" >
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/index" access="permitAll" />
+        <intercept-url pattern="/newuser" access="permitAll" />
         <intercept-url pattern="/home**" access="hasRole('ROLE_USER')" />
         <form-login  login-page="/login" 
         username-parameter="username" 
