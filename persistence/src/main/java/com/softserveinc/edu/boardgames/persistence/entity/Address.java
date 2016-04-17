@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * This class describes addresses where users of boardGames website live.  
  * 
@@ -21,7 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table (name = "address")
-public class Address implements Serializable{
+public class Address implements Serializable {
 
 	/**
      * Describes the address id. Unique value.
