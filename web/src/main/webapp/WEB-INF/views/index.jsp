@@ -115,8 +115,8 @@
 							{{user.firstName}}</a></td>
 					<td>{{user.email}}</td>
 					<td>{{user.phoneNumber}}</td>
-					<td>{{user.address}},{{user.address.street}},
-						{{user.address.houseNumber}}, {{user.address.roomNumber}}</td>
+					<td>{{user.country}},{{user.city}},
+						{{user.houseNumber}}, {{user.roomNumber}}</td>
 
 				</tr>
 			</table>
