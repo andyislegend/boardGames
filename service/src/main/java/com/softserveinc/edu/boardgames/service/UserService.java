@@ -138,4 +138,9 @@ public class UserService {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
+	
+	@Transactional
+	public List<User> findAllUsersByCity(String cityName) {
+		return userRepository.findUserByCity(cityName);
+	}
 }

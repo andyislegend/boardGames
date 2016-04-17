@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,5 +30,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUsername(String username);
 
 	public User findByFirstName(String firstName);
+	
+	@Query("Select u FROM User u JOIN u.address address" +
+			" WHERE address.city =:cityName")
+	public List<User> findUserByCity(@Param("cityName")String cityName);
 
 }

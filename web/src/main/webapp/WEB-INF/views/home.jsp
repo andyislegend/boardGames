@@ -1,3 +1,4 @@
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
 <!DOCTYPE html>
@@ -104,6 +105,44 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-3"></div>
+	<div class="container-fluid" data-ng-app="usersApp">
+		<div class="col-sm-6" data-ng-controller="getAllUsers">
+			<table class="table table-striped">
+				<tr>
+					<th>Last Name, First Name</th>
+					<th>Email</th>
+					<th>PhoneNumber</th>
+					<th>Address</th>
+				</tr>
+				<tr data-ng-repeat="user in users">
+					<td>{{user.lastName}} {{user.firstName}}</td>
+					<td>{{user.email}}</td>
+					<td>{{user.phoneNumber}}</td>
+					<td>{{user.country}},{{user.city}}, {{user.street}},
+						{{user.houseNumber}}, {{user.roomNumber}}</td>
+				</tr>
+			</table>
+			<div class="col-sm-3" data-ng-controller="getUsersByCityName">
+				<form:form method="get" action="getUsersByCityName">
+					<p class="findUsers">
+						Find users by city: <input type="text" class="form-control"
+							name="cityName" data-ng-model="cityName">
+						<button type="submit" class="btn btn-success">Search</button>
+					</p>
+				</form:form>
+			</div>
+			<div class="col-sm-4">
+				<form:form method="get" action="getUsersByLastName">
+					<p class="findUsers">
+						Find users by Last Name: <input type="text" class="form-control"
+							name="lastName">
+						<button type="submit" class="btn btn-success">Search</button>
+					</p>
+				</form:form>
 			</div>
 		</div>
 	</div>
