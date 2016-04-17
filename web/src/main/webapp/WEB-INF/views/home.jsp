@@ -48,7 +48,7 @@
 					<br />
 					<table class = "table" >
 						<tr><th>Name</th><th>Category</th></tr>
-						<tr ng-repeat = "x in allGame"><td>{{x.name}}</td><td>{{x.category}}</td></tr>
+						<tr ng-repeat = "x in allGame"><td>{{ x.name }}</td><td>{{ x.category }}</td></tr>
 					</table>
 				</div>
 			</div>

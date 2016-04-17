@@ -33,11 +33,11 @@ public class CurrentUserGameController {
 	@ResponseBody
 	public List<AllGamesForCurrentUserDTO> showGames() {
 		List<AllGamesForCurrentUserDTO> games = new ArrayList<>();
-		AllGamesForCurrentUserDTO allGamesForCurrentUserDTO = new AllGamesForCurrentUserDTO();
 		List<Game> allGames = gameUserRep.findAll();
 		for(Game game : allGames ){
-			allGamesForCurrentUserDTO.setGameName(game.getName());
-			allGamesForCurrentUserDTO.setCategoryName(game.getCategory().getName());
+			AllGamesForCurrentUserDTO allGamesForCurrentUserDTO = new AllGamesForCurrentUserDTO();
+			allGamesForCurrentUserDTO.setName(game.getName());
+			allGamesForCurrentUserDTO.setCategory(game.getCategory().getName());
 			games.add(allGamesForCurrentUserDTO);
 		}
 		return games;

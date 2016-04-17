@@ -8,25 +8,26 @@ public class AllGamesForCurrentUserDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AllGamesForCurrentUserDTO(String gameName, String categoryName) {
-		this.name = gameName;
-		this.category = categoryName;
+	public AllGamesForCurrentUserDTO(String name, String category) {
+		this.name = name;
+		this.category = category;
 	}
 
-	public String getGameName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setGameName(String gameName) {
-		this.name = gameName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCategoryName() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.category = categoryName;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
+	
 }
