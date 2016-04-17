@@ -7,11 +7,3 @@ app.controller('getAllUsers', function($scope, $http) {
 	})
 });
 
-app.controller('getUsersByCityName', function($scope, $http) {
-	$scope.users = [];
-	$http.get('getUsersByCityName')
-	.then(function(result) {
-		$scope.users = result.data;
-	})
-});
-

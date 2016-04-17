@@ -10,12 +10,12 @@
 	rel="stylesheet" />
 <link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
 
-<script type="text/javascript"
-	src="resources/bower_components/angular/angular.js"></script>
-<script type="text/javascript"
-	src="resources/bower_components/jquery/dist/jquery.js"></script>
-<script type="text/javascript"
-	src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="resources/bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="resources/js/users.js"></script>
+	<script type="text/javascript" src="resources/js/gamesApp.js"></script>
+	<script type="text/javascript" src="resources/js/showAllGamesCurrentUser.js"></script>
+	
 </head>
 <body>
 
@@ -109,8 +109,8 @@
 		</div>
 	</div>
 	<div class="col-sm-3"></div>
-	<div class="container-fluid" data-ng-app="usersApp">
-		<div class="col-sm-6" data-ng-controller="getAllUsers">
+	<div class="container-fluid" ng-app="usersApp">
+		<div class="col-sm-6" ng-controller="getAllUsers">
 			<table class="table table-striped">
 				<tr>
 					<th>Last Name, First Name</th>
@@ -147,8 +147,7 @@
 		</div>
 	</div>
 	<footer class="panel-footer">vghfg</footer>
-	<script type="text/javascript" src="resources/js/gamesApp.js"></script>
-	<script type="text/javascript" src="resources/js/showAllGamesCurrentUser.js"></script>
+	
 
 
 </body>
