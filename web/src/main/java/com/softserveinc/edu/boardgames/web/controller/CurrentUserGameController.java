@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
-import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
+import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 
 /**
  * 
@@ -23,33 +24,14 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 @Controller
 public class CurrentUserGameController {
 
+	@Autowired
+	GameUserRepository gameUserRep;
+	
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List showGames() {
-		Game game1 = new Game();
-		  game1.setName("chess");
-		  game1.setCategory(new Category("strategic"));
-		  game1.setDescription("bla bla");
-		  game1.setMinPlayers(2);
-		  game1.setMaxPlayers(2);
-		  GameRating rating1 = new GameRating();
-		  rating1.setRating(28.5);
-		  game1.setGameRating(rating1);
-		  
-		  Game game2 = new Game();
-		  game2.setName("gameOfThrones");
-		  game2.setCategory(new Category("strategic"));
-		  game2.setDescription("die");
-		  game2.setMinPlayers(2);
-		  game2.setMaxPlayers(8);
-		  GameRating rating2 = new GameRating();
-		  rating2.setRating(18.3);
-		  game2.setGameRating(rating2);
-		  
-		  List<Game> someGames = new ArrayList<Game>();
-		  someGames.add(game1);
-		  someGames.add(game2);
-		return someGames;
+		List<Game> games = 
+		return "";
 	}
 
 	/**
