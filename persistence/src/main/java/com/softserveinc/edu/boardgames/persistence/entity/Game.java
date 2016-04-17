@@ -17,13 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
-
-
-
-
+import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
  * This class represents data model to game entity
@@ -102,20 +99,19 @@ public class Game implements Serializable{
 	 * Every game has it's position in ratings
 	 */
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.ALL)
-	private GameRating gameRating;
+	@NotEmpty
+	@Column(name = "gameRating", nullable=false)
+	private String gameRating = GameRating.NOT_RATED.name();
 
 	public Game(){}
 	
 	public Game(String name, String description, Integer minPlayers, 
 			Integer maxPlayers, Category category, GameRating gameRating) {
-		super();
 		this.name = name;
 		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.category = category;
-		this.gameRating = gameRating;
 	}
 
 	public Integer getId() {
@@ -162,11 +158,11 @@ public class Game implements Serializable{
 		this.category = category;
 	}
 	
-	public GameRating getGameRating() {
+	public String getGameRating() {
 		return gameRating;
 	}
 
-	public void setGameRating(GameRating gameRating) {
+	public void setGameRating(String gameRating) {
 		this.gameRating = gameRating;
 	}
 

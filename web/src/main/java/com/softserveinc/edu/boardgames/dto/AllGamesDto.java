@@ -7,11 +7,11 @@ public class AllGamesDto {
 	private String description;
 	private Integer minPlayers;
 	private Integer maxPlayers;
-	private Double rating;
+	private String rating;
 	
 	public AllGamesDto() {}
 	public AllGamesDto(String name, String categoryName, String description, Integer minPlayers, Integer maxPlayers,
-			Double rating) {
+			String rating) {
 		super();
 		this.name = name;
 		this.categoryName = categoryName;
@@ -50,10 +50,10 @@ public class AllGamesDto {
 	public void setMaxPlayers(Integer maxPlayers) {
 		this.maxPlayers = maxPlayers;
 	}
-	public Double getRating() {
+	public String getRating() {
 		return rating;
 	}
-	public void setRating(Double rating) {
+	public void setRating(String rating) {
 		this.rating = rating;
 	}
 }

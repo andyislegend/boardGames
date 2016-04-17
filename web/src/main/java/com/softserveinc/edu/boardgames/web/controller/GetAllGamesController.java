@@ -14,7 +14,6 @@ import com.softserveinc.edu.boardgames.dto.AllGamesDto;
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
-import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.EventService;
 import com.softserveinc.edu.boardgames.service.GameService;
@@ -38,7 +37,7 @@ public class GetAllGamesController {
 			gamesDto.setMinPlayers(game.getMinPlayers());
 			gamesDto.setMaxPlayers(game.getMaxPlayers());
 			gamesDto.setCategoryName(game.getCategory().getName());
-			gamesDto.setRating(game.getGameRating().getRating());
+			gamesDto.setRating(game.getGameRating());
 			gamesTransfer.add(gamesDto);
 		}
 		return gamesTransfer;
