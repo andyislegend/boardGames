@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 
 @Repository
-public interface GameRepository extends JpaRepository<Game, Long>  {
+public interface GameRepository extends JpaRepository<Game, Integer>  {
 
 }

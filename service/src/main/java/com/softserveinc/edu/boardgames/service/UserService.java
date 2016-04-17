@@ -1,6 +1,8 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +22,20 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Transactional
-	public void createUser(User user){
+	public void createUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		UserRoles role = UserRoles.USER;
+		Set<UserRoles> roles = new HashSet<>();
+		roles.add(role);
+		user.setUserRoles(roles);
 		userRepository.save(user);
 	}
-	
+
 	/**
 	 * Check if user with {@code username} exist in database
 	 *
@@ -80,21 +86,21 @@ public class UserService {
 	public List<String> getRoles(String username) {
 		return ConvertSetEnumsToListString.convertToListString(userRepository.getRolesByUserName(username));
 	}
-	
+
 	@Transactional
-    public void updateUser(User user) {
-        userRepository.save(user);
-    }
-	
+	public void updateUser(User user) {
+		userRepository.save(user);
+	}
+
 	@Transactional
-    public void createSuperAdminIfNotExists(User user){
-        if (isExistsWithUsername(user.getUsername()) && findByRole("SUPER_ADMIN").isEmpty()){
-            userRepository.save(user);
-        }
-    }
-	
+	public void createSuperAdminIfNotExists(User user) {
+		if (isExistsWithUsername(user.getUsername()) && findByRole("SUPER_ADMIN").isEmpty()) {
+			userRepository.save(user);
+		}
+	}
+
 	@Transactional
-	public void createAdmin(String username, String role){
+	public void createAdmin(String username, String role) {
 		User user = userRepository.findByUsername(username);
 		List<String> roles = getRoles(username);
 		roles.add(role);
@@ -103,9 +109,9 @@ public class UserService {
 		}
 		userRepository.save(user);
 	}
-	
+
 	@Transactional
-	public void createModerator(String username, String role){
+	public void createModerator(String username, String role) {
 		User user = userRepository.findByUsername(username);
 		List<String> roles = getRoles(username);
 		roles.add(role);
@@ -113,11 +119,11 @@ public class UserService {
 			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
 		}
 		userRepository.save(user);
-		
+
 	}
-	
+
 	@Transactional
-	public void createDBA(String username, String role){
+	public void createDBA(String username, String role) {
 		User user = userRepository.findByUsername(username);
 		List<String> roles = getRoles(username);
 		roles.add(role);
@@ -125,11 +131,11 @@ public class UserService {
 			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
 		}
 		userRepository.save(user);
-		
+
 	}
-	
+
 	@Transactional
-	public List<User> findAll(){
+	public List<User> findAll() {
 		return userRepository.findAll();
 	}
 }
