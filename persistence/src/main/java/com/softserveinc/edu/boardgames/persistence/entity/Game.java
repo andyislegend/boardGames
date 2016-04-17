@@ -14,10 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
@@ -70,15 +72,14 @@ public class Game implements Serializable{
 	 * foreign key
 	 * ManyToOne relationship to Category 
 	 */
-	@ManyToOne(fetch=FetchType.LAZY, optional=false, targetEntity=Category.class, cascade={CascadeType.ALL})
-	@JoinColumn(name="categoryId")
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
+	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private Category category;
 	
 	/**
 	 * by Anna for Events connections 
 	 */
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="game")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="game", cascade={CascadeType.ALL})
     private Set<Event> events;
 	
 	/**
@@ -90,23 +91,27 @@ public class Game implements Serializable{
 	private Set<GameUser> userGames;
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
-    private List<Tournament> tournaments;
+    private Set<Tournament> tournaments;
+	
+	/**
+	 * foreign key
+	 * OneToOne relationship to GameRating
+	 * Every game has it's position in ratings
+	 */
 	
 	@NotEmpty
-	@Column(name = "rating", nullable = false)
-	private GameRating gameRating = GameRating.NOT_RATED;
+	@Column(name = "gameRating", nullable=false)
+	private String gameRating = GameRating.NOT_RATED.name();
 
 	public Game(){}
 	
 	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category) {
-		
+			Integer maxPlayers, Category category, GameRating gameRating) {
 		this.name = name;
 		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.category = category;
-		
 	}
 
 	public Integer getId() {
@@ -153,11 +158,11 @@ public class Game implements Serializable{
 		this.category = category;
 	}
 	
-	public GameRating getGameRating() {
+	public String getGameRating() {
 		return gameRating;
 	}
 
-	public void setGameRating(GameRating gameRating) {
+	public void setGameRating(String gameRating) {
 		this.gameRating = gameRating;
 	}
 
@@ -205,11 +210,31 @@ public class Game implements Serializable{
 		this.events = events;
 	}
 
+	public Set<GameUser> getUserGames() {
+		return userGames;
+	}
+
+	public void setUserGames(Set<GameUser> userGames) {
+		this.userGames = userGames;
+	}
+
+	public Set<Tournament> getTournaments() {
+		return tournaments;
+	}
+
+	public void setTournaments(Set<Tournament> tournaments) {
+		this.tournaments = tournaments;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + id.intValue();
         return result;
     }
     

@@ -4,9 +4,16 @@
       <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
       <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
       <link rel="stylesheet" href="resources/css/mainStyleSheet.css"/>
+<<<<<<< HEAD
       <script src = "resources/bower_components/angular/angular.js"></script>
       <script src = "resources/bower_components/angular/angular.min.js"></script>
       
+=======
+      
+      <script type="text/javascript" src="resources/bower_components/angular/angular.js"></script>
+      <script type="text/javascript" src="resources/bower_components/jquery/dist/jquery.js"></script>
+      <script type="text/javascript" src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+>>>>>>> 3fb23e428e084636229ffa9023ea9489127b47d5
    </head>
    <body>
       <nav class="navbar navbar-default">
@@ -35,6 +42,7 @@
             </ul>
          </div>
       </nav>
+<<<<<<< HEAD
      
         <div class="container-fluid" ng-app="usersGameApp">
         <div class="row">
@@ -100,5 +108,7 @@
       </div>
        <footer class = "panel-footer" ></footer>
        <script src = "resources/js/showAllGamesCurrentUser.js"></script>
+=======
+>>>>>>> 3fb23e428e084636229ffa9023ea9489127b47d5
    </body>
 </html>

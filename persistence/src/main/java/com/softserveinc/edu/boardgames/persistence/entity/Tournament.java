@@ -1,6 +1,9 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class Tournament implements Serializable {
      * Kind of game which is tournament organized on
      */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
-    @JoinColumn(name = "gameid", referencedColumnName = "id")
+    @JoinColumn(name = "gameId", referencedColumnName = "id")
     private Game game;
 
 
