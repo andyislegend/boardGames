@@ -3,8 +3,10 @@
    <head>
       <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
       <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-      <link rel="stylesheet" href="resources/css/mainStyleSheet.css"
-         />
+      <link rel="stylesheet" href="resources/css/mainStyleSheet.css"/>
+      <script src = "resources/bower_components/angular/angular.js"></script>
+      <script src = "resources/bower_components/angular/angular.min.js"></script>
+      
    </head>
    <body>
       <nav class="navbar navbar-default">
@@ -34,15 +36,15 @@
          </div>
       </nav>
      
-        <div class="container-fluid" ng-app="boardGamesApp">
+        <div class="container-fluid" ng-app="usersGameApp">
         <div class="row">
-            <div class="col-sm-3" ng-controller="getGamesMyController">
+            <div class="col-sm-3" ng-controller="allUsersGameCtrl">
                 <div class="well col-md-offset-0">
                     
                     <h3 class="text-center">My Games</h3>
                     <br/>
-                    <ul class="list-group" ng-repeat="x in gamesMy">
-                        <li class="list-group-item">{{ x.Name }}</li>
+                    <ul class="list-group" ng-repeat="x in allGames">
+                        <li class="list-group-item">{{ x.name }}</li>
                     </ul>
                     
                 </div>
@@ -96,6 +98,7 @@
             </div>
          </div>
       </div>
-       <footer class = "panel-footer" >vghfg</footer>
+       <footer class = "panel-footer" ></footer>
+       <script src = "resources/js/showAllGamesCurrentUser.js"></script>
    </body>
 </html>

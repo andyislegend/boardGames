@@ -15,7 +15,6 @@
         ">
 
 	<context:annotation-config />
-	
 	<import resource="classpath*:database/DataSource.xml" />
 
 	<!-- Hibernate entity manager factory -->
@@ -48,7 +47,7 @@
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<jpa:repositories base-package="com.softserveinc.edu.boardgames.persistence.repository" 
-		/>
+	<jpa:repositories
+		base-package="com.softserveinc.edu.boardgames.persistence.repository" />
 
 </beans>
