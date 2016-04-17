@@ -23,7 +23,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "events")
 public class Event implements Serializable{
-
 	
 	@Id
 	@Column(name = "id")

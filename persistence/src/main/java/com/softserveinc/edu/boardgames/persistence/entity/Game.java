@@ -14,8 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
  * This class represents data model to game entity
@@ -89,25 +92,21 @@ public class Game implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
     private List<Tournament> tournaments;
 	
-	/**
-	 * foreign key
-	 * OneToOne relationship to GameRating
-	 * Every game has it's position in ratings
-	 */
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.ALL)
-	private GameRating gameRating;
+	@NotEmpty
+	@Column(name = "rating", nullable = false)
+	private GameRating gameRating = GameRating.NOT_RATED;
 
 	public Game(){}
 	
 	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category, GameRating gameRating) {
-		super();
+			Integer maxPlayers, Category category) {
+		
 		this.name = name;
 		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.category = category;
-		this.gameRating = gameRating;
+		
 	}
 
 	public Integer getId() {

@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login page</title>
-<link href="<c:url value='/resources/bower_components/bootstrap/dist/css/bootstrap.css' />"
+<link
+	href="<c:url value='/resources/bower_components/bootstrap/dist/css/bootstrap.css' />"
 	rel="stylesheet"></link>
 <link href="<c:url value='/resources/css/login.css' />" rel="stylesheet"></link>
 <link rel="stylesheet" type="text/css"
@@ -36,7 +37,8 @@
 						<div class="input-group input-sm">
 							<label class="input-group-addon" for="username"><i
 								class="fa fa-user"></i></label> <input type="text" class="form-control"
-								id="username" name="ssoId" placeholder="Enter Username" required>
+								id="username" name="username" placeholder="Enter Username"
+								required>
 						</div>
 						<div class="input-group input-sm">
 							<label class="input-group-addon" for="password"><i
@@ -51,6 +53,14 @@
 							<input type="submit"
 								class="btn btn-block btn-primary btn-default" value="Log in">
 						</div>
+						<br>
+
+					</form>
+					<form action="newuser">
+						<h6 class="register-suggestion">    Wanna play but still don't have an account? Sign up
+							now.</h6>
+						<button class="btn btn-block btn-primary btn-default"
+							type="submit">Sign in</button>
 					</form>
 				</div>
 			</div>
