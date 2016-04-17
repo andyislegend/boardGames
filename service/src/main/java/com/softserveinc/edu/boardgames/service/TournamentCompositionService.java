@@ -35,11 +35,15 @@ public class TournamentCompositionService {
         tournamentCompositionRepository.delete(tournamentComposition);
     }
 
-    List<TournamentComposition> findAll(){
+    public List<TournamentComposition> findAll(){
         return tournamentCompositionRepository.findAll();
     }
 
-    TournamentComposition findById(Long id){
+    public TournamentComposition findById(Long id){
         return tournamentCompositionRepository.findOne(id);
+    }
+
+    public List<TournamentComposition> findByTournamentId(Long id){
+        return tournamentCompositionRepository.findByTournamentId(id);
     }
 }

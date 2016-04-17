@@ -6,7 +6,9 @@ use boardgames;
 
 
 --  inserts to table category
-
+insert into category (name) values ('strategy');
+insert into category (name) values ('children games');
+insert into category (name) values ('logical');
 
 
 --  inserts to table address
@@ -36,6 +38,10 @@ insert into user_role (username, value) values
 
 
 --  inserts to table game
+insert into game (name,description,minPlayers,maxPlayers,categoryId,rating) values ('Monopoly','Bla la description',
+2,4,1,0.0);
+insert into game (name,description,minPlayers,maxPlayers,categoryId,rating) values ('MEMO','Bla la description',
+2,4,2,0.0);
 
 --  inserts to table status
 INSERT INTO `boardgames`.`status` (`statusOfFriend`) VALUES ('NOTCONSIDER');
@@ -53,3 +59,13 @@ INSERT INTO `boardgames`.`friends` (`status`, `user_one`, `user_two`) VALUES ('3
 
 
 --  inserts to table user_game
+
+
+
+--  inserts to table tournament
+insert into table tournament (name,idUserCreator,gameid) values ('MonopolyTournament',1,1);
+insert into table tournament (name,idUserCreator,gameid) values ('MEMOTournament',2,2);
+
+--  inserts to table tournament_composition
+
+

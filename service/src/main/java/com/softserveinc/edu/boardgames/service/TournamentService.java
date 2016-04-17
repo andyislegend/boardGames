@@ -33,11 +33,12 @@ public class TournamentService {
         tournamentRepository.delete(tournament);
     }
 
-    List<Tournament> findAll(){
+    public List<Tournament> findAll(){
         return tournamentRepository.findAll();
     }
 
-    Tournament findById(Long id){
+    public Tournament findById(Long id){
         return tournamentRepository.findOne(id);
     }
+
 }
