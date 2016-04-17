@@ -34,6 +34,11 @@
 								<p>You have been logged out successfully.</p>
 							</div>
 						</c:if>
+						<c:if test="${success != null}">
+							<div class="generic-container">
+								<div class="alert alert-success lead">${success}</div>
+							</div>
+						</c:if>
 						<div class="input-group input-sm">
 							<label class="input-group-addon" for="username"><i
 								class="fa fa-user"></i></label> <input type="text" class="form-control"
@@ -57,8 +62,8 @@
 
 					</form>
 					<form action="newuser">
-						<h6 class="register-suggestion">    Wanna play but still don't have an account? Sign up
-							now.</h6>
+						<h6 class="register-suggestion">Wanna play but still don't
+							have an account? Sign up now.</h6>
 						<button class="btn btn-block btn-primary btn-default"
 							type="submit">Sign in</button>
 					</form>

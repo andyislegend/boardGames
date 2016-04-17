@@ -33,7 +33,6 @@ public class RegisterController {
 		Address address = new Address();
 		model.addAttribute("user", user);
 		model.addAttribute("address", address);
-		model.addAttribute("edit", false);
 		return "registration";
 	}
 
@@ -45,8 +44,8 @@ public class RegisterController {
 		}
 
 		if (userService.isExistsWithUsername(user.getUsername())) {
-			FieldError usernameError = new FieldError("user", "username", messageSource.getMessage("non.unique.username",
-					new String[] { user.getUsername() }, Locale.US));
+			
+			FieldError usernameError = new FieldError("iuser", "username", "Sorry, but this usernmae is already taken. Choose another one");
 			result.addError(usernameError);
 			return "registration";
 		}
@@ -54,8 +53,7 @@ public class RegisterController {
 		userService.createUser(user);;
 
 		model.addAttribute("success",
-				"User " + user.getUsername()+ " registered successfully");
-		// return "success";
+				"User ---" + user.getUsername()+ "--- registered successfully");
 		return "login";
 	}
 

@@ -26,23 +26,15 @@
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="ssoId">Username</label>
 					<div class="col-md-7">
-						<c:choose>
-							<c:when test="${edit}">
-								<form:input type="text" path="username" id="username"
-									class="form-control input-sm" disabled="true" />
-							</c:when>
-							<c:otherwise>
-								<form:input type="text" path="username" id="username"
-									class="form-control input-sm" />
-								<div class="has-error">
-									<form:errors path="username" class="help-inline" />
-								</div>
-							</c:otherwise>
-						</c:choose>
+						<form:input type="text" path="username" id="username"
+							class="form-control input-sm" />
+						<div class="has-error">
+							<form:errors path="username" class="help-inline" />
+						</div>
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="firstName">First
@@ -77,7 +69,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="sex">Gender</label>
@@ -87,7 +79,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="age">Age</label>
@@ -110,10 +102,11 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="phoneNumber">Phone Number</label>
+					<label class="col-md-3 control-lable" for="phoneNumber">Phone
+						Number</label>
 					<div class="col-md-7">
 						<form:input type="text" path="phoneNumber" id="phoneNumber"
 							class="form-control input-sm" />
@@ -123,18 +116,9 @@
 
 			<div class="row">
 				<div class="form-actions floatRight">
-					<c:choose>
-						<c:when test="${edit}">
-							<input type="submit" value="Update"
-								class="btn btn-primary btn-sm" /> or <a
-								href="<c:url value='/list' />">Cancel</a>
-						</c:when>
-						<c:otherwise>
-							<input type="submit" value="Register"
-								class="btn btn-primary btn-sm" /> or <a
-								href="<c:url value='/list' />">Cancel</a>
-						</c:otherwise>
-					</c:choose>
+					<input type="submit" value="Register"
+						class="btn btn-primary btn-sm" /> or <a
+						href="<c:url value='/list' />">Cancel</a>
 				</div>
 			</div>
 		</form:form>
