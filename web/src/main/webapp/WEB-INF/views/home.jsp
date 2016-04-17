@@ -39,17 +39,17 @@
 
 	Dear
 	<strong>${user}</strong>, Welcome to Home Page.
-	<div class="container-fluid" ng-app="boardGamesApp">
-		<div class="row">
-			<div class="col-sm-3" ng-controller="getGamesMyController">
+	<div class="container-fluid">
+		<div class="row" ng-app="usersGameApp">
+			<div class="col-sm-3"  ng-controller="allUsersGameCtrl">
 				<div class="well col-md-offset-0">
 
 					<h3 class="text-center">My Games</h3>
 					<br />
-					<ul class="list-group" ng-repeat="x in gamesMy">
-						<li class="list-group-item">{{ x.name }}</li>
-					</ul>
-
+					<table class = "table" >
+						<tr><th>Name</th><th>Category</th></tr>
+						<tr ng-repeat = "x in allGame"><td>{{x.name}}</td><td>{{x.category}}</td></tr>
+					</table>
 				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="getGamesGlobalController">
@@ -109,6 +109,7 @@
 	</div>
 	<footer class="panel-footer">vghfg</footer>
 	<script type="text/javascript" src="resources/js/gamesApp.js"></script>
+	<script type="text/javascript" src="resources/js/showAllGamesCurrentUser.js"></script>
 
 
 </body>

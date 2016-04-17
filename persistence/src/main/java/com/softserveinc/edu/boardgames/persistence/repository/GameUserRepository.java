@@ -12,6 +12,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 
 @Repository
 public interface GameUserRepository extends JpaRepository<GameUser, Long> {
-	@Query("SELECT u.gameUsers from User u where u.username = :username")
-	public List<Game> getAllGamesForCurrentUser(@Param("username") String userName);
+	@Query("select game from GameUser gameUser where gameUser.game.id = '1'")
+	public List<Game> getAllGamesForCurrentUser();
 }

@@ -28,6 +28,11 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 /**
  * This class describes users of boardGames website.
  * 
@@ -77,7 +82,7 @@ public class User implements Serializable {
 	private String sex;
 
 	/**
-	 * Describes users sex.
+	 * Describes users age.
 	 */
 	@Column(name = "age")
 	private Integer age;
@@ -123,27 +128,28 @@ public class User implements Serializable {
 	 * Describes address where user lives. Has a many to one relationship to
 	 * address table.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Address.class, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Address.class, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
 
 	/*
 	 * by Anna for Events in case you need to change smth, please let me know
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<Event> events;
-	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-	private Set<GameUser> gameUsers;
-	
-	// /**
-	// * Describes address where user lives. Has a many to one relationship to
-	// * address table.
-	// */
-	// @OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
-	// { CascadeType.ALL })
-	// @JoinColumn(name = "friendId", referencedColumnName = "id")
-	// private Set <Friend> friends;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	@JsonManagedReference
+    private Set<Event> events;
+
+
+	 /**
+	 * Describes address where user lives. Has a many to one relationship to
+	 * address table.
+	 */
+	 @OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
+	 { CascadeType.ALL })
+	 @JoinColumn(name = "friendId", referencedColumnName = "id")
+	 @JsonManagedReference
+	 private Set <Friend> friends;
 
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
@@ -153,6 +159,10 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "value", length = 30)
 	private Set<UserRoles> userRoles = new HashSet<>();
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@JsonBackReference
+	private Set<GameUser> gameUsers;
 
 	/**
 	 * List of tounaments that were organized by user
@@ -167,6 +177,7 @@ public class User implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userGuest")
 	private List<TournamentComposition> takenpartTounaments;
+
 
 	/**
 	 * Constructor without parameters.
@@ -376,6 +387,14 @@ public class User implements Serializable {
 	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
+	
+	public Set<Friend> getFriends() {
+		return friends;
+	}
+	
+	public void setFriends(Set<Friend> friends) {
+		this.friends = friends;
+	}
 
 	public Set<UserRoles> getUserRoles() {
 		return userRoles;
@@ -383,14 +402,6 @@ public class User implements Serializable {
 
 	public void setUserRoles(Set<UserRoles> userRoles) {
 		this.userRoles = userRoles;
-	}
-
-	public Set<GameUser> getGameUsers() {
-		return gameUsers;
-	}
-
-	public void setGameUsers(Set<GameUser> gameUsers) {
-		this.gameUsers = gameUsers;
 	}
 
 	@Override
@@ -510,9 +521,10 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex
-				+ ", age=" + age + ", email=" + email + ", phoneNumber=" + phoneNumber + ", rating=" + rating
-				+ ", state=" + state + ", address=" + address + "]";
+
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", age="
+				+ age + ", email=" + email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", address="
+				+ address + "]";
 	}
 
 	

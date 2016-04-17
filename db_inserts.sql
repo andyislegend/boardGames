@@ -36,13 +36,6 @@ insert into user_role (username, value) values
 (1, 'USER');
 
 
---INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('1', '18', 'stepa@ukr.net', 'Stepa', 'Makar', '1111', '101', 'male', '1', '2');
---INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('2', '19', 'body@ukr.net', 'Body', 'Makar', '12345', '102', 'male', '4', '2');
---INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('3', '27', 'ulia@ukr.net', 'Ulia', 'Bondar', 'qwerty', '103', 'female', '2', '2');
---INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `lastName`, `password`, `phoneNumber`, `sex`, `addressId`, `role_id`) VALUES ('4', '18', 'andry@ukr.net', 'Andry', 'Bakaim', '112233', '104', 'male', '3', '2');
-
-
-
 --  inserts to table game
 
 --  inserts to table status
