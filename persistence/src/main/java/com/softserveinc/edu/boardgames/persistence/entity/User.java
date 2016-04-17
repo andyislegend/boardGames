@@ -132,7 +132,10 @@ public class User implements Serializable {
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Event> events;
-
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	private Set<GameUser> gameUsers;
+	
 	// /**
 	// * Describes address where user lives. Has a many to one relationship to
 	// * address table.
@@ -150,9 +153,6 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "value", length = 30)
 	private Set<UserRoles> userRoles = new HashSet<>();
-
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-	private Set<GameUser> gameUsers;
 
 	/**
 	 * List of tounaments that were organized by user
@@ -383,6 +383,14 @@ public class User implements Serializable {
 
 	public void setUserRoles(Set<UserRoles> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	public Set<GameUser> getGameUsers() {
+		return gameUsers;
+	}
+
+	public void setGameUsers(Set<GameUser> gameUsers) {
+		this.gameUsers = gameUsers;
 	}
 
 	@Override

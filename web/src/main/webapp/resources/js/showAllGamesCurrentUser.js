@@ -3,11 +3,12 @@ games.controller("allUsersGameCtrl", function($scope, $http) {
 $http({
 	method:'GET',
 	url:'/getAllGamesCurUser'
-}).then (function mySuccses(data){
-	$scope.allGames = data
-},function myError(data){
+}).then (function mySuccses(response){
+	$scope.allGames = response.data
+},function myError(response){
 	$scope.allGames = [ {
-		name : "Game"
+		name : "Chess",
+		category:"Sport"
 	} ];
 });
 });

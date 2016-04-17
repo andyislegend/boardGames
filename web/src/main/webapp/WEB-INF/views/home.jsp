@@ -47,7 +47,7 @@
 					<h3 class="text-center">My Games</h3>
 					<br />
 					<ul class="list-group" ng-repeat="x in gamesMy">
-						<li class="list-group-item">{{ x.Name }}</li>
+						<li class="list-group-item">{{ x.name }}</li>
 					</ul>
 
 				</div>

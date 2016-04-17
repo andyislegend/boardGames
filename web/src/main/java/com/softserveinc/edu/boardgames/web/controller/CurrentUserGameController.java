@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.softserveinc.edu.boardgames.dto.AllGamesForCurrentUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
@@ -25,13 +26,19 @@ import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository
 public class CurrentUserGameController {
 
 	@Autowired
-	GameUserRepository gameUserRep;
+	private GameUserRepository gameUserRep;
 	
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List showGames() {
-		List<Game> games = 
-		return "";
+		List<AllGamesForCurrentUserDTO> games = new ArrayList<>();
+		AllGamesForCurrentUserDTO allGamesForCurrentUserDTO = new AllGamesForCurrentUserDTO();
+		for(Game game : gameUserRep.getAllGamesForCurrentUser(getUserLogin())){
+			allGamesForCurrentUserDTO.setGameName(game.getName());
+			allGamesForCurrentUserDTO.setCategoryName(game.getCategory().getName());
+			games.add(allGamesForCurrentUserDTO);
+		}
+		return games;
 	}
 
 	/**
