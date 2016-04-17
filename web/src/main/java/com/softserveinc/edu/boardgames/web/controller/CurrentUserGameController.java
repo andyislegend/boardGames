@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.softserveinc.edu.boardgames.dto.AllGamesForCurrentUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
+import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 
@@ -27,17 +28,17 @@ import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository
 public class CurrentUserGameController {
 
 	@Autowired
-	private GameRepository gameUserRep;
+	private GameUserRepository gameUserRep;
 	
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<AllGamesForCurrentUserDTO> showGames() {
 		List<AllGamesForCurrentUserDTO> games = new ArrayList<>();
-		List<Game> allGames = gameUserRep.findAll();
-		for(Game game : allGames ){
+		List<GameUser> allGames = gameUserRep.getAllGamesForCurrentUser(getUserLogin());
+		for(GameUser game : allGames ){
 			AllGamesForCurrentUserDTO allGamesForCurrentUserDTO = new AllGamesForCurrentUserDTO();
-			allGamesForCurrentUserDTO.setName(game.getName());
-			allGamesForCurrentUserDTO.setCategory(game.getCategory().getName());
+			allGamesForCurrentUserDTO.setName(game.getGame().getName());
+			allGamesForCurrentUserDTO.setCategory(game.getGame().getCategory().getName());
 			games.add(allGamesForCurrentUserDTO);
 		}
 		return games;
