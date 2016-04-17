@@ -128,8 +128,7 @@ public class User implements Serializable {
 	 * Describes address where user lives. Has a many to one relationship to
 	 * address table.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Address.class, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "addressId", referencedColumnName = "id")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Address address;
 
 	/*

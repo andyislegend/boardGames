@@ -50,9 +50,6 @@
 					<div class="col-md-7">
 						<form:input type="text" path="firstName" id="firstName"
 							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="firstName" class="help-inline" />
-						</div>
 					</div>
 				</div>
 			</div>
@@ -64,9 +61,6 @@
 					<div class="col-md-7">
 						<form:input type="text" path="lastName" id="lastName"
 							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="lastName" class="help-inline" />
-						</div>
 					</div>
 				</div>
 			</div>
@@ -90,9 +84,6 @@
 					<div class="col-md-7">
 						<form:input type="text" path="sex" id="sex"
 							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="sex" class="help-inline" />
-						</div>
 					</div>
 				</div>
 			</div>
@@ -103,9 +94,6 @@
 					<div class="col-md-7">
 						<form:input type="text" path="age" id="age"
 							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="age" class="help-inline" />
-						</div>
 					</div>
 				</div>
 			</div>
@@ -129,9 +117,6 @@
 					<div class="col-md-7">
 						<form:input type="text" path="phoneNumber" id="phoneNumber"
 							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="phoenNumber" class="help-inline" />
-						</div>
 					</div>
 				</div>
 			</div>

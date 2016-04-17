@@ -44,9 +44,9 @@ public class RegisterController {
 			return "registration";
 		}
 
-		if (!userService.isExistsWithUsername(user.getUsername())) {
+		if (userService.isExistsWithUsername(user.getUsername())) {
 			FieldError usernameError = new FieldError("user", "username", messageSource.getMessage("non.unique.username",
-					new String[] { user.getUsername() }, Locale.getDefault()));
+					new String[] { user.getUsername() }, Locale.US));
 			result.addError(usernameError);
 			return "registration";
 		}
@@ -59,13 +59,5 @@ public class RegisterController {
 		return "login";
 	}
 
-	
-	@RequestMapping(value = { "/edit-user-{username}" }, method = RequestMethod.GET)
-	public String editUser(@PathVariable String username, ModelMap model) {
-		User user = userService.getUser(username);
-		model.addAttribute("user", user);
-		model.addAttribute("edit", true);
-		return "registration";
-	}
 
 }
