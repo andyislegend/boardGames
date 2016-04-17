@@ -145,11 +145,11 @@ public class User implements Serializable {
 	 * Describes address where user lives. Has a many to one relationship to
 	 * address table.
 	 */
-	 @OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
+	 /*@OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
 	 { CascadeType.ALL })
 	 @JoinColumn(name = "friendId", referencedColumnName = "id")
 	 @JsonManagedReference
-	 private Set <Friend> friends;
+	 private Set <Friend> friends;*/
 
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
@@ -388,13 +388,13 @@ public class User implements Serializable {
 		this.events = events;
 	}
 	
-	public Set<Friend> getFriends() {
+	/*public Set<Friend> getFriends() {
 		return friends;
 	}
 	
 	public void setFriends(Set<Friend> friends) {
 		this.friends = friends;
-	}
+	}*/
 
 	public Set<UserRoles> getUserRoles() {
 		return userRoles;
