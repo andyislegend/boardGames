@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
+
 /**
  * This class describes game's ratings of boardGames website.
  * 

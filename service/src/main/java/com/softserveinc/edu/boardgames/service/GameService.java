@@ -16,7 +16,7 @@ public class GameService {
 	@Autowired
 	private GameRepository gameRepo;
 
-	public Game findById(Long id) {
+	public Game findById(Integer id) {
 		return gameRepo.findOne(id);
 	}
 
