@@ -27,6 +27,8 @@ footer {
   height: 60px;
 }
 footer.panel-footer {
+	margin-left: auto;
+	margin-right: auto;
 	background-color: #0d0d0d;
 	color: #e6e6e6;
 }
