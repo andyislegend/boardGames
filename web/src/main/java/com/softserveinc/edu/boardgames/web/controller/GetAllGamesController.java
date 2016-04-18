@@ -1,4 +1,4 @@
-/*package com.softserveinc.edu.boardgames.web.controller;
+package com.softserveinc.edu.boardgames.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,4 +43,4 @@ public class GetAllGamesController {
 		return gamesTransfer;
 	}
 
-}*/
+}

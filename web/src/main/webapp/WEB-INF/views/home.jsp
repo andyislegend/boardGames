@@ -10,14 +10,12 @@
 	rel="stylesheet" />
 <link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
 
-	<script type="text/javascript" src="resources/bower_components/angular/angular.js"></script>
-	<script type="text/javascript" src="resources/js/users.js"></script>
-	<script type="text/javascript" src="resources/js/gamesApp.js"></script>
-	<script type="text/javascript" src="resources/js/showAllGamesCurrentUser.js"></script>
-	<script type="text/javascript" src="resources/js/friends.js"></script>
-	
+<script type="text/javascript"
+	src="resources/bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="resources/js/main.js"></script>
+
 </head>
-<body>
+<body ng-app="usersGameApp">
 
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -41,24 +39,25 @@
 	Dear
 	<strong>${user}</strong>, Welcome to Home Page.
 	<div class="container-fluid">
-<<<<<<< HEAD
 		<div class="row">
-			<div class="col-sm-3" ng-app="usersGameApp">
-=======
-		<div class="row" ng-app="usersGameApp">
-		
-			<div class="col-sm-3"  ng-controller="allUsersGameCtrl">
->>>>>>> a06b8b91c6ff02c6c89d28d6b5c2cb00d2203a9d
+			<div class="col-sm-3">
 				<div class="well col-md-offset-0">
+
 					<h3 class="text-center">My Games</h3>
 					<br />
-					<table class = "table" ng-controller="allUsersGameCtrl" >
-						<tr><th>Name</th><th>Category</th></tr>
-						<tr ng-repeat = "x in allGame"><td>{{ x.name }}</td><td>{{ x.category }}</td></tr>
+					<table class="table" ng-controller="allUsersGameCtrl">
+						<tr>
+							<th>Name</th>
+							<th>Category</th>
+						</tr>
+						<tr ng-repeat="x in allGame">
+							<td>{{ x.name }}</td>
+							<td>{{ x.category }}</td>
+						</tr>
 					</table>
 				</div>
 			</div>
-			<div class="col-sm-6"> <!-- ng-controller="getGamesGlobalController"  -->
+			<div class="col-sm-6" ng-controller="getGamesGlobalController">
 				<table class="table">
 					<thead>
 						<tr>
@@ -84,12 +83,11 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="col-sm-3" ng-controller="list_of_Friends_Ctrl">
+			<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
 				<div class="well col-md-offset-0">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-							
 								<th>Friends</th>
 								<td><a href="#"><img src="resources/ico/add_user.png"
 										width="25"></a></td>
@@ -99,7 +97,8 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="friend in friends">
-								<td>{{ friend.firstName }}</td>
+								<td><img src="resources/images/{{friend.img}}.jpg" /></td>
+								<td>{{ friend.name }}</td>
 								<td>{{ friend.lastName }}</td>
 								<td><a href="#"><img src="resources/ico/messages.png"
 										width="25"></a></td>
@@ -114,16 +113,16 @@
 		</div>
 	</div>
 	<div class="col-sm-3"></div>
-	<div class="container-fluid" ng-app="usersApp">
-		<div class="col-sm-6" ng-controller="getAllUsers">
-			<table class="table table-striped">
+	<div class="container-fluid">
+		<div class="col-sm-6">
+			<table class="table table-striped" ng-controller="getAllUsersCtrl">
 				<tr>
 					<th>Last Name, First Name</th>
 					<th>Email</th>
 					<th>PhoneNumber</th>
 					<th>Address</th>
 				</tr>
-				<tr data-ng-repeat="user in users">
+				<tr ng-repeat="user in users">
 					<td>{{user.lastName}} {{user.firstName}}</td>
 					<td>{{user.email}}</td>
 					<td>{{user.phoneNumber}}</td>
@@ -131,7 +130,7 @@
 						{{user.houseNumber}}, {{user.roomNumber}}</td>
 				</tr>
 			</table>
-			<div class="col-sm-3" data-ng-controller="getUsersByCityName">
+			<div class="col-sm-3">
 				<form:form method="get" action="getUsersByCityName">
 					<p class="findUsers">
 						Find users by city: <input type="text" class="form-control"

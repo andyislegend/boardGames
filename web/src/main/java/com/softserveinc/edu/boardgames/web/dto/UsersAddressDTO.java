@@ -95,6 +95,5 @@ public class UsersAddressDTO {
 	public void setRoomNumber(Integer roomNumber) {
 		this.roomNumber = roomNumber;
 	}
-
 }
 
