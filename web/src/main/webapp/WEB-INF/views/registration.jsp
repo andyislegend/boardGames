@@ -118,7 +118,7 @@
 				<div class="form-actions floatRight">
 					<input type="submit" value="Register"
 						class="btn btn-primary btn-sm" /> or <a
-						href="<c:url value='/list' />">Cancel</a>
+						href="<c:url value='/login' />">Cancel</a>
 				</div>
 			</div>
 		</form:form>
