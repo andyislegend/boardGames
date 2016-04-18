@@ -431,85 +431,104 @@ public class User implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+		System.out.println("**********000*********");
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		System.out.println("**********00000000*********");
+		/*if (getClass() != obj.getClass())
+			return false;*/
 		User other = (User) obj;
+		System.out.println("**********1*********");
 		if (address == null) {
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
+		System.out.println("**********2*********");
 		if (age == null) {
 			if (other.age != null)
 				return false;
 		} else if (!age.equals(other.age))
 			return false;
+		System.out.println("**********3*********");
 		if (createdTounaments == null) {
 			if (other.createdTounaments != null)
 				return false;
 		} else if (!createdTounaments.equals(other.createdTounaments))
 			return false;
+		System.out.println("**********4*********");
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		System.out.println("**********5*********");
 		if (events == null) {
 			if (other.events != null)
 				return false;
 		} else if (!events.equals(other.events))
 			return false;
+		System.out.println("**********6*********");
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		System.out.println("**********7*********");
 		if (gameUsers == null) {
 			if (other.gameUsers != null)
 				return false;
 		} else if (!gameUsers.equals(other.gameUsers))
 			return false;
+		System.out.println("**********8*********");
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		System.out.println("**********9*********");
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		System.out.println("**********10*********");
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		System.out.println("**********11*********");
 		if (phoneNumber == null) {
 			if (other.phoneNumber != null)
 				return false;
 		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
+		System.out.println("**********12*********");
 		if (rating != other.rating)
 			return false;
+		System.out.println("**********13*********");
 		if (sex == null) {
 			if (other.sex != null)
 				return false;
 		} else if (!sex.equals(other.sex))
 			return false;
+		System.out.println("**********14*********");
 		if (state != other.state)
 			return false;
+		System.out.println("**********15*********");
 		if (takenpartTounaments == null) {
 			if (other.takenpartTounaments != null)
 				return false;
 		} else if (!takenpartTounaments.equals(other.takenpartTounaments))
 			return false;
+		System.out.println("**********16*********");
 		if (userRoles == null) {
 			if (other.userRoles != null)
 				return false;
 		} else if (!userRoles.equals(other.userRoles))
 			return false;
+		System.out.println("**********17*********");
 		if (username == null) {
 			if (other.username != null)
 				return false;

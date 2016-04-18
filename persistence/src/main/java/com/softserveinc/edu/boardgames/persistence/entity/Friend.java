@@ -33,14 +33,14 @@ public class Friend {
 	/**
 	 * Describes connection to the User entity
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_one", referencedColumnName = "id")
 	private User userOne;
 	
 	/**
 	 * Describes connection to the User entity
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "user_two", referencedColumnName = "id")
 	private User userTwo;
 	
@@ -49,7 +49,7 @@ public class Friend {
 	/**
 	 * Describes status of friendship
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Status.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
     @JoinColumn(name = "status", referencedColumnName = "id")
 	private Status status;
 	
