@@ -18,6 +18,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
  * 
@@ -34,7 +35,7 @@ public class CurrentUserGameController {
 	@ResponseBody
 	public List<AllGamesForCurrentUserDTO> showGames() {
 		List<AllGamesForCurrentUserDTO> games = new ArrayList<>();
-		List<GameUser> allGames = gameUserRep.getAllGamesForCurrentUser(getUserLogin());
+		List<GameUser> allGames = gameUserRep.getAllGamesForCurrentUser(WebUtil.getPrincipalUsername());
 		for(GameUser game : allGames ){
 			AllGamesForCurrentUserDTO allGamesForCurrentUserDTO = new AllGamesForCurrentUserDTO();
 			allGamesForCurrentUserDTO.setName(game.getGame().getName());
@@ -42,23 +43,5 @@ public class CurrentUserGameController {
 			games.add(allGamesForCurrentUserDTO);
 		}
 		return games;
-	}
-
-	/**
-	 * 
-	 * Method for returning user login
-	 * 
-	 * @return user login name
-	 */
-	private String getUserLogin() {
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		if (principal instanceof UserDetails) {
-			userName = ((UserDetails) principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		return userName;
 	}
 }
