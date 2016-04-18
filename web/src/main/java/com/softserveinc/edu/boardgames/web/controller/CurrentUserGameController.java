@@ -30,13 +30,13 @@ public class CurrentUserGameController {
 
 	@Autowired
 	private GameUserRepository gameUserRep;
-	
+
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<AllGamesForCurrentUserDTO> showGames() {
 		List<AllGamesForCurrentUserDTO> games = new ArrayList<>();
 		List<GameUser> allGames = gameUserRep.getAllGamesForCurrentUser(WebUtil.getPrincipalUsername());
-		for(GameUser game : allGames ){
+		for (GameUser game : allGames) {
 			AllGamesForCurrentUserDTO allGamesForCurrentUserDTO = new AllGamesForCurrentUserDTO();
 			allGamesForCurrentUserDTO.setName(game.getGame().getName());
 			allGamesForCurrentUserDTO.setCategory(game.getGame().getCategory().getName());
