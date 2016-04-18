@@ -31,7 +31,11 @@ public class UsersController {
 			userAddressDTO.setLastName(user.getLastName());
 			userAddressDTO.setEmail(user.getEmail());
 			userAddressDTO.setPhoneNumber(user.getPhoneNumber());
-			
+			userAddressDTO.setCountry(user.getAddress().getCountry());
+			userAddressDTO.setCity(user.getAddress().getCity());
+			userAddressDTO.setStreet(user.getAddress().getStreet());
+			userAddressDTO.setHouseNumber(user.getAddress().getHouseNumber());
+			userAddressDTO.setRoomNumber(user.getAddress().getRoomNumber());
 			userAddressList.add(userAddressDTO);
 		}
 		return userAddressList;
