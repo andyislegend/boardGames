@@ -20,3 +20,4 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 app.controller('getGamesMyController', function($scope) {
 
 });
+

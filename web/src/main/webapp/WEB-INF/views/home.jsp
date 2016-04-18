@@ -10,11 +10,11 @@
 	rel="stylesheet" />
 <link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
 
-	<script type="text/javascript"
-		src="resources/bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="resources/bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="resources/js/users.js"></script>
 	<script type="text/javascript" src="resources/js/gamesApp.js"></script>
 	<script type="text/javascript" src="resources/js/showAllGamesCurrentUser.js"></script>
+	<script type="text/javascript" src="resources/js/friends.js"></script>
 	
 </head>
 <body>
@@ -41,10 +41,15 @@
 	Dear
 	<strong>${user}</strong>, Welcome to Home Page.
 	<div class="container-fluid">
+<<<<<<< HEAD
 		<div class="row">
 			<div class="col-sm-3" ng-app="usersGameApp">
+=======
+		<div class="row" ng-app="usersGameApp">
+		
+			<div class="col-sm-3"  ng-controller="allUsersGameCtrl">
+>>>>>>> a06b8b91c6ff02c6c89d28d6b5c2cb00d2203a9d
 				<div class="well col-md-offset-0">
-
 					<h3 class="text-center">My Games</h3>
 					<br />
 					<table class = "table" ng-controller="allUsersGameCtrl" >
@@ -53,7 +58,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-sm-6" ng-controller="getGamesGlobalController">
+			<div class="col-sm-6"> <!-- ng-controller="getGamesGlobalController"  -->
 				<table class="table">
 					<thead>
 						<tr>
@@ -79,11 +84,12 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
+			<div class="col-sm-3" ng-controller="list_of_Friends_Ctrl">
 				<div class="well col-md-offset-0">
 					<table class="table table-striped">
 						<thead>
 							<tr>
+							
 								<th>Friends</th>
 								<td><a href="#"><img src="resources/ico/add_user.png"
 										width="25"></a></td>
@@ -93,8 +99,7 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="friend in friends">
-								<td><img src="resources/images/{{friend.img}}.jpg" /></td>
-								<td>{{ friend.name }}</td>
+								<td>{{ friend.firstName }}</td>
 								<td>{{ friend.lastName }}</td>
 								<td><a href="#"><img src="resources/ico/messages.png"
 										width="25"></a></td>
