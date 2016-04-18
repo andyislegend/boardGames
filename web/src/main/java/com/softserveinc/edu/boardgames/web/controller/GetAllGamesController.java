@@ -24,12 +24,12 @@ public class GetAllGamesController {
 	@Autowired
 	private GameService gameService;
 	
-	private List<AllGamesDto> gamesTransfer = new ArrayList<AllGamesDto>();
+	private List<AllGamesDto> gamesTransfer;
 	
 	@RequestMapping(value="/getAllGames", method = RequestMethod.GET)
 	@ResponseBody
 	public List<AllGamesDto> getAllGames(){
-		
+		gamesTransfer = new ArrayList<AllGamesDto>();
 		for (Game game : gameService.getAll()){
 			AllGamesDto gamesDto = new AllGamesDto();
 			gamesDto.setName(game.getName());
