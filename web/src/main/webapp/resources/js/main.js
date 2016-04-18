@@ -26,7 +26,7 @@ app.controller("getAllUsersByCityNameCtrl", function($scope, $http) {
 	$scope.submit = function(){
 		var cityName = $scope.cityName;
 		$scope.users = [];
-		$http.get('/getUsersByCityName', cityName).then(function(result) {
+		$http.get('/getUsersByCityName?cityName=' + cityName).then(function(result) {
 			$scope.users = result.data;
 		});
 	}
