@@ -32,10 +32,12 @@ public class TournamentController {
     public @ResponseBody List<AllTournamentsDTO> showAllTournaments() {
         List<AllTournamentsDTO> response=new ArrayList<>();
         List<Tournament> tournaments=tournamentService.findAll();
-        List<String> userGuests=new ArrayList<>();
+
+        List<TournamentComposition> compositions;
         for(Tournament tournament:tournaments){
-            userGuests.clear();
-            for(TournamentComposition tournamentComposition:tournamentCompositionService.findByTournamentId(tournament.getId())){
+            List<String> userGuests=new ArrayList<>();
+            compositions=tournamentCompositionService.findByTournamentId(tournament.getId());
+            for(TournamentComposition tournamentComposition:compositions){
                 userGuests.add(tournamentComposition.getUserGuest().getFirstName()+ " "+tournamentComposition.getUserGuest().getLastName());
             }
             response.add(new AllTournamentsDTO(tournament.getName(),

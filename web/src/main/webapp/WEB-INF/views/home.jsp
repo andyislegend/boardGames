@@ -174,6 +174,6 @@
 			</div>
 		</div>
 	</div>
-	<footer class="panel-footer">vghfg</footer>
+	<footer class="panel-footer">Copyright (C) 2016 Softserve inc, Lv-179.Java. All rights reserved.</footer>
 </body>
 </html>
