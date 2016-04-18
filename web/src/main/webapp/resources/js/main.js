@@ -5,6 +5,7 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 		$scope.allGame = result.data;
 	});
 });
+
 app.controller("listOfFriendsCtrl", function($scope, $http) {
 	console.log("in controller list of Friends");
 	$http.get("/allFriends").success(function(data) {
@@ -18,12 +19,17 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	$scope.users = [];
 	$http.get('/users').then(function(result) {
 		$scope.users = result.data;
-	}), function myError(result) {
-		$scope.users = [ {
-			lastName : "Monopolly",
-
-		} ];
-	};
+	});
+});
+	
+app.controller("getAllUsersByCityNameCtrl", function($scope, $http) {
+	$scope.submit = function(){
+		var cityName = $scope.cityName;
+		$scope.users = [];
+		$http.get('/getUsersByCityName', cityName).then(function(result) {
+			$scope.users = result.data;
+		});
+	}
 
 });
 

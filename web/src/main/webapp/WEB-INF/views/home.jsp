@@ -154,14 +154,14 @@
 						{{user.houseNumber}}, {{user.roomNumber}}</td>
 				</tr>
 			</table>
-			<div class="col-sm-3">
-				<form:form method="get" action="getUsersByCityName">
+			<div class="col-sm-3" ng-controller="getAllUsersByCityNameCtrl">
+				<form>
 					<p class="findUsers">
 						Find users by city: <input type="text" class="form-control"
-							name="cityName" data-ng-model="cityName">
-						<button type="submit" class="btn btn-success">Search</button>
+							ng-model="cityName">
+						<input type="submit" value="Submit" ng-click="submit()">
 					</p>
-				</form:form>
+				</form>
 			</div>
 			<div class="col-sm-4">
 				<form:form method="get" action="getUsersByLastName">

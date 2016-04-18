@@ -129,6 +129,7 @@ public class User implements Serializable {
 	 * address table.
 	 */
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
 
 	/*
