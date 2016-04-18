@@ -155,7 +155,7 @@
 					<th>Address</th>
 				</tr>
 				<tr ng-repeat="user in users|filter:searchText">
-					<td filter="{ lastName: 'text'}">{{user.lastName}}
+					<td>{{user.lastName}}
 						{{user.firstName}}</td>
 					<td>{{user.email}}</td>
 					<td>{{user.phoneNumber}}</td>
