@@ -139,7 +139,7 @@
 	<div class="col-sm-3"></div>
 	<div class="container-fluid">
 		<div class="col-sm-6">
-			<table class="table table-striped" ng-controller="getAllUsersCtrl">
+			<table class="table" ng-controller="getAllUsersCtrl">
 				<tr>
 					<th>Last Name, First Name</th>
 					<th>Email</th>

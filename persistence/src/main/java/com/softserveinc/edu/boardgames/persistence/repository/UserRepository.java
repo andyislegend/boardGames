@@ -26,6 +26,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("Select u.rating"+" FROM User u"+" WHERE u.username =:username")
 	String getUsersRating(String username); // Not sure if will work
 	
+	@Query("Select u FROM User u")
+	public List<User> findAllUsers();
 	
     User findByUsername(String username);
 

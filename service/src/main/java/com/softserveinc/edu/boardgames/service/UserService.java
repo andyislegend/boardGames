@@ -136,7 +136,7 @@ public class UserService {
 
 	@Transactional
 	public List<User> findAll() {
-		return userRepository.findAll();
+		return userRepository.findAllUsers();
 	}
 	
 	@Transactional
