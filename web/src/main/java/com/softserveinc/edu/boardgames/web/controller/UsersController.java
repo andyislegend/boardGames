@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.softserveinc.edu.boardgames.dto.UsersAddressDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.UserService;
-import com.softserveinc.edu.boardgames.web.dto.UsersAddressDTO;
 
 @Controller
 public class UsersController {

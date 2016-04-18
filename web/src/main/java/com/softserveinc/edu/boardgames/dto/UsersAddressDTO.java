@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.web.dto;
+package com.softserveinc.edu.boardgames.dto;
 
 
 public class UsersAddressDTO {
