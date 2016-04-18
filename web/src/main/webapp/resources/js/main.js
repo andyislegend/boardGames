@@ -1,14 +1,14 @@
 var app = angular.module("usersGameApp", []);
 app.controller("allUsersGameCtrl", function($scope, $http) {
 	$scope.allGame = [];
-	$http.get('/getAllGamesCurUser').then(function(result) {
+	$http.get('getAllGamesCurUser').then(function(result) {
 		$scope.allGame = result.data;
 	});
 });
 
 app.controller("listOfFriendsCtrl", function($scope, $http) {
 	console.log("in controller list of Friends");
-	$http.get("/allFriends").success(function(data) {
+	$http.get("allFriends").success(function(data) {
 		$scope.friends = data;
 	}).error(function(error) {
 		console.log(error);
@@ -17,7 +17,7 @@ app.controller("listOfFriendsCtrl", function($scope, $http) {
 
 app.controller("getAllUsersCtrl", function($scope, $http) {
 	$scope.users = [];
-	$http.get('/users').then(function(result) {
+	$http.get('users').then(function(result) {
 		$scope.users = result.data;
 	});
 });
@@ -37,7 +37,7 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 
 	$http({
 		method : "GET",
-		url : '/getAllGames'
+		url : 'getAllGames'
 	}).then(function mySucces(response) {
 		$scope.gamesGlobal = response.data;
 	}, function myError(response) {
