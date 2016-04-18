@@ -62,8 +62,8 @@
 
 					</form>
 					<form action="newuser">
-						<h6 class="register-suggestion">Wanna play but still don't
-							have an account? Sign up now.</h6>
+						<h5 class="register-suggestion">Wanna play but still don't
+							have an account? Sign up now.</h5>
 						<button class="btn btn-block btn-primary btn-default"
 							type="submit">Sign in</button>
 					</form>
