@@ -41,13 +41,13 @@
 	Dear
 	<strong>${user}</strong>, Welcome to Home Page.
 	<div class="container-fluid">
-		<div class="row" ng-app="usersGameApp">
-			<div class="col-sm-3"  ng-controller="allUsersGameCtrl">
+		<div class="row">
+			<div class="col-sm-3" ng-app="usersGameApp">
 				<div class="well col-md-offset-0">
 
 					<h3 class="text-center">My Games</h3>
 					<br />
-					<table class = "table" >
+					<table class = "table" ng-controller="allUsersGameCtrl" >
 						<tr><th>Name</th><th>Category</th></tr>
 						<tr ng-repeat = "x in allGame"><td>{{ x.name }}</td><td>{{ x.category }}</td></tr>
 					</table>
@@ -147,8 +147,5 @@
 		</div>
 	</div>
 	<footer class="panel-footer">vghfg</footer>
-	
-
-
 </body>
 </html>
