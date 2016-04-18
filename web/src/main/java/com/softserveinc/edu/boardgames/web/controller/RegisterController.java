@@ -1,6 +1,6 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.util.Locale;
+
 
 import javax.validation.Valid;
 
@@ -23,9 +23,6 @@ public class RegisterController {
 
 	@Autowired
 	UserService userService;
-	
-	@Autowired
-    MessageSource messageSource;
 
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
@@ -45,7 +42,7 @@ public class RegisterController {
 
 		if (userService.isExistsWithUsername(user.getUsername())) {
 			
-			FieldError usernameError = new FieldError("iuser", "username", "Sorry, but this usernmae is already taken. Choose another one");
+			FieldError usernameError = new FieldError("user", "username", "Sorry, but this usernmae is already taken. Choose another one");
 			result.addError(usernameError);
 			return "registration";
 		}

@@ -43,13 +43,6 @@ public class ServletConfiguration extends WebMvcConfigurerAdapter {
 		converters.add(new MappingJackson2HttpMessageConverter());
 		converters.add(new StringHttpMessageConverter());
 	}
-
-	 @Bean
-	    public MessageSource messageSource() {
-	        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-	        messageSource.setBasename("messages");
-	        return messageSource;
-	    }
 	
 	@Bean
 	public FormattingConversionService conversionService() {
