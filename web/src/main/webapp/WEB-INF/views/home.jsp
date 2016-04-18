@@ -23,7 +23,7 @@
 				<a class="navbar-brand" href="#">Cross Games</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="#">Championship</a></li>
+				<li><a href="tournaments">Championship</a></li>
 				<li><a href="#">All Games</a></li>
 				<li><a href="#">Events</a></li>
 			</ul>
@@ -83,6 +83,30 @@
 					</tbody>
 				</table>
 			</div>
+
+
+			<div class="col-sm-6" ng-controller="showAllTournaments">
+				<table class="table">
+					<thead>
+					<tr>
+						<th>Tournament name</th>
+						<th>User creator</th>
+						<th>Users Guests</th>
+						<th>Join</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="x in tournaments">
+						<td>{{ x.tournamentName }}</td>
+						<td>{{ x.userName }}</td>
+						<td>{{ x.userGuests}}</td>
+						<td><button class="btn btn-success">Actions</button></td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+
+
 			<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
 				<div class="well col-md-offset-0">
 					<table class="table table-striped">

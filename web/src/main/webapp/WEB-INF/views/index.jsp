@@ -16,7 +16,7 @@
                <a class="navbar-brand" href="#">Bla Bla Game</a>
             </div>
             <ul class="nav navbar-nav">
-               <li><a href="#">Championship</a></li>
+               <li><a href="tournaments">Championship</a></li>
                <li><a href="#">All Games</a></li>
                <li><a href="#">Events</a></li>
                <li><a href="users">Users</a></li>
