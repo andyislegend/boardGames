@@ -139,39 +139,31 @@
 	<div class="col-sm-3"></div>
 	<div class="container-fluid">
 		<div class="col-sm-6">
-			<table class="table" ng-controller="getAllUsersCtrl">
+			<div class="col-sm-4">
+				<input type="text" class="form-control"
+					ng-model="searchText.lastName" placeholder="Search by last name">
+			</div>
+			<div class="col-sm-4">
+				<input type="text" class="form-control"
+					ng-model="searchText.address.city" placeholder="Search by city">
+			</div>
+			<table class="table" ng-controller="getAllUsersCtrl">		
 				<tr>
 					<th>Last Name, First Name</th>
 					<th>Email</th>
 					<th>PhoneNumber</th>
 					<th>Address</th>
 				</tr>
-				<tr ng-repeat="user in users">
-					<td>{{user.lastName}} {{user.firstName}}</td>
+				<tr ng-repeat="user in users|filter:searchText">
+					<td filter="{ lastName: 'text'}">{{user.lastName}}
+						{{user.firstName}}</td>
 					<td>{{user.email}}</td>
 					<td>{{user.phoneNumber}}</td>
-					<td>{{user.country}},{{user.city}}, {{user.street}},
-						{{user.houseNumber}}, {{user.roomNumber}}</td>
+					<td>{{user.address.country}},{{user.address.city}},
+						{{user.address.street}}, {{user.address.houseNumber}},
+						{{user.address.roomNumber}}</td>
 				</tr>
 			</table>
-			<div class="col-sm-3" ng-controller="getAllUsersByCityNameCtrl">
-				<form>
-					<p class="findUsers">
-						Find users by city: <input type="text" class="form-control"
-							ng-model="cityName">
-						<input type="submit" value="Submit" ng-click="submit()">
-					</p>
-				</form>
-			</div>
-			<div class="col-sm-4">
-				<form:form method="get" action="getUsersByLastName">
-					<p class="findUsers">
-						Find users by Last Name: <input type="text" class="form-control"
-							name="lastName">
-						<button type="submit" class="btn btn-success">Search</button>
-					</p>
-				</form:form>
-			</div>
 		</div>
 	</div>
 	<footer class="panel-footer">Copyright (C) 2016 Softserve inc, Lv-179.Java. All rights reserved.</footer>

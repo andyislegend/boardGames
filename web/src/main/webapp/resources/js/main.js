@@ -21,17 +21,6 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 		$scope.users = result.data;
 	});
 });
-	
-app.controller("getAllUsersByCityNameCtrl", function($scope, $http) {
-	$scope.submit = function(){
-		var cityName = $scope.cityName;
-		$scope.users = [];
-		$http.get('/getUsersByCityName?cityName=' + cityName).then(function(result) {
-			$scope.users = result.data;
-		});
-	}
-
-});
 
 app.controller('getGamesGlobalController', function($scope, $http) {
 
