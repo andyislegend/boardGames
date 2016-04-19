@@ -1,13 +1,41 @@
 var app = angular.module("usersGameApp", []);
 app.controller("allUsersGameCtrl", function($scope, $http) {
-	$scope.allGame = [];
 	$http.get('getAllGamesCurUser').then(function(result) {
 		$scope.allGame = result.data;
 		$scope.showMe = false;
-	    $scope.myFunc = function() {
-	        $scope.showMe = !$scope.showMe;
-	    }
+		$scope.myFunc = function(id) {
+			$scope.games = [];
+			$scope.showMe = !$scope.showMe;
+			for (var i = 0; i < $scope.allGame.length; i++) {
+				if ($scope.allGame[i].name === id) {
+					$scope.games[0] = $scope.allGame[i];
+				}
+			}
+		}
 	});
+});
+
+app.controller("CreateGameCtrl", function($scope, $http) {
+	$scope.submit = function() {
+		var game = [{
+			"name" : $scope.name,
+			"description" : $scope.description,
+			"rules" : $scope.rules,
+			"maxPlayers" : $scope.maxPlayers,
+			"minPleyers" : $scope.minPlayers,
+		}];
+		var category = {
+			"name" : $scope.category
+		};
+		var userGame = {
+			"edition" : $scope.edition,
+			"year" : year
+		}
+	};
+	$scope.showForm = function() {
+		$scope.showText = false;
+		$scope.showText = !$scope.showText;
+		}
 });
 
 app.controller("listOfFriendsCtrl", function($scope, $http) {

@@ -39,26 +39,55 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3">
-				<div class="well col-md-offset-0">
-
+				<div class="well col-md-offset-0 form-group">
+					
 					<h3 class="text-center">My Games</h3>
+					<div controller = "CreateGameCtrl">
+					<button ng-click="showForm()" >Add new Game</button>
+					<form data-ng-submit role="form" ng-show = "showText">
+						<div class="form-group">
+						<label>Game name</label>
+						<input data-ng-model = "name">
+						<label>Category</label>
+						<input data-ng-model = "category">
+						<label>Description</label>
+						<input data-ng-model = "description">
+						<label>Rules</label>
+						<input data-ng-model = "rules">
+						<label>Max players</label>
+						<input data-ng-model = "maxPleyers">
+						<label>Min players</label>
+						<input data-ng-model = "minPlayers">
+                        <label>Edition</label>
+						<input data-ng-model = "edition">
+                        <label>Year of production</label>
+						<input data-ng-model = "year">
+                        <input type="submit" value="add">                      
+						</div>
+						<p ng-repeat = "i in game">{{i.name}}</p>
+					</form>
+					</div>
+					
 					<div ng-controller="allUsersGameCtrl">
-						<div ng-repeat = "game in allGame">
-						<div> <p>{{game.name}}</p><p><button ng-click="myFunc()"><span class="glyphicon glyphicon glyphicon-list-alt" aria-hidden="true"/></button></p></td></div>
-						<div ng-show = "showMe">
-							<p>Year of production: {{game.yearOfProduction}}</p>
-							<p>Category: {{game.category}}</p>
-						</div>
-						</div>
-						
+						<div >
 							<table class = "table">
-							<tr><th>Name</th><th>Category </th><th>More</th><th>Comment</th><tr>
-							<tr ng-repeat = "game in allGame"><td>{{game.name}}</td><td>{{game.category}}</td>
+							  <tr><th>Name</th><th>Category </th><th>More</th><th>Comment</th><tr>
+							  <tr ng-repeat = "game in allGame">
+							<td>{{game.name}}</td><td>{{game.yearOfProduction}}</td>
 							<td>
-							
-							<td><span class="glyphicon glyphicon-comment" aria-hidden="true"/></td>
+							<button ng-click="myFunc(game.name)">M</button></td>
+							<td>com</td>
 							</tr>																																										
 							</table>						
+							<div ng-show="showMe">
+							<div ng-repeat = "game in games">
+							<p>Category:{{game.category}}</p>
+							<p>Year of production: {{game.yearOfProduction}}</p>
+							<p>Edition: {{game.edition}}</p>
+							<p>Description: {{game.description}}</p>
+							<p>Max players: {{game.maxPlayers}}</p>
+							<p>Min players: {{game.minPlayers}}</p> 
+							</div>
 							</div>
 						</div>
 					</div>
