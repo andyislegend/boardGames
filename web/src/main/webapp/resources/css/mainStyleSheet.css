@@ -19,17 +19,13 @@ table {
 div.well {
     background-color: 	#FFDEAD;
 }
-footer {
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-}
 footer.panel-footer {
-	margin-left: auto;
-	margin-right: auto;
+	position: fixed;
+	bottom: 0;
 	background-color: #0d0d0d;
 	color: #e6e6e6;
+  	width: 100%;
+  	height: 45px;
 }
 .findUsers {
 	color:white;

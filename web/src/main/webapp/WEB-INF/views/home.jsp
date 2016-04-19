@@ -63,9 +63,7 @@
 						<tr>
 							<th>Game</th>
 							<th>Category</th>
-							<th>Description</th>
-							<th>Min players</th>
-							<th>Max players</th>
+							<th>Min/Max players</th>
 							<th>Rating</th>
 							<th>Actions</th>
 						</tr>
@@ -74,9 +72,7 @@
 						<tr ng-repeat="x in gamesGlobal">
 							<td>{{ x.name }}</td>
 							<td>{{ x.categoryName }}</td>
-							<td>{{ x.description }}</td>
-							<td>{{ x.minPlayers }}</td>
-							<td>{{ x.maxPlayers }}</td>
+							<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
 							<td>{{ x.rating }}</td>
 							<td><button class="btn btn-success">Actions</button></td>
 						</tr>
@@ -166,6 +162,8 @@
 			</table>
 		</div>
 	</div>
-	<footer class="panel-footer">Copyright (C) 2016 Softserve inc, Lv-179.Java. All rights reserved.</footer>
+	<footer class="panel-footer">
+	Copyright (C) 2016 Softserve inc, Lv-179.Java. All rights reserved.
+	</footer>
 </body>
 </html>

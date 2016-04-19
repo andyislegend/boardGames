@@ -15,7 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 
 /**
@@ -29,41 +32,25 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "gameUser")
 public class GameUser {
 
-	/**
-	 * unique value, primary key
-	 */
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)       
 	private Integer id;
 	
-	/**
-	 * edition - one game can have different editions with
-	 * a little difference 
-	 */
 	@Column(name = "edition")
 	private String edition;
 	
-	/**
-	 * year of production - when game was made
-	 */
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 	
-	/**
-	 * foreign key
-	 * ManyToOne relationship to Game
-	 * global game to the type of which current game belongs 
-	 */
 	@ManyToOne(fetch=FetchType.LAZY, optional=false, targetEntity=Game.class, cascade={CascadeType.ALL})
 	@JoinColumn(name="gameId")
 	private Game game;
 	
-	/**
-	 * foreign key
-	 * ManyTomany relationship to users
-	 * several users can actualy have several games  
-	 */
+	@NotEmpty
+	@Column(name = "gameUserRating", nullable=false)
+	private String gameUserRating = GameRating.NOT_RATED.name();
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user", joinColumns = { 
 			@JoinColumn(name = "userId", nullable = false, updatable = false) }, 
