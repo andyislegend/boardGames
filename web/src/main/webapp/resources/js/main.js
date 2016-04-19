@@ -16,6 +16,10 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 });
 
 app.controller("CreateGameCtrl", function($scope, $http) {
+	$scope.showText = false;
+	$scope.showForm = function() {
+		$scope.showText = !$scope.showText;
+		};
 	$scope.submit = function() {
 		var game = [{
 			"name" : $scope.name,
@@ -32,10 +36,6 @@ app.controller("CreateGameCtrl", function($scope, $http) {
 			"year" : year
 		}
 	};
-	$scope.showForm = function() {
-		$scope.showText = false;
-		$scope.showText = !$scope.showText;
-		}
 });
 
 app.controller("listOfFriendsCtrl", function($scope, $http) {
