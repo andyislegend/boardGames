@@ -107,6 +107,14 @@ public class User implements Serializable {
 	@NotEmpty
 	@Column(name = "password", nullable = false)
 	private String password;
+	
+	/**
+	 * Provides a description of User's current rating as a number. By default, after
+	 * registration User obtain 0 rating
+	 */
+	@NotEmpty
+	@Column(name = "userRating", nullable = false)
+	private Integer userRating;
 
 	/**
 	 * Provides a description of User's current rating. By default, after
