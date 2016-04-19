@@ -45,16 +45,11 @@
 
 					<h3 class="text-center">My Games</h3>
 					<br />
-					<table class="table" ng-controller="allUsersGameCtrl">
-						<tr>
-							<th>Name</th>
-							<th>Category</th>
-						</tr>
-						<tr ng-repeat="x in allGame">
-							<td>{{ x.name }}</td>
-							<td>{{ x.category }}</td>
-						</tr>
-					</table>
+					<div ng-controller="allUsersGameCtrl">
+						<div ng-repeat = "game in allGame">
+						<p>{{game.name}}</p><p>{{game.category}}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="getGamesGlobalController">
