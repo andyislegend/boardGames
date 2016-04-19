@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import javax.persistence.CascadeType;
@@ -41,10 +42,13 @@ public class Event implements Serializable{
 
 	
 	@Column(name = "date")
-	private Date date;
+	private GregorianCalendar date;
 	
 	@Column(name = "place")
 	private String place;
+	
+	@Column(name = "imgSrc")
+	private String imgsrc;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "userId", referencedColumnName = "id")
@@ -55,6 +59,20 @@ public class Event implements Serializable{
 	private Game game;
 
 	public Event(){}
+	
+	
+
+	public String getImgsrc() {
+		return imgsrc;
+	}
+
+
+
+	public void setImgsrc(String imgsrc) {
+		this.imgsrc = imgsrc;
+	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -80,11 +98,11 @@ public class Event implements Serializable{
 		this.description = description;
 	}
 
-	public Date getDate() {
+	public GregorianCalendar getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(GregorianCalendar date) {
 		this.date = date;
 	}
 
@@ -111,6 +129,8 @@ public class Event implements Serializable{
 	public void setGame(Game game) {
 		this.game = game;
 	}
+	
+	
 
 	@Override
 	public boolean equals(Object obj) {

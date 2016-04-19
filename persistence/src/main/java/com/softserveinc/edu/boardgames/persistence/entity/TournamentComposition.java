@@ -20,14 +20,12 @@ public class TournamentComposition implements Serializable {
      * tournament which users take part in
      */
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Tournament.class)
-    @JoinColumn(name = "tournamentId", referencedColumnName = "id")
     private Tournament tournament;
 
     /**
      * Discribe user that takes part in this tournament
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "userGuestId",referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User userGuest;
 
     public TournamentComposition() {

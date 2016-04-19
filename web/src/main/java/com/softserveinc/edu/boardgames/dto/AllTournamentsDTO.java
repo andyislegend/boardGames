@@ -9,15 +9,20 @@ public class AllTournamentsDTO {
 
     private String tournamentName;
     private String userName;
+    private String requiredRating;
     private List<String> userGuests;
 
     public AllTournamentsDTO() {
     }
 
-    public AllTournamentsDTO(String tournamentName, String userName, List<String> userGuests) {
+    public AllTournamentsDTO(String tournamentName,
+                             String userName,
+                             List<String> userGuests,
+                             String requiredRating) {
         this.tournamentName = tournamentName;
         this.userName = userName;
         this.userGuests = userGuests;
+        this.requiredRating=requiredRating;
     }
 
     public String getTournamentName() {
@@ -42,5 +47,13 @@ public class AllTournamentsDTO {
 
     public void setUserGuests(List<String> userGuests) {
         this.userGuests = userGuests;
+    }
+
+    public String getRequiredRating() {
+        return requiredRating;
+    }
+
+    public void setRequiredRating(String requiredRating) {
+        this.requiredRating = requiredRating;
     }
 }
