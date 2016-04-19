@@ -25,14 +25,13 @@ public class Tournament implements Serializable {
     /**
      * Discribes tournament's name
      */
-    @Column
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * User that created this tournament
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "idUserCreator", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User userCreator;
 
     /**
@@ -44,12 +43,11 @@ public class Tournament implements Serializable {
     /**
      * Kind of game which is tournament organized on
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
-    @JoinColumn(name = "gameId", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Game game;
 
-    private UserRating requiredRating;
-
+    @Column
+    private Double requiredRating;
 
     public Tournament() {
     }
@@ -94,11 +92,11 @@ public class Tournament implements Serializable {
         this.game = game;
     }
 
-    public UserRating getRequiredRating() {
+    public Double getRequiredRating() {
         return requiredRating;
     }
 
-    public void setRequiredRating(UserRating requiredRating) {
+    public void setRequiredRating(Double requiredRating) {
         this.requiredRating = requiredRating;
     }
 

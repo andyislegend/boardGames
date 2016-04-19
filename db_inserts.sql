@@ -62,8 +62,8 @@ INSERT INTO `boardgames`.`friends` (`status`, `user_one`, `user_two`) VALUES ('3
 
 
 --  inserts to table tournament
-insert into tournament (name,idUserCreator,gameid) values ('MonopolyTournament',1,1);
-insert into tournament (name,idUserCreator,gameid) values ('MEMOTournament',2,2);
+insert into tournament (name,idUserCreator,gameid,requiredRating) values ('MonopolyTournament',1,1,2.5);
+insert into tournament (name,idUserCreator,gameid,requiredRating) values ('MEMOTournament',2,2,3.8);
 
 --  inserts to table tournament_composition
 insert into tournament_composition (tournamentId,userGuestId) values (1,2);
