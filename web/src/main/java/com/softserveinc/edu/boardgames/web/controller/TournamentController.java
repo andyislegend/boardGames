@@ -30,19 +30,22 @@ public class TournamentController {
 
     @RequestMapping(value = "/tournaments", method = RequestMethod.GET)
     public @ResponseBody List<AllTournamentsDTO> showAllTournaments() {
-        List<AllTournamentsDTO> response=new ArrayList<>();
-        List<Tournament> tournaments=tournamentService.findAll();
+        List<AllTournamentsDTO> response = new ArrayList<>();
+        List<Tournament> tournaments = tournamentService.findAll();
 
         List<TournamentComposition> compositions;
-        for(Tournament tournament:tournaments){
-            List<String> userGuests=new ArrayList<>();
-            compositions=tournamentCompositionService.findByTournamentId(tournament.getId());
-            for(TournamentComposition tournamentComposition:compositions){
-                userGuests.add(tournamentComposition.getUserGuest().getFirstName()+ " "+tournamentComposition.getUserGuest().getLastName());
+
+        for (Tournament tournament : tournaments) {
+            List<String> userGuests = new ArrayList<>();
+
+            compositions = tournament.getTournamentComposition();
+
+            for (TournamentComposition tournamentComposition : compositions) {
+                userGuests.add(tournamentComposition.getUserGuest().getFirstName() + " " + tournamentComposition.getUserGuest().getLastName());
             }
             response.add(new AllTournamentsDTO(tournament.getName(),
-                    tournament.getUserCreator().getFirstName()+ " "+ tournament.getUserCreator().getLastName(),
-                    userGuests));
+                    tournament.getUserCreator().getFirstName() + " " + tournament.getUserCreator().getLastName(),
+                    userGuests,String.valueOf(tournament.getRequiredRating())));
         }
         return response;
     }

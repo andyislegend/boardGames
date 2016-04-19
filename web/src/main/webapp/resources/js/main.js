@@ -1,9 +1,41 @@
 var app = angular.module("usersGameApp", []);
 app.controller("allUsersGameCtrl", function($scope, $http) {
-	$scope.allGame = [];
 	$http.get('getAllGamesCurUser').then(function(result) {
 		$scope.allGame = result.data;
+		$scope.showMe = false;
+		$scope.myFunc = function(id) {
+			$scope.games = [];
+			$scope.showMe = !$scope.showMe;
+			for (var i = 0; i < $scope.allGame.length; i++) {
+				if ($scope.allGame[i].name === id) {
+					$scope.games[0] = $scope.allGame[i];
+				}
+			}
+		}
 	});
+});
+
+app.controller("CreateGameCtrl", function($scope, $http) {
+	$scope.showText = false;
+	$scope.showForm = function() {
+		$scope.showText = !$scope.showText;
+		};
+	$scope.submit = function() {
+		var game = [{
+			"name" : $scope.name,
+			"description" : $scope.description,
+			"rules" : $scope.rules,
+			"maxPlayers" : $scope.maxPlayers,
+			"minPleyers" : $scope.minPlayers,
+		}];
+		var category = {
+			"name" : $scope.category
+		};
+		var userGame = {
+			"edition" : $scope.edition,
+			"year" : year
+		}
+	};
 });
 
 app.controller("listOfFriendsCtrl", function($scope, $http) {
@@ -43,5 +75,8 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 app.controller("showAllTournaments", function ($scope,$http) {
 	$http.get('/tournaments').success(function(data){
 		$scope.tournaments=data;
-	})
+	});
+	$scope.JoinTournament=function(){
+
+	}
 });

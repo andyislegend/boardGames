@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,14 +25,13 @@ public class Tournament implements Serializable {
     /**
      * Discribes tournament's name
      */
-    @Column
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * User that created this tournament
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "idUserCreator", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User userCreator;
 
     /**
@@ -43,10 +43,11 @@ public class Tournament implements Serializable {
     /**
      * Kind of game which is tournament organized on
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
-    @JoinColumn(name = "gameId", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Game game;
 
+    @Column
+    private Double requiredRating;
 
     public Tournament() {
     }
@@ -73,6 +74,30 @@ public class Tournament implements Serializable {
 
     public void setUserCreator(User userCreator) {
         this.userCreator = userCreator;
+    }
+
+    public List<TournamentComposition> getTournamentComposition() {
+        return tournamentComposition;
+    }
+
+    public void setTournamentComposition(List<TournamentComposition> tournamentComposition) {
+        this.tournamentComposition = tournamentComposition;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Double getRequiredRating() {
+        return requiredRating;
+    }
+
+    public void setRequiredRating(Double requiredRating) {
+        this.requiredRating = requiredRating;
     }
 
     @Override

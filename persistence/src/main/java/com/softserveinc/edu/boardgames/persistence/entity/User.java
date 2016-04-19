@@ -107,6 +107,14 @@ public class User implements Serializable {
 	@NotEmpty
 	@Column(name = "password", nullable = false)
 	private String password;
+	
+	/**
+	 * Provides a description of User's current rating as a number. By default, after
+	 * registration User obtain 0 rating
+	 */
+	@NotEmpty
+	@Column(name = "userRating", nullable = false)
+	private Integer userRating;
 
 	/**
 	 * Provides a description of User's current rating. By default, after
@@ -160,7 +168,7 @@ public class User implements Serializable {
     @Column(name = "value", length = 30)
 	private Set<UserRoles> userRoles = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	@JsonBackReference
 	private Set<GameUser> gameUsers;
 

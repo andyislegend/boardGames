@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 
@@ -48,8 +49,9 @@ public class Category implements Serializable{
 	 * A set of games that belongs to current category
 	 * Mapped from Game entity - OneToMany relationship
 	 */
-	@OneToMany(cascade={CascadeType.ALL},mappedBy="category", fetch=FetchType.LAZY)
-	private Set<Game> games;
+//	@JsonManagedReference
+//	@OneToMany(cascade={CascadeType.ALL},mappedBy="category", fetch=FetchType.LAZY)
+//	private Set<Game> games;
 
 	/**
 	 * Default constructor
@@ -89,9 +91,9 @@ public class Category implements Serializable{
 	/**
 	 * @return games return the list of games
 	 */
-	public Set<Game> getGames() {
-		return games;
-	}
+//	public Set<Game> getGames() {
+//		return games;
+//	}
 	
 	@Override
     public boolean equals(Object obj) {

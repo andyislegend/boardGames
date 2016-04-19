@@ -4,20 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.softserveinc.edu.boardgames.dto.AllGamesForCurrentUserDTO;
-import com.softserveinc.edu.boardgames.persistence.entity.Category;
-import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
+import com.softserveinc.edu.boardgames.service.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.service.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -33,15 +30,17 @@ public class CurrentUserGameController {
 
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
-	public List<AllGamesForCurrentUserDTO> showGames() {
-		List<AllGamesForCurrentUserDTO> games = new ArrayList<>();
+	public List<GameUserDTO> showGames() {
 		List<GameUser> allGames = gameUserRep.getAllGamesForCurrentUser(WebUtil.getPrincipalUsername());
-		for (GameUser game : allGames) {
-			AllGamesForCurrentUserDTO allGamesForCurrentUserDTO = new AllGamesForCurrentUserDTO();
-			allGamesForCurrentUserDTO.setName(game.getGame().getName());
-			allGamesForCurrentUserDTO.setCategory(game.getGame().getCategory().getName());
-			games.add(allGamesForCurrentUserDTO);
+		List<GameUserDTO> gameUserDTOs = new ArrayList<>();
+		for(GameUser dto : allGames){
+			gameUserDTOs.add(new GameUserMapper().toDTO(dto));
 		}
-		return games;
+		return gameUserDTOs;
+	}
+	
+	@RequestMapping(value = "addNewGame", method = RequestMethod.POST)
+	public String addNewGame(Model model){
+		return "";
 	}
 }

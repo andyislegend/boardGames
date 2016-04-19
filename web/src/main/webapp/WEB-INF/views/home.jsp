@@ -25,8 +25,11 @@
 					src="resources/images/logo.png" style="height: 75px; weight: 75px;"></a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="tournaments">Championship</a></li>
-				<li><a href="#">All Games</a></li>
+				<li><a href=""
+					ng-click="hideTournaments = false; hideAllGames = true">Championship</a></li>
+				<li><a href=""
+					ng-click="hideTournaments = true; hideAllGames = false">All
+						Games</a></li>
 				<li><a href="#">Events</a></li>
 			</ul>
 
@@ -42,9 +45,9 @@
 				<li><a class="btn btn-secondary btn-lg disabled">Welcome
 						back, <em><b style="color: white">${user}</b></em>
 				</a></li>
-				<li class="dropdown" style="background-color: transparent;"><a href="#"
-					class="dropdown-toggle profile-image" data-toggle="dropdown"> <img
-						style="height: 35px; width: 35px;"
+				<li class="dropdown" style="background-color: transparent;"><a
+					href="#" class="dropdown-toggle profile-image"
+					data-toggle="dropdown"> <img style="height: 35px; width: 35px;"
 						src="/resources/images/test_avatar.jpeg"
 						class="img-circle dropdown-toggle profile-image"
 						data-toggle="dropdown"> <span class="caret"></span></a>
@@ -54,8 +57,8 @@
 						<li><a href="#"><span
 								class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 								Messages <span class="badge">2</span></a></li>
-						<!-- <li class="dropdown-header">Already leaving?</li> -->	
-						<li class="divider"></li>	
+						<!-- <li class="dropdown-header">Already leaving?</li> -->
+						<li class="divider"></li>
 						<li><a href="logout"><span
 								class="glyphicon glyphicon-off" aria-hidden="true"></span>
 								Logout </a></li>
@@ -65,24 +68,59 @@
 		</div>
 	</nav>
 
-
 	<div style="margin-top: 6%;" class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3">
-				<div class="well col-md-offset-0">
+				<div class="well col-md-offset-0 form-group">
 
 					<h3 class="text-center">My Games</h3>
-					<br />
-					<table class="table" ng-controller="allUsersGameCtrl">
-						<tr>
-							<th>Name</th>
-							<th>Category</th>
-						</tr>
-						<tr ng-repeat="x in allGame">
-							<td>{{ x.name }}</td>
-							<td>{{ x.category }}</td>
-						</tr>
-					</table>
+					<div ng-controller="CreateGameCtrl">
+						<button ng-click="showForm()">Add new Game</button>
+						<form data-ng-submit role="form" ng-show="showText">
+							<div class="form-group">
+								<label>Game name</label> <input data-ng-model="name"> <label>Category</label>
+								<input data-ng-model="category"> <label>Description</label>
+								<input data-ng-model="description"> <label>Rules</label>
+								<input data-ng-model="rules"> <label>Max players</label>
+								<input data-ng-model="maxPleyers"> <label>Min
+									players</label> <input data-ng-model="minPlayers"> <label>Edition</label>
+								<input data-ng-model="edition"> <label>Year of
+									production</label> <input data-ng-model="year"> <input
+									type="submit" value="add">
+							</div>
+						</form>
+					</div>
+
+					<div ng-controller="allUsersGameCtrl">
+						<div>
+							<table class="table">
+								<tr>
+									<th>Name</th>
+									<th>Category</th>
+									<th>More</th>
+									<th>Comment</th>
+								<tr>
+								<tr ng-repeat="game in allGame">
+									<td>{{game.name}}</td>
+									<td>{{game.yearOfProduction}}</td>
+									<td>
+										<button ng-click="myFunc(game.name)">M</button>
+									</td>
+									<td>com</td>
+								</tr>
+							</table>
+							<div ng-show="showMe">
+								<div ng-repeat="game in games">
+									<p>Category:{{game.category}}</p>
+									<p>Year of production: {{game.yearOfProduction}}</p>
+									<p>Edition: {{game.edition}}</p>
+									<p>Description: {{game.description}}</p>
+									<p>Max players: {{game.maxPlayers}}</p>
+									<p>Min players: {{game.minPlayers}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="getGamesGlobalController">
@@ -107,9 +145,8 @@
 					</tbody>
 				</table>
 			</div>
-
-
-			<div class="col-sm-6" ng-controller="showAllTournaments">
+			<div class="col-sm-6" ng-controller="showAllTournaments"
+				ng-hide="hideTournaments">
 				<table class="table">
 					<thead>
 						<tr>
@@ -123,7 +160,13 @@
 						<tr ng-repeat="x in tournaments">
 							<td>{{ x.tournamentName }}</td>
 							<td>{{ x.userName }}</td>
-							<td>{{ x.userGuests}}</td>
+							<td>
+								<table>
+									<tr ng-repeat="y in x.userGuests">
+										<td>{{y}}</td>
+									</tr>
+								</table>
+							</td>
 							<td><button class="btn btn-success">Actions</button></td>
 						</tr>
 					</tbody>
