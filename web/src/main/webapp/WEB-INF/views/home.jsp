@@ -42,8 +42,8 @@
 				<div class="well col-md-offset-0 form-group">
 					
 					<h3 class="text-center">My Games</h3>
-					<div controller = "CreateGameCtrl">
-					<button ng-click="showForm()" >Add new Game</button>
+					<div ng-controller = "CreateGameCtrl">
+					<button ng-click="showForm()">Add new Game</button>
 					<form data-ng-submit role="form" ng-show = "showText">
 						<div class="form-group">
 						<label>Game name</label>
@@ -64,7 +64,6 @@
 						<input data-ng-model = "year">
                         <input type="submit" value="add">                      
 						</div>
-						<p ng-repeat = "i in game">{{i.name}}</p>
 					</form>
 					</div>
 					
