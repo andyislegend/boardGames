@@ -14,6 +14,7 @@ public class AddressService {
 	@Autowired
 	private AddressRepository addressRepository;
 	
+	@Transactional
 	public List<Address> findAll() {
         return addressRepository.findAll();
     }

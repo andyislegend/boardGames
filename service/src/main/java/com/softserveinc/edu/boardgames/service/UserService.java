@@ -49,7 +49,7 @@ public class UserService {
 		return userRepository.findByUsername(username) != null;
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public User getUser(String username) {
 		return userRepository.findByUsername(username);
 	}

@@ -74,8 +74,7 @@ public class Address implements Serializable {
      * Describes all the users that are associated with this address.
      * Has a one to many relationship to users table.
      */    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="address")
-    private Set<User> users;
+//    private Set<User> users;
     
     /**
      * Constructor without parameters.
@@ -221,9 +220,9 @@ public class Address implements Serializable {
      * 
      * @return all users associated with this address.
      */
-    public Set<User> getUsers() {
-		return users;
-	}
+//    public Set<User> getUsers() {
+//		return users;
+//	}
     
     /**
      * Changes list of users for this address.
@@ -231,9 +230,9 @@ public class Address implements Serializable {
      * @param users
      *            value of all users for this address.
      */
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
+//	public void setUsers(Set<User> users) {
+//		this.users = users;
+//	}
     
     @Override
     public boolean equals(Object obj) {
