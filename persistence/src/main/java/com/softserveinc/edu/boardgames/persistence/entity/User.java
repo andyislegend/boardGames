@@ -160,7 +160,7 @@ public class User implements Serializable {
     @Column(name = "value", length = 30)
 	private Set<UserRoles> userRoles = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	@JsonBackReference
 	private Set<GameUser> gameUsers;
 

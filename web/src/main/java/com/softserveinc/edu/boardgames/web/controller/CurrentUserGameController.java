@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.softserveinc.edu.boardgames.dto.AllGamesForCurrentUserDTO;
-import com.softserveinc.edu.boardgames.persistence.entity.Category;
-import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
+import com.softserveinc.edu.boardgames.service.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.service.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -30,8 +29,12 @@ public class CurrentUserGameController {
 
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
-	public List<GameUser> showGames() {
+	public List<GameUserDTO> showGames() {
 		List<GameUser> allGames = gameUserRep.getAllGamesForCurrentUser(WebUtil.getPrincipalUsername());
-		return allGames;
+		List<GameUserDTO> gameUserDTOs = new ArrayList<>();
+		for(GameUser dto : allGames){
+			gameUserDTOs.add(new GameUserMapper().toDTO(dto));
+		}
+		return gameUserDTOs;
 	}
 }

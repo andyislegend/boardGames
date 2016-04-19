@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,7 +31,7 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
  */
 @Entity
 @Table(name = "gameUser")
-public class GameUser {
+public class GameUser implements Serializable {
 
 	@Id
 	@Column(name = "id")

@@ -3,6 +3,10 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 	$scope.allGame = [];
 	$http.get('getAllGamesCurUser').then(function(result) {
 		$scope.allGame = result.data;
+		$scope.showMe = false;
+	    $scope.myFunc = function() {
+	        $scope.showMe = !$scope.showMe;
+	    }
 	});
 });
 
@@ -40,8 +44,8 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	});
 });
 
-app.controller("showAllTournaments", function ($scope,$http) {
-	$http.get('/tournaments').success(function(data){
-		$scope.tournaments=data;
+app.controller("showAllTournaments", function($scope, $http) {
+	$http.get('/tournaments').success(function(data) {
+		$scope.tournaments = data;
 	})
 });

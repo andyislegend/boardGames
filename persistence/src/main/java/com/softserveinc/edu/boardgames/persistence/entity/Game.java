@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
@@ -53,6 +54,7 @@ public class Game implements Serializable{
 	
 	@Column(name = "maxPlayers")
 	private Integer maxPlayers;
+	
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
@@ -96,6 +98,14 @@ public class Game implements Serializable{
 
 	public String getDescription() {
 		return description;
+	}
+
+	public String getRules() {
+		return rules;
+	}
+
+	public void setRules(String rules) {
+		this.rules = rules;
 	}
 
 	public void setDescription(String description) {
