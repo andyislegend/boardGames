@@ -23,9 +23,9 @@
             <a class="navbar-brand" href="#">Cross Games</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="#">Championship</a></li>
-            <li><a href="#">All Games</a></li>
-            <li><a href="#">Events</a></li>
+            <li><a href="" ng-click="hideTournaments = false; hideAllGames = true">Championship</a></li>
+            <li><a href="" ng-click="hideTournaments = true; hideAllGames = false">All Games</a></li>
+            <li><a href="">Events</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="<c:url value="/logout" />"><span
@@ -64,7 +64,7 @@ Dear
         </div>
     </div>
 </div>
-<div class="col-sm-6" ng-controller="getGamesGlobalController">
+<div class="col-sm-6" ng-hide="hideAllGames" ng-controller="getGamesGlobalController">
     <table class="table">
         <thead>
         <tr>
@@ -88,7 +88,7 @@ Dear
 </div>
 
 
-<div class="col-sm-6" ng-controller="showAllTournaments">
+<div class="col-sm-6" ng-controller="showAllTournaments" ng-hide="hideTournaments">
     <table class="table">
         <thead>
         <tr>
