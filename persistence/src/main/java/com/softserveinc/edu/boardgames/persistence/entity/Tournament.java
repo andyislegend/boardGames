@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 
 import java.io.Serializable;
 import java.util.List;
@@ -47,6 +48,8 @@ public class Tournament implements Serializable {
     @JoinColumn(name = "gameId", referencedColumnName = "id")
     private Game game;
 
+    private UserRating requiredRating;
+
 
     public Tournament() {
     }
@@ -73,6 +76,30 @@ public class Tournament implements Serializable {
 
     public void setUserCreator(User userCreator) {
         this.userCreator = userCreator;
+    }
+
+    public List<TournamentComposition> getTournamentComposition() {
+        return tournamentComposition;
+    }
+
+    public void setTournamentComposition(List<TournamentComposition> tournamentComposition) {
+        this.tournamentComposition = tournamentComposition;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public UserRating getRequiredRating() {
+        return requiredRating;
+    }
+
+    public void setRequiredRating(UserRating requiredRating) {
+        this.requiredRating = requiredRating;
     }
 
     @Override

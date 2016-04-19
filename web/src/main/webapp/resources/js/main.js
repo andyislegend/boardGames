@@ -44,8 +44,11 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	});
 });
 
-app.controller("showAllTournaments", function($scope, $http) {
-	$http.get('/tournaments').success(function(data) {
-		$scope.tournaments = data;
-	})
+app.controller("showAllTournaments", function ($scope,$http) {
+	$http.get('/tournaments').success(function(data){
+		$scope.tournaments=data;
+	});
+	$scope.JoinTournament=function(){
+
+	}
 });

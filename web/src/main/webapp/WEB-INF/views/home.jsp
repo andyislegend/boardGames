@@ -34,12 +34,12 @@
 		</div>
 	</nav>
 
-	Dear
-	<strong>${user}</strong>, Welcome to Home Page.
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3">
-				<div class="well col-md-offset-0">
+Dear
+<strong>${user}</strong>, Welcome to Home Page.
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="well col-md-offset-0">
 
 					<h3 class="text-center">My Games</h3>
 					<div ng-controller="allUsersGameCtrl">
@@ -88,49 +88,59 @@
 			</div>
 
 
-			<div class="col-sm-6" ng-controller="showAllTournaments">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Tournament name</th>
-							<th>User creator</th>
-							<th>Users Guests</th>
-							<th>Join</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="x in tournaments">
-							<td>{{ x.tournamentName }}</td>
-							<td>{{ x.userName }}</td>
-							<td>{{ x.userGuests}}</td>
-							<td><button class="btn btn-success">Actions</button></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+        <div class="col-sm-6" ng-controller="showAllTournaments">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Tournament name</th>
+                    <th>User creator</th>
+                    <th>Required Rating</th>
+                    <th>Users Guests</th>
+                    <th>Join</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in tournaments">
+                    <td>{{ x.tournamentName }}</td>
+                    <td>{{ x.userName }}</td>
+                    <td>{{x.requiredRating}}</td>
+                    <td>
+                        <table>
+                            <tr ng-repeat="y in x.userGuests">
+                                <td>{{y}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                <td>
+                    <button ng-click="9" class="btn btn-success">Actions</button>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
 
-			<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
-				<div class="well col-md-offset-0">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Friends</th>
-								<td><a href="#"><img src="resources/ico/add_user.png"
-										width="25"></a></td>
-								<td><a href="#"><img src="resources/ico/bell.png"
-										width="25"></a></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="friend in friends">
-								<td><img src="resources/images/{{friend.img}}.jpg" /></td>
-								<td>{{ friend.firstName }}</td>
-								<td>{{ friend.lastName }}</td>
-								<td><a href="#"><img src="resources/ico/messages.png"
-										width="25"></a></td>
-								<td><a href="#"><img src="resources/ico/trophy.png"
-										width="25"></a></td>
+        <div class="col-sm-3" ng-controller="listOfFriendsCtrl">
+            <div class="well col-md-offset-0">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Friends</th>
+                        <td><a href="#"><img src="resources/ico/add_user.png"
+                                             width="25"></a></td>
+                        <td><a href="#"><img src="resources/ico/bell.png"
+                                             width="25"></a></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="friend in friends">
+                        <td><img src="resources/images/{{friend.img}}.jpg"/></td>
+                        <td>{{ friend.firstName }}</td>
+                        <td>{{ friend.lastName }}</td>
+                        <td><a href="#"><img src="resources/ico/messages.png"
+                                             width="25"></a></td>
+                        <td><a href="#"><img src="resources/ico/trophy.png"
+                                             width="25"></a></td>
 
 							</tr>
 						</tbody>
