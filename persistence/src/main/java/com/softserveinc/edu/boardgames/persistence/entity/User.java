@@ -29,9 +29,6 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * This class describes users of boardGames website.
