@@ -34,7 +34,6 @@
     </div>
 </nav>
 
-<<<<<<< HEAD
 	Dear
 	<strong>${user}</strong>, Welcome to Home Page.
 	<div class="container-fluid">
@@ -116,62 +115,6 @@
 					</tbody>
 				</table>
 			</div>
-=======
-Dear
-<strong>${user}</strong>, Welcome to Home Page.
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="well col-md-offset-0">
-
-                <h3 class="text-center">My Games</h3>
-                <div ng-controller="allUsersGameCtrl">
-                    <div ng-repeat = "game in allGame">
-                        <div> <p>{{game.name}}</p><p><button ng-click="myFunc()"><span class="glyphicon glyphicon glyphicon-list-alt" aria-hidden="true"/></button></p></td></div>
-                        <div ng-show = "showMe">
-                            <p>Year of production: {{game.yearOfProduction}}</p>
-                            <p>Category: {{game.category}}</p>
-                        </div>
-                    </div>
->>>>>>> 4426f40a323ecaf6526bec78006aa9cbe4ac216c
-
-                    <table class = "table">
-                        <tr><th>Name</th><th>Category </th><th>More</th><th>Comment</th><tr>
-                        <tr ng-repeat = "game in allGame"><td>{{game.name}}</td><td>{{game.category}}</td>
-                            <td>
-
-                            <td><span class="glyphicon glyphicon-comment" aria-hidden="true"/></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-sm-6" ng-hide="hideAllGames" ng-controller="getGamesGlobalController">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Game</th>
-            <th>Category</th>
-            <th>Min/Max players</th>
-            <th>Rating</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="x in gamesGlobal">
-            <td>{{ x.name }}</td>
-            <td>{{ x.categoryName }}</td>
-            <td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
-            <td>{{ x.rating }}</td>
-            <td><button class="btn btn-success">Actions</button></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-
 <div class="col-sm-6" ng-controller="showAllTournaments" ng-hide="hideTournaments">
     <table class="table">
         <thead>
