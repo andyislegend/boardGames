@@ -6,12 +6,7 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 		$scope.myFunc = function(id) {
 			$scope.games = [];
 			$scope.showMe = !$scope.showMe;
-			for (var i = 0; i < $scope.allGame.length; i++) {
-				if ($scope.allGame[i].name === id) {
-					$scope.games[0] = $scope.allGame[i];
-					break;
-				}
-			}
+			$scope.games[0] = $scope.allGame[1];
 		}
 	});
 });
