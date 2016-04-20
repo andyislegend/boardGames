@@ -67,7 +67,7 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	
 	$scope.gameSelect = function(obj, $event) {
 		
-		alert(obj);
+		$scope.gameDetailsShown = true;
 		$http({
 			method: "GET",
 			url : 'getGameDetails' + '/' + obj
@@ -76,6 +76,10 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 		}, function myError(response) {
 			alert("Getting games general data error");
 		});
+	}
+	
+	$scope.hideGameDetails = function() {
+		$scope.gameDetailsShown = false;
 	}
 });
 

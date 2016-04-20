@@ -134,7 +134,7 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.name)"
-						data-toggle="collapse" data-target="#gameSelectedCollapse">
+						ng-init="gameDetailsShown=false">
 							<td>{{ x.name }}</td>
 							<td>{{ x.categoryName }}</td>
 							<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
@@ -144,7 +144,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<div id="gameSelectedCollapse" class="collapse well">
+				<div class="well" ng-show="gameDetailsShown">
 					<h4>Name</h4>
 					<p>{{gameDetail.name}}</p>
 					<hr/>
@@ -156,12 +156,11 @@
 					<hr/>
 					<h4>Rating</h4>
 					<table class="table">
-						<thead>
-							<tr>
+						<thead><tr>
 								<th>Rate</th>
 								<th>Your rate</th>
 								<th>General rate</th>
-							</tr>
+						</tr>
 						</thead>
 						<tbody>
 							<tr>
@@ -187,6 +186,18 @@
 					</table>
 					<hr/>
 					<h4>Owners</h4>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Game edition</th>
+								<th>Year of production</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+					</table>
+					<hr/>
+					<button ng-click="hideGameDetails()" class="btn btn-success">Hide</button>
 				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="showAllTournaments"
