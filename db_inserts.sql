@@ -54,11 +54,11 @@ INSERT INTO `boardgames`.`status` (`statusOfFriend`) VALUES ('REJECTED');
 
 
 --  inserts to table friends
-INSERT INTO `boardgames`.`friends` (`status`, `user_one`, `user_two`) VALUES ('2', '1', '2');
-INSERT INTO `boardgames`.`friends` (`status`, `user_one`, `user_two`) VALUES ('2', '3', '1');
-INSERT INTO `boardgames`.`friends` (`status`, `user_one`, `user_two`) VALUES ('1', '4', '2');
-INSERT INTO `boardgames`.`friends` (`status`, `user_one`, `user_two`) VALUES ('1', '2', '3');
-INSERT INTO `boardgames`.`friends` (`status`, `user_one`, `user_two`) VALUES ('3', '4', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1', '2');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '2', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1', '3');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '3', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '4', '1');
 
 
 --  inserts to table tournament

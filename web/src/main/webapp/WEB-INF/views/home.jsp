@@ -188,7 +188,6 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="friend in friends">
-								<td><img src="resources/images/{{friend.img}}.jpg" /></td>
 								<td>{{ friend.firstName }}</td>
 								<td>{{ friend.lastName }}</td>
 								<td><a href="#"><img src="resources/ico/messages.png"

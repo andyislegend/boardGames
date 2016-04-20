@@ -34,15 +34,15 @@ public class Friend {
 	 * Describes connection to the User entity
 	 */
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinColumn(name = "user_one", referencedColumnName = "id")
-	private User userOne;
+    @JoinColumn(name = "user", referencedColumnName = "id")
+	private User user;
 	
 	/**
 	 * Describes connection to the User entity
 	 */
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinColumn(name = "user_two", referencedColumnName = "id")
-	private User userTwo;
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+	private User userId;
 	
 	
 	
@@ -61,20 +61,20 @@ public class Friend {
 		this.id = id;
 	}
 
-	public User getUserOne() {
-		return userOne;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserOne(User userOne) {
-		this.userOne = userOne;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public User getUserTwo() {
-		return userTwo;
+	public User getUserId() {
+		return userId;
 	}
 
-	public void setUserTwo(User userTwo) {
-		this.userTwo = userTwo;
+	public void setUserId(User userId) {
+		this.userId = userId;
 	}
 
 	public Status getStatus() {
