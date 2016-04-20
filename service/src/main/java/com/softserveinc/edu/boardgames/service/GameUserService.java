@@ -33,4 +33,8 @@ public class GameUserService {
 	public void create(GameUser gameUser) {
 		gameUserRepo.save(gameUser);
 	}
+	
+	public List<GameUser> getGameUsersFromUsername(String name) {
+		return gameUserRepo.getAllGamesForCurrentUser(name);
+	}
 }

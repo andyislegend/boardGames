@@ -22,7 +22,7 @@ app.controller("CreateGameCtrl", function($scope, $http,$window) {
 		$scope.showText = !$scope.showText;
 		};
 		$scope.list = [];
-	$scope.submit = function() {
+	$scope.submit = function($window) {
 		 var userGame  = {
 			"edition" : $scope.edition,
 			"yearOfProduction" : $scope.year,
@@ -37,7 +37,8 @@ app.controller("CreateGameCtrl", function($scope, $http,$window) {
 		 var response = $http.post('NewGame', userGame);
 			response.success(function(data, status, headers, config) {
 				$scope.list.push(data);
-			});
+			});				
+			$route.reload();
 	};
 });
 
@@ -81,6 +82,7 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	$scope.gameSelect = function(obj, $event) {
 		
 		$scope.gameDetailsShown = true;
+		
 		$http({
 			method: "GET",
 			url : 'getGameDetails' + '/' + obj
@@ -88,6 +90,15 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 			$scope.gameDetail = response.data;
 		}, function myError(response) {
 			alert("Getting games general data error");
+		});
+		
+		$http({
+			method: "GET",
+			url : 'getUserGamesOfGame' + '/' + obj
+		}).then(function mySucces(response){
+			$scope.userGamesOfGame = response.data;
+		}, function myError(response) {
+			alert("Getting games userGames of game error");
 		});
 	}
 	

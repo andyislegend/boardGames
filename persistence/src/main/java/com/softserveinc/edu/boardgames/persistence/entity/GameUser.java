@@ -44,19 +44,13 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Game.class, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "gameId")
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "gameId", referencedColumnName = "id")
 	private Game game;
 
-	@NotEmpty
-	@Column(name = "gameUserRating", nullable = false)
-	private String gameUserRating = GameRating.NOT_RATED.name();
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinTable(name = "user", joinColumns = {
-			@JoinColumn(name = "userId", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "userGames", nullable = false, updatable = false) })
-	private Set<User> users = new HashSet<>();
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, targetEntity = User.class)
+	@JoinColumn(name = "userId", referencedColumnName = "id")
+	private User user;
 
 	public GameUser() {
 	};
@@ -66,12 +60,26 @@ public class GameUser implements Serializable {
 		this.edition = edition;
 		this.yearOfProduction = yearOfProduction;
 		this.game = game;
+		this.user = user;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
+	
 	public String getEdition() {
 		return edition;
 	}
@@ -95,15 +103,7 @@ public class GameUser implements Serializable {
 	public void setGame(Game game) {
 		this.game = game;
 	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -128,7 +128,7 @@ public class GameUser implements Serializable {
 		if (game != other.game) {
 			return false;
 		}
-		if (users != other.users) {
+		if (user != other.user) {
 			return false;
 		}
 		return true;
