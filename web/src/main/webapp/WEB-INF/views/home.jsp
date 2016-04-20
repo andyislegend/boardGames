@@ -64,7 +64,6 @@
 								Logout </a></li>
 					</ul></li>
 			</ul>
-
 		</div>
 	</nav>
 
@@ -138,19 +137,75 @@
 							<th>Category</th>
 							<th>Min/Max players</th>
 							<th>Rating</th>
-							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="x in gamesGlobal">
+						<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.name)"
+						ng-init="gameDetailsShown=false">
 							<td>{{ x.name }}</td>
 							<td>{{ x.categoryName }}</td>
 							<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
 							<td>{{ x.rating }}</td>
-							<td><button class="btn btn-success">Actions</button></td>
+						</tr>
+						<tr>
 						</tr>
 					</tbody>
 				</table>
+				<div class="well" ng-show="gameDetailsShown">
+					<h4>Name</h4>
+					<p>{{gameDetail.name}}</p>
+					<hr/>
+					<h4>Description</h4>
+					<pre>{{gameDetail.description}}</pre>
+					<hr/>
+					<h4>Rules</h4>
+					<pre>{{gameRules.rules}}</pre>
+					<hr/>
+					<h4>Rating</h4>
+					<table class="table">
+						<thead><tr>
+								<th>Rate</th>
+								<th>Your rate</th>
+								<th>General rate</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<select class="form-control" mg-model="gameRating">
+										<option>Bad as hell</option>
+										<option>Bad</option>
+										<option>Average</option>
+										<option>Good</option>
+										<option>Vary good</option>
+										<option>Excellent</option>
+										<option>Must have</option>
+									</select>
+								</td>
+								<td>
+									<p>{{gameRating}}</p>
+								</td>
+								<td>
+									<p>{{globalRating}}</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<hr/>
+					<h4>Owners</h4>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Game edition</th>
+								<th>Year of production</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+					</table>
+					<hr/>
+					<button ng-click="hideGameDetails()" class="btn btn-success">Hide</button>
+				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="showAllTournaments"
 				ng-hide="hideTournaments">

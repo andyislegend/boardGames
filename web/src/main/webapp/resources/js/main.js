@@ -76,14 +76,25 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	}).then(function mySucces(response) {
 		$scope.gamesGlobal = response.data;
 	}, function myError(response) {
-		$scope.gamesGlobal = [ {
-			name : "Monopolly",
-			category : "Buisiness",
-			description : "Some awesome things about this game",
-			minPlayers : "3",
-			maxPlayers : "6"
-		} ];
+		alert("Getting games general data error");
 	});
+	
+	$scope.gameSelect = function(obj, $event) {
+		
+		$scope.gameDetailsShown = true;
+		$http({
+			method: "GET",
+			url : 'getGameDetails' + '/' + obj
+		}).then(function mySucces(response){
+			$scope.gameDetail = response.data;
+		}, function myError(response) {
+			alert("Getting games general data error");
+		});
+	}
+	
+	$scope.hideGameDetails = function() {
+		$scope.gameDetailsShown = false;
+	}
 });
 
 app.controller("showAllTournaments", function ($scope,$http) {
