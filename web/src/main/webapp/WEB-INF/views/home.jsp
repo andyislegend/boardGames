@@ -73,6 +73,32 @@
 				<div class="well col-md-offset-0 form-group">
 
 					<h3 class="text-center">My Games</h3>
+<<<<<<< HEAD
+					<div ng-controller = "CreateGameCtrl">
+					<button ng-click="showForm()">Add new Game</button>
+					<form data-ng-submit = submit()  role="form" ng-show = "showText">
+						<div class="form-group">
+						<label>Game name</label>
+						<input data-ng-model = "name">
+						<label>Category</label>
+						<input data-ng-model = "category">
+						<label>Description</label>
+						<input data-ng-model = "description">
+						<label>Rules</label>
+						<input data-ng-model = "rules">
+						<label>Max players</label>
+						<input data-ng-model = "maxPlayers">
+						<label>Min players</label>
+						<input data-ng-model = "minPlayers">
+                        <label>Edition</label>
+						<input data-ng-model = "edition">
+                        <label>Year of production</label>
+						<input data-ng-model = "year">
+                        <input type="submit" value="add">                      
+						</div>
+						<p ng-repeat = "x in game">{{x.name}}</p>
+					</form>
+=======
 					<div ng-controller="CreateGameCtrl">
 						<button ng-click="showForm()">Add new Game</button>
 						<form data-ng-submit role="form" ng-show="showText">
@@ -88,6 +114,7 @@
 									type="submit" value="add">
 							</div>
 						</form>
+>>>>>>> d235b3c45085ca948a562a41ffb5d834bd454431
 					</div>
 
 					<div ng-controller="allUsersGameCtrl">
@@ -259,7 +286,7 @@
 	</div>
 	<div class="col-sm-3"></div>
 	<div class="container-fluid">
-		<div class="col-sm-6">
+		<div class="col-sm-6" ng-controller="getAllUsersCtrl">
 			<div class="col-sm-4">
 				<input type="text" class="form-control"
 					ng-model="searchText.lastName" placeholder="Search by last name">
@@ -268,7 +295,7 @@
 				<input type="text" class="form-control"
 					ng-model="searchText.address.city" placeholder="Search by city">
 			</div>
-			<table class="table" ng-controller="getAllUsersCtrl">
+			<table class="table">
 				<tr>
 					<th>Last Name, First Name</th>
 					<th>Email</th>
@@ -276,7 +303,8 @@
 					<th>Address</th>
 				</tr>
 				<tr ng-repeat="user in users|filter:searchText">
-					<td>{{user.lastName}} {{user.firstName}}</td>
+					<td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
+							{{user.lastName}} {{user.firstName}}</a></td>
 					<td>{{user.email}}</td>
 					<td>{{user.phoneNumber}}</td>
 					<td>{{user.address.country}},{{user.address.city}},
@@ -284,6 +312,13 @@
 						{{user.address.roomNumber}}</td>
 				</tr>
 			</table>
+			<div ng-show="showUser" class="well col-md-offset-0 form-group">
+				<div>
+					<p>Last Name:{{oneUser.lastName}}</p>
+					<p>First Name:{{oneUser.firstName}}</p>
+					<p>Username:{{oneUser.username}}</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	<footer class="panel-footer"> Copyright (C) 2016 Softserve

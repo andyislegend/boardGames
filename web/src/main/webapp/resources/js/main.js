@@ -9,32 +9,35 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 			for (var i = 0; i < $scope.allGame.length; i++) {
 				if ($scope.allGame[i].name === id) {
 					$scope.games[0] = $scope.allGame[i];
+					break;
 				}
 			}
 		}
 	});
 });
 
-app.controller("CreateGameCtrl", function($scope, $http) {
+app.controller("CreateGameCtrl", function($scope, $http,$window) {
 	$scope.showText = false;
 	$scope.showForm = function() {
 		$scope.showText = !$scope.showText;
 		};
+		$scope.list = [];
 	$scope.submit = function() {
-		var game = [{
-			"name" : $scope.name,
-			"description" : $scope.description,
+		 var userGame  = {
+			"edition" : $scope.edition,
+			"yearOfProduction" : $scope.year,
+			"game" : {"name" : $scope.name,
+			"category" : { "name" : $scope.category},
+			"description" : $scope.description,	
 			"rules" : $scope.rules,
 			"maxPlayers" : $scope.maxPlayers,
-			"minPleyers" : $scope.minPlayers,
-		}];
-		var category = {
-			"name" : $scope.category
-		};
-		var userGame = {
-			"edition" : $scope.edition,
-			"year" : year
-		}
+			"minPlayers" : $scope.minPlayers
+			}
+		 };
+		 var response = $http.post('NewGame', userGame);
+			response.success(function(data, status, headers, config) {
+				$scope.list.push(data);
+			});
 	};
 });
 
@@ -51,6 +54,16 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	$scope.users = [];
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;
+		$scope.showUser = false;
+		$scope.getInfoAboutUserFunc = function(id) {
+			$scope.showUser = !$scope.showUser;
+			for (var i = 0; i < $scope.users.length; i++) {
+				if ($scope.users[i].id === id) {
+					$scope.oneUser = $scope.users[i];
+					break;
+				}
+			}
+		}
 	});
 });
 
