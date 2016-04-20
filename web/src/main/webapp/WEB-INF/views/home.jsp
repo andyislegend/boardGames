@@ -130,19 +130,31 @@
 							<th>Category</th>
 							<th>Min/Max players</th>
 							<th>Rating</th>
-							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="x in gamesGlobal">
+						<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.name)"
+						data-toggle="collapse" data-target="#gameSelectedCollapse">
 							<td>{{ x.name }}</td>
 							<td>{{ x.categoryName }}</td>
 							<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
 							<td>{{ x.rating }}</td>
-							<td><button class="btn btn-success">Actions</button></td>
+						</tr>
+						<tr>
 						</tr>
 					</tbody>
 				</table>
+				<div id="gameSelectedCollapse" class="collapse well">
+					<h4>Name</h4>
+					<p ng-model="gameName">{{gameDetail.name}}</p>
+					<hr/>
+					<h4>Description</h4>
+					<p ng-model="gameDescription">{{gameDetail.description}}</p>
+					<hr/>
+					<h4>Rules</h4>
+					<p ng-model="gameRules">{{gameRules.rules}}</p>
+					<hr/>
+				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="showAllTournaments"
 				ng-hide="hideTournaments">

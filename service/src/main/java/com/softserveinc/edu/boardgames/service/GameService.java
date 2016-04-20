@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.service.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.service.dto.GameDetailsDTO;
 
 @Service
 @Transactional
@@ -49,5 +50,15 @@ public class GameService {
 			gamesTransfer.add(gamesDto);
 		}
 		return gamesTransfer;
+	}
+	
+	public GameDetailsDTO getGamesByName(String name){
+			
+		GameDetailsDTO gameDetailsDTO = new GameDetailsDTO();
+		gameDetailsDTO.setName(gameRepo.findGameByName(name).getName());
+		gameDetailsDTO.setDescription(gameRepo.findGameByName(name).getDescription());
+		gameDetailsDTO.setRules(gameRepo.findGameByName(name).getRules());
+		
+		return gameDetailsDTO;
 	}
 }
