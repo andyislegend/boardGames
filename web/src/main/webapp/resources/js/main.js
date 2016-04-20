@@ -54,6 +54,16 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	$scope.users = [];
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;
+		$scope.showUser = false;
+		$scope.getInfoAboutUserFunc = function(id) {
+			$scope.showUser = !$scope.showUser;
+			for (var i = 0; i < $scope.users.length; i++) {
+				if ($scope.users[i].id === id) {
+					$scope.oneUser = $scope.users[i];
+					break;
+				}
+			}
+		}
 	});
 });
 

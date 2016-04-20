@@ -13,6 +13,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Friend;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.FriendService;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController
 public class FriendController {
@@ -25,26 +26,13 @@ public class FriendController {
 	
 	@RequestMapping("/allFriends")
 	public List<User> getAllFriends(){
-		System.out.println("****in controller*****");
-		User user = userService.findOne("root");
+		String userName = WebUtil.getPrincipalUsername();
+		User user = userService.findOne(userName);
 		List<Friend> listOfFriends = friendService.getAllFriends(user);
-		
-		Set<User> setOfUser = new HashSet<User>();
-		
+		List<User> list = new ArrayList<User>();
 		for(int i = 0; i < listOfFriends.size(); i++){
-			setOfUser.add(listOfFriends.get(i).getUserOne());
-			setOfUser.add(listOfFriends.get(i).getUserTwo());
+			list.add(listOfFriends.get(i).getUserId());
 		}
-		setOfUser.remove(user);
-		System.out.println(setOfUser);
-		System.out.println(user);
-		List<User> list = new ArrayList<>(setOfUser);
-		for(int i = 0; i < list.size(); i++){
-			System.out.println(list.get(i).equals(user));
-		}
-		
 		return list;
-		
 	}
-
 }

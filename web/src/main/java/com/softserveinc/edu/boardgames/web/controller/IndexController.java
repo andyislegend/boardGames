@@ -10,16 +10,16 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @Controller
 public class IndexController {
 
-	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public final String getIndexPage() {
-        return "index";
-    }
-	
+	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+	public final String getIndexPage() {
+		return "index";
+	}
+
 	@RequestMapping(value = "/home**", method = RequestMethod.GET)
-	public final String getUserPage(Model model){
+	public final String getUserPage(Model model) {
 		model.addAttribute("user", WebUtil.getPrincipalUsername());
-		
+
 		return "home";
 	}
-	
+
 }
