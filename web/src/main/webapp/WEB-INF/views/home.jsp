@@ -146,14 +146,47 @@
 				</table>
 				<div id="gameSelectedCollapse" class="collapse well">
 					<h4>Name</h4>
-					<p ng-model="gameName">{{gameDetail.name}}</p>
+					<p>{{gameDetail.name}}</p>
 					<hr/>
 					<h4>Description</h4>
-					<p ng-model="gameDescription">{{gameDetail.description}}</p>
+					<pre>{{gameDetail.description}}</pre>
 					<hr/>
 					<h4>Rules</h4>
-					<p ng-model="gameRules">{{gameRules.rules}}</p>
+					<pre>{{gameRules.rules}}</pre>
 					<hr/>
+					<h4>Rating</h4>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Rate</th>
+								<th>Your rate</th>
+								<th>General rate</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<select class="form-control" mg-model="gameRating">
+										<option>Bad as hell</option>
+										<option>Bad</option>
+										<option>Average</option>
+										<option>Good</option>
+										<option>Vary good</option>
+										<option>Excellent</option>
+										<option>Must have</option>
+									</select>
+								</td>
+								<td>
+									<p>{{gameRating}}</p>
+								</td>
+								<td>
+									<p>{{globalRating}}</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<hr/>
+					<h4>Owners</h4>
 				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="showAllTournaments"
