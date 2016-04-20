@@ -204,7 +204,7 @@
 	</div>
 	<div class="col-sm-3"></div>
 	<div class="container-fluid">
-		<div class="col-sm-6">
+		<div class="col-sm-6" ng-controller="getAllUsersCtrl">
 			<div class="col-sm-4">
 				<input type="text" class="form-control"
 					ng-model="searchText.lastName" placeholder="Search by last name">
@@ -213,7 +213,7 @@
 				<input type="text" class="form-control"
 					ng-model="searchText.address.city" placeholder="Search by city">
 			</div>
-			<table class="table" ng-controller="getAllUsersCtrl">
+			<table class="table">
 				<tr>
 					<th>Last Name, First Name</th>
 					<th>Email</th>
@@ -221,7 +221,8 @@
 					<th>Address</th>
 				</tr>
 				<tr ng-repeat="user in users|filter:searchText">
-					<td>{{user.lastName}} {{user.firstName}}</td>
+					<td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
+							{{user.lastName}} {{user.firstName}}</a></td>
 					<td>{{user.email}}</td>
 					<td>{{user.phoneNumber}}</td>
 					<td>{{user.address.country}},{{user.address.city}},
@@ -229,6 +230,13 @@
 						{{user.address.roomNumber}}</td>
 				</tr>
 			</table>
+			<div ng-show="showUser" class="well col-md-offset-0 form-group">
+				<div>
+					<p>Last Name:{{oneUser.lastName}}</p>
+					<p>First Name:{{oneUser.firstName}}</p>
+					<p>Username:{{oneUser.username}}</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	<footer class="panel-footer"> Copyright (C) 2016 Softserve
