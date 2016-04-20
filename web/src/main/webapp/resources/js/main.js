@@ -22,7 +22,7 @@ app.controller("CreateGameCtrl", function($scope, $http,$window) {
 		$scope.showText = !$scope.showText;
 		};
 		$scope.list = [];
-	$scope.submit = function() {
+	$scope.submit = function($window) {
 		 var userGame  = {
 			"edition" : $scope.edition,
 			"yearOfProduction" : $scope.year,
@@ -37,7 +37,8 @@ app.controller("CreateGameCtrl", function($scope, $http,$window) {
 		 var response = $http.post('NewGame', userGame);
 			response.success(function(data, status, headers, config) {
 				$scope.list.push(data);
-			});
+			});				
+			$route.reload();
 	};
 });
 
