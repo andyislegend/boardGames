@@ -20,6 +20,7 @@ import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.service.GameUserService;
+import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.service.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.service.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -31,20 +32,17 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  */
 @Controller
 public class CurrentUserGameController {
-
-	@Autowired
-	private GameUserRepository gameUserRep;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Autowired
-	GameUserService gameUserService;
+	private GameUserService gameUserService;
 	
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
-		List<GameUser> allGames = gameUserRep.getAllGamesForCurrentUser(WebUtil.getPrincipalUsername());
+		List<GameUser> allGames = gameUserService.getGameUsersFromUsername(WebUtil.getPrincipalUsername());
 		List<GameUserDTO> gameUserDTOs = new ArrayList<>();
 		for(GameUser dto : allGames){
 			gameUserDTOs.add(new GameUserMapper().toDTO(dto));
@@ -54,9 +52,7 @@ public class CurrentUserGameController {
 	
 	@RequestMapping(value = "NewGame", method = RequestMethod.POST)
 	public String addNewGame(@RequestBody GameUser gameUser){		 
-		Set<User> users =  new HashSet<>();
-		users.add(userRepository.findByUsername(WebUtil.getPrincipalUsername()));
-		gameUser.setUsers(users);
+		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.create(gameUser);
 		return "";
 	}

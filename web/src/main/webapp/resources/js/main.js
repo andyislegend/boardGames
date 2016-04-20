@@ -63,7 +63,7 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	});
 });
 
-app.controller('getGamesGlobalController', function($scope, $http) {
+app.controller('getGamesGlobalController', function ($scope, $http) {
 
 	$http({
 		method : "GET",
@@ -77,6 +77,7 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	$scope.gameSelect = function(obj, $event) {
 		
 		$scope.gameDetailsShown = true;
+		
 		$http({
 			method: "GET",
 			url : 'getGameDetails' + '/' + obj
@@ -85,6 +86,15 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 		}, function myError(response) {
 			alert("Getting games general data error");
 		});
+		
+		$http({
+			method: "GET",
+			url : 'getUserGamesOfGame' + '/' + obj
+		}).then(function mySucces(response){
+			$scope.userGamesOfGame = response.data;
+		}, function myError(response) {
+			alert("Getting games userGames of game error");
+		});
 	}
 	
 	$scope.hideGameDetails = function() {
@@ -92,11 +102,19 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	}
 });
 
-app.controller("showAllTournaments", function ($scope,$http) {
-	$http.get('/tournaments').success(function(data){
-		$scope.tournaments=data;
-	});
-	$scope.JoinTournament=function(){
+app.controller("showAllTournaments", function ($scope, $http) {
+    $http.get('/tournaments').success(function (data) {
+        $scope.tournaments = data;
+    });
+    $scope.JoinTournament = function (elem) {
+        var idTournament = elem;
+        console.log(idTournament);
+        $http.post("/joinTournament", idTournament)
+            .success(function (data) {
+                $scope.tournaments = data;
+                /*angular.elem('btn_join_tournament'+elem).disable()*/;
+                document.getElementById('btn_join_tournament'+elem).disable=true;
 
-	}
+            });
+    }
 });

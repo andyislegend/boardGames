@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -48,6 +49,15 @@ public class Tournament implements Serializable {
 
     @Column
     private Double requiredRating;
+
+    @Column
+    private Integer maxParticipants;
+
+    @Column
+    private Date dateOfTournament;
+
+    @Column
+    private String town;
 
     public Tournament() {
     }
@@ -98,6 +108,30 @@ public class Tournament implements Serializable {
 
     public void setRequiredRating(Double requiredRating) {
         this.requiredRating = requiredRating;
+    }
+
+    public Integer getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public void setMaxParticipants(Integer maxParticipants) {
+        this.maxParticipants = maxParticipants;
+    }
+
+    public Date getDateOfTournament() {
+        return dateOfTournament;
+    }
+
+    public void setDateOfTournament(Date dateOfTournament) {
+        this.dateOfTournament = dateOfTournament;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
     }
 
     @Override

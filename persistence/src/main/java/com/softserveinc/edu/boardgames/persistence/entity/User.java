@@ -165,10 +165,6 @@ public class User implements Serializable {
     @Column(name = "value", length = 30)
 	private Set<UserRoles> userRoles = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
-	@JsonBackReference
-	private Set<GameUser> gameUsers;
-
 	/**
 	 * List of tounaments that were organized by user
 	 */
@@ -419,7 +415,6 @@ public class User implements Serializable {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 /*		result = prime * result + ((events == null) ? 0 : events.hashCode());*/
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((gameUsers == null) ? 0 : gameUsers.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -481,12 +476,6 @@ public class User implements Serializable {
 		} else if (!firstName.equals(other.firstName))
 			return false;
 		System.out.println("**********7*********");
-		if (gameUsers == null) {
-			if (other.gameUsers != null)
-				return false;
-		} else if (!gameUsers.equals(other.gameUsers))
-			return false;
-		System.out.println("**********8*********");
 		if (id == null) {
 			if (other.id != null)
 				return false;
