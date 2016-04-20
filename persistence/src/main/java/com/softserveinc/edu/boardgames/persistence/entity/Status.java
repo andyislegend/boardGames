@@ -30,6 +30,15 @@ public class Status{
 	 */
 	@Column(name="statusOfFriend")
 	private String statusOfFriend;
+	
+	public Status(long id, String statusOfFriend) {
+		super();
+		this.id = id;
+		this.statusOfFriend = statusOfFriend;
+	}
+	
+	public Status() {
+	}
 
 	public long getId() {
 		return id;
