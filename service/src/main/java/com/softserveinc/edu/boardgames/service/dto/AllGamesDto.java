@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.dto;
+package com.softserveinc.edu.boardgames.service.dto;
 
 public class AllGamesDto {
 	
