@@ -1,18 +1,25 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
+import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.service.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -27,7 +34,13 @@ public class CurrentUserGameController {
 
 	@Autowired
 	private GameUserRepository gameUserRep;
+	
+	@Autowired
+	private UserRepository userRepository;
 
+	@Autowired
+	GameUserService gameUserService;
+	
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
@@ -39,8 +52,12 @@ public class CurrentUserGameController {
 		return gameUserDTOs;
 	}
 	
-	@RequestMapping(value = "addNewGame", method = RequestMethod.POST)
-	public String addNewGame(Model model){
+	@RequestMapping(value = "NewGame", method = RequestMethod.POST)
+	public String addNewGame(@RequestBody GameUser gameUser){		 
+		Set<User> users =  new HashSet<>();
+		users.add(userRepository.findByUsername(WebUtil.getPrincipalUsername()));
+		gameUser.setUsers(users);
+		gameUserService.create(gameUser);
 		return "";
 	}
 }

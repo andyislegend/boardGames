@@ -21,6 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
@@ -63,7 +64,9 @@ public class Game implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="game", cascade={CascadeType.ALL})
     private Set<Event> events;
 	
+	
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
+	@JsonProperty("userGames")
 	private Set<GameUser> userGames;
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
@@ -212,7 +215,7 @@ public class Game implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id.intValue();
+        result = prime * result + 1;
         return result;
     }
     

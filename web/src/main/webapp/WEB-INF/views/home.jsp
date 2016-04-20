@@ -44,7 +44,7 @@
 					<h3 class="text-center">My Games</h3>
 					<div ng-controller = "CreateGameCtrl">
 					<button ng-click="showForm()">Add new Game</button>
-					<form data-ng-submit role="form" ng-show = "showText">
+					<form data-ng-submit = submit()  role="form" ng-show = "showText">
 						<div class="form-group">
 						<label>Game name</label>
 						<input data-ng-model = "name">
@@ -55,7 +55,7 @@
 						<label>Rules</label>
 						<input data-ng-model = "rules">
 						<label>Max players</label>
-						<input data-ng-model = "maxPleyers">
+						<input data-ng-model = "maxPlayers">
 						<label>Min players</label>
 						<input data-ng-model = "minPlayers">
                         <label>Edition</label>
@@ -64,6 +64,7 @@
 						<input data-ng-model = "year">
                         <input type="submit" value="add">                      
 						</div>
+						<p ng-repeat = "x in game">{{x.name}}</p>
 					</form>
 					</div>
 					
