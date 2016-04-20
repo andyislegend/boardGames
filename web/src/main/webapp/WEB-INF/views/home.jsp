@@ -18,20 +18,6 @@
 
 </head>
 <body ng-app="usersGameApp">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand"><img alt="logo"
-					src="resources/images/logo.png" style="height: 75px; weight: 75px;"></a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href=""
-					ng-click="hideTournaments = false; hideAllGames = true">Championship</a></li>
-				<li><a href=""
-					ng-click="hideTournaments = true; hideAllGames = false">All
-						Games</a></li>
-				<li><a href="#">Events</a></li>
-			</ul>
 
 			<ul class="nav navbar-nav navbar-left">
 				<form class="navbar-form navbar-center" role="search">
@@ -256,6 +242,34 @@
 										width="25"></a></td>
 								<td><a href="#"><img src="resources/ico/trophy.png"
 										width="25"></a></td>
+<div class="col-sm-6" ng-controller="showAllTournaments" ng-hide="hideTournaments">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Tournament name</th>
+            <th>User creator</th>
+            <th>Required rating to join</th>
+            <th>Users Guests</th>
+            <th>Join</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in tournaments">
+            <td >{{ x.tournamentName }}</td>
+            <td >{{ x.userName }}</td>
+            <td>{{x.requiredRating}}</td>
+            <td>
+                <table>
+                    <tr ng-repeat="y in x.userGuests">
+                        <td>{{y}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td><button ng-attr-id="{{'btn_join_tournament' + x.tournamentId    }}"  class="btn btn-success" ng-click="JoinTournament(x.tournamentId)">Join</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 							</tr>
 						</tbody>

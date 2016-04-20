@@ -68,7 +68,7 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	});
 });
 
-app.controller('getGamesGlobalController', function($scope, $http) {
+app.controller('getGamesGlobalController', function ($scope, $http) {
 
 	$http({
 		method : "GET",
@@ -97,11 +97,19 @@ app.controller('getGamesGlobalController', function($scope, $http) {
 	}
 });
 
-app.controller("showAllTournaments", function ($scope,$http) {
-	$http.get('/tournaments').success(function(data){
-		$scope.tournaments=data;
-	});
-	$scope.JoinTournament=function(){
+app.controller("showAllTournaments", function ($scope, $http) {
+    $http.get('/tournaments').success(function (data) {
+        $scope.tournaments = data;
+    });
+    $scope.JoinTournament = function (elem) {
+        var idTournament = elem;
+        console.log(idTournament);
+        $http.post("/joinTournament", idTournament)
+            .success(function (data) {
+                $scope.tournaments = data;
+                /*angular.elem('btn_join_tournament'+elem).disable()*/;
+                document.getElementById('btn_join_tournament'+elem).disable=true;
 
-	}
+            });
+    }
 });

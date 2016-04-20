@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.dto;
 
+import sun.util.locale.InternalLocaleBuilder;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,7 @@ import java.util.List;
  */
 public class AllTournamentsDTO {
 
+    private Long tournamentId;
     private String tournamentName;
     private String userName;
     private String requiredRating;
@@ -15,14 +18,16 @@ public class AllTournamentsDTO {
     public AllTournamentsDTO() {
     }
 
-    public AllTournamentsDTO(String tournamentName,
+    public AllTournamentsDTO(Long tournamentId,
+                             String tournamentName,
                              String userName,
-                             List<String> userGuests,
-                             String requiredRating) {
+                             String requiredRating,
+                             List<String> userGuests) {
+        this.tournamentId = tournamentId;
         this.tournamentName = tournamentName;
         this.userName = userName;
+        this.requiredRating = requiredRating;
         this.userGuests = userGuests;
-        this.requiredRating=requiredRating;
     }
 
     public String getTournamentName() {
@@ -55,5 +60,13 @@ public class AllTournamentsDTO {
 
     public void setRequiredRating(String requiredRating) {
         this.requiredRating = requiredRating;
+    }
+
+    public Long getTournamentId() {
+        return tournamentId;
+    }
+
+    public void setTournamentId(Long tournamentId) {
+        this.tournamentId = tournamentId;
     }
 }
