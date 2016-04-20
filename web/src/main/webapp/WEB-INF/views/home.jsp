@@ -150,7 +150,8 @@
 				</div>
 			</div>
 			<div class="col-sm-6" ng-controller="getGamesGlobalController">
-				<table class="table">
+				<scrollable-table>
+					<table class="table">
 					<thead>
 						<tr>
 							<th>Game</th>
@@ -160,7 +161,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.name)"
+						<tr ng-repeat="x in gamesGlobal" 
+						ng-click="gameSelect(x.name)"
 						ng-init="gameDetailsShown=false">
 							<td>{{ x.name }}</td>
 							<td>{{ x.categoryName }}</td>
@@ -170,7 +172,8 @@
 						<tr>
 						</tr>
 					</tbody>
-				</table>
+					</table>
+				</scrollable-table>
 				<div class="well" ng-show="gameDetailsShown">
 					<h4>Name</h4>
 					<p>{{gameDetail.name}}</p>
