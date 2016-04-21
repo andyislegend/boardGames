@@ -44,16 +44,13 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "gameId", referencedColumnName = "id")
 	private Game game;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
-
-	public GameUser() {
-	};
 
 	public GameUser(String edition, Integer yearOfProduction, Game game, User user) {
 		super();

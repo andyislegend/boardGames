@@ -6,7 +6,7 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 		$scope.myFunc = function(id) {
 			$scope.games = [];
 			$scope.showMe = !$scope.showMe;
-			$scope.games[0] = $scope.allGame[1];
+			$scope.games[0] = $scope.allGame[id];
 		}
 	});
 });

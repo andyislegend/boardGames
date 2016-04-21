@@ -57,7 +57,7 @@ public class Game implements Serializable{
 	private Integer maxPlayers;
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
+	@ManyToOne(fetch=FetchType.EAGER, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private Category category;
 	

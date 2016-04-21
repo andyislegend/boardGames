@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
-import com.softserveinc.edu.boardgames.service.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.service.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
@@ -43,9 +43,10 @@ public class CurrentUserGameController {
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
 		List<GameUser> allGames = gameUserService.getGameUsersFromUsername(WebUtil.getPrincipalUsername());
+		GameUserMapper gameUserMapper = new GameUserMapper();
 		List<GameUserDTO> gameUserDTOs = new ArrayList<>();
 		for(GameUser dto : allGames){
-			gameUserDTOs.add(new GameUserMapper().toDTO(dto));
+			gameUserDTOs.add(gameUserMapper.toDTO(dto));
 		}
 		return gameUserDTOs;
 	}

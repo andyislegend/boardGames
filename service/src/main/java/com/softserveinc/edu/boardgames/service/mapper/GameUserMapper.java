@@ -1,7 +1,7 @@
 package com.softserveinc.edu.boardgames.service.mapper;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
-import com.softserveinc.edu.boardgames.service.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 
 public class GameUserMapper implements GenericMapper<GameUserDTO, GameUser> {
 

@@ -108,7 +108,7 @@
 							<tr>
 							<tr ng-repeat="game in allGame">
 								<td>{{game.name}}</td>
-								<td>{{game.yearOfProduction}}</td>
+								<td>{{game.category}}</td>
 								<td>
 									<button ng-click="myFunc(game.name)">M</button>
 								</td>
