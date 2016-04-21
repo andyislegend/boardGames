@@ -79,7 +79,10 @@ app.controller("OfferToFriendCtrl", function($scope, $uibModal) {
 		 });
 	};
 });
-app.controller("getAllUsersCtrl", function($scope, $http) {
+
+/*users Angular controller -- start*/
+
+app.controller("getAllUsersCtrl", function($scope, $http, $uibModal) {
 	$scope.users = [];
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;
@@ -90,11 +93,14 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 				if ($scope.users[i].id === id) {
 					$scope.oneUser = $scope.users[i];
 					break;
-				}
-			}
-		}
+				};
+			};
+		};
 	});
 });
+
+/*users Angular controller -- end*/
+
 
 app.controller('getGamesGlobalController', function ($scope, $http) {
 
