@@ -9,6 +9,9 @@
 	<link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
 		  rel="stylesheet" />
 	<link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
+	
+	<link rel="stylesheet" href="resources/css/main.css" />
+	<link rel="stylesheet" href="resources/css/events.css" />
 	<script type="text/javascript"
 			src="resources/bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="resources/js/main.js"></script>
@@ -333,6 +336,34 @@
 		</div>
 	</div>
 </div>
+<!----------------------- Start of Events ------------------------------>
+<div ng-controller="eventListCtrl">
+	 <header class="section-header" ng-controller="eventListCtrl">
+              <h2 class="title" >COMING EVENTS:{{events.length}}</h2>
+            
+    </header>
+
+			<div class=" jcarousel-skin-tango">
+			   <div class="jcarousel-container jcarousel-container-horizontal" style="display: block;">				
+						<li class="jcarousel-item jcarousel-item-horizontal " >						 
+						  <a ng-repeat="event in events" href="#" class="item">
+							  <div id={{event.id}} style="display: none;"><img src={{event.imgsrc}} width="64" height="64" class="loader"></div>
+							  <img width="245" height="245"  onLoad="$({{event.id}}).hide(); $(this).show();" src={{event.imgsrc}} alt={{event.name}}>
+							  <span class="game_name">{{event.game}}</span>
+							  <div class="name" style="top: 201px;">
+								<div class="num">{{event.datenum}}<span>{{event.datemonth}}</span></div>
+								<div class="tema">{{event.name}}</div>
+								
+					
+							  </div>
+						   </a>						   
+						</li>				
+				  </div>
+			   </div>
+			</div>
+			</div>
+<!----------------------- End of Events ------------------------------>
+
 <footer class="panel-footer"> Copyright (C) 2016 Softserve
 	inc, Lv-179.Java. All rights reserved. </footer>
 </body>

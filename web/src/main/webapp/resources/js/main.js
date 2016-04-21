@@ -16,6 +16,19 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 	});
 });
 
+app.controller("eventListCtrl", function($scope, $http) {
+	$scope.events = [];
+	 $http({
+			method : "GET",
+			url : 'eventspage'
+		}).then(function mySucces(response) {
+			$scope.events = response.data;
+		}, function myError(response) {
+			$scope.events = [ {"name":"Everybody sleeps but mafia members wake up","description":"Mafia event","date":1465160400000,"place":"Lviv","game":"Mafia","user":"Super","imgsrc":"resources/images/mafiaImg.jpg"} ];
+		});
+	});
+
+
 app.controller("CreateGameCtrl", function($scope, $http,$window) {
 	$scope.showText = false;
 	$scope.showForm = function() {
