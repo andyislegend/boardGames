@@ -29,6 +29,7 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * This class describes users of boardGames website.
@@ -146,16 +147,6 @@ public class User implements Serializable {
     private Set<Event> events;*/
 
 
-	 /**
-	 * Describes address where user lives. Has a many to one relationship to
-	 * address table.
-	 */
-	 /*@OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
-	 { CascadeType.ALL })
-	 @JoinColumn(name = "friendId", referencedColumnName = "id")
-	 @JsonManagedReference
-	 private Set <Friend> friends;*/
-
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
 	 */
@@ -168,6 +159,7 @@ public class User implements Serializable {
 	/**
 	 * List of tounaments that were organized by user
 	 */
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userCreator")
 	private List<Tournament> createdTounaments;
@@ -175,8 +167,10 @@ public class User implements Serializable {
 	/**
 	 * List if tounaments which user take part in
 	 */
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userGuest")
+	@JsonManagedReference
 	private List<TournamentComposition> takenpartTounaments;
 
 
@@ -387,14 +381,6 @@ public class User implements Serializable {
 
 	public void setEvents(Set<Event> events) {
 		this.events = events;
-	}
-	*/
-	/*public Set<Friend> getFriends() {
-		return friends;
-	}
-	
-	public void setFriends(Set<Friend> friends) {
-		this.friends = friends;
 	}*/
 
 	public Set<UserRoles> getUserRoles() {

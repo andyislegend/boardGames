@@ -50,11 +50,11 @@ public class Event implements Serializable{
 	@Column(name = "imgSrc")
 	private String imgsrc;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Game.class)
 	@JoinColumn(name = "gameId", referencedColumnName = "id")
 	private Game game;
 
@@ -169,7 +169,7 @@ public class Event implements Serializable{
 	public String toString() {
 	DateFormat datef = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
 		return "User [id=" + id + ", name=" + name + ", date=" + datef.format(date) + ", description=" + description + ", author="
-				+ user + ", game=" + game + "]";
+				+ user + ", game=" + game +"]";
 	}
 	
 }
