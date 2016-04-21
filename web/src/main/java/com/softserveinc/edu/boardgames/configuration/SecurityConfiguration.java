@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/home/**").access("hasRole('USER')").
 		and()
 		.formLogin().
-//		failureUrl("/index?error").
+		failureUrl("/?error").
 		loginProcessingUrl("/j_spring_security_check")
 		.defaultSuccessUrl("/home", true).
 		usernameParameter("username").passwordParameter("password").
