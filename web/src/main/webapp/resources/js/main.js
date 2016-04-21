@@ -132,8 +132,6 @@ app.controller("showAllTournaments", function ($scope, $http) {
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
                 $scope.tournaments = data;
-                /*angular.elem('btn_join_tournament'+elem).disable()*/;
-                document.getElementById('btn_join_tournament'+elem).disable=true;
 
             });
     }

@@ -245,7 +245,7 @@
 							</tr>
 						</table>
 					</td>
-					<td><button ng-attr-id="{{'btn_join_tournament' + x.tournamentId}}"  class="btn btn-success" ng-click="JoinTournament(x.tournamentId)">Join</button></td>
+					<td ><button ng-disabled="x.isCanJoin"  class="btn btn-success" ng-click="JoinTournament(x.tournamentId)">Join</button></td>
 				</tr>
 				</tbody>
 			</table>
