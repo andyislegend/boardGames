@@ -1,4 +1,4 @@
-var app = angular.module("usersGameApp", []);
+var app = angular.module("usersGameApp", ['ui.bootstrap']);
 app.controller("allUsersGameCtrl", function($scope, $http) {
 	$http.get('getAllGamesCurUser').then(function(result) {
 		$scope.allGame = result.data;
@@ -45,7 +45,22 @@ app.controller("listOfFriendsCtrl", function($scope, $http) {
 		console.log(error);
 	})
 });
-
+app.controller("countOfOffering", function($scope, $http) {
+	console.log("countOfOffering");
+	$http.get("allOffering").success(function(data) {
+		$scope.count = data;
+	}).error(function(error) {
+		console.log(error);
+	})
+});
+app.controller("OfferToFriendCtrl", function($scope, $uibModal) {
+	$scope.open = function () {
+		console.log("befor open");
+		   $uibModal.open({
+		      templateUrl: 'OfferingForm.html'
+		 });
+	};
+});
 app.controller("getAllUsersCtrl", function($scope, $http) {
 	$scope.users = [];
 	$http.get('users').then(function(result) {
@@ -112,9 +127,8 @@ app.controller("showAllTournaments", function ($scope, $http) {
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
                 $scope.tournaments = data;
-                /*angular.elem('btn_join_tournament'+elem).disable()*/;
-                document.getElementById('btn_join_tournament'+elem).disable=true;
 
             });
     }
 });
+

@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.dto;
+package com.softserveinc.edu.boardgames.service.dto;
 
 import sun.util.locale.InternalLocaleBuilder;
 
@@ -14,6 +14,7 @@ public class AllTournamentsDTO {
     private String userName;
     private String requiredRating;
     private List<String> userGuests;
+    private boolean isCanJoin;
 
     public AllTournamentsDTO() {
     }
@@ -22,12 +23,13 @@ public class AllTournamentsDTO {
                              String tournamentName,
                              String userName,
                              String requiredRating,
-                             List<String> userGuests) {
+                             List<String> userGuests,boolean isCanJoin) {
         this.tournamentId = tournamentId;
         this.tournamentName = tournamentName;
         this.userName = userName;
         this.requiredRating = requiredRating;
         this.userGuests = userGuests;
+        this.isCanJoin=isCanJoin;
     }
 
     public String getTournamentName() {
@@ -68,5 +70,13 @@ public class AllTournamentsDTO {
 
     public void setTournamentId(Long tournamentId) {
         this.tournamentId = tournamentId;
+    }
+
+    public boolean isCanJoin() {
+        return isCanJoin;
+    }
+
+    public void setIsCanJoin(boolean isCanJoin) {
+        this.isCanJoin = isCanJoin;
     }
 }
