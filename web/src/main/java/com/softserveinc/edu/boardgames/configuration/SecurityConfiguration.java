@@ -47,13 +47,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/index").
-		permitAll().antMatchers("/newuser").permitAll()
+		http.authorizeRequests().
+		antMatchers("/", "/index").
+		permitAll().antMatchers("/newuser").
+		permitAll()
 		.antMatchers("/home/**").access("hasRole('USER')").
-		and().
-		formLogin().loginPage("/login").
 		and()
-		.formLogin().failureUrl("/login?error").
+		.formLogin().
+//		failureUrl("/index?error").
 		loginProcessingUrl("/j_spring_security_check")
 		.defaultSuccessUrl("/home", true).
 		usernameParameter("username").passwordParameter("password").
