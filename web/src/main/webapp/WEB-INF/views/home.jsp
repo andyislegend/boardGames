@@ -15,6 +15,9 @@
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript"
 			src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+			src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+	
 
 </head>
 <body ng-app="usersGameApp">
@@ -248,7 +251,7 @@
 			</table>
 		</div>
 
-
+					<!-- Start Frinds -->
 		<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
 			<div class="well col-md-offset-0">
 				<table class="table table-striped">
@@ -257,8 +260,22 @@
 						<th>Friends</th>
 						<td><a href="#"><img src="resources/ico/add_user.png"
 											 width="25"></a></td>
-						<td><a href="#"><img src="resources/ico/bell.png"
-											 width="25"></a></td>
+						<td>
+							<div ng-controller="OfferToFriendCtrl">
+							<script type="text/ng-template" id="OfferingForm.html">
+                   				<div class="modal-header">
+                        			<h3 class="modal-title">I'm a modal!</h3>
+                    			</div>
+                    			<div class="modal-body">
+                        				<div>Hello Everyone</div>
+                        		</div>
+                    			<div class="modal-footer">
+                        				<h3>This is footer</h3>
+                    			</div>
+                				</script>   
+								<a href="#" ng-click="open()"><img src="resources/ico/bell.png" width="25"></a>
+							</div>
+						</td>
 					</tr>
 					</thead>
 					<tbody>
@@ -275,6 +292,8 @@
 				</table>
 			</div>
 		</div>
+		
+						<!-- End of Friends -->
 	</div>
 </div>
 <div class="col-sm-3"></div>
