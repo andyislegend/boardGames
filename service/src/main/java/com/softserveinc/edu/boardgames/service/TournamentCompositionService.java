@@ -46,4 +46,8 @@ public class TournamentCompositionService {
     public List<TournamentComposition> findByTournamentId(Long id){
         return tournamentCompositionRepository.findByTournamentId(id);
     }
+
+    public Long findCountUserGuest(String username,Long idComposition){
+        return tournamentCompositionRepository.findCountUserGuest(username,idComposition);
+    }
 }

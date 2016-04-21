@@ -13,8 +13,12 @@ import java.util.List;
  * @since 12.04.2016
  */
 @Repository
-public interface TournamentCompositionRepository extends JpaRepository<TournamentComposition,Long> {
+public interface TournamentCompositionRepository extends JpaRepository<TournamentComposition, Long> {
 
 
     List<TournamentComposition> findByTournamentId(Long id);
+
+    @Query(value = "select count(t) from TournamentComposition t where t.userGuest.username = :username or" +
+            " t.tournament.userCreator.username = :username and t.id=:id")
+    Long findCountUserGuest(@Param("username")String username,@Param("id")Long idComposition);
 }
