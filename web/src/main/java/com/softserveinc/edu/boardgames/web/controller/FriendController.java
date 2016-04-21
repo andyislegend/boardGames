@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +33,13 @@ public class FriendController {
 			list.add(listOfFriends.get(i).getUserId());
 		}
 		return list;
+	}
+	
+	@RequestMapping("/allOffering")
+	public int getAllOffering(){
+		String userName = WebUtil.getPrincipalUsername();
+		User user = userService.findOne(userName);
+		int countOfOffering = friendService.findCountNoConsiderFrinds(user);
+		return countOfOffering;
 	}
 }

@@ -50,6 +50,14 @@ app.controller("listOfFriendsCtrl", function($scope, $http) {
 		console.log(error);
 	})
 });
+app.controller("countOfOffering", function($scope, $http) {
+	console.log("countOfOffering");
+	$http.get("allOffering").success(function(data) {
+		$scope.count = data;
+	}).error(function(error) {
+		console.log(error);
+	})
+});
 app.controller("OfferToFriendCtrl", function($scope, $uibModal) {
 	$scope.open = function () {
 		console.log("befor open");
