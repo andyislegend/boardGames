@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,12 +22,17 @@ import javax.persistence.Table;
  * This entity contains data model describing games of particular user Has
  * ManyToOne relationship to game ManyToMany relationship to user
  * 
- * @author Volodymyr Krokhmalyuk
+ * @author Taras Varvariuk,Volodymyr Krokhmaliuk
  *
  */
 @Entity
 @Table(name = "gameUser")
 public class GameUser implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6954309571224923595L;
 
 	@Id
 	@Column(name = "id")
@@ -47,8 +53,12 @@ public class GameUser implements Serializable {
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
 
-	public GameUser () {
-		
+	public GameUser(String edition, Integer yearOfProduction, Game game, User user) {
+		super();
+		this.edition = edition;
+		this.yearOfProduction = yearOfProduction;
+		this.game = game;
+		this.user = user;
 	}
 	
 	public User getUser() {
@@ -67,6 +77,7 @@ public class GameUser implements Serializable {
 		return id;
 	}
 
+	
 	public String getEdition() {
 		return edition;
 	}
