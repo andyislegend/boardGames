@@ -4,19 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script type="text/javascript"
+			src="resources/bower_components/angular/angular.js"></script>
 	<link rel="stylesheet"
 		  href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
 		  rel="stylesheet" />
 	<link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
-	<script type="text/javascript"
-			src="resources/bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="resources/js/main.js"></script>
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript"
 			src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 			src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+
 	
 
 </head>
@@ -135,7 +136,7 @@
 		
 <%----------------------------All Game info table -------------------------------------------------%>		
 		<div class="col-sm-6" ng-controller="getGamesGlobalController">
-			<table class="table">
+ 			<table class="table">
 				<thead>
 				<tr>
 					<th>Game</th>
@@ -294,45 +295,89 @@
 		</div>
 		
 	<!----------------------- End of Friends ------------------------------>
+	<!----------------------- Start of users ------------------------------>
 	</div>
 </div>
 <div class="col-sm-3"></div>
-<div class="container-fluid">
-	<div class="col-sm-6" ng-controller="getAllUsersCtrl">
-		<div class="col-sm-4">
-			<input type="text" class="form-control"
-				   ng-model="searchText.lastName" placeholder="Search by last name">
-		</div>
-		<div class="col-sm-4">
-			<input type="text" class="form-control"
-				   ng-model="searchText.address.city" placeholder="Search by city">
-		</div>
-		<table class="table">
-			<tr>
-				<th>Last Name, First Name</th>
-				<th>Email</th>
-				<th>PhoneNumber</th>
-				<th>Address</th>
-			</tr>
-			<tr ng-repeat="user in users|filter:searchText">
-				<td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
-					{{user.lastName}} {{user.firstName}}</a></td>
-				<td>{{user.email}}</td>
-				<td>{{user.phoneNumber}}</td>
-				<td>{{user.address.country}},{{user.address.city}},
-					{{user.address.street}}, {{user.address.houseNumber}},
-					{{user.address.roomNumber}}</td>
-			</tr>
-		</table>
-		<div ng-show="showUser" class="well col-md-offset-0 form-group">
-			<div>
-				<p>Last Name:{{oneUser.lastName}}</p>
-				<p>First Name:{{oneUser.firstName}}</p>
-				<p>Username:{{oneUser.username}}</p>
+	<div class="container-fluid">
+		<div class="col-sm-6" ng-controller="getAllUsersCtrl">
+			<div class="col-sm-4">
+				<input type="text" class="form-control"
+					ng-model="searchText.lastName" placeholder="Search by last name">
 			</div>
+			<div class="col-sm-4">
+				<input type="text" class="form-control"
+					ng-model="searchText.address.city" placeholder="Search by city">
+			</div>
+			<table class="table">
+				<tr>
+					<th>Last Name, First Name</th>
+					<th>Email</th>
+					<th>PhoneNumber</th>
+					<th>Address</th>
+				</tr>
+				<tr ng-repeat="user in users|filter:searchText">
+					<td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
+							{{user.lastName}} {{user.firstName}}</a></td>
+					<td>{{user.email}}</td>
+					<td>{{user.phoneNumber}}</td>
+					<td>{{user.address.country}},{{user.address.city}},
+						{{user.address.street}}, {{user.address.houseNumber}},
+						{{user.address.roomNumber}}</td>
+				</tr>
+			</table>
+			<div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
+				<div class="col-sm-4" id="backgroundForOneUser">
+					<p>Last Name:{{oneUser.lastName}}</p>
+					<p>First Name:{{oneUser.firstName}}</p>
+					<p>Username:{{oneUser.username}}</p>
+					<p>Sex:{{oneUser.sex}}</p>
+					<p>Age:{{oneUser.age}}</p>
+					<p>Rating:{{oneUser.rating}}</p>
+				</div>
+
+				<div class="col-sm-4" id="backgroundForOneUser">
+					<a href="" ng-click="getInfoAboutGamesUserHave(user.id)"> 
+					Games user owns</a>
+				</div>
+				<div class="col-sm-4" id="backgroundForOneUser">
+					<a href="" ng-click="getInfoAboutUsersTournaments(user.id)">
+						Users tournaments</a>
+				</div>
+			</div>
+			<modal visible="showModal"></modal>
 		</div>
 	</div>
 </div>
+<!----------------------- End of users ------------------------------>
+<!----------------------- Start of Events ------------------------------>
+<div ng-controller="eventListCtrl">
+	 <header class="section-header" ng-controller="eventListCtrl">
+              <h2 class="title" >COMING EVENTS:{{events.length}}</h2>
+            
+    </header>
+
+			<div class=" jcarousel-skin-tango">
+			   <div class="jcarousel-container jcarousel-container-horizontal" style="display: block;">				
+						<li class="jcarousel-item jcarousel-item-horizontal " >						 
+						  <a ng-repeat="event in events" href="#" class="item">
+							  <div id={{event.id}} style="display: none;"><img src={{event.imgsrc}} width="64" height="64" class="loader"></div>
+							  <img width="245" height="245"  onLoad="$({{event.id}}).hide(); $(this).show();" src={{event.imgsrc}} alt={{event.name}}>
+							  <span class="game_name">{{event.game}}</span>
+							  <div class="name" style="top: 201px;">
+								<div class="num">{{event.datenum}}<span>{{event.datemonth}}</span></div>
+								<div class="tema">{{event.name}}</div>
+								
+					
+							  </div>
+						   </a>						   
+						</li>				
+				  </div>
+			   </div>
+			</div>
+			</div>
+<!----------------------- End of Events ------------------------------>
+
 <footer class="panel-footer"> Copyright (C) 2016 Softserve
 	inc, Lv-179.Java. All rights reserved. </footer>
 </body>

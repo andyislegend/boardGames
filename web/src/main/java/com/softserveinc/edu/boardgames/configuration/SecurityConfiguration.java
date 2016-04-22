@@ -51,22 +51,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		antMatchers("/", "/index").
 		permitAll().antMatchers("/newuser").
 		permitAll()
-		.antMatchers("/home/**").access("hasRole('USER')").
-		and()
+		.antMatchers("/home/**").access("hasRole('USER')")
+		.and()
 		.formLogin().
-		failureUrl("/?error").
-		loginProcessingUrl("/j_spring_security_check")
-		.defaultSuccessUrl("/home", true).
-		usernameParameter("username").passwordParameter("password").
-		and()
-		.exceptionHandling().accessDeniedPage("/403").
-		and().
-		csrf().disable().
-		logout()
-		.invalidateHttpSession(true).
-		logoutSuccessUrl("/").
-		logoutUrl("/logout").
-		permitAll();
+		failureUrl("/#/login?error")
+		.loginProcessingUrl("/authenticate")
+		.defaultSuccessUrl("/home", true)
+		.usernameParameter("username").passwordParameter("password")
+		.loginPage("/#/login")
+		.and()
+		.exceptionHandling().accessDeniedPage("/403")
+		.and()
+		.csrf().disable()
+		.logout()
+		.invalidateHttpSession(true)
+		.logoutSuccessUrl("/")
+		.logoutUrl("/logout")
+		.permitAll();
 
 	}
 }
