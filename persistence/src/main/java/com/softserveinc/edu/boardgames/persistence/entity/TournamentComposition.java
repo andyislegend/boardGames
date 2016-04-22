@@ -1,6 +1,10 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 
 /**
@@ -25,6 +29,7 @@ public class TournamentComposition implements Serializable {
     /**
      * Discribe user that takes part in this tournament
      */
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     private User userGuest;
 

@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 
 import java.io.Serializable;
@@ -38,12 +39,14 @@ public class Tournament implements Serializable {
     /**
      * List of tournament compositions (users) that take part in this tounament
      */
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "tournament")
     private List<TournamentComposition> tournamentComposition;
 
     /**
      * Kind of game which is tournament organized on
      */
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     private Game game;
 
