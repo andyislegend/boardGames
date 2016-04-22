@@ -11,13 +11,12 @@
 	<link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
 	<script type="text/javascript"
 			src="resources/bower_components/angular/angular.js"></script>
-	<script type="text/javascript" src="resources/js/main.js"></script>
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript"
 			src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 			src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
-	
+	<script type="text/javascript" src="resources/js/main.js"></script>
 
 </head>
 <body ng-app="usersGameApp">
@@ -335,5 +334,6 @@
 </div>
 <footer class="panel-footer"> Copyright (C) 2016 Softserve
 	inc, Lv-179.Java. All rights reserved. </footer>
+	
 </body>
 </html>
