@@ -69,36 +69,33 @@
 	</div>
 </nav>
 
-<div style="margin-top: 6%;" class="container-fluid">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3">
-			<div class="well col-md-offset-0 form-group">
-
+			<div class="well col-md-offset-0">
 				<h3 class="text-center">My Games</h3>
 				<div ng-controller = "CreateGameCtrl">
 					<button ng-click="showForm()">Add new Game</button>
 					<form data-ng-submit = submit()  role="form" ng-show = "showText">
 						<div class="form-group">
-							<label>Game name</label>
-							<input data-ng-model = "name">
+							<input class="form-control" data-ng-model = "name" placeholder="Name">
+							</div>
+							<div class="form-group">
 							<label>Select Category:</label>
-							<select data-ng-model = "category">
+							<select class="form-control" id="exampleSelect1" data-ng-model = "category">
 							<option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
 							</select>
-							<label>Description</label>
-							<input data-ng-model = "description">
-							<label>Rules</label>
-							<input data-ng-model = "rules">
-							<label>Max players</label>
-							<input data-ng-model = "maxPlayers">
-							<label>Min players</label>
-							<input data-ng-model = "minPlayers">
-							<label>Edition</label>
-							<input data-ng-model = "edition">
-							<label>Year of production</label>
-							<input data-ng-model = "year">
-							<input type="submit" value="add" >
-						</div>
+							</div>
+							<div class="form-group">
+							<input class="form-control" data-ng-model = "description" placeholder="Description">
+							<input class="form-control" data-ng-model = "rules" placeholder="Rules">
+							<input class="form-control" data-ng-model = "maxPlayers" placeholder="Max Players">
+							<input class="form-control" data-ng-model = "minPlayers" placeholder="Min Players">
+							<input class="form-control" data-ng-model = "edition" placeholder= "Edition">
+							<input class="form-control" data-ng-model = "year" placeholder= "Year">
+							</div>
+							<button type="submit" value="add" class="btn btn-primary" >
+						
 					</form>
 				</div>
 				<div ng-controller="allUsersGameCtrl">
