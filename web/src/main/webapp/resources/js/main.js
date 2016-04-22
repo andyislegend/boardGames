@@ -16,6 +16,36 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 	});
 });
 
+app.controller("CreateGameCtrl", function($scope, $http) {
+	$scope.showText = false;
+	$scope.categories = [];
+	$scope.showForm = function() {
+		$scope.showText = !$scope.showText;
+		};
+	$http.get('getAllCategories').then(function(result ){
+		$scope.categories = result.data;
+	});
+		$scope.list = [];
+	$scope.submit = function() {	
+		 var userGame  = {
+			"edition" : $scope.edition,
+			"yearOfProduction" : $scope.year,
+			"game" : {"name" : $scope.name,
+			"category" : { "id" : $scope.category},
+			"description" : $scope.description,	
+			"rules" : $scope.rules,
+			"maxPlayers" : $scope.maxPlayers,
+			"minPlayers" : $scope.minPlayers
+			}
+		 };
+		 var response = $http.post('NewGame', userGame);
+			response.success(function(data, status, headers, config) {
+				$scope.list.push(data);
+				
+			});				
+	};
+});
+
 app.controller("eventListCtrl", function($scope, $http) {
 	$scope.events = [];
 	 $http({
@@ -28,32 +58,6 @@ app.controller("eventListCtrl", function($scope, $http) {
 		});
 	});
 
-
-app.controller("CreateGameCtrl", function($scope, $http,$window) {
-	$scope.showText = false;
-	$scope.showForm = function() {
-		$scope.showText = !$scope.showText;
-		};
-		$scope.list = [];
-	$scope.submit = function() {	
-		 var userGame  = {
-			"edition" : $scope.edition,
-			"yearOfProduction" : $scope.year,
-			"game" : {"name" : $scope.name,
-			"category" : { "name" : $scope.category},
-			"description" : $scope.description,	
-			"rules" : $scope.rules,
-			"maxPlayers" : $scope.maxPlayers,
-			"minPlayers" : $scope.minPlayers
-			}
-		 };
-		 var response = $http.post('NewGame', userGame);
-			response.success(function(data, status, headers, config) {
-				$scope.list.push(data);
-				if(!$scope.$$phase){$scope.$apply();}
-			});				
-	};
-});
 
 app.controller("listOfFriendsCtrl", function($scope, $http) {
 	console.log("in controller list of Friends");

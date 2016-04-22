@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<script type="text/javascript"
 			src="resources/bower_components/angular/angular.js"></script>
 	<link rel="stylesheet"
@@ -17,9 +18,6 @@
 			src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
 			src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
-
-	
-
 </head>
 <body ng-app="usersGameApp">
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -83,8 +81,10 @@
 						<div class="form-group">
 							<label>Game name</label>
 							<input data-ng-model = "name">
-							<label>Category</label>
-							<input data-ng-model = "category">
+							<label>Select Category:</label>
+							<select data-ng-model = "category">
+							<option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+							</select>
 							<label>Description</label>
 							<input data-ng-model = "description">
 							<label>Rules</label>
