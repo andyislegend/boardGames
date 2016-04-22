@@ -155,7 +155,7 @@ public class User implements Serializable {
 	 @JoinColumn(name = "friendId", referencedColumnName = "id")
 	 @JsonManagedReference
 	 private Set <Friend> friends;*/
-
+	
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
 	 */

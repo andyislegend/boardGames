@@ -96,7 +96,7 @@
 							<input data-ng-model = "edition">
 							<label>Year of production</label>
 							<input data-ng-model = "year">
-							<input type="submit" value="add">
+							<input type="submit" value="add" >
 						</div>
 					</form>
 				</div>
@@ -113,7 +113,7 @@
 								<td>{{game.name}}</td>
 								<td>{{game.category}}</td>
 								<td>
-									<button ng-click="myFunc(game.name)">M</button>
+									<button ng-click="myFunc(game.id)">M</button>
 								</td>
 								<td>com</td>
 							</tr>

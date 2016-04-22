@@ -6,7 +6,12 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 		$scope.myFunc = function(id) {
 			$scope.games = [];
 			$scope.showMe = !$scope.showMe;
-			$scope.games[0] = $scope.allGame[id];
+			for (var i = 0; i < $scope.allGame.length; i++) {
+				if ($scope.allGame[i].id === id) {
+					$scope.games[0] = $scope.allGame[i];
+					break;
+				}
+			}
 		}
 	});
 });
@@ -17,7 +22,7 @@ app.controller("CreateGameCtrl", function($scope, $http,$window) {
 		$scope.showText = !$scope.showText;
 		};
 		$scope.list = [];
-	$scope.submit = function($window) {
+	$scope.submit = function() {	
 		 var userGame  = {
 			"edition" : $scope.edition,
 			"yearOfProduction" : $scope.year,
@@ -32,8 +37,8 @@ app.controller("CreateGameCtrl", function($scope, $http,$window) {
 		 var response = $http.post('NewGame', userGame);
 			response.success(function(data, status, headers, config) {
 				$scope.list.push(data);
+				if(!$scope.$$phase){$scope.$apply();}
 			});				
-			$route.reload();
 	};
 });
 

@@ -8,6 +8,7 @@ public class GameUserMapper implements GenericMapper<GameUserDTO, GameUser> {
 	@Override
 	public GameUserDTO toDTO(GameUser gameUser) {
 		GameUserDTO gameUserDTO = new GameUserDTO();
+		gameUserDTO.setId(gameUser.getId());
 		gameUserDTO.setName(gameUser.getGame().getName());
 		gameUserDTO.setCategory(gameUser.getGame().getCategory().getName());
 		gameUserDTO.setYearOfProduction(gameUser.getYearOfProduction());
