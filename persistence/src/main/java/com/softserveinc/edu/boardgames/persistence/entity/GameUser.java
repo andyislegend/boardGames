@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * This entity contains data model describing games of particular user Has
  * ManyToOne relationship to game ManyToMany relationship to user
  * 
- * @author Taras Varvariuk,Volodymyr Krokhmaliuk
+ * @authors Taras Varvariuk,Volodymyr Krokhmaliuk
  *
  */
 @Entity
@@ -45,14 +45,18 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Game.class, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "gameId", referencedColumnName = "id")
 	private Game game;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
 
+	public GameUser() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public GameUser(String edition, Integer yearOfProduction, Game game, User user) {
 		super();
 		this.edition = edition;

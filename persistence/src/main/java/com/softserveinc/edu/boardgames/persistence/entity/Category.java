@@ -55,6 +55,10 @@ public class Category implements Serializable{
 	 */
 	public Category() {}
 	
+	/**
+	 * Aditional constructor
+	 * @param id - id number
+	 */
 	public Category(Integer id) {
 		this.id = id;
 	}

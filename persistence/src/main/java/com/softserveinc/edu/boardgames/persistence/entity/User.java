@@ -30,6 +30,7 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * This class describes users of boardGames website.
@@ -173,15 +174,16 @@ public class User implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userCreator")
+	@JsonBackReference
 	private List<Tournament> createdTounaments;
 
 	/**
 	 * List if tounaments which user take part in
 	 */
-
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userGuest")
-	@JsonManagedReference
+	@JsonBackReference
 	private List<TournamentComposition> takenpartTounaments;
 
 
@@ -389,7 +391,6 @@ public class User implements Serializable {
 /*	public Set<Event> getEvents() {
 		return events;
 	}
-
 	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}*/
@@ -419,7 +420,7 @@ public class User implements Serializable {
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + ((takenpartTounaments == null) ? 0 : takenpartTounaments.hashCode());
+		//result = prime * result + ((takenpartTounaments == null) ? 0 : takenpartTounaments.hashCode());
 		result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -509,11 +510,11 @@ public class User implements Serializable {
 		if (state != other.state)
 			return false;
 		System.out.println("**********15*********");
-		if (takenpartTounaments == null) {
-			if (other.takenpartTounaments != null)
-				return false;
-		} else if (!takenpartTounaments.equals(other.takenpartTounaments))
-			return false;
+//		if (takenpartTounaments == null) {
+//			if (other.takenpartTounaments != null)
+//				return false;
+//		} else if (!takenpartTounaments.equals(other.takenpartTounaments))
+//			return false;
 		System.out.println("**********16*********");
 		if (userRoles == null) {
 			if (other.userRoles != null)
