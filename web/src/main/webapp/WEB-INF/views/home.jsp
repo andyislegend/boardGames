@@ -62,7 +62,7 @@
 						Messages <span class="badge">2</span></a></li>
 					<!-- <li class="dropdown-header">Already leaving?</li> -->
 					<li class="divider"></li>
-					<li><a href="logout"><span
+					<li><a href="/logout"><span
 							class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						Logout </a></li>
 				</ul></li>

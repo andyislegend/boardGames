@@ -88,6 +88,11 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.allanditzel</groupId>
+			<artifactId>spring-security-csrf-token-filter</artifactId>
+			<version>1.1</version>
+		</dependency>
 
 
 		<dependency>
@@ -117,10 +122,10 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
-		
-		
-    </dependencies>
+
+
+
+	</dependencies>
 
 
 

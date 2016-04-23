@@ -6,23 +6,23 @@
 <head>
 
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	crossorigin="anonymous" />
 <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
 	rel="stylesheet" crossorigin="anonymous" />
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
 <link rel="stylesheet" href="resources/css/main.css" />
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
-<script
-	src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+<script src="resources/bower_components/angular-route/angular-route.js"></script>
+<script src="../../resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
 <script src="resources/js/index.js"></script>
@@ -46,11 +46,11 @@
 					<li><a href="#tournaments"><i class="fa fa-comment"></i>
 							Tournaments</a></li>
 				</ul>
-				<c:if test="${param.error != null}">
+				<%-- <c:if test="${param.error != null}">
 					<ul class="navbar navbar-default">
 						<li class="alert alert-danger">Invalid username or password</li>
 					</ul>
-				</c:if>
+				</c:if> --%>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#login"><i class="fa fa-home"></i> Login</a></li>
 					<li><a href="#registration"><i class="fa fa-home"></i>

@@ -1,8 +1,6 @@
 package com.softserveinc.edu.boardgames.configuration;
 
 import javax.servlet.Filter;
-
-import org.springframework.security.access.SecurityConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

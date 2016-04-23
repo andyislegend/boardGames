@@ -1,4 +1,4 @@
-var indexModule = angular.module('indexModule', ['ngRoute']);
+var indexModule = angular.module('indexModule', ['ngRoute', 'spring-security-csrf-token-interceptor']);
 
 
 indexModule.config(function($routeProvider) {
@@ -46,20 +46,28 @@ indexModule.controller('loginCntrl', ['$scope', '$http', function ($scope, $http
 
         var response = $http(request);
          response.success(function (data) {
-            var path = 'home';
-//            $scope.loginForm.password = null;
-//        
-//            if (path)
+            var path = redirectByRole(data);
+            $scope.loginForm.password = null;
+        
+            if (path)
                 window.location.replace(path);
-//            if (path == undefined){
-//            	$scope.loginCorrect = true;
-//            	$scope.incorrectStyle = true;
-//            	$scope.incorrectStylePlaceholder = true;
-//            }
+            if (path == undefined){
+            	$scope.loginCorrect = true;
+            	$scope.incorrectStyle = true;
+            	$scope.incorrectStylePlaceholder = true;
+            }
         });
-//        response.error(function (data) {
-//            console.dir(data);
-//        });
+        response.error(function (data) {
+            console.dir(data);
+        });
+        
+        function redirectByRole(role) {
+        	var path = undefined;
+            if (role == "ROLE_USER" || role == "ROLE_ADMIN" || role == "ROLE_MODERATOR" || role == "ROLE_SUPERADMIN" || role == "ROLE_DBA")
+                path = 'home';
+   
+              return path;
+        }
 
    };
 
