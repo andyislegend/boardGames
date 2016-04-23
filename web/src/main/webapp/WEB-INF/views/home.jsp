@@ -69,7 +69,7 @@
 	</div>
 </nav>
 
-<div class="container-fluid">
+<div style="margin-top: 7%;" class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3">
 			<div class="well col-md-offset-0">
