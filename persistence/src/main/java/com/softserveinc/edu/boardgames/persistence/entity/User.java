@@ -139,26 +139,6 @@ public class User implements Serializable {
 	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
 
-	/*
-	 * by Anna for Events in case you need to change smth, please let me know
-	 */
-
-/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
-	@JsonManagedReference
-    private Set<Event> events;*/
-
-
-
-	 /**
-	 * Describes address where user lives. Has a many to one relationship to
-	 * address table.
-	 */
-	 /*@OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
-	 { CascadeType.ALL })
-	 @JoinColumn(name = "friendId", referencedColumnName = "id")
-	 @JsonManagedReference
-	 private Set <Friend> friends;*/
-	
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
 	 */
@@ -185,7 +165,6 @@ public class User implements Serializable {
 			CascadeType.REFRESH }, mappedBy = "userGuest")
 	@JsonBackReference
 	private List<TournamentComposition> takenpartTounaments;
-
 
 	/**
 	 * Constructor without parameters.
@@ -388,13 +367,6 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-/*	public Set<Event> getEvents() {
-		return events;
-	}
-	public void setEvents(Set<Event> events) {
-		this.events = events;
-	}*/
-
 	public Set<UserRoles> getUserRoles() {
 		return userRoles;
 	}
@@ -402,6 +374,7 @@ public class User implements Serializable {
 	public void setUserRoles(Set<UserRoles> userRoles) {
 		this.userRoles = userRoles;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -411,7 +384,6 @@ public class User implements Serializable {
 		result = prime * result + ((age == null) ? 0 : age.hashCode());
 		result = prime * result + ((createdTounaments == null) ? 0 : createdTounaments.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-/*		result = prime * result + ((events == null) ? 0 : events.hashCode());*/
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -434,8 +406,6 @@ public class User implements Serializable {
 		if (obj == null)
 			return false;
 		System.out.println("**********00000000*********");
-		/*if (getClass() != obj.getClass())
-			return false;*/
 		User other = (User) obj;
 		System.out.println("**********1*********");
 		if (address == null) {
@@ -462,11 +432,6 @@ public class User implements Serializable {
 		} else if (!email.equals(other.email))
 			return false;
 		System.out.println("**********5*********");
-/*		if (events == null) {
-			if (other.events != null)
-				return false;
-		} else if (!events.equals(other.events))
-			return false;*/
 		System.out.println("**********6*********");
 		if (firstName == null) {
 			if (other.firstName != null)

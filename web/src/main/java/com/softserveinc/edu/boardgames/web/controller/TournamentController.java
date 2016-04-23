@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.web.controller;
+/*package com.softserveinc.edu.boardgames.web.controller;
 
 import com.softserveinc.edu.boardgames.service.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
@@ -6,7 +6,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
 import com.softserveinc.edu.boardgames.service.TournamentCompositionService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
-import com.softserveinc.edu.boardgames.web.util.WebUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+*//**
  * Created by Dora on 17.04.2016.
- */
+ *//*
 
 @Controller
 public class TournamentController {
@@ -44,11 +43,11 @@ public class TournamentController {
     @ResponseBody
     List<com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO> joinTournamnet(@RequestBody Integer id) {
         List<com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO> list=tournamentService.findAllTournamentsDTO();
-        /*TournamentComposition tournamentComposition = new TournamentComposition();
+        TournamentComposition tournamentComposition = new TournamentComposition();
         tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
         tournamentComposition.setUserGuest(userService.findOne(WebUtil.getPrincipalUsername()));
         tournamentCompositionService.save(tournamentComposition);
-        return createDTOfromtournamentList();*/
+        return createDTOfromtournamentList();
         return list;
     }
 
@@ -72,15 +71,17 @@ public class TournamentController {
                 countUser = tournamentCompositionService.findCountUserGuest(WebUtil.getPrincipalUsername(),tournamentComposition.getId());
             }
 
-            /*response.add(new AllTournamentsDTO(tournament.getId(),
+            response.add(new AllTournamentsDTO(tournament.getId(),
                     tournament.getName(),
                     tournament.getUserCreator().getUsername(),
                     String.valueOf(tournament.getRequiredRating()),
                     userGuests,
-                    (countUser) == 0 ? false : true));*/
+                    (countUser) == 0 ? false : true));
         }
         return response;
     }
 
 
 }
+
+*/

@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import javax.persistence.*;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

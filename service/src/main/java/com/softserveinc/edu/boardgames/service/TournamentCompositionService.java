@@ -4,6 +4,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentCompositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,5 +50,9 @@ public class TournamentCompositionService {
 
     public Long findCountUserGuest(String username,Long idComposition){
         return tournamentCompositionRepository.findCountUserGuest(username,idComposition);
+    }
+    
+    public List<TournamentComposition> findByUsersUsername(String username){
+        return tournamentCompositionRepository.findUserByUsername(username);
     }
 }

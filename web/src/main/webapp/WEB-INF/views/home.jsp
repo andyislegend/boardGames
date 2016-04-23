@@ -33,6 +33,7 @@
 				   ng-click="hideTournaments = true; hideAllGames = false">All
 				Games</a></li>
 			<li><a href="#">Events</a></li>
+			<li><a href="<c:url value="uploadJSP"/>">Foto Uploader</a></li>
 		</ul>
 
 		<ul class="nav navbar-nav navbar-left">
@@ -333,13 +334,22 @@
 					<p>Rating:{{oneUser.rating}}</p>
 				</div>
 
-				<div class="col-sm-4" id="backgroundForOneUser">
-					<a href="" ng-click="getInfoAboutGamesUserHave(user.id)"> 
+				<div class="col-sm-4" id="backgroundForOneUser" 
+					ng-controller="getAllUsersGames">
+					<a href="" ng-click="getInfoAboutUserGames(oneUser.username)"> 
 					Games user owns</a>
+					<ul ng-show="showUsersGames" ng-repeat = "game in games">
+					<li><a href="" ng-click="getInfoAboutGame(game.id)">
+							{{game.name}}</a></li>
+					</ul>
 				</div>
-				<div class="col-sm-4" id="backgroundForOneUser">
-					<a href="" ng-click="getInfoAboutUsersTournaments(user.id)">
+				<div class="col-sm-4" id="backgroundForOneUser" ng-controller="getAllUsersTournaments">
+					<a href="" ng-click="getInfoAboutUsersTournaments(oneUser.username)">
 						Users tournaments</a>
+					<ul ng-show="showUsersTournaments" ng-repeat = "tournament in tournaments">
+					<li><a href="" ng-click="getInfoAboutTournament(tournament.id)">
+							{{tournament.name}}</a></li>
+					</ul>
 				</div>
 			</div>
 			<modal visible="showModal"></modal>

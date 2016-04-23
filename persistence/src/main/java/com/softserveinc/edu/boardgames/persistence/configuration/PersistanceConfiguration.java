@@ -20,6 +20,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 @EnableTransactionManagement
@@ -61,6 +62,13 @@ public class PersistanceConfiguration {
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         transactionManager.setDataSource(dataSource);
         return transactionManager;
+    }
+    
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver createMultipartResolver() {
+        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("utf-8");
+        return resolver;
     }
 
     private Map<String, String> jpaProperties() {

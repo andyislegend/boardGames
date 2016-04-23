@@ -34,6 +34,7 @@ public class Tournament implements Serializable {
      * User that created this tournament
      */
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
     private User userCreator;
 
     /**

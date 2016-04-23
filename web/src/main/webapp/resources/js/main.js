@@ -16,7 +16,7 @@ app.controller("allUsersGameCtrl", function($scope, $http) {
 	});
 });
 
-app.controller("CreateGameCtrl", function($scope, $http) {
+app.controller("CreateGameCtrl", function($scope, $http,$window) {
 	$scope.showText = false;
 	$scope.categories = [];
 	$scope.showForm = function() {
@@ -86,7 +86,7 @@ app.controller("OfferToFriendCtrl", function($scope, $uibModal) {
 
 /*users Angular controller -- start*/
 
-app.controller("getAllUsersCtrl", function($scope, $http, $uibModal) {
+app.controller("getAllUsersCtrl", function($scope, $http) {
 	$scope.users = [];
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;
@@ -102,6 +102,72 @@ app.controller("getAllUsersCtrl", function($scope, $http, $uibModal) {
 		};
 	});
 });
+
+app.controller("getAllUsersGames", function($scope, $http) {
+	$scope.showUsersGames = false;
+	$scope.getInfoAboutUserGames = function(userName) {
+		$scope.showUsersGames = !$scope.showUsersGames;	
+		$http.get('allUsersGames?userName=' + userName).then(function(result) {
+			$scope.games = result.data;			
+		});
+
+	};
+});
+
+app.controller("getAllUsersTournaments", function($scope, $http) {
+	$scope.showUsersTournaments = false;
+	$scope.getInfoAboutUsersTournaments = function(userName) {
+		$scope.showUsersTournaments = !$scope.showUsersTournaments;	
+		$http.get('allUsersTournaments?userName=' + userName).then(function(result) {
+			$scope.games = result.data;			
+		});
+
+	};
+});
+
+app.directive('modal', function () {
+    return {
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+					'<p>Last Name:{{oneUser.lastName}}</p>' +
+					'<p>First Name:{{oneUser.firstName}}</p>' +
+					'<p>Username:{{oneUser.username}}</p>' +
+					'<p>Sex:{{oneUser.sex}}</p>' +
+					'<p>Age:{{oneUser.age}}</p>' +
+					'<p>Rating:{{oneUser.rating}}</p>' +
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+      restrict: 'E',
+      transclude: true,
+      replace:true,
+      scope:true,
+      link: function postLink(scope, element, attrs) {
+          scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+      }
+    };
+  });
 
 /*users Angular controller -- end*/
 
