@@ -94,13 +94,14 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 		alert("Getting games general data error");
 	});
 	
-	$scope.gameSelect = function(obj, $event) {
+	$scope.gameSelect = function(id, name, $event) {
 		
 		$scope.gameDetailsShown = true;
+		$scope.currentGameId = id;
 		
 		$http({
 			method: "GET",
-			url : 'getGameDetails' + '/' + obj
+			url : 'getGameDetails' + '/' + id
 		}).then(function mySucces(response){
 			$scope.gameDetail = response.data;
 		}, function myError(response) {
@@ -109,7 +110,7 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 		
 		$http({
 			method: "GET",
-			url : 'getUserGamesOfGame' + '/' + obj
+			url : 'getUserGamesOfGame' + '/' + name
 		}).then(function mySucces(response){
 			$scope.userGamesOfGame = response.data;
 		}, function myError(response) {
@@ -137,6 +138,19 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 		else if ($scope.gameRating > 90 && $scope.gameRating <= 100)
 			$scope.gameRatingText = "Legendary";
 	}
+	
+	$scope.ratingSaved = function() {
+		
+		$http({
+			method: "POST",
+			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + $scope.gameRating,
+		}).then(function mySucces(response){
+			alert("Games updated");
+		}, function myError(response) {
+			alert("Getting games general data error");
+		});
+	}
+	
 });
 
 app.controller("showAllTournaments", function ($scope, $http) {

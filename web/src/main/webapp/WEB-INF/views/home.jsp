@@ -133,7 +133,7 @@
 		</div>
 		
 <%----------------------------All Game info table -------------------------------------------------%>		
-		<div class="col-sm-6" ng-controller="getGamesGlobalController">
+		<div class="col-sm-6" ng-controller="getGamesGlobalController" >
 			<table class="table">
 				<thead>
 				<tr>
@@ -144,7 +144,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.name)"
+				<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.id, x.name)"
 					ng-init="gameDetailsShown=false">
 					<td>{{ x.name }}</td>
 					<td>{{ x.categoryName }}</td>
@@ -168,9 +168,9 @@
 					<h4>Rating</h4>
 					<table class="table">
 						<thead><tr>
-								<th>Rate</th>
+								<th>Rate this game</th>
 								<th>Your rate</th>
-								<th>General rate</th>
+								<th>General</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -180,13 +180,14 @@
 									ng-change="ratingSliderChanged()" ng-model="gameRating"/>
 								</td>
 								<td>
-									<p>{{gameRating}}</p>
-								</td>
-								<td>
 									<p class="text-primary">{{gameRatingText}}</p>
 								</td>
 								<td>
 									<p>{{globalRating}}</p>
+								</td>
+								<td>
+									<button class="btn btn-success"  ng-click="ratingSaved()">
+									Save rate</button>
 								</td>
 							</tr>
 						</tbody>
@@ -207,7 +208,7 @@
 								<td>{{ x.user.username }}</td>
 								<td>{{ x.edition }}</td>
 								<td>{{ x.yearOfProduction }}</td>
-								<td><button class="btn btn-success">Action</button></td>
+								<td><button class="btn btn-success">Save rating</button></td>
 							</tr>
 						</tbody>
 					</table>

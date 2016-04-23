@@ -25,15 +25,25 @@ public class GetGameDetailsController {
 	@Autowired
 	private GameUserService gameUserService;
 	
-	@RequestMapping(value="/getGameDetails/{name}", method = RequestMethod.GET)
+	@RequestMapping(value="/getGameDetails/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
-	public GameDetailsDTO getGameDetails(@PathVariable String name){
-		return gameService.getGamesByName(name);
+	public GameDetailsDTO getGameDetails(@PathVariable Integer gameId){
+		return gameService.getGamesById(gameId);
 	}
 	
 	@RequestMapping(value="/getUserGamesOfGame/{name}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUser> getGamesOfInstance(@PathVariable String name){
 		return gameUserService.getAllUserGamesOfGame(name);
+	}
+	
+	@RequestMapping(value="/calculateRatings/{gameId}/{rating}", method = RequestMethod.POST)
+	@ResponseBody
+	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating){
+		Game game = gameService.findById(gameId);
+		if (game.getRating() == null)
+			game.setRating(0);
+		game.setRating((game.getRating() + rating)/2);
+		gameService.update(game);
 	}
 }

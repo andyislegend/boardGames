@@ -57,7 +57,7 @@ public class Game implements Serializable{
 	private Integer maxPlayers;
 	
 	@Column(name = "rating")
-	private Integer rating;
+	private Integer rating = 0;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
@@ -79,12 +79,13 @@ public class Game implements Serializable{
 	public Game(){}
 	
 	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category, GameRating gameRating) {
+			Integer maxPlayers, Category category, GameRating gameRating, Integer rating) {
 		this.name = name;
 		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.category = category;
+		this.rating = rating;
 	}
 
 	public Integer getRating() {

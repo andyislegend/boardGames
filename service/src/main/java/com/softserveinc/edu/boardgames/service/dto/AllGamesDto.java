@@ -2,23 +2,31 @@ package com.softserveinc.edu.boardgames.service.dto;
 
 public class AllGamesDto {
 	
+	private Integer id;
 	private String name;
 	private String categoryName;
 	private String description;
 	private Integer minPlayers;
 	private Integer maxPlayers;
-	private String rating;
+	private Integer rating;
 	
 	public AllGamesDto() {}
-	public AllGamesDto(String name, String categoryName, String description, Integer minPlayers, Integer maxPlayers,
-			String rating) {
+	public AllGamesDto(Integer id, String name, String categoryName, String description, Integer minPlayers, Integer maxPlayers,
+			Integer rating) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.categoryName = categoryName;
 		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.rating = rating;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -50,10 +58,10 @@ public class AllGamesDto {
 	public void setMaxPlayers(Integer maxPlayers) {
 		this.maxPlayers = maxPlayers;
 	}
-	public String getRating() {
+	public Integer getRating() {
 		return rating;
 	}
-	public void setRating(String rating) {
+	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
 }
