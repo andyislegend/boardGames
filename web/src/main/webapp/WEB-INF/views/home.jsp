@@ -180,6 +180,42 @@
                             </div>
                             <div class="modal-body">
                                 <div>
+                                    <form>
+                                        <p>Enter a special name of your tournament</p>
+                                        <input class="form-control" data-ng-model="inputTournamentName" placeholder="Some Awsome Name">
+                                        <br/>
+                                        <p>Choose game for your awsome tournament</p>
+                                        <select class="form-control" id="inputselectGame" data-ng-model="category">
+                                            <option ng-repeat="game in allGame" value="{{game.name}}">{{game.name}}
+                                            </option>
+                                        </select>
+                                        <br/>
+                                        <p>Input required rating for all who wants to join to your awsome tournament</p>
+                                        <input class="form-control" data-ng-model="inputTournamentRating" placeholder="5.0">
+                                        <br/>
+                                        <p>Choose the date for your awsome tournamnent</p>
+                                        <input type="date" data-ng-model="inputTournamentDate">
+                                        <br/>
+                                        <br/>
+                                        <p>Enter place of your tournament:</p>
+                                        <p>Country</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="country">
+                                        <br/>
+                                        <p>City</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="city">
+                                        <br/>
+                                        <p>Street</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="street">
+                                        <br/>
+                                        <p>Number of building</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="building">
+                                        <br/>
+                                        <p>Number of apartment</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="apartment">
+                                        <br/>
+                                        <br/>
+                                        <button ng-click="">Create</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -200,7 +236,6 @@
                     <td>{{x.date}}</td>
                     <td>{{x.requiredRating}}</td>
                     <td>
-                        <%--{{x.userGuests}}--%>
                         <table>
                             <tr ng-repeat="y in x.userGuests">
                                 <td>{{y}}</td>

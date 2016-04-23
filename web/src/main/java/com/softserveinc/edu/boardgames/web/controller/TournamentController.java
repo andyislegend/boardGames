@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
@@ -41,12 +42,19 @@ public class TournamentController {
     @RequestMapping(value = "/joinTournament", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<AllTournamentsDTO> joinTournamnet(@RequestBody Integer id) {
+    List<AllTournamentsDTO> joinTournamnet(@RequestBody Long id) throws Exception{
+        User user=userService.findOne(WebUtil.getPrincipalUsername());
+        Long count;
+        count=tournamentCompositionService.findCountUserGuest(user.getUsername(),id);
+        if(count==0){
         TournamentComposition tournamentComposition = new TournamentComposition();
         tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
-        tournamentComposition.setUserGuest(userService.findOne(WebUtil.getPrincipalUsername()));
+        tournamentComposition.setUserGuest(user);
         tournamentCompositionService.save(tournamentComposition);
-        return createDTOfromtournamentList();
+        return createDTOfromtournamentList();}
+        else {
+            return null;
+        }
     }
 
     @RequestMapping(value = "/addTournament", method = RequestMethod.PUT)
