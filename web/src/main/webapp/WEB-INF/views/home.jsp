@@ -133,7 +133,7 @@
 		</div>
 		
 <%----------------------------All Game info table -------------------------------------------------%>		
-		<div class="col-sm-6" ng-controller="getGamesGlobalController" >
+		<div class="col-sm-6"  ng-controller="getGamesGlobalController">
 			<table class="table">
 				<thead>
 				<tr>
@@ -155,7 +155,7 @@
 				</tr>
 				</tbody>
 			</table>
-			<div class="well" ng-show="gameDetailsShown">
+			<div class="well" ng-show="gameDetailsShown" ng-controller="getGameDetailedInfoController">
 					<h4>Name</h4>
 					<p>{{gameDetail.name}}</p>
 					<hr/>

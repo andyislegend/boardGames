@@ -117,6 +117,9 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 			alert("Getting games userGames of game error");
 		});
 	}
+});
+
+app.controller('getGameDetailedInfoController', function ($scope, $http) {
 	
 	$scope.hideGameDetails = function() {
 		$scope.gameDetailsShown = false;
@@ -145,12 +148,11 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 			method: "POST",
 			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + $scope.gameRating,
 		}).then(function mySucces(response){
-			alert("Games updated");
+			
 		}, function myError(response) {
 			alert("Getting games general data error");
 		});
 	}
-	
 });
 
 app.controller("showAllTournaments", function ($scope, $http) {
