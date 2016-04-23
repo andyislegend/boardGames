@@ -11,8 +11,8 @@
 			</c:if>
 			<div class="login-form">
 				<c:url var="authenticate" value="/login" />
-				<form action="<c:url value='authenticate' />"
-					method="post" class="form-horizontal">
+				<form action="<c:url value='authenticate' />" method="post"
+					class="form-horizontal">
 					<c:if test="${param.error != null}">
 						<div class="alert alert-danger">
 							<p>Invalid username and password.</p>
