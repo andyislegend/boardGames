@@ -128,6 +128,10 @@ public class User implements Serializable {
 	@NotEmpty
 	@Column(name = "state", nullable = false)
 	private String state = UserStatus.ACTIVE.name();
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user" ,fetch = FetchType.LAZY)
+	private Set<GameUser> userGames;
+	
 
 	/**
 	 * Describes address where user lives. Has a many to one relationship to

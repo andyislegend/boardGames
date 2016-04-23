@@ -34,6 +34,6 @@ public class GetGameDetailsController {
 	@RequestMapping(value="/getUserGamesOfGame/{name}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUser> getGamesOfInstance(@PathVariable String name){
-		return gameUserService.getAllUserGames();
+		return gameUserService.getAllUserGamesOfGame(name);
 	}
 }

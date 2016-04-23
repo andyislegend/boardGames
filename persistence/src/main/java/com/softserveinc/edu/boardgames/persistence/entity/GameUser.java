@@ -1,8 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,15 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
  * This entity contains data model describing games of particular user Has
@@ -33,6 +26,8 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 @Table(name = "gameUser")
 public class GameUser implements Serializable {
 
+	private static final long serialVersionUID = 9107019551046622111L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,12 +39,12 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "gameId", referencedColumnName = "id")
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Game game;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, targetEntity = User.class)
-	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private User user;
 
 	public GameUser() {
@@ -95,7 +90,7 @@ public class GameUser implements Serializable {
 	public void setYearOfProduction(Integer yearOfProduction) {
 		this.yearOfProduction = yearOfProduction;
 	}
-
+	
 	public Game getGame() {
 		return game;
 	}
@@ -144,7 +139,8 @@ public class GameUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "GameUser [id=" + id + ", game=" + game + ", yearOfProduction=" + yearOfProduction + ", edition="
+		return "GameUser [id=" + id + ", game=" + game + 
+				", yearOfProduction=" + yearOfProduction + ", edition="
 				+ edition + "]";
 	}
 }

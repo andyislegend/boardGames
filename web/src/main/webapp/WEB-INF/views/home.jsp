@@ -176,18 +176,14 @@
 						<tbody>
 							<tr>
 								<td>
-									<select class="form-control" mg-model="gameRating">
-										<option>Bad as hell</option>
-										<option>Bad</option>
-										<option>Average</option>
-										<option>Good</option>
-										<option>Vary good</option>
-										<option>Excellent</option>
-										<option>Must have</option>
-									</select>
+									<input type="range" id="myRange" value="100" 
+									ng-change="ratingSliderChanged()" ng-model="gameRating"/>
 								</td>
 								<td>
 									<p>{{gameRating}}</p>
+								</td>
+								<td>
+									<p class="text-primary">{{gameRatingText}}</p>
 								</td>
 								<td>
 									<p>{{globalRating}}</p>

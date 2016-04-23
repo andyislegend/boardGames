@@ -120,6 +120,23 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 	$scope.hideGameDetails = function() {
 		$scope.gameDetailsShown = false;
 	}
+	
+	$scope.ratingSliderChanged = function(){
+		if ($scope.gameRating <= 15)
+			$scope.gameRatingText = "Bad as hell";
+		else if ($scope.gameRating > 15 && $scope.gameRating <= 30)
+			$scope.gameRatingText = "Actually bad";
+		else if ($scope.gameRating > 30 && $scope.gameRating <= 45)
+			$scope.gameRatingText = "Averege";
+		else if ($scope.gameRating > 45 && $scope.gameRating <= 60)
+			$scope.gameRatingText = "Pretty good";
+		else if ($scope.gameRating > 60 && $scope.gameRating <= 75)
+			$scope.gameRatingText = "Good stuff";
+		else if ($scope.gameRating > 75 && $scope.gameRating <= 90)
+			$scope.gameRatingText = "Exelent!";
+		else if ($scope.gameRating > 90 && $scope.gameRating <= 100)
+			$scope.gameRatingText = "Legendary";
+	}
 });
 
 app.controller("showAllTournaments", function ($scope, $http) {

@@ -63,15 +63,13 @@ public class Game implements Serializable{
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="game", cascade={CascadeType.ALL})
     private Set<Event> events;
-	
-	
+		
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
-	@JsonProperty("userGames")
 	private Set<GameUser> userGames;
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
     private Set<Tournament> tournaments;
-	
+
 	@NotEmpty
 	@Column(name = "gameRating", nullable=false)
 	private String gameRating = GameRating.NOT_RATED.name();
@@ -87,6 +85,14 @@ public class Game implements Serializable{
 		this.category = category;
 	}
 
+	public Set<GameUser> getUserGames() {
+		return userGames;
+	}
+
+	public void setUserGames(Set<GameUser> userGames) {
+		this.userGames = userGames;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -189,14 +195,6 @@ public class Game implements Serializable{
 
 	public void setEvents(Set<Event> events) {
 		this.events = events;
-	}
-
-	public Set<GameUser> getUserGames() {
-		return userGames;
-	}
-
-	public void setUserGames(Set<GameUser> userGames) {
-		this.userGames = userGames;
 	}
 
 	public Set<Tournament> getTournaments() {

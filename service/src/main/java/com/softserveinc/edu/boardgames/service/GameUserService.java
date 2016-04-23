@@ -37,4 +37,8 @@ public class GameUserService {
 	public List<GameUser> getGameUsersFromUsername(String name) {
 		return gameUserRepo.getAllGamesForCurrentUser(name);
 	}
+	
+	public List<GameUser> getAllUserGamesOfGame(String name) {
+		return gameUserRepo.getAllUserGamesOfGame(name);
+	}
 }
