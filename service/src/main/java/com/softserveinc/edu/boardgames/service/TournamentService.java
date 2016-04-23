@@ -42,8 +42,8 @@ public class TournamentService {
         return tournamentRepository.findOne(id);
     }
 
-    public List<AllTournamentsDTO> findAllTournamentsDTO(){
+    /*public List<AllTournamentsDTO> findAllTournamentsDTO(){
         return tournamentRepository.findAllTournamentsDTO();
-    }
+    }*/
 
 }

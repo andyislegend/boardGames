@@ -70,231 +70,299 @@
 	</div>
 </nav>
 
-<div style="margin-top: 7%;" class="container-fluid">
-	<div class="row">
-		<div class="col-sm-3">
-			<div class="well col-md-offset-0">
-				<h3 class="text-center">My Games</h3>
-				<div ng-controller = "CreateGameCtrl">
-					<button ng-click="showForm()">Add new Game</button>
-					<form data-ng-submit = submit()  role="form" ng-show = "showText">
-						<div class="form-group">
-							<input class="form-control" data-ng-model = "name" placeholder="Name">
-							</div>
-							<div class="form-group">
-							<label>Select Category:</label>
-							<select class="form-control" id="exampleSelect1" data-ng-model = "category">
-							<option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
-							</select>
-							</div>
-							<div class="form-group">
-							<input class="form-control" data-ng-model = "description" placeholder="Description">
-							<input class="form-control" data-ng-model = "rules" placeholder="Rules">
-							<input class="form-control" data-ng-model = "maxPlayers" placeholder="Max Players">
-							<input class="form-control" data-ng-model = "minPlayers" placeholder="Min Players">
-							<input class="form-control" data-ng-model = "edition" placeholder= "Edition">
-							<input class="form-control" data-ng-model = "year" placeholder= "Year">
-							</div>
-							<button type="submit" value="add" class="btn btn-primary" >
-						
-					</form>
-				</div>
-				<div ng-controller="allUsersGameCtrl">
-					<div>
-						<table class="table">
-							<tr>
-								<th>Name</th>
-								<th>Category</th>
-								<th>More</th>
-								<th>Comment</th>
-							<tr>
-							<tr ng-repeat="game in allGame">
-								<td>{{game.name}}</td>
-								<td>{{game.category}}</td>
-								<td>
-									<button ng-click="myFunc(game.id)">M</button>
-								</td>
-								<td>com</td>
-							</tr>
-						</table>
-						<div ng-show="showMe">
-							<div ng-repeat="game in games">
-								<p>Category:{{game.category}}</p>
-								<p>Year of production: {{game.yearOfProduction}}</p>
-								<p>Edition: {{game.edition}}</p>
-								<p>Description: {{game.description}}</p>
-								<p>Max players: {{game.maxPlayers}}</p>
-								<p>Min players: {{game.minPlayers}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-<%----------------------------All Game info table -------------------------------------------------%>		
-		<div class="col-sm-6" ng-controller="getGamesGlobalController">
- 			<table class="table">
-				<thead>
-				<tr>
-					<th>Game</th>
-					<th>Category</th>
-					<th>Min/Max players</th>
-					<th>Rating</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.name)"
-					ng-init="gameDetailsShown=false">
-					<td>{{ x.name }}</td>
-					<td>{{ x.categoryName }}</td>
-					<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
-					<td>{{ x.rating }}</td>
-				</tr>
-				<tr>
-				</tr>
-				</tbody>
-			</table>
-			<div class="well" ng-show="gameDetailsShown">
-					<h4>Name</h4>
-					<p>{{gameDetail.name}}</p>
-					<hr/>
-					<h4>Description</h4>
-					<pre>{{gameDetail.description}}</pre>
-					<hr/>
-					<h4>Rules</h4>
-					<pre>{{gameRules.rules}}</pre>
-					<hr/>
-					<h4>Rating</h4>
-					<table class="table">
-						<thead><tr>
-								<th>Rate</th>
-								<th>Your rate</th>
-								<th>General rate</th>
-						</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<select class="form-control" mg-model="gameRating">
-										<option>Bad as hell</option>
-										<option>Bad</option>
-										<option>Average</option>
-										<option>Good</option>
-										<option>Vary good</option>
-										<option>Excellent</option>
-										<option>Must have</option>
-									</select>
-								</td>
-								<td>
-									<p>{{gameRating}}</p>
-								</td>
-								<td>
-									<p>{{globalRating}}</p>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<hr/>
-					<h4>Owners</h4>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Game edition</th>
-								<th>Year of production</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="x in userGamesOfGame" >
-								<td>{{ x.user.username }}</td>
-								<td>{{ x.edition }}</td>
-								<td>{{ x.yearOfProduction }}</td>
-								<td><button class="btn btn-success">Action</button></td>
-							</tr>
-						</tbody>
-					</table>
-					<hr/>
-					<button ng-click="hideGameDetails()" class="btn btn-success">Hide</button>
-				</div>
-			</div>
-		</div>
-<%--------------------------------- end of all game info -----------------------------------------%>
-		<div class="col-sm-6" ng-controller="showAllTournaments" ng-hide="hideTournaments">
-			<table class="table">
-				<thead>
-				<tr>
-					<th>Tournament name</th>
-					<th>User creator</th>
-					<th>Required rating to join</th>
-					<th>Users Guests</th>
-					<th>Join</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr ng-repeat="x in tournaments">
-					<td >{{ x.tournamentName }}</td>
-					<td >{{ x.userName }}</td>
-					<td>{{x.requiredRating}}</td>
-					<td>
-						<table>
-							<tr ng-repeat="y in x.userGuests">
-								<td>{{y}}</td>
-							</tr>
-						</table>
-					</td>
-					<td ><button ng-disabled="x.isCanJoin"  class="btn btn-success" ng-click="JoinTournament(x.tournamentId)">Join</button></td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
-	<!------------------------ Start Frinds ------------------------------>
-		<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
-			<div class="well col-md-offset-0">
-				<table class="table table-striped">
-					<thead>
-					<tr>
-						<th>Friends</th>
-						<td><a href="#"><img src="resources/ico/add_user.png" width="25"></a></td>
-						
-						<td>
-							<div ng-controller="countOfOffering" class="count">{{count}}</div>
-							<div ng-controller="OfferToFriendCtrl">
-							<script type="text/ng-template" id="OfferingForm.html">
-                   				<div class="modal-header">
-                        			<h3 class="modal-title">This users want to be tour friend</h3>
-                    			</div>
-                    			<div class="modal-body">
-                        				<div>Hello Everyone</div>
-                        		</div>
-                    			<div class="modal-footer">
-                        				<h3>This is footer</h3>
-                    			</div>
-                			</script>   
-								<a href="#" ng-click="open()"><img src="resources/ico/bell.png" width="25"></a>
-							</div>
-						</td>
-					</tr>
-					</thead>
-					<tbody>
-					<tr ng-repeat="friend in friends">
-						<td>{{ friend.firstName }}</td>
-						<td>{{ friend.lastName }}</td>
-						<td><a href="#"><img src="resources/ico/messages.png"
-											 width="25"></a></td>
-						<td><a href="#"><img src="resources/ico/trophy.png"
-											 width="25"></a></td>
+<div class="container-fluid">
+    <div class="row" style="margin-top: 10%;">
+        <div class="col-sm-3">
+            <div class="well col-md-offset-0">
+                <h3 class="text-center">My Games</h3>
 
-					</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		
-	<!----------------------- End of Friends ------------------------------>
-	<!----------------------- Start of users ------------------------------>
-	</div>
+                <div ng-controller="CreateGameCtrl">
+                    <button ng-click="showForm()">Add new Game</button>
+                    <form data-ng-submit=submit() role="form" ng-show="showText">
+                        <div class="form-group">
+                            <input class="form-control" data-ng-model="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Select Category:</label>
+                            <select class="form-control" id="exampleSelect1" data-ng-model="category">
+                                <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" data-ng-model="description" placeholder="Description">
+                            <input class="form-control" data-ng-model="rules" placeholder="Rules">
+                            <input class="form-control" data-ng-model="maxPlayers" placeholder="Max Players">
+                            <input class="form-control" data-ng-model="minPlayers" placeholder="Min Players">
+                            <input class="form-control" data-ng-model="edition" placeholder="Edition">
+                            <input class="form-control" data-ng-model="year" placeholder="Year">
+                        </div>
+                        <button type="submit" value="add" class="btn btn-primary"/>
+
+                    </form>
+                </div>
+                <div ng-controller="allUsersGameCtrl">
+                    <div>
+                        <table class="table">
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>More</th>
+                                <th>Comment</th>
+                            <tr>
+                            <tr ng-repeat="game in allGame">
+                                <td>{{game.name}}</td>
+                                <td>{{game.category}}</td>
+                                <td>
+                                    <button ng-click="myFunc(game.id)">M</button>
+                                </td>
+                                <td>com</td>
+                            </tr>
+                        </table>
+                        <div ng-show="showMe">
+                            <div ng-repeat="game in games">
+                                <p>Category:{{game.category}}</p>
+
+                                <p>Year of production: {{game.yearOfProduction}}</p>
+
+                                <p>Edition: {{game.edition}}</p>
+
+                                <p>Description: {{game.description}}</p>
+
+                                <p>Max players: {{game.maxPlayers}}</p>
+
+                                <p>Min players: {{game.minPlayers}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%----------------------------All Game info table -------------------------------------------------%>
+        <div class="col-sm-6" >
+            <table ng-controller="getGamesGlobalController" ng-hide="hideAllGames" class="table">
+                <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Category</th>
+                    <th>Min/Max players</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.name)"
+                    ng-init="gameDetailsShown=false">
+                    <td>{{ x.name }}</td>
+                    <td>{{ x.categoryName }}</td>
+                    <td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
+                    <td>{{ x.rating }}</td>
+                </tr>
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table" ng-controller="showAllTournaments" ng-hide="hideTournaments">
+                <thead>
+                <tr>
+                    <th>Tournament name</th>
+                    <th>User creator</th>
+                    <th>Adress</th>
+                    <th>Date</th>
+                    <th>Required rating</th>
+                    <th>Users Guests</th>
+                    <th>Join</th>
+                    <th ng-controller="AddTournament"><a href="" ng-click="addTournament()">
+                        <img src="resources/ico/add_tournament.png"></a>
+                        <script type="text/ng-template" id="AddTournament.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Whant to cteate new tournament?</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <form>
+                                        <p>Enter a special name of your tournament</p>
+                                        <input class="form-control" data-ng-model="inputTournamentName" placeholder="Some Awsome Name">
+                                        <br/>
+                                        <p>Choose game for your awsome tournament</p>
+                                        <select class="form-control" id="inputselectGame" data-ng-model="category">
+                                            <option ng-repeat="game in allGame" value="{{game.name}}">{{game.name}}
+                                            </option>
+                                        </select>
+                                        <br/>
+                                        <p>Input required rating for all who wants to join to your awsome tournament</p>
+                                        <input class="form-control" data-ng-model="inputTournamentRating" placeholder="5.0">
+                                        <br/>
+                                        <p>Choose the date for your awsome tournamnent</p>
+                                        <input type="date" data-ng-model="inputTournamentDate">
+                                        <br/>
+                                        <br/>
+                                        <p>Enter place of your tournament:</p>
+                                        <p>Country</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="country">
+                                        <br/>
+                                        <p>City</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="city">
+                                        <br/>
+                                        <p>Street</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="street">
+                                        <br/>
+                                        <p>Number of building</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="building">
+                                        <br/>
+                                        <p>Number of apartment</p>
+                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="apartment">
+                                        <br/>
+                                        <br/>
+                                        <button ng-click="">Create</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <h3>This is footer</h3>
+                            </div>
+                        </script>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in tournaments">
+                    <td>{{ x.tournamentName }}</td>
+                    <td>{{ x.username }}</td>
+                    <td>{{x.country}}, {{x.city}},
+                        <br/>
+                        {{x.street}}, {{x.houseNumber}}/{{x.roomNumber}}
+                    </td>
+                    <td>{{x.date}}</td>
+                    <td>{{x.requiredRating}}</td>
+                    <td>
+                        <table>
+                            <tr ng-repeat="y in x.userGuests">
+                                <td>{{y}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td> <button class="btn btn-success" ng-click="JoinTournament(x.tournamentId)">Join</button> </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="well" ng-show="gameDetailsShown">
+                <h4>Name</h4>
+
+                <p>{{gameDetail.name}}</p>
+                <hr/>
+                <h4>Description</h4>
+                <pre>{{gameDetail.description}}</pre>
+                <hr/>
+                <h4>Rules</h4>
+                <pre>{{gameRules.rules}}</pre>
+                <hr/>
+                <h4>Rating</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Rate</th>
+                        <th>Your rate</th>
+                        <th>General rate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <select class="form-control" mg-model="gameRating">
+                                <option>Bad as hell</option>
+                                <option>Bad</option>
+                                <option>Average</option>
+                                <option>Good</option>
+                                <option>Vary good</option>
+                                <option>Excellent</option>
+                                <option>Must have</option>
+                            </select>
+                        </td>
+                        <td>
+                            <p>{{gameRating}}</p>
+                        </td>
+                        <td>
+                            <p>{{globalRating}}</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr/>
+                <h4>Owners</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Game edition</th>
+                        <th>Year of production</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in userGamesOfGame">
+                        <td>{{ x.user.username }}</td>
+                        <td>{{ x.edition }}</td>
+                        <td>{{ x.yearOfProduction }}</td>
+                        <td>
+                            <button class="btn btn-success">Action</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr/>
+                <button ng-click="hideGameDetails()" class="btn btn-success">Hide</button>
+            </div>
+        </div>
+
+        <!------------------------ Start Frinds ------------------------------>
+        <div class="col-sm-3" ng-controller="listOfFriendsCtrl">
+            <div class="well col-md-offset-0">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Friends</th>
+                        <td><a href="#"><img src="resources/ico/add_user.png" width="25"></a></td>
+
+                        <td>
+                            <div ng-controller="countOfOffering" class="count">{{count}}</div>
+                            <div ng-controller="OfferToFriendCtrl">
+                                <script type="text/ng-template" id="OfferingForm.html">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">This users want to be tour friend</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>Hello Everyone</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <h3>This is footer</h3>
+                                    </div>
+                                </script>
+                                <a href="#" ng-click="open()"><img src="resources/ico/bell.png" width="25"></a>
+                            </div>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="friend in friends">
+                        <td>{{ friend.firstName }}</td>
+                        <td>{{ friend.lastName }}</td>
+                        <td><a href="#"><img src="resources/ico/messages.png"
+                                             width="25"></a></td>
+                        <td><a href="#"><img src="resources/ico/trophy.png"
+                                             width="25"></a></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!----------------------- End of Friends ------------------------------>
+
+    </div>
+    <%--------------------------------- end of all game info -----------------------------------------%>
+
+    <!----------------------- Start of users ------------------------------>
 </div>
 <div class="col-sm-3"></div>
 	<div class="container-fluid">
@@ -359,33 +427,36 @@
 <!----------------------- End of users ------------------------------>
 <!----------------------- Start of Events ------------------------------>
 <div ng-controller="eventListCtrl">
-	 <header class="section-header" ng-controller="eventListCtrl">
-              <h2 class="title" >COMING EVENTS:{{events.length}}</h2>
-            
+    <header class="section-header" ng-controller="eventListCtrl">
+        <h2 class="title">COMING EVENTS:{{events.length}}</h2>
+
     </header>
 
-			<div class=" jcarousel-skin-tango">
-			   <div class="jcarousel-container jcarousel-container-horizontal" style="display: block;">				
-						<li class="jcarousel-item jcarousel-item-horizontal " >						 
-						  <a ng-repeat="event in events" href="#" class="item">
-							  <div id={{event.id}} style="display: none;"><img src={{event.imgsrc}} width="64" height="64" class="loader"></div>
-							  <img width="245" height="245"  onLoad="$({{event.id}}).hide(); $(this).show();" src={{event.imgsrc}} alt={{event.name}}>
-							  <span class="game_name">{{event.game}}</span>
-							  <div class="name" style="top: 201px;">
-								<div class="num">{{event.datenum}}<span>{{event.datemonth}}</span></div>
-								<div class="tema">{{event.name}}</div>
-								
-					
-							  </div>
-						   </a>						   
-						</li>				
-				  </div>
-			   </div>
-			</div>
-			</div>
+    <div class=" jcarousel-skin-tango">
+        <div class="jcarousel-container jcarousel-container-horizontal" style="display: block;">
+            <li class="jcarousel-item jcarousel-item-horizontal ">
+                <a ng-repeat="event in events" href="#" class="item">
+                    <div id={{event.id}} style="display: none;"><img src={{event.imgsrc}} width="64" height="64"
+                                                                     class="loader"></div>
+                    <img width="245" height="245" onLoad="$({{event.id}}).hide(); $(this).show();" src={{event.imgsrc}}
+                         alt={{event.name}}>
+                    <span class="game_name">{{event.game}}</span>
+
+                    <div class="name" style="top: 201px;">
+                        <div class="num">{{event.datenum}}<span>{{event.datemonth}}</span></div>
+                        <div class="tema">{{event.name}}</div>
+
+
+                    </div>
+                </a>
+            </li>
+        </div>
+    </div>
+</div>
 <!----------------------- End of Events ------------------------------>
 
 <footer class="panel-footer"> Copyright (C) 2016 Softserve
-	inc, Lv-179.Java. All rights reserved. </footer>
+    inc, Lv-179.Java. All rights reserved.
+</footer>
 </body>
 </html>

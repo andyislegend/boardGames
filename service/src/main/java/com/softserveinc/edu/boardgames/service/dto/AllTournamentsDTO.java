@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class AllTournamentsDTO {
 
-    private Long id;
-    private String name;
+    private Long tournamentId;
+    private String tournamentName;
     private String username;
     private String country;
     private String city;
@@ -18,17 +18,20 @@ public class AllTournamentsDTO {
     private Integer houseNumber;
     private Integer roomNumber;
     private Double requiredRating;
+    private String date;
+    private List<String> userGuests;
 
     public AllTournamentsDTO() {
     }
 
-    public AllTournamentsDTO(Long id, String name,
+    public AllTournamentsDTO(Long tournamentId, String tournamentName,
                              String username, String country,
                              String city, String street,
                              Integer houseNumber, Integer roomNumber,
-                             Double requiredRating) {
-        this.id = id;
-        this.name = name;
+                             Double requiredRating, String date,
+                             List<String> userGuests) {
+        this.tournamentId = tournamentId;
+        this.tournamentName = tournamentName;
         this.username = username;
         this.country = country;
         this.city = city;
@@ -36,22 +39,35 @@ public class AllTournamentsDTO {
         this.houseNumber = houseNumber;
         this.roomNumber = roomNumber;
         this.requiredRating = requiredRating;
+        this.date = date;
+        this.userGuests = userGuests;
     }
 
-    public Long getId() {
-        return id;
+    public AllTournamentsDTO(Long tournamentId, String tournamentName,
+                             String username, Double requiredRating, String date,
+                             List<String> userGuests) {
+        this.tournamentId = tournamentId;
+        this.tournamentName = tournamentName;
+        this.username = username;
+        this.requiredRating = requiredRating;
+        this.date = date;
+        this.userGuests = userGuests;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getTournamentId() {
+        return tournamentId;
     }
 
-    public String getName() {
-        return name;
+    public void setTournamentId(Long tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTournamentName() {
+        return tournamentName;
+    }
+
+    public void setTournamentName(String tournamentName) {
+        this.tournamentName = tournamentName;
     }
 
     public String getUsername() {
@@ -108,5 +124,21 @@ public class AllTournamentsDTO {
 
     public void setRequiredRating(Double requiredRating) {
         this.requiredRating = requiredRating;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public List<String> getUserGuests() {
+        return userGuests;
+    }
+
+    public void setUserGuests(List<String> userGuests) {
+        this.userGuests = userGuests;
     }
 }
