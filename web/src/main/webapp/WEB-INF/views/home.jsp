@@ -183,15 +183,12 @@
 									<p class="text-primary">{{gameRatingText}}</p>
 								</td>
 								<td>
-									<p>{{globalRating}}</p>
-								</td>
-								<td>
-									<button class="btn btn-success"  ng-click="ratingSaved()">
-									Save rate</button>
+									<p>{{gameRating}}</p>
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					<button class="btn btn-success"  ng-click="ratingSaved()">Save rate</button>
 					<hr/>
 					<h4>Owners</h4>
 					<table class="table">
