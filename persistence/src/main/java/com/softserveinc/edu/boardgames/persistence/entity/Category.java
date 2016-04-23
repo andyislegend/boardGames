@@ -14,7 +14,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 
@@ -30,7 +33,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "category")
 public class Category implements Serializable{
-	
 	/**
 	 * Unique value, primary key to categories
 	 */
@@ -42,16 +44,13 @@ public class Category implements Serializable{
 	/**
 	 * Game category name
 	 */
-	@Column(name = "name")
+	@Column(name = "name" )
 	private String name;
 	
 	/**
 	 * A set of games that belongs to current category
 	 * Mapped from Game entity - OneToMany relationship
 	 */
-//	@JsonManagedReference
-//	@OneToMany(cascade={CascadeType.ALL},mappedBy="category", fetch=FetchType.LAZY)
-//	private Set<Game> games;
 
 	/**
 	 * Default constructor
@@ -60,10 +59,18 @@ public class Category implements Serializable{
 	
 	/**
 	 * Aditional constructor
+	 * @param id - id number
+	 */
+	public Category(Integer id) {
+		this.id = id;
+	}
+	
+	/**
+	 * Aditional constructor
 	 * @param name - category name
 	 */
 	public Category(String name) {
-		super();
+		
 		this.name = name;
 	}
 	
@@ -72,6 +79,10 @@ public class Category implements Serializable{
 	 */
 	public Integer getId() {
 		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	/**
@@ -91,9 +102,7 @@ public class Category implements Serializable{
 	/**
 	 * @return games return the list of games
 	 */
-//	public Set<Game> getGames() {
-//		return games;
-//	}
+	
 	
 	@Override
     public boolean equals(Object obj) {

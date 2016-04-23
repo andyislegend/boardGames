@@ -1,13 +1,14 @@
 package com.softserveinc.edu.boardgames.service.mapper;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
-import com.softserveinc.edu.boardgames.service.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 
 public class GameUserMapper implements GenericMapper<GameUserDTO, GameUser> {
 
 	@Override
 	public GameUserDTO toDTO(GameUser gameUser) {
 		GameUserDTO gameUserDTO = new GameUserDTO();
+		gameUserDTO.setId(gameUser.getId());
 		gameUserDTO.setName(gameUser.getGame().getName());
 		gameUserDTO.setCategory(gameUser.getGame().getCategory().getName());
 		gameUserDTO.setYearOfProduction(gameUser.getYearOfProduction());

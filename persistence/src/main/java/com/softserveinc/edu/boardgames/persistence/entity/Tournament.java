@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 
 import java.io.Serializable;
@@ -33,31 +34,36 @@ public class Tournament implements Serializable {
      * User that created this tournament
      */
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
     private User userCreator;
 
     /**
      * List of tournament compositions (users) that take part in this tounament
      */
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "tournament")
     private List<TournamentComposition> tournamentComposition;
 
     /**
      * Kind of game which is tournament organized on
      */
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     private Game game;
 
     @Column
     private Double requiredRating;
 
-    @Column
+    @Column(nullable = false)
     private Integer maxParticipants;
 
-    @Column
+
+    @Column(nullable = false)
     private Date dateOfTournament;
 
-    @Column
-    private String town;
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY)
+    private Address address;
 
     public Tournament() {
     }
@@ -126,12 +132,12 @@ public class Tournament implements Serializable {
         this.dateOfTournament = dateOfTournament;
     }
 
-    public String getTown() {
-        return town;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setTown(String town) {
-        this.town = town;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override

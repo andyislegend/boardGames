@@ -20,8 +20,10 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
@@ -59,7 +61,7 @@ public class Game implements Serializable{
 	@Column(name = "rating")
 	private Integer rating = 0;
 	
-	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
+	@ManyToOne(fetch=FetchType.EAGER, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private Category category;
 	
@@ -70,6 +72,7 @@ public class Game implements Serializable{
 	private Set<GameUser> userGames;
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
+	@JsonBackReference
     private Set<Tournament> tournaments;
 
 	@NotEmpty

@@ -30,20 +30,21 @@ public class EventService {
     	eventRepository.saveAndFlush(event);
     }
 
-    public Event findByName(String name) {
+   /* public Event findByName(String name) {
         return  eventRepository.findByName (name);
     }
     
-    public Event findByGame(Game game) {
-        return eventRepository.findByGame (game);
-    }
+    
     
     public Event findByDate(Date date) {
         return eventRepository.findByDate (date);
     }
-    
+   
     public Event findByUser(User user) {
         return eventRepository.findByUser (user);
     }
+    public Event findByGame(Game game) {
+        return eventRepository.findByGame (game);
+    }*/
 
 }

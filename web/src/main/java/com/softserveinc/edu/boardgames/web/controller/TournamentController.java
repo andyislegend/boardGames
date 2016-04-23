@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
@@ -35,19 +36,30 @@ public class TournamentController {
     public
     @ResponseBody
     List<AllTournamentsDTO> showAllTournaments() {
-
         return createDTOfromtournamentList();
     }
 
     @RequestMapping(value = "/joinTournament", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<AllTournamentsDTO> joinTournamnet(@RequestBody Integer id) {
+    List<AllTournamentsDTO> joinTournamnet(@RequestBody Long id) throws Exception{
+        User user=userService.findOne(WebUtil.getPrincipalUsername());
+        Long count;
+        count=tournamentCompositionService.findCountUserGuest(user.getUsername(),id);
+        if(count==0){
         TournamentComposition tournamentComposition = new TournamentComposition();
         tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
-        tournamentComposition.setUserGuest(userService.findOne(WebUtil.getPrincipalUsername()));
+        tournamentComposition.setUserGuest(user);
         tournamentCompositionService.save(tournamentComposition);
-        return createDTOfromtournamentList();
+        return createDTOfromtournamentList();}
+        else {
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/addTournament", method = RequestMethod.PUT)
+    public void addTournament(@RequestBody Tournament tournament) {
+        tournamentService.save(tournament);
     }
 
     private List<AllTournamentsDTO> createDTOfromtournamentList() {
@@ -59,19 +71,39 @@ public class TournamentController {
             List<String> userGuests = new ArrayList<>();
 
             compositions = tournament.getTournamentComposition();
-            countUser=(long)0;
+            countUser = (long) 0;
             for (TournamentComposition tournamentComposition : compositions) {
-                userGuests.add(tournamentComposition.getUserGuest().getFirstName() + " " + tournamentComposition.getUserGuest().getLastName());
-                countUser = tournamentCompositionService.findCountUserGuest(WebUtil.getPrincipalUsername(),tournamentComposition.getId());
+                userGuests.add(tournamentComposition.getUserGuest().getUsername());
+                countUser = tournamentCompositionService.findCountUserGuest(WebUtil.getPrincipalUsername(), tournamentComposition.getId());
             }
 
-            response.add(new AllTournamentsDTO(tournament.getId(),
-                    tournament.getName(),
-                    tournament.getUserCreator().getUsername(),
-                    String.valueOf(tournament.getRequiredRating()),
-                    userGuests,
-                    (countUser) == 0 ? false : true));
+            if (tournament.getAddress() != null) {
+                response.add(new AllTournamentsDTO(
+                        tournament.getId(),
+                        tournament.getName(),
+                        tournament.getUserCreator().getUsername(),
+                        tournament.getAddress().getCountry(),
+                        tournament.getAddress().getCity(),
+                        tournament.getAddress().getStreet(),
+                        tournament.getAddress().getHouseNumber(),
+                        tournament.getAddress().getRoomNumber(),
+                        tournament.getRequiredRating(),
+                        tournament.getDateOfTournament().toString(),
+                        userGuests
+                ));
+            } else {
+                response.add(new AllTournamentsDTO(
+                        tournament.getId(),
+                        tournament.getName(),
+                        tournament.getUserCreator().getUsername(),
+                        tournament.getRequiredRating(),
+                        tournament.getDateOfTournament().toString(),
+                        userGuests
+                ));
+            }
         }
         return response;
     }
+
+
 }

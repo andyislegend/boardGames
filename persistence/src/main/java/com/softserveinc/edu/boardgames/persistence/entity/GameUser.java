@@ -9,9 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -19,12 +22,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
  * This entity contains data model describing games of particular user Has
  * ManyToOne relationship to game ManyToMany relationship to user
  * 
- * @author Taras Varvariuk
+ * @authors Taras Varvariuk,Volodymyr Krokhmaliuk
  *
  */
 @Entity
 @Table(name = "gameUser")
 public class GameUser implements Serializable {
+
 
 	private static final long serialVersionUID = 9107019551046622111L;
 
@@ -48,8 +52,9 @@ public class GameUser implements Serializable {
 	private User user;
 
 	public GameUser() {
-	};
-
+		// TODO Auto-generated constructor stub
+	}
+	
 	public GameUser(String edition, Integer yearOfProduction, Game game, User user) {
 		super();
 		this.edition = edition;
@@ -74,7 +79,6 @@ public class GameUser implements Serializable {
 		return id;
 	}
 
-	
 	public String getEdition() {
 		return edition;
 	}
@@ -100,47 +104,17 @@ public class GameUser implements Serializable {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		GameUser other = (GameUser) obj;
-		if (id != other.id) {
-			return false;
-		}
-		if (yearOfProduction != other.yearOfProduction) {
-			return false;
-		}
-		if (edition != other.edition) {
-			return false;
-		}
-		if (game != other.game) {
-			return false;
-		}
-		if (user != other.user) {
-			return false;
-		}
-		return true;
+	public boolean equals(Object obj) {	
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + 1;
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public String toString() {
-		return "GameUser [id=" + id + ", game=" + game + 
-				", yearOfProduction=" + yearOfProduction + ", edition="
-				+ edition + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

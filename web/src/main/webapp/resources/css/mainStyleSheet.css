@@ -34,3 +34,11 @@ footer.panel-footer {
 h4 {
 	font-weight: bold;
 }
+
+#backgroundForOneUser {
+	background-color: #EEE8AA;
+}
+
+.form-control {
+	margin : 10px;
+}

@@ -1,8 +1,4 @@
-package com.softserveinc.edu.boardgames.service.dto;
-
-import sun.util.locale.InternalLocaleBuilder;
-
-import java.util.List;
+package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 /**
  * Created by Dora on 18.04.2016.
@@ -12,46 +8,28 @@ public class AllTournamentsDTO {
     private Long tournamentId;
     private String tournamentName;
     private String username;
+    private String gameName;
     private String country;
     private String city;
     private String street;
     private Integer houseNumber;
     private Integer roomNumber;
     private Double requiredRating;
-    private String date;
-    private List<String> userGuests;
 
     public AllTournamentsDTO() {
     }
 
-    public AllTournamentsDTO(Long tournamentId, String tournamentName,
-                             String username, String country,
-                             String city, String street,
-                             Integer houseNumber, Integer roomNumber,
-                             Double requiredRating, String date,
-                             List<String> userGuests) {
+    public AllTournamentsDTO(Long tournamentId, String tournamentName, String username, String gameName, String country, String city, String street, Integer houseNumber, Integer roomNumber, Double requiredRating) {
         this.tournamentId = tournamentId;
         this.tournamentName = tournamentName;
         this.username = username;
+        this.gameName = gameName;
         this.country = country;
         this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
         this.roomNumber = roomNumber;
         this.requiredRating = requiredRating;
-        this.date = date;
-        this.userGuests = userGuests;
-    }
-
-    public AllTournamentsDTO(Long tournamentId, String tournamentName,
-                             String username, Double requiredRating, String date,
-                             List<String> userGuests) {
-        this.tournamentId = tournamentId;
-        this.tournamentName = tournamentName;
-        this.username = username;
-        this.requiredRating = requiredRating;
-        this.date = date;
-        this.userGuests = userGuests;
     }
 
     public Long getTournamentId() {
@@ -76,6 +54,14 @@ public class AllTournamentsDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public String getCountry() {
@@ -124,21 +110,5 @@ public class AllTournamentsDTO {
 
     public void setRequiredRating(Double requiredRating) {
         this.requiredRating = requiredRating;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public List<String> getUserGuests() {
-        return userGuests;
-    }
-
-    public void setUserGuests(List<String> userGuests) {
-        this.userGuests = userGuests;
     }
 }

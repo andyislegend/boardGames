@@ -1,6 +1,7 @@
-package com.softserveinc.edu.boardgames.service.dto;
+package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 public class GameUserDTO {
+	private int id;
 	private String name;
 	private String category;
 	private int yearOfProduction;
@@ -9,13 +10,14 @@ public class GameUserDTO {
 	private String rules;
 	private int maxPlayers;
 	private int minPlayers;
-	
+
 	public GameUserDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GameUserDTO(String name, String category, int yearOfProduction, String edition, String description,
+	public GameUserDTO(int id, String name, String category, int yearOfProduction, String edition, String description,
 			String rules, int maxPlayers, int minPlayers) {
+		this.id = id;
 		this.name = name;
 		this.category = category;
 		this.yearOfProduction = yearOfProduction;
@@ -24,6 +26,14 @@ public class GameUserDTO {
 		this.rules = rules;
 		this.maxPlayers = maxPlayers;
 		this.minPlayers = minPlayers;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

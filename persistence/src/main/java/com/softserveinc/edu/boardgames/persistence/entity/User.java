@@ -29,6 +29,8 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * This class describes users of boardGames website.
@@ -141,25 +143,6 @@ public class User implements Serializable {
 	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
 
-	/*
-	 * by Anna for Events in case you need to change smth, please let me know
-	 */
-
-/*	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
-	@JsonManagedReference
-    private Set<Event> events;*/
-
-
-	 /**
-	 * Describes address where user lives. Has a many to one relationship to
-	 * address table.
-	 */
-	 /*@OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
-	 { CascadeType.ALL })
-	 @JoinColumn(name = "friendId", referencedColumnName = "id")
-	 @JsonManagedReference
-	 private Set <Friend> friends;*/
-
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
 	 */
@@ -172,17 +155,20 @@ public class User implements Serializable {
 	/**
 	 * List of tounaments that were organized by user
 	 */
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userCreator")
+	@JsonBackReference
 	private List<Tournament> createdTounaments;
 
 	/**
 	 * List if tounaments which user take part in
 	 */
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userGuest")
+	@JsonBackReference
 	private List<TournamentComposition> takenpartTounaments;
-
 
 	/**
 	 * Constructor without parameters.
@@ -385,22 +371,6 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-/*	public Set<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(Set<Event> events) {
-		this.events = events;
-	}
-	*/
-	/*public Set<Friend> getFriends() {
-		return friends;
-	}
-	
-	public void setFriends(Set<Friend> friends) {
-		this.friends = friends;
-	}*/
-
 	public Set<UserRoles> getUserRoles() {
 		return userRoles;
 	}
@@ -408,6 +378,7 @@ public class User implements Serializable {
 	public void setUserRoles(Set<UserRoles> userRoles) {
 		this.userRoles = userRoles;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -417,7 +388,6 @@ public class User implements Serializable {
 		result = prime * result + ((age == null) ? 0 : age.hashCode());
 		result = prime * result + ((createdTounaments == null) ? 0 : createdTounaments.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-/*		result = prime * result + ((events == null) ? 0 : events.hashCode());*/
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -426,7 +396,7 @@ public class User implements Serializable {
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + ((takenpartTounaments == null) ? 0 : takenpartTounaments.hashCode());
+		//result = prime * result + ((takenpartTounaments == null) ? 0 : takenpartTounaments.hashCode());
 		result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -440,8 +410,6 @@ public class User implements Serializable {
 		if (obj == null)
 			return false;
 		System.out.println("**********00000000*********");
-		/*if (getClass() != obj.getClass())
-			return false;*/
 		User other = (User) obj;
 		System.out.println("**********1*********");
 		if (address == null) {
@@ -468,11 +436,6 @@ public class User implements Serializable {
 		} else if (!email.equals(other.email))
 			return false;
 		System.out.println("**********5*********");
-/*		if (events == null) {
-			if (other.events != null)
-				return false;
-		} else if (!events.equals(other.events))
-			return false;*/
 		System.out.println("**********6*********");
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -516,11 +479,11 @@ public class User implements Serializable {
 		if (state != other.state)
 			return false;
 		System.out.println("**********15*********");
-		if (takenpartTounaments == null) {
-			if (other.takenpartTounaments != null)
-				return false;
-		} else if (!takenpartTounaments.equals(other.takenpartTounaments))
-			return false;
+//		if (takenpartTounaments == null) {
+//			if (other.takenpartTounaments != null)
+//				return false;
+//		} else if (!takenpartTounaments.equals(other.takenpartTounaments))
+//			return false;
 		System.out.println("**********16*********");
 		if (userRoles == null) {
 			if (other.userRoles != null)

@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.service;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,9 @@ public class TournamentService {
     public Tournament findById(Long id){
         return tournamentRepository.findOne(id);
     }
+
+    /*public List<AllTournamentsDTO> findAllTournamentsDTO(){
+        return tournamentRepository.findAllTournamentsDTO();
+    }*/
 
 }
