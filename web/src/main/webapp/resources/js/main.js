@@ -160,3 +160,22 @@ app.controller("showAllTournaments", function ($scope, $http) {
     }
 });
 
+
+app.controller("addTournament", function ($scope, $http) {
+	var address={
+		country:"",
+		city:"",
+		street:"",
+		houseNumber:"",
+		roomNumber:""
+	};
+	var tournament={
+		name:"",
+		game:{
+			name:""
+		},
+		dateOfTournament:"",
+		requiredRating:"",
+		maxParticipants:""
+	}
+});
