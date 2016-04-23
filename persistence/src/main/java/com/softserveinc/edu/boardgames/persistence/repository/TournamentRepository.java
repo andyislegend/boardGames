@@ -18,8 +18,8 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
 
     Tournament findByName(String name);
 
-    @Query("select t.id as tournamentId, t.name as tournamentName, t.userCreator.username as username," +
+    /*@Query("select t.id as tournamentId, t.name as tournamentName, t.userCreator.username as username," +
             " t.game.name as gameName, t.address.country, t.address.city, t.address.street, t.address.houseNumber," +
             "t.address.roomNumber from Tournament t")
-    List<AllTournamentsDTO> findAllTournamentsDTO();
+    List<AllTournamentsDTO> findAllTournamentsDTO();*/
 }

@@ -1,4 +1,20 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
+
+app.controller("MainController", function ($scope) {
+    $scope.hideTournaments=true;
+    $scope.hideAllGames=true;
+});
+app.controller("HideController",function($scope){
+    $scope.championshipClick=function(){
+        $scope.hideTournaments=false;
+        $scope.hideAllGames=true;
+    }
+    $scope.allGamesClick=function(){
+        $scope.hideTournaments=true;
+        $scope.hideAllGames=false;
+    }
+});
+
 app.controller("allUsersGameCtrl", function($scope, $http) {
 	$http.get('getAllGamesCurUser').then(function(result) {
 		$scope.allGame = result.data;
@@ -226,22 +242,10 @@ app.controller("showAllTournaments", function ($scope, $http) {
     }
 });
 
-
-app.controller("addTournament", function ($scope, $http) {
-	var address={
-		country:"",
-		city:"",
-		street:"",
-		houseNumber:"",
-		roomNumber:""
-	};
-	var tournament={
-		name:"",
-		game:{
-			name:""
-		},
-		dateOfTournament:"",
-		requiredRating:"",
-		maxParticipants:""
+app.controller("AddTournament",function($scope,$uibModal){
+	$scope.addTournament=function(){
+		$uibModal.open({
+			templateUrl: 'AddTournament.html'
+		});
 	}
 });
