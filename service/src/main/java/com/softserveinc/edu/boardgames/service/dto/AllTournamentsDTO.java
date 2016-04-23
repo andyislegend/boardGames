@@ -9,74 +9,104 @@ import java.util.List;
  */
 public class AllTournamentsDTO {
 
-    private Long tournamentId;
-    private String tournamentName;
-    private String userName;
-    private String requiredRating;
-    private List<String> userGuests;
-    private boolean isCanJoin;
+    private Long id;
+    private String name;
+    private String username;
+    private String country;
+    private String city;
+    private String street;
+    private Integer houseNumber;
+    private Integer roomNumber;
+    private Double requiredRating;
 
     public AllTournamentsDTO() {
     }
 
-    public AllTournamentsDTO(Long tournamentId,
-                             String tournamentName,
-                             String userName,
-                             String requiredRating,
-                             List<String> userGuests,boolean isCanJoin) {
-        this.tournamentId = tournamentId;
-        this.tournamentName = tournamentName;
-        this.userName = userName;
+    public AllTournamentsDTO(Long id, String name,
+                             String username, String country,
+                             String city, String street,
+                             Integer houseNumber, Integer roomNumber,
+                             Double requiredRating) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.roomNumber = roomNumber;
         this.requiredRating = requiredRating;
-        this.userGuests = userGuests;
-        this.isCanJoin=isCanJoin;
     }
 
-    public String getTournamentName() {
-        return tournamentName;
+    public Long getId() {
+        return id;
     }
 
-    public void setTournamentName(String tournamentName) {
-        this.tournamentName = tournamentName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<String> getUserGuests() {
-        return userGuests;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserGuests(List<String> userGuests) {
-        this.userGuests = userGuests;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getRequiredRating() {
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public Integer getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(Integer houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public Integer getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public Double getRequiredRating() {
         return requiredRating;
     }
 
-    public void setRequiredRating(String requiredRating) {
+    public void setRequiredRating(Double requiredRating) {
         this.requiredRating = requiredRating;
-    }
-
-    public Long getTournamentId() {
-        return tournamentId;
-    }
-
-    public void setTournamentId(Long tournamentId) {
-        this.tournamentId = tournamentId;
-    }
-
-    public boolean isCanJoin() {
-        return isCanJoin;
-    }
-
-    public void setIsCanJoin(boolean isCanJoin) {
-        this.isCanJoin = isCanJoin;
     }
 }

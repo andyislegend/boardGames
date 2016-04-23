@@ -8,6 +8,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.CascadeType;
@@ -50,6 +51,7 @@ public class GameUser implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Game.class, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "gameId", referencedColumnName = "id")
+	@JsonManagedReference
 	private Game game;
 
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.MERGE)
@@ -84,7 +86,6 @@ public class GameUser implements Serializable {
 		return id;
 	}
 
-	
 	public String getEdition() {
 		return edition;
 	}

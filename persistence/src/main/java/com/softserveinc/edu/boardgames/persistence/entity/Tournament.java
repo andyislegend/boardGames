@@ -53,14 +53,16 @@ public class Tournament implements Serializable {
     @Column
     private Double requiredRating;
 
-    @Column
+    @Column(nullable = false)
     private Integer maxParticipants;
 
-    @Column
+
+    @Column(nullable = false)
     private Date dateOfTournament;
 
-    @Column
-    private String town;
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY)
+    private Address address;
 
     public Tournament() {
     }
@@ -129,12 +131,12 @@ public class Tournament implements Serializable {
         this.dateOfTournament = dateOfTournament;
     }
 
-    public String getTown() {
-        return town;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setTown(String town) {
-        this.town = town;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override

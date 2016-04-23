@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "comments")
-public class ÑommentsForGame {
+public class CommentsForGame {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -36,11 +36,11 @@ public class ÑommentsForGame {
 	@Column(name = "text")
 	private String text;
 	
-	public ÑommentsForGame (){
+	public CommentsForGame (){
 		
 	}
 	
-	public ÑommentsForGame (GameUser gameUser, User user, String text){
+	public CommentsForGame (GameUser gameUser, User user, String text){
 		this.gameUser = gameUser;
 		this.user = user;
 		this.text = text;

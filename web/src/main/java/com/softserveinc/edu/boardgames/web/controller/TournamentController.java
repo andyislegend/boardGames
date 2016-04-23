@@ -42,12 +42,19 @@ public class TournamentController {
     @RequestMapping(value = "/joinTournament", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<AllTournamentsDTO> joinTournamnet(@RequestBody Integer id) {
-        TournamentComposition tournamentComposition = new TournamentComposition();
+    List<com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO> joinTournamnet(@RequestBody Integer id) {
+        List<com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO> list=tournamentService.findAllTournamentsDTO();
+        /*TournamentComposition tournamentComposition = new TournamentComposition();
         tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
         tournamentComposition.setUserGuest(userService.findOne(WebUtil.getPrincipalUsername()));
         tournamentCompositionService.save(tournamentComposition);
-        return createDTOfromtournamentList();
+        return createDTOfromtournamentList();*/
+        return list;
+    }
+
+    @RequestMapping(value = "/addTournament",method = RequestMethod.PUT)
+    public void addTournament(@RequestBody Tournament tournament){
+        tournamentService.save(tournament);
     }
 
     private List<AllTournamentsDTO> createDTOfromtournamentList() {
@@ -65,13 +72,15 @@ public class TournamentController {
                 countUser = tournamentCompositionService.findCountUserGuest(WebUtil.getPrincipalUsername(),tournamentComposition.getId());
             }
 
-            response.add(new AllTournamentsDTO(tournament.getId(),
+            /*response.add(new AllTournamentsDTO(tournament.getId(),
                     tournament.getName(),
                     tournament.getUserCreator().getUsername(),
                     String.valueOf(tournament.getRequiredRating()),
                     userGuests,
-                    (countUser) == 0 ? false : true));
+                    (countUser) == 0 ? false : true));*/
         }
         return response;
     }
+
+
 }
