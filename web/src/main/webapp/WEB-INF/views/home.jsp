@@ -72,7 +72,7 @@
 			</ul>
 		</div>
 	</nav>
-
+<%--------------------------------------- UserGames operations ----------------------------------------%>
 	<div class="container-fluid">
 		<div class="row" style="margin-top: 10%;">
 			<div class="col-sm-3">
@@ -145,8 +145,8 @@
 					</div>
 				</div>
 			</div>
-
-			<%----------------------------All Game info table -------------------------------------------------%>
+<%--------------------------------------- end of userGames ----------------------------------------%>
+<%--------------------------------------- All games info ------------------------------------------%>
 			<div class="col-sm-6" ng-controller="getGamesGlobalController">
 				<table class="table">
 					<thead>
@@ -228,9 +228,11 @@
 					<hr />
 					<button ng-click="hideGameDetails()" class="btn btn-success">Hide</button>
 				</div>
-				
-				<div class="container-fluid">
-					<div class="col-sm-6" ng-controller="getAllUsersCtrl">
+<!------------------------------------------- End of all games info ------------------------------------->
+<!------------------------------------------- Users info ------------------------------------------------>
+
+				<div class="container-fluid" ng-controller="getAllUsersCtrl">
+					<div class="col-sm-6">
 						<div class="col-sm-4">
 							<input type="text" class="form-control"
 								ng-model="searchText.lastName" placeholder="Search by last name">
@@ -238,119 +240,111 @@
 					</div>
 
 					<div class="col-sm-6">
-
 						<div class="col-sm-4">
 							<input type="text" class="form-control"
 								ng-model="searchText.address.city" placeholder="Search by city">
 						</div>
-						<table class="table">
-							<tr>
-								<th>Last Name, First Name</th>
-								<th>Email</th>
-								<th>PhoneNumber</th>
-								<th>Address</th>
-							</tr>
-							<tr ng-repeat="user in users|filter:searchText">
-								<td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
-										{{user.lastName}} {{user.firstName}}</a></td>
-								<td>{{user.email}}</td>
-								<td>{{user.phoneNumber}}</td>
-								<td>{{user.address.country}},{{user.address.city}},
-									{{user.address.street}}, {{user.address.houseNumber}},
-									{{user.address.roomNumber}}</td>
-							</tr>
-						</table>
-						<div ng-show="showUser" class="col-sm-12"
-							id="backgroundForOneUser">
-							<div class="col-sm-4" id="backgroundForOneUser">
-								<p>Last Name:{{oneUser.lastName}}</p>
-								<p>First Name:{{oneUser.firstName}}</p>
-								<p>Username:{{oneUser.username}}</p>
-								<p>Sex:{{oneUser.sex}}</p>
-								<p>Age:{{oneUser.age}}</p>
-								<p>Rating:{{oneUser.rating}}</p>
-							</div>
-
-							<div class="col-sm-4" id="backgroundForOneUser"
-								ng-controller="getAllUsersGames">
-								<a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
-									Games user owns</a>
-								<ul ng-show="showUsersGames" ng-repeat="game in games">
-									<li><a href="" ng-click="getInfoAboutGame(game.id)">
-											{{game.name}}</a></li>
-								</ul>
-							</div>
-							<div class="col-sm-4" id="backgroundForOneUser"
-								ng-controller="getAllUsersTournaments">
-								<a href=""
-									ng-click="getInfoAboutUsersTournaments(oneUser.username)">
-									Users tournaments</a>
-								<ul ng-show="showUsersTournaments"
-									ng-repeat="tournament in tournaments">
-									<li><a href=""
-										ng-click="getInfoAboutTournament(tournament.id)">
-											{{tournament.name}}</a></li>
-								</ul>
-							</div>
-						</div>
-						<modal visible="showModal"></modal>
 					</div>
-				</div>
-				<table class="table" ng-controller="showAllTournaments"
-					ng-hide="hideTournaments">
-					<thead>
+					<table class="table">
 						<tr>
-							<th>Tournament name</th>
-							<th>User creator</th>
-							<th>Adress</th>
-							<th>Date</th>
-							<th>Required rating</th>
-							<th>Users Guests</th>
-							<th>Join</th>
-							<th ng-controller="AddTournament"><a href=""
-								ng-click="addTournament()"> <img
-									src="resources/ico/add_tournament.png"></a> <script
-									type="text/ng-template" id="AddTournament.html">
+							<th>Last Name, First Name</th>
+							<th>Email</th>
+							<th>PhoneNumber</th>
+							<th>Address</th>
+						</tr>
+						<tr ng-repeat="user in users|filter:searchText">
+							<td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
+									{{user.lastName}} {{user.firstName}}</a></td>
+							<td>{{user.email}}</td>
+							<td>{{user.phoneNumber}}</td>
+							<td>{{user.address.country}},{{user.address.city}},
+								{{user.address.street}}, {{user.address.houseNumber}},
+								{{user.address.roomNumber}}</td>
+						</tr>
+					</table>
+					<div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
+						<div class="col-sm-4" id="backgroundForOneUser">
+							<p>Last Name:{{oneUser.lastName}}</p>
+							<p>First Name:{{oneUser.firstName}}</p>
+							<p>Username:{{oneUser.username}}</p>
+							<p>Sex:{{oneUser.sex}}</p>
+							<p>Age:{{oneUser.age}}</p>
+							<p>Rating:{{oneUser.rating}}</p>
+						</div>
+
+						<div class="col-sm-4" id="backgroundForOneUser"
+							ng-controller="getAllUsersGames">
+							<a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
+								Games user owns</a>
+							<ul ng-show="showUsersGames" ng-repeat="game in games">
+								<li><a href="" ng-click="getInfoAboutGame(game.id)">
+										{{game.name}}</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+<!---------------------------------------- end of users -------------------------------------------------->
+<!---------------------------------------- begin of tournaments ------------------------------------------>
+				<div class="container-fluid" ng-controller="showAllTournaments">
+					<table class="table" ng-hide="hideTournaments">
+						<thead>
+							<tr>
+								<th>Tournament name</th>
+								<th>User creator</th>
+								<th>Adress</th>
+								<th>Date</th>
+								<th>Required rating</th>
+								<th>Users Guests</th>
+								<th>Join</th>
+								<th ng-controller="AddTournament"><a href=""
+									ng-click="addTournament()"> <img
+										src="resources/ico/add_tournament.png"></a> <script
+										type="text/ng-template" id="AddTournament.html">
                             <div class="modal-header">
                                 <h3 class="modal-title">Whant to cteate new tournament?</h3>
                             </div>
                             <div class="modal-body">
                                 <div>
-                                    <form>
+                                    <form ng-controller="AddTournament">
                                         <p>Enter a special name of your tournament</p>
-                                        <input class="form-control" data-ng-model="inputTournamentName" placeholder="Some Awsome Name">
+                                        <input class="form-control" id="inputTournamentName" placeholder="Some Awsome Name">
                                         <br/>
                                         <p>Choose game for your awsome tournament</p>
-                                        <select class="form-control" id="inputselectGame" data-ng-model="category">
-                                            <option ng-repeat="game in allGame" value="{{game.name}}">{{game.name}}
+                                        <select class="form-control" id="inputselectGame" ng-controller="getGamesGlobalController">
+                                            <option ng-repeat="game in gamesGlobal" ng-attr-id="game + {{game.name}}">
+                                                {{game.name}}
                                             </option>
                                         </select>
                                         <br/>
                                         <p>Input required rating for all who wants to join to your awsome tournament</p>
-                                        <input class="form-control" data-ng-model="inputTournamentRating" placeholder="5.0">
+                                        <input class="form-control" id="inputTournamentRating" placeholder="5.0">
+                                        <br/>
+                                        <p>Input max perticipants of your awsome tournament</p>
+                                        <input class="form-control" id="inputTournamentParticipants" placeholder="5.0">
                                         <br/>
                                         <p>Choose the date for your awsome tournamnent</p>
-                                        <input type="date" data-ng-model="inputTournamentDate">
+                                        <input type="date" id="inputTournamentDate">
                                         <br/>
                                         <br/>
                                         <p>Enter place of your tournament:</p>
                                         <p>Country</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="country">
+                                        <input class="form-control" id="inputTournamentCountry" placeholder="country">
                                         <br/>
                                         <p>City</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="city">
+                                        <input class="form-control" id="inputTournamentCity" placeholder="city">
                                         <br/>
                                         <p>Street</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="street">
+                                        <input class="form-control" id="inputTournamentStreet" placeholder="street">
                                         <br/>
                                         <p>Number of building</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="building">
+                                        <input class="form-control" id="inputTournamentBuilding" placeholder="building">
                                         <br/>
                                         <p>Number of apartment</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="apartment">
+                                        <input class="form-control" id="inputTournamentApartment" placeholder="apartment">
                                         <br/>
                                         <br/>
-                                        <button ng-click="">Create</button>
+                                        <button ng-click="createTournament()">Create</button>
                                     </form>
                                 </div>
                             </div>
@@ -358,38 +352,38 @@
                                 <h3>This is footer</h3>
                             </div>
                         </script></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="x in tournaments">
-							<td>{{ x.tournamentName }}</td>
-							<td>{{ x.username }}</td>
-							<td>{{x.country}}, {{x.city}}, <br /> {{x.street}},
-								{{x.houseNumber}}/{{x.roomNumber}}
-							</td>
-							<td>{{x.date}}</td>
-							<td>{{x.requiredRating}}</td>
-							<td>
-								<table>
-									<tr ng-repeat="y in x.userGuests">
-										<td>{{y}}</td>
-									</tr>
-								</table>
-							</td>
-							<td>
-								<button class="btn btn-success"
-									ng-click="JoinTournament(x.tournamentId)">Join</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-			</div>
-
-			<!------------------------ Start Frinds ------------------------------>
-			<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in tournaments">
+								<td>{{ x.tournamentName }}</td>
+								<td>{{ x.username }}</td>
+								<td>{{x.country}}, {{x.city}}, <br /> {{x.street}},
+									{{x.houseNumber}}/{{x.roomNumber}}
+								</td>
+								<td>{{x.date}}</td>
+								<td>{{x.requiredRating}}</td>
+								<td>
+									<table>
+										<tr ng-repeat="y in x.userGuests">
+											<td>{{y}}</td>
+										</tr>
+									</table>
+								</td>
+								<td>
+									<button class="btn btn-success"
+										ng-click="JoinTournament(x.tournamentId)">Join</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</div>
+	<!---------------------------------------- end of tournaments ------------------------------------------>
+<!---------------------------------------- Start Frinds   ---------------------------------------------->
+			<div class="col-sm-3">
 				<div class="well col-md-offset-0">
-					<table class="table table-striped">
+					<table class="table table-striped" ng-controller="listOfFriendsCtrl">
 						<thead>
 							<tr>
 								<th>Friends</th>
@@ -409,7 +403,7 @@
                                     <div class="modal-footer">
                                         <h3>This is footer</h3>
                                     </div>
-                                </script>
+                                		</script>
 										<a href="#" ng-click="open()"><img
 											src="resources/ico/bell.png" width="25"></a>
 									</div>
@@ -434,10 +428,10 @@
 		</div>
 
 	</div>
-
-	</div>
-	<!----------------------- End of users ------------------------------>
-	<!----------------------- Start of Events ------------------------------>
+<!------------------------------------- End of friends ----------------------------------------->
+	
+	
+<!------------------------------------- Start of Events ---------------------------------------->
 	<div ng-controller="eventListCtrl">
 		<header class="section-header" ng-controller="eventListCtrl">
 			<h2 class="title">COMING EVENTS:{{events.length}}</h2>
