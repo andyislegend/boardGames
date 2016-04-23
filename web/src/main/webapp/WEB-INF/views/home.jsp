@@ -180,41 +180,45 @@
                             </div>
                             <div class="modal-body">
                                 <div>
-                                    <form>
+                                    <form ng-controller="AddTournament">
                                         <p>Enter a special name of your tournament</p>
-                                        <input class="form-control" data-ng-model="inputTournamentName" placeholder="Some Awsome Name">
+                                        <input class="form-control" id="inputTournamentName" placeholder="Some Awsome Name">
                                         <br/>
                                         <p>Choose game for your awsome tournament</p>
-                                        <select class="form-control" id="inputselectGame" data-ng-model="category">
-                                            <option ng-repeat="game in allGame" value="{{game.name}}">{{game.name}}
+                                        <select class="form-control" id="inputselectGame" ng-controller="getGamesGlobalController">
+                                            <option ng-repeat="game in gamesGlobal" ng-attr-id="game + {{game.name}}">
+                                                {{game.name}}
                                             </option>
                                         </select>
                                         <br/>
                                         <p>Input required rating for all who wants to join to your awsome tournament</p>
-                                        <input class="form-control" data-ng-model="inputTournamentRating" placeholder="5.0">
+                                        <input class="form-control" id="inputTournamentRating" placeholder="5.0">
+                                        <br/>
+                                        <p>Input max perticipants of your awsome tournament</p>
+                                        <input class="form-control" id="inputTournamentParticipants" placeholder="5.0">
                                         <br/>
                                         <p>Choose the date for your awsome tournamnent</p>
-                                        <input type="date" data-ng-model="inputTournamentDate">
+                                        <input type="date" id="inputTournamentDate">
                                         <br/>
                                         <br/>
                                         <p>Enter place of your tournament:</p>
                                         <p>Country</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="country">
+                                        <input class="form-control" id="inputTournamentCountry" placeholder="country">
                                         <br/>
                                         <p>City</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="city">
+                                        <input class="form-control" id="inputTournamentCity" placeholder="city">
                                         <br/>
                                         <p>Street</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="street">
+                                        <input class="form-control" id="inputTournamentStreet" placeholder="street">
                                         <br/>
                                         <p>Number of building</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="building">
+                                        <input class="form-control" id="inputTournamentBuilding" placeholder="building">
                                         <br/>
                                         <p>Number of apartment</p>
-                                        <input class="form-control" data-ng-model="inputTournamentCountry" placeholder="apartment">
+                                        <input class="form-control" id="inputTournamentApartment" placeholder="apartment">
                                         <br/>
                                         <br/>
-                                        <button ng-click="">Create</button>
+                                        <button ng-click="createTournament()">Create</button>
                                     </form>
                                 </div>
                             </div>
