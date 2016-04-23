@@ -33,10 +33,11 @@
 					</div>
 				</form>
 				<div class="form-actions">
-			<form action="#">
-			<button  class="btn btn-block btn-primary" type="submit" id="button">Cancel</button>
-			</form>	
-			</div>
+					<form action="#">
+						<button class="btn btn-block btn-primary" type="submit"
+							id="button">Cancel</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

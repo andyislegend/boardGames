@@ -282,22 +282,47 @@ app.controller("showAllTournaments", function ($scope, $http) {
         console.log(idTournament);
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
-                if (data == null) {
-                    alert("You've already join this tournament");
-                } else {
+                if (data != null) {
                     $scope.tournaments = data;
                 }
+                else {
+                    alert("Null");
+                }
 
-            }).error(function (error) {
-                console.log(error);
             });
     }
 });
 
-app.controller("AddTournament", function ($scope, $uibModal) {
+app.controller("AddTournament", function ($scope, $uibModal, $http) {
     $scope.addTournament = function () {
+
         $uibModal.open({
             templateUrl: 'AddTournament.html'
         });
+
     }
+    $scope.createTournament = function () {
+        alert("ENTER");
+        var e = document.getElementById("inputselectGame");
+        var gameName = e.options[e.selectedIndex].value;
+        var tournament = {
+            tournamentName: (document.getElementById('inputTournamentName')).value,
+            rating: document.getElementById('inputTournamentRating').value,
+            maxParticipants: document.getElementById('inputTournamentParticipants').value,
+            date: document.getElementById('inputTournamentDate').value,
+            gameName: gameName,
+            country: document.getElementById('inputTournamentCountry').value,
+            city: document.getElementById('inputTournamentCity').value,
+            street: document.getElementById('inputTournamentStreet').value,
+            houseNumber: document.getElementById('inputTournamentBuilding').value,
+            roomNumber: document.getElementById('inputTournamentApartment').value
+        };
+
+        $http.post("/addTournament", tournament)
+            .success(function () {
+
+            });
+
+    }
+
 });

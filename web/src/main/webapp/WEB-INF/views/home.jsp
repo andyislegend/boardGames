@@ -78,7 +78,6 @@
 			<div class="col-sm-3">
 				<div class="well col-md-offset-0">
 					<h3 class="text-center">My Games</h3>
-
 					<div ng-controller="CreateGameCtrl">
 						<button ng-click="showForm()">Add new Game</button>
 						<form data-ng-submit=submit() role="form" ng-show="showText">
@@ -379,7 +378,7 @@
 					</table>
 				</div>
 				</div>
-	<!---------------------------------------- end of tournaments ------------------------------------------>
+<!---------------------------------------- end of tournaments ------------------------------------------>
 <!---------------------------------------- Start Frinds   ---------------------------------------------->
 			<div class="col-sm-3">
 				<div class="well col-md-offset-0">
