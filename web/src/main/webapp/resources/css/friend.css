@@ -1,0 +1,77 @@
+.count{
+	position: absolute;
+    background: #D00000;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    padding-top: 0px;
+    vertical-align:middle;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    font-size: 15px; 
+    margin-top: -5px;
+    margin-left: 13px;
+    z-index: 1;
+
+}
+.ava{
+	padding-top: 10px;
+	height: 150px;
+	width: 140px;
+}
+.FriendIco{
+    opacity: .7;
+    width: 25px;
+    -webkit-transition: .1s ease-in-out;
+	transition: .1s ease-in-out;
+}
+/*.FriendIco:hover{
+    opacity: 1;
+    width: 27px;
+}*/
+.plus-minus{
+    margin-top: -7px;
+    margin-left: 8px;
+    cursor: pointer;
+    opacity: .2;
+    width: 25px;
+    -webkit-transition: .1s ease-in-out;
+	transition: .1s ease-in-out;
+}
+/*.plus-minus:hover{
+
+    opacity: 1;
+    width: 27px;
+}*/
+.proba{
+    width: 27px;
+    height: 27px;
+}
+.proba:hover .FriendIco{
+    opacity: 1;
+    width: 27px;
+}
+.background{
+    display: inline-block;
+    background: #D0D0D0;
+    margin-bottom: -10px;
+    width: 100%;
+}
+.user{
+    padding-left: 15px;
+    padding-bottom: 10px;
+    background: #FFF;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 170px;
+}
+.buton{
+    width: 67px;
+    height: 30px;
+}
+.buton:hover .plus-minus{
+    opacity: 1;
+    width: 27px;
+}
+

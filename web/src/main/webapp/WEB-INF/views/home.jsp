@@ -12,6 +12,7 @@
 <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
 	rel="stylesheet" />
 <link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
+<link rel="stylesheet" href="resources/css/friend.css" />
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
@@ -20,6 +21,7 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="resources/js/main.js"></script>
+<script type="text/javascript" src="resources/js/service.js"></script>
 
 </head>
 <body ng-app="usersGameApp">
@@ -379,55 +381,83 @@
 				</div>
 				</div>
 <!---------------------------------------- end of tournaments ------------------------------------------>
-<!---------------------------------------- Start Frinds   ---------------------------------------------->
-			<div class="col-sm-3">
-				<div class="well col-md-offset-0">
-					<table class="table table-striped" ng-controller="listOfFriendsCtrl">
-						<thead>
-							<tr>
-								<th>Friends</th>
-								<td><a href="#"><img src="resources/ico/add_user.png"
-										width="25"></a></td>
+<!------------------------ Start Frinds ------------------------------>
+	
+		<div class="col-sm-3" ng-controller="listOfFriendsCtrl">
+		
+			<div class="well col-md-offset-0">
+			
+				<table class="table table-striped">
+				
+					<thead>
+					<tr>
+						<th>Friends </th>
+                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/add_user.png"></div></a></td>
+						<td>
+                            
+                            
+                            <a href="#" type="button" data-toggle="modal" data-target="#myModal">
+                                <div class="proba">
+                                    <div class="count" ng-hide="count < 1">{{count}}</div>
+                                    <img class="FriendIco" src="resources/ico/bell.png">
+                                </div>
+                            </a>
+                            
+                            <!-- Modal -->
+                            <div id="myModal" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
 
-								<td>
-									<div ng-controller="countOfOffering" class="count">{{count}}</div>
-									<div ng-controller="OfferToFriendCtrl">
-										<script type="text/ng-template" id="OfferingForm.html">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">This users want to be tour friend</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div>Hello Everyone</div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <h3>This is footer</h3>
-                                    </div>
-                                		</script>
-										<a href="#" ng-click="open()"><img
-											src="resources/ico/bell.png" width="25"></a>
-									</div>
-								</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="friend in friends">
-								<td>{{ friend.firstName }}</td>
-								<td>{{ friend.lastName }}</td>
-								<td><a href="#"><img src="resources/ico/messages.png"
-										width="25"></a></td>
-								<td><a href="#"><img src="resources/ico/trophy.png"
-										width="25"></a></td>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">This users want to be your friend</h4>
+                                  </div>
+                                  <div class="background">
+                                      <div ng-repeat="user in users" class="col-sm-4" >
+                                        <div class="user">
+                                        <div class="rows"><img class="ava" src="resources/images/default-avatar.jpg"/></div>
+                                        <div class="rows">name: {{user.firstName }}</div>
+                                        <div class="rows">Last name: {{user.lastName}}</div> 
+                                        <div class="rows">
+                                        <button class="btn btn-info buton" ng-click="add(user.id)">
+                                        <div class="proba"><img class="plus-minus" src="resources/ico/plus.ico"></div>
+										</button>
+                                        <button class="btn btn-primary buton" ng-click="rejected(user.id)">
+                                            <div class="proba"><img class="plus-minus" src="resources/ico/minus.ico"></div>
+										</button>
+                                        </div>
+                                        </div>
+                        			</div>
+                              
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
 
-							</tr>
-						</tbody>
-					</table>
-				</div>
+                              </div>
+                            </div>
+                            
+                            
+						</td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="friend in friends">
+						<td>{{ friend.firstName }}</td>
+						<td>{{ friend.lastName }}</td>
+                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/messages.png"></div></a></td>
+                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/trophy.png"></div></a></td>
+
+					</tr>
+					</tbody>
+				</table>
 			</div>
-
 		</div>
-
 	</div>
-<!------------------------------------- End of friends ----------------------------------------->
+		
+	<!----------------------- End of Friends ------------------------------>
 	
 	
 <!------------------------------------- Start of Events ---------------------------------------->

@@ -19,7 +19,7 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
-<script src="../../resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
+<script src="resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <script
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"

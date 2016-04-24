@@ -144,4 +144,8 @@ public class UserService {
 	public List<User> findAllUsersByCity(String cityName) {
 		return userRepository.findUserByCity(cityName);
 	}
+	
+	public User findById(int id){
+		return userRepository.findOne(id);
+	}
 }

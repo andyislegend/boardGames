@@ -83,29 +83,64 @@ app.controller("eventListCtrl", function ($scope, $http) {
     });
 });
 
-app.controller("listOfFriendsCtrl", function ($scope, $http) {
-    console.log("in controller list of Friends");
-    $http.get("allFriends").success(function (data) {
-        $scope.friends = data;
-    }).error(function (error) {
-        console.log(error);
-    })
-});
-
-app.controller("countOfOffering", function ($scope, $http) {
-    console.log("countOfOffering");
-    $http.get("allOffering").success(function (data) {
-        $scope.count = data;
-    }).error(function (error) {
-        console.log(error);
-    })
-});
-
-app.controller("OfferToFriendCtrl", function ($scope, $uibModal) {
+app.controller("listOfFriendsCtrl", function($scope, friendService, $http, $uibModal) {
+    $scope.users;
+	 friendService.getAllFriends().success(function(data) {
+		$scope.friends = data;
+	}).error(function(error) {
+		console.log(error);
+	})
+    
+    friendService.getCount().success(function(data){
+         $scope.count = data;
+     }).error(function(error){
+         console.log(error)
+     });
+    
     $scope.open = function () {
-        console.log("befor open");
-        $uibModal.open({
-            templateUrl: 'OfferingForm.html'
+		   $uibModal.open({
+		      templateUrl: 'OfferingForm.html'
+		 });
+	};
+    
+    
+    
+	friendService.getAllOfferedUsers().success(function(data) {
+        $scope.users = data;
+	}).error(function(error) {
+		console.log(error);
+	});
+    
+    
+    
+     $scope.add = function(id){
+        var userId = id;
+          $scope.count =  $scope.count-1;
+        $http.post('addUserToFriend', userId).success(function(data){
+            var user = data;
+            for(var i = 0; i < $scope.users.length; i++){
+                if($scope.users[i].id === user.id){
+                    $scope.friends.push($scope.users[i]);
+                    $scope.users.splice(i, 1)
+                };
+            };
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+    
+    $scope.rejected = function(id){
+        var userId = id;
+         $scope.count =  $scope.count-1;
+        $http.post('rejectedUserToFriend', userId).success(function(data){
+             var user = data;
+            for(var i = 0; i < $scope.users.length; i++){
+                if($scope.users[i].id === user.id){
+                    $scope.users.splice(i, 1)
+                };
+            };
+        }).error(function(error){
+            console.log(error);
         });
     };
 });
