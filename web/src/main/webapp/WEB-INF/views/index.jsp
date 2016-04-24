@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,13 +16,14 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
-<script src="../../resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
+<script src="resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <script
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
 <script src="resources/js/index.js"></script>
+<!-- <script src="resources/js/service/create_user_service.js"></script> -->
 
 </head>
 <body ng-app="indexModule">
@@ -46,15 +44,10 @@
 					<li><a href="#tournaments"><i class="fa fa-comment"></i>
 							Tournaments</a></li>
 				</ul>
-				<%-- <c:if test="${param.error != null}">
-					<ul class="navbar navbar-default">
-						<li class="alert alert-danger">Invalid username or password</li>
-					</ul>
-				</c:if> --%>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#login"><i class="fa fa-home"></i> Login</a></li>
-					<li><a href="#registration"><i class="fa fa-home"></i>
-							Registration</a></li>
+					<!-- <li><a href="#registration"><i class="fa fa-home"></i>
+							Registration</a></li> -->
 				</ul>
 			</div>
 		</nav>

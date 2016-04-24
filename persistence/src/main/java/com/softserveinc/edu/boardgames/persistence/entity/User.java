@@ -17,10 +17,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,8 +29,6 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * This class describes users of boardGames website.
@@ -111,9 +109,9 @@ public class User implements Serializable {
 	 * Provides a description of User's current rating as a number. By default, after
 	 * registration User obtain 0 rating
 	 */
-	@NotEmpty
+	@NotNull
 	@Column(name = "userRating", nullable = false)
-	private Integer userRating;
+	private Integer userRating = 0;
 
 	/**
 	 * Provides a description of User's current rating. By default, after

@@ -1,5 +1,8 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.softserveinc.edu.boardgames.persistence.entity.Address;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -18,6 +23,9 @@ public class RegisterController {
 
 	@Autowired
 	UserService userService;
+	
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+		    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
@@ -29,7 +37,7 @@ public class RegisterController {
 	}
 
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
+	public String saveUser(@Valid User user,@RequestParam("confirmPassword") String confirmPassword, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
 			return "registration";
@@ -42,12 +50,33 @@ public class RegisterController {
 			result.addError(usernameError);
 			return "registration";
 		}
+		
+		if (!user.getPassword().equals(confirmPassword)) {
+
+			FieldError passwordError = new FieldError("user", "password",
+					"Sorry, but You must confirm Your password");
+			result.addError(passwordError);
+			return "registration";
+		}
+		
+		if (!validate(user.getEmail())) {
+
+			FieldError emailError = new FieldError("user", "email",
+					"Sorry, but Your email seems to be wrong");
+			result.addError(emailError);
+			return "registration";
+		}
+		
 
 		userService.createUser(user);
-		;
 
-		model.addAttribute("success", "User ---" + user.getUsername() + "--- registered successfully");
-		return "login";
+		return "index";
 	}
 
+	private static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+}
+
+	
 }

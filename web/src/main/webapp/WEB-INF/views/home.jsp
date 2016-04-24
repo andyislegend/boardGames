@@ -46,7 +46,7 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a class="btn btn-secondary btn-lg disabled">Welcome
-				back, <em><b style="color: white">${user}</b></em>
+				back, <em><b style="color: white">${currentUser.username}</b></em>
 			</a></li>
 			<li class="dropdown" style="background-color: transparent;"><a
 					href="#" class="dropdown-toggle profile-image"

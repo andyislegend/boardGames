@@ -19,6 +19,11 @@ import org.springframework.security.web.csrf.CsrfFilter;
 
 import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
 
+/**
+ * 
+ * @author Andrii Petryk
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
