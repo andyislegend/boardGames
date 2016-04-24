@@ -43,11 +43,9 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 
-	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Game game;
 
-	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private User user;
 

@@ -217,7 +217,7 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="x in userGamesOfGame">
-								<td>{{ x.user.username }}</td>
+								<td>{{ x.username }}</td>
 								<td>{{ x.edition }}</td>
 								<td>{{ x.yearOfProduction }}</td>
 								<td><button class="btn btn-success">Action</button></td>

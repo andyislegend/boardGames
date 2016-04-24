@@ -8,8 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
-import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 
 @Repository
 public interface GameUserRepository extends JpaRepository<GameUser, Long> {
@@ -23,6 +22,11 @@ public interface GameUserRepository extends JpaRepository<GameUser, Long> {
 	@Query("select u from GameUser u where u.user.username = :username ")
 	public List<GameUser> getAllGameUserByUsername(@Param("username") String username);
 	
-	@Query("select u from GameUser u where u.game.name = :name")
-	public List<GameUser> getAllUserGamesOfGame(@Param("name")String name);
+//	@Query("select u from GameUser u where u.game.name = :name")
+//	public List<GameUser> getAllUserGamesOfGame(@Param("name")String name);
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO"
+			+"(gu.user.username, gu.edition, gu.yearOfProduction) " +
+	       "from GameUser gu where gu.game.name = :name")
+	List<UserGamesOfGameDTO> getUserGameOfGame(@Param("name")String name);
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.service.mapper.GameUserMapper;
 
@@ -50,7 +51,7 @@ public class GameUserService {
 		return gameUserDTOs;
 	}
 	
-	public List<GameUser> getAllUserGamesOfGame(String name) {
-		return gameUserRepo.getAllUserGamesOfGame(name);
+	public List<UserGamesOfGameDTO> getAllUserGamesOfGame(String name) {
+		return gameUserRepo.getUserGameOfGame(name);
 	}
 }

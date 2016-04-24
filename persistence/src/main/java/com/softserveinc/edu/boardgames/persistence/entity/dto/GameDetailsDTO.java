@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.service.dto;
+package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 public class GameDetailsDTO {
 	

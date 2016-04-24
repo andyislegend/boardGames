@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
-import com.softserveinc.edu.boardgames.service.dto.AllGamesDto;
-import com.softserveinc.edu.boardgames.service.dto.GameDetailsDTO;
 
 @RestController
 public class GetGameDetailsController {
@@ -33,7 +34,7 @@ public class GetGameDetailsController {
 	
 	@RequestMapping(value="/getUserGamesOfGame/{name}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<GameUser> getGamesOfInstance(@PathVariable String name){
+	public List<UserGamesOfGameDTO> getGamesOfInstance(@PathVariable String name){
 		return gameUserService.getAllUserGamesOfGame(name);
 	}
 	
