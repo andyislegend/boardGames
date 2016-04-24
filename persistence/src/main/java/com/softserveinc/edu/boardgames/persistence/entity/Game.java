@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -166,42 +169,6 @@ public class Game implements Serializable{
 	public void setGameRating(String gameRating) {
 		this.gameRating = gameRating;
 	}
-
-	@Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Game other = (Game) obj;
-        if (id != other.id) {
-            return false;
-        }       
-        if (category != other.category) {
-            return false;
-        }
-        if (maxPlayers != other.maxPlayers) {
-            return false;
-        }
-        if (minPlayers != other.minPlayers) {
-            return false;
-        }
-        if (description != other.description) {
-            return false;
-        }
-        if (name != other.name) {
-            return false;
-        }
-        if (gameRating != other.gameRating){
-        	return false;
-        }
-        return true;
-    }
     
     public Set<Event> getEvents() {
 		return events;
@@ -222,19 +189,19 @@ public class Game implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
 
 	@Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + 1;
-        return result;
+        return HashCodeBuilder.reflectionHashCode(this);
     }
     
     @Override
     public String toString() {
-        return "Game [id=" + id + ", category=" + category + ", maxPlayers=" + maxPlayers +
-        		", minPlayers=" + minPlayers +
-        		", description=" + description + ", name=" + name + ", gameRating=" + gameRating + "]";
+        return ToStringBuilder.reflectionToString(this);
     }
 }
