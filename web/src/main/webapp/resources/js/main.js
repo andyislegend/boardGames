@@ -213,8 +213,14 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 	
 	$scope.gameSelect = function(id, name, $event) {
 		
-		$scope.gameDetailsShown = true;
 		$scope.currentGameId = id;
+		
+		if ($scope.gameDetailsShown == false)
+			$scope.gameDetailsShown = true;
+		else if ($scope.currentGameId != $scope.openedGameId)
+			$scope.gameDetailsShown = true;
+		else $scope.gameDetailsShown = false;
+		$scope.openedGameId = id;
 		
 		$http({
 			method: "GET",
