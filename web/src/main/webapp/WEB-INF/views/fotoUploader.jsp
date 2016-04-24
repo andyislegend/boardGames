@@ -23,13 +23,15 @@
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form enctype="multipart/form-data" action="uploadFile"   
-    method="POST"> 
+<div ng-controller = "CreateGameCtrl">
+<form enctype="multipart/form-data" action="uploadFile" method="POST"> 
     Choose foto to upload : 
     <input type="file" name="fileUpload" class="fileUpload">
     <br>
     <input type="text" placeholder="Name of the foto" name="imageName">
     <input type="submit" value="Upload">
   </form>
+  <br>
+  <img src="http://localhost/ava.png">
 </body>
 </html>
