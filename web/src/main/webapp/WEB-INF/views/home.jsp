@@ -202,7 +202,6 @@
                   <button ng-click="showForm()" style="color:black" >ADD NEW GAME</button>
                   <form data-ng-submit = submit()  ng-show = "showText">
                      <div class="field"><label>Game name</label><input data-ng-model = "name"></div>
-                     <div class="field"><label>Game name</label><input data-ng-model = "name"></div>
                      <div class="field"><label>Category</label><input data-ng-model = "category"></div>
                      <div class="field"><label>Description</label><input data-ng-model = "description"></div>
                      <div class="field"><label>Rules</label><input data-ng-model = "rules"></div>
@@ -444,8 +443,8 @@
             
     
          <!-- sidebar FRIENDS-->
-         <div class="column-4" ng-controller="listOfFriendsCtrl">    
-           <div class="widget">
+         <div class="column-4" ng-controller="listOfFriendsCtrl" >    
+           <div class="widget" style="border-bottom:1px solid #787878; padding-bottom:20px; ">
               <h2 class="title" >Friends</h2>
               
           
@@ -525,7 +524,75 @@
 	
               
             <!-- /sidebar FRIENDS-->
-
+             <!-- sidebar MYGAMES-->
+       <div class="column-4" ng-controller="listOfFriendsCtrl" style="padding-top:20px;">    
+           <div class="widget">
+              <h2 class="title" >MyGames</h2>
+              
+               
+    <div ng-controller = "CreateGameCtrl">
+    <div ><input type="submit" value="ADD GAME" ng-click="showForm() " style="width:100%; margin-bottom:10px"></div>
+     
+     <form data-ng-submit = submit()  role="form" ng-show = "showText">
+      <div >
+       <input class="field-form" data-ng-model = "name" placeholder="Name">
+       </div>
+       <div >
+       <label>Select Category:</label>
+       <select class="field-form" id="exampleSelect1" data-ng-model = "category">
+       <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
+       </select>
+       </div>
+       <div >
+       <input class="field-form" data-ng-model = "description" placeholder="Description">
+       <input class="field-form" data-ng-model = "rules" placeholder="Rules">
+       <input class="field-form" data-ng-model = "maxPlayers" placeholder="Max Players">
+       <input class="field-form" data-ng-model = "minPlayers" placeholder="Min Players">
+       <input class="field-form" data-ng-model = "edition" placeholder= "Edition">
+       <input class="field-form" data-ng-model = "year" placeholder= "Year">
+       </div>
+       <div ><input type="submit" value="APPLY" style="width:100%; margin-bottom:10px"></div>
+      
+     </form>
+    </div>
+  
+    <div ng-controller="allUsersGameCtrl">
+     <div>
+      <table class="table">
+       <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>More</th>
+        <th>Comment</th>
+       <tr>
+       <tr ng-repeat="game in allGame">
+        <td>{{game.name}}</td>
+        <td>{{game.category}}</td>
+        <td>
+        <div ><input type="submit" value="More" ng-click="myFunc(game.id)" style="border:1px solid #787878;
+    border-radius:1px;"></div>
+         
+        </td>
+        <td>com</td>
+       </tr>
+      </table>
+      <div ng-show="showMe">
+       <div ng-repeat="game in games">
+        <p>Category:{{game.category}}</p>
+        <p>Year of production: {{game.yearOfProduction}}</p>
+        <p>Edition: {{game.edition}}</p>
+        <p>Description: {{game.description}}</p>
+        <p>Max players: {{game.maxPlayers}}</p>
+        <p>Min players: {{game.minPlayers}}</p>
+       </div>
+  
+  
+      </div>
+      </div>
+      </div>
+       </div>
+        </div>
+<!-- /sidebar MYGAMES-->
       </aside>
       </div>     
       <!-- /sidebar -->
