@@ -232,10 +232,10 @@
 <!------------------------------------------- End of all games info ------------------------------------->
 <!------------------------------------------- Users info ------------------------------------------------>
 
-					<div class="col-sm-3"></div>
+
 	<div ng-controller="getAllUsersWithNegativeRating"></div>
 	<div class="container-fluid">
-		<div class="col-sm-6" ng-controller="getAllUsersCtrl">
+		<div class="col-sm-12" ng-controller="getAllUsersCtrl">
 			<div class="col-sm-4">
 				<input type="text" class="form-control"
 					ng-model="searchText.lastName" placeholder="Search by last name">
