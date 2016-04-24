@@ -1,6 +1,8 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Address;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.service.dto.AddTournamentDTO;
 import com.softserveinc.edu.boardgames.service.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
@@ -57,9 +59,12 @@ public class TournamentController {
         }
     }
 
-    @RequestMapping(value = "/addTournament", method = RequestMethod.PUT)
-    public void addTournament(@RequestBody Tournament tournament) {
-        tournamentService.save(tournament);
+    @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
+    public void addTournament(@RequestBody AddTournamentDTO tournamentDTO) {
+        Address address=new Address();
+        address.setCountry(tournamentDTO.getCountry());
+        address.setCity(tournamentDTO.getCity());
+        //address.
     }
 
     private List<AllTournamentsDTO> createDTOfromtournamentList() {

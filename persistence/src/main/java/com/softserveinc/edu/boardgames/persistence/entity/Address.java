@@ -8,6 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * This class describes addresses where users of boardGames website live.
  * 
@@ -63,193 +67,77 @@ public class Address implements Serializable {
 	@Column(name = "roomNumber")
 	private Integer roomNumber;
 
-	/**
-	 * Constructor without parameters.
-	 */
 	public Address() {
 	}
 
-	/**
-	 * Get value of column id.
-	 * 
-	 * @return value of column id.
-	 */
 	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Set value of column id.
-	 * 
-	 * @param id
-	 *            value of column id.
-	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * Get value of column country.
-	 * 
-	 * @return value of column country.
-	 */
 	public String getCountry() {
 		return country;
 	}
 
-	/**
-	 * Set value of column country.
-	 * 
-	 * @param country
-	 *            value of column country.
-	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-	/**
-	 * Get value of column city.
-	 * 
-	 * @return value of column city.
-	 */
 	public String getCity() {
 		return city;
 	}
 
-	/**
-	 * Set value of column city.
-	 * 
-	 * @param city
-	 *            value of column city.
-	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-	/**
-	 * Get value of column postCode.
-	 * 
-	 * @return value of column postCode.
-	 */
 	public Integer getPostCode() {
 		return postCode;
 	}
 
-	/**
-	 * Set value of column postCode.
-	 * 
-	 * @param postCode
-	 *            value of column postCode.
-	 */
 	public void setPostCode(Integer postCode) {
 		this.postCode = postCode;
 	}
 
-	/**
-	 * Get value of column street.
-	 * 
-	 * @return value of column street.
-	 */
 	public String getStreet() {
 		return street;
 	}
 
-	/**
-	 * Set value of column street.
-	 * 
-	 * @param street
-	 *            value of column street.
-	 */
 	public void setStreet(String street) {
 		this.street = street;
 	}
 
-	/**
-	 * Get value of column houseNumber.
-	 * 
-	 * @return value of column houseNumber.
-	 */
 	public Integer getHouseNumber() {
 		return houseNumber;
 	}
 
-	/**
-	 * Set value of column houseNumber.
-	 * 
-	 * @param houseNumber
-	 *            value of column houseNumber.
-	 */
 	public void setHouseNumber(Integer houseNumber) {
 		this.houseNumber = houseNumber;
 	}
 
-	/**
-	 * Get value of column roomNumber.
-	 * 
-	 * @return value of column roomNumber.
-	 */
 	public Integer getRoomNumber() {
 		return roomNumber;
 	}
 
-	/**
-	 * Set value of column roomNumber.
-	 * 
-	 * @param roomNumber
-	 *            value of column roomNumber.
-	 */
 	public void setRoomNumber(Integer roomNumber) {
 		this.roomNumber = roomNumber;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Address other = (Address) obj;
-		if (id != other.id) {
-			return false;
-		}
-		if (country != other.country) {
-			return false;
-		}
-		if (city != other.city) {
-			return false;
-		}
-		if (postCode != other.postCode) {
-			return false;
-		}
-		if (street != other.street) {
-			return false;
-		}
-		if (houseNumber != other.houseNumber) {
-			return false;
-		}
-		if (roomNumber != other.roomNumber) {
-			return false;
-		}
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public String toString() {
-		return "Adress [id=" + id + ", country=" + country + ", city=" + city + ", postCode=" + postCode + ", street="
-				+ street + ", houseNumber=" + houseNumber + ", rooomNumber=" + roomNumber + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 }
-

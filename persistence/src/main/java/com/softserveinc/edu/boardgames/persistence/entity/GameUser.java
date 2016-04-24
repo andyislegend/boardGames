@@ -2,15 +2,6 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * This entity contains data model describing games of particular user Has
@@ -33,10 +29,8 @@ import javax.persistence.Table;
 @Table(name = "gameUser")
 public class GameUser implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6954309571224923595L;
+
+	private static final long serialVersionUID = 9107019551046622111L;
 
 	@Id
 	@Column(name = "id")
@@ -49,13 +43,12 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Game.class, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "gameId", referencedColumnName = "id")
-	@JsonManagedReference
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Game game;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private User user;
 
 	public GameUser() {
@@ -101,7 +94,7 @@ public class GameUser implements Serializable {
 	public void setYearOfProduction(Integer yearOfProduction) {
 		this.yearOfProduction = yearOfProduction;
 	}
-
+	
 	public Game getGame() {
 		return game;
 	}

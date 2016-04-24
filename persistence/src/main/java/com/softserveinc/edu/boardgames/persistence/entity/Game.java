@@ -58,6 +58,8 @@ public class Game implements Serializable{
 	@Column(name = "maxPlayers")
 	private Integer maxPlayers;
 	
+	@Column(name = "rating")
+	private Integer rating = 0;
 	
 	@ManyToOne(fetch=FetchType.EAGER, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
@@ -65,15 +67,14 @@ public class Game implements Serializable{
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="game", cascade={CascadeType.ALL})
     private Set<Event> events;
-	
-	
+		
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
 
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
 	@JsonBackReference
     private Set<Tournament> tournaments;
-	
+
 	@NotEmpty
 	@Column(name = "gameRating", nullable=false)
 	private String gameRating = GameRating.NOT_RATED.name();
@@ -81,14 +82,31 @@ public class Game implements Serializable{
 	public Game(){}
 	
 	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category, GameRating gameRating) {
+			Integer maxPlayers, Category category, GameRating gameRating, Integer rating) {
 		this.name = name;
 		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.category = category;
+		this.rating = rating;
 	}
 
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+
+	public Set<GameUser> getUserGames() {
+		return userGames;
+	}
+
+	public void setUserGames(Set<GameUser> userGames) {
+		this.userGames = userGames;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -191,14 +209,6 @@ public class Game implements Serializable{
 
 	public void setEvents(Set<Event> events) {
 		this.events = events;
-	}
-
-	public Set<GameUser> getUserGames() {
-		return userGames;
-	}
-
-	public void setUserGames(Set<GameUser> userGames) {
-		this.userGames = userGames;
 	}
 
 	public Set<Tournament> getTournaments() {

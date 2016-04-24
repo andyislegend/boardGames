@@ -5,14 +5,21 @@ public class GameDetailsDTO {
 	String name;
 	String description;
 	String rules;
+	Integer rating;
 	
 	public GameDetailsDTO() {}
 	
-	public GameDetailsDTO(String name, String description, String rules) {
+	public GameDetailsDTO(String name, String description, String rules, Integer rating) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.rules = rules;
+	}
+	public Integer getRating() {
+		return rating;
+	}
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 	public String getName() {
 		return name;

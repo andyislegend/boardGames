@@ -12,6 +12,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.Game;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer>  {
 
-	@Query("select game from Game game where game.name = :name")
-	Game findGameByName(@Param("name")String name);
+//	@Query("select game from Game game where game.name = :name")
+//	Integer findAverageRating(@Param("name")String name);
 }

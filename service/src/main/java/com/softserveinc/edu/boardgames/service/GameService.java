@@ -41,23 +41,25 @@ public class GameService {
 		List<AllGamesDto> gamesTransfer = new ArrayList<AllGamesDto>();
 		for (Game game : this.getAll()){
 			AllGamesDto gamesDto = new AllGamesDto();
+			gamesDto.setId(game.getId());
 			gamesDto.setName(game.getName());
 			gamesDto.setDescription(game.getDescription());
 			gamesDto.setMinPlayers(game.getMinPlayers());
 			gamesDto.setMaxPlayers(game.getMaxPlayers());
 			gamesDto.setCategoryName(game.getCategory().getName());
-			gamesDto.setRating(game.getGameRating());
+			gamesDto.setRating(game.getRating());
 			gamesTransfer.add(gamesDto);
 		}
 		return gamesTransfer;
 	}
 	
-	public GameDetailsDTO getGamesByName(String name){
+	public GameDetailsDTO getGamesById(Integer id){
 			
 		GameDetailsDTO gameDetailsDTO = new GameDetailsDTO();
-		gameDetailsDTO.setName(gameRepo.findGameByName(name).getName());
-		gameDetailsDTO.setDescription(gameRepo.findGameByName(name).getDescription());
-		gameDetailsDTO.setRules(gameRepo.findGameByName(name).getRules());
+		gameDetailsDTO.setName(gameRepo.findOne(id).getName());
+		gameDetailsDTO.setDescription(gameRepo.findOne(id).getDescription());
+		gameDetailsDTO.setRules(gameRepo.findOne(id).getRules());
+		gameDetailsDTO.setRating(gameRepo.findOne(id).getRating());
 		
 		return gameDetailsDTO;
 	}

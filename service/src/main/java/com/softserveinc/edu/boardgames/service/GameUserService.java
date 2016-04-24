@@ -49,4 +49,8 @@ public class GameUserService {
 		}
 		return gameUserDTOs;
 	}
+	
+	public List<GameUser> getAllUserGamesOfGame(String name) {
+		return gameUserRepo.getAllUserGamesOfGame(name);
+	}
 }
