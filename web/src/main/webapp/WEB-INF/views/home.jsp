@@ -163,7 +163,7 @@
 							<td>{{ x.name }}</td>
 							<td>{{ x.categoryName }}</td>
 							<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
-							<td>{{ x.rating }}</td>
+							<!--<td>{{ x.rating }}</td>-->
 						</tr>
 						<tr>
 						</tr>

@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
+import com.softserveinc.edu.boardgames.persistence.entity.GameRatingNumeric;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
+import com.softserveinc.edu.boardgames.service.GameRatingNumericService;
 import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
+import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController
 public class GetGameDetailsController {
@@ -25,6 +30,12 @@ public class GetGameDetailsController {
 	
 	@Autowired
 	private GameUserService gameUserService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private GameRatingNumericService gameRateNumService;
 	
 	@RequestMapping(value="/getGameDetails/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
@@ -42,9 +53,12 @@ public class GetGameDetailsController {
 	@ResponseBody
 	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating){
 		Game game = gameService.findById(gameId);
-		if (game.getRating() == null )
-			game.setRating(0);
-		game.setRating((game.getRating() + rating)/2);
-		gameService.update(game);
+		User user = userService.getUser(WebUtil.getPrincipalUsername());
+		GameRatingNumeric gameRating = new GameRatingNumeric();
+		gameRating.setIsRated(true);
+		gameRating.setRating(rating);
+		gameRating.setUser(user);
+		gameRating.setGame(game);
+		gameRateNumService.update(gameRating);
 	}
 }
