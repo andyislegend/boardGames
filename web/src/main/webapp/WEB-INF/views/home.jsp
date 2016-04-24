@@ -38,7 +38,6 @@
 					ng-click="hideTournaments = true; hideAllGames = false">All
 						Games</a></li>
 				<li><a href="#">Events</a></li>
-				<li><a href="<c:url value="uploadJSP"/>">Foto Uploader</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-left">
