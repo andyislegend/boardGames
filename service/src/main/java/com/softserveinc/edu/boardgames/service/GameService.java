@@ -42,7 +42,8 @@ public class GameService {
 	}
 	
 	public GameDetailsDTO getGamesById(Integer id){
-		
-		return gameRepo.getGameDescription(id);
+		GameDetailsDTO gameDetails = gameRepo.getGameDescription(id);
+		gameDetails.setRating(gameRepo.getAverageGameRating(id));
+		return gameDetails;
 	}
 }

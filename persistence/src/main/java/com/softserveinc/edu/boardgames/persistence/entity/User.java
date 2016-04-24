@@ -152,6 +152,7 @@ public class User implements Serializable {
 	 * List of tounaments that were organized by user
 	 */
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "user")
+	@JsonBackReference
     private Set<GameRatingNumeric> gameRatingNumeric;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,

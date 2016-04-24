@@ -153,7 +153,6 @@
 							<th>Game</th>
 							<th>Category</th>
 							<th>Min/Max players</th>
-							<th>Rating</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -163,7 +162,6 @@
 							<td>{{ x.name }}</td>
 							<td>{{ x.categoryName }}</td>
 							<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
-							<!--<td>{{ x.rating }}</td>-->
 						</tr>
 						<tr>
 						</tr>
@@ -178,7 +176,7 @@
 					<pre>{{gameDetail.description}}</pre>
 					<hr />
 					<h4>Rules</h4>
-					<pre>{{gameRules.rules}}</pre>
+					<pre>{{gameDetail.rules}}</pre>
 					<hr />
 					<h4>Rating</h4>
 					<table class="table">
@@ -197,7 +195,7 @@
 									<p class="text-primary">{{gameRatingText}}</p>
 								</td>
 								<td>
-									<p>{{gameRating}}</p>
+									<p>{{gameDetail.rating}}</p>
 								</td>
 							</tr>
 						</tbody>
