@@ -42,12 +42,6 @@ public class GameService {
 	}
 	
 	public GameDetailsDTO getGamesById(Integer id){
-			
-//		GameDetailsDTO gameDetailsDTO = new GameDetailsDTO();
-//		gameDetailsDTO.setName(gameRepo.findOne(id).getName());
-//		gameDetailsDTO.setDescription(gameRepo.findOne(id).getDescription());
-//		gameDetailsDTO.setRules(gameRepo.findOne(id).getRules());
-//		gameDetailsDTO.setRating(gameRepo.findOne(id).getRating());
 		
 		return gameRepo.getGameDescription(id);
 	}

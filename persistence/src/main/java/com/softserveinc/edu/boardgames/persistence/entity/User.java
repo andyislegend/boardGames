@@ -17,20 +17,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * This class describes users of boardGames website.
@@ -155,6 +151,8 @@ public class User implements Serializable {
 	/**
 	 * List of tounaments that were organized by user
 	 */
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "user")
+    private Set<GameRatingNumeric> gameRatingNumeric;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userCreator")
@@ -176,6 +174,13 @@ public class User implements Serializable {
 	public User() {
 	}
 
+	public Set<GameRatingNumeric> getGameRatingNumeric() {
+		return gameRatingNumeric;
+	}
+
+	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
+		this.gameRatingNumeric = gameRatingNumeric;
+	}
 	/**
 	 * Get value of column id.
 	 * 

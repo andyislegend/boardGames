@@ -42,7 +42,7 @@ public class GetGameDetailsController {
 	@ResponseBody
 	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating){
 		Game game = gameService.findById(gameId);
-		if (game.getRating() == null)
+		if (game.getRating() == null )
 			game.setRating(0);
 		game.setRating((game.getRating() + rating)/2);
 		gameService.update(game);
