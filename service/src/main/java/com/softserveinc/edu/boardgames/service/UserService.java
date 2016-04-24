@@ -10,8 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
@@ -139,9 +137,19 @@ public class UserService {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
-	
+
 	@Transactional
 	public List<User> findAllUsersByCity(String cityName) {
 		return userRepository.findUserByCity(cityName);
+	}
+	
+	public User findById(int id){
+		return userRepository.findOne(id);
+	}
+
+	@Transactional
+	public List<String> findUserWithNeagativeRating() {
+		return userRepository.findUsesrWithNegativeRating();
+
 	}
 }

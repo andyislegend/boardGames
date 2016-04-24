@@ -83,62 +83,126 @@ app.controller("eventListCtrl", function ($scope, $http) {
     });
 });
 
-app.controller("listOfFriendsCtrl", function ($scope, $http) {
-    console.log("in controller list of Friends");
-    $http.get("allFriends").success(function (data) {
-        $scope.friends = data;
-    }).error(function (error) {
-        console.log(error);
-    })
-});
-
-app.controller("countOfOffering", function ($scope, $http) {
-    console.log("countOfOffering");
-    $http.get("allOffering").success(function (data) {
-        $scope.count = data;
-    }).error(function (error) {
-        console.log(error);
-    })
-});
-
-app.controller("OfferToFriendCtrl", function ($scope, $uibModal) {
+app.controller("listOfFriendsCtrl", function($scope, friendService, $http, $uibModal) {
+    $scope.users;
+	 friendService.getAllFriends().success(function(data) {
+		$scope.friends = data;
+	}).error(function(error) {
+		console.log(error);
+	})
+    
+    friendService.getCount().success(function(data){
+         $scope.count = data;
+     }).error(function(error){
+         console.log(error)
+     });
+    
     $scope.open = function () {
-        console.log("befor open");
-        $uibModal.open({
-            templateUrl: 'OfferingForm.html'
+		   $uibModal.open({
+		      templateUrl: 'OfferingForm.html'
+		 });
+	};
+    
+    
+    
+	friendService.getAllOfferedUsers().success(function(data) {
+        $scope.users = data;
+	}).error(function(error) {
+		console.log(error);
+	});
+    
+    
+    
+     $scope.add = function(id){
+        var userId = id;
+          $scope.count =  $scope.count-1;
+        $http.post('addUserToFriend', userId).success(function(data){
+            var user = data;
+            for(var i = 0; i < $scope.users.length; i++){
+                if($scope.users[i].id === user.id){
+                    $scope.friends.push($scope.users[i]);
+                    $scope.users.splice(i, 1)
+                };
+            };
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+    
+    $scope.rejected = function(id){
+        var userId = id;
+         $scope.count =  $scope.count-1;
+        $http.post('rejectedUserToFriend', userId).success(function(data){
+             var user = data;
+            for(var i = 0; i < $scope.users.length; i++){
+                if($scope.users[i].id === user.id){
+                    $scope.users.splice(i, 1)
+                };
+            };
+        }).error(function(error){
+            console.log(error);
         });
     };
 });
 
 /*users Angular controller -- start*/
-
-app.controller("getAllUsersCtrl", function ($scope, $http) {
-    $scope.users = [];
-    $http.get('users').then(function (result) {
-        $scope.users = result.data;
-        $scope.showUser = false;
-        $scope.getInfoAboutUserFunc = function (id) {
-            $scope.showUser = !$scope.showUser;
-            for (var i = 0; i < $scope.users.length; i++) {
-                if ($scope.users[i].id === id) {
-                    $scope.oneUser = $scope.users[i];
-                    break;
-                }
-                ;
-            }
-            ;
-        };
-    });
+app.controller("getAllUsersCtrl", function($scope, $http) {
+	$scope.users = [];
+	$http.get('users').then(function(result) {
+		$scope.users = result.data;
+		$scope.showUser = false;
+		$scope.getInfoAboutUserFunc = function(id) {
+			$scope.showUser = !$scope.showUser;
+			for (var i = 0; i < $scope.users.length; i++) {
+				if ($scope.users[i].id === id) {
+					$scope.oneUser = $scope.users[i];
+					$scope.userUrl = 'http://localhost/img/avatar/'+ $scope.oneUser.username;
+					break;
+				};
+			};
+		};
+	});
 });
 
-app.controller("getAllUsersGames", function ($scope, $http) {
-    $scope.showUsersGames = false;
-    $scope.getInfoAboutUserGames = function (userName) {
-        $scope.showUsersGames = !$scope.showUsersGames;
-        $http.get('allUsersGames?userName=' + userName).then(function (result) {
-            $scope.games = result.data;
-        });
+app.controller("getAllUsersWithNegativeRating", function($scope, $http, $window) {
+	$scope.usersWithNegRate = [];
+	$http.get('getUsersWithNegativeRating').then(function(result) {
+		$scope.usersWithNegRate = result.data;
+		if ($scope.usersWithNegRate.length != 0) {
+			$window.alert('These users have to be banned: ' + $scope.usersWithNegRate);
+		}
+	});
+});
 
+app.directive('fallbackSrc', function () {
+	  var fallbackSrc = {
+	    link: function postLink(scope, iElement, iAttrs) {
+	      iElement.bind('error', function() {
+	        angular.element(this).attr("src", iAttrs.fallbackSrc);
+	      });
+	    }
+	   }
+	   return fallbackSrc;
+});
+
+app.controller("getAllUsersGames", function($scope, $http) {
+	$scope.showUsersGames = false;
+	$scope.getInfoAboutUserGames = function(userName) {
+		$scope.showUsersGames = !$scope.showUsersGames;	
+		$http.get('allUsersGames?userName=' + userName).then(function(result) {
+			$scope.games = result.data;			
+		});
+
+	};
+    $scope.showModal = false;
+    $scope.getInfoAboutGame = function(id){
+        $scope.showModal = !$scope.showModal;
+        for (var i = 0; i < $scope.games.length; i++) {
+			if ($scope.games[i].id === id) {
+				$scope.oneGame = $scope.games[i];
+				break;
+			};
+		};
     };
 });
 
@@ -153,22 +217,26 @@ app.controller("getAllUsersTournaments", function ($scope, $http) {
     };
 });
 
+app.controller('MainCtrl', function ($scope) {
+
+  });
+
 app.directive('modal', function () {
     return {
-        template: '<div class="modal fade">' +
-        '<div class="modal-dialog">' +
-        '<div class="modal-content">' +
-        '<div class="modal-header">' +
-        '<p>Last Name:{{oneUser.lastName}}</p>' +
-        '<p>First Name:{{oneUser.firstName}}</p>' +
-        '<p>Username:{{oneUser.username}}</p>' +
-        '<p>Sex:{{oneUser.sex}}</p>' +
-        '<p>Age:{{oneUser.age}}</p>' +
-        '<p>Rating:{{oneUser.rating}}</p>' +
-        '</div>' +
-        '<div class="modal-body" ng-transclude></div>' +
-        '</div>' +
-        '</div>' +
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+              '<p>Category:{{oneGame.category}}</p>' +
+				'<p>Year of production: {{oneGame.yearOfProduction}}</p>' +
+				'<p>Edition: {{oneGame.edition}}</p>' +
+				'<p>Description: {{oneGame.description}}</p>' +
+				'<p>Max players: {{oneGame.maxPlayers}}</p>' +
+				'<p>Min players: {{oneGame.minPlayers}}</p>' +
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
         '</div>',
         restrict: 'E',
         transclude: true,

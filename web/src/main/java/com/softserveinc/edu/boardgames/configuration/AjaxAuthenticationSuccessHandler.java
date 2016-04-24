@@ -11,6 +11,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+/**
+ * 
+ * @author Andrii Petryk
+ *
+ */
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
 	private AuthenticationSuccessHandler defaultHandler;

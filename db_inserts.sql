@@ -48,15 +48,15 @@ insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating)
 
 
 -- inserts to table of users
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Ivory edition', '2008', '1', '1');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Standart edition', '2010', '4', '2');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Standart edition', '1998', '3', '3');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Legendary edition', '1980', '2', '4');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Standart', '1999', '5', '2');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Golden rode', '2001', '6', '3');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Platinum', '2008', '7', '1');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Standart', '1300', '8', '2');
-INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `gameId`, `userId`) VALUES ('Awesome', '2010', '9', '3');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Ivory edition', '2008', '1', '1');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Standart edition', '2010', '4', '2');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Standart edition', '1998', '3', '3');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Legendary edition', '1980', '2', '4');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Standart', '1999', '5', '2');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Golden rode', '2001', '6', '3');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Platinum', '2008', '7', '1');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Standart', '1300', '8', '2');
+INSERT INTO `boardgames`.`gameuser` (`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('Awesome', '2010', '9', '3');
 
 
 --  inserts to table status

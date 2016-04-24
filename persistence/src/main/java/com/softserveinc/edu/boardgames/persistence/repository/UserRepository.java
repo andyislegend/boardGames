@@ -32,5 +32,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query("Select u FROM User u JOIN u.address address" + " WHERE address.city =:cityName")
 	public List<User> findUserByCity(@Param("cityName") String cityName);
+	
+	@Query("Select u.username FROM User u WHERE u.userRating <=-5")
+	public List<String> findUsesrWithNegativeRating();
 
 }

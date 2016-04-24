@@ -20,7 +20,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -102,14 +106,14 @@ public class User implements Serializable {
 	@NotEmpty
 	@Column(name = "password", nullable = false)
 	private String password;
-	
+
 	/**
-	 * Provides a description of User's current rating as a number. By default, after
-	 * registration User obtain 0 rating
+	 * Provides a description of User's current rating as a number. By default,
+	 * after registration User obtain 0 rating
 	 */
-	@NotEmpty
+	@NotNull
 	@Column(name = "userRating", nullable = false)
-	private Integer userRating;
+	private Integer userRating = 0;
 
 	/**
 	 * Provides a description of User's current rating. By default, after
@@ -143,9 +147,9 @@ public class User implements Serializable {
 	 * Describes users role. Has a one to many relationship to roles table.
 	 */
 	@ElementCollection
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "username"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "value", length = 30)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "username"))
+	@Enumerated(EnumType.STRING)
+	@Column(name = "value", length = 30)
 	private Set<UserRoles> userRoles = new HashSet<>();
 
 	/**
@@ -163,15 +167,12 @@ public class User implements Serializable {
 	/**
 	 * List if tounaments which user take part in
 	 */
-	
+
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userGuest")
 	@JsonBackReference
 	private List<TournamentComposition> takenpartTounaments;
 
-	/**
-	 * Constructor without parameters.
-	 */
 	public User() {
 	}
 
@@ -187,20 +188,15 @@ public class User implements Serializable {
 	 * 
 	 * @return value of column id.
 	 */
+
 	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Set value of column id.
-	 * 
-	 * @param id
-	 *            value of column id.
-	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -209,137 +205,68 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	/**
-	 * Get value of column firstName.
-	 * 
-	 * @return value of column firstName.
-	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * Set value of column firstName.
-	 * 
-	 * @param firstName
-	 *            value of column firstName.
-	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	/**
-	 * Get value of column lastName.
-	 * 
-	 * @return value of column lastName.
-	 */
 	public String getLastName() {
 		return lastName;
 	}
 
-	/**
-	 * Set value of column lastName.
-	 * 
-	 * @param lastName
-	 *            value of column lastName.
-	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	/**
-	 * Get value of column sex.
-	 * 
-	 * @return value of column sex.
-	 */
 	public String getSex() {
 		return sex;
 	}
 
-	/**
-	 * Set value of column sex.
-	 * 
-	 * @param sex
-	 *            value of column sex.
-	 */
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
-	/**
-	 * Get value of column age.
-	 * 
-	 * @return value of column age.
-	 */
 	public Integer getAge() {
 		return age;
 	}
 
-	/**
-	 * Set value of column age.
-	 * 
-	 * @param age
-	 *            value of column age.
-	 */
 	public void setAge(Integer age) {
 		this.age = age;
 	}
 
-	/**
-	 * Get value of column email.
-	 * 
-	 * @return value of column email.
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * Set value of column email.
-	 * 
-	 * @param email
-	 *            value of column email.
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * Get value of column phoneNumber.
-	 * 
-	 * @return value of column phoneNumber.
-	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	/**
-	 * Set value of column phoneNumber.
-	 * 
-	 * @param phoneNumber
-	 *            value of column phoneNumber.
-	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	/**
-	 * Get value of column password.
-	 * 
-	 * @return value of column password.
-	 */
 	public String getPassword() {
 		return password;
 	}
 
-	/**
-	 * Set value of column password.
-	 * 
-	 * @param password
-	 *            value of column password.
-	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Integer getUserRating() {
+		return userRating;
+	}
+	
+	public void setUserRating(Integer userRating) {
+		this.userRating = userRating;
 	}
 
 	public String getRating() {
@@ -357,7 +284,7 @@ public class User implements Serializable {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
+
 	/**
 	 * Get value of column address.
 	 * 
@@ -385,133 +312,18 @@ public class User implements Serializable {
 		this.userRoles = userRoles;
 	}
 
-
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((age == null) ? 0 : age.hashCode());
-		result = prime * result + ((createdTounaments == null) ? 0 : createdTounaments.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
-		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		//result = prime * result + ((takenpartTounaments == null) ? 0 : takenpartTounaments.hashCode());
-		result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		System.out.println("**********000*********");
-		if (obj == null)
-			return false;
-		System.out.println("**********00000000*********");
-		User other = (User) obj;
-		System.out.println("**********1*********");
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		System.out.println("**********2*********");
-		if (age == null) {
-			if (other.age != null)
-				return false;
-		} else if (!age.equals(other.age))
-			return false;
-		System.out.println("**********3*********");
-		if (createdTounaments == null) {
-			if (other.createdTounaments != null)
-				return false;
-		} else if (!createdTounaments.equals(other.createdTounaments))
-			return false;
-		System.out.println("**********4*********");
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		System.out.println("**********5*********");
-		System.out.println("**********6*********");
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		System.out.println("**********7*********");
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		System.out.println("**********9*********");
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		System.out.println("**********10*********");
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		System.out.println("**********11*********");
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		System.out.println("**********12*********");
-		if (rating != other.rating)
-			return false;
-		System.out.println("**********13*********");
-		if (sex == null) {
-			if (other.sex != null)
-				return false;
-		} else if (!sex.equals(other.sex))
-			return false;
-		System.out.println("**********14*********");
-		if (state != other.state)
-			return false;
-		System.out.println("**********15*********");
-//		if (takenpartTounaments == null) {
-//			if (other.takenpartTounaments != null)
-//				return false;
-//		} else if (!takenpartTounaments.equals(other.takenpartTounaments))
-//			return false;
-		System.out.println("**********16*********");
-		if (userRoles == null) {
-			if (other.userRoles != null)
-				return false;
-		} else if (!userRoles.equals(other.userRoles))
-			return false;
-		System.out.println("**********17*********");
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public String toString() {
-
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", age="
-				+ age + ", email=" + email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", address="
-				+ address + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
-
-	
 }

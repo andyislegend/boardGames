@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Friend;
@@ -41,5 +43,33 @@ public class FriendController {
 		User user = userService.findOne(userName);
 		int countOfOffering = friendService.findCountNoConsiderFrinds(user);
 		return countOfOffering;
+	}
+	
+	@RequestMapping("/allOfferedUsers")
+	public List<User> allOfferedUsers(){
+		String userName = WebUtil.getPrincipalUsername();
+		User user = userService.findOne(userName);
+		List<Friend> listOfNoConsiderFriend = friendService.getAllNoConsiderFriendByUser(user);
+		List<User> listOfUsers = new ArrayList<User>();
+		for(int i = 0; i < listOfNoConsiderFriend.size(); i++){
+			listOfUsers.add(listOfNoConsiderFriend.get(i).getUser());
+		}
+		return listOfUsers;
+	}
+	
+	@RequestMapping(value = "/addUserToFriend",method = RequestMethod.POST)
+	public User addUserToFriend(@RequestBody Integer id){
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		User userId = userService.findById(id);
+		friendService.acceptFrienship(user, userId);
+		return userId;
+	}
+	
+	@RequestMapping(value = "/rejectedUserToFriend",method = RequestMethod.POST)
+	public User rejectedUserToFriend(@RequestBody Integer id){
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		User userId = userService.findById(id);
+		friendService.rejectedFrienship(user, userId);
+		return userId;
 	}
 }

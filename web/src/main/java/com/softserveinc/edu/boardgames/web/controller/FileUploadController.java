@@ -1,16 +1,12 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
 import java.io.File;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
@@ -27,7 +23,7 @@ public class FileUploadController {
 	@Autowired
 	UserService userService;
 	
-	private String saveDirectory = "d:/USR/www/img";
+	
 	
 	@RequestMapping(value = {"/uploadJSP"}, method = RequestMethod.GET)
 	public String getUploadJSP() {
@@ -35,17 +31,17 @@ public class FileUploadController {
 	}
 	
 	@RequestMapping(value = {"/uploadFile"}, method = RequestMethod.POST)
-	public String handleFileUpload(@RequestParam("fileUpload") CommonsMultipartFile fileUpload,
-			@RequestParam("imageName") String imageName) throws Exception {
+	public String handleFileUpload(@RequestParam("fileUpload") CommonsMultipartFile fileUpload
+			) throws Exception {
 		Image image = new Image();
 		image.setUser(userService.findOne(WebUtil.getPrincipalUsername()));
-		image.setImageName(imageName);
+		image.setUrl("http://localhost/img/avatar/"+fileUpload.getOriginalFilename());
 		imageService.create(image);
-		System.out.println("description: ");	
+		String saveDirectory = "d:/USR/www/img/avatar/" + WebUtil.getPrincipalUsername();
 		if (fileUpload != null) {					
-				System.out.println("Saving file: " + fileUpload.getOriginalFilename());
-				fileUpload.transferTo(new File(saveDirectory + fileUpload.getOriginalFilename()));
+				fileUpload.transferTo(new File(saveDirectory));
 		}
-		return "Result";
+		
+		return "rec";
 	}
 }

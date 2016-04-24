@@ -7,6 +7,11 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import com.softserveinc.edu.boardgames.persistence.configuration.PersistanceConfiguration;
 import com.softserveinc.edu.boardgames.service.configuration.ServiceConfiguaration;
 
+/**
+ * 
+ * @author Andrii Petryk, Taras Varvariuk
+ *
+ */
 public class WebappInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
