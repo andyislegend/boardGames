@@ -33,4 +33,8 @@ public class GameRatingNumericService {
 	public void create(GameRatingNumeric gameRateNum) {
 		gameRatingNumericRepo.save(gameRateNum);
 	}
+	
+	public Integer getRatingforUser(Integer gameId, String username){
+		return gameRatingNumericRepo.getGameRated(gameId, username);
+	}
 }

@@ -305,9 +305,17 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 			url : 'getGameDetails' + '/' + id
 		}).then(function mySucces(response){
 			$scope.gameDetail = response.data;
-			$scope.gameRating = $scope.gameDetail.rating;
 		}, function myError(response) {
 			alert("Getting games general data error");
+		});
+		
+		$http({
+			method: "GET",
+			url : 'getGameRatedByUser' + '/' + id
+		}).then(function mySucces(response){
+			$scope.gameRating = response.data;
+		}, function myError(response) {
+			alert("Getting isRated game error");
 		});
 		
 		$http({

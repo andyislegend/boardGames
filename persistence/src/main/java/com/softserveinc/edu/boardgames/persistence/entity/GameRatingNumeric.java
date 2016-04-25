@@ -28,9 +28,6 @@ public class GameRatingNumeric implements Serializable{
 	@Column(name = "rating")
 	private Integer rating;
 	
-	@Column(name = "isRated")
-	private Boolean isRated = false;
-	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Game.class, 
 			cascade={CascadeType.ALL})
 	private Game game;
@@ -41,11 +38,10 @@ public class GameRatingNumeric implements Serializable{
 
 	public GameRatingNumeric() {}
 	
-	public GameRatingNumeric(Integer id, Integer rating, Boolean isRated, Game game, User user) {
+	public GameRatingNumeric(Integer id, Integer rating, Game game, User user) {
 		super();
 		this.id = id;
 		this.rating = rating;
-		this.isRated = isRated;
 		this.game = game;
 		this.user = user;
 	}
@@ -64,14 +60,6 @@ public class GameRatingNumeric implements Serializable{
 
 	public void setRating(Integer rating) {
 		this.rating = rating;
-	}
-
-	public Boolean getIsRated() {
-		return isRated;
-	}
-
-	public void setIsRated(Boolean isRated) {
-		this.isRated = isRated;
 	}
 
 	public Game getGame() {
