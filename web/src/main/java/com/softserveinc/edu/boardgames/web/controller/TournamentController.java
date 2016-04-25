@@ -53,10 +53,11 @@ public class TournamentController {
         tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
         tournamentComposition.setUserGuest(user);
         tournamentCompositionService.save(tournamentComposition);
-        return createDTOfromtournamentList();}
-        else {
-            return null;
         }
+        return createDTOfromtournamentList();
+        /*else {
+            return null;
+        }*/
     }
 
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
@@ -64,7 +65,8 @@ public class TournamentController {
         Address address=new Address();
         address.setCountry(tournamentDTO.getCountry());
         address.setCity(tournamentDTO.getCity());
-        //address.
+        address.setStreet(tournamentDTO.getStreet());
+        address.setHouseNumber(Integer.parseInt(tournamentDTO.getHouseNumber()));
     }
 
     private List<AllTournamentsDTO> createDTOfromtournamentList() {
@@ -94,7 +96,7 @@ public class TournamentController {
                         tournament.getAddress().getRoomNumber(),
                         tournament.getRequiredRating(),
                         tournament.getDateOfTournament().toString(),
-                        userGuests
+                        userGuests, tournament.getMaxParticipants()
                 ));
             } else {
                 response.add(new AllTournamentsDTO(
@@ -103,7 +105,7 @@ public class TournamentController {
                         tournament.getUserCreator().getUsername(),
                         tournament.getRequiredRating(),
                         tournament.getDateOfTournament().toString(),
-                        userGuests
+                        userGuests,tournament.getMaxParticipants()
                 ));
             }
         }
