@@ -21,11 +21,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	Set<UserRoles> getRolesByUserName(@Param("username") String username);
 
 	@Query("Select u.state" + " FROM User u" + " WHERE u.username =:username")
-	String getUsersState(String username); // Not sure if will work
+	String getUsersState(String username); 
 
 	@Query("Select u.rating" + " FROM User u" + " WHERE u.username =:username")
-	String getUsersRating(String username); // Not sure if will work
+	String getUsersRating(String username); 
 
+	User findByEmail(String email);
+	
 	User findByUsername(String username);
 
 	public User findByFirstName(String firstName);

@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.service.configuration;
 
-
 import java.io.IOException;
 import java.util.Properties;
 
@@ -17,7 +16,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
-
+/**
+ * This class configure mail sender
+ * 
+ * @author Andrii Petryk
+ *
+ */
 @Configuration
 @PropertySource("classpath:/properties/mail.properties")
 @ComponentScan("com.softserve.edu.controller.service")
@@ -29,9 +33,9 @@ public class MailConfig {
 	@Bean
 	public JavaMailSender mailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-	
+
 		mailSender.setDefaultEncoding(MailConstant.DEFAULT_ENCODING);
-		
+
 		mailSender.setHost(env.getProperty(MailConstant.CONFIG_HOST));
 		mailSender.setPort(env.getProperty(MailConstant.CONFIG_PORT, Integer.class, 25));
 		mailSender.setProtocol(env.getProperty(MailConstant.CONFIG_PROTOCOL));
@@ -39,14 +43,15 @@ public class MailConfig {
 		mailSender.setPassword(env.getProperty(MailConstant.CREDENTIAL_PASSWORD));
 		Properties properties = new Properties();
 		properties.put("mail.smtp.aut", env.getProperty("mail.config.smtp.auth", Boolean.class, false));
-		properties.put("mail.smtp.starttls.enable", env.getProperty("mail.config.smtp.starttls.enable", Boolean.class, false));
+		properties.put("mail.smtp.starttls.enable",
+				env.getProperty("mail.config.smtp.starttls.enable", Boolean.class, false));
 		properties.put("mail.smtp.socketFactory.fallback", "true");
 		mailSender.setJavaMailProperties(properties);
 		return mailSender;
 	}
-	
+
 	@Bean
-	public VelocityEngine velocityEngine() throws VelocityException, IOException{
+	public VelocityEngine velocityEngine() throws VelocityException, IOException {
 		VelocityEngineFactoryBean factory = new VelocityEngineFactoryBean();
 		factory.setResourceLoaderPath(env.getProperty("velocity.resource.loader.path"));
 		factory.setPreferFileSystemAccess(env.getProperty("velocity.prefer.file.systema.access", Boolean.class, false));
@@ -56,11 +61,10 @@ public class MailConfig {
 		factory.setVelocityProperties(props);
 		return factory.createVelocityEngine();
 	}
-	
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigIn() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
 
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyConfigIn() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 
 }

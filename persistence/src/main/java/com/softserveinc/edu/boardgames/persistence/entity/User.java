@@ -91,7 +91,7 @@ public class User implements Serializable {
 	 * 
 	 */
 	@NotEmpty
-	@Column(name = "email", nullable = false) //, unique = true - removed for testing and due to no validations
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
 	/**
@@ -167,7 +167,6 @@ public class User implements Serializable {
 	/**
 	 * List if tounaments which user take part in
 	 */
-
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userGuest")
 	@JsonBackReference

@@ -1,5 +1,9 @@
 package com.softserveinc.edu.boardgames.service;
 
+/**
+ * UserService.class responsible for realization of DB CRUD and other operation upon User Repository
+ * 
+ */
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,16 +26,21 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private MailService mailService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	/**
+	 * 
+	 * @param user
+	 *            receive a user-object from controller in order to add it to DB
+	 *            as a new user
+	 */
 	@Transactional
 	public void createUser(User user) {
-//		EmailSenderApp.sendMail(user.getUsername(), user.getPassword(), user.getEmail());
 		mailService.sendMail(user.getEmail(), user.getUsername(), user.getPassword());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		UserRoles role = UserRoles.USER;
@@ -52,6 +61,19 @@ public class UserService {
 	@Transactional
 	public boolean isExistsWithUsername(String username) {
 		return userRepository.findByUsername(username) != null;
+	}
+	
+	/**
+	 * Check if user with {@code email} exist in database
+	 *
+	 * @param email
+	 *            must not be non {@literal null}
+	 * @return {@literal true} if user with {@code email} does exist in
+	 *         database, else {@literal false}
+	 */
+	@Transactional
+	public boolean isExistsWithEmail(String email) {
+		return userRepository.findByUsername(email) != null;
 	}
 
 	@Transactional(readOnly = true)
@@ -148,19 +170,20 @@ public class UserService {
 	public List<User> findAllUsersByCity(String cityName) {
 		return userRepository.findUserByCity(cityName);
 	}
-	
-	public User findById(int id){
+
+	public User findById(int id) {
 		return userRepository.findOne(id);
 	}
-	
-	public List<User> findAllFriends(User user){
+
+	public List<User> findAllFriends(User user) {
 		return userRepository.findAllFriends(user);
 	}
-	
-	public List<User> getAllNoConsiderFriendByUser(User user){
+
+	public List<User> getAllNoConsiderFriendByUser(User user) {
 		return userRepository.getAllNoConsiderFriendByUser(user);
 	}
-	public List<User> findAllUserByFirstName(String name){
+
+	public List<User> findAllUserByFirstName(String name) {
 		return userRepository.findAllUserByFirstName(name);
 	}
 

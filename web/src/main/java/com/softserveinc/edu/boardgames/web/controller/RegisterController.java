@@ -59,6 +59,14 @@ public class RegisterController {
 			return "registration";
 		}
 		
+		if (userService.isExistsWithEmail(user.getEmail())) {
+
+			FieldError emailError = new FieldError("user", "email",
+					"Sorry, but this email is already in use!");
+			result.addError(emailError);
+			return "registration";
+		}
+		
 		if (!validate(user.getEmail())) {
 
 			FieldError emailError = new FieldError("user", "email",
