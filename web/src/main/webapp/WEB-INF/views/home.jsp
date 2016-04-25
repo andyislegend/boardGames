@@ -574,8 +574,7 @@
               
             <!-- /sidebar FRIENDS-->
 					<!-- sidebar MYGAMES-->
-					<div class="column-4" ng-controller="listOfFriendsCtrl"
-						style="padding-top: 20px;">
+						
 						<div class="widget">
 							<h2 class="title">My Games</h2>
 
