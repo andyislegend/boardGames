@@ -1,20 +1,5 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
 
-app.controller("MainController", function ($scope) {
-    $scope.hideTournaments = true;
-    $scope.hideAllGames = true;
-});
-app.controller("HideController", function ($scope) {
-    $scope.championshipClick = function () {
-        $scope.hideTournaments = false;
-        $scope.hideAllGames = true;
-    }
-    $scope.allGamesClick = function () {
-        $scope.hideTournaments = true;
-        $scope.hideAllGames = false;
-    }
-});
-
 app.controller("allUsersGameCtrl", function ($scope, $http) {
     $http.get('getAllGamesCurUser').then(function (result) {
         $scope.allGame = result.data;
@@ -397,47 +382,35 @@ app.controller("showAllTournaments", function ($scope, $http) {
         console.log(idTournament);
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
-                if (data != null) {
+                if($scope.tournaments == data){
+                    alert("You've already join this tournament");
+                }
+                $scope.tournaments = data;
+
+            });
+
+        $scope.createTournament = function () {
+            alert("ENTER");
+            var e = document.getElementById("inputselectGame");
+            var gameName = e.options[e.selectedIndex].value;
+            var tournament = {
+                tournamentName: $scope.tournamentName,
+                rating: $scope.requiredRating,
+                maxParticipants: $scope.maxParticipants,
+                date: $scope.date,
+                gameName: gameName,
+                country: $scope.countryTournament,
+                city: $scope.cityTournament,
+                street: $scope.streetTournament,
+                houseNumber: $scope.houseNumberTournament,
+                roomNumber: $scope.roomNumberTournament
+            };
+
+            $http.post("/addTournament", tournament)
+                .success(function (data) {
                     $scope.tournaments = data;
-                }
-                else {
-                    alert("Null");
-                }
+                });
 
-            });
+        }
     }
-});
-
-app.controller("AddTournament", function ($scope, $uibModal, $http) {
-    $scope.addTournament = function () {
-
-        $uibModal.open({
-            templateUrl: 'AddTournament.html'
-        });
-
-    }
-    $scope.createTournament = function () {
-        alert("ENTER");
-        var e = document.getElementById("inputselectGame");
-        var gameName = e.options[e.selectedIndex].value;
-        var tournament = {
-            tournamentName: (document.getElementById('inputTournamentName')).value,
-            rating: document.getElementById('inputTournamentRating').value,
-            maxParticipants: document.getElementById('inputTournamentParticipants').value,
-            date: document.getElementById('inputTournamentDate').value,
-            gameName: gameName,
-            country: document.getElementById('inputTournamentCountry').value,
-            city: document.getElementById('inputTournamentCity').value,
-            street: document.getElementById('inputTournamentStreet').value,
-            houseNumber: document.getElementById('inputTournamentBuilding').value,
-            roomNumber: document.getElementById('inputTournamentApartment').value
-        };
-
-        $http.post("/addTournament", tournament)
-            .success(function () {
-
-            });
-
-    }
-
 });
