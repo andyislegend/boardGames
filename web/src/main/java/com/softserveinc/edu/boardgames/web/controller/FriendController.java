@@ -76,11 +76,8 @@ public class FriendController {
 	
 	@RequestMapping(value = "/findAllUsers/{name}", method = RequestMethod.POST)
 	public List<User> findAllUsers(@PathVariable String name){
-		System.out.println("**********************  name = " + name);
 		String userName = name + "%";
-		System.out.println("**********************  userName = " + userName);
 		List<User> listOfUsers = userService.findAllUserByFirstName(userName);
-		System.out.println("**********************  listOfUsers = " + listOfUsers);
 		return listOfUsers;
 	}
 }
