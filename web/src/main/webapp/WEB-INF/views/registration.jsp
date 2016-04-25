@@ -17,8 +17,9 @@
 	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
-<link rel="stylesheet" href="resources/css/main.css" />
+<link rel="stylesheet" href="resources/css/new-css.css" />
+<link rel="stylesheet" href="resources/css/fonts.css" />
+<link rel="stylesheet" href="resources/css/index.css" />
 
 </head>
 
@@ -42,16 +43,14 @@
 		</nav>
 	</header>
 
-
 	<div style="margin-top: 2%;"
 		class="generic-container col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-
-				<h3 style="text-align: center; color: darkblue" class="h3">
+				<p style="text-align: center;">
 					WELCOME, NEW USER!<br> PLEASE, FILL THE FORM BELOW TO GET
 					STARTED
-				</h3>
+				</p>
 			</div>
 
 			<form:form method="POST" modelAttribute="user"

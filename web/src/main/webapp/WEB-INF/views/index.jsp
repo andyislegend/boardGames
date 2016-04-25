@@ -11,11 +11,15 @@
 	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
+<link rel="stylesheet" href="resources/css/new-css.css" />
+<link rel="stylesheet" href="resources/css/fonts.css" />
+<link rel="stylesheet" href="resources/css/index.css" />
+
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
-<script src="resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
+<script
+	src="resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <script
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"
