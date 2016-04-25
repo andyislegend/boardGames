@@ -206,27 +206,7 @@
 								<!-- sidebar ADD GAME-->
 
 
-								<div ng-controller="allUsersGameCtrl">
-									<table class="table">
-										<tr ng-repeat="game in allGame">
-											<td>{{game.name}}</td>
-											<td>{{game.yearOfProduction}}</td>
-											<td>
-												<button ng-click="myFunc(game.name)" style="color: black">M</button>
-											</td>
-											<td>com</td>
-										</tr>
-									</table>
-									<div ng-show="showMe">
-										<div ng-repeat="game in games">
-											<p>Category:{{game.category}}</p>
-											<p>Year of production: {{game.yearOfProduction}}</p>
-											<p>Edition: {{game.edition}}</p>
-											<p>Description: {{game.description}}</p>
-											<p>Max players: {{game.maxPlayers}}</p>
-											<p>Min players: {{game.minPlayers}}</p>
-										</div>
-									</div>
+								
 
 
 								</div>
@@ -555,17 +535,11 @@
 						</div>
 					</div>
 
-
-
-
-
 					<!-- /sidebar FRIENDS-->
 					<!-- sidebar MYGAMES-->
 
 					<div class="widget">
 						<h2 class="title">My Games</h2>
-
-
 						<div ng-controller="CreateGameCtrl">
 							<div>
 								<input type="submit" value="ADD GAME" ng-click="showForm() "
