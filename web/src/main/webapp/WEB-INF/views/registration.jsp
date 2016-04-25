@@ -53,7 +53,7 @@
 					STARTED
 				</h3>
 			</div>
-			
+
 			<form:form method="POST" modelAttribute="user"
 				class="form-horizontal">
 				<form:input type="hidden" path="id" id="id" />
@@ -63,7 +63,7 @@
 						<label class="col-md-3 control-lable" for="username">Username</label>
 						<div class="col-md-7">
 							<form:input type="text" path="username" id="username"
-								class="form-control input-sm" required="required"/>
+								class="form-control input-sm" required="required" />
 							<div class="has-error">
 								<form:errors path="username" class="label label-warning" />
 							</div>
@@ -98,7 +98,7 @@
 						<label class="col-md-3 control-lable" for="password">Password</label>
 						<div class="col-md-7">
 							<form:input type="password" path="password" id="password"
-								class="form-control input-sm" required="required"/>
+								class="form-control input-sm" required="required" />
 							<div class="has-error">
 								<form:errors path="password" class="label label-danger" />
 							</div>
@@ -112,7 +112,8 @@
 							Password</label>
 						<div class="col-md-7">
 							<input type="password" name="confirmPassword"
-								id="confirmPassword" class="form-control input-sm" required="required"/>
+								id="confirmPassword" class="form-control input-sm"
+								required="required" />
 						</div>
 					</div>
 				</div>
@@ -121,12 +122,12 @@
 					<div class="form-group col-md-12" style="margin-left: 1%;">
 						<label class="col-md-3 control-lable" for="sex">Gender</label>
 						<div class="col-md-7">
-								<select class="form-control" id="sex" path="sex">
-									<option value="none" selected> None</option>
-									<option value="male"> Male</option>
-									<option value="female"> Female</option>
-								</select>
-							</div>
+							<select class="form-control" id="sex" path="sex">
+								<option value="none" selected>None</option>
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+						</div>
 					</div>
 				</div>
 
@@ -145,7 +146,7 @@
 						<label class="col-md-3 control-lable" for="email">Email</label>
 						<div class="col-md-7">
 							<form:input type="text" path="email" id="email"
-								class="form-control input-sm" required="required"/>
+								class="form-control input-sm" required="required" />
 							<div class="has-error">
 								<form:errors path="email" class="label label-danger" />
 							</div>
@@ -167,8 +168,7 @@
 				<div class="row">
 					<div style="margin-left: 2%;" class="form-actions floatRight">
 						<input type="submit" value="Register"
-							class="btn btn-primary btn-bg" /> or <a
-							href="index">Cancel</a>
+							class="btn btn-primary btn-bg" /> or <a href="index">Cancel</a>
 					</div>
 				</div>
 			</form:form>

@@ -35,5 +35,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("Select u.username FROM User u WHERE u.userRating <=-5")
 	public List<String> findUsesrWithNegativeRating();
+	
+	@Query("Select u FROM User u WHERE u.firstName LIKE ?1 OR u.lastName LIKE ?1")
+	public List<User> findAllUserByFirstName(String name);
 
 }

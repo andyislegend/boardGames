@@ -91,7 +91,7 @@ public class User implements Serializable {
 	 * 
 	 */
 	@NotEmpty
-	@Column(name = "email", nullable = false, unique = true)
+	@Column(name = "email", nullable = false) //, unique = true - removed for testing and due to no validations
 	private String email;
 
 	/**
