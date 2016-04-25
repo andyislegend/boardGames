@@ -122,8 +122,8 @@
 					<div class="form-group col-md-12" style="margin-left: 1%;">
 						<label class="col-md-3 control-lable" for="sex">Gender</label>
 						<div class="col-md-7">
-							<select class="form-control" id="sex" path="sex">
-								<option value="none" selected>None</option>
+							<select class="form-control" id="sex" name="sex">
+								<option value="none">None</option>
 								<option value="male">Male</option>
 								<option value="female">Female</option>
 							</select>
