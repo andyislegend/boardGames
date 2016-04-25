@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.service.mapper;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Category;
+import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 
@@ -18,6 +20,16 @@ public class GameUserMapper implements GenericMapper<GameUserDTO, GameUser> {
 		gameUserDTO.setMaxPlayers(gameUser.getGame().getMaxPlayers());
 		gameUserDTO.setMinPlayers(gameUser.getGame().getMinPlayers());
 		return gameUserDTO;
+	}
+	
+	@Override
+	public GameUser toEntity(GameUserDTO gameUserDTO) {
+		GameUser gameUser = new GameUser();
+		gameUser.setEdition(gameUserDTO.getEdition());
+		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
+		Category category = new Category(gameUserDTO.getCategory());
+		gameUser.setGame(new Game(gameUserDTO.getName(), gameUserDTO.getDescription(), gameUserDTO.getMinPlayers(), gameUserDTO.getMaxPlayers(), category));
+		return gameUser;
 	}
 
 }
