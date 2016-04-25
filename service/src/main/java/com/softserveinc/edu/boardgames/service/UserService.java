@@ -14,7 +14,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
-import com.softserveinc.edu.boardgames.service.util.EmailSenderApp;
+//import com.softserveinc.edu.boardgames.service.util.EmailSenderApp;
 
 @Service
 @Transactional
@@ -22,13 +22,17 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private MailService mailService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Transactional
 	public void createUser(User user) {
-		EmailSenderApp.sendMail(user.getUsername(), user.getPassword(), user.getEmail());
+//		EmailSenderApp.sendMail(user.getUsername(), user.getPassword(), user.getEmail());
+		mailService.sendMail(user.getEmail(), user.getUsername(), user.getPassword());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		UserRoles role = UserRoles.USER;
 		Set<UserRoles> roles = new HashSet<>();
