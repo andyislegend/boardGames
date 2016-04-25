@@ -8,12 +8,12 @@ to acces home.jsp use following instructions
 # pword: 123
 
 How to run :
-bower install
-mvn clean install 
-tomcat7:run-war
-mvn jetty:run
+#bower install
+#mvn clean install 
+#tomcat7:run-war
+#mvn jetty:run
 
 our mail
-l: boardGamesExchange@gmail.com
-p: LV179-Java
+#l: boardGamesExchange@gmail.com
+#p: LV179-Java
 
