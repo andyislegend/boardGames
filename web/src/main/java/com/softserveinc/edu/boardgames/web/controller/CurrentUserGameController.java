@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.CommentsForGameDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
@@ -49,7 +50,9 @@ public class CurrentUserGameController {
 	}
 	
 	@RequestMapping(value = "NewGame", method = RequestMethod.POST)
-	public String addNewGame(@RequestBody GameUser gameUser){		 
+	public String addNewGame(@RequestBody GameUserDTO gameUserDTO){	
+		GameUser gameUser = new GameUser();
+		gameUser = new GameUserMapper().toEntity(gameUserDTO);
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.create(gameUser);
 		return "";
@@ -60,5 +63,11 @@ public class CurrentUserGameController {
 	public List<Category> allCategories (){
 		List<Category> categories = categoryService.getAll();
 		return categories;
+	}
+	
+	@RequestMapping(value = "NewComment", method = RequestMethod.POST)
+	public String addComment(@RequestBody CommentsForGameDTO commentsForGameDTO) {
+		System.out.println(commentsForGameDTO.getGameID());
+		return "";
 	}
 }

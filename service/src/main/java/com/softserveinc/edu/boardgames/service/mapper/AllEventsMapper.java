@@ -28,4 +28,10 @@ public class AllEventsMapper  implements GenericMapper<AllEventsDto, Event> {
 		
 		return allEventsDto;
 	}
+
+	@Override
+	public Event toEntity(AllEventsDto t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

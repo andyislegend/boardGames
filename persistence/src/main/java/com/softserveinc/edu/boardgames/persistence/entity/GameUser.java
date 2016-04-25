@@ -46,7 +46,7 @@ public class GameUser implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Game game;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private User user;
 
 	public GameUser() {

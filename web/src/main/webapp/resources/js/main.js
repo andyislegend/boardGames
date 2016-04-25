@@ -32,35 +32,41 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
     });
 });
 
-app.controller("CreateGameCtrl", function ($scope, $http, $window) {
-    $scope.showText = false;
-    $scope.categories = [];
-    $scope.showForm = function () {
-        $scope.showText = !$scope.showText;
-    };
-    $http.get('getAllCategories').then(function (result) {
-        $scope.categories = result.data;
-    });
-    $scope.list = [];
-    $scope.submit = function () {
-        var userGame = {
-            "edition": $scope.edition,
-            "yearOfProduction": $scope.year,
-            "game": {
-                "name": $scope.name,
-                "category": {"id": $scope.category},
-                "description": $scope.description,
-                "rules": $scope.rules,
-                "maxPlayers": $scope.maxPlayers,
-                "minPlayers": $scope.minPlayers
-            }
-        };
-        var response = $http.post('NewGame', userGame);
-        response.success(function (data, status, headers, config) {
-            $scope.list.push(data);
+app.controller("CreateGameCtrl", function($scope, $http) {
+	$scope.showText = false;
+	$scope.categories = [];
+	$scope.showForm = function() {
+		$scope.showText = !$scope.showText;
+		};
+	$http.get('getAllCategories').then(function(result ){
+		$scope.categories = result.data;
+	});
+		$scope.list = [];
+	$scope.submit = function() {	
+		 var userGame  = {
+			"name" : $scope.name,
+			"category" : $scope.category,
+			"yearOfProduction" : $scope.year,
+			"edition" : $scope.edition,
+			"description" : $scope.description,
+			"rules" : $scope.rules,
+			"maxPlayers" : $scope.maxPlayers,
+			"minPlayers" : $scope.minPlayers
+		 };
 
-        });
-    };
+		 $http({
+			  method: 'POST',
+			  url: '/NewGame',
+			  headers: {
+				   'Content-Type': 'application/json'
+				 },
+			  data:userGame
+			}).then(function successCallback(response) {
+			    $scope.list.push(response.data);
+			  }, function errorCallback(response) {
+			    
+			  });
+	};
 });
 
 app.controller("eventListCtrl", function ($scope, $http) {
