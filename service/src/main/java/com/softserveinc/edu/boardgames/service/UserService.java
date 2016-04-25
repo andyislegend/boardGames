@@ -152,6 +152,14 @@ public class UserService {
 	public User findById(int id){
 		return userRepository.findOne(id);
 	}
+	
+	public List<User> findAllFriends(User user){
+		return userRepository.findAllFriends(user);
+	}
+	
+	public List<User> getAllNoConsiderFriendByUser(User user){
+		return userRepository.getAllNoConsiderFriendByUser(user);
+	}
 	public List<User> findAllUserByFirstName(String name){
 		return userRepository.findAllUserByFirstName(name);
 	}
