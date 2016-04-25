@@ -388,39 +388,29 @@ app.controller("showAllTournaments", function ($scope, $http) {
                 $scope.tournaments = data;
 
             });
+
+        $scope.createTournament = function () {
+            alert("ENTER");
+            var e = document.getElementById("inputselectGame");
+            var gameName = e.options[e.selectedIndex].value;
+            var tournament = {
+                tournamentName: $scope.tournamentName,
+                rating: $scope.requiredRating,
+                maxParticipants: $scope.maxParticipants,
+                date: $scope.date,
+                gameName: gameName,
+                country: $scope.countryTournament,
+                city: $scope.cityTournament,
+                street: $scope.streetTournament,
+                houseNumber: $scope.houseNumberTournament,
+                roomNumber: $scope.roomNumberTournament
+            };
+
+            $http.post("/addTournament", tournament)
+                .success(function (data) {
+                    $scope.tournaments = data;
+                });
+
+        }
     }
-});
-
-app.controller("AddTournament", function ($scope, $uibModal, $http) {
-    $scope.addTournament = function () {
-
-        $uibModal.open({
-            templateUrl: 'AddTournament.html'
-        });
-
-    }
-    $scope.createTournament = function () {
-        alert("ENTER");
-        var e = document.getElementById("inputselectGame");
-        var gameName = e.options[e.selectedIndex].value;
-        var tournament = {
-            tournamentName: $scope.tournamentName,
-            rating: $scope.requiredRating,
-            maxParticipants: $scope.maxParticipants,
-            date: $scope.date,
-            gameName: gameName,
-            country: $scope.countryTournament,
-            city: $scope.cityTournament,
-            street: $scope.streetTournament,
-            houseNumber: $scope.houseNumberTournament,
-            roomNumber: $scope.roomNumberTournament
-        };
-
-        $http.post("/addTournament", tournament)
-            .success(function (data) {
-
-            });
-
-    }
-
 });

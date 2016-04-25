@@ -258,7 +258,7 @@
                                            data-target="#myModalTournament">
                                             <img class="tournamentIco" src="resources/ico/plus_white.png"></a>
 
-                                        <div id="myModalTournament" class="modal fade" role="dialog">
+                                        <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="showAllTournaments">
                                             <div class="modal-dialog">
 
                                                 <!-- Modal content-->
@@ -301,7 +301,7 @@
                                                         <br/>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default"> Create</button>
+                                                        <button type="button" class="btn btn-default" ng-click="createTournament()"> Create</button>
                                                         <button type="button" class="btn btn-default"
                                                                 data-dismiss="modal">Close</button>
                                                     </div>
