@@ -95,16 +95,13 @@
          </div>
       </section>
       <!-- /top-strip -->
-      
       <div class="anmtd main-menu-container" role="navigation">
          <nav class="wrapper main-menu">
             <ul id="menu-main-menu" class="menu">
-               <li
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category sub-menu-full-width menu-item-has-mega-menu link-arrow">
-                  <a href="#"><span>Games</span></a>
-                  <div class="sub-menu">
+               <li class="dropdown">
+                  <a href="#" class="dropdown.toggle" data-toggle="dropdown" style="font-weight:bold;"><span>Games</span></a>
+                  <ul class="dropdown-menu">
                      <div class="sub-posts">
-                        
                         <!-- drop-down ALL GAMES-->
                         <div class="column-5" ng-controller="getGamesGlobalController"
                            ng-hide="hideTournaments">
@@ -201,14 +198,12 @@
                         </div>
                         <!-- /drop-down ALL GAMES-->
                      </div>
-                  </div>
+                  </ul>
                </li>
-               <li
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category sub-menu-full-width menu-item-has-mega-menu link-arrow">
-                  <a href="#"><span>Championship</span></a>
-                  <div class="sub-menu">
+               <li class="dropdown">
+                  <a href="#" class="dropdown.toggle" data-toggle="dropdown" style="font-weight:bold;"><span>Tournaments</span></a>
+                  <ul class="dropdown-menu">
                      <div class="sub-posts">
-                       
                         <!-- TOURNAMENTS -->
                         <div class="column-5" ng-controller="showAllTournaments"
                            ng-hide="hideTournaments">
@@ -301,114 +296,16 @@
                            </div>
                         </div>
                         <!-- /TOURNAMENTS -->
-                        
                      </div>
-                  </div>
-               </li>
-               <li
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category sub-menu-full-width menu-item-has-mega-menu link-arrow">
-                  <a href="#"><span>Users</span></a>
-                  <div class="sub-menu">
-                     <div class="sub-posts">
-                        
-                        <!-- USERS SEARCH-->
-                        <div ng-controller="getAllUsersWithNegativeRating"></div>
-                        <div class="column-4" ng-controller="getAllUsersCtrl">
-                           <div class="mainbar">
-                              <div class="widget widget_top-posts">
-                                 <h2 class="title">Users search</h2>
-                              </div>
-                              <div class="column-4">
-                                 <input type="text" class="form-control"
-                                    ng-model="searchText.lastName"
-                                    placeholder="Search by last name">
-                              </div>
-                              <div class="column-4">
-                                 <input type="text" class="form-control"
-                                    ng-model="searchText.address.city"
-                                    placeholder="Search by city">
-                              </div>
-                              <table class="table">
-                                 <tr>
-                                    <th>Last Name, First Name</th>
-                                    <th>Email</th>
-                                    <th>PhoneNumber</th>
-                                    <th>Address</th>
-                                 </tr>
-                                 <tr ng-repeat="user in users|filter:searchText">
-                                    <td><a href="" ng-click="getInfoAboutUserFunc(user.id)"
-                                       style="color: white"> {{user.lastName}}
-                                       {{user.firstName}}</a>
-                                    </td>
-                                    <td>{{user.email}}</td>
-                                    <td>{{user.phoneNumber}}</td>
-                                    <td>{{user.address.country}},{{user.address.city}},
-                                       {{user.address.street}}, {{user.address.houseNumber}},
-                                       {{user.address.roomNumber}}
-                                    </td>
-                                 </tr>
-                              </table>
-                              <div ng-show="showUser" class="col-sm-12"
-                                 id="backgroundForOneUser">
-                                 <div class="col-sm-3" id="backgroundForOneUser">
-                                    <p>Last Name:{{oneUser.lastName}}</p>
-                                    <p>First Name:{{oneUser.firstName}}</p>
-                                    <p>Username:{{oneUser.username}}</p>
-                                    <p>Sex:{{oneUser.sex}}</p>
-                                    <p>Age:{{oneUser.age}}</p>
-                                    <p>Rating:{{oneUser.rating}}</p>
-                                 </div>
-                                 <div class="col-sm-3" id="backgroundForOneUser"
-                                    ng-controller="getAllUsersGames">
-                                    <a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
-                                    Games user owns</a>
-                                    <ul ng-show="showUsersGames" ng-repeat="game in games">
-                                       <li><a href="" ng-click="getInfoAboutGame(game.id)">
-                                          {{game.name}}</a>
-                                       </li>
-                                    </ul>
-                                    <modal visible="showModal"></modal>
-                                 </div>
-                                 <div class="col-sm-3" id="backgroundForOneUser"
-                                    ng-controller="getAllUsersTournaments">
-                                    <a href=""
-                                       ng-click="getInfoAboutUsersTournaments(oneUser.username)">
-                                    Users tournaments</a>
-                                    <ul ng-show="showUsersTournaments"
-                                       ng-repeat="tournament in tournaments">
-                                       <li><a href=""
-                                          ng-click="getInfoAboutTournament(tournament.id)">
-                                          {{tournament.name}}</a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="col-sm-3" id="backgroundForOneUser">
-                                    <img fallback-src='http://localhost/img/avatar/ava.png'
-                                       ng-src="{{userUrl}}" height="52" width="52">
-                                    <form enctype="multipart/form-data" action="uploadFile"
-                                       method="POST">
-                                       Choose foto to upload : <input type="file" name="fileUpload"
-                                          class="fileUpload"> <br> <input type="submit"
-                                          value="Upload">
-                                    </form>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <!-- /USERS SEARCH-->                        
-                        
-                     </div>        
-                  </div>
+                  </ul>
                </li>
             </ul>
          </nav>
       </div>
-      
       <!-- Main Section-->
       <section class="wrapper home-section posts-section with-sidebar">
          <div class="grids">
             <div class="grid-8">
-               
                <!-- EVENTS -->
                <div class="column-1" ng-controller="eventListCtrl">
                   <div class="mainbar">
@@ -446,43 +343,116 @@
                   </div>
                </div>
                <!-- /EVENTS -->
-               
                <!--
-                <div class=" jcarousel-skin-tango">
-    <div class="widget" ng-controller = "CreateEventCtrl">
-     <div class="title">Add event</div>    
-
-
-
-
-        <div class="field">
-          Event: <input type="text" data-ng-model="name" size="100px" />
-        </div>
-		
-        <div class="field">
-        Game: <input type="text" data-ng-model="game" size="100px" />
-        </div>
-        
-		<div class="field">
-        Description: <input type="text" data-ng-model="description" size="100px" />
-        </div>
-		
-        <div class="field">
-        Place: <input type="text"  data-ng-model="place" size="100px" />
-        </div>
-		
-       
-       
-        <div class="field">
-		<button class="btn btn-default" data-ng-model="addNewEvent()">Add Event</button>
-        </div>
-	</form> 
-  </div>
-  </div>
-               -->
-               
-               
-               
+                  <div class=" jcarousel-skin-tango">
+                  <div class="widget" ng-controller = "CreateEventCtrl">
+                  <div class="title">Add event</div>    
+                  
+                  
+                  
+                  
+                  <div class="field">
+                  Event: <input type="text" data-ng-model="name" size="100px" />
+                  </div>
+                  
+                  <div class="field">
+                  Game: <input type="text" data-ng-model="game" size="100px" />
+                  </div>
+                  
+                  <div class="field">
+                  Description: <input type="text" data-ng-model="description" size="100px" />
+                  </div>
+                  
+                  <div class="field">
+                  Place: <input type="text"  data-ng-model="place" size="100px" />
+                  </div>
+                  
+                  
+                  
+                  <div class="field">
+                  <button class="btn btn-default" data-ng-model="addNewEvent()">Add Event</button>
+                  </div>
+                  </form> 
+                  </div>
+                  </div>
+                  -->              
+               <!------------------------------------------- Users info ------------------------------------------------>
+               <div class="column-1" ng-controller="getAllUsersWithNegativeRating"></div>
+               <div class="mainbar" ng-controller="getAllUsersCtrl">
+                  <header class="section-header" ng-controller="eventListCtrl">
+                     <div class="section-title title-with-sep">
+                        <h2 class="title">Users</h2>
+                     </div>
+                  </header>
+                  <input type="text" class="form-control"
+                     ng-model="searchText.lastName" placeholder="Search by last name" style="margin-bottom:10px">
+                  <input type="text" class="form-control"
+                     ng-model="searchText.address.city" placeholder="Search by city">
+                  <table class="table">
+                     <tr>
+                        <th>Last Name, First Name</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>Address</th>
+                     </tr>
+                     <tr ng-repeat="user in users|filter:searchText">
+                        <td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
+                           {{user.lastName}} {{user.firstName}}</a>
+                        </td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phoneNumber}}</td>
+                        <td>{{user.address.country}},{{user.address.city}},
+                           {{user.address.street}}, {{user.address.houseNumber}},
+                           {{user.address.roomNumber}}
+                        </td>
+                     </tr>
+                  </table>
+                  <div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
+                     <div class="col-sm-3" id="backgroundForOneUser">
+                        <p>Last Name:{{oneUser.lastName}}</p>
+                        <p>First Name:{{oneUser.firstName}}</p>
+                        <p>Username:{{oneUser.username}}</p>
+                        <p>Sex:{{oneUser.sex}}</p>
+                        <p>Age:{{oneUser.age}}</p>
+                        <p>Rating:{{oneUser.rating}}</p>
+                     </div>
+                     <div class="col-sm-3" id="backgroundForOneUser"
+                        ng-controller="getAllUsersGames">
+                        <a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
+                        Games user owns</a>
+                        <ul ng-show="showUsersGames" ng-repeat="game in games">
+                           <li><a href="" ng-click="getInfoAboutGame(game.id)">
+                              {{game.name}}</a>
+                           </li>
+                        </ul>
+                        <modal visible="showModal"></modal>
+                     </div>
+                     <div class="col-sm-3" id="backgroundForOneUser"
+                        ng-controller="getAllUsersTournaments">
+                        <a href=""
+                           ng-click="getInfoAboutUsersTournaments(oneUser.username)">
+                        Users tournaments</a>
+                        <ul ng-show="showUsersTournaments"
+                           ng-repeat="tournament in tournaments">
+                           <li><a href=""
+                              ng-click="getInfoAboutTournament(tournament.id)">
+                              {{tournament.name}}</a>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="col-sm-3" id="backgroundForOneUser">
+                        <img fallback-src='http://localhost/img/avatar/ava.png'
+                           ng-src="{{userUrl}}" height="52" width="52">
+                        <form enctype="multipart/form-data" action="uploadFile"
+                           method="POST">
+                           Choose foto to upload : <input type="file" name="fileUpload"
+                              class="fileUpload"> <br> <input type="submit"
+                              value="Upload">
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <!---------------------------------------- end of users -------------------------------------------------->
             </div>
             <!-- sidebar -->
             <div class="grid-4">
@@ -594,7 +564,6 @@
                      </div>
                   </div>
                   <!-- /sidebar FRIENDS-->
-                 
                   <!-- sidebar MYGAMES-->
                   <div class="widget">
                      <h2 class="title">My Games</h2>
@@ -667,15 +636,13 @@
                         </div>
                      </div>
                   </div>
-            
-            <!-- /sidebar MYGAMES-->
-            </aside>
+                  <!-- /sidebar MYGAMES-->
+               </aside>
+            </div>
+            <!-- /sidebar -->
          </div>
-         <!-- /sidebar -->
-      </div>
       </section>
       <!-- Main Section-->
-      
       <!-- Footer -->
       <section id="site">
          <footer id="footer" class=" anmtd" role="contentinfo">
