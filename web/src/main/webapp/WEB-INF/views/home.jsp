@@ -186,50 +186,25 @@
 													<td>{{ x.username }}</td>
 													<td>{{ x.edition }}</td>
 													<td>{{ x.yearOfProduction }}</td>
-													<td><button class="btn btn-success">Action</button></td>
+													<td><button ng-click = "showComments(x.id)">Comment</button></td>
 												</tr>
 											</tbody>
 										</table>
+										<div ng-show="isShowComment">
+											<p ng-repeat="comment in comments">
+											<p>{{comment.username}}</p>
+											<p>{{comment.text}}</p>
+											</p>
+											<form data-ng-submit=submit()>
+												<input type="text" data-ng-model="comment"><input
+													type="submit" ng-click="addComment">
+											</form>
+										</div>
 									</div>
 								</div>
 								<!-- /sidebar ALL GAMES-->
 								<!-- sidebar ADD GAME-->
 
-								<div class="widget" ng-controller="CreateGameCtrl">
-									<h2 class="title">Add a game</h2>
-
-									<button ng-click="showForm()" style="color: black">ADD
-										NEW GAME</button>
-									<form data-ng-submit=submit() ng-show="showText">
-										<div class="field">
-											<label>Game name</label><input data-ng-model="name">
-										</div>
-										<div class="field">
-											<label>Category</label><input data-ng-model="category">
-										</div>
-										<div class="field">
-											<label>Description</label><input data-ng-model="description">
-										</div>
-										<div class="field">
-											<label>Rules</label><input data-ng-model="rules">
-										</div>
-										<div class="field">
-											<label>Max players</label><input data-ng-model="maxPlayers">
-										</div>
-										<div class="field">
-											<label>Min players</label><input data-ng-model="minPlayers">
-										</div>
-										<div class="field">
-											<label>Edition</label><input data-ng-model="edition">
-										</div>
-										<div class="field">
-											<label>Year of production</label><input data-ng-model="year">
-										</div>
-										<div class="field">
-											<input type="submit" value="add">
-										</div>
-									</form>
-								</div>
 
 								<div ng-controller="allUsersGameCtrl">
 									<table class="table">
@@ -478,187 +453,198 @@
 
 
 					<!-- sidebar FRIENDS-->
-         <div class="column-4" ng-controller="friendsCtrl">    
-           <div class="widget">
-              <h2 class="title">Friends</h2>
-              
-          
-			
-			
-				<table class="table table-striped">
-				
-					<thead>
-					<tr>
-						<th>Friends </th>
-                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/add_user.png" ng-click="showFriends = !showFriends"></div></a></td>
-						<td>
-                            
-                            
-                            <a href="#" type="button" data-toggle="modal" data-target="#myModal">
-                                <div class="proba">
-                                    <div class="count" ng-hide="count < 1">{{count}}</div>
-                                    <img class="FriendIco" src="resources/ico/bell.png">
-                                </div>
-                            </a>
-                            
-                            <!-- Modal -->
-                            <div id="myModal" class="modal fade" role="dialog">
-                              <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">This users want to be your friend</h4>
-                                  </div>
-                                  <div class="background">
-                                      <div ng-repeat="user in users" class="col-sm-4" >
-                                        <div class="user">
-                                        <div class="rows"><img class="ava" src="resources/images/default-avatar.jpg"/></div>
-                                        <div class="rows">name: {{user.firstName }}</div>
-                                        <div class="rows">Last name: {{user.lastName}}</div> 
-                                        <div class="rows">
-                                        <button class="btn btn-info buton" ng-click="add(user.id)">
-                                        <div class="proba"><img class="plus-minus" src="resources/ico/plus.ico"></div>
-										</button>
-                                        <button class="btn btn-primary buton" ng-click="rejected(user.id)">
-                                            <div class="proba"><img class="plus-minus" src="resources/ico/minus.ico"></div>
-										</button>
-                                        </div>
-                                        </div>
-                        			</div>
-                              
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-                            
-                            
-						</td>
-					</tr>
-					</thead>
-					<tbody  ng-hide="showFriends">
-                         
-					<tr ng-repeat="friend in friends">
-						<td>{{ friend.firstName }}</td>
-						<td>{{ friend.lastName }}</td>
-                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/messages.png"></div></a></td>
-                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/trophy.png"></div></a></td>
-
-					</tr>
-					</tbody>
-                    
-				</table>
-                <div  ng-hide="!showFriends">
-                    <h2 class="title">All users in our App</h2>
-                    <input type="text" ng-init="findAllUsers()"  ng-model="name" ng-keyup="findAllUsers()"/>
-                    <h3></h3>
-                    <div ng-repeat="user in allUsers" class="addUsers">
-                        <img src="resources/images/default-avatar.jpg" width="25"/>
-                        {{ user.firstName }}
-						{{ user.lastName }}
-                        <img class="addUserImg" src="resources/ico/plus.ico">
-					</div>
-                    
-                </div>
-			</div>
-		</div>
-           
-			
-		
-	
-              
-            <!-- /sidebar FRIENDS-->
-					<!-- sidebar MYGAMES-->
-						
+					<div class="column-4" ng-controller="friendsCtrl">
 						<div class="widget">
-							<h2 class="title">My Games</h2>
+							<h2 class="title">Friends</h2>
 
 
-							<div ng-controller="CreateGameCtrl">
+
+
+							<table class="table table-striped">
+
+								<thead>
+									<tr>
+										<th>Friends</th>
+										<td><a href="#"><div class="proba">
+													<img class="FriendIco" src="resources/ico/add_user.png"
+														ng-click="showFriends = !showFriends">
+												</div></a></td>
+										<td><a href="#" type="button" data-toggle="modal"
+											data-target="#myModal">
+												<div class="proba">
+													<div class="count" ng-hide="count < 1">{{count}}</div>
+													<img class="FriendIco" src="resources/ico/bell.png">
+												</div>
+										</a> <!-- Modal -->
+											<div id="myModal" class="modal fade" role="dialog">
+												<div class="modal-dialog">
+
+													<!-- Modal content-->
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">This users want to be your
+																friend</h4>
+														</div>
+														<div class="background">
+															<div ng-repeat="user in users" class="col-sm-4">
+																<div class="user">
+																	<div class="rows">
+																		<img class="ava"
+																			src="resources/images/default-avatar.jpg" />
+																	</div>
+																	<div class="rows">name: {{user.firstName }}</div>
+																	<div class="rows">Last name: {{user.lastName}}</div>
+																	<div class="rows">
+																		<button class="btn btn-info buton"
+																			ng-click="add(user.id)">
+																			<div class="proba">
+																				<img class="plus-minus" src="resources/ico/plus.ico">
+																			</div>
+																		</button>
+																		<button class="btn btn-primary buton"
+																			ng-click="rejected(user.id)">
+																			<div class="proba">
+																				<img class="plus-minus"
+																					src="resources/ico/minus.ico">
+																			</div>
+																		</button>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+														</div>
+													</div>
+
+												</div>
+											</div></td>
+									</tr>
+								</thead>
+								<tbody ng-hide="showFriends">
+
+									<tr ng-repeat="friend in friends">
+										<td>{{ friend.firstName }}</td>
+										<td>{{ friend.lastName }}</td>
+										<td><a href="#"><div class="proba">
+													<img class="FriendIco" src="resources/ico/messages.png">
+												</div></a></td>
+										<td><a href="#"><div class="proba">
+													<img class="FriendIco" src="resources/ico/trophy.png">
+												</div></a></td>
+
+									</tr>
+								</tbody>
+
+							</table>
+							<div ng-hide="!showFriends">
+								<h2 class="title">All users in our App</h2>
+								<input type="text" ng-init="findAllUsers()" ng-model="name"
+									ng-keyup="findAllUsers()" />
+								<h3></h3>
+								<div ng-repeat="user in allUsers" class="addUsers">
+									<img src="resources/images/default-avatar.jpg" width="25" /> {{
+									user.firstName }} {{ user.lastName }} <img class="addUserImg"
+										src="resources/ico/plus.ico">
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+					<!-- /sidebar FRIENDS-->
+					<!-- sidebar MYGAMES-->
+
+					<div class="widget">
+						<h2 class="title">My Games</h2>
+
+
+						<div ng-controller="CreateGameCtrl">
+							<div>
+								<input type="submit" value="ADD GAME" ng-click="showForm() "
+									style="width: 100%; margin-bottom: 10px">
+							</div>
+
+							<form data-ng-submit=submit() role="form" ng-show="showText">
 								<div>
-									<input type="submit" value="ADD GAME" ng-click="showForm() "
+									<input class="field-form" data-ng-model="name"
+										placeholder="Name">
+								</div>
+								<div>
+									<label>Select Category:</label> <select class="field-form"
+										id="exampleSelect1" data-ng-model="category">
+										<option ng-repeat="category in categories"
+											value="{{category.name}}">{{category.name}}</option>
+									</select>
+								</div>
+								<div>
+									<input class="field-form" data-ng-model="description"
+										placeholder="Description"> <input class="field-form"
+										data-ng-model="rules" placeholder="Rules"> <input
+										class="field-form" data-ng-model="maxPlayers"
+										placeholder="Max Players"> <input class="field-form"
+										data-ng-model="minPlayers" placeholder="Min Players">
+									<input class="field-form" data-ng-model="edition"
+										placeholder="Edition"> <input class="field-form"
+										data-ng-model="year" placeholder="Year">
+								</div>
+								<div>
+									<input type="submit" value="APPLY"
 										style="width: 100%; margin-bottom: 10px">
 								</div>
 
-								<form data-ng-submit=submit() role="form" ng-show="showText">
-									<div>
-										<input class="field-form" data-ng-model="name"
-											placeholder="Name">
-									</div>
-									<div>
-										<label>Select Category:</label> <select class="field-form"
-											id="exampleSelect1" data-ng-model="category">
-											<option ng-repeat="category in categories"
-												value="{{category.name}}">{{category.name}}</option>
-										</select>
-									</div>
-									<div>
-										<input class="field-form" data-ng-model="description"
-											placeholder="Description"> <input class="field-form"
-											data-ng-model="rules" placeholder="Rules"> <input
-											class="field-form" data-ng-model="maxPlayers"
-											placeholder="Max Players"> <input class="field-form"
-											data-ng-model="minPlayers" placeholder="Min Players">
-										<input class="field-form" data-ng-model="edition"
-											placeholder="Edition"> <input class="field-form"
-											data-ng-model="year" placeholder="Year">
-									</div>
-									<div>
-										<input type="submit" value="APPLY"
-											style="width: 100%; margin-bottom: 10px">
+							</form>
+						</div>
+
+						<div ng-controller="allUsersGameCtrl">
+							<div>
+								<table class="table">
+									<tr>
+										<th>Name</th>
+										<th>Category</th>
+										<th>More</th>
+										<th>Comment</th>
+									<tr>
+									<tr ng-repeat="game in allGame">
+										<td>{{game.name}}</td>
+										<td>{{game.category}}</td>
+										<td>
+											<div>
+												<input type="submit" value="More" ng-click="myFunc(game.id)"
+													style="border: 1px solid #787878; border-radius: 1px;">
+											</div>
+
+										</td>
+										<td>com</td>
+									</tr>
+								</table>
+								<div ng-show="showMe">
+									<div ng-repeat="game in games">
+										<p>Category:{{game.category}}</p>
+										<p>Year of production: {{game.yearOfProduction}}</p>
+										<p>Edition: {{game.edition}}</p>
+										<p>Description: {{game.description}}</p>
+										<p>Max players: {{game.maxPlayers}}</p>
+										<p>Min players: {{game.minPlayers}}</p>
 									</div>
 
-								</form>
-							</div>
 
-							<div ng-controller="allUsersGameCtrl">
-								<div>
-									<table class="table">
-										<tr>
-											<th>Name</th>
-											<th>Category</th>
-											<th>More</th>
-											<th>Comment</th>
-										<tr>
-										<tr ng-repeat="game in allGame">
-											<td>{{game.name}}</td>
-											<td>{{game.category}}</td>
-											<td>
-												<div>
-													<input type="submit" value="More"
-														ng-click="myFunc(game.id)"
-														style="border: 1px solid #787878; border-radius: 1px;">
-												</div>
-
-											</td>
-											<td>com</td>
-										</tr>
-									</table>
-									<div ng-show="showMe">
-										<div ng-repeat="game in games">
-											<p>Category:{{game.category}}</p>
-											<p>Year of production: {{game.yearOfProduction}}</p>
-											<p>Edition: {{game.edition}}</p>
-											<p>Description: {{game.description}}</p>
-											<p>Max players: {{game.maxPlayers}}</p>
-											<p>Min players: {{game.minPlayers}}</p>
-										</div>
-
-
-									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- /sidebar MYGAMES-->
-				</aside>
 			</div>
-			<!-- /sidebar -->
+			<!-- /sidebar MYGAMES-->
+			</aside>
+		</div>
+		<!-- /sidebar -->
 		</div>
 	</section>
 	<!-- Main Section-->
