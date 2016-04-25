@@ -30,11 +30,7 @@ public class FriendController {
 	public List<User> getAllFriends(){
 		String userName = WebUtil.getPrincipalUsername();
 		User user = userService.findOne(userName);
-		List<Friend> listOfFriends = friendService.getAllFriends(user);
-		List<User> list = new ArrayList<User>();
-		for(int i = 0; i < listOfFriends.size(); i++){
-			list.add(listOfFriends.get(i).getUserId());
-		}
+		List<User> list = userService.findAllFriends(user);
 		return list;
 	}
 	
@@ -50,11 +46,7 @@ public class FriendController {
 	public List<User> allOfferedUsers(){
 		String userName = WebUtil.getPrincipalUsername();
 		User user = userService.findOne(userName);
-		List<Friend> listOfNoConsiderFriend = friendService.getAllNoConsiderFriendByUser(user);
-		List<User> listOfUsers = new ArrayList<User>();
-		for(int i = 0; i < listOfNoConsiderFriend.size(); i++){
-			listOfUsers.add(listOfNoConsiderFriend.get(i).getUser());
-		}
+		List<User> listOfUsers = userService.getAllNoConsiderFriendByUser(user);
 		return listOfUsers;
 	}
 	

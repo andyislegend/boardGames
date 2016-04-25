@@ -38,5 +38,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("Select u FROM User u WHERE u.firstName LIKE ?1 OR u.lastName LIKE ?1")
 	public List<User> findAllUserByFirstName(String name);
+	
+	@Query("SELECT u FROM Friend f RIGHT JOIN f.userId u WHERE f.user = ?1 AND f.status.id = 2")
+	public List<User> findAllFriends(User user);
+	
+	@Query("SELECT u FROM Friend f RIGHT JOIN f.user u WHERE f.userId = ?1 AND f.status.id = 1")
+	public List<User> getAllNoConsiderFriendByUser(User user);
 
 }
