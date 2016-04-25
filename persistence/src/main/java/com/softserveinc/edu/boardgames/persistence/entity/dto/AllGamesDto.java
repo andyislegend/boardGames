@@ -1,23 +1,21 @@
-package com.softserveinc.edu.boardgames.service.dto;
+package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 public class AllGamesDto {
 	
 	private Integer id;
 	private String name;
 	private String categoryName;
-	private String description;
 	private Integer minPlayers;
 	private Integer maxPlayers;
 	private Integer rating;
 	
 	public AllGamesDto() {}
-	public AllGamesDto(Integer id, String name, String categoryName, String description, Integer minPlayers, Integer maxPlayers,
+	public AllGamesDto(Integer id, String name, String categoryName, Integer minPlayers, Integer maxPlayers,
 			Integer rating) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.categoryName = categoryName;
-		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.rating = rating;
@@ -39,12 +37,6 @@ public class AllGamesDto {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
 	}
 	public Integer getMinPlayers() {
 		return minPlayers;

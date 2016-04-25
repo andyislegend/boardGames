@@ -27,11 +27,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * This class describes users of boardGames website.
@@ -156,6 +155,9 @@ public class User implements Serializable {
 	/**
 	 * List of tounaments that were organized by user
 	 */
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "user")
+	@JsonBackReference
+    private Set<GameRatingNumeric> gameRatingNumeric;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userCreator")
@@ -173,6 +175,19 @@ public class User implements Serializable {
 
 	public User() {
 	}
+
+	public Set<GameRatingNumeric> getGameRatingNumeric() {
+		return gameRatingNumeric;
+	}
+
+	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
+		this.gameRatingNumeric = gameRatingNumeric;
+	}
+	/**
+	 * Get value of column id.
+	 * 
+	 * @return value of column id.
+	 */
 
 	public Integer getId() {
 		return id;

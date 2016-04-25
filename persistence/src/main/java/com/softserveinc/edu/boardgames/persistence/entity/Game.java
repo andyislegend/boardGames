@@ -1,7 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,16 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 
 /**
@@ -61,7 +58,7 @@ public class Game implements Serializable{
 	@Column(name = "rating")
 	private Integer rating = 0;
 	
-	@ManyToOne(fetch=FetchType.EAGER, targetEntity=Category.class, cascade={CascadeType.ALL})
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private Category category;
 	
@@ -74,11 +71,14 @@ public class Game implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
 	@JsonBackReference
     private Set<Tournament> tournaments;
+	
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
+    private Set<GameRatingNumeric> gameRatingNumeric;
 
 	@NotEmpty
 	@Column(name = "gameRating", nullable=false)
 	private String gameRating = GameRating.NOT_RATED.name();
-
+	
 	public Game(){}
 	
 	public Game(String name, String description, Integer minPlayers, 
@@ -89,6 +89,14 @@ public class Game implements Serializable{
 		this.maxPlayers = maxPlayers;
 		this.category = category;
 		this.rating = rating;
+	}
+
+	public Set<GameRatingNumeric> getGameRatingNumeric() {
+		return gameRatingNumeric;
+	}
+
+	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
+		this.gameRatingNumeric = gameRatingNumeric;
 	}
 
 	public Integer getRating() {
@@ -166,42 +174,6 @@ public class Game implements Serializable{
 	public void setGameRating(String gameRating) {
 		this.gameRating = gameRating;
 	}
-
-	@Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Game other = (Game) obj;
-        if (id != other.id) {
-            return false;
-        }       
-        if (category != other.category) {
-            return false;
-        }
-        if (maxPlayers != other.maxPlayers) {
-            return false;
-        }
-        if (minPlayers != other.minPlayers) {
-            return false;
-        }
-        if (description != other.description) {
-            return false;
-        }
-        if (name != other.name) {
-            return false;
-        }
-        if (gameRating != other.gameRating){
-        	return false;
-        }
-        return true;
-    }
     
     public Set<Event> getEvents() {
 		return events;
@@ -222,19 +194,19 @@ public class Game implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
 
 	@Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + 1;
-        return result;
+        return HashCodeBuilder.reflectionHashCode(this);
     }
     
     @Override
     public String toString() {
-        return "Game [id=" + id + ", category=" + category + ", maxPlayers=" + maxPlayers +
-        		", minPlayers=" + minPlayers +
-        		", description=" + description + ", name=" + name + ", gameRating=" + gameRating + "]";
+        return ToStringBuilder.reflectionToString(this);
     }
 }
