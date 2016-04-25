@@ -23,7 +23,7 @@ public interface GameUserRepository extends JpaRepository<GameUser, Long> {
 	public List<GameUser> getAllGameUserByUsername(@Param("username") String username);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO"
-			+"(gu.user.username, gu.edition, gu.yearOfProduction) " +
+			+"(gu.id, gu.user.username, gu.edition, gu.yearOfProduction) " +
 	       "from GameUser gu where gu.game.name = :name")
 	List<UserGamesOfGameDTO> getUserGameOfGame(@Param("name")String name);
 }

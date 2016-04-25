@@ -2,17 +2,25 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 public class UserGamesOfGameDTO {
 
+	private Integer id;
 	private String username;
 	private String edition;
 	private Integer yearOfProduction;
 	
 	public UserGamesOfGameDTO() {}
 	
-	public UserGamesOfGameDTO(String username, String edition, Integer yearOfProduction) {
+	public UserGamesOfGameDTO(Integer id, String username, String edition, Integer yearOfProduction) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.edition = edition;
 		this.yearOfProduction = yearOfProduction;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getUsername() {
 		return username;
