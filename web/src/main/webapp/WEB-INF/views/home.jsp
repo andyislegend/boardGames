@@ -13,6 +13,7 @@
 	rel="stylesheet" />
 <link rel="stylesheet" href="resources/css/new-css.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
+<link rel="stylesheet" href="resources/css/tournament.css"/>
 
 <link rel="stylesheet" href="resources/css/friend.css" />
 <script type="text/javascript"
@@ -206,27 +207,7 @@
 								<!-- sidebar ADD GAME-->
 
 
-								<div ng-controller="allUsersGameCtrl">
-									<table class="table">
-										<tr ng-repeat="game in allGame">
-											<td>{{game.name}}</td>
-											<td>{{game.yearOfProduction}}</td>
-											<td>
-												<button ng-click="myFunc(game.name)" style="color: black">M</button>
-											</td>
-											<td>com</td>
-										</tr>
-									</table>
-									<div ng-show="showMe">
-										<div ng-repeat="game in games">
-											<p>Category:{{game.category}}</p>
-											<p>Year of production: {{game.yearOfProduction}}</p>
-											<p>Edition: {{game.edition}}</p>
-											<p>Description: {{game.description}}</p>
-											<p>Max players: {{game.maxPlayers}}</p>
-											<p>Min players: {{game.minPlayers}}</p>
-										</div>
-									</div>
+								
 
 
 								</div>
@@ -252,8 +233,65 @@
 								ng-hide="hideTournaments">
 								<div class="mainbar">
 									<div class="widget widget_top-posts">
-										<h2 class="title">Users search</h2>
+										<h2 class="title">Tournament search</h2>
+                                        <a href="#" type="button" data-toggle="modal"
+                                           data-target="#myModalTournament">
+                                            <img class="tournamentIco" src="resources/ico/plus_white.png"></a>
+
+                                        <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="showAllTournaments">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h2>Create the best tournament ever</h2>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <label>Select game for your awsome tournament</label>
+                                                        <select class="field-form" id="selectGame" ng-controller="getGamesGlobalController">
+                                                            <option ng-repeat="game in gamesGlobal" value="{{game.name}}">{{game.name}}</option>
+                                                        </select>
+
+                                                        <label>Name of your awsome tournament</label>
+                                                        <input class="field-form" data-ng-model="tournamentName" placeholder="Name">
+                                                        <br/>
+
+                                                        <label>Required rating to join to your tournament</label>
+                                                        <input class="field-form" data-ng-model="requiredRating" placeholder="0.0">
+                                                        <br/>
+
+                                                        <label>Max count of players</label>
+                                                        <input class="field-form" data-ng-model="maxParticipants" placeholder="2">
+                                                        <br/>
+
+                                                        <label>Choose date of your tournament</label>
+                                                        <input class="field-form" data-ng-model="date" type="date">
+                                                        <br/>
+
+                                                        <label>Required rating to join to your tournament</label>
+                                                        <input class="field-form" data-ng-model="requiredRating" placeholder="0.0">
+                                                        <br/><br/>
+
+                                                        <label>Enter place where tournament will be</label>
+                                                        <input class="field-form" data-ng-model="countryTournament" placeholder="Country">
+                                                        <input class="field-form" data-ng-model="cityTournament" placeholder="City">
+                                                        <input class="field-form" data-ng-model="streetTournament" placeholder="Street">
+                                                        <input class="field-form" data-ng-model="houseNumberTournament" placeholder="HouseNumber">
+                                                        <input class="field-form" data-ng-model="roomNumberTournament" placeholder="RoomNumber">
+                                                        <br/>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" ng-click="createTournament()"> Create</button>
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 									</div>
+
+
 
 									<table class="table">
 
@@ -261,7 +299,9 @@
 											<tr>
 												<th>Tournament name</th>
 												<th>User creator</th>
-												<th>Required rating to join</th>
+												<th>Required rating</th>
+												<th>Max Participants</th>
+                                                <th>Address</th>
 												<th>Users Guests</th>
 												<th>Join</th>
 											</tr>
@@ -269,8 +309,14 @@
 										<tbody>
 											<tr ng-repeat="x in tournaments">
 												<td>{{ x.tournamentName }}</td>
-												<td>{{ x.userName }}</td>
+												<td>{{ x.username }}</td>
 												<td>{{x.requiredRating}}</td>
+                                                <td>{{x.maxParticipants}}</td>
+                                                <td>
+                                                    {{x.country}} {{x.city}}
+                                                    <br/>
+                                                    {{x.street}} {{x.houseNumber}} {{x.roomNumber}}
+                                                </td>
 												<td>
 													<table>
 														<tr ng-repeat="y in x.userGuests">
@@ -555,17 +601,11 @@
 						</div>
 					</div>
 
-
-
-
-
 					<!-- /sidebar FRIENDS-->
 					<!-- sidebar MYGAMES-->
 
 					<div class="widget">
 						<h2 class="title">My Games</h2>
-
-
 						<div ng-controller="CreateGameCtrl">
 							<div>
 								<input type="submit" value="ADD GAME" ng-click="showForm() "

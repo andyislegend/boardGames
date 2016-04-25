@@ -27,4 +27,7 @@ public interface GameRepository extends JpaRepository<Game, Integer>  {
 	
 	@Query("select avg(gRateNum.rating) from GameRatingNumeric gRateNum where gRateNum.game.id = :id")
 	Integer getAverageGameRating(@Param("id")Integer id);
+
+
+	public Game findByName(String name);
 }
