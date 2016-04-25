@@ -447,6 +447,42 @@
                </div>
                <!-- /EVENTS -->
                
+               <!--
+                <div class=" jcarousel-skin-tango">
+    <div class="widget" ng-controller = "CreateEventCtrl">
+     <div class="title">Add event</div>    
+
+
+
+
+        <div class="field">
+          Event: <input type="text" data-ng-model="name" size="100px" />
+        </div>
+		
+        <div class="field">
+        Game: <input type="text" data-ng-model="game" size="100px" />
+        </div>
+        
+		<div class="field">
+        Description: <input type="text" data-ng-model="description" size="100px" />
+        </div>
+		
+        <div class="field">
+        Place: <input type="text"  data-ng-model="place" size="100px" />
+        </div>
+		
+       
+       
+        <div class="field">
+		<button class="btn btn-default" data-ng-model="addNewEvent()">Add Event</button>
+        </div>
+	</form> 
+  </div>
+  </div>
+               -->
+               
+               
+               
             </div>
             <!-- sidebar -->
             <div class="grid-4">

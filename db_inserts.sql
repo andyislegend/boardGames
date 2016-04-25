@@ -73,14 +73,7 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '3'
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '4', '1');
 
 
---  inserts to table tournament
-insert into tournament (name,userCreator_id,game_id,requiredRating) values ('MonopolyTournament',1,1,2.5);
-insert into tournament (name,userCreator_id,game_id,requiredRating) values ('MEMOTournament',2,2,3.8);
 
---  inserts to table tournament_composition
-insert into tournament_composition (tournament_id,userGuest_id) values (1,2);
-insert into tournament_composition (tournament_id,userGuest_id) values (1,3);
-insert into tournament_composition (tournament_id,userGuest_id) values (2,4);
 
 --  inserts to table events
 INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Everybody sleeps but mafia members wake up', 'Mafia event', 'resources/images/mafiaImg.jpg', '2016-06-06', 'Lviv', '1', '3');
