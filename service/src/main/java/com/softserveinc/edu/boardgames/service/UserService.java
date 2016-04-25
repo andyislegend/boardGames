@@ -146,6 +146,9 @@ public class UserService {
 	public User findById(int id){
 		return userRepository.findOne(id);
 	}
+	public List<User> findAllUserByFirstName(String name){
+		return userRepository.findAllUserByFirstName(name);
+	}
 
 	@Transactional
 	public List<String> findUserWithNeagativeRating() {

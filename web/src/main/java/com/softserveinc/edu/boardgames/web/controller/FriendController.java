@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,5 +72,15 @@ public class FriendController {
 		User userId = userService.findById(id);
 		friendService.rejectedFrienship(user, userId);
 		return userId;
+	}
+	
+	@RequestMapping(value = "/findAllUsers/{name}", method = RequestMethod.POST)
+	public List<User> findAllUsers(@PathVariable String name){
+		System.out.println("**********************  name = " + name);
+		String userName = name + "%";
+		System.out.println("**********************  userName = " + userName);
+		List<User> listOfUsers = userService.findAllUserByFirstName(userName);
+		System.out.println("**********************  listOfUsers = " + listOfUsers);
+		return listOfUsers;
 	}
 }

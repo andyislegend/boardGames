@@ -83,7 +83,7 @@ app.controller("eventListCtrl", function ($scope, $http) {
     });
 });
 
-app.controller("listOfFriendsCtrl", function($scope, friendService, $http, $uibModal) {
+app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) {
     $scope.users;
 	 friendService.getAllFriends().success(function(data) {
 		$scope.friends = data;
@@ -103,15 +103,11 @@ app.controller("listOfFriendsCtrl", function($scope, friendService, $http, $uibM
 		 });
 	};
     
-    
-    
 	friendService.getAllOfferedUsers().success(function(data) {
         $scope.users = data;
 	}).error(function(error) {
 		console.log(error);
 	});
-    
-    
     
      $scope.add = function(id){
         var userId = id;
@@ -143,6 +139,14 @@ app.controller("listOfFriendsCtrl", function($scope, friendService, $http, $uibM
             console.log(error);
         });
     };
+    
+   $scope.findAllUsers = function(){
+        $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
+            $scope.allUsers = data;
+        }).error(function(error){
+            console.log(error);
+        });
+   };
 });
 
 /*users Angular controller -- start*/

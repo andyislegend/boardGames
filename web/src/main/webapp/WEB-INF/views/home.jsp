@@ -478,99 +478,101 @@
 
 
 					<!-- sidebar FRIENDS-->
-					<div class="column-4" ng-controller="listOfFriendsCtrl">
-						<div class="widget"
-							style="border-bottom: 1px solid #787878; padding-bottom: 20px;">
-							<h2 class="title">Friends</h2>
+         <div class="column-4" ng-controller="friendsCtrl">    
+           <div class="widget">
+              <h2 class="title">Friends</h2>
+              
+          
+			
+			
+				<table class="table table-striped">
+				
+					<thead>
+					<tr>
+						<th>Friends </th>
+                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/add_user.png" ng-click="showFriends = !showFriends"></div></a></td>
+						<td>
+                            
+                            
+                            <a href="#" type="button" data-toggle="modal" data-target="#myModal">
+                                <div class="proba">
+                                    <div class="count" ng-hide="count < 1">{{count}}</div>
+                                    <img class="FriendIco" src="resources/ico/bell.png">
+                                </div>
+                            </a>
+                            
+                            <!-- Modal -->
+                            <div id="myModal" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
 
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">This users want to be your friend</h4>
+                                  </div>
+                                  <div class="background">
+                                      <div ng-repeat="user in users" class="col-sm-4" >
+                                        <div class="user">
+                                        <div class="rows"><img class="ava" src="resources/images/default-avatar.jpg"/></div>
+                                        <div class="rows">name: {{user.firstName }}</div>
+                                        <div class="rows">Last name: {{user.lastName}}</div> 
+                                        <div class="rows">
+                                        <button class="btn btn-info buton" ng-click="add(user.id)">
+                                        <div class="proba"><img class="plus-minus" src="resources/ico/plus.ico"></div>
+										</button>
+                                        <button class="btn btn-primary buton" ng-click="rejected(user.id)">
+                                            <div class="proba"><img class="plus-minus" src="resources/ico/minus.ico"></div>
+										</button>
+                                        </div>
+                                        </div>
+                        			</div>
+                              
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
 
+                              </div>
+                            </div>
+                            
+                            
+						</td>
+					</tr>
+					</thead>
+					<tbody  ng-hide="showFriends">
+                         
+					<tr ng-repeat="friend in friends">
+						<td>{{ friend.firstName }}</td>
+						<td>{{ friend.lastName }}</td>
+                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/messages.png"></div></a></td>
+                        <td><a href="#"><div class="proba"><img class="FriendIco" src="resources/ico/trophy.png"></div></a></td>
 
-
-							<table class="table table-striped">
-
-								<thead>
-									<tr>
-										<th>Friends</th>
-										<td><a href="#"><div class="proba">
-													<img class="FriendIco" src="resources/ico/add_user.png">
-												</div></a></td>
-										<td><a href="#" type="button" data-toggle="modal"
-											data-target="#myModal">
-												<div class="proba">
-													<div class="count" ng-hide="count < 1">{{count}}</div>
-													<img class="FriendIco" src="resources/ico/bell.png">
-												</div>
-										</a> <!-- Modal -->
-											<div id="myModal" class="modal fade" role="dialog">
-												<div class="modal-dialog">
-
-													<!-- Modal content-->
-													<div class="modal-content">
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4 class="modal-title">This users want to be your
-																friend</h4>
-														</div>
-														<div class="background">
-															<div ng-repeat="user in users" class="col-sm-4">
-																<div class="user">
-																	<div class="rows">
-																		<img class="ava"
-																			src="resources/images/default-avatar.jpg" />
-																	</div>
-																	<div class="rows">name: {{user.firstName }}</div>
-																	<div class="rows">Last name: {{user.lastName}}</div>
-																	<div class="rows">
-																		<button class="btn btn-info buton"
-																			ng-click="add(user.id)">
-																			<div class="proba">
-																				<img class="plus-minus" src="resources/ico/plus.ico">
-																			</div>
-																		</button>
-																		<button class="btn btn-primary buton"
-																			ng-click="rejected(user.id)">
-																			<div class="proba">
-																				<img class="plus-minus"
-																					src="resources/ico/minus.ico">
-																			</div>
-																		</button>
-																	</div>
-																</div>
-															</div>
-
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-default"
-																data-dismiss="modal">Close</button>
-														</div>
-													</div>
-
-												</div>
-											</div></td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="friend in friends">
-										<td>{{ friend.firstName }}</td>
-										<td>{{ friend.lastName }}</td>
-										<td><a href="#"><div class="proba">
-													<img class="FriendIco" src="resources/ico/messages.png">
-												</div></a></td>
-										<td><a href="#"><div class="proba">
-													<img class="FriendIco" src="resources/ico/trophy.png">
-												</div></a></td>
-
-									</tr>
-								</tbody>
-							</table>
-						</div>
+					</tr>
+					</tbody>
+                    
+				</table>
+                <div  ng-hide="!showFriends">
+                    <h2 class="title">All users in our App</h2>
+                    <input type="text" ng-init="findAllUsers()"  ng-model="name" ng-keyup="findAllUsers()"/>
+                    <h3></h3>
+                    <div ng-repeat="user in allUsers" class="addUsers">
+                        <img src="resources/images/default-avatar.jpg" width="25"/>
+                        {{ user.firstName }}
+						{{ user.lastName }}
+                        <img class="addUserImg" src="resources/ico/plus.ico">
 					</div>
-
-
-
-
-
-					<!-- /sidebar FRIENDS-->
+                    
+                </div>
+			</div>
+		</div>
+           
+			
+		
+	
+              
+            <!-- /sidebar FRIENDS-->
 					<!-- sidebar MYGAMES-->
 					<div class="column-4" ng-controller="listOfFriendsCtrl"
 						style="padding-top: 20px;">
