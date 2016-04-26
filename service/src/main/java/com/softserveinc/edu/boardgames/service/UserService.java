@@ -187,9 +187,11 @@ public class UserService {
 		return userRepository.findAllUserByFirstName(name, lastName);
 	}
 
-	@Transactional
 	public List<String> findUserWithNeagativeRating() {
 		return userRepository.findUsesrWithNegativeRating();
-
+	}
+	
+	public String findUsersSex(String username) {
+		return userRepository.findUsersSex(username);
 	}
 }

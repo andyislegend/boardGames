@@ -21,7 +21,8 @@ public class GetAllUsersTournaments {
 	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<AllTournamentsDTO> showGames(@RequestParam("username") String username) {
-		List<AllTournamentsDTO> allGames = tournamentService.findTournamentsByUserId(username);
+		List<AllTournamentsDTO> allGames = tournamentService.findTournamentsByUserName(username);
+		System.out.println(allGames);
 		return allGames;
 	}
 }

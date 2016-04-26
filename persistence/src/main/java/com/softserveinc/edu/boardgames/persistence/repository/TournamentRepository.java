@@ -29,5 +29,5 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
 			"t.address.city, t.address.street, t.address.houseNumber, " +
 			"t.address.roomNumber, t.dateOfTournament, t.requiredRating) " +
     		"from Tournament t where t.userCreator.username =:username")
-	public List<AllTournamentsDTO> getUserTournamentsByUserId(@Param("username")String username);
+	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
 }

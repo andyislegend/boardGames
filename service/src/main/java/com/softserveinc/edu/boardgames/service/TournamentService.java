@@ -47,7 +47,7 @@ public class TournamentService {
         return tournamentRepository.findAllTournamentsDTO();
     }*/
     
-    public List<AllTournamentsDTO> findTournamentsByUserId(String username){
-        return tournamentRepository.getUserTournamentsByUserId(username);
+    public List<AllTournamentsDTO> findTournamentsByUserName(String username){
+        return tournamentRepository.getUserTournamentsByUserName(username);
     }
 }

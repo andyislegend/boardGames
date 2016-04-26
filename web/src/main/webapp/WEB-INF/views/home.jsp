@@ -417,8 +417,8 @@
                         </td>
                         <td>{{user.email}}</td>
                         <td>{{user.phoneNumber}}</td>
-                        <td>{{user.address.country}},{{user.address.city}},
-                           {{user.address.street}}, {{user.address.houseNumber}},
+                        <td>{{user.address.country}} {{user.address.city}}
+                           {{user.address.street}} {{user.address.houseNumber}}
                            {{user.address.roomNumber}}
                         </td>
                      </tr>
@@ -447,6 +447,7 @@
                               <div class="modal-content">
                                  <!-- Modal Header -->
                                  <div class="modal-header">
+                                 <h1>{{oneGame.name}}</h1>
                                     <button type="button" class="close" 
                                        data-dismiss="modal">
                                     <span aria-hidden="true">&times;</span>
@@ -480,6 +481,7 @@
                               <div class="modal-content">
                                  <!-- Modal Header -->
                                  <div class="modal-header">
+                                 	<h1>{{oneTournament.tournamentName}}</h1>
                                     <button type="button" class="close" 
                                        data-dismiss="modal">
                                     <span aria-hidden="true">&times;</span>
@@ -487,7 +489,6 @@
                                     </button>
                                  </div>
                                  <div class="modal-body">
-									<p>Tournament name:{{oneTournament.tournamentName}}</p>
 									<p>User creator: {{oneTournament.username}}</p>
 									<p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />
 										{{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}</p>

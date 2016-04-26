@@ -20,8 +20,11 @@ public class ImageConfiguration {
 	@Value("${gamesUrl}")
 	private String gamesPackage;
 
-	@Value("${defaultAvatarUrl}")
-	private String defaultAvatarUrl;
+	@Value("${defaultMaleAvatarUrl}")
+	private String defaultMaleAvatarUrl;
+	
+	@Value("${defaultFemaleAvatarUrl}")
+	private String defaultFemaleAvatarUrl;
 
 	public String getAvatarUrl(String username) {
 		return avatarUrl + username;
@@ -39,7 +42,11 @@ public class ImageConfiguration {
 		return gamesPackage + username;
 	}
 
-	public String getDefaultAvatarUrl() {
-		return defaultAvatarUrl;
+	public String getDefaultMaleAvatarUrl() {
+		return defaultMaleAvatarUrl;
+	}
+	
+	public String getDefaultFemaleAvatarUrl() {
+		return defaultFemaleAvatarUrl;
 	}
 }
