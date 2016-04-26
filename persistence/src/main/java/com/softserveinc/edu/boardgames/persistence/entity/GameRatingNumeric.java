@@ -29,11 +29,11 @@ public class GameRatingNumeric implements Serializable{
 	private Integer rating;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Game.class, 
-			cascade={CascadeType.ALL})
+			cascade={ CascadeType.MERGE, CascadeType.REFRESH })
 	private Game game;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, 
-			cascade={CascadeType.ALL})
+			cascade={ CascadeType.MERGE, CascadeType.REFRESH })
 	private User user;
 
 	public GameRatingNumeric() {}
@@ -45,6 +45,8 @@ public class GameRatingNumeric implements Serializable{
 		this.game = game;
 		this.user = user;
 	}
+	
+	
 
 	public Integer getId() {
 		return id;

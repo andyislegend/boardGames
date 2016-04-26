@@ -2,13 +2,11 @@ package com.softserveinc.edu.boardgames.web.controller;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Address;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.service.*;
 import com.softserveinc.edu.boardgames.service.dto.AddTournamentDTO;
 import com.softserveinc.edu.boardgames.service.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
-import com.softserveinc.edu.boardgames.service.TournamentCompositionService;
-import com.softserveinc.edu.boardgames.service.TournamentService;
-import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +31,10 @@ public class TournamentController {
     TournamentCompositionService tournamentCompositionService;
     @Autowired
     UserService userService;
+    @Autowired
+    GameService gameService;
+    @Autowired
+    AddressService addressService;
 
     @RequestMapping(value = "/tournaments", method = RequestMethod.GET)
     public
@@ -53,18 +55,37 @@ public class TournamentController {
         tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
         tournamentComposition.setUserGuest(user);
         tournamentCompositionService.save(tournamentComposition);
-        return createDTOfromtournamentList();}
-        else {
-            return null;
         }
+        return createDTOfromtournamentList();
+        /*else {
+            return null;
+        }*/
     }
 
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
-    public void addTournament(@RequestBody AddTournamentDTO tournamentDTO) {
+    public List<AllTournamentsDTO> addTournament(@RequestBody AddTournamentDTO tournamentDTO) {
         Address address=new Address();
-        address.setCountry(tournamentDTO.getCountry());
-        address.setCity(tournamentDTO.getCity());
-        //address.
+        Tournament tournament=new Tournament();
+        if((tournamentDTO.getCountry().equals("") && tournamentDTO.getCity().equals("") &&
+                tournamentDTO.getStreet().equals("") && tournamentDTO.getHouseNumber().equals(null) &&
+                tournamentDTO.getRoomNumber().equals(null))) {
+            address.setCountry(tournamentDTO.getCountry());
+            address.setCity(tournamentDTO.getCity());
+            address.setStreet(tournamentDTO.getStreet());
+            address.setHouseNumber(Integer.parseInt(tournamentDTO.getHouseNumber()));
+            address.setRoomNumber(Integer.parseInt(tournamentDTO.getRoomNumber()));
+
+            address=addressService.save(address);
+            tournament.setAddress(addressService.findById(address.getId()));
+        }
+        tournament.setDateOfTournament(tournamentDTO.getDate());
+        tournament.setGame(gameService.findByName(tournamentDTO.getGameName()));
+        tournament.setRequiredRating(tournamentDTO.getRating());
+        tournament.setMaxParticipants(tournamentDTO.getMaxParticipants());
+        tournament.setUserCreator(userService.findOne(WebUtil.getPrincipalUsername()));
+
+        tournamentService.save(tournament);
+        return createDTOfromtournamentList();
     }
 
     private List<AllTournamentsDTO> createDTOfromtournamentList() {
@@ -94,7 +115,7 @@ public class TournamentController {
                         tournament.getAddress().getRoomNumber(),
                         tournament.getRequiredRating(),
                         tournament.getDateOfTournament().toString(),
-                        userGuests
+                        userGuests, tournament.getMaxParticipants()
                 ));
             } else {
                 response.add(new AllTournamentsDTO(
@@ -103,7 +124,7 @@ public class TournamentController {
                         tournament.getUserCreator().getUsername(),
                         tournament.getRequiredRating(),
                         tournament.getDateOfTournament().toString(),
-                        userGuests
+                        userGuests,tournament.getMaxParticipants()
                 ));
             }
         }

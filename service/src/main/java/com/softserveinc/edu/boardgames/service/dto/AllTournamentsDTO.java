@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.service.dto;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import sun.util.locale.InternalLocaleBuilder;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class AllTournamentsDTO {
     private Integer houseNumber;
     private Integer roomNumber;
     private Double requiredRating;
+    private Integer maxParticipants;
     private String date;
     private List<String> userGuests;
 
@@ -29,7 +31,7 @@ public class AllTournamentsDTO {
                              String city, String street,
                              Integer houseNumber, Integer roomNumber,
                              Double requiredRating, String date,
-                             List<String> userGuests) {
+                             List<String> userGuests,Integer maxParticipants) {
         this.tournamentId = tournamentId;
         this.tournamentName = tournamentName;
         this.username = username;
@@ -41,17 +43,19 @@ public class AllTournamentsDTO {
         this.requiredRating = requiredRating;
         this.date = date;
         this.userGuests = userGuests;
+        this.maxParticipants=maxParticipants;
     }
 
     public AllTournamentsDTO(Long tournamentId, String tournamentName,
                              String username, Double requiredRating, String date,
-                             List<String> userGuests) {
+                             List<String> userGuests,Integer maxParticipants) {
         this.tournamentId = tournamentId;
         this.tournamentName = tournamentName;
         this.username = username;
         this.requiredRating = requiredRating;
         this.date = date;
         this.userGuests = userGuests;
+        this.maxParticipants=maxParticipants;
     }
 
     public Long getTournamentId() {
@@ -140,5 +144,13 @@ public class AllTournamentsDTO {
 
     public void setUserGuests(List<String> userGuests) {
         this.userGuests = userGuests;
+    }
+
+    public Integer getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public void setMaxParticipants(Integer maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 }

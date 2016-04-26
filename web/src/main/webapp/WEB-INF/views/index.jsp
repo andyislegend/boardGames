@@ -12,7 +12,6 @@
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/mainStyleSheet.css" />
-<link rel="stylesheet" href="resources/css/main.css" />
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>

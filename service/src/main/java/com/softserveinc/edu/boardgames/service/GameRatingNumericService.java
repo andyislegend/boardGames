@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +26,9 @@ public class GameRatingNumericService {
 	}
 
 	@Transactional
-	public void update(GameRatingNumeric gameRateNum) {
-		gameRatingNumericRepo.saveAndFlush(gameRateNum);
+	@Modifying
+	public void update(Integer gameId, Integer userId, Integer rating) {
+		gameRatingNumericRepo.updateRating(gameId, userId, rating);
 	}
 
 	@Transactional
@@ -34,7 +36,11 @@ public class GameRatingNumericService {
 		gameRatingNumericRepo.save(gameRateNum);
 	}
 	
-	public Integer getRatingforUser(Integer gameId, String username){
-		return gameRatingNumericRepo.getGameRated(gameId, username);
+	public Integer getRatingforUser(Integer gameId, Integer userId){
+		return gameRatingNumericRepo.getGameRated(gameId, userId).get(0);
+	}
+	
+	public GameRatingNumeric getFromGameAndUser(Integer gameId, Integer userId){
+		return gameRatingNumericRepo.getFromGameAndUser(gameId, userId).get(0);
 	}
 }

@@ -46,4 +46,8 @@ public class GameService {
 		gameDetails.setRating(gameRepo.getAverageGameRating(id));
 		return gameDetails;
 	}
+
+	public Game findByName(String name){
+        return gameRepo.findByName(name);
+    }
 }

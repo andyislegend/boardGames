@@ -23,4 +23,13 @@ public class AddressService {
     public void update(Address address) {
     	addressRepository.saveAndFlush(address);
     }
+
+    @Transactional
+    public Address save(Address address){
+       return addressRepository.save(address);
+    }
+
+    public Address findById(Integer id){
+        return addressRepository.findOne(id);
+    }
 }
