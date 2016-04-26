@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * This class describes images users want to download on website.
  * 
@@ -23,6 +27,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "image")
 public class Image implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2966070992511907459L;
 
 	/**
 	 * Describes the image id. Unique value.
@@ -83,5 +92,19 @@ public class Image implements Serializable {
 	public void setImageLocation(String imageLocation) {
 		this.imageLocation = imageLocation;
 	}
-}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
 
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+}

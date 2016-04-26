@@ -62,7 +62,7 @@ public class UserService {
 	public boolean isExistsWithUsername(String username) {
 		return userRepository.findByUsername(username) != null;
 	}
-	
+
 	/**
 	 * Check if user with {@code email} exist in database
 	 *
@@ -183,7 +183,7 @@ public class UserService {
 		return userRepository.getAllNoConsiderFriendByUser(user);
 	}
 
-	public List<User> findAllUserByFirstName(String name, String lastName){
+	public List<User> findAllUserByFirstName(String name, String lastName) {
 		return userRepository.findAllUserByFirstName(name, lastName);
 	}
 
