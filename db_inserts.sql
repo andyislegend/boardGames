@@ -85,3 +85,11 @@ INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `pla
 INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('When your body is the canvas', 'Pictionary event', 'resources/images/pictionaryImg.jpg', '2016-07-22', 'Lviv', '2', '7');
 INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('This is simply a wonderful visual feast', 'Utopia event', 'resources/images/utopiaImg.jpg', '2016-08-20', 'Lviv', '1', '8');
 
+--  inserts to table tournament
+insert into tournament (name,userCreator_id,game_id,requiredRating,dateOfTournament,maxParticipants) values ('MonopolyTournament',1,1,2.5,'2016-04-12',3);
+insert into tournament (name,userCreator_id,game_id,requiredRating,dateOfTournament,maxParticipants) values ('MEMOTournament',2,2,3.8,'2016-05-18',4);
+
+--  inserts to table tournament_composition
+insert into tournament_composition (tournament_id,userGuest_id) values (1,2);
+insert into tournament_composition (tournament_id,userGuest_id) values (1,3);
+insert into tournament_composition (tournament_id,userGuest_id) values (2,4);
