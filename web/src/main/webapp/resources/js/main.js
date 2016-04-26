@@ -435,7 +435,7 @@ app.controller('getGameDetailedInfoController', function ($scope, $http) {
 	//comment
 	$scope.gameuserId = 0;
 	$scope.isShowComment = false;
-	
+		
 	$scope.showComments = function(id) {
 		$scope.gameuserId = id;
 		$scope.isShowComment = !$scope.isShowComment
@@ -448,6 +448,10 @@ app.controller('getGameDetailedInfoController', function ($scope, $http) {
 		}		
 		)	
 	}
+	
+	$http.get('comment/'+$scope.gameuserId, $scope.gameuserId).success(function(result) {
+		$scope.comments = result.data;
+	})
 	
 	$scope.list = [];
 	$scope.submit = function () {
@@ -470,10 +474,6 @@ app.controller('getGameDetailedInfoController', function ($scope, $http) {
 				    
 				  }); 
 	}
-	$scope.comments = [];
-	$http.get('commentsForGame').success(function(result) {
-		$scope.comments = result.data;
-	})
 });
 
 app.controller("showAllTournaments", function ($scope, $http) {

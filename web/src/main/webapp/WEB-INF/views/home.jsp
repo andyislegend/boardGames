@@ -183,14 +183,21 @@
                                        </tr>
                                     </tbody>
                                  </table>
+                                 <div>
                                  <div ng-show="isShowComment">
-                                    <p ng-repeat="comment in comments">
-                                    <p>{{comment.username}}</p>
-                                    <p>{{comment.text}}</p>
+                                   <table>
+                                   <thead>
+                                   <tr><th></th><th></th></tr>
+                                   </thead>
+                                   <tbody>
+                                   <tr ng-repeat="x in comments"></td>{x.text}<td></td></tr>
+                                   </tbody>
+                                                                      </table>
                                     <form data-ng-submit=submit()>
                                        <input type="text" data-ng-model="comment"><input
                                           type="submit" ng-click="addComment">
                                     </form>
+                                 </div>
                                  </div>
                               </div>
                            </div>

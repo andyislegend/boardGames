@@ -40,7 +40,7 @@ public class CommentForGameService {
 		return commentsForGameRepository.getAllCommentsForGame(id);
 	}
 	
-	public List<CommentsForGame> getAllCommentsByGameAndUser(Integer gameId, Integer userId){
-		return commentsForGameRepository.getAllCommentsForGameByUser(gameId, userId);
+	public Integer getCountOfCommentsByGameId(Integer id) {
+		return commentsForGameRepository.countsOfComment(id);
 	}
 }
