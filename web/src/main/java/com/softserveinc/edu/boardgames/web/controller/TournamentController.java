@@ -47,15 +47,15 @@ public class TournamentController {
     @RequestMapping(value = "/joinTournament", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<AllTournamentsDTO> joinTournamnet(@RequestBody Long id) throws Exception{
-        User user=userService.findOne(WebUtil.getPrincipalUsername());
+    List<AllTournamentsDTO> joinTournamnet(@RequestBody Long id) throws Exception {
+        User user = userService.findOne(WebUtil.getPrincipalUsername());
         Long count;
-        count=tournamentCompositionService.findCountUserGuest(user.getUsername(),id);
-        if(count==0){
-        TournamentComposition tournamentComposition = new TournamentComposition();
-        tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
-        tournamentComposition.setUserGuest(user);
-        tournamentCompositionService.save(tournamentComposition);
+        count = tournamentCompositionService.findCountUserGuest(user.getUsername(), id);
+        if (count == 0) {
+            TournamentComposition tournamentComposition = new TournamentComposition();
+            tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
+            tournamentComposition.setUserGuest(user);
+            tournamentCompositionService.save(tournamentComposition);
         }
         return createDTOfromtournamentList();
         /*else {
@@ -65,21 +65,27 @@ public class TournamentController {
 
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
     public List<AllTournamentsDTO> addTournament(@RequestBody AddTournamentDTO tournamentDTO) {
-        Address address=new Address();
-        Tournament tournament=new Tournament();
-        if((tournamentDTO.getCountry().equals("") && tournamentDTO.getCity().equals("") &&
-                tournamentDTO.getStreet().equals("") && tournamentDTO.getHouseNumber().equals(null) &&
-                tournamentDTO.getRoomNumber().equals(null))) {
-            address.setCountry(tournamentDTO.getCountry());
-            address.setCity(tournamentDTO.getCity());
-            address.setStreet(tournamentDTO.getStreet());
-            address.setHouseNumber(Integer.parseInt(tournamentDTO.getHouseNumber()));
-            address.setRoomNumber(Integer.parseInt(tournamentDTO.getRoomNumber()));
+        Address address = new Address();
+        Tournament tournament = new Tournament();
+        if (tournamentDTO.getCountry() != null || tournamentDTO.getCity() != null ||
+                tournamentDTO.getStreet() != null || tournamentDTO.getHouseNumber() != null ||
+                tournamentDTO.getRoomNumber() != null) {
+            if (tournamentDTO.getCountry() != null)
+                address.setCountry(tournamentDTO.getCountry());
+            if (tournamentDTO.getCity() != null)
+                address.setCity(tournamentDTO.getCity());
+            if (tournamentDTO.getStreet() != null)
+                address.setStreet(tournamentDTO.getStreet());
+            if (tournamentDTO.getHouseNumber() != null)
+                address.setHouseNumber(Integer.parseInt(tournamentDTO.getHouseNumber()));
+            if (tournamentDTO.getRoomNumber() != null)
+                address.setRoomNumber(Integer.parseInt(tournamentDTO.getRoomNumber()));
 
-            address=addressService.save(address);
+            address = addressService.save(address);
             tournament.setAddress(addressService.findById(address.getId()));
         }
         tournament.setDateOfTournament(tournamentDTO.getDate());
+        tournament.setName(tournamentDTO.getTournamentName());
         tournament.setGame(gameService.findByName(tournamentDTO.getGameName()));
         tournament.setRequiredRating(tournamentDTO.getRating());
         tournament.setMaxParticipants(tournamentDTO.getMaxParticipants());

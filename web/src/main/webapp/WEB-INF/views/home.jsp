@@ -508,6 +508,94 @@
                   </div>
                </div>
                <!---------------------------------------- end of users -------------------------------------------------->
+                <!--------------------------------------- tournaments  -------------------------------------------------->
+                <div class="column-5" ng-controller="showAllTournaments"
+                     ng-hide="hideTournaments">
+                    <div class="mainbar">
+                        <div class="widget widget_top-posts">
+                            <h2 class="title">Tournament search</h2>
+                            <a href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
+                                <img class="tournamentIco" src="resources/ico/plus.ico"></a>
+                            <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="showAllTournaments">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content"  >
+                                        <div class="modal-header">
+                                            <h2>Create the best tournament ever</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label>Select game for your awsome tournament</label>
+                                            <select required="required" class="field-form" data-ng-model="selectedGame">
+                                                <option  ng-repeat="game in games" value="{{game.name}}">{{game.name}}</option>
+                                            </select>
+                                            <label>Name of your awsome tournament</label>
+                                            <input required="required" class="field-form" data-ng-model="tournamentName" placeholder="Name">
+                                            <br/>
+                                            <label>Required rating to join to your tournament</label>
+                                            <input class="field-form" data-ng-model="requiredRating" placeholder="0.0">
+                                            <br/>
+                                            <label>Max count of players</label>
+                                            <input class="field-form" data-ng-model="maxParticipants" placeholder="2">
+                                            <br/>
+                                            <label>Choose date of your tournament</label>
+                                            <input required="required" class="field-form" data-ng-model="date" type="date">
+                                            <br/><br/>
+                                            <label>Enter place where tournament will be</label>
+                                            <input class="field-form" data-ng-model="countryTournament" placeholder="Country">
+                                            <input class="field-form" data-ng-model="cityTournament" placeholder="City">
+                                            <input class="field-form" data-ng-model="streetTournament" placeholder="Street">
+                                            <input class="field-form" data-ng-model="houseNumberTournament" placeholder="HouseNumber">
+                                            <input class="field-form" data-ng-model="roomNumberTournament" placeholder="RoomNumber">
+                                            <br/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Tournament name</th>
+                                <th>User creator</th>
+                                <th>Required rating</th>
+                                <th>Max Participants</th>
+                                <th>Address</th>
+                                <th>Users Guests</th>
+                                <th>Join</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in tournaments">
+                                <td>{{ x.tournamentName }}</td>
+                                <td>{{ x.username }}</td>
+                                <td>{{x.requiredRating}}</td>
+                                <td>{{x.maxParticipants}}</td>
+                                <td>
+                                    {{x.country}} {{x.city}}
+                                    <br/>
+                                    {{x.street}} {{x.houseNumber}} {{x.roomNumber}}
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr ng-repeat="y in x.userGuests">
+                                            <td>{{y}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td><button ng-disabled="x.isCanJoin" class="button"
+                                            style="color: black"
+                                            ng-click="JoinTournament(x.tournamentId)">Join</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!---------------------------------------- end of tournaments -------------------------------------------------->
             </div>
             <!-- sidebar -->
             <div class="grid-4">
@@ -752,7 +840,7 @@
 				<div class="copyright">
 					<div class="wrapper">
 						<div class="grids">
-							<div class="grid-10">Copyright © 2016 Java-179 All Rights
+							<div class="grid-10">Copyright ï¿½ 2016 Java-179 All Rights
 								Reserved</div>
 							<div class="grid-2">
 								<a href="#" class="alignright back-top">Back to top <i
