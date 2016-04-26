@@ -14,10 +14,10 @@ import com.softserveinc.edu.boardgames.service.TournamentService;
 
 @Controller
 public class GetAllUsersTournaments {
-	
+
 	@Autowired
 	TournamentService tournamentService;
-	
+
 	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<AllTournamentsDTO> showGames(@RequestParam("username") String username) {

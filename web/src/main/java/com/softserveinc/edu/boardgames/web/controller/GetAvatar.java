@@ -12,10 +12,10 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @Controller
 public class GetAvatar {
-	
+
 	@Autowired
 	ImageService imageService;
-	
+
 	@Autowired
 	ImageConfiguration imageConfiguration;
 
