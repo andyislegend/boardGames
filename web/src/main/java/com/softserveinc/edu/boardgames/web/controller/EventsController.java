@@ -17,11 +17,11 @@ import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto;
+import com.softserveinc.edu.boardgames.persistence.entity.mapper.AllEventsMapper;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.EventService;
-import com.softserveinc.edu.boardgames.service.dto.AllEventsDto;
-import com.softserveinc.edu.boardgames.service.mapper.AllEventsMapper;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController

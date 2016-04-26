@@ -2,8 +2,8 @@ package com.softserveinc.edu.boardgames.web.controller;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Address;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AddTournamentDTO;
 import com.softserveinc.edu.boardgames.service.*;
-import com.softserveinc.edu.boardgames.service.dto.AddTournamentDTO;
 import com.softserveinc.edu.boardgames.service.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
