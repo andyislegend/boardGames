@@ -183,8 +183,8 @@ public class UserService {
 		return userRepository.getAllNoConsiderFriendByUser(user);
 	}
 
-	public List<User> findAllUserByFirstName(String name) {
-		return userRepository.findAllUserByFirstName(name);
+	public List<User> findAllUserByFirstName(String name, String lastName){
+		return userRepository.findAllUserByFirstName(name, lastName);
 	}
 
 	@Transactional

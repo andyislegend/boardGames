@@ -66,10 +66,41 @@ public class FriendController {
 		return userId;
 	}
 	
-	@RequestMapping(value = "/findAllUsers/{name}", method = RequestMethod.POST)
-	public List<User> findAllUsers(@PathVariable String name){
-		String userName = name + "%";
-		List<User> listOfUsers = userService.findAllUserByFirstName(userName);
+	@RequestMapping(value = "/findAllUsers/{str}", method = RequestMethod.POST)
+	public List<User> findAllUsers(@PathVariable String str){
+		String name = str.trim();
+		String lname = "";
+		if(str.indexOf(" ") != -1){
+			name = str.substring(0, str.indexOf(" ")).trim();
+			lname = str.substring(str.indexOf(" "), str.length()).trim();
+		}
+		name = name.concat("%");
+		lname = lname.concat("%");
+		List<User> listOfUsers = userService.findAllUserByFirstName(name, lname);
 		return listOfUsers;
 	}
+	
+	@RequestMapping(value = "/addOfferToFriendship",method = RequestMethod.POST)
+	public String addOfferToFriendship(@RequestBody Integer id){
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		User userId = userService.findById(id);
+		boolean isYourFriend = false;
+		List<User> listOfFriends = userService.findAllFriends(user);
+		for(int i = 0; i < listOfFriends.size(); i++){
+			if(listOfFriends.get(i).getId() == id){
+				isYourFriend = true;
+			}
+		}
+		String answer = "";
+		if(user.getId() == id){
+			answer = "This is you";
+		}else if(isYourFriend){
+			answer = "This is your friend";
+		}else{
+		friendService.addOfferToFriendship(user, userId);
+			answer = "Done";
+		}
+		return answer;
+	}
+	
 }

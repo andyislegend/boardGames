@@ -20,4 +20,8 @@ public class ImageService {
 	public void create(Image image) {
 		imageRepository.save(image);
 	}
+	
+	public String findUrl(String username) {
+		return imageRepository.findUrlByUsername(username);
+	}
 }

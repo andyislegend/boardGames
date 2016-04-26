@@ -1387,7 +1387,8 @@ a,
 }
 
  .sub-posts {
-    color:#d4d4d4;
+  
+    color:#000;
         max-width:696px;
         width:232px;
         min-height:138px;
@@ -1402,12 +1403,32 @@ a,
         margin-top:30px;
     
     }
+
+.dropdown-menu {
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate(-50%, 0);
+  
+ 
+    
+}
     
 
 .main-menu .mega-menu-posts {
    
     width:100%;
 }
+
+    .dropdown ul {
+   
+      display: none;
+    }
+
+
+    .main-menu.open ul {
+      display: block;
+    }
 
 .main-menu  .mega-menu-posts .mega-menu-item {
     display:block;
@@ -7359,6 +7380,6 @@ a.myjcarousel-next {
     background-repeat: no-repeat;
     background-image: url(/i/index_top8_right.gif);
     display: block;
-    z-index: 100;
+    z-index: 100;    
     cursor: pointer;
 }

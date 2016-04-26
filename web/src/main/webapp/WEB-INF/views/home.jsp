@@ -58,13 +58,12 @@
                </li>
             </ul>
             <nav class="secondary-menu">
-               <ul>
+               <ul ng-controller='getAvatar'>
                   <li class="dropdown" style="background-color: transparent;">
                      <a
                         href="#" class="dropdown-toggle profile-image"
-                        data-toggle="dropdown"> <img
-                        style="height: 35px; width: 35px;"
-                        src="/resources/images/test_avatar.jpeg"
+                        data-toggle="dropdown"> <img ng-src="{{avatar}}"
+                        style="height: 35px; width: 35px;"                    
                         class="img-circle dropdown-toggle profile-image"
                         data-toggle="dropdown"> <span class="caret"></span></a>
                      <ul class="dropdown-menu">
@@ -95,16 +94,13 @@
          </div>
       </section>
       <!-- /top-strip -->
-      
       <div class="anmtd main-menu-container" role="navigation">
          <nav class="wrapper main-menu">
             <ul id="menu-main-menu" class="menu">
-               <li
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category sub-menu-full-width menu-item-has-mega-menu link-arrow">
-                  <a href="#"><span>Games</span></a>
-                  <div class="sub-menu">
+               <li class="dropdown">
+                  <a href="#" class="dropdown.toggle" data-toggle="dropdown" style="font-weight:bold;"><span>Games</span></a>
+                  <ul class="dropdown-menu">
                      <div class="sub-posts">
-                        
                         <!-- drop-down ALL GAMES-->
                         <div class="column-5" ng-controller="getGamesGlobalController"
                            ng-hide="hideTournaments">
@@ -201,14 +197,12 @@
                         </div>
                         <!-- /drop-down ALL GAMES-->
                      </div>
-                  </div>
+                  </ul>
                </li>
-               <li
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category sub-menu-full-width menu-item-has-mega-menu link-arrow">
-                  <a href="#"><span>Championship</span></a>
-                  <div class="sub-menu">
+               <li class="dropdown">
+                  <a href="#" class="dropdown.toggle" data-toggle="dropdown" style="font-weight:bold;"><span>Tournaments</span></a>
+                  <ul class="dropdown-menu">
                      <div class="sub-posts">
-                       
                         <!-- TOURNAMENTS -->
                         <div class="column-5" ng-controller="showAllTournaments"
                            ng-hide="hideTournaments">
@@ -301,114 +295,16 @@
                            </div>
                         </div>
                         <!-- /TOURNAMENTS -->
-                        
                      </div>
-                  </div>
-               </li>
-               <li
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category sub-menu-full-width menu-item-has-mega-menu link-arrow">
-                  <a href="#"><span>Users</span></a>
-                  <div class="sub-menu">
-                     <div class="sub-posts">
-                        
-                        <!-- USERS SEARCH-->
-                        <div ng-controller="getAllUsersWithNegativeRating"></div>
-                        <div class="column-4" ng-controller="getAllUsersCtrl">
-                           <div class="mainbar">
-                              <div class="widget widget_top-posts">
-                                 <h2 class="title">Users search</h2>
-                              </div>
-                              <div class="column-4">
-                                 <input type="text" class="form-control"
-                                    ng-model="searchText.lastName"
-                                    placeholder="Search by last name">
-                              </div>
-                              <div class="column-4">
-                                 <input type="text" class="form-control"
-                                    ng-model="searchText.address.city"
-                                    placeholder="Search by city">
-                              </div>
-                              <table class="table">
-                                 <tr>
-                                    <th>Last Name, First Name</th>
-                                    <th>Email</th>
-                                    <th>PhoneNumber</th>
-                                    <th>Address</th>
-                                 </tr>
-                                 <tr ng-repeat="user in users|filter:searchText">
-                                    <td><a href="" ng-click="getInfoAboutUserFunc(user.id)"
-                                       style="color: white"> {{user.lastName}}
-                                       {{user.firstName}}</a>
-                                    </td>
-                                    <td>{{user.email}}</td>
-                                    <td>{{user.phoneNumber}}</td>
-                                    <td>{{user.address.country}},{{user.address.city}},
-                                       {{user.address.street}}, {{user.address.houseNumber}},
-                                       {{user.address.roomNumber}}
-                                    </td>
-                                 </tr>
-                              </table>
-                              <div ng-show="showUser" class="col-sm-12"
-                                 id="backgroundForOneUser">
-                                 <div class="col-sm-3" id="backgroundForOneUser">
-                                    <p>Last Name:{{oneUser.lastName}}</p>
-                                    <p>First Name:{{oneUser.firstName}}</p>
-                                    <p>Username:{{oneUser.username}}</p>
-                                    <p>Sex:{{oneUser.sex}}</p>
-                                    <p>Age:{{oneUser.age}}</p>
-                                    <p>Rating:{{oneUser.rating}}</p>
-                                 </div>
-                                 <div class="col-sm-3" id="backgroundForOneUser"
-                                    ng-controller="getAllUsersGames">
-                                    <a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
-                                    Games user owns</a>
-                                    <ul ng-show="showUsersGames" ng-repeat="game in games">
-                                       <li><a href="" ng-click="getInfoAboutGame(game.id)">
-                                          {{game.name}}</a>
-                                       </li>
-                                    </ul>
-                                    <modal visible="showModal"></modal>
-                                 </div>
-                                 <div class="col-sm-3" id="backgroundForOneUser"
-                                    ng-controller="getAllUsersTournaments">
-                                    <a href=""
-                                       ng-click="getInfoAboutUsersTournaments(oneUser.username)">
-                                    Users tournaments</a>
-                                    <ul ng-show="showUsersTournaments"
-                                       ng-repeat="tournament in tournaments">
-                                       <li><a href=""
-                                          ng-click="getInfoAboutTournament(tournament.id)">
-                                          {{tournament.name}}</a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                                 <div class="col-sm-3" id="backgroundForOneUser">
-                                    <img fallback-src='http://localhost/img/avatar/ava.png'
-                                       ng-src="{{userUrl}}" height="52" width="52">
-                                    <form enctype="multipart/form-data" action="uploadFile"
-                                       method="POST">
-                                       Choose foto to upload : <input type="file" name="fileUpload"
-                                          class="fileUpload"> <br> <input type="submit"
-                                          value="Upload">
-                                    </form>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <!-- /USERS SEARCH-->                        
-                        
-                     </div>        
-                  </div>
+                  </ul>
                </li>
             </ul>
          </nav>
       </div>
-      
       <!-- Main Section-->
       <section class="wrapper home-section posts-section with-sidebar">
          <div class="grids">
             <div class="grid-8">
-               
                <!-- EVENTS -->
                <div class="column-1" ng-controller="eventListCtrl">
                   <div class="mainbar">
@@ -446,43 +342,113 @@
                   </div>
                </div>
                <!-- /EVENTS -->
-               
                <!--
-                <div class=" jcarousel-skin-tango">
-    <div class="widget" ng-controller = "CreateEventCtrl">
-     <div class="title">Add event</div>    
-
-
-
-
-        <div class="field">
-          Event: <input type="text" data-ng-model="name" size="100px" />
-        </div>
-		
-        <div class="field">
-        Game: <input type="text" data-ng-model="game" size="100px" />
-        </div>
-        
-		<div class="field">
-        Description: <input type="text" data-ng-model="description" size="100px" />
-        </div>
-		
-        <div class="field">
-        Place: <input type="text"  data-ng-model="place" size="100px" />
-        </div>
-		
-       
-       
-        <div class="field">
-		<button class="btn btn-default" data-ng-model="addNewEvent()">Add Event</button>
-        </div>
-	</form> 
-  </div>
-  </div>
-               -->
+                  <div class=" jcarousel-skin-tango">
+                  <div class="widget" ng-controller = "CreateEventCtrl">
+                  <div class="title">Add event</div>                
+                  <div class="field">
+                  Event: <input type="text" data-ng-model="name" size="100px" />
+                  </div>
+                  
+                  <div class="field">
+                  Game: <input type="text" data-ng-model="game" size="100px" />
+                  </div>
+                  
+                  <div class="field">
+                  Description: <input type="text" data-ng-model="description" size="100px" />
+                  </div>
+                  
+                  <div class="field">
+                  Place: <input type="text"  data-ng-model="place" size="100px" />
+                  </div>
+                  
+                  
+                  
+                  <div class="field">
+                  <button class="btn btn-default" data-ng-model="addNewEvent()">Add Event</button>
+                  </div>
+                  </form> 
+                  </div>
+                  </div>
+                  --> 
+                         <!------------------------------------------- Users info ------------------------------------------------>
                
-               
-               
+               <div class="column-1" ng-controller="getAllUsersWithNegativeRating"></div>
+               <div class="mainbar" ng-controller="getAllUsersCtrl">
+                  <header class="section-header" ng-controller="eventListCtrl">
+                     <div class="section-title title-with-sep">
+                        <h2 class="title">Users</h2>
+                     </div>
+                  </header>
+                  <input type="text" class="form-control"
+                     ng-model="searchText.lastName" placeholder="Search by last name" style="margin-bottom:10px">
+                  <input type="text" class="form-control"
+                     ng-model="searchText.address.city" placeholder="Search by city">
+                  <table class="table">
+                     <tr>
+                        <th>Last Name, First Name</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>Address</th>
+                     </tr>
+                     <tr ng-repeat="user in users|filter:searchText">
+                        <td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
+                           {{user.lastName}} {{user.firstName}}</a>
+                        </td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.phoneNumber}}</td>
+                        <td>{{user.address.country}},{{user.address.city}},
+                           {{user.address.street}}, {{user.address.houseNumber}},
+                           {{user.address.roomNumber}}
+                        </td>
+                     </tr>
+                  </table>
+                  <div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
+                     <div class="col-sm-3" id="backgroundForOneUser">
+                        <p>Last Name:{{oneUser.lastName}}</p>
+                        <p>First Name:{{oneUser.firstName}}</p>
+                        <p>Username:{{oneUser.username}}</p>
+                        <p>Sex:{{oneUser.sex}}</p>
+                        <p>Age:{{oneUser.age}}</p>
+                        <p>Rating:{{oneUser.rating}}</p>
+                     </div>
+                     <div class="col-sm-3" id="backgroundForOneUser"
+                        ng-controller="getAllUsersGames">
+                        <a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
+                        Games user owns</a>
+                        <ul ng-show="showUsersGames" ng-repeat="game in games">
+                           <li><a href="" ng-click="getInfoAboutGame(game.id)">
+                              {{game.name}}</a>
+                           </li>
+                        </ul>
+                        <modal visible="showModal"></modal>
+                     </div>
+                     <div class="col-sm-3" id="backgroundForOneUser"
+                        ng-controller="getAllUsersTournaments">
+                        <a href=""
+                           ng-click="getInfoAboutUsersTournaments(oneUser.username)">
+                        Users tournaments</a>
+                        <ul ng-show="showUsersTournaments"
+                           ng-repeat="tournament in tournaments">
+                           <li><a href=""
+                              ng-click="getInfoAboutTournament(tournament.id)">
+                              {{tournament.name}}</a>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="col-sm-3" id="backgroundForOneUser">
+                        <img fallback-src='http://localhost/img/avatar/ava.png'
+                           ng-src="{{userUrl}}" height="52" width="52">
+                        <form enctype="multipart/form-data" action="uploadFile"
+                           method="POST">
+                           Choose foto to upload : <input type="file" name="fileUpload"
+                              class="fileUpload"> <br> <input type="submit"
+                              value="Upload">
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <!---------------------------------------- end of users -------------------------------------------------->
             </div>
             <!-- sidebar -->
             <div class="grid-4">
@@ -582,56 +548,97 @@
                         </table>
                         <div ng-hide="!showFriends">
                            <h2 class="title">All users in our App</h2>
-                           <input type="text" ng-init="findAllUsers()" ng-model="name"
-                              ng-keyup="findAllUsers()" />
+                                <input type="text" placeholder="name or last name" ng-model="name"
+                                ng-keyup="findAllUsers()" />
                            <h3></h3>
                            <div ng-repeat="user in allUsers" class="addUsers">
                               <img src="resources/images/default-avatar.jpg" width="25" /> {{
-                              user.firstName }} {{ user.lastName }} <img class="addUserImg"
-                                 src="resources/ico/plus.ico">
+                              user.firstName }} {{ user.lastName }} 
+                               <a href="#" type="button" data-toggle="modal" data-target="#myAnswer" ng-click="addUserToFriend(user.id)"> <img class="addUserImg" src="resources/ico/plus.ico"></a>
                            </div>
+                            
                         </div>
+                                                     <!-- Modal -->
+                            <div id="myAnswer" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Modal Header</h4>
+                                  </div>
+                                  <div class="modal-body done">
+                                            <img ng-show="answer == 'Done'" src="resources/ico/checkmark.gif" width="250">
+                                            {{answer}}!
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
                      </div>
                   </div>
                   <!-- /sidebar FRIENDS-->
-                 
                   <!-- sidebar MYGAMES-->
                   <div class="widget">
                      <h2 class="title">My Games</h2>
                      <div ng-controller="CreateGameCtrl">
-                        <div>
-                           <input type="submit" value="ADD GAME" ng-click="showForm() "
-                              style="width: 100%; margin-bottom: 10px">
+                         <div>
+                           <input type="submit" value="ADD GAME" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">								
                         </div>
-                        <form data-ng-submit=submit() role="form" ng-show="showText">
-                           <div>
-                              <input class="field-form" data-ng-model="name"
-                                 placeholder="Name">
+                        <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" 
+                           aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <!-- Modal Header -->
+                                 <div class="modal-header">
+                                    <button type="button" class="close" 
+                                       data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <form data-ng-submit=submit() role="form" >
+                                       <div>
+                                          <input class="field-form" data-ng-model="name"
+                                             placeholder="Name">
+                                       </div>
+                                       <div>
+                                          <label>Select Category:</label> 
+                                          <select class="field-form"
+                                             id="exampleSelect1" data-ng-model="category">
+                                             <option ng-repeat="category in categories"
+                                                value="{{category.name}}">{{category.name}}</option>
+                                          </select>
+                                       </div>
+                                       <div>
+                                          <input class="field-form" data-ng-model="description"
+                                             placeholder="Description"> <input class="field-form"
+                                             data-ng-model="rules" placeholder="Rules"> <input
+                                             class="field-form" data-ng-model="maxPlayers"
+                                             placeholder="Max Players"> <input class="field-form"
+                                             data-ng-model="minPlayers" placeholder="Min Players">
+                                          <input class="field-form" data-ng-model="edition"
+                                             placeholder="Edition"> <input class="field-form"
+                                             data-ng-model="year" placeholder="Year">
+                                       </div>
+                                       <div>
+                                          <input type="submit" value="ADD"
+                                             style="width: 30%; margin-bottom: 10px">
+                                             <input type="submit"  value="Close" data-dismiss="modal"
+                                             style="width: 30%; margin-bottom: 10px">
+                   							
+                       						    
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
                            </div>
-                           <div>
-                              <label>Select Category:</label> 
-                              <select class="field-form"
-                                 id="exampleSelect1" data-ng-model="category">
-                                 <option ng-repeat="category in categories"
-                                    value="{{category.name}}">{{category.name}}</option>
-                              </select>
-                           </div>
-                           <div>
-                              <input class="field-form" data-ng-model="description"
-                                 placeholder="Description"> <input class="field-form"
-                                 data-ng-model="rules" placeholder="Rules"> <input
-                                 class="field-form" data-ng-model="maxPlayers"
-                                 placeholder="Max Players"> <input class="field-form"
-                                 data-ng-model="minPlayers" placeholder="Min Players">
-                              <input class="field-form" data-ng-model="edition"
-                                 placeholder="Edition"> <input class="field-form"
-                                 data-ng-model="year" placeholder="Year">
-                           </div>
-                           <div>
-                              <input type="submit" value="APPLY"
-                                 style="width: 100%; margin-bottom: 10px">
-                           </div>
-                        </form>
+                        </div>
                      </div>
                      <div ng-controller="allUsersGameCtrl">
                         <div>
@@ -667,15 +674,13 @@
                         </div>
                      </div>
                   </div>
-            
-            <!-- /sidebar MYGAMES-->
-            </aside>
+                  <!-- /sidebar MYGAMES-->
+               </aside>
+            </div>
+            <!-- /sidebar -->
          </div>
-         <!-- /sidebar -->
-      </div>
       </section>
       <!-- Main Section-->
-      
       <!-- Footer -->
       <section id="site">
          <footer id="footer" class=" anmtd" role="contentinfo">
@@ -683,7 +688,7 @@
                <div class="copyright">
                   <div class="wrapper">
                      <div class="grids">
-                        <div class="grid-10">Copyright Â© 2016 Java-179 All Rights
+                        <div class="grid-10">Copyright © 2016 Java-179 All Rights
                            Reserved
                         </div>
                         <div class="grid-2">

@@ -1,7 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
-import com.softserveinc.edu.boardgames.persistence.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +23,6 @@ public interface TournamentCompositionRepository extends JpaRepository<Tournamen
             " t.tournament.userCreator.username = :username and t.id=:id")
     Long findCountUserGuest(@Param("username")String username,@Param("id")Long idComposition);
     
-    @Query("Select t FROM TournamentComposition t WHERE t.userGuest.username =:username")
+    @Query("Select t FROM Tournament t WHERE t.userCreator.username =:username")
 	public List<TournamentComposition> findUserByUsername(@Param("username") String username);
 }
