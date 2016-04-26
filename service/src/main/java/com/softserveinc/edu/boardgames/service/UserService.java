@@ -73,7 +73,7 @@ public class UserService {
 	 */
 	@Transactional
 	public boolean isExistsWithEmail(String email) {
-		return userRepository.findByUsername(email) != null;
+		return userRepository.findByEmail(email) != null;
 	}
 
 	@Transactional(readOnly = true)

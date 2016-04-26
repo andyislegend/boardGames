@@ -17,6 +17,6 @@ public interface CommentsForGameRepository extends JpaRepository<CommentsForGame
 	@Query("select c from CommentsForGame c where c.gameUser.id = :id")
 	public List<CommentsForGame> getAllCommentsForGame(@Param("id") Integer id);
 	
-	@Query("select count (c) from CommentsForUser c where c.id = :id")
+	@Query("select count (c) from CommentsForGame c where c.id = :id")
 	public Integer countsOfComment(@Param("id") Integer id);
 }
