@@ -346,97 +346,7 @@
                <!--
                   <div class=" jcarousel-skin-tango">
                   <div class="widget" ng-controller = "CreateEventCtrl">
-                  <div class="title">Add event</div>    
-                  
-<<<<<<< dafbc04808f078ff76cf85ec085ade729be4c23a
-=======
-                         <!-- USERS SEARCH-->
-    <div ng-controller="getAllUsersWithNegativeRating"></div>
-      <div class="column-4" ng-controller="getAllUsersCtrl">
-         <div class="mainbar">
-            <div class="widget widget_top-posts">
-               <h2 class="title" >Users search</h2>
-            </div>
-            <div class="column-4">
-     
-	
-				<input type="text" class="form-control"
-					ng-model="searchText.lastName" placeholder="Search by last name">
-			</div>
-			<div class="column-4">
-				<input type="text" class="form-control"
-					ng-model="searchText.address.city" placeholder="Search by city">
-			</div>
-			<table class="table" >
-				<tr>
-					<th>Last Name, First Name</th>
-					<th>Email</th>
-					<th>PhoneNumber</th>
-					<th>Address</th>
-				</tr>
-				<tr ng-repeat="user in users|filter:searchText">
-					<td><a href="" ng-click="getInfoAboutUserFunc(user.id)" style="color:white">
-							{{user.lastName}} {{user.firstName}}</a></td>
-					<td>{{user.email}}</td>
-					<td>{{user.phoneNumber}}</td>
-					<td>{{user.address.country}},{{user.address.city}},
-						{{user.address.street}}, {{user.address.houseNumber}},
-						{{user.address.roomNumber}}</td>
-				</tr>
-			</table>
-			<div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
-				<div class="col-sm-3" id="backgroundForOneUser">
-					<p>Last Name:{{oneUser.lastName}}</p>
-					<p>First Name:{{oneUser.firstName}}</p>
-					<p>Username:{{oneUser.username}}</p>
-					<p>Sex:{{oneUser.sex}}</p>
-					<p>Age:{{oneUser.age}}</p>
-					<p>Rating:{{oneUser.rating}}</p>
-				</div>
-
-				<div class="col-sm-3" id="backgroundForOneUser"
-					ng-controller="getAllUsersGames">
-					<a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
-						Games user owns</a>
-					<ul ng-show="showUsersGames" ng-repeat="game in games">
-						<li><a href="" ng-click="getInfoAboutGame(game.id)">
-								{{game.name}}</a></li>
-					</ul>
-					<modal visible="showModal"></modal>
-				</div>
-				<div class="col-sm-3" id="backgroundForOneUser"
-					ng-controller="getAllUsersTournaments">
-					<a href=""
-						ng-click="getInfoAboutUsersTournaments(oneUser.username)" >
-						Users tournaments</a>
-					<ul ng-show="showUsersTournaments"
-						ng-repeat="tournament in tournaments">
-						<li><a href=""
-							ng-click="getInfoAboutTournament(tournament.tournamentId)">
-								{{tournament.tournamentName}}</a></li>
-					</ul>
-					<modal1 visible="showModal1"></modal1>
-				</div>
-				<div class="col-sm-3" id="backgroundForOneUser">
-					<img fallback-src='http://localhost/img/avatar/ava.png'
-						ng-src="{{userUrl}}" height="72" width="72">
-						<p>Score: {{oneUser.userRating}}</p>
-					<form enctype="multipart/form-data" action="uploadFile"
-						method="POST">
-						Choose foto to upload : <input type="file" name="fileUpload"
-							class="fileUpload"> <br> <input type="submit"
-							value="Upload">
-					</form>
-				</div>
-			</div>
-
-		</div>
-	</div>
-      <!-- /USERS SEARCH-->
->>>>>>> added tournaments viewer for users
-                  
-                  
-                  
+                  <div class="title">Add event</div>                
                   <div class="field">
                   Event: <input type="text" data-ng-model="name" size="100px" />
                   </div>
@@ -461,8 +371,9 @@
                   </form> 
                   </div>
                   </div>
-                  -->              
-               <!------------------------------------------- Users info ------------------------------------------------>
+                  --> 
+                         <!------------------------------------------- Users info ------------------------------------------------>
+               
                <div class="column-1" ng-controller="getAllUsersWithNegativeRating"></div>
                <div class="mainbar" ng-controller="getAllUsersCtrl">
                   <header class="section-header" ng-controller="eventListCtrl">
