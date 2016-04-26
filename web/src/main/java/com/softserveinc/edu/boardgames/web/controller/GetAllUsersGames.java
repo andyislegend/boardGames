@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
-
+/**
+ * 
+ * @author Volodymyr Krokhmaliuk
+ *
+ */
 
 @Controller
 public class GetAllUsersGames {
