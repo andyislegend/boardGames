@@ -65,7 +65,7 @@ app.controller("eventListCtrl", function ($scope, $http) {
         $scope.events = [{
             "name": "Everybody sleeps but mafia members wake up",
             "description": "Mafia event",
-            "date": 1465160400000,
+            "datenum": 14,
             "place": "Lviv",
             "game": "Mafia",
             "user": "Super",
@@ -74,6 +74,30 @@ app.controller("eventListCtrl", function ($scope, $http) {
     });
 });
 
+/*app.controller("CreateEventCtrl", function ($scope, $http) {
+    
+    $scope.events = [];
+    
+ 
+    $scope.submit = function () {
+        var newEvent = {
+            	 "name": $scope.name,
+                 "description": $scope.description,
+                 "date": $scope.date,
+                 "place": $scope.place,
+                 "game": 1,
+                 "user": 1,
+                 "imgsrc": "resources/images/defaultImg.jpg",
+               
+            
+        };
+        var response = $http.post('NewEvent', newEvent);
+        response.success(function (data) {
+            $scope.events.push(data);
+
+        });
+    };
+});*/
 app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) {
     $scope.users;
 	 friendService.getAllFriends().success(function(data) {
@@ -135,9 +159,17 @@ app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) 
         $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
             $scope.allUsers = data;
         }).error(function(error){
-            console.log(error);
-        });
+    });
    };
+    $scope.addUserToFriend = function(id){
+      console.log(id);
+         $http.post('addOfferToFriendship/', id).success(function(data){
+             $scope.answer = data;
+             console.log(data);
+         }).error(function(error){
+             console.log(error);
+         });
+    };
 });
 
 /*users Angular controller -- start*/
