@@ -221,11 +221,11 @@
                                           </div>
                                           <div class="modal-body">
                                              <label>Select game for your awsome tournament</label>
-                                             <select class="field-form" id="selectGame" ng-controller="getGamesGlobalController">
+                                             <select required="required" class="field-form" id="selectGame" ng-controller="getGamesGlobalController">
                                                 <option ng-repeat="game in gamesGlobal" value="{{game.name}}">{{game.name}}</option>
                                              </select>
                                              <label>Name of your awsome tournament</label>
-                                             <input class="field-form" data-ng-model="tournamentName" placeholder="Name">
+                                             <input required="required" class="field-form" data-ng-model="tournamentName" placeholder="Name">
                                              <br/>
                                              <label>Required rating to join to your tournament</label>
                                              <input class="field-form" data-ng-model="requiredRating" placeholder="0.0">
@@ -234,7 +234,7 @@
                                              <input class="field-form" data-ng-model="maxParticipants" placeholder="2">
                                              <br/>
                                              <label>Choose date of your tournament</label>
-                                             <input class="field-form" data-ng-model="date" type="date">
+                                             <input required="required" class="field-form" data-ng-model="date" type="date">
                                              <br/>
                                              <label>Required rating to join to your tournament</label>
                                              <input class="field-form" data-ng-model="requiredRating" placeholder="0.0">
