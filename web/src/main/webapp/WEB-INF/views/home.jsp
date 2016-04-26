@@ -417,34 +417,72 @@
                         <a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
                         Games user owns</a>
                         <ul ng-show="showUsersGames" ng-repeat="game in games">
-                           <li><a href="" ng-click="getInfoAboutGame(game.id)">
+                           <li><a href="" ng-click="getInfoAboutGame(game.id)" data-toggle="modal" data-target="#myModalGames">
                               {{game.name}}</a>
                            </li>
                         </ul>
-                        <modal visible="showModal"></modal>
+					 <div class="modal fade" id="myModalGames" tabindex="-1" role="dialog" 
+                           aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <!-- Modal Header -->
+                                 <div class="modal-header">
+                                    <button type="button" class="close" 
+                                       data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body">
+									<p>Year of production: {{oneGame.yearOfProduction}}</p>
+									<p>Edition: {{oneGame.edition}}</p>
+									<p>Description: {{oneGame.description}}</p>
+									<p>Max players: {{oneGame.maxPlayers}}</p>
+									<p>Min players: {{oneGame.minPlayers}}</p>
+								</div>
+                                       
+                                 </div>
+                              </div>
+                           </div>
                      </div>
                      <div class="col-sm-3" id="backgroundForOneUser"
                         ng-controller="getAllUsersTournaments">
                         <a href=""
-                           ng-click="getInfoAboutUsersTournaments(oneUser.username)">
+                           ng-click="allUsersTournaments(oneUser.username)">
                         Users tournaments</a>
-                        <ul ng-show="showUsersTournaments"
-                           ng-repeat="tournament in tournaments">
-                           <li><a href=""
-                              ng-click="getInfoAboutTournament(tournament.id)">
-                              {{tournament.name}}</a>
-                           </li>
+                        <ul ng-show="showUsersTournaments" ng-repeat="tournament in tournaments">
+                           <li><a href="" ng-click="getInfoAboutTournament(tournament.tournamentId)" data-toggle="modal" data-target="#myModalTournaments">
+                              {{tournament.tournamentName}}</a>
+                           </li>                     
                         </ul>
+                         <div class="modal fade" id="myModalTournaments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <!-- Modal Header -->
+                                 <div class="modal-header">
+                                    <button type="button" class="close" 
+                                       data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body">
+									<p>Tournament name:{{oneTournament.tournamentName}}</p>
+									<p>User creator: {{oneTournament.username}}</p>
+									<p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />
+										{{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}</p>
+									<p>Date: {{oneTournament.date}}</p>
+									<p>Required rating: {{oneTournament.requiredRating}}</p>
+								</div>
+                                       
+                                 </div>
+                              </div>
+
+                     </div>
                      </div>
                      <div class="col-sm-3" id="backgroundForOneUser">
                         <img fallback-src='http://localhost/img/avatar/ava.png'
                            ng-src="{{userUrl}}" height="52" width="52">
-                        <form enctype="multipart/form-data" action="uploadFile"
-                           method="POST">
-                           Choose foto to upload : <input type="file" name="fileUpload"
-                              class="fileUpload"> <br> <input type="submit"
-                              value="Upload">
-                        </form>
                      </div>
                   </div>
                </div>

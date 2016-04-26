@@ -22,6 +22,9 @@ public class ImageConfiguration {
 	@Value("${gamesUrl}")
 	private String gamesPackage;
 	
+	@Value("${defaultAvatarUrl}")
+	private String defaultAvatarUrl;
+	
 	public String getAvatarUrl(User user) {
 		return avatarUrl + user.getUsername();
 	}
@@ -35,6 +38,10 @@ public class ImageConfiguration {
 	
 	public String getGamesPackage(User user) {
 		return gamesPackage + user.getUsername();
+	}
+	
+	public String getDefaultAvatarUrl() {
+		return defaultAvatarUrl;
 	}
 	
 }

@@ -183,7 +183,6 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 			for (var i = 0; i < $scope.users.length; i++) {
 				if ($scope.users[i].id === id) {
 					$scope.oneUser = $scope.users[i];
-					$scope.userUrl = 'http://localhost/img/avatar/'+ $scope.oneUser.username;
 					break;
 				};
 			};
@@ -220,9 +219,7 @@ app.controller("getAllUsersGames", function($scope, $http) {
 			$scope.games = result.data;			
 		});
 	};
-    $scope.showModal = false;
     $scope.getInfoAboutGame = function(id){
-        $scope.showModal = !$scope.showModal;
         for (var i = 0; i < $scope.games.length; i++) {
 			if ($scope.games[i].id === id) {
 				$scope.oneGame = $scope.games[i];
@@ -234,113 +231,19 @@ app.controller("getAllUsersGames", function($scope, $http) {
 
 app.controller("getAllUsersTournaments", function ($scope, $http) {
     $scope.showUsersTournaments = false;
-    $scope.getInfoAboutUsersTournaments = function (userName) {
+    $scope.allUsersTournaments = function (userName) {
         $scope.showUsersTournaments = !$scope.showUsersTournaments;
         $http.get('allUsersTournaments?userName=' + userName).then(function (result) {
             $scope.tournaments = result.data;
         });
     };
-    $scope.showModal1 = false;
     $scope.getInfoAboutTournament = function(tournamentId){
-        $scope.showModal1 = !$scope.showModal1;
         for (var i = 0; i < $scope.tournaments.length; i++) {
 			if ($scope.tournaments[i].tournamentId === tournamentId) {
 				$scope.oneTournament = $scope.tournaments[i];
 				break;
 			};
 		};
-    };
-});
-
-app.controller('MainCtrl', function ($scope) {
-
-  });
-
-app.directive('modal', function () {
-    return {
-      template: '<div class="modal fade">' + 
-          '<div class="modal-dialog">' + 
-            '<div class="modal-content">' + 
-              '<div class="modal-header">' + 
-              '<p>Category:{{oneGame.category}}</p>' +
-				'<p>Year of production: {{oneGame.yearOfProduction}}</p>' +
-				'<p>Edition: {{oneGame.edition}}</p>' +
-				'<p>Description: {{oneGame.description}}</p>' +
-				'<p>Max players: {{oneGame.maxPlayers}}</p>' +
-				'<p>Min players: {{oneGame.minPlayers}}</p>' +
-              '</div>' + 
-              '<div class="modal-body" ng-transclude></div>' + 
-            '</div>' + 
-          '</div>' + 
-        '</div>',
-        restrict: 'E',
-        transclude: true,
-        replace: true,
-        scope: true,
-        link: function postLink(scope, element, attrs) {
-            scope.$watch(attrs.visible, function (value) {
-                if (value == true)
-                    $(element).modal('show');
-                else
-                    $(element).modal('hide');
-            });
-
-            $(element).on('shown.bs.modal', function () {
-                scope.$apply(function () {
-                    scope.$parent[attrs.visible] = true;
-                });
-            });
-
-            $(element).on('hidden.bs.modal', function () {
-                scope.$apply(function () {
-                    scope.$parent[attrs.visible] = false;
-                });
-            });
-        }
-    };
-});
-
-app.directive('modal1', function () {
-    return {
-      template: '<div class="modal fade">' + 
-          '<div class="modal-dialog">' + 
-            '<div class="modal-content">' + 
-              '<div class="modal-header">' + 
-              '<p>Tournament name:{{oneTournament.tournamentName}}</p>' +
-				'<p>User creator: {{oneTournament.username}}</p>' +
-				'<p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />' + 
-				'{{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}</p>' +
-				'<p>Date: {{oneTournament.date}}</p>' +
-				'<p>Required rating: {{oneTournament.requiredRating}}</p>' +
-              '</div>' + 
-              '<div class="modal-body" ng-transclude></div>' + 
-            '</div>' + 
-          '</div>' + 
-        '</div>',
-        restrict: 'E',
-        transclude: true,
-        replace: true,
-        scope: true,
-        link: function postLink(scope, element, attrs) {
-            scope.$watch(attrs.visible, function (value) {
-                if (value == true)
-                    $(element).modal('show');
-                else
-                	$(element).modal('hide');
-            });
-
-            $(element).on('shown.bs.modal', function () {
-                scope.$apply(function () {
-                    scope.$parent[attrs.visible] = true;
-                });
-            });
-
-            $(element).on('hidden.bs.modal', function () {
-                scope.$apply(function () {
-                    scope.$parent[attrs.visible] = false;
-                });
-            });
-        }
     };
 });
 
