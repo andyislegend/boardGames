@@ -123,15 +123,16 @@ public class RegisterController {
 		}
 
 		userService.createUser(user);
-		Image image = new Image();
-		image.setUser(user);
-		image.setUrl(imageConfiguration.getAvatarUrl(user));
-		image.setImageLocation(imageConfiguration.getAvatarPackage(user));
-		imageService.create(image);
-		String saveDirectory = image.getImageLocation();
-		if (fileUpload != null) {
+		if (!fileUpload.isEmpty()) {
+			Image image = new Image();
+			image.setUser(user);
+			image.setUrl(imageConfiguration.getAvatarUrl(user));
+			image.setImageLocation(imageConfiguration.getAvatarPackage(user));
+			imageService.create(image);
+			String saveDirectory = image.getImageLocation();
 			fileUpload.transferTo(new File(saveDirectory));
 		}
+
 
 		return "index";
 	}
