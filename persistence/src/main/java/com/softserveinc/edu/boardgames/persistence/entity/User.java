@@ -38,6 +38,7 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
  * 
  * @author Volodymyr Terlyha
  */
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -284,21 +285,10 @@ public class User implements Serializable {
 		this.state = state;
 	}
 
-	/**
-	 * Get value of column address.
-	 * 
-	 * @return value of column address.
-	 */
 	public Address getAddress() {
 		return address;
 	}
 
-	/**
-	 * Set value of column address.
-	 * 
-	 * @param address
-	 *            value of column address.
-	 */
 	public void setAddress(Address address) {
 		this.address = address;
 	}

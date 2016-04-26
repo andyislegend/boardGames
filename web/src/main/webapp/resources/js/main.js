@@ -219,7 +219,6 @@ app.controller("getAllUsersGames", function($scope, $http) {
 		$http.get('allUsersGames?userName=' + userName).then(function(result) {
 			$scope.games = result.data;			
 		});
-
 	};
     $scope.showModal = false;
     $scope.getInfoAboutGame = function(id){
@@ -238,9 +237,18 @@ app.controller("getAllUsersTournaments", function ($scope, $http) {
     $scope.getInfoAboutUsersTournaments = function (userName) {
         $scope.showUsersTournaments = !$scope.showUsersTournaments;
         $http.get('allUsersTournaments?userName=' + userName).then(function (result) {
-            $scope.games = result.data;
+            $scope.tournaments = result.data;
         });
-
+    };
+    $scope.showModal1 = false;
+    $scope.getInfoAboutTournament = function(tournamentId){
+        $scope.showModal1 = !$scope.showModal1;
+        for (var i = 0; i < $scope.tournaments.length; i++) {
+			if ($scope.tournaments[i].tournamentId === tournamentId) {
+				$scope.oneTournament = $scope.tournaments[i];
+				break;
+			};
+		};
     };
 });
 
@@ -275,6 +283,50 @@ app.directive('modal', function () {
                     $(element).modal('show');
                 else
                     $(element).modal('hide');
+            });
+
+            $(element).on('shown.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = true;
+                });
+            });
+
+            $(element).on('hidden.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = false;
+                });
+            });
+        }
+    };
+});
+
+app.directive('modal1', function () {
+    return {
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+              '<p>Tournament name:{{oneTournament.tournamentName}}</p>' +
+				'<p>User creator: {{oneTournament.username}}</p>' +
+				'<p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />' + 
+				'{{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}</p>' +
+				'<p>Date: {{oneTournament.date}}</p>' +
+				'<p>Required rating: {{oneTournament.requiredRating}}</p>' +
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+        restrict: 'E',
+        transclude: true,
+        replace: true,
+        scope: true,
+        link: function postLink(scope, element, attrs) {
+            scope.$watch(attrs.visible, function (value) {
+                if (value == true)
+                    $(element).modal('show');
+                else
+                	$(element).modal('hide');
             });
 
             $(element).on('shown.bs.modal', function () {
