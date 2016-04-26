@@ -58,13 +58,12 @@
                </li>
             </ul>
             <nav class="secondary-menu">
-               <ul>
+               <ul ng-controller='getAvatar'>
                   <li class="dropdown" style="background-color: transparent;">
                      <a
                         href="#" class="dropdown-toggle profile-image"
-                        data-toggle="dropdown"> <img
-                        style="height: 35px; width: 35px;"
-                        src="/resources/images/test_avatar.jpeg"
+                        data-toggle="dropdown"> <img ng-src="{{avatar}}"
+                        style="height: 35px; width: 35px;"                    
                         class="img-circle dropdown-toggle profile-image"
                         data-toggle="dropdown"> <span class="caret"></span></a>
                      <ul class="dropdown-menu">
