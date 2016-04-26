@@ -195,9 +195,11 @@ app.controller("getAllUsersWithNegativeRating", function($scope, $http, $window)
 	$http.get('getUsersWithNegativeRating').then(function(result) {
 		$scope.usersWithNegRate = result.data;
 		if ($scope.usersWithNegRate.length != 0) {
-			$window.alert('These users have to be banned: ' + $scope.usersWithNegRate);
+			$("#myModalBannedUsers").modal('show');
+		        $scope.bannedUsers = ('These users have to be banned: ' + $scope.usersWithNegRate);        
 		}
 	});
+	
 });
 
 app.directive('fallbackSrc', function () {

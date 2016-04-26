@@ -370,9 +370,31 @@
                   </div>
                   </div>
                          <!------------------------------------------- Users info ------------------------------------------------>
-               
-               <div class="column-1" ng-controller="getAllUsersWithNegativeRating"></div>
-               <div class="mainbar" ng-controller="getAllUsersCtrl">
+
+				<div class="modal fade" 
+					ng-controller="getAllUsersWithNegativeRating" id="myModalBannedUsers"
+					tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+					aria-hidden="true" >
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+								</button>
+								<div class="modal-body">
+								<b>Attention!</b>
+								<p>{{bannedUsers}}</p>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mainbar" ng-controller="getAllUsersCtrl">
                   <header class="section-header" ng-controller="eventListCtrl">
                      <div class="section-title title-with-sep">
                         <h2 class="title">Users</h2>
