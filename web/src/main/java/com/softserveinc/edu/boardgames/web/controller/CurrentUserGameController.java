@@ -54,7 +54,7 @@ public class CurrentUserGameController {
 	@RequestMapping(value = "NewGame", method = RequestMethod.POST)
 	public String addNewGame(@RequestBody GameUserDTO gameUserDTO){	
 		GameUser gameUser = new GameUser();
-		gameUser = new GameUserMapper().toEntity(gameUserDTO);
+		gameUser = GameUserMapper.toEntity(gameUserDTO);
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.create(gameUser);
 		return "";
@@ -70,7 +70,7 @@ public class CurrentUserGameController {
 	@RequestMapping(value = "NewComment", method = RequestMethod.POST)
 	public String addComment(@RequestBody CommentsForGameDTO commentsForGameDTO) {
 		CommentsForGame commentsForGame = new CommentsForGame();
-		commentsForGame = new CommentForGameMapper().toEntity(commentsForGameDTO);
+		commentsForGame =  CommentForGameMapper.toEntity(commentsForGameDTO);
 		commentsForGame.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		commentForGameService.addComment(commentsForGame);
 		return "";
