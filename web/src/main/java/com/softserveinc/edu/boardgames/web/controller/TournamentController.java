@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -88,6 +89,22 @@ public class TournamentController {
         return createDTOfromtournamentList();
     }
 
+    @RequestMapping(value = "/allUsersTournaments", method = RequestMethod.GET)
+	@ResponseBody
+	public List<AllTournamentsDTO> getAllTournaments(@RequestParam("userName") String userName) {
+		List<AllTournamentsDTO> oneUserTournaments = new ArrayList<AllTournamentsDTO>();
+		List<AllTournamentsDTO> allTournamentList =	createDTOfromtournamentList();
+		System.out.println(allTournamentList);
+		for(AllTournamentsDTO allTournamentsDTO : allTournamentList) {
+			System.out.println(allTournamentsDTO.getUsername());
+			if (allTournamentsDTO.getUsername().equals(userName)) {
+				oneUserTournaments.add(allTournamentsDTO);
+			}
+		}
+		System.out.println(oneUserTournaments);
+		return oneUserTournaments;
+	}
+    
     private List<AllTournamentsDTO> createDTOfromtournamentList() {
         List<AllTournamentsDTO> response = new ArrayList<>();
         List<Tournament> tournaments = tournamentService.findAll();
