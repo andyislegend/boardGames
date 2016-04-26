@@ -24,7 +24,6 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
  */
 @Configuration
 @PropertySource("classpath:/properties/mail.properties")
-@ComponentScan("com.softserve.edu.controller.service")
 public class MailConfig {
 
 	@Autowired
