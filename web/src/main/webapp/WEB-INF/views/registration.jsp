@@ -53,7 +53,7 @@
 				</p>
 			</div>
 
-			<form:form method="POST" modelAttribute="user"
+			<form:form method="POST" modelAttribute="user" enctype="multipart/form-data"
 				class="form-horizontal">
 				<form:input type="hidden" path="id" id="id" />
 
@@ -160,6 +160,15 @@
 						<div class="col-md-7">
 							<form:input type="text" path="phoneNumber" id="phoneNumber"
 								class="form-control input-sm" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" style="margin-left: 1%;">
+						<div class="col-md-7">
+							 Choose foto to upload : <input type="file" name="fileUpload"
+                              class="fileUpload">
 						</div>
 					</div>
 				</div>

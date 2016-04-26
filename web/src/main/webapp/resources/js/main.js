@@ -344,6 +344,12 @@ app.directive('modal1', function () {
     };
 });
 
+app.controller("getAvatar", function($scope, $http) {
+	$http.get('getAvatar').then(function(result) {
+		$scope.avatar = result.data;
+	});
+});
+
 /*users Angular controller -- end*/
 
 
