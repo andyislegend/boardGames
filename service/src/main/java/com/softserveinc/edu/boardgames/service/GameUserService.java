@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
-import com.softserveinc.edu.boardgames.service.mapper.GameUserMapper;
 
 @Service
 @Transactional
@@ -20,8 +20,8 @@ public class GameUserService {
 	@Autowired
 	private GameUserRepository gameUserRepo;
 
-	public GameUser getUserGamesById(Long id) {
-		return gameUserRepo.findOne(id);
+	public GameUser getUserGamesById(Integer id) {
+		return gameUserRepo.getGameUserById(id);
 	}
 
 	public List<GameUser> getAllUserGames() {
@@ -38,7 +38,7 @@ public class GameUserService {
 		gameUserRepo.save(gameUser);
 	}
 
-	public List<GameUser> getGameUsersFromUsername(String username) {
+	public List<GameUserDTO> getGameUsersFromUsername(String username) {
 		return gameUserRepo.getAllGameUserByUsername(username);
 	}
 
