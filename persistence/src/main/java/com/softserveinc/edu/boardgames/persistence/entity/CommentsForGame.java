@@ -4,6 +4,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,14 +25,16 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "comments")
-public class CommentsForGame {
+public class CommentsForGame implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = GameUser.class, cascade = CascadeType.MERGE)
     private GameUser gameUser;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.MERGE)
     private User user;
 
