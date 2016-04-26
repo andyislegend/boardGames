@@ -22,23 +22,48 @@ import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
-import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
+/**
+ * This conrollers is responsible for add new user and validating field in
+ * registration process.
+ * 
+ * @param username
+ *            must be unique.
+ * @param email
+ *            must be unique and be a valid mail address.
+ * @param password
+ *            must be equals to @param confirm password
+ * 
+ * @author Andrii Petryk
+ *
+ */
 @Controller
 public class RegisterController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	ImageService imageService;
-	
+
 	@Autowired
 	ImageConfiguration imageConfiguration;
-	
-	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
-		    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
+	/**
+	 * @param VALID_EMAIL_ADDRESS_REGEX
+	 *            is used to validate the correctness of mail provided py new
+	 *            user during registration
+	 */
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+			Pattern.CASE_INSENSITIVE);
+
+	/**
+	 * Answer the request for registration from web
+	 * 
+	 * @param model
+	 * @return a registration form which is connected to user-entity object
+	 *         fields
+	 */
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
 		User user = new User();
@@ -48,10 +73,21 @@ public class RegisterController {
 		return "registration";
 	}
 
+	/**
+	 * Validate the registration form and saves the user to db.
+	 * 
+	 * @param fileUpload
+	 * @param user
+	 * @param confirmPassword
+	 * @param result
+	 * @param model
+	 * @return instance of User and transmit it to service layer
+	 * @throws Exception
+	 */
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
-	public String saveUser(@RequestParam("fileUpload") CommonsMultipartFile fileUpload, 
-			@Valid User user,@RequestParam("confirmPassword") String confirmPassword, 
-			BindingResult result, ModelMap model) throws Exception {
+	public String saveUser(@RequestParam("fileUpload") CommonsMultipartFile fileUpload, @Valid User user,
+			@RequestParam("confirmPassword") String confirmPassword, BindingResult result, ModelMap model)
+			throws Exception {
 
 		if (result.hasErrors()) {
 			return "registration";
@@ -64,31 +100,27 @@ public class RegisterController {
 			result.addError(usernameError);
 			return "registration";
 		}
-		
+
 		if (!user.getPassword().equals(confirmPassword)) {
 
-			FieldError passwordError = new FieldError("user", "password",
-					"Sorry, but You must confirm Your password");
+			FieldError passwordError = new FieldError("user", "password", "Sorry, but You must confirm Your password");
 			result.addError(passwordError);
 			return "registration";
 		}
-		
+
 		if (userService.isExistsWithEmail(user.getEmail())) {
 
-			FieldError emailError = new FieldError("user", "email",
-					"Sorry, but this email is already in use!");
+			FieldError emailError = new FieldError("user", "email", "Sorry, but this email is already in use!");
 			result.addError(emailError);
 			return "registration";
 		}
-		
+
 		if (!validate(user.getEmail())) {
 
-			FieldError emailError = new FieldError("user", "email",
-					"Sorry, but Your email seems to be wrong");
+			FieldError emailError = new FieldError("user", "email", "Sorry, but Your email seems to be wrong");
 			result.addError(emailError);
 			return "registration";
 		}
-		
 
 		userService.createUser(user);
 		Image image = new Image();
@@ -97,17 +129,16 @@ public class RegisterController {
 		image.setImageLocation(imageConfiguration.getAvatarPackage(user));
 		imageService.create(image);
 		String saveDirectory = image.getImageLocation();
-		if (fileUpload != null) {					
-				fileUpload.transferTo(new File(saveDirectory));
+		if (fileUpload != null) {
+			fileUpload.transferTo(new File(saveDirectory));
 		}
 
 		return "index";
 	}
 
 	private static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
-        return matcher.find();
-}
+		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+		return matcher.find();
+	}
 
-	
 }
