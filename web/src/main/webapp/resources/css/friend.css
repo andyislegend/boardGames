@@ -90,3 +90,37 @@
      opacity: 1;
     width: 27px;
 }
+::-webkit-input-placeholder {
+    font-family: Oswald;
+    font-weight: normal;
+    font-style: normal;
+    color: #DCDCDC;
+}
+:-moz-placeholder { 
+    font-family: Oswald;
+    font-weight: normal;
+    font-style: normal;
+    color: #DCDCDC;
+}
+
+::-moz-placeholder {  
+    font-family: Oswald;
+    font-weight: normal;
+    font-style: normal;
+    color: #DCDCDC;
+}
+
+:-ms-input-placeholder {  
+   font-family: Oswald;
+    font-weight: normal;
+    font-style: normal;
+    color: #DCDCDC;
+}
+.done{
+    font-family: Oswald;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 70px;
+    
+}
+

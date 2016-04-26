@@ -159,9 +159,17 @@ app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) 
         $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
             $scope.allUsers = data;
         }).error(function(error){
-            console.log(error);
-        });
+    });
    };
+    $scope.addUserToFriend = function(id){
+      console.log(id);
+         $http.post('addOfferToFriendship/', id).success(function(data){
+             $scope.answer = data;
+             console.log(data);
+         }).error(function(error){
+             console.log(error);
+         });
+    };
 });
 
 /*users Angular controller -- start*/
