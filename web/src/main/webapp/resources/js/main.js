@@ -1,8 +1,9 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
 
 app.controller("allUsersGameCtrl", function ($scope, $http) {
+	$scope.allGame = [];
     $http.get('getAllGamesCurUser').then(function (result) {
-        $scope.allGame = result.data;
+        $scope.allGame = result.data;});
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
@@ -14,7 +15,6 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
                 }
             }
         }
-    });
 });
 
 app.controller("CreateGameCtrl", function($scope, $http) {
@@ -394,36 +394,7 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 			alert("Getting games userGames of game error");
 		});
 	}
-	//Comments
-	$scope.gameuserId = 0;
-	$scope.isShowComment = false;
 	
-	$scope.showComments = function(id) {
-		$scope.gameuserId = id;
-		$scope.isShowComment = !$scope.isShowComment
-	}
-	
-	$scope.list = [];
-	$scope.submit = function () {
-		var comment  = {
-				"gameID" : ''+$scope.gameuserId,
-				"commentText" : $scope.comment
-			 };
-		console.log(comment.gameID);
-		console.log(comment.commentText);
-			 $http({
-				  method: 'POST',
-				  url: '/NewComment',
-				  headers: {
-					   'Content-Type': 'application/json'
-					 },
-				  data:comment
-				}).then(function successCallback(response) {
-				    $scope.list.push(response.data);
-				  }, function errorCallback(response) {
-				    
-				  });
-	}
 });
 
 app.controller('getGameDetailedInfoController', function ($scope, $http) {
@@ -460,6 +431,49 @@ app.controller('getGameDetailedInfoController', function ($scope, $http) {
 			alert("Getting games general data error");
 		});
 	}
+	
+	//comment
+	$scope.gameuserId = 0;
+	$scope.isShowComment = false;
+	
+	$scope.showComments = function(id) {
+		$scope.gameuserId = id;
+		$scope.isShowComment = !$scope.isShowComment
+		
+		return $http.get('comment/'+id).then(
+		function(response) {
+			 response.data;
+		},function(errResponse){
+			console.log("Error sending comment id");
+		}		
+		)	
+	}
+	
+	$scope.list = [];
+	$scope.submit = function () {
+		var comment  = {
+				"gameID" : ''+$scope.gameuserId,
+				"commentText" : $scope.comment
+			 };
+		console.log(comment.gameID);
+		console.log(comment.commentText);
+			 $http({
+				  method: 'POST',
+				  url: '/NewComment',
+				  headers: {
+					   'Content-Type': 'application/json'
+					 },
+				  data:comment
+				}).then(function successCallback(response) {
+				    $scope.list.push(response.data);
+				  }, function errorCallback(response) {
+				    
+				  }); 
+	}
+	$scope.comments = [];
+	$http.get('commentsForGame').success(function(result) {
+		$scope.comments = result.data;
+	})
 });
 
 app.controller("showAllTournaments", function ($scope, $http) {

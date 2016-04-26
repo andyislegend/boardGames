@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.service.mapper;
+package com.softserveinc.edu.boardgames.persistence.entity.mapper;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;

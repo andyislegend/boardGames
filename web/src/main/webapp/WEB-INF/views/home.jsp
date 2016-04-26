@@ -586,39 +586,59 @@
                   <div class="widget">
                      <h2 class="title">My Games</h2>
                      <div ng-controller="CreateGameCtrl">
-                        <div>
-                           <input type="submit" value="ADD GAME" ng-click="showForm() "
-                              style="width: 100%; margin-bottom: 10px">
+                         <div>
+                           <input type="submit" value="ADD GAME" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">								
                         </div>
-                        <form data-ng-submit=submit() role="form" ng-show="showText">
-                           <div>
-                              <input class="field-form" data-ng-model="name"
-                                 placeholder="Name">
+                        <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" 
+                           aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <!-- Modal Header -->
+                                 <div class="modal-header">
+                                    <button type="button" class="close" 
+                                       data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body">
+                                    <form data-ng-submit=submit() role="form" >
+                                       <div>
+                                          <input class="field-form" data-ng-model="name"
+                                             placeholder="Name">
+                                       </div>
+                                       <div>
+                                          <label>Select Category:</label> 
+                                          <select class="field-form"
+                                             id="exampleSelect1" data-ng-model="category">
+                                             <option ng-repeat="category in categories"
+                                                value="{{category.name}}">{{category.name}}</option>
+                                          </select>
+                                       </div>
+                                       <div>
+                                          <input class="field-form" data-ng-model="description"
+                                             placeholder="Description"> <input class="field-form"
+                                             data-ng-model="rules" placeholder="Rules"> <input
+                                             class="field-form" data-ng-model="maxPlayers"
+                                             placeholder="Max Players"> <input class="field-form"
+                                             data-ng-model="minPlayers" placeholder="Min Players">
+                                          <input class="field-form" data-ng-model="edition"
+                                             placeholder="Edition"> <input class="field-form"
+                                             data-ng-model="year" placeholder="Year">
+                                       </div>
+                                       <div>
+                                          <input type="submit" value="ADD"
+                                             style="width: 30%; margin-bottom: 10px">
+                                             <input type="submit"  value="Close" data-dismiss="modal"
+                                             style="width: 30%; margin-bottom: 10px">
+                   							
+                       						    
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
                            </div>
-                           <div>
-                              <label>Select Category:</label> 
-                              <select class="field-form"
-                                 id="exampleSelect1" data-ng-model="category">
-                                 <option ng-repeat="category in categories"
-                                    value="{{category.name}}">{{category.name}}</option>
-                              </select>
-                           </div>
-                           <div>
-                              <input class="field-form" data-ng-model="description"
-                                 placeholder="Description"> <input class="field-form"
-                                 data-ng-model="rules" placeholder="Rules"> <input
-                                 class="field-form" data-ng-model="maxPlayers"
-                                 placeholder="Max Players"> <input class="field-form"
-                                 data-ng-model="minPlayers" placeholder="Min Players">
-                              <input class="field-form" data-ng-model="edition"
-                                 placeholder="Edition"> <input class="field-form"
-                                 data-ng-model="year" placeholder="Year">
-                           </div>
-                           <div>
-                              <input type="submit" value="APPLY"
-                                 style="width: 100%; margin-bottom: 10px">
-                           </div>
-                        </form>
+                        </div>
                      </div>
                      <div ng-controller="allUsersGameCtrl">
                         <div>
@@ -668,7 +688,7 @@
                <div class="copyright">
                   <div class="wrapper">
                      <div class="grids">
-                        <div class="grid-10">Copyright Â© 2016 Java-179 All Rights
+                        <div class="grid-10">Copyright © 2016 Java-179 All Rights
                            Reserved
                         </div>
                         <div class="grid-2">
