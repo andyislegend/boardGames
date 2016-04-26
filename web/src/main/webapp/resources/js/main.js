@@ -369,13 +369,6 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 		$scope.currentGameId = id;
 		$rootScope.currentGameRootId = $scope.currentGameId;
 		
-		if ($scope.gameDetailsShown == false)
-			$scope.gameDetailsShown = true;
-		else if ($scope.currentGameId != $scope.openedGameId)
-			$scope.gameDetailsShown = true;
-		else $scope.gameDetailsShown = false;
-		$scope.openedGameId = id;
-		
 		$http({
 			method: "GET",
 			url : 'getGameDetails' + '/' + id
@@ -407,10 +400,6 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 });
 
 app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $http) {
-	
-	$scope.hideGameDetails = function() {
-		$scope.gameDetailsShown = false;
-	}
 	
 	$scope.ratingSliderChanged = function(){
 		if ($scope.gameRating <= 15)
