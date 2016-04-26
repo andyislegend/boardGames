@@ -16,15 +16,12 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Long> {
 		
-		@Query("SELECT f FROM Friend f WHERE f.user = ?1 AND f.status.id = 2")
-		public List<Friend> findAllFriendByUser(User user);
+		
 		
 		@Query("SELECT COUNT(f) FROM Friend f WHERE f.userId = ?1 AND f.status.id = 1")
 		public Integer findCountNoConsiderFrinds(User user);
 		
-		@Query("SELECT f FROM Friend f WHERE f.userId = ?1 AND f.status.id = 1")
-		public List<Friend> getAllNoConsiderFriendByUser(User user);
-		
+				
 		@Modifying
 		@Query("UPDATE Friend f SET f.status.id = 2 WHERE f.user = ?1 AND f.userId = ?2")
 		public void changeStatusOfFriendshipToAccepted(User user, User userId);

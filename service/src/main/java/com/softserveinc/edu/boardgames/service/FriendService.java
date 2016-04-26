@@ -22,16 +22,8 @@ public class FriendService {
 	@Autowired
 	private FriendRepository friendRepository;
 	
-	public List<Friend> getAllFriends(User user){
-		return friendRepository.findAllFriendByUser(user);
-	}
-	
 	public Integer findCountNoConsiderFrinds(User user){
 		return friendRepository.findCountNoConsiderFrinds(user);
-	}
-	
-	public List<Friend> getAllNoConsiderFriendByUser(User user){
-		return friendRepository.getAllNoConsiderFriendByUser(user);
 	}
 	
 	public Friend addOfferToFriendship(User user, User userId){

@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.service.mapper;
+package com.softserveinc.edu.boardgames.persistence.entity.mapper;
 
 public interface GenericMapper<T, V> {
 	public T toDTO(V v);

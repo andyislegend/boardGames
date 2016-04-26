@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import javax.persistence.CascadeType;
@@ -42,12 +41,12 @@ public class Event implements Serializable{
 
 	
 	@Column(name = "date")
-	private GregorianCalendar date;
+	private Date date;
 	
 	@Column(name = "place")
 	private String place;
 	
-	@Column(name = "imgSrc")
+	@Column(name = "imgsrc")
 	private String imgsrc;
 	
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
@@ -98,11 +97,11 @@ public class Event implements Serializable{
 		this.description = description;
 	}
 
-	public GregorianCalendar getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(GregorianCalendar date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

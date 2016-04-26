@@ -1,6 +1,11 @@
-package com.softserveinc.edu.boardgames.service.dto;
+package com.softserveinc.edu.boardgames.persistence.entity.dto;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
@@ -9,28 +14,25 @@ public class AllEventsDto {
 	
 	private String name;
 	private String description;
+	private String place;
 	private String datenum;
 	private String datemonth;
-	//private GregorianCalendar date;
-	
-	private String place;
 	private String game;
 	private String user;
 	private String imgsrc;
 	
 	
 	public AllEventsDto() {}
-	public AllEventsDto(String name, String description, /*GregorianCalendar date, */String datedatenum,  String datemonth, String place,
-				String game,	String user, String imgsrc) {
+	public AllEventsDto(String name, String description, String place, String imgsrc,
+			String user, String game, Date date) {
 		super();
 		this.name = name;
 		this.description = description;
-		this.datenum = datenum;
-		this.datemonth = datemonth;
-		//this.date = date;
+		this.datenum = new SimpleDateFormat("dd", Locale.ENGLISH).format(date);
+		this.datemonth = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(date);
 		this.place = place;
-		this.game=game; 
-		this.user=user; 
+		this.game = game;
+		this.user = user;
 		this.imgsrc = imgsrc;
 	}
 	public String getName() {
@@ -59,26 +61,22 @@ public class AllEventsDto {
 	public void setDatemonth(String datemonth) {
 		this.datemonth = datemonth;
 	}
-	
-	
-	public String getImgsrc() {
-		return imgsrc;
-	}
-	/*public GregorianCalendar getDate() {
-		return date;
-	}
-	public void setDate(GregorianCalendar date) {
-		this.date = date;
-	}*/
-	public void setImgsrc(String imgsrc) {
-		this.imgsrc = imgsrc;
-	}
 	public String getPlace() {
 		return place;
 	}
 	public void setPlace(String place) {
 		this.place = place;
 	}
+	
+	public String getImgsrc() {
+		return imgsrc;
+	}
+	
+	public void setImgsrc(String imgsrc) {
+		this.imgsrc = imgsrc;
+	}
+	
+	
 	public String getGame() {
 		return game;
 	}

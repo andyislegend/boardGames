@@ -1,8 +1,9 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
 
 app.controller("allUsersGameCtrl", function ($scope, $http) {
+	$scope.allGame = [];
     $http.get('getAllGamesCurUser').then(function (result) {
-        $scope.allGame = result.data;
+        $scope.allGame = result.data;});
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
@@ -14,7 +15,6 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
                 }
             }
         }
-    });
 });
 
 app.controller("CreateGameCtrl", function($scope, $http) {
@@ -65,7 +65,7 @@ app.controller("eventListCtrl", function ($scope, $http) {
         $scope.events = [{
             "name": "Everybody sleeps but mafia members wake up",
             "description": "Mafia event",
-            "date": 1465160400000,
+            "datenum": 14,
             "place": "Lviv",
             "game": "Mafia",
             "user": "Super",
@@ -74,6 +74,30 @@ app.controller("eventListCtrl", function ($scope, $http) {
     });
 });
 
+/*app.controller("CreateEventCtrl", function ($scope, $http) {
+    
+    $scope.events = [];
+    
+ 
+    $scope.submit = function () {
+        var newEvent = {
+            	 "name": $scope.name,
+                 "description": $scope.description,
+                 "date": $scope.date,
+                 "place": $scope.place,
+                 "game": 1,
+                 "user": 1,
+                 "imgsrc": "resources/images/defaultImg.jpg",
+               
+            
+        };
+        var response = $http.post('NewEvent', newEvent);
+        response.success(function (data) {
+            $scope.events.push(data);
+
+        });
+    };
+});*/
 app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) {
     $scope.users;
 	 friendService.getAllFriends().success(function(data) {
@@ -135,9 +159,17 @@ app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) 
         $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
             $scope.allUsers = data;
         }).error(function(error){
-            console.log(error);
-        });
+    });
    };
+    $scope.addUserToFriend = function(id){
+      console.log(id);
+         $http.post('addOfferToFriendship/', id).success(function(data){
+             $scope.answer = data;
+             console.log(data);
+         }).error(function(error){
+             console.log(error);
+         });
+    };
 });
 
 /*users Angular controller -- start*/
@@ -187,7 +219,6 @@ app.controller("getAllUsersGames", function($scope, $http) {
 		$http.get('allUsersGames?userName=' + userName).then(function(result) {
 			$scope.games = result.data;			
 		});
-
 	};
     $scope.showModal = false;
     $scope.getInfoAboutGame = function(id){
@@ -206,9 +237,18 @@ app.controller("getAllUsersTournaments", function ($scope, $http) {
     $scope.getInfoAboutUsersTournaments = function (userName) {
         $scope.showUsersTournaments = !$scope.showUsersTournaments;
         $http.get('allUsersTournaments?userName=' + userName).then(function (result) {
-            $scope.games = result.data;
+            $scope.tournaments = result.data;
         });
-
+    };
+    $scope.showModal1 = false;
+    $scope.getInfoAboutTournament = function(tournamentId){
+        $scope.showModal1 = !$scope.showModal1;
+        for (var i = 0; i < $scope.tournaments.length; i++) {
+			if ($scope.tournaments[i].tournamentId === tournamentId) {
+				$scope.oneTournament = $scope.tournaments[i];
+				break;
+			};
+		};
     };
 });
 
@@ -258,6 +298,56 @@ app.directive('modal', function () {
             });
         }
     };
+});
+
+app.directive('modal1', function () {
+    return {
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+              '<p>Tournament name:{{oneTournament.tournamentName}}</p>' +
+				'<p>User creator: {{oneTournament.username}}</p>' +
+				'<p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />' + 
+				'{{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}</p>' +
+				'<p>Date: {{oneTournament.date}}</p>' +
+				'<p>Required rating: {{oneTournament.requiredRating}}</p>' +
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+        restrict: 'E',
+        transclude: true,
+        replace: true,
+        scope: true,
+        link: function postLink(scope, element, attrs) {
+            scope.$watch(attrs.visible, function (value) {
+                if (value == true)
+                    $(element).modal('show');
+                else
+                	$(element).modal('hide');
+            });
+
+            $(element).on('shown.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = true;
+                });
+            });
+
+            $(element).on('hidden.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = false;
+                });
+            });
+        }
+    };
+});
+
+app.controller("getAvatar", function($scope, $http) {
+	$http.get('getAvatar').then(function(result) {
+		$scope.avatar = result.data;
+	});
 });
 
 /*users Angular controller -- end*/
@@ -313,36 +403,7 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 			alert("Getting games userGames of game error");
 		});
 	}
-	//Comments
-	$scope.gameuserId = 0;
-	$scope.isShowComment = false;
 	
-	$scope.showComments = function(id) {
-		$scope.gameuserId = id;
-		$scope.isShowComment = !$scope.isShowComment
-	}
-	
-	$scope.list = [];
-	$scope.submit = function () {
-		var comment  = {
-				"gameID" : ''+$scope.gameuserId,
-				"commentText" : $scope.comment
-			 };
-		console.log(comment.gameID);
-		console.log(comment.commentText);
-			 $http({
-				  method: 'POST',
-				  url: '/NewComment',
-				  headers: {
-					   'Content-Type': 'application/json'
-					 },
-				  data:comment
-				}).then(function successCallback(response) {
-				    $scope.list.push(response.data);
-				  }, function errorCallback(response) {
-				    
-				  });
-	}
 });
 
 app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $http) {
@@ -379,6 +440,49 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 			alert("Getting games general data error");
 		});
 	}
+	
+	//comment
+	$scope.gameuserId = 0;
+	$scope.isShowComment = false;
+	
+	$scope.showComments = function(id) {
+		$scope.gameuserId = id;
+		$scope.isShowComment = !$scope.isShowComment
+		
+		return $http.get('comment/'+id).then(
+		function(response) {
+			 response.data;
+		},function(errResponse){
+			console.log("Error sending comment id");
+		}		
+		)	
+	}
+	
+	$scope.list = [];
+	$scope.submit = function () {
+		var comment  = {
+				"gameID" : ''+$scope.gameuserId,
+				"commentText" : $scope.comment
+			 };
+		console.log(comment.gameID);
+		console.log(comment.commentText);
+			 $http({
+				  method: 'POST',
+				  url: '/NewComment',
+				  headers: {
+					   'Content-Type': 'application/json'
+					 },
+				  data:comment
+				}).then(function successCallback(response) {
+				    $scope.list.push(response.data);
+				  }, function errorCallback(response) {
+				    
+				  }); 
+	}
+	$scope.comments = [];
+	$http.get('commentsForGame').success(function(result) {
+		$scope.comments = result.data;
+	})
 });
 
 app.controller("showAllTournaments", function ($scope, $http) {

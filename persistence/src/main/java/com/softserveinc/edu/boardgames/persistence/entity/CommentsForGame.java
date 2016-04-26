@@ -27,10 +27,10 @@ public class CommentsForGame {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = GameUser.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,targetEntity = GameUser.class, cascade = CascadeType.MERGE)
     private GameUser gameUser;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.MERGE)
     private User user;
 
     @Column(name = "text")

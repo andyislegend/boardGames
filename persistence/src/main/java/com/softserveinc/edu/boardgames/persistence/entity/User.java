@@ -38,6 +38,7 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
  * 
  * @author Volodymyr Terlyha
  */
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -91,7 +92,7 @@ public class User implements Serializable {
 	 * 
 	 */
 	@NotEmpty
-	@Column(name = "email", nullable = false) //, unique = true - removed for testing and due to no validations
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
 	/**
@@ -167,7 +168,6 @@ public class User implements Serializable {
 	/**
 	 * List if tounaments which user take part in
 	 */
-
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userGuest")
 	@JsonBackReference
@@ -285,21 +285,10 @@ public class User implements Serializable {
 		this.state = state;
 	}
 
-	/**
-	 * Get value of column address.
-	 * 
-	 * @return value of column address.
-	 */
 	public Address getAddress() {
 		return address;
 	}
 
-	/**
-	 * Set value of column address.
-	 * 
-	 * @param address
-	 *            value of column address.
-	 */
 	public void setAddress(Address address) {
 		this.address = address;
 	}
