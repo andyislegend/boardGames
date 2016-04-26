@@ -72,7 +72,7 @@ public class Game implements Serializable{
 	@JsonBackReference
     private Set<Tournament> tournaments;
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
+	@OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL },mappedBy = "game")
     private Set<GameRatingNumeric> gameRatingNumeric;
 
 	@NotEmpty
