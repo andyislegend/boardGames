@@ -464,7 +464,7 @@
 									<p>User creator: {{oneTournament.username}}</p>
 									<p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />
 										{{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}</p>
-									<p>Date: {{oneTournament.date}}</p>
+									<p>Date: {{oneTournament.dateUtil}}</p>
 									<p>Required rating: {{oneTournament.requiredRating}}</p>
 								</div>
                                        

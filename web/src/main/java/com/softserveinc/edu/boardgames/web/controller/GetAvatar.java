@@ -8,14 +8,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.service.ImageService;
-import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @Controller
 public class GetAvatar {
-	
-	@Autowired
-	UserService userSevice;
 	
 	@Autowired
 	ImageService imageService;
@@ -26,7 +22,7 @@ public class GetAvatar {
 	@RequestMapping(value = {"/getAvatar"}, method = RequestMethod.GET)
 	@ResponseBody
 	public String getUsersAvatar() {
-		String avatarUrl = imageService.findUrl(WebUtil.getPrincipalUsername());
+		String avatarUrl = imageConfiguration.getAvatarUrl(WebUtil.getPrincipalUsername());
 		if (avatarUrl == null) {
 			avatarUrl = imageConfiguration.getDefaultAvatarUrl();
 		}

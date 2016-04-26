@@ -25,19 +25,19 @@ public class ImageConfiguration {
 	@Value("${defaultAvatarUrl}")
 	private String defaultAvatarUrl;
 	
-	public String getAvatarUrl(User user) {
-		return avatarUrl + user.getUsername();
+	public String getAvatarUrl(String username) {
+		return avatarUrl + username;
 	}
 	
-	public String getGamesUrl(User user) {
-		return gamesUrl + user.getUsername();
+	public String getGamesUrl(String username) {
+		return gamesUrl + username;
 	}
-	public String getAvatarPackage(User user) {
-		return avatarPackage + user.getUsername();
+	public String getAvatarPackage(String username) {
+		return avatarPackage + username;
 	}
 	
-	public String getGamesPackage(User user) {
-		return gamesPackage + user.getUsername();
+	public String getGamesPackage(String username) {
+		return gamesPackage + username;
 	}
 	
 	public String getDefaultAvatarUrl() {

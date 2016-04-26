@@ -231,9 +231,9 @@ app.controller("getAllUsersGames", function($scope, $http) {
 
 app.controller("getAllUsersTournaments", function ($scope, $http) {
     $scope.showUsersTournaments = false;
-    $scope.allUsersTournaments = function (userName) {
+    $scope.allUsersTournaments = function (username) {
         $scope.showUsersTournaments = !$scope.showUsersTournaments;
-        $http.get('allUsersTournaments?userName=' + userName).then(function (result) {
+        $http.get('allUsersTournaments?username=' + username).then(function (result) {
             $scope.tournaments = result.data;
         });
     };

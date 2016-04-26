@@ -9,23 +9,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.softserveinc.edu.boardgames.service.GameUserService;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
-/**
- * 
- * @author Volodymyr Krokhmaliuk, Volodymyr Terlyha
- *
- */
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
+import com.softserveinc.edu.boardgames.service.TournamentService;
+
 @Controller
-public class GetAllUsersGames {
+public class GetAllUsersTournaments {
 	
 	@Autowired
-	GameUserService gameUserService;
+	TournamentService tournamentService;
 	
-	@RequestMapping(value = {"/allUsersGames"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<GameUserDTO> showGames(@RequestParam("userName") String userName) {
-		List<GameUserDTO> allGames = gameUserService.getGameUsersFromUsername(userName);
+	public List<AllTournamentsDTO> showGames(@RequestParam("username") String username) {
+		List<AllTournamentsDTO> allGames = tournamentService.findTournamentsByUserId(username);
 		return allGames;
 	}
 }

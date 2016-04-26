@@ -89,7 +89,7 @@ public class TournamentController {
         return createDTOfromtournamentList();
     }
 
-    @RequestMapping(value = "/allUsersTournaments", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/allUsersTournaments", method = RequestMethod.GET)
 	@ResponseBody
 	public List<AllTournamentsDTO> getAllTournaments(@RequestParam("userName") String userName) {
 		List<AllTournamentsDTO> oneUserTournaments = new ArrayList<AllTournamentsDTO>();
@@ -103,7 +103,7 @@ public class TournamentController {
 		}
 		System.out.println(oneUserTournaments);
 		return oneUserTournaments;
-	}
+	}*/
     
     private List<AllTournamentsDTO> createDTOfromtournamentList() {
         List<AllTournamentsDTO> response = new ArrayList<>();

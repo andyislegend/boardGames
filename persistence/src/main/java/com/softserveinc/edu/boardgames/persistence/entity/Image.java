@@ -25,7 +25,7 @@ import javax.persistence.Table;
 public class Image implements Serializable {
 
 	/**
-	 * Describes the address id. Unique value.
+	 * Describes the image id. Unique value.
 	 */
 	@Id
 	@Column(name = "id")
@@ -39,64 +39,49 @@ public class Image implements Serializable {
 			CascadeType.REFRESH })
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
-	
+
 	/**
 	 * Describes the name of the image user wants to upload.
 	 */
 	@Column(name = "imageName")
 	private String imageName;
-	
-	/**
-	 * Describes the url by which user can get the picture.
-	 */
-	@Column(name = "url")
-	private String url;
-	
+
 	/**
 	 * Describes the location of image after user uploads it.
 	 */
 	@Column(name = "imageLocation")
 	private String imageLocation;
-	
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public String getImageName() {
 		return imageName;
 	}
-	
+
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
 	}
-	
-	public String getUrl() {
-		return url;
-	}
-	
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
+
 	public String getImageLocation() {
 		return imageLocation;
 	}
-	
+
 	public void setImageLocation(String imageLocation) {
 		this.imageLocation = imageLocation;
 	}
-
 }
 

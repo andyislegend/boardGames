@@ -126,8 +126,8 @@ public class RegisterController {
 		if (!fileUpload.isEmpty()) {
 			Image image = new Image();
 			image.setUser(user);
-			image.setUrl(imageConfiguration.getAvatarUrl(user));
-			image.setImageLocation(imageConfiguration.getAvatarPackage(user));
+			image.setImageName(user.getUsername());
+			image.setImageLocation(imageConfiguration.getAvatarPackage(user.getUsername()));
 			imageService.create(image);
 			String saveDirectory = image.getImageLocation();
 			fileUpload.transferTo(new File(saveDirectory));

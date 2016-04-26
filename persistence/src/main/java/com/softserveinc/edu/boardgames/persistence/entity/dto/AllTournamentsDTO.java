@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public class AllTournamentsDTO {
     private Integer maxParticipants;
     private String date;
     private List<String> userGuests;
-
+    private Date dateUtil;
     public AllTournamentsDTO() {
     }
 
@@ -44,16 +46,31 @@ public class AllTournamentsDTO {
     }
 
     public AllTournamentsDTO(Long tournamentId, String tournamentName,
-                             String username, Double requiredRating, String date,
-                             List<String> userGuests,Integer maxParticipants) {
+                             String username, String country, String city,
+                             String street,  Integer houseNumber, Integer roomNumber,
+                             Date dateUtil, Double requiredRating) {
         this.tournamentId = tournamentId;
         this.tournamentName = tournamentName;
         this.username = username;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.roomNumber = roomNumber;
+        this.dateUtil = dateUtil;
         this.requiredRating = requiredRating;
-        this.date = date;
-        this.userGuests = userGuests;
-        this.maxParticipants=maxParticipants;
     }
+    
+	public AllTournamentsDTO(Long tournamentId, String tournamentName, String username, Double requiredRating,
+			String date, List<String> userGuests, Integer maxParticipants) {
+		this.tournamentId = tournamentId;
+		this.tournamentName = tournamentName;
+		this.username = username;
+		this.requiredRating = requiredRating;
+		this.date = date;
+		this.userGuests = userGuests;
+		this.maxParticipants = maxParticipants;
+	}
 
     public Long getTournamentId() {
         return tournamentId;
@@ -134,6 +151,14 @@ public class AllTournamentsDTO {
     public void setDate(String date) {
         this.date = date;
     }
+    
+    public Date getDateUtil() {
+		return dateUtil;
+	}
+    
+    public void setDateSql(Date dateUtil) {
+		this.dateUtil = dateUtil;
+	}
 
     public List<String> getUserGuests() {
         return userGuests;

@@ -4,6 +4,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,5 +46,8 @@ public class TournamentService {
     /*public List<AllTournamentsDTO> findAllTournamentsDTO(){
         return tournamentRepository.findAllTournamentsDTO();
     }*/
-
+    
+    public List<AllTournamentsDTO> findTournamentsByUserId(String username){
+        return tournamentRepository.getUserTournamentsByUserId(username);
+    }
 }
