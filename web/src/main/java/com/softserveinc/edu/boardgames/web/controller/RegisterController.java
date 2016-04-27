@@ -51,12 +51,24 @@ public class RegisterController {
 
 	/**
 	 * @param VALID_EMAIL_ADDRESS_REGEX
-	 *            is used to validate the correctness of mail provided py new
+	 *            is used to validate the correctness of mail provided by new
 	 *            user during registration
 	 */
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
 			Pattern.CASE_INSENSITIVE);
 
+	/**
+	 * @param VALID_PSASSWORD_REGEX
+	 *            is used to validate the safety of users password
+	 */
+	public static final Pattern VALID_PASSWORD_REGEX = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})");
+
+	/**
+	 * @param VALID_USERNAME_REGEX
+	 *            is used to validate the safety of username
+	 */
+	public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,15}");
+	
 	/**
 	 * Answer the request for registration from web
 	 * 
@@ -74,7 +86,7 @@ public class RegisterController {
 	}
 
 	/**
-	 * Validate the registration form and saves the user to db.
+	 * Validate the registration form and saves the user to database.
 	 * 
 	 * @param fileUpload
 	 * @param user
@@ -89,7 +101,14 @@ public class RegisterController {
 			@RequestParam("confirmPassword") String confirmPassword, BindingResult result, ModelMap model)
 			throws Exception {
 
-		if (result.hasErrors()) {
+		// if (result.hasErrors()) {
+		// return "registration";
+		// }
+		if (!validateUsername(user.getUsername())) {
+
+			FieldError usernameError = new FieldError("user", "username",
+					"Soory, but Your Username should be at least 3 charters long and no more then 15 chars!");
+			result.addError(usernameError);
 			return "registration";
 		}
 
@@ -98,6 +117,15 @@ public class RegisterController {
 			FieldError usernameError = new FieldError("user", "username",
 					"Sorry, but this usernmae is already taken. Choose another one");
 			result.addError(usernameError);
+			return "registration";
+		}
+
+		if (!validatePassword(user.getPassword())) {
+
+			FieldError passwordError = new FieldError("user", "password",
+					"Sorry, but Your password must contain at least one lower case symbol, "
+							+ "one Upper case symbol, one number and be from 6 to 20 chars long");
+			result.addError(passwordError);
 			return "registration";
 		}
 
@@ -115,7 +143,7 @@ public class RegisterController {
 			return "registration";
 		}
 
-		if (!validate(user.getEmail())) {
+		if (!validateMail(user.getEmail())) {
 
 			FieldError emailError = new FieldError("user", "email", "Sorry, but Your email seems to be wrong");
 			result.addError(emailError);
@@ -123,7 +151,7 @@ public class RegisterController {
 		}
 
 		userService.createUser(user);
-		
+
 		if (!fileUpload.isEmpty()) {
 			Image image = new Image();
 			image.setUser(user);
@@ -134,12 +162,21 @@ public class RegisterController {
 			fileUpload.transferTo(new File(saveDirectory));
 		}
 
-
 		return "index";
 	}
 
-	private static boolean validate(String emailStr) {
+	private static boolean validateMail(String emailStr) {
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+		return matcher.find();
+	}
+
+	private static boolean validatePassword(String password) {
+		Matcher matcher = VALID_PASSWORD_REGEX.matcher(password);
+		return matcher.find();
+	}
+
+	private static boolean validateUsername(String username) {
+		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
 		return matcher.find();
 	}
 
