@@ -60,6 +60,7 @@ public class MailService {
 			
         };
         mailSender.send(preparator);
+        System.out.println("----Message to "+ to + " send successful---");
     }
 	
 	
