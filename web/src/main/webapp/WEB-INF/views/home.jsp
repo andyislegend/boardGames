@@ -700,10 +700,13 @@
 										<td><a href = "" ng-click="myFunc(game.id)" data-toggle="modal" data-target="#myModalMyGames">
 										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
-										<td><div>
-												<input type="submit" value="More" ng-click="showComments(game.id)"
-													style="border: 1px solid #787878; border-radius: 1px;">
-											</div></td>
+										<td>
+												<a href = "" ng-click="showComments(game.id)">
+												<span class="glyphicon glyphicon-comment"></span>
+												</a>
+													
+											
+</td>
 									</tr>
 								</table>
 								
