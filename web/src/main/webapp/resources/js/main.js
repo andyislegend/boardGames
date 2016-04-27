@@ -18,6 +18,9 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
             }
         }
         
+        var commentStatus = document.getElementById("");
+        for(var i = 0; i<$scope.allGame.length;i++){}
+        
 });
 app.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;
@@ -198,7 +201,7 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	});
 });
 
-app.controller("getAllUsersWithNegativeRating", function($scope, $http, $window) {
+app.controller("getAllUsersWithNegativeRating", function($scope, $http) {
 	$scope.usersWithNegRate = [];
 	$http.get('getUsersWithNegativeRating').then(function(result) {
 		$scope.usersWithNegRate = result.data;
@@ -257,10 +260,10 @@ app.controller("getAvatar", function($scope, $http) {
 
 
 app.controller("eventsVisibleController", function($scope) {
-	$scope.eventsFade = true;
-	$scope.tournamentsFade = true;
+	$scope.eventsFade = false;
+	$scope.tournamentsFade = false;
 	$scope.gamesFade = true;
-	$scope.usersFade = true;
+	$scope.usersFade = false;
 	$scope.onlyUsers = function () {
 		$scope.eventsFade = false;
 		$scope.tournamentsFade = false;
@@ -412,6 +415,9 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 				  });
 			 $scope.commentForGame.push(comment);
 	}
+	
+	
+	
 });
 app.controller("showAllTournaments", function ($scope, $http) {
     $http.get('/tournaments').success(function (data) {
@@ -419,9 +425,6 @@ app.controller("showAllTournaments", function ($scope, $http) {
     });
 
 
-    $scope.$on('myCustomEvent', function(event, fromChild) {
-        $scope.tournaments = fromChild;
-    });
 
     $http({
         method : "GET",
@@ -437,7 +440,7 @@ app.controller("showAllTournaments", function ($scope, $http) {
         console.log(idTournament);
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
-                if($scope.tournaments === data){
+                if($scope.tournaments == data){
                     alert("You've already join this tournament");
                 }
                 $scope.tournaments = data;
@@ -466,7 +469,6 @@ app.controller("CtreateNewTournament",function($scope,$http){
             .success(function (data) {
                 console.log(data);
                 $scope.$parent.tournaments=data;
-                /*$scope.$emit('myCustomEvent',data);*/
             });
 
     }
