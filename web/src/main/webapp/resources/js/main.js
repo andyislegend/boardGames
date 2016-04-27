@@ -1,8 +1,7 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
-var user = "userName";
-console.log(user);
+
 app.controller("allUsersGameCtrl", function ($scope, $http) {
-	
+	$scope.countsOfComments = 1;
     $http.get('getAllGamesCurUser').then(function (result) {
     	$scope.allGame = result.data;});
         
@@ -17,9 +16,6 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
                 }
             }
         }
-        
-        var commentStatus = document.getElementById("");
-        for(var i = 0; i<$scope.allGame.length;i++){}
         
 });
 app.controller("CreateGameCtrl", function($scope, $http) {

@@ -637,7 +637,8 @@
 								<div>
 								<input type="submit" value="ADD GAME"
 									class="btn btn-primary btn-lg" data-toggle="modal"
-									data-target="#myModalHorizontal">
+									data-target="#myModalHorizontal"
+									style = "background-color: gray;">
 							</div>
 							<div class="modal fade" id="myModalHorizontal" tabindex="-1"
 								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
