@@ -15,11 +15,10 @@ public class AllEventsDto {
 	private String name;
 	private String description;
 	private String place;
-	private String datenum;
-	private String datemonth;
 	private String game;
 	private String user;
 	private String imgsrc;
+	private Date date;
 	
 	
 	public AllEventsDto() {}
@@ -28,12 +27,11 @@ public class AllEventsDto {
 		super();
 		this.name = name;
 		this.description = description;
-		this.datenum = new SimpleDateFormat("dd", Locale.ENGLISH).format(date);
-		this.datemonth = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(date);
 		this.place = place;
 		this.game = game;
 		this.user = user;
 		this.imgsrc = imgsrc;
+		this.date = date;
 	}
 	public String getName() {
 		return name;
@@ -49,18 +47,7 @@ public class AllEventsDto {
 		this.description = description;
 	}
 	
-	public String getDatenum() {
-		return datenum;
-	}
-	public void setDatenum(String datenum) {
-		this.datenum = datenum;
-	}
-	public String getDatemonth() {
-		return datemonth;
-	}
-	public void setDatemonth(String datemonth) {
-		this.datemonth = datemonth;
-	}
+	
 	public String getPlace() {
 		return place;
 	}
@@ -88,6 +75,12 @@ public class AllEventsDto {
 	}
 	public void setUser(String user) {
 		this.user = user;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	
