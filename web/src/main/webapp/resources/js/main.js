@@ -126,6 +126,9 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.friends.push($scope.allOfferedUsers[i]);
                     $scope.allOfferedUsers.splice(i, 1)
                 };
+            if($scope.count == 1){
+                $scope.NameOfModalWindow = 'modal';
+            }
             };
         }).error(function(error){
             console.log(error);
@@ -142,6 +145,9 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.allOfferedUsers.splice(i, 1)
                 };
             };
+            if($scope.count == 1){
+                $scope.NameOfModalWindow = 'modal';
+            }
         }).error(function(error){
             console.log(error);
         });

@@ -591,13 +591,13 @@
                                                       <div class="rows">name: {{user.firstName }}</div>
                                                       <div class="rows">Last name: {{user.lastName}}</div>
                                                       <div class="rows">
-                                                         <button class="btn btn-info buton"
+                                                         <button class="btn btn-info buton" data-dismiss="{{NameOfModalWindow}}"
                                                             ng-click="add(user.id)">
                                                             <div class="proba">
                                                                <img class="plus-minus" src="resources/ico/plus.ico">
                                                             </div>
                                                          </button>
-                                                         <button class="btn btn-primary buton"
+                                                         <button class="btn btn-primary buton" data-dismiss="{{NameOfModalWindow}}"
                                                             ng-click="rejected(user.id)">
                                                             <div class="proba">
                                                                <img class="plus-minus"
