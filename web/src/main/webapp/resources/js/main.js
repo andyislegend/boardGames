@@ -395,6 +395,11 @@ app.controller("showAllTournaments", function ($scope, $http) {
         $scope.tournaments = data;
     });
 
+
+    $scope.$on('myCustomEvent', function(event, fromChild) {
+        $scope.tournaments = fromChild;
+    });
+
     $http({
         method : "GET",
         url : 'getAllGames'
@@ -417,23 +422,29 @@ app.controller("showAllTournaments", function ($scope, $http) {
             });
 
     }
-	$scope.createTournament = function () {
-		var tournament = {
-			"tournamentName": $scope.tournamentName,
-			"rating": $scope.requiredRating,
-			"maxParticipants": $scope.maxParticipants,
-			"date": $scope.date,
-			"gameName": $scope.selectedGame,
-			"country": $scope.countryTournament,
-			"city": $scope.cityTournament,
-			"addition":$scope.additionTournament
-		};
 
-		$http.post("/addTournament", tournament)
-			.success(function (data) {
+});
+
+app.controller("CtreateNewTournament",function($scope,$http){
+
+    $scope.createTournament = function () {
+        var tournament = {
+            "tournamentName": $scope.tournamentName,
+            "rating": $scope.requiredRating,
+            "maxParticipants": $scope.maxParticipants,
+            "date": $scope.date,
+            "gameName": $scope.selectedGame,
+            "country": $scope.countryTournament,
+            "city": $scope.cityTournament,
+            "addition":$scope.additionTournament
+        };
+        console.log(tournament);
+        $http.post("/addTournament", tournament)
+            .success(function (data) {
                 console.log(data);
-				$scope.tournaments = data;
-			});
+                $scope.$parent.tournaments=data;
+                /*$scope.$emit('myCustomEvent',data);*/
+            });
 
-	}
+    }
 });

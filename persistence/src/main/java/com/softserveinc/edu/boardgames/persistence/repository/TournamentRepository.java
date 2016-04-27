@@ -28,7 +28,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
 
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
             "(t.id, t.name, t.userCreator.username, t.country, " +
-            "t.city, t.addition, t.dateOfTournament, t.requiredRating) " +
+            "t.city, t.addition, t.dateOfTournament, t.requiredRating,t.maxParticipants) " +
             "from Tournament t")
     public List<AllTournamentsDTO> findAllTournamentsDTO();
 }
