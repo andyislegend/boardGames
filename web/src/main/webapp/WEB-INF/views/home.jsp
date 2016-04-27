@@ -563,7 +563,7 @@
                                     </a>
                                  </td>
                                  <td>
-                                    <a href="#" type="button" data-toggle="modal"
+                                    <a href="#" ng-disabled="count < 1" type="button" data-toggle="modal"
                                        data-target="#myModal">
                                        <div class="proba">
                                           <div class="count" ng-hide="count < 1">{{count}}</div>
@@ -640,44 +640,52 @@
                            </tbody>
                         </table>
                         <div ng-hide="!showFriends">
-                           <h2 class="title">All users in our App</h2>
-                           <input type="text" placeholder="name or last name"
-                              ng-model="name" ng-keyup="findAllUsers()" />
-                           <h3></h3>
-                           <div ng-repeat="user in allUsers" class="addUsers">
-                              <img src="resources/images/default-avatar.jpg" width="25" />
-                              {{ user.firstName }} {{ user.lastName }} <a href="#"
-                                 type="button" data-toggle="modal" data-target="#myAnswer"
-                                 ng-click="addUserToFriend(user.id)"> <img
-                                 class="addUserImg" src="resources/ico/plus.ico"></a>
-                           </div>
-                        </div>
-                        <!-- Modal -->
-                        <div id="myAnswer" class="modal fade" role="dialog">
-                           <div class="modal-dialog">
-                              <!-- Modal content-->
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Modal Header</h4>
-                                 </div>
-                                 <div class="modal-body done">
-                                    <img ng-show="answer == 'Done'"
-                                       src="resources/ico/checkmark.gif" width="250">
-                                    {{answer}}!
-                                 </div>
-                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default"
-                                       data-dismiss="modal">Close</button>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- /sidebar FRIENDS-->
-                  <!-- sidebar MYGAMES-->
-                 	<div class="widget">
+								<h2 class="title">All users in our App</h2>
+								<input type="text" placeholder="name or last name"
+									ng-model="name" ng-keyup="findAllUsers()" />
+								<h3></h3>
+								<div ng-repeat="user in allUsers" class="row addUsers">
+									<img src="resources/images/default-avatar.jpg" width="29" style="margin-right: 5px;"/>
+                                    <div class="firsName">{{ user.firstName }}</div>
+                                   <div class="firsName">{{ user.lastName }} </div>
+                                    <button data-toggle="modal" class="btn btn-info buton mybutton"
+                                       data-target="#myAnswer"
+										ng-click="addUserToFriend(user.id)" >
+                                        Send offer to friend
+                                    </button>
+                                    
+                                    
+								</div>
+
+							</div>
+							<!-- Modal -->
+							<div id="myAnswer" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Modal Header</h4>
+										</div>
+										<div class="modal-body done">
+											<img ng-show="answer == 'Done'"
+												src="resources/ico/checkmark.gif" width="250">
+											{{answer}}!
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /sidebar FRIENDS-->
+					<!-- sidebar MYGAMES-->
+					<div class="widget">
 						<h2 class="title">My Games</h2>
 						<div ng-controller="allUsersGameCtrl">
 							<div ng-controller="CreateGameCtrl">
