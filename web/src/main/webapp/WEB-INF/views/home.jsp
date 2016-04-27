@@ -15,6 +15,7 @@
       <link rel="stylesheet" href="resources/css/fonts.css" />
       <link rel="stylesheet" href="resources/css/tournament.css" />
       <link rel="stylesheet" href="resources/css/friend.css" />
+      <link rel="stylesheet" href="resources/css/users.css" />
       <script type="text/javascript"
          src="resources/bower_components/angular/angular.js"></script>
       <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
@@ -140,11 +141,14 @@
       </div>
       <!-- Main Section-->
       <section class="wrapper home-section posts-section with-sidebar" ng-controller="eventsVisibleController">
-      <button class="btn btn-success" ng-click="fadeEvents()">Users</button>
+      <button class="btn btn-success" ng-click="onlyUsers()" id="blackBut">Users</button>
+      <button class="btn btn-success" ng-click="onlyGames()" id="blackBut">Games</button>
+      <button class="btn btn-success" ng-click="onlyEvents()" id="blackBut">Events</button>
+      <button class="btn btn-success" ng-click="onlyTournaments()" id="blackBut">Tournaments</button>
          <div class="grids">
             <div class="grid-8">
             	<div class="column-5" ng-controller="getGamesGlobalController"
-					ng-hide="hideTournaments">
+					ng-hide="hideTournaments" ng-show="gamesFade">
 					<div class="mainbar">
 						<div class="widget widget_top-posts">
 							<h2 class="title">Games</h2>
@@ -325,9 +329,6 @@
                      <div class="modal-content">
                         <!-- Modal Header -->
                         <div class="modal-header">
-                           <button type="button" class="close" data-dismiss="modal">
-                           <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
-                           </button>
                            <div class="modal-body">
                               <b>Attention!</b>
                               <p>{{bannedUsers}}</p>
@@ -340,17 +341,27 @@
                      </div>
                   </div>
                </div>
-               <div ng-controller="getAllUsersCtrl">
+               <div ng-controller="getAllUsersCtrl" ng-show="usersFade">
                   <header class="section-header" ng-controller="eventListCtrl">
                      <div class="section-title title-with-sep">
                         <h2 class="title">Users</h2>
                      </div>
                   </header>
-                  <input type="text" class="form-control"
-                     ng-model="searchText.lastName" placeholder="Search by last name" style="margin-bottom:10px">
-                  <input type="text" class="form-control"
-                     ng-model="searchText.address.city" placeholder="Search by city">
+                  
                   <table class="table">
+                  	 <tr>
+                        <th>
+                        	<input type="text" class="form-control"
+                     			ng-model="searchText.lastName" 
+                     			placeholder="Search by last name">
+                     	</th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                        	<input type="text" class="form-control"
+                    			ng-model="searchText.address.city" placeholder="Search by city">
+                    	</th>
+                     </tr>
                      <tr>
                         <th>Last Name, First Name</th>
                         <th>Email</th>
@@ -394,11 +405,7 @@
                                  <!-- Modal Header -->
                                  <div class="modal-header">
                                     <h1>{{oneGame.name}}</h1>
-                                    <button type="button" class="close"
-                                       data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span>
-                                    <span class="sr-only">Close</span>
-                                    </button>
+     
                                  </div>
                                  <div class="modal-body">
                                     <p>Year of production: {{oneGame.yearOfProduction}}</p>
@@ -407,7 +414,11 @@
                                     <p>Max players: {{oneGame.maxPlayers}}</p>
                                     <p>Min players: {{oneGame.minPlayers}}</p>
                                  </div>
-                              </div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
                            </div>
                         </div>
                      </div>
@@ -427,34 +438,31 @@
                                  <!-- Modal Header -->
                                  <div class="modal-header">
                                     <h1>{{oneTournament.tournamentName}}</h1>
-                                    <button type="button" class="close"
-                                       data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span>
-                                    <span class="sr-only">Close</span>
-                                    </button>
                                  </div>
                                  <div class="modal-body">
                                     <p>User creator: {{oneTournament.username}}</p>
-                                    <p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />
-                                       {{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}
-                                    </p>
+                                    <p>Adress: {{oneTournament.country}}, {{oneTournament.city}}</p>
                                     <p>Date: {{oneTournament.dateUtil}}</p>
                                     <p>Required rating: {{oneTournament.requiredRating}}</p>
                                  </div>
+                                 <div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
                               </div>
                            </div>
                         </div>
                      </div>
                      <div class="col-sm-3" id="backgroundForOneUser">
-                        <img fallback-src='http://localhost/img/avatar/ava.png'
-                           ng-src="{{userUrl}}" height="52" width="52">
+                        <img ng-src="{{userAvatar}}" height="92" width="92">
+                        <p>Score: {{oneUser.userRating}}</p>
                      </div>
                   </div>
                </div>
                <!---------------------------------------- end of users -------------------------------------------------->
                <!--------------------------------------- tournaments  -------------------------------------------------->
                <div class="column-5" ng-controller="showAllTournaments"
-                  ng-hide="hideTournaments" ng-show="tournamentsFade">
+                   ng-show="tournamentsFade">
                   <div class="mainbar">
                      <div class="widget widget_top-posts">
                         <h2 class="title">Tournament search</h2>
