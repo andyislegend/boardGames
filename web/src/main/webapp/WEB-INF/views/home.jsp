@@ -16,8 +16,6 @@
       <link rel="stylesheet" href="resources/css/tournament.css" />
       <link rel="stylesheet" href="resources/css/friend.css" />
       <link rel="stylesheet" href="resources/css/users.css" />
-      <script type="text/javascript"
-         src="resources/bower_components/angular/angular.js"></script>
       <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
       <script type="text/javascript"
          src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
