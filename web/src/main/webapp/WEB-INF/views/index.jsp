@@ -13,20 +13,17 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/new-css.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
-<link rel="stylesheet" href="resources/css/index.css" />
 
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
-<script
-	src="resources/bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <script
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
 <script src="resources/js/index.js"></script>
-<!-- <script src="resources/js/service/create_user_service.js"></script> -->
+
 
 </head>
 <body ng-app="indexModule">

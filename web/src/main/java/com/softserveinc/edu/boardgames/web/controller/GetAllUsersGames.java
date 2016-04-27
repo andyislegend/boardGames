@@ -11,21 +11,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
+
 /**
+ * Controller for finding all games that belong to some user.
  * 
- * @author Volodymyr Krokhmaliuk
+ * @author Volodymyr Krokhmaliuk, Volodymyr Terlyha
  *
  */
-
 @Controller
 public class GetAllUsersGames {
-	
+
 	@Autowired
 	GameUserService gameUserService;
-	
+
+	/**
+     * Returns needed information about games some user owns.
+     *
+     * @param userName	username of user, who's games we want to find
+     */
 	@RequestMapping(value = {"/allUsersGames"}, method = RequestMethod.GET)
 	@ResponseBody
-
 	public List<GameUserDTO> showGames(@RequestParam("userName") String userName) {
 		List<GameUserDTO> allGames = gameUserService.getGameUsersFromUsername(userName);
 		return allGames;

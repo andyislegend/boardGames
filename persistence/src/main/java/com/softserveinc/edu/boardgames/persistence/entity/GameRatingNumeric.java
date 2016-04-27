@@ -19,6 +19,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Entity
 @Table(name = "gameRatingNumeric")
 public class GameRatingNumeric implements Serializable{
+	
+	private static final long serialVersionUID = 5911151982701538423L;
 
 	@Id
 	@Column(name = "id")
@@ -45,8 +47,6 @@ public class GameRatingNumeric implements Serializable{
 		this.game = game;
 		this.user = user;
 	}
-	
-	
 
 	public Integer getId() {
 		return id;

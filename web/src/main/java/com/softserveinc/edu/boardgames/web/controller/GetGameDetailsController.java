@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameRatingNumeric;
-import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 import com.softserveinc.edu.boardgames.service.GameRatingNumericService;
@@ -48,15 +45,15 @@ public class GetGameDetailsController {
 	
 	@RequestMapping(value="/getUserGamesOfGame/{name}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<UserGamesOfGameDTO> getGamesOfInstance(@PathVariable String name){
+	public List<UserGamesOfGameDTO> getGamesOfInstance(@PathVariable String name) {
 		return gameUserService.getAllUserGamesOfGame(name);
 	}
 	
 	@RequestMapping(value="/getGameRatedByUser/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Integer getGameRatedByUser(@PathVariable Integer gameId){
+	public Integer getGameRatedByUser(@PathVariable Integer gameId) {
 		User user = userService.getUser(WebUtil.getPrincipalUsername());
-		Integer rating = 0;
+		Integer rating = new Integer(0);
 		try {
 			rating = gameRateNumService.getRatingforUser(gameId, user.getId());
 		} catch (NullPointerException nullPtrEx){
@@ -64,17 +61,17 @@ public class GetGameDetailsController {
 		} catch (IndexOutOfBoundsException indexEx ){
 			System.out.println("No rating found");
 		}
-		System.out.println(rating);
 		return rating;
 	}
 	
 	@RequestMapping(value="/calculateRatings/{gameId}/{rating}", method = RequestMethod.POST)
 	@ResponseBody
-	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating){
+	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
 		User user = userService.getUser(WebUtil.getPrincipalUsername());
-		GameRatingNumeric gameRatingNumeric;
+		GameRatingNumeric gameRateNum;
 		try {
-			gameRatingNumeric = gameRateNumService.getFromGameAndUser(gameId, user.getId());
+			gameRateNum = gameRateNumService.getFromGameAndUser(gameId, user.getId());
+			System.out.println(gameId + " " + user.getId() + " " +  rating);
 			gameRateNumService.update(gameId, user.getId(), rating);
 		}catch (IndexOutOfBoundsException indexEx){
 			GameRatingNumeric gameRating = new GameRatingNumeric();

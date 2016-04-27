@@ -13,22 +13,29 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @Controller
 public class GetAvatar {
-	
-	@Autowired
-	UserService userSevice;
-	
+
 	@Autowired
 	ImageService imageService;
 	
+	@Autowired
+	UserService userService;
+
 	@Autowired
 	ImageConfiguration imageConfiguration;
 
 	@RequestMapping(value = {"/getAvatar"}, method = RequestMethod.GET)
 	@ResponseBody
 	public String getUsersAvatar() {
-		String avatarUrl = imageService.findUrl(WebUtil.getPrincipalUsername());
-		if (avatarUrl == null) {
-			avatarUrl = imageConfiguration.getDefaultAvatarUrl();
+		String username = WebUtil.getPrincipalUsername();
+		System.out.println(username);
+		String avatarUrl = imageConfiguration.getAvatarUrl(username);
+		String imageName = imageService.findImageNameByUsername(username);
+		if (imageName == null) {
+			if (userService.findUsersSex(username).equals("male")) {
+			avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
+			} else {
+				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
+			}
 		}
 		return avatarUrl;
 	}

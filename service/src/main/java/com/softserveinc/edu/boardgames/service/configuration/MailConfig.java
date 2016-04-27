@@ -35,16 +35,17 @@ public class MailConfig {
 		mailSender.setDefaultEncoding(MailConstant.DEFAULT_ENCODING);
 
 		mailSender.setHost(env.getProperty(MailConstant.CONFIG_HOST));
-		mailSender.setPort(env.getProperty(MailConstant.CONFIG_PORT, Integer.class, 25));
+		mailSender.setPort(Integer.parseInt(env.getProperty(MailConstant.CONFIG_PORT)));
 		mailSender.setProtocol(env.getProperty(MailConstant.CONFIG_PROTOCOL));
 		mailSender.setUsername(env.getProperty(MailConstant.CREDENTIAL_USERNAME));
 		mailSender.setPassword(env.getProperty(MailConstant.CREDENTIAL_PASSWORD));
 		Properties properties = new Properties();
-		properties.put("mail.smtp.aut", env.getProperty("mail.config.smtp.auth", Boolean.class, false));
-		properties.put("mail.smtp.starttls.enable",
-				env.getProperty("mail.config.smtp.starttls.enable", Boolean.class, false));
+		properties.put("mail.smtp.aut",Boolean.parseBoolean(env.getProperty("mail.config.smtp.auth")));
+		properties.put("mail.smtp.starttls.enable",Boolean.parseBoolean(
+				env.getProperty("mail.config.smtp.starttls.enable")));
 		properties.put("mail.smtp.socketFactory.fallback", "true");
 		mailSender.setJavaMailProperties(properties);
+		System.out.println("---Gmail auth success---");
 		return mailSender;
 	}
 

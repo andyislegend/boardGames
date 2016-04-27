@@ -22,8 +22,8 @@ public class FriendService {
 	@Autowired
 	private FriendRepository friendRepository;
 	
-	public Integer findCountNoConsiderFrinds(User user){
-		return friendRepository.findCountNoConsiderFrinds(user);
+	public Integer findCountNoConsiderFrinds(String username){
+		return friendRepository.findCountNoConsiderFrinds(username);
 	}
 	
 	public Friend addOfferToFriendship(User user, User userId){
@@ -42,9 +42,27 @@ public class FriendService {
 		friend.setStatus(ACCEPTED);
 		friendRepository.saveAndFlush(friend);
 	}
+	/*public void acceptFrienship(String curretUserName, String friendsUserName){
+		friendRepository.changeStatusOfFriendshipToAccepted(friendsUserName, curretUserName);
+		Friend friend = new Friend();
+		
+		User user = new User();
+		user.setUsername(curretUserName);
+		
+		User user2 = new User();
+		user.setUsername(friendsUserName);
+		
+		friend.setUser(user);
+		friend.setUserId(user2);
+		friend.setStatus(ACCEPTED);
+		friendRepository.saveAndFlush(friend);
+	}*/
 	
 	public void rejectedFrienship(User user, User userId){
 		friendRepository.changeStatusOfFriendshipToRejected(userId, user);
 	}
+	/*public void rejectedFrienship(String curretUserName, String friendsUserName){
+		friendRepository.changeStatusOfFriendshipToRejected(friendsUserName, curretUserName);
+	}*/
 	
 }

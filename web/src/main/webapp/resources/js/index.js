@@ -1,5 +1,4 @@
-var indexModule = angular.module('indexModule', [ 'ngRoute',
-		'spring-security-csrf-token-interceptor' ]);
+var indexModule = angular.module('indexModule', [ 'ngRoute']);
 
 indexModule.config(function($routeProvider) {
 	$routeProvider

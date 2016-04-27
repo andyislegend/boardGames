@@ -49,10 +49,14 @@ public class TournamentCompositionService {
     }
 
     public Long findCountUserGuest(String username,Long idComposition){
-        return tournamentCompositionRepository.findCountUserGuest(username,idComposition);
+        return tournamentCompositionRepository.findCountUserGuest(username, idComposition);
     }
     
     public List<TournamentComposition> findByUsersUsername(String username){
         return tournamentCompositionRepository.findUserByUsername(username);
+    }
+
+    public List<String> findAllUserGuestsByTournament(Long id){
+        return tournamentCompositionRepository.findAllUserGuestsByTournament(id);
     }
 }
