@@ -413,36 +413,13 @@ app.controller("showAllTournaments", function ($scope, $http) {
         console.log(idTournament);
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
-                if($scope.tournaments == data){
+                if($scope.tournaments === data){
                     alert("You've already join this tournament");
                 }
                 $scope.tournaments = data;
 
             });
 
-        $scope.createTournament = function () {
-            alert("ENTER");
-            var e = document.getElementById("inputselectGame");
-            var gameName = e.options[e.selectedIndex].value;
-            var tournament = {
-                tournamentName: $scope.tournamentName,
-                rating: $scope.requiredRating,
-                maxParticipants: $scope.maxParticipants,
-                date: $scope.date,
-                gameName: gameName,
-                country: $scope.countryTournament,
-                city: $scope.cityTournament,
-                street: $scope.streetTournament,
-                houseNumber: $scope.houseNumberTournament,
-                roomNumber: $scope.roomNumberTournament
-            };
-
-            $http.post("/addTournament", tournament)
-                .success(function (data) {
-                    $scope.tournaments = data;
-                });
-
-        }
     }
 	$scope.createTournament = function () {
 		var tournament = {
@@ -453,9 +430,7 @@ app.controller("showAllTournaments", function ($scope, $http) {
 			"gameName": $scope.selectedGame,
 			"country": $scope.countryTournament,
 			"city": $scope.cityTournament,
-			"street": $scope.streetTournament,
-			"houseNumber": $scope.houseNumberTournament,
-			"roomNumber": $scope.roomNumberTournament
+			"addition":$scope.additionTournament
 		};
 
 		$http.post("/addTournament", tournament)

@@ -33,6 +33,10 @@ public interface TournamentCompositionRepository extends JpaRepository<Tournamen
 			"t.address.roomNumber, t.dateOfTournament, t.requiredRating) " +
     		"from Tournament t where t.userCreator.id =:id")
 	public List<AllTournamentsDTO> getUserTournamentsByUserId(@Param("id")Long id);
+
+    /*@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO(List<t.userGuest.username>)" +
+            " from TournamentComposition t where t.tournament.id=:tournamentId")
+    public AllTournamentsDTO findAllUserGuestsByTournament(@Param("tournamentId") Long id);*/
     
     
 }

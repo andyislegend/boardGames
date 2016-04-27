@@ -2,9 +2,9 @@ package com.softserveinc.edu.boardgames.web.controller;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Address;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AddTournamentDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.service.*;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AddTournamentDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.TournamentComposition;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -13,14 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Dora on 17.04.2016.
+ * @author Daria Bondar
  */
 
 @Controller
@@ -41,7 +40,8 @@ public class TournamentController {
     public
     @ResponseBody
     List<AllTournamentsDTO> showAllTournaments() {
-        return createDTOfromtournamentList();
+        //List<AllTournamentsDTO> response=tournamentService.
+        return null;
     }
 
     @RequestMapping(value = "/joinTournament", method = RequestMethod.POST)
@@ -57,33 +57,14 @@ public class TournamentController {
             tournamentComposition.setUserGuest(user);
             tournamentCompositionService.save(tournamentComposition);
         }
-        return createDTOfromtournamentList();
-        /*else {
-            return null;
-        }*/
+        return null;
     }
 
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
     public List<AllTournamentsDTO> addTournament(@RequestBody AddTournamentDTO tournamentDTO) {
         Address address = new Address();
         Tournament tournament = new Tournament();
-        if (tournamentDTO.getCountry() != null || tournamentDTO.getCity() != null ||
-                tournamentDTO.getStreet() != null || tournamentDTO.getHouseNumber() != null ||
-                tournamentDTO.getRoomNumber() != null) {
-            if (tournamentDTO.getCountry() != null)
-                address.setCountry(tournamentDTO.getCountry());
-            if (tournamentDTO.getCity() != null)
-                address.setCity(tournamentDTO.getCity());
-            if (tournamentDTO.getStreet() != null)
-                address.setStreet(tournamentDTO.getStreet());
-            if (tournamentDTO.getHouseNumber() != null)
-                address.setHouseNumber(Integer.parseInt(tournamentDTO.getHouseNumber()));
-            if (tournamentDTO.getRoomNumber() != null)
-                address.setRoomNumber(Integer.parseInt(tournamentDTO.getRoomNumber()));
 
-            address = addressService.save(address);
-            tournament.setAddress(addressService.findById(address.getId()));
-        }
         tournament.setDateOfTournament(tournamentDTO.getDate());
         tournament.setName(tournamentDTO.getTournamentName());
         tournament.setGame(gameService.findByName(tournamentDTO.getGameName()));
@@ -92,51 +73,10 @@ public class TournamentController {
         tournament.setUserCreator(userService.findOne(WebUtil.getPrincipalUsername()));
 
         tournamentService.save(tournament);
-        return createDTOfromtournamentList();
+        return null;
     }
-    
-    private List<AllTournamentsDTO> createDTOfromtournamentList() {
-        List<AllTournamentsDTO> response = new ArrayList<>();
-        List<Tournament> tournaments = tournamentService.findAll();
-        List<TournamentComposition> compositions;
-        Long countUser;
-        for (Tournament tournament : tournaments) {
-            List<String> userGuests = new ArrayList<>();
 
-            compositions = tournament.getTournamentComposition();
-            countUser = (long) 0;
-            for (TournamentComposition tournamentComposition : compositions) {
-                userGuests.add(tournamentComposition.getUserGuest().getUsername());
-                countUser = tournamentCompositionService.findCountUserGuest(WebUtil.getPrincipalUsername(), tournamentComposition.getId());
-            }
 
-            if (tournament.getAddress() != null) {
-                response.add(new AllTournamentsDTO(
-                        tournament.getId(),
-                        tournament.getName(),
-                        tournament.getUserCreator().getUsername(),
-                        tournament.getAddress().getCountry(),
-                        tournament.getAddress().getCity(),
-                        tournament.getAddress().getStreet(),
-                        tournament.getAddress().getHouseNumber(),
-                        tournament.getAddress().getRoomNumber(),
-                        tournament.getRequiredRating(),
-                        tournament.getDateOfTournament().toString(),
-                        userGuests, tournament.getMaxParticipants()
-                ));
-            } else {
-                response.add(new AllTournamentsDTO(
-                        tournament.getId(),
-                        tournament.getName(),
-                        tournament.getUserCreator().getUsername(),
-                        tournament.getRequiredRating(),
-                        tournament.getDateOfTournament().toString(),
-                        userGuests,tournament.getMaxParticipants()
-                ));
-            }
-        }
-        return response;
-    }
 
 
 }

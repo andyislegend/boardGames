@@ -197,6 +197,7 @@
 								</div>
 								<!-- /drop-down ALL GAMES-->
 							</div>
+                        </div>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown.toggle"
 					data-toggle="dropdown" style="font-weight: bold;"><span>Tournaments</span></a>
@@ -211,55 +212,6 @@
 										<a href="#" type="button" data-toggle="modal"
 											data-target="#myModalTournament"> <img
 											class="tournamentIco" src="resources/ico/plus_white.png"></a>
-										<div id="myModalTournament" class="modal fade" role="dialog"
-											ng-controller="showAllTournaments">
-											<div class="modal-dialog">
-												<!-- Modal content-->
-												<div class="modal-content">
-													<div class="modal-header">
-														<h2>Create the best tournament ever</h2>
-													</div>
-													<div class="modal-body">
-														<label>Select game for your awsome tournament</label> <select
-															required="required" class="field-form" id="selectGame"
-															ng-controller="getGamesGlobalController">
-															<option ng-repeat="game in gamesGlobal"
-																value="{{game.name}}">{{game.name}}</option>
-														</select> <label>Name of your awsome tournament</label> <input
-															required="required" class="field-form"
-															data-ng-model="tournamentName" placeholder="Name">
-														<br /> <label>Required rating to join to your
-															tournament</label> <input class="field-form"
-															data-ng-model="requiredRating" placeholder="0.0">
-														<br /> <label>Max count of players</label> <input
-															class="field-form" data-ng-model="maxParticipants"
-															placeholder="2"> <br /> <label>Choose
-															date of your tournament</label> <input required="required"
-															class="field-form" data-ng-model="date" type="date">
-														<br /> <label>Required rating to join to your
-															tournament</label> <input class="field-form"
-															data-ng-model="requiredRating" placeholder="0.0">
-														<br /> <br /> <label>Enter place where
-															tournament will be</label> <input class="field-form"
-															data-ng-model="countryTournament" placeholder="Country">
-														<input class="field-form" data-ng-model="cityTournament"
-															placeholder="City"> <input class="field-form"
-															data-ng-model="streetTournament" placeholder="Street">
-														<input class="field-form"
-															data-ng-model="houseNumberTournament"
-															placeholder="HouseNumber"> <input
-															class="field-form" data-ng-model="roomNumberTournament"
-															placeholder="RoomNumber"> <br />
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default"
-															ng-click="createTournament()">Create</button>
-														<button type="button" class="btn btn-default"
-															data-dismiss="modal">Close</button>
-													</div>
-												</div>
-											</div>
-										</div>
 									</div>
 									<table class="table">
 										<thead>
@@ -344,34 +296,34 @@
 				<!--
                   <div class=" jcarousel-skin-tango">
                   <div class="widget" ng-controller = "CreateEventCtrl">
-                  <div class="title">Add event</div>                
+                  <div class="title">Add event</div>
                   <div class="field">
                   Event: <input type="text" data-ng-model="name" size="100px" />
                   </div>
-                  
+
                   <div class="field">
                   Game: <input type="text" data-ng-model="game" size="100px" />
                   </div>
-                  
+
                   <div class="field">
                   Description: <input type="text" data-ng-model="description" size="100px" />
                   </div>
-                  
+
                   <div class="field">
                   Place: <input type="text"  data-ng-model="place" size="100px" />
                   </div>
-                  
-                  
-                  
+
+
+
                   <div class="field">
                   <button class="btn btn-default" data-ng-model="addNewEvent()">Add Event</button>
                   </div>
-                  </form> 
+                  </form>
                   </div>
                   </div>
                          <!------------------------------------------- Users info ------------------------------------------------>
 
-				<div class="modal fade" 
+				<div class="modal fade"
 					ng-controller="getAllUsersWithNegativeRating" id="myModalBannedUsers"
 					tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 					aria-hidden="true" >
@@ -441,14 +393,14 @@
                               {{game.name}}</a>
                            </li>
                         </ul>
-					 <div class="modal fade" id="myModalGames" tabindex="-1" role="dialog" 
+					 <div class="modal fade" id="myModalGames" tabindex="-1" role="dialog"
                            aria-labelledby="myModalLabel" aria-hidden="true">
                            <div class="modal-dialog">
                               <div class="modal-content">
                                  <!-- Modal Header -->
                                  <div class="modal-header">
                                  <h1>{{oneGame.name}}</h1>
-                                    <button type="button" class="close" 
+                                    <button type="button" class="close"
                                        data-dismiss="modal">
                                     <span aria-hidden="true">&times;</span>
                                     <span class="sr-only">Close</span>
@@ -461,7 +413,7 @@
 									<p>Max players: {{oneGame.maxPlayers}}</p>
 									<p>Min players: {{oneGame.minPlayers}}</p>
 								</div>
-                                       
+
                                  </div>
                               </div>
                            </div>
@@ -474,7 +426,7 @@
                         <ul ng-show="showUsersTournaments" ng-repeat="tournament in tournaments">
                            <li><a href="" ng-click="getInfoAboutTournament(tournament.tournamentId)" data-toggle="modal" data-target="#myModalTournaments">
                               {{tournament.tournamentName}}</a>
-                           </li>                     
+                           </li>
                         </ul>
                          <div class="modal fade" id="myModalTournaments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                            <div class="modal-dialog">
@@ -482,7 +434,7 @@
                                  <!-- Modal Header -->
                                  <div class="modal-header">
                                  	<h1>{{oneTournament.tournamentName}}</h1>
-                                    <button type="button" class="close" 
+                                    <button type="button" class="close"
                                        data-dismiss="modal">
                                     <span aria-hidden="true">&times;</span>
                                     <span class="sr-only">Close</span>
@@ -495,7 +447,7 @@
 									<p>Date: {{oneTournament.dateUtil}}</p>
 									<p>Required rating: {{oneTournament.requiredRating}}</p>
 								</div>
-                                       
+
                                  </div>
                               </div>
 
@@ -514,7 +466,7 @@
                     <div class="mainbar">
                         <div class="widget widget_top-posts">
                             <h2 class="title">Tournament search</h2>
-                            <a href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
+                            <a style="align-content: center;" href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
                                 <img class="tournamentIco" src="resources/ico/plus.ico"></a>
                             <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="showAllTournaments">
                                 <div class="modal-dialog">
@@ -524,6 +476,7 @@
                                             <h2>Create the best tournament ever</h2>
                                         </div>
                                         <div class="modal-body">
+                                            <form>
                                             <label>Select game for your awsome tournament</label>
                                             <select required="required" class="field-form" data-ng-model="selectedGame">
                                                 <option  ng-repeat="game in games" value="{{game.name}}">{{game.name}}</option>
@@ -543,15 +496,16 @@
                                             <label>Enter place where tournament will be</label>
                                             <input class="field-form" data-ng-model="countryTournament" placeholder="Country">
                                             <input class="field-form" data-ng-model="cityTournament" placeholder="City">
-                                            <input class="field-form" data-ng-model="streetTournament" placeholder="Street">
-                                            <input class="field-form" data-ng-model="houseNumberTournament" placeholder="HouseNumber">
-                                            <input class="field-form" data-ng-model="roomNumberTournament" placeholder="RoomNumber">
                                             <br/>
+                                            <textarea rows="3"  class="field-form" data-ng-model="additionTournament" placeholder="City"></textarea>
+                                            <br/>
+												<button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
+												<button type="button" class="btn btn-default" ng-click="modalClose()"
+														data-dismiss="modal">Close</button>
+                                                </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
-                                            <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -577,9 +531,8 @@
                                 <td>{{x.maxParticipants}}</td>
                                 <td>
                                     {{x.country}} {{x.city}}
-                                    <br/>
-                                    {{x.street}} {{x.houseNumber}} {{x.roomNumber}}
                                 </td>
+                                <td>{{x.addition}}</td>
                                 <td>
                                     <table>
                                         <tr ng-repeat="y in x.userGuests">
@@ -587,9 +540,11 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td><button ng-disabled="x.isCanJoin" class="button"
+                                <td>
+                                    <button ng-disabled="x.isCanJoin" class="button"
                                             style="color: black"
-                                            ng-click="JoinTournament(x.tournamentId)">Join</button></td>
+                                            ng-click="JoinTournament(x.tournamentId)">Join</button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
