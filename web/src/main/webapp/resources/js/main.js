@@ -252,8 +252,10 @@ app.controller("getAvatar", function($scope, $http) {
 
 app.controller("eventsVisibleController", function($scope) {
 	$scope.eventsFade = true;
+	$scope.tournamentsFade = true;
 	 $scope.fadeEvents = function () {
 		$scope.eventsFade = !$scope.eventsFade;
+		$scope.tournamentsFade = !$scope.tournamentsFade
 	};
 });
 

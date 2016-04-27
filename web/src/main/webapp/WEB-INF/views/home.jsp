@@ -452,7 +452,7 @@
                <!---------------------------------------- end of users -------------------------------------------------->
                <!--------------------------------------- tournaments  -------------------------------------------------->
                <div class="column-5" ng-controller="showAllTournaments"
-                  ng-hide="hideTournaments">
+                  ng-hide="hideTournaments" ng-show="tournamentsFade">
                   <div class="mainbar">
                      <div class="widget widget_top-posts">
                         <h2 class="title">Tournament search</h2>
@@ -772,6 +772,9 @@
             <!-- /sidebar -->
          </div>
       </section>
+      <br>
+      <br>
+      <br>
       <!-- Main Section-->
       <!-- Footer -->
       <section id="site">
