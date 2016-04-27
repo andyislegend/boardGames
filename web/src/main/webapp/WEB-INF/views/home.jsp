@@ -418,6 +418,7 @@
                                         <div class="modal-content"  >
                                             <div class="modal-header">
                                                 <h2>Create the best tournament ever</h2>
+                                                <p>P.S. ALL fields are necessarily </p>
                                             </div>
                                             <div class="modal-body">
                                                 <form>
@@ -443,7 +444,7 @@
                                                     <br/>
                                                     <textarea rows="3"  class="field-form" data-ng-model="additionTournament" placeholder="City"></textarea>
                                                     <br/>
-                                                    <button type="button" class="btn btn-default" ng-click="createTournament()"<%-- value="Close" data-dismiss="modal"--%>> Create</button>
+                                                    <button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
                                                     <button type="button" class="btn btn-default" ng-click="modalClose()"
                                                             data-dismiss="modal">Close</button>
                                                 </form>
