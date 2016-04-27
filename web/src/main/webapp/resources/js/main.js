@@ -244,6 +244,13 @@ app.controller("getAvatar", function($scope, $http) {
 	});
 });
 
+app.controller("eventsVisibleController", function($scope) {
+	$scope.eventsFade = true;
+	 $scope.fadeEvents = function () {
+		$scope.eventsFade = !$scope.eventsFade;
+	};
+});
+
 /*users Angular controller -- end*/
 
 

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="resources/css/fonts.css" />
 <link rel="stylesheet" href="resources/css/tournament.css" />
 <link rel="stylesheet" href="resources/css/friend.css" />
+<link rel="stylesheet" href="resources/css/users.css" />
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
@@ -304,11 +305,12 @@
 		</nav>
 	</div>
 	<!-- Main Section-->
-	<section class="wrapper home-section posts-section with-sidebar">
+	<section class="wrapper home-section posts-section with-sidebar" ng-controller="eventsVisibleController">
+	<button class="btn btn-success" ng-click="fadeEvents()">Users</button>
 		<div class="grids">
 			<div class="grid-8">
 				<!-- EVENTS -->
-				<div class="column-1" ng-controller="eventListCtrl">
+				<div class="column-1" ng-controller="eventListCtrl" ng-show="eventsFade">
 					<div class="mainbar">
 						<header class="section-header" ng-controller="eventListCtrl">
 							<div class="section-title title-with-sep">
@@ -394,7 +396,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="mainbar" ng-controller="getAllUsersCtrl">
+				<div  ng-controller="getAllUsersCtrl">
                   <header class="section-header" ng-controller="eventListCtrl">
                      <div class="section-title title-with-sep">
                         <h2 class="title">Users</h2>
@@ -403,8 +405,8 @@
                   <input type="text" class="form-control"
                      ng-model="searchText.lastName" placeholder="Search by last name" style="margin-bottom:10px">
                   <input type="text" class="form-control"
-                     ng-model="searchText.address.city" placeholder="Search by city">
-                  <table class="table">
+                     ng-model="searchText.address.city" placeholder="Search by city"> 
+                  <table class="table" >
                      <tr>
                         <th>Last Name, First Name</th>
                         <th>Email</th>
@@ -422,7 +424,7 @@
                            {{user.address.roomNumber}}
                         </td>
                      </tr>
-                  </table>
+                  </table>                
                   <div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
                      <div class="col-sm-3" id="backgroundForOneUser">
                         <p>Last Name:{{oneUser.lastName}}</p>
@@ -746,6 +748,9 @@
 	</section>
 	<!-- Main Section-->
 	<!-- Footer -->
+	<br>
+	<br>
+	<br>
 	<section id="site">
 		<footer id="footer" class=" anmtd" role="contentinfo">
 			<div class="footer-sidebar">
