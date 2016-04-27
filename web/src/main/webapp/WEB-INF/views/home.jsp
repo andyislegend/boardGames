@@ -76,67 +76,7 @@
          </div>
       </section>
       <!-- /top-strip -->
-      <div class="anmtd main-menu-container" role="navigation">
-         <nav class="wrapper main-menu">
-            <ul id="menu-main-menu" class="menu">
-               <li class="dropdown">
-                  <a href="#" class="dropdown.toggle"
-                     data-toggle="dropdown" style="font-weight: bold;"><span>Tournaments</span></a>
-                  <ul class="dropdown-menu">
-                     <div class="sub-posts">
-                        <!-- TOURNAMENTS -->
-                        <div class="column-5" ng-controller="showAllTournaments"
-                           ng-hide="hideTournaments">
-                           <div class="mainbar">
-                              <div class="widget widget_top-posts">
-                                 <h2 class="title">Tournament search</h2>
-                                 <a href="#" type="button" data-toggle="modal"
-                                    data-target="#myModalTournament"> <img
-                                    class="tournamentIco" src="resources/ico/plus_white.png"></a>
-                              </div>
-                              <table class="table">
-                                 <thead>
-                                    <tr>
-                                       <th>Tournament name</th>
-                                       <th>User creator</th>
-                                       <th>Required rating</th>
-                                       <th>Max Participants</th>
-                                       <th>Address</th>
-                                       <th>Users Guests</th>
-                                       <th>Join</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    <tr ng-repeat="x in tournaments">
-                                       <td>{{ x.tournamentName }}</td>
-                                       <td>{{ x.username }}</td>
-                                       <td>{{x.requiredRating}}</td>
-                                       <td>{{x.maxParticipants}}</td>
-                                       <td>{{x.country}} {{x.city}} <br /> {{x.street}}
-                                          {{x.houseNumber}} {{x.roomNumber}}
-                                       </td>
-                                       <td>
-                                          <table>
-                                             <tr ng-repeat="y in x.userGuests">
-                                                <td>{{y}}</td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                       <td><button ng-disabled="x.isCanJoin" class="button"
-                                          style="color: black"
-                                          ng-click="JoinTournament(x.tournamentId)">Join</button></td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                        </div>
-                        <!-- /TOURNAMENTS -->
-                     </div>
-                  </ul>
-               </li>
-            </ul>
-         </nav>
-      </div>
+
       <!-- Main Section-->
       <section class="wrapper home-section posts-section with-sidebar" ng-controller="eventsVisibleController">
       <button class="btn btn-success" ng-click="onlyUsers()" id="blackBut">Users</button>

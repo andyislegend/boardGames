@@ -420,9 +420,6 @@ app.controller("showAllTournaments", function ($scope, $http) {
     });
 
 
-    $scope.$on('myCustomEvent', function(event, fromChild) {
-        $scope.tournaments = fromChild;
-    });
 
     $http({
         method : "GET",
@@ -438,7 +435,7 @@ app.controller("showAllTournaments", function ($scope, $http) {
         console.log(idTournament);
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
-                if($scope.tournaments === data){
+                if($scope.tournaments == data){
                     alert("You've already join this tournament");
                 }
                 $scope.tournaments = data;
@@ -467,7 +464,6 @@ app.controller("CtreateNewTournament",function($scope,$http){
             .success(function (data) {
                 console.log(data);
                 $scope.$parent.tournaments=data;
-                /*$scope.$emit('myCustomEvent',data);*/
             });
 
     }
