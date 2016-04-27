@@ -5,6 +5,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
             " t.game.name as gameName, t.address.country, t.address.city, t.address.street, t.address.houseNumber," +
             "t.address.roomNumber from Tournament t")
     List<AllTournamentsDTO> findAllTournamentsDTO();*/
+    
+    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
+			"(t.id, t.name, t.userCreator.username, t.address.country, " +
+			"t.address.city, t.address.street, t.address.houseNumber, " +
+			"t.address.roomNumber, t.dateOfTournament, t.requiredRating) " +
+    		"from Tournament t where t.userCreator.username =:username")
+	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
 }

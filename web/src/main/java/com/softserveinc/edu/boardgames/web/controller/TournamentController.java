@@ -88,22 +88,6 @@ public class TournamentController {
         tournamentService.save(tournament);
         return createDTOfromtournamentList();
     }
-
-    @RequestMapping(value = "/allUsersTournaments", method = RequestMethod.GET)
-	@ResponseBody
-	public List<AllTournamentsDTO> getAllTournaments(@RequestParam("userName") String userName) {
-		List<AllTournamentsDTO> oneUserTournaments = new ArrayList<AllTournamentsDTO>();
-		List<AllTournamentsDTO> allTournamentList =	createDTOfromtournamentList();
-		System.out.println(allTournamentList);
-		for(AllTournamentsDTO allTournamentsDTO : allTournamentList) {
-			System.out.println(allTournamentsDTO.getUsername());
-			if (allTournamentsDTO.getUsername().equals(userName)) {
-				oneUserTournaments.add(allTournamentsDTO);
-			}
-		}
-		System.out.println(oneUserTournaments);
-		return oneUserTournaments;
-	}
     
     private List<AllTournamentsDTO> createDTOfromtournamentList() {
         List<AllTournamentsDTO> response = new ArrayList<>();

@@ -13,10 +13,10 @@ import com.softserveinc.edu.boardgames.service.UserService;
 
 @Controller
 public class UsersController {
-	
+
 	@Autowired
 	UserService userSevice;
-	
+
 	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> getAllUsers() {

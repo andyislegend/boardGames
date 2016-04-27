@@ -195,20 +195,11 @@ app.controller("getAllUsersWithNegativeRating", function($scope, $http, $window)
 	$http.get('getUsersWithNegativeRating').then(function(result) {
 		$scope.usersWithNegRate = result.data;
 		if ($scope.usersWithNegRate.length != 0) {
-			$window.alert('These users have to be banned: ' + $scope.usersWithNegRate);
+			$("#myModalBannedUsers").modal('show');
+		        $scope.bannedUsers = ('These users have to be banned: ' + $scope.usersWithNegRate);        
 		}
 	});
-});
-
-app.directive('fallbackSrc', function () {
-	  var fallbackSrc = {
-	    link: function postLink(scope, iElement, iAttrs) {
-	      iElement.bind('error', function() {
-	        angular.element(this).attr("src", iAttrs.fallbackSrc);
-	      });
-	    }
-	   }
-	   return fallbackSrc;
+	
 });
 
 app.controller("getAllUsersGames", function($scope, $http) {
@@ -231,9 +222,9 @@ app.controller("getAllUsersGames", function($scope, $http) {
 
 app.controller("getAllUsersTournaments", function ($scope, $http) {
     $scope.showUsersTournaments = false;
-    $scope.allUsersTournaments = function (userName) {
+    $scope.allUsersTournaments = function (username) {
         $scope.showUsersTournaments = !$scope.showUsersTournaments;
-        $http.get('allUsersTournaments?userName=' + userName).then(function (result) {
+        $http.get('allUsersTournaments?username=' + username).then(function (result) {
             $scope.tournaments = result.data;
         });
     };

@@ -13,15 +13,22 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * This class describes addresses where users of boardGames website live.
+ * This class describes addresses where users of boardGames website live and
+ * 		where tournaments are held.
  * 
- * This Address entity has a one to many relationship with the User entity.
+ * This Address entity has a one to many relationship with the User entity and
+ * 		one to many relationship with Tournament entity.
  * 
  * @author Volodymyr Terlyha
  */
 @Entity
 @Table(name = "address")
 public class Address implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2966070992511907458L;
 
 	/**
 	 * Describes the address id. Unique value.

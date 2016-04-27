@@ -35,7 +35,6 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 /**
  * This class describes users of boardGames website.
  * 
- * 
  * @author Volodymyr Terlyha
  */
 
@@ -57,7 +56,7 @@ public class User implements Serializable {
 	private Integer id;
 
 	/**
-	 * Describes users first name.
+	 * Describes users username(login).
 	 */
 	@NotEmpty
 	@Column(name = "username", nullable = false, unique = true)
@@ -88,7 +87,7 @@ public class User implements Serializable {
 	private Integer age;
 
 	/**
-	 * Describes users email. Also is used as a login.
+	 * Describes users email.
 	 * 
 	 */
 	@NotEmpty
@@ -131,10 +130,9 @@ public class User implements Serializable {
 	@NotEmpty
 	@Column(name = "state", nullable = false)
 	private String state = UserStatus.ACTIVE.name();
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user" ,fetch = FetchType.LAZY)
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<GameUser> userGames;
-	
 
 	/**
 	 * Describes address where user lives. Has a many to one relationship to
@@ -156,9 +154,9 @@ public class User implements Serializable {
 	/**
 	 * List of tounaments that were organized by user
 	 */
-	@OneToMany(fetch = FetchType.LAZY,cascade = { CascadeType.ALL }, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, mappedBy = "user")
 	@JsonBackReference
-    private Set<GameRatingNumeric> gameRatingNumeric;
+	private Set<GameRatingNumeric> gameRatingNumeric;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "userCreator")
@@ -175,19 +173,6 @@ public class User implements Serializable {
 
 	public User() {
 	}
-
-	public Set<GameRatingNumeric> getGameRatingNumeric() {
-		return gameRatingNumeric;
-	}
-
-	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
-		this.gameRatingNumeric = gameRatingNumeric;
-	}
-	/**
-	 * Get value of column id.
-	 * 
-	 * @return value of column id.
-	 */
 
 	public Integer getId() {
 		return id;
@@ -260,11 +245,11 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public Integer getUserRating() {
 		return userRating;
 	}
-	
+
 	public void setUserRating(Integer userRating) {
 		this.userRating = userRating;
 	}
@@ -299,6 +284,14 @@ public class User implements Serializable {
 
 	public void setUserRoles(Set<UserRoles> userRoles) {
 		this.userRoles = userRoles;
+	}
+
+	public Set<GameRatingNumeric> getGameRatingNumeric() {
+		return gameRatingNumeric;
+	}
+
+	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
+		this.gameRatingNumeric = gameRatingNumeric;
 	}
 
 	@Override
