@@ -201,7 +201,7 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	});
 });
 
-app.controller("getAllUsersWithNegativeRating", function($scope, $http, $window) {
+app.controller("getAllUsersWithNegativeRating", function($scope, $http) {
 	$scope.usersWithNegRate = [];
 	$http.get('getUsersWithNegativeRating').then(function(result) {
 		$scope.usersWithNegRate = result.data;
@@ -260,10 +260,10 @@ app.controller("getAvatar", function($scope, $http) {
 
 
 app.controller("eventsVisibleController", function($scope) {
-	$scope.eventsFade = true;
-	$scope.tournamentsFade = true;
+	$scope.eventsFade = false;
+	$scope.tournamentsFade = false;
 	$scope.gamesFade = true;
-	$scope.usersFade = true;
+	$scope.usersFade = false;
 	$scope.onlyUsers = function () {
 		$scope.eventsFade = false;
 		$scope.tournamentsFade = false;
