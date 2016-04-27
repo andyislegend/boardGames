@@ -1,9 +1,5 @@
 package com.softserveinc.edu.boardgames.service;
 
-/**
- * UserService.class responsible for realization of DB CRUD and other operation upon User Repository
- * 
- */
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +16,11 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 //import com.softserveinc.edu.boardgames.service.util.EmailSenderApp;
 
+/**
+ * UserService.class responsible for realization of DB CRUD and other operation
+ * upon User Repository
+ * 
+ */
 @Service
 @Transactional
 public class UserService {
@@ -76,6 +77,11 @@ public class UserService {
 		return userRepository.findByEmail(email) != null;
 	}
 
+	/**
+	 * 
+	 * @param username
+	 *            finding user by username
+	 */
 	@Transactional(readOnly = true)
 	public User getUser(String username) {
 		return userRepository.findByUsername(username);
@@ -166,6 +172,11 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
+	/**
+	 * 
+	 * @param cityName
+	 *            finding users by cityName
+	 */
 	@Transactional
 	public List<User> findAllUsersByCity(String cityName) {
 		return userRepository.findUserByCity(cityName);
@@ -186,7 +197,7 @@ public class UserService {
 	public List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName) {
 		String name = nameAndLastName.trim();
 		String lastName = "";
-		if(nameAndLastName.indexOf(" ") != -1){
+		if (nameAndLastName.indexOf(" ") != -1) {
 			name = nameAndLastName.substring(0, nameAndLastName.indexOf(" ")).trim();
 			lastName = nameAndLastName.substring(nameAndLastName.indexOf(" "), nameAndLastName.length()).trim();
 		}
@@ -195,10 +206,19 @@ public class UserService {
 		return userRepository.findAllUserByFirstNameAndLastName(name, lastName, userName);
 	}
 
+	/**
+	 * 
+	 * finding users with userRating lower than -5
+	 */
 	public List<String> findUserWithNeagativeRating() {
 		return userRepository.findUsesrWithNegativeRating();
 	}
-	
+
+	/**
+	 * 
+	 * @param username
+	 *            finding users sex by username
+	 */
 	public String findUsersSex(String username) {
 		return userRepository.findUsersSex(username);
 	}
