@@ -38,12 +38,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("Select u.username FROM User u WHERE u.userRating <=-5")
 	public List<String> findUsesrWithNegativeRating();
 	
-	/*@Query("Select u FROM User u WHERE u.firstName LIKE ?1 AND u.lastName LIKE ?2 OR u.firstName LIKE ?2 AND u.lastName LIKE ?1")
-	public List<User> findAllUserByFirstNameAndLastName(String name, String lastName);*/
-	
-	@Query("Select u FROM User u WHERE (u.firstName LIKE ?1 AND u.lastName LIKE ?2 OR u.firstName LIKE ?2 AND u.lastName LIKE ?1)"
-			+ "AND u.username != ?3")
-	public List<User> findAllUserByFirstNameAndLastName(String name, String lastName, String userName);
+	@Query("SELECT u FROM User u WHERE u.username != ?1 "
+			+ "AND u NOT IN ("
+			+ "SELECT u FROM Friend f RIGHT JOIN f.userId u WHERE f.user.username = ?1 AND (f.status.id = 2 OR f.status.id = 1))"
+			+ "AND u NOT IN("
+			+ "SELECT u FROM Friend f RIGHT JOIN f.user u WHERE f.userId.username = ?1 AND f.status.id = 1)"
+			+ "AND ((u.firstName LIKE ?2 AND u.lastName LIKE ?3) OR (u.firstName LIKE ?3 AND u.lastName LIKE ?2))")
+	public List<User> findAllUserByFirstNameAndLastName(String userName, String name, String lastName);
 	
 	@Query("SELECT u FROM Friend f RIGHT JOIN f.userId u WHERE f.user.username = ?1 AND f.status.id = 2")
 	public List<User> findAllFriends(String userName);

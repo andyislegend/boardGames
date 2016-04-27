@@ -209,7 +209,7 @@ public class UserService {
 		}
 		name = name.concat("%");
 		lastName = lastName.concat("%");
-		return userRepository.findAllUserByFirstNameAndLastName(name, lastName, userName);
+		return userRepository.findAllUserByFirstNameAndLastName(userName, name, lastName);
 	}
 
 	/**

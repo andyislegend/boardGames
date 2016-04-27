@@ -135,3 +135,7 @@
     height: 29px;
     width: 130px;
 }
+.myStyle{
+    pointer-events: none;
+    cursor: default;
+}

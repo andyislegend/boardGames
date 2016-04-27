@@ -508,7 +508,7 @@
                                     </a>
                                  </td>
                                  <td>
-                                    <a href="#" ng-disabled="count < 1" type="button" data-toggle="modal"
+                                    <a href="#" ng-class="{myStyle: count < 1}" ng-disabled="count < 1" type="button" data-toggle="modal"
                                        data-target="#myModal">
                                        <div class="proba">
                                           <div class="count" ng-hide="count < 1">{{count}}</div>

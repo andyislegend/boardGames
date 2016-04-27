@@ -123,7 +123,10 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
     
      $scope.add = function(id){
         var userId = id;
-          $scope.count =  $scope.count-1;
+        if($scope.count == 1){
+            $scope.NameOfModalWindow = 'modal';
+        }
+        $scope.count =  $scope.count-1;
         $http.post('addUserToFriend', userId).success(function(data){
             var user = data;
             for(var i = 0; i < $scope.allOfferedUsers.length; i++){
@@ -131,9 +134,7 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.friends.push($scope.allOfferedUsers[i]);
                     $scope.allOfferedUsers.splice(i, 1)
                 };
-            if($scope.count == 1){
-                $scope.NameOfModalWindow = 'modal';
-            }
+            
             };
         }).error(function(error){
             console.log(error);
@@ -142,7 +143,10 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
 
     $scope.rejected = function(id){
         var userId = id;
-         $scope.count =  $scope.count-1;
+        if($scope.count == 1){
+            $scope.NameOfModalWindow = 'modal';
+        }
+        $scope.count =  $scope.count-1;
         $http.post('rejectedUserToFriend', userId).success(function(data){
              var user = data;
             for(var i = 0; i < $scope.allOfferedUsers.length; i++){
@@ -150,9 +154,7 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.allOfferedUsers.splice(i, 1)
                 };
             };
-            if($scope.count == 1){
-                $scope.NameOfModalWindow = 'modal';
-            }
+            
         }).error(function(error){
             console.log(error);
         });
