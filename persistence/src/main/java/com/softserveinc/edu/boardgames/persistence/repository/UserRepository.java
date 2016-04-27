@@ -53,5 +53,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("Select u.sex FROM User u WHERE u.username = :username")
 	public String findUsersSex(@Param("username") String username);
-
 }
