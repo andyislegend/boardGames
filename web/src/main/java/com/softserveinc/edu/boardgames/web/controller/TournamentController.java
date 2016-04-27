@@ -40,29 +40,35 @@ public class TournamentController {
     public
     @ResponseBody
     List<AllTournamentsDTO> showAllTournaments() {
-        //List<AllTournamentsDTO> response=tournamentService.
-        return null;
+        return getAllTournaments();
     }
 
     @RequestMapping(value = "/joinTournament", method = RequestMethod.POST)
     public
     @ResponseBody
-    List<AllTournamentsDTO> joinTournamnet(@RequestBody Long id) throws Exception {
+    List<AllTournamentsDTO> joinTournamnet(@RequestBody Long id) {
         User user = userService.findOne(WebUtil.getPrincipalUsername());
-        Long count;
-        count = tournamentCompositionService.findCountUserGuest(user.getUsername(), id);
+        Long count = (long) 1;
+        List<TournamentComposition> tournamentCompositions = tournamentCompositionService.findByTournamentId(id);
+        for (TournamentComposition tournamentComposition : tournamentCompositions) {
+
+            count = tournamentCompositionService.findCountUserGuest(user.getUsername(), tournamentComposition.getId());
+            if (count != 0) {
+                break;
+            }
+        }
         if (count == 0) {
             TournamentComposition tournamentComposition = new TournamentComposition();
             tournamentComposition.setTournament(tournamentService.findById(Long.parseLong(String.valueOf(id))));
             tournamentComposition.setUserGuest(user);
             tournamentCompositionService.save(tournamentComposition);
         }
-        return null;
+        return getAllTournaments();
     }
 
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
+    @ResponseBody
     public List<AllTournamentsDTO> addTournament(@RequestBody AddTournamentDTO tournamentDTO) {
-        Address address = new Address();
         Tournament tournament = new Tournament();
 
         tournament.setDateOfTournament(tournamentDTO.getDate());
@@ -71,12 +77,26 @@ public class TournamentController {
         tournament.setRequiredRating(tournamentDTO.getRating());
         tournament.setMaxParticipants(tournamentDTO.getMaxParticipants());
         tournament.setUserCreator(userService.findOne(WebUtil.getPrincipalUsername()));
+        tournament.setCountry(tournamentDTO.getCountry());
+        tournament.setCity(tournamentDTO.getCity());
+        tournament.setAddition(tournamentDTO.getAddition());
 
         tournamentService.save(tournament);
-        return null;
+        return getAllTournaments();
     }
 
-
-
+    private List<AllTournamentsDTO> getAllTournaments() {
+        List<AllTournamentsDTO> response = tournamentService.findAllTournamentsDTO();
+        for (AllTournamentsDTO tournamentsDTO : response) {
+            tournamentsDTO.setUserGuests(tournamentCompositionService.findAllUserGuestsByTournament(tournamentsDTO.getTournamentId()));
+            tournamentsDTO.setCountParticipants(tournamentCompositionService.findAllUserGuestsByTournament
+                    (tournamentsDTO.getTournamentId()).size());
+            tournamentsDTO.setIsCanJoin(
+                    (tournamentsDTO.getCountParticipants() == tournamentsDTO.getMaxParticipants() ||
+                            tournamentsDTO.getUsername().equals(WebUtil.getPrincipalUsername()) ||
+                            tournamentsDTO.getUserGuests().contains(WebUtil.getPrincipalUsername())) ? true : false);
+        }
+        return response;
+    }
 
 }

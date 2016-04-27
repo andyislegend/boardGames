@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.CommentsForGame;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.CommentsForGameDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.CommentsForGameRepository;
 
 
@@ -42,5 +43,9 @@ public class CommentForGameService {
 	
 	public Integer getCountOfCommentsByGameId(Integer id) {
 		return commentsForGameRepository.countsOfComment(id);
+	}
+	
+	public List<CommentsForGameDTO> getAllCommentsDTO(){
+		return commentsForGameRepository.getAllCoomentsDTO();
 	}
 }

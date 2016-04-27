@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.CommentsForGame;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.CommentsForGameDTO;
 
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface CommentsForGameRepository extends JpaRepository<CommentsForGame
 	
 	@Query("select count (c) from CommentsForGame c where c.id = :id")
 	public Integer countsOfComment(@Param("id") Integer id);
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.CommentsForGameDTO(c.gameUser.id, c.text, c.user.username, c.date) from CommentsForGame c")
+	public List<CommentsForGameDTO> getAllCoomentsDTO();
 }
