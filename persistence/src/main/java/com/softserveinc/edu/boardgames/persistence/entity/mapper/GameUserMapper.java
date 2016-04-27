@@ -5,10 +5,10 @@ import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 
-public class GameUserMapper implements GenericMapper<GameUserDTO, GameUser> {
+public class GameUserMapper  {
 
-	@Override
-	public GameUserDTO toDTO(GameUser gameUser) {
+	
+	public static GameUserDTO toDTO(GameUser gameUser) {
 		GameUserDTO gameUserDTO = new GameUserDTO();
 		gameUserDTO.setId(gameUser.getId());
 		gameUserDTO.setName(gameUser.getGame().getName());
@@ -22,8 +22,8 @@ public class GameUserMapper implements GenericMapper<GameUserDTO, GameUser> {
 		return gameUserDTO;
 	}
 	
-	@Override
-	public GameUser toEntity(GameUserDTO gameUserDTO) {
+	
+	public static GameUser toEntity(GameUserDTO gameUserDTO) {
 		GameUser gameUser = new GameUser();
 		gameUser.setEdition(gameUserDTO.getEdition());
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());

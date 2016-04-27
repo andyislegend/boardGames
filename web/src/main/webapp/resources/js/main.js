@@ -1,9 +1,14 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
 
 app.controller("allUsersGameCtrl", function ($scope, $http) {
-	$scope.allGame = [];
+	
     $http.get('getAllGamesCurUser').then(function (result) {
-        $scope.allGame = result.data;});
+    	$scope.allGame = result.data;});
+    
+    $scope.$on('myCustomEvent', function(event, fromChild) {
+        $scope.allGame = fromChild;
+    });
+    
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
@@ -15,8 +20,8 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
                 }
             }
         }
+        
 });
-
 app.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;
 	$scope.categories = [];
@@ -27,7 +32,7 @@ app.controller("CreateGameCtrl", function($scope, $http) {
 		$scope.categories = result.data;
 	});
 		$scope.list = [];
-	$scope.submit = function() {
+	$scope.submit = function() {	
 		 var userGame  = {
 			"name" : $scope.name,
 			"category" : $scope.category,
@@ -46,11 +51,15 @@ app.controller("CreateGameCtrl", function($scope, $http) {
 				   'Content-Type': 'application/json'
 				 },
 			  data:userGame
-			}).then(function successCallback(response) {
-			    $scope.list.push(response.data);
+			}).success(function(response) {
+				console.log("fjsdbfhbdshfsdhds")
+			    $scope.list.push(response.data); 
+				
 			  }, function errorCallback(response) {
 			    
 			  });
+		 $scope.$parent.allGame.push(userGame);
+		 
 	};
 });
 
@@ -126,6 +135,9 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.friends.push($scope.allOfferedUsers[i]);
                     $scope.allOfferedUsers.splice(i, 1)
                 };
+            if($scope.count == 1){
+                $scope.NameOfModalWindow = 'modal';
+            }
             };
         }).error(function(error){
             console.log(error);
@@ -142,6 +154,9 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.allOfferedUsers.splice(i, 1)
                 };
             };
+            if($scope.count == 1){
+                $scope.NameOfModalWindow = 'modal';
+            }
         }).error(function(error){
             console.log(error);
         });
@@ -272,13 +287,6 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 		$scope.currentGameId = id;
 		$rootScope.currentGameRootId = $scope.currentGameId;
 		
-		if ($scope.gameDetailsShown == false)
-			$scope.gameDetailsShown = true;
-		else if ($scope.currentGameId != $scope.openedGameId)
-			$scope.gameDetailsShown = true;
-		else $scope.gameDetailsShown = false;
-		$scope.openedGameId = id;
-
 		$http({
 			method: "GET",
 			url : 'getGameDetails' + '/' + id
@@ -312,10 +320,6 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 
 app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $http) {
 	
-	$scope.hideGameDetails = function() {
-		$scope.gameDetailsShown = false;
-	}
-	
 	$scope.ratingSliderChanged = function(){
 		if ($scope.gameRating <= 15)
 			$scope.gameRatingText = "Bad as hell";
@@ -341,30 +345,31 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 		}).then(function mySucces(response){
 			
 		}, function myError(response) {
-			alert("Getting games general data error");
+			alert("Saving rating error");
 		});
 	}
 	
 	//comment
 	$scope.gameuserId = 0;
-	$scope.isShowComment = false;
-		
+	$scope.isShowComment = false;	
+	$scope.comments = [];
+	$http.get('comment').then(function(result) {
+		$scope.comments = result.data;
+	},function Error(result) {
+		$scope.comments = [{"text":"jdsfsjd"}];
+	})
+	
 	$scope.showComments = function(id) {
 		$scope.gameuserId = id;
 		$scope.isShowComment = !$scope.isShowComment
-		
-		return $http.get('comment/'+id).then(
-		function(response) {
-			 response.data;
-		},function(errResponse){
-			console.log("Error sending comment id");
-		}		
-		)	
-	}
-	
-	$http.get('comment/'+$scope.gameuserId, $scope.gameuserId).success(function(result) {
-		$scope.comments = result.data;
-	})
+		$scope.commentForGame = [];
+		for(var i = 0; i<$scope.comments.length;i++){
+			if($scope.comments[i].gameID === id){
+				console.log(id);
+				$scope.commentForGame.push($scope.comments[i]);
+			}
+		}	
+	}	
 	
 	$scope.list = [];
 	$scope.submit = function () {
@@ -372,8 +377,6 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 				"gameID" : ''+$scope.gameuserId,
 				"commentText" : $scope.comment
 			 };
-		console.log(comment.gameID);
-		console.log(comment.commentText);
 			 $http({
 				  method: 'POST',
 				  url: '/NewComment',
@@ -382,16 +385,21 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 					 },
 				  data:comment
 				}).then(function successCallback(response) {
-				    $scope.list.push(response.data);
+				    $scope.list.push(response.data);	
 				  }, function errorCallback(response) {
-
+				    
 				  });
+			 $scope.comments.push(comment);
 	}
 });
-
 app.controller("showAllTournaments", function ($scope, $http) {
     $http.get('/tournaments').success(function (data) {
         $scope.tournaments = data;
+    });
+
+
+    $scope.$on('myCustomEvent', function(event, fromChild) {
+        $scope.tournaments = fromChild;
     });
 
     $http({
@@ -416,23 +424,29 @@ app.controller("showAllTournaments", function ($scope, $http) {
             });
 
     }
-	$scope.createTournament = function () {
-		var tournament = {
-			"tournamentName": $scope.tournamentName,
-			"rating": $scope.requiredRating,
-			"maxParticipants": $scope.maxParticipants,
-			"date": $scope.date,
-			"gameName": $scope.selectedGame,
-			"country": $scope.countryTournament,
-			"city": $scope.cityTournament,
-			"addition":$scope.additionTournament
-		};
 
-		$http.post("/addTournament", tournament)
-			.success(function (data) {
+});
+
+app.controller("CtreateNewTournament",function($scope,$http){
+
+    $scope.createTournament = function () {
+        var tournament = {
+            "tournamentName": $scope.tournamentName,
+            "rating": $scope.requiredRating,
+            "maxParticipants": $scope.maxParticipants,
+            "date": $scope.date,
+            "gameName": $scope.selectedGame,
+            "country": $scope.countryTournament,
+            "city": $scope.cityTournament,
+            "addition":$scope.additionTournament
+        };
+        console.log(tournament);
+        $http.post("/addTournament", tournament)
+            .success(function (data) {
                 console.log(data);
-				$scope.tournaments = data;
-			});
+                $scope.$parent.tournaments=data;
+                /*$scope.$emit('myCustomEvent',data);*/
+            });
 
-	}
+    }
 });

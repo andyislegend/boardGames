@@ -19,7 +19,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/new-css.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
-<link rel="stylesheet" href="resources/css/index.css" />
+<!-- <link rel="stylesheet" href="resources/css/index.css" /> -->
 
 </head>
 
@@ -121,8 +121,7 @@
 					<div class="form-group col-md-12" style="margin-left: 1%;">
 						<label class="col-md-3 control-lable" for="sex">Gender</label>
 						<div class="col-md-7">
-							<select class="form-control" id="sex" name="sex">
-								<option value="none">None</option>
+							<select class="form-control" id="sex" name="sex" required>
 								<option value="male">Male</option>
 								<option value="female">Female</option>
 							</select>

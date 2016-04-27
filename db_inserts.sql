@@ -86,8 +86,8 @@ INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `pla
 INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('This is simply a wonderful visual feast', 'Utopia event', 'resources/images/utopiaImg.jpg', '2016-08-20', 'Lviv', '1', '8');
 
 --  inserts to table tournament
-insert into tournament (name,userCreator_id,game_id,requiredRating,dateOfTournament,maxParticipants) values ('MonopolyTournament',1,1,2.5,'2016-04-12',3);
-insert into tournament (name,userCreator_id,game_id,requiredRating,dateOfTournament,maxParticipants) values ('MEMOTournament',2,2,3.8,'2016-05-18',4);
+insert into tournament (name,userCreator_id,game_id,requiredRating,dateOfTournament,maxParticipants,city,country,addition) values ('MonopolyTournament',1,1,2.5,'2016-04-12',3,'Ukraine','Lviv','Join with us');
+insert into tournament (name,userCreator_id,game_id,requiredRating,dateOfTournament,maxParticipants,city,country,addition) values ('MEMOTournament',2,2,3.8,'2016-05-18',4,'Ukraine','Lviv','Will be fun');
 
 --  inserts to table tournament_composition
 insert into tournament_composition (tournament_id,userGuest_id) values (1,2);

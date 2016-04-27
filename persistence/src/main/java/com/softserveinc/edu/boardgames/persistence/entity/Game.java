@@ -35,6 +35,8 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
 @Table(name = "game")
 public class Game implements Serializable{
 
+	private static final long serialVersionUID = 6137099479297502093L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)       
@@ -49,14 +51,14 @@ public class Game implements Serializable{
 	@Column(name = "rules")
 	private String rules;
 	
+	@Column(name = "ratings")
+	private Integer rating;
+	
 	@Column(name = "minPlayers")
 	private Integer minPlayers;
 	
 	@Column(name = "maxPlayers")
 	private Integer maxPlayers;
-	
-	@Column(name = "rating")
-	private Integer rating = 0;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
@@ -88,17 +90,23 @@ public class Game implements Serializable{
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.category = category;
-		
 	}
 	
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+
 	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category, GameRating gameRating, Integer rating) {
+			Integer maxPlayers, Category category, GameRating gameRating) {
 		this.name = name;
 		this.description = description;
 		this.minPlayers = minPlayers;
 		this.maxPlayers = maxPlayers;
 		this.category = category;
-		this.rating = rating;
 	}
 
 	public Set<GameRatingNumeric> getGameRatingNumeric() {
@@ -107,14 +115,6 @@ public class Game implements Serializable{
 
 	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
 		this.gameRatingNumeric = gameRatingNumeric;
-	}
-
-	public Integer getRating() {
-		return rating;
-	}
-
-	public void setRating(Integer rating) {
-		this.rating = rating;
 	}
 
 	public Set<GameUser> getUserGames() {

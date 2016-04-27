@@ -24,6 +24,7 @@
          src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
       <script type="text/javascript" src="resources/js/main.js"></script>
       <script type="text/javascript" src="resources/js/service.js"></script>
+   </head>
    <body ng-app="usersGameApp" class="layout-boxed">
       <!-- top-strip -->
       <section class="top-strip">
@@ -79,124 +80,6 @@
       <div class="anmtd main-menu-container" role="navigation">
          <nav class="wrapper main-menu">
             <ul id="menu-main-menu" class="menu">
-               <li class="dropdown">
-                  <a href="#" class="dropdown.toggle"
-                     data-toggle="dropdown" style="font-weight: bold;"><span>Games</span></a>
-                  <ul class="dropdown-menu">
-                     <div class="sub-posts">
-                        <!-- drop-down ALL GAMES-->
-                        <div class="column-5" ng-controller="getGamesGlobalController"
-                           ng-hide="hideTournaments">
-                           <div class="mainbar">
-                              <div class="widget widget_top-posts">
-                                 <h2 class="title">Games</h2>
-                              </div>
-                              <table class="table">
-                                 <thead>
-                                    <tr>
-                                       <th>Game</th>
-                                       <th>Category</th>
-                                       <th>Min/Max players</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    <tr ng-repeat="x in gamesGlobal"
-                                       ng-click="gameSelect(x.id, x.name)"
-                                       ng-init="gameDetailsShown=false">
-                                       <td>{{ x.name }}</td>
-                                       <td>{{ x.categoryName }}</td>
-                                       <td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
-                                    </tr>
-                                    <tr>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                              <div class="well" ng-show="gameDetailsShown"
-                                 ng-controller="getGameDetailedInfoController">
-                                 <h4>Name</h4>
-                                 <p>{{gameDetail.name}}</p>
-                                 <hr />
-                                 <h4>Description</h4>
-                                 <pre>{{gameDetail.description}}</pre>
-                                 <hr />
-                                 <h4>Rules</h4>
-                                 <pre>{{gameDetail.rules}}</pre>
-                                 <hr />
-                                 <h4>Rating</h4>
-                                 <table class="table">
-                                    <thead>
-                                       <tr>
-                                          <th>Rate this game</th>
-                                          <th>Your rate</th>
-                                          <th>General</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       <tr>
-                                          <td><input type="range" id="myRange" value="100"
-                                             ng-change="ratingSliderChanged()" ng-model="gameRating" /></td>
-                                          <td>
-                                             <p class="text-primary">{{gameRatingText}}:
-                                                {{gameRating}}
-                                             </p>
-                                          </td>
-                                          <td>
-                                             <p>{{gameDetail.rating}}</p>
-                                          </td>
-                                       </tr>
-                                    </tbody>
-                                 </table>
-                                 <button class="btn btn-success" ng-click="ratingSaved()">Save
-                                 rate</button>
-                                 <hr />
-                                 <h4>Owners</h4>
-                                 <table class="table">
-                                    <thead>
-                                       <tr>
-                                          <th>Name</th>
-                                          <th>Game edition</th>
-                                          <th>Year of production</th>
-                                          <th>Action</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       <tr ng-repeat="x in userGamesOfGame">
-                                          <td>{{ x.username }}</td>
-                                          <td>{{ x.edition }}</td>
-                                          <td>{{ x.yearOfProduction }}</td>
-                                          <td><button ng-click="showComments(x.id)">Comment</button></td>
-                                       </tr>
-                                    </tbody>
-                                 </table>
-                                 <div>
-                                    <div ng-show="isShowComment">
-                                       <table>
-                                          <thead>
-                                             <tr>
-                                                <th></th>
-                                                <th></th>
-                                             </tr>
-                                          </thead>
-                                          <tbody>
-                                             <tr ng-repeat="x in comments">
-                                                </td>{x.text}
-                                                <td></td>
-                                             </tr>
-                                          </tbody>
-                                       </table>
-                                       <form data-ng-submit=submit()>
-                                          <input type="text" data-ng-model="comment"><input
-                                             type="submit" ng-click="addComment">
-                                       </form>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- /drop-down ALL GAMES-->
-                        </div>
-                     </div>
-                  </ul>
-               </li>
                <li class="dropdown">
                   <a href="#" class="dropdown.toggle"
                      data-toggle="dropdown" style="font-weight: bold;"><span>Tournaments</span></a>
@@ -260,6 +143,125 @@
       <button class="btn btn-success" ng-click="fadeEvents()">Users</button>
          <div class="grids">
             <div class="grid-8">
+            	<div class="column-5" ng-controller="getGamesGlobalController"
+					ng-hide="hideTournaments">
+					<div class="mainbar">
+						<div class="widget widget_top-posts">
+							<h2 class="title">Games</h2>
+						</div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Game</th>
+									<th>Category</th>
+									<th>Min/Max players</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in gamesGlobal"
+									ng-click="gameSelect(x.id, x.name)" data-toggle="modal"
+									data-target="#GameModal">
+									<td>{{ x.name }}</td>
+									<td>{{ x.categoryName }}</td>
+									<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
+								</tr>
+								<tr>
+								</tr>
+							</tbody>
+						</table>
+						<div id="GameModal" class="modal fade" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Games</h4>
+									</div>
+									<div class="modal-body"
+										ng-controller="getGameDetailedInfoController">
+										<h4>Name</h4>
+										<p>{{gameDetail.name}}</p>
+										<hr />
+										<h4>Description</h4>
+										<pre>{{gameDetail.description}}</pre>
+										<hr />
+										<h4>Rules</h4>
+										<pre>{{gameDetail.rules}}</pre>
+										<hr />
+										<h4>Rating</h4>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Rate this game</th>
+													<th>Your rate</th>
+													<th>General</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><input type="range" id="myRange" value="100"
+														ng-change="ratingSliderChanged()" ng-model="gameRating"></td>
+													<td>
+														<p class="text-primary">{{gameRatingText}}:
+															{{gameRating}}</p>
+													</td>
+													<td>
+														<p>{{gameDetail.rating}}</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<button class="btn btn-success" ng-click="ratingSaved()">Save
+											rate</button>
+										<hr />
+										<h4>Owners</h4>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Game edition</th>
+													<th>Year of production</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="x in userGamesOfGame">
+													<td>{{ x.username }}</td>
+													<td>{{ x.edition }}</td>
+													<td>{{ x.yearOfProduction }}</td>
+													<td><button ng-click="showComments(x.id)">Comment</button></td>
+												</tr>
+											</tbody>
+										</table>
+
+										<div>
+											<div ng-show="isShowComment">
+												<table>
+													<thead>
+														<tr>
+															<th></th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat="x in comments">
+															<td>{x.text}</td>
+															<td></td>
+														</tr>
+													</tbody>
+												</table>
+												<form data-ng-submit=submit()>
+													<input type="text" data-ng-model="comment"><input
+														type="submit" ng-click="addComment">
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /drop-down ALL GAMES-->
+							</div>
+						</div>
+					</div>
+				</div>
                <!-- EVENTS -->
                <div class="mainbar" ng-controller="eventListCtrl" ng-show="eventsFade">
                   <div class="column-1" >
@@ -593,13 +595,13 @@
                                                       <div class="rows">name: {{user.firstName }}</div>
                                                       <div class="rows">Last name: {{user.lastName}}</div>
                                                       <div class="rows">
-                                                         <button class="btn btn-info buton"
+                                                         <button class="btn btn-info buton" data-dismiss="{{NameOfModalWindow}}"
                                                             ng-click="add(user.id)">
                                                             <div class="proba">
                                                                <img class="plus-minus" src="resources/ico/plus.ico">
                                                             </div>
                                                          </button>
-                                                         <button class="btn btn-primary buton"
+                                                         <button class="btn btn-primary buton" data-dismiss="{{NameOfModalWindow}}"
                                                             ng-click="rejected(user.id)">
                                                             <div class="proba">
                                                                <img class="plus-minus"
@@ -679,97 +681,112 @@
                   </div>
                   <!-- /sidebar FRIENDS-->
                   <!-- sidebar MYGAMES-->
-                  <div class="widget">
-                     <h2 class="title">My Games</h2>
-                     <div ng-controller="CreateGameCtrl">
-                        <div>
-                           <input type="submit" value="ADD GAME"
-                              class="btn btn-primary btn-lg" data-toggle="modal"
-                              data-target="#myModalHorizontal">
-                        </div>
-                        <div class="modal fade" id="myModalHorizontal" tabindex="-1"
-                           role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                           <div class="modal-dialog">
-                              <div class="modal-content">
-                                 <!-- Modal Header -->
-                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span> <span
-                                       class="sr-only">Close</span>
-                                    </button>
-                                 </div>
-                                 <div class="modal-body">
-                                    <form data-ng-submit=submit() role="form">
-                                       <div>
-                                          <input class="field-form" data-ng-model="name"
-                                             placeholder="Name">
-                                       </div>
-                                       <div>
-                                          <label>Select Category:</label> 
-                                          <select class="field-form"
-                                             id="exampleSelect1" data-ng-model="category">
-                                             <option ng-repeat="category in categories"
-                                                value="{{category.name}}">{{category.name}}</option>
-                                          </select>
-                                       </div>
-                                       <div>
-                                          <input class="field-form" data-ng-model="description"
-                                             placeholder="Description"> <input
-                                             class="field-form" data-ng-model="rules"
-                                             placeholder="Rules"> <input class="field-form"
-                                             data-ng-model="maxPlayers" placeholder="Max Players">
-                                          <input class="field-form" data-ng-model="minPlayers"
-                                             placeholder="Min Players"> <input
-                                             class="field-form" data-ng-model="edition"
-                                             placeholder="Edition"> <input class="field-form"
-                                             data-ng-model="year" placeholder="Year">
-                                       </div>
-                                       <div>
-                                          <input type="submit" value="ADD"
-                                             style="width: 30%; margin-bottom: 10px"> <input
-                                             type="submit" value="Close" data-dismiss="modal"
-                                             style="width: 30%; margin-bottom: 10px">
-                                       </div>
+                 	<div class="widget">
+						<h2 class="title">My Games</h2>
+						<div ng-controller="allUsersGameCtrl">
+							<div ng-controller="CreateGameCtrl">
+								<div>
+								<input type="submit" value="ADD GAME"
+									class="btn btn-primary btn-lg" data-toggle="modal"
+									data-target="#myModalHorizontal">
+							</div>
+							<div class="modal fade" id="myModalHorizontal" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- Modal Header -->
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												<span aria-hidden="true">&times;</span> <span
+													class="sr-only">Close</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form data-ng-submit=submit() role="form">
+												<div>
+													<input class="field-form" data-ng-model="name"
+														placeholder="Name">
+												</div>
+												<div>
+													<label>Select Category:</label> <select class="field-form"
+														id="exampleSelect1" data-ng-model="category">
+														<option ng-repeat="category in categories"
+															value="{{category.name}}">{{category.name}}</option>
+													</select>
+												</div>
+												<div>
+													<input class="field-form" data-ng-model="description"
+														placeholder="Description"> <input
+														class="field-form" data-ng-model="rules"
+														placeholder="Rules"> <input class="field-form"
+														data-ng-model="maxPlayers" placeholder="Max Players">
+													<input class="field-form" data-ng-model="minPlayers"
+														placeholder="Min Players"> <input
+														class="field-form" data-ng-model="edition"
+														placeholder="Edition"> <input class="field-form"
+														data-ng-model="year" placeholder="Year">
+												</div>
+												<div>
+													<input type="submit" value="ADD" 
+														style="width: 30%; margin-bottom: 10px"> <input
+														type="submit" value="Close" data-dismiss="modal"
+														style="width: 30%; margin-bottom: 10px">
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						 </div>
+						
+							<div ng-controller = "getGameDetailedInfoController">
+								<table class="table">
+									<tr>
+										<th>Name</th>
+										<th>Category</th>
+										<th>More</th>
+										<th>Comment</th>
+									<tr>
+									<tr ng-repeat="game in allGame">
+										<td>{{game.name}}</td>
+										<td>{{game.category}}</td>
+										<td>
+											<div>
+												<input type="submit" value="More" ng-click="myFunc(game.id)"
+													style="border: 1px solid #787878; border-radius: 1px;">
+											</div>
+										</td>
+										<td><div>
+												<input type="submit" value="More" ng-click="showComments(game.id)"
+													style="border: 1px solid #787878; border-radius: 1px;">
+											</div></td>
+									</tr>
+								</table>
+								<div ng-show="showMe">
+									<div ng-repeat="game in games">
+										<p>Category:{{game.category}}</p>
+										<p>Year of production: {{game.yearOfProduction}}</p>
+										<p>Edition: {{game.edition}}</p>
+										<p>Description: {{game.description}}</p>
+										<p>Max players: {{game.maxPlayers}}</p>
+										<p>Min players: {{game.minPlayers}}</p>
+									</div>
+								</div>
+								<div ng-show="isShowComment">
+                                   <table class = "table">
+								   <tr><th></th><th></th></tr>
+                                   <tr ng-repeat="x in commentForGame"><td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
+
+                                   </table>
+                                    <form data-ng-submit=submit()>
+                                       <input id = "sendComment" type="text" data-ng-model="comment"><input
+                                          type="submit" ng-click="addComment">
                                     </form>
                                  </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div ng-controller="allUsersGameCtrl">
-                        <div>
-                           <table class="table">
-                              <tr>
-                                 <th>Name</th>
-                                 <th>Category</th>
-                                 <th>More</th>
-                                 <th>Comment</th>
-                              <tr>
-                              <tr ng-repeat="game in allGame">
-                                 <td>{{game.name}}</td>
-                                 <td>{{game.category}}</td>
-                                 <td>
-                                    <div>
-                                       <input type="submit" value="More" ng-click="myFunc(game.id)"
-                                          style="border: 1px solid #787878; border-radius: 1px;">
-                                    </div>
-                                 </td>
-                                 <td>com</td>
-                              </tr>
-                           </table>
-                           <div ng-show="showMe">
-                              <div ng-repeat="game in games">
-                                 <p>Category:{{game.category}}</p>
-                                 <p>Year of production: {{game.yearOfProduction}}</p>
-                                 <p>Edition: {{game.edition}}</p>
-                                 <p>Description: {{game.description}}</p>
-                                 <p>Max players: {{game.maxPlayers}}</p>
-                                 <p>Min players: {{game.minPlayers}}</p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+							</div>
+						</div>
+						</div>
+					</div>
                   <!-- /sidebar MYGAMES-->
                </aside>
             </div>
