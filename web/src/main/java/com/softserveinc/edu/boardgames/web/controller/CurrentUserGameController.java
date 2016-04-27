@@ -77,10 +77,9 @@ public class CurrentUserGameController {
 	}
 	
 	@RequestMapping(value = "comment/{id}", method = RequestMethod.GET)
-	
-	public String commentForGame(@PathVariable("id") Integer id, Model model) {
+	@ResponseBody
+	public List<CommentsForGame> commentForGame(@PathVariable("id") Integer id, Model model) {
 		List<CommentsForGame> commentsForGames = commentForGameService.getAllCommentsByGameId(id);
-		model.addAttribute(commentsForGames);
-		return "commentsForGame";
+		return commentsForGames;
 	}
 }

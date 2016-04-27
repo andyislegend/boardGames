@@ -61,9 +61,14 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private Date dateOfTournament;
 
-    @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY)
-    private Address address;
+    @Column(nullable = false)
+    private String country;
+
+    @Column(nullable = false)
+    private String city;
+
+    @Column
+    private String addition;
 
     public Tournament() {
     }
@@ -132,12 +137,28 @@ public class Tournament implements Serializable {
         this.dateOfTournament = dateOfTournament;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getCountry() {
+        return country;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAddition() {
+        return addition;
+    }
+
+    public void setAddition(String addition) {
+        this.addition = addition;
     }
 
     @Override

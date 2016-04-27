@@ -42,6 +42,9 @@ public class GameUser implements Serializable {
 
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
+	
+	@Column(name = "countOfComments")
+	private Integer countOfComments;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Game game;
@@ -93,6 +96,14 @@ public class GameUser implements Serializable {
 		this.yearOfProduction = yearOfProduction;
 	}
 	
+	public Integer getCountOfComments() {
+		return countOfComments;
+	}
+
+	public void setCountOfComments(Integer countOfComments) {
+		this.countOfComments = countOfComments;
+	}
+
 	public Game getGame() {
 		return game;
 	}

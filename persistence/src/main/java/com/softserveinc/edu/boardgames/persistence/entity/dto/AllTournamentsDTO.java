@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,47 +14,32 @@ public class AllTournamentsDTO {
     private String username;
     private String country;
     private String city;
-    private String street;
-    private Integer houseNumber;
-    private Integer roomNumber;
+    private String addition;
     private Double requiredRating;
     private Integer maxParticipants;
     private String date;
     private List<String> userGuests;
+    private Date dateUtil;
 
     public AllTournamentsDTO() {
     }
 
-    public AllTournamentsDTO(Long tournamentId, String tournamentName,
-                             String username, String country,
-                             String city, String street,
-                             Integer houseNumber, Integer roomNumber,
-                             Double requiredRating, String date,
-                             List<String> userGuests,Integer maxParticipants) {
+
+    public AllTournamentsDTO(Long tournamentId, String tournamentName, String username, String country, String city,
+                             String addition, Date dateUtil,Double requiredRating ) {
         this.tournamentId = tournamentId;
         this.tournamentName = tournamentName;
         this.username = username;
         this.country = country;
         this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.roomNumber = roomNumber;
+        this.addition=addition;
         this.requiredRating = requiredRating;
         this.date = date;
-        this.userGuests = userGuests;
-        this.maxParticipants=maxParticipants;
+        this.dateUtil = dateUtil;
     }
 
-    public AllTournamentsDTO(Long tournamentId, String tournamentName,
-                             String username, Double requiredRating, String date,
-                             List<String> userGuests,Integer maxParticipants) {
-        this.tournamentId = tournamentId;
-        this.tournamentName = tournamentName;
-        this.username = username;
-        this.requiredRating = requiredRating;
-        this.date = date;
+    public AllTournamentsDTO(List<String> userGuests) {
         this.userGuests = userGuests;
-        this.maxParticipants=maxParticipants;
     }
 
     public Long getTournamentId() {
@@ -95,28 +82,16 @@ public class AllTournamentsDTO {
         this.city = city;
     }
 
-    public String getStreet() {
-        return street;
+    public String getAddition() {
+        return addition;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setAddition(String addition) {
+        this.addition = addition;
     }
 
-    public Integer getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(Integer houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public Integer getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setDateUtil(Date dateUtil) {
+        this.dateUtil = dateUtil;
     }
 
     public Double getRequiredRating() {
@@ -133,6 +108,14 @@ public class AllTournamentsDTO {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Date getDateUtil() {
+        return dateUtil;
+    }
+
+    public void setDateSql(Date dateUtil) {
+        this.dateUtil = dateUtil;
     }
 
     public List<String> getUserGuests() {
