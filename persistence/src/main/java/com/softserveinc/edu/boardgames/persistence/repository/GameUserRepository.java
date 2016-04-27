@@ -15,7 +15,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO
 public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO(u.id, u.game.name, u.game.category.name, u.yearOfProduction,"
-			+ " u.edition, u.game.description, u.game.rules, u.game.maxPlayers,  u.game.minPlayers) from GameUser u where u.user.username = :username")   
+			+ " u.edition, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.user.username = :username")   
 	public List<GameUserDTO> getAllGameUserByUsername(@Param("username") String username);
 		
 	@Query("select u from GameUser u where u.id = :id")

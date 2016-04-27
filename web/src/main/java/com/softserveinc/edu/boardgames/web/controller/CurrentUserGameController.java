@@ -83,4 +83,10 @@ public class CurrentUserGameController {
 		List<CommentsForGameDTO> commentsForGames = commentForGameService.getAllCommentsDTO();
 		return commentsForGames;
 	}
+	
+	@RequestMapping(value = "getCountOfCommentsByGame/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer countOfComments(@PathVariable Integer id) {
+		 return commentForGameService.getCountOfCommentsByGameId(id);
+	}
 }
