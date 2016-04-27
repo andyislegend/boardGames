@@ -14,6 +14,7 @@ public class GameDetailsDTO {
 		this.name = name;
 		this.description = description;
 		this.rules = rules;
+		this.rating = rating;
 	}
 	public Integer getRating() {
 		return rating;

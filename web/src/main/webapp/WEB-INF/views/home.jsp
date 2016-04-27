@@ -235,7 +235,7 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Games</h4>
+        								<h4 class="modal-title">Games</h4>
 									</div>
 									<div class="modal-body"
 										ng-controller="getGameDetailedInfoController">
@@ -260,10 +260,9 @@
 											<tbody>
 												<tr>
 													<td><input type="range" id="myRange" value="100"
-														ng-change="ratingSliderChanged()" ng-model="gameRating" /></td>
+														ng-change="ratingSliderChanged()" ng-model="gameRating"></td>
 													<td>
-														<p class="text-primary">{{gameRatingText}}:
-															{{gameRating}}</p>
+														<p class="text-primary">{{gameRatingText}}: {{gameRating}}</p>
 													</td>
 													<td>
 														<p>{{gameDetail.rating}}</p>

@@ -426,7 +426,7 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 		}).then(function mySucces(response){
 			
 		}, function myError(response) {
-			alert("Getting games general data error");
+			alert("Saving rating error");
 		});
 	}
 	
