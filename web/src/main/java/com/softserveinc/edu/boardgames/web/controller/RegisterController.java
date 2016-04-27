@@ -123,6 +123,7 @@ public class RegisterController {
 		}
 
 		userService.createUser(user);
+		
 		if (!fileUpload.isEmpty()) {
 			Image image = new Image();
 			image.setUser(user);
