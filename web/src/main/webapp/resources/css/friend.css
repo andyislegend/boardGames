@@ -81,6 +81,8 @@
     font-family: Oswald;
     font-weight: normal;
     font-style: normal;
+    display: flex;
+    margin-left: 2px;
 }
 .addUserImg{
     opacity: 0.6;
@@ -123,4 +125,13 @@
     font-size: 70px;
     
 }
-
+.firsName{
+    margin-right: 5px;
+    width: 130px;
+    height: 29px;
+    padding-top: 5px;
+}
+.mybutton{
+    height: 29px;
+    width: 130px;
+}
