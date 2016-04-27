@@ -171,6 +171,7 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 		$scope.users = result.data;
 		$scope.showUser = false;
 		$scope.getInfoAboutUserFunc = function(id) {
+			$scope.oneUser
 			$scope.showUser = !$scope.showUser;
 			for (var i = 0; i < $scope.users.length; i++) {
 				if ($scope.users[i].id === id) {
@@ -178,7 +179,10 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 					break;
 				};
 			};
-		};
+			$http.get('getUsersAvatar?username=' + $scope.oneUser.username).then(function(result) {
+				$scope.userAvatar = result.data;
+			});
+		};		
 	});
 });
 
@@ -191,17 +195,6 @@ app.controller("getAllUsersWithNegativeRating", function($scope, $http, $window)
 		        $scope.bannedUsers = ('These users have to be banned: ' + $scope.usersWithNegRate);        
 		}
 	});
-});
-
-app.directive('fallbackSrc', function () {
-	  var fallbackSrc = {
-	    link: function postLink(scope, iElement, iAttrs) {
-	      iElement.bind('error', function() {
-	        angular.element(this).attr("src", iAttrs.fallbackSrc);
-	      });
-	    }
-	   }
-	   return fallbackSrc;
 });
 
 app.controller("getAllUsersGames", function($scope, $http) {
@@ -249,6 +242,7 @@ app.controller("getAvatar", function($scope, $http) {
 		$scope.avatar = result.data;
 	});
 });
+
 
 app.controller("eventsVisibleController", function($scope) {
 	$scope.eventsFade = true;

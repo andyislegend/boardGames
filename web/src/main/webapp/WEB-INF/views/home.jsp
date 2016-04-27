@@ -323,9 +323,6 @@
                      <div class="modal-content">
                         <!-- Modal Header -->
                         <div class="modal-header">
-                           <button type="button" class="close" data-dismiss="modal">
-                           <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
-                           </button>
                            <div class="modal-body">
                               <b>Attention!</b>
                               <p>{{bannedUsers}}</p>
@@ -344,11 +341,21 @@
                         <h2 class="title">Users</h2>
                      </div>
                   </header>
-                  <input type="text" class="form-control"
-                     ng-model="searchText.lastName" placeholder="Search by last name" style="margin-bottom:10px">
-                  <input type="text" class="form-control"
-                     ng-model="searchText.address.city" placeholder="Search by city">
+                  
                   <table class="table">
+                  	 <tr>
+                        <th>
+                        	<input type="text" class="form-control"
+                     			ng-model="searchText.lastName" 
+                     			placeholder="Search by last name">
+                     	</th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                        	<input type="text" class="form-control"
+                    			ng-model="searchText.address.city" placeholder="Search by city">
+                    	</th>
+                     </tr>
                      <tr>
                         <th>Last Name, First Name</th>
                         <th>Email</th>
@@ -392,11 +399,7 @@
                                  <!-- Modal Header -->
                                  <div class="modal-header">
                                     <h1>{{oneGame.name}}</h1>
-                                    <button type="button" class="close"
-                                       data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span>
-                                    <span class="sr-only">Close</span>
-                                    </button>
+     
                                  </div>
                                  <div class="modal-body">
                                     <p>Year of production: {{oneGame.yearOfProduction}}</p>
@@ -405,7 +408,11 @@
                                     <p>Max players: {{oneGame.maxPlayers}}</p>
                                     <p>Min players: {{oneGame.minPlayers}}</p>
                                  </div>
-                              </div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
                            </div>
                         </div>
                      </div>
@@ -425,27 +432,24 @@
                                  <!-- Modal Header -->
                                  <div class="modal-header">
                                     <h1>{{oneTournament.tournamentName}}</h1>
-                                    <button type="button" class="close"
-                                       data-dismiss="modal">
-                                    <span aria-hidden="true">&times;</span>
-                                    <span class="sr-only">Close</span>
-                                    </button>
                                  </div>
                                  <div class="modal-body">
                                     <p>User creator: {{oneTournament.username}}</p>
-                                    <p>Adress: {{oneTournament.country}}, {{oneTournament.city}}, <br />
-                                       {{oneTournament.street}}, {{oneTournament.houseNumber}}/{{oneTournament.roomNumber}}
-                                    </p>
+                                    <p>Adress: {{oneTournament.country}}, {{oneTournament.city}}</p>
                                     <p>Date: {{oneTournament.dateUtil}}</p>
                                     <p>Required rating: {{oneTournament.requiredRating}}</p>
                                  </div>
+                                 <div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+								</div>
                               </div>
                            </div>
                         </div>
                      </div>
                      <div class="col-sm-3" id="backgroundForOneUser">
-                        <img fallback-src='http://localhost/img/avatar/ava.png'
-                           ng-src="{{userUrl}}" height="52" width="52">
+                        <img ng-src="{{userAvatar}}" height="92" width="92">
+                        <p>Score: {{oneUser.userRating}}</p>
                      </div>
                   </div>
                </div>
