@@ -13,7 +13,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/new-css.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
-<link rel="stylesheet" href="resources/css/index.css" />
+<!-- <link rel="stylesheet" href="resources/css/index.css" /> -->
 
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>

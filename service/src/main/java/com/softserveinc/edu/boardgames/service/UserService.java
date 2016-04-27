@@ -175,16 +175,24 @@ public class UserService {
 		return userRepository.findOne(id);
 	}
 
-	public List<User> findAllFriends(User user) {
-		return userRepository.findAllFriends(user);
+	public List<User> findAllFriends(String userName) {
+		return userRepository.findAllFriends(userName);
 	}
 
-	public List<User> getAllNoConsiderFriendByUser(User user) {
-		return userRepository.getAllNoConsiderFriendByUser(user);
+	public List<User> getAllNoConsiderFriendByUser(String userName) {
+		return userRepository.getAllNoConsiderFriendByUser(userName);
 	}
 
-	public List<User> findAllUserByFirstName(String name, String lastName) {
-		return userRepository.findAllUserByFirstName(name, lastName);
+	public List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName) {
+		String name = nameAndLastName.trim();
+		String lastName = "";
+		if(nameAndLastName.indexOf(" ") != -1){
+			name = nameAndLastName.substring(0, nameAndLastName.indexOf(" ")).trim();
+			lastName = nameAndLastName.substring(nameAndLastName.indexOf(" "), nameAndLastName.length()).trim();
+		}
+		name = name.concat("%");
+		lastName = lastName.concat("%");
+		return userRepository.findAllUserByFirstNameAndLastName(name, lastName, userName);
 	}
 
 	public List<String> findUserWithNeagativeRating() {

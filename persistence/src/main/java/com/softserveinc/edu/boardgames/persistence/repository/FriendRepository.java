@@ -18,15 +18,24 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
 		
 		
 		
-		@Query("SELECT COUNT(f) FROM Friend f WHERE f.userId = ?1 AND f.status.id = 1")
-		public Integer findCountNoConsiderFrinds(User user);
+		@Query("SELECT COUNT(f) FROM Friend f WHERE f.userId.username = ?1 AND f.status.id = 1")
+		public Integer findCountNoConsiderFrinds(String username);
 		
 				
 		@Modifying
 		@Query("UPDATE Friend f SET f.status.id = 2 WHERE f.user = ?1 AND f.userId = ?2")
 		public void changeStatusOfFriendshipToAccepted(User user, User userId);
 		
+		/*@Modifying
+		@Query("UPDATE Friend f SET f.status.id = 2 WHERE f.user.username = ?1 AND f.userId.username = ?2")
+		public void changeStatusOfFriendshipToAccepted(String curretUserName, String friendsUserName);*/
+		
 		@Modifying
 		@Query("UPDATE Friend f SET f.status.id = 3 WHERE f.user = ?1 AND f.userId = ?2")
 		public void changeStatusOfFriendshipToRejected(User user, User userId);
+		
+		/*@Modifying
+		@Query("UPDATE Friend f SET f.status.id = 3 WHERE f.user.username = ?1 AND f.userId.username = ?2")
+		public void changeStatusOfFriendshipToRejected(String curretUserName, String friendsUserName);*/
+		
 }
