@@ -262,9 +262,31 @@ app.controller("getAvatar", function($scope, $http) {
 app.controller("eventsVisibleController", function($scope) {
 	$scope.eventsFade = true;
 	$scope.tournamentsFade = true;
-	 $scope.fadeEvents = function () {
-		$scope.eventsFade = !$scope.eventsFade;
-		$scope.tournamentsFade = !$scope.tournamentsFade
+	$scope.gamesFade = true;
+	$scope.usersFade = true;
+	$scope.onlyUsers = function () {
+		$scope.eventsFade = false;
+		$scope.tournamentsFade = false;
+		$scope.gamesFade = false;
+		$scope.usersFade = true;
+	};
+	$scope.onlyGames = function () {
+		$scope.eventsFade = false;
+		$scope.tournamentsFade = false;
+		$scope.gamesFade = true;
+		$scope.usersFade = false;
+	};
+	$scope.onlyEvents = function () {
+		$scope.eventsFade = true;
+		$scope.tournamentsFade = false;
+		$scope.gamesFade = false;
+		$scope.usersFade = false;
+	};
+	$scope.onlyTournaments = function () {
+		$scope.eventsFade = false;
+		$scope.tournamentsFade = true;
+		$scope.gamesFade = false;
+		$scope.usersFade = false;
 	};
 });
 

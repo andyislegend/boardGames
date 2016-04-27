@@ -15,6 +15,7 @@
       <link rel="stylesheet" href="resources/css/fonts.css" />
       <link rel="stylesheet" href="resources/css/tournament.css" />
       <link rel="stylesheet" href="resources/css/friend.css" />
+      <link rel="stylesheet" href="resources/css/users.css" />
       <script type="text/javascript"
          src="resources/bower_components/angular/angular.js"></script>
       <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
@@ -140,11 +141,14 @@
       </div>
       <!-- Main Section-->
       <section class="wrapper home-section posts-section with-sidebar" ng-controller="eventsVisibleController">
-      <button class="btn btn-success" ng-click="fadeEvents()">Users</button>
+      <button class="btn btn-success" ng-click="onlyUsers()" id="blackBut">Users</button>
+      <button class="btn btn-success" ng-click="onlyGames()" id="blackBut">Games</button>
+      <button class="btn btn-success" ng-click="onlyEvents()" id="blackBut">Events</button>
+      <button class="btn btn-success" ng-click="onlyTournaments()" id="blackBut">Tournaments</button>
          <div class="grids">
             <div class="grid-8">
             	<div class="column-5" ng-controller="getGamesGlobalController"
-					ng-hide="hideTournaments">
+					ng-hide="hideTournaments" ng-show="gamesFade">
 					<div class="mainbar">
 						<div class="widget widget_top-posts">
 							<h2 class="title">Games</h2>
@@ -337,7 +341,7 @@
                      </div>
                   </div>
                </div>
-               <div ng-controller="getAllUsersCtrl">
+               <div ng-controller="getAllUsersCtrl" ng-show="usersFade">
                   <header class="section-header" ng-controller="eventListCtrl">
                      <div class="section-title title-with-sep">
                         <h2 class="title">Users</h2>

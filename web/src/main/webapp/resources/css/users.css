@@ -1,3 +1,12 @@
-table#usersTable {border: none;
+#blackBut {
+	background-color: black;
+	color: white;
+	border-color:white;
+}
+
+#blackBut:hover {
+    background-color: grey;
+	color: black;
+	border-color:grey;
 }
 
