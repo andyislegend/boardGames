@@ -259,68 +259,70 @@
 	<section class="wrapper home-section posts-section with-sidebar">
 		<div class="grids">
 			<div class="grid-8">
-				<!-- EVENTS -->
-				<div class="column-1" ng-controller="eventListCtrl">
-					<div class="mainbar">
-						<header class="section-header" ng-controller="eventListCtrl">
-							<div class="section-title title-with-sep">
-								<h2 class="title">COMING EVENTS:{{events.length}}</h2>
-							</div>
-						</header>
-						<div class="grids grid-layout columns-size-1 entries">
-							<div class=" jcarousel-skin-tango">
-								<div class="jcarousel-container jcarousel-container-horizontal"
-									style="display: block;">
-									<li class="jcarousel-item jcarousel-item-horizontal "><a
-										ng-repeat="event in events" href="#" class="item">
-											<div id={{event.id}} style="display: none;">
-												<img src={{event.imgsrc}} width="64" height="64"
-													class="loader">
-											</div> <img width="240" height="240"
-											onLoad="$({{event.id}}).hide(); $(this).show();"
-											src={{event.imgsrc}} alt={{event.name}}> <span
-											class="game_name">{{event.game}}</span>
-											<div class="name" style="top: 201px;">
-												<div class="num">
-													{{event.datenum}}<span>{{event.datemonth}}</span>
-												</div>
-												<div class="tema">{{event.name}}</div>
-											</div>
-									</a></li>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /EVENTS -->
-				<!--
-                  <div class=" jcarousel-skin-tango">
-                  <div class="widget" ng-controller = "CreateEventCtrl">
-                  <div class="title">Add event</div>
-                  <div class="field">
-                  Event: <input type="text" data-ng-model="name" size="100px" />
+				 <!-- EVENTS -->
+               <div class="mainbar" ng-controller="eventListCtrl">
+                  <div class="column-1" >
+                     <header class="section-header" >
+                        <div class="section-title title-with-sep">
+                           <h2 class="title">COMING EVENTS:{{events.length}}</h2>
+                        </div>
+                     </header>
+                     <div class="grids grid-layout columns-size-1 entries">
+                        <div class=" jcarousel-skin-tango">
+                           <div class="jcarousel-container jcarousel-container-horizontal"
+                              style="display: block;">
+                              <li class="jcarousel-item jcarousel-item-horizontal ">
+                                 <a
+                                    ng-repeat="event in events" href="#" class="item">
+                                    <img width="240" height="240" 
+                                       ng-src={{event.imgsrc}} alt={{event.name}}> 
+                                    <span class="game_name">{{event.game}}</span>
+                                    <div class="name" style="top: 201px;">
+                                       <div class="num">
+                                          {{event.date|date:MMMM }}<span>{{event.date|date:dd}}</span>
+                                       </div>
+                                       <div class="tema">{{event.name}}</div>
+                                    </div>
+                                 </a>
+                              </li>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-
-                  <div class="field">
-                  Game: <input type="text" data-ng-model="game" size="100px" />
+                  <div class="widget">
+                     
+                      <div>
+                           <input type="submit" value="ADD EVENT" ng-click="showForm() "
+                              style="width: 100%; height:40px; margin-top: 20px; margin-bottom: 10px">
+                        </div>
+                        <form data-ng-submit=submit() role="form" ng-show="showText">
+                          
+                              <input type="text" class="form-control"
+                     ng-model="input_name" placeholder="Event" style="margin-bottom:10px">
+                     
+                      <input type="text" class="form-control"
+                     ng-model="input_game" placeholder="Game" style="margin-bottom:10px">
+                     
+                     <input type="text" class="form-control"
+                     ng-model="input_description" placeholder="Description" style="margin-bottom:10px">
+                    
+                    <input type="text" class="form-control"
+                     ng-model="input_place" placeholder="Place" style="margin-bottom:10px">
+                     
+                      <input type="date" class="form-control"
+                     ng-model="input_date" placeholder="Date" style="margin-bottom:10px">
+                   
+                           <div>
+                              <input type="submit" value="APPLY" ng-click="addEvent()"
+                                 style="width: 100%; margin-bottom: 10px">
+                           </div>
+                        </form>
+                     
+                     
+                     
                   </div>
-
-                  <div class="field">
-                  Description: <input type="text" data-ng-model="description" size="100px" />
-                  </div>
-
-                  <div class="field">
-                  Place: <input type="text"  data-ng-model="place" size="100px" />
-                  </div>
-
-
-
-                  <div class="field">
-                  <button class="btn btn-default" data-ng-model="addNewEvent()">Add Event</button>
-                  </div>
-                  </form>
-                  </div>
-                  </div>
+               </div>
+               <!-- /EVENTS -->
                          <!------------------------------------------- Users info ------------------------------------------------>
 
 				<div class="modal fade"
