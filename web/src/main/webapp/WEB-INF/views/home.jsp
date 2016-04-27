@@ -248,15 +248,17 @@
 													</thead>
 													<tbody>
 														<tr ng-repeat="x in comments">
-															<td>{x.text}</td>
+															<td>{{x.text}}</td>
 															<td></td>
 														</tr>
 													</tbody>
 												</table>
+												<div >
 												<form data-ng-submit=submit()>
-													<input type="text" data-ng-model="comment"><input
-														type="submit" ng-click="addComment">
+													<input type="text" data-ng-model="comment" style = "width:70%" ><input
+														type="submit" ng-click="addComment" style = "width:30%">
 												</form>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -756,44 +758,51 @@
 									<tr>
 										<th>Name</th>
 										<th>Category</th>
-										<th>More</th>
 										<th>Comment</th>
 									<tr>
 									<tr ng-repeat="game in allGame">
-										<td>{{game.name}}</td>
+										<td><a href = "" ng-click="myFunc(game.id)" data-toggle="modal" data-target="#myModalMyGames">
+										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
-										<td>
-											<div>
-												<input type="submit" value="More" ng-click="myFunc(game.id)"
-													style="border: 1px solid #787878; border-radius: 1px;">
-											</div>
-										</td>
 										<td><div>
 												<input type="submit" value="More" ng-click="showComments(game.id)"
 													style="border: 1px solid #787878; border-radius: 1px;">
 											</div></td>
 									</tr>
 								</table>
-								<div ng-show="showMe">
-									<div ng-repeat="game in games">
-										<p>Category:{{game.category}}</p>
-										<p>Year of production: {{game.yearOfProduction}}</p>
-										<p>Edition: {{game.edition}}</p>
-										<p>Description: {{game.description}}</p>
-										<p>Max players: {{game.maxPlayers}}</p>
-										<p>Min players: {{game.minPlayers}}</p>
-									</div>
+								
+									<div class="modal fade" id="myModalMyGames" tabindex="-1" role="dialog"
+                           aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                              <div class="modal-header">
+                                    <h1 ng-repeat = "game in games">{{game.name}}</h1>
+                                    </div>
+                                 <div class="modal-body" ng-repeat = "game in games">
+                                    <p>Year of production: {{game.yearOfProduction}}</p>
+                                    <p>Edition: {{game.edition}}</p>
+                                    <p>Description: {{game.description}}</p>
+                                    <p>Max players: {{game.maxPlayers}}</p>
+                                    <p>Min players: {{game.minPlayers}}</p>
+                                 </div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									
 								</div>
+                           </div>
+                        </div>
+					</div>
 								<div ng-show="isShowComment">
                                    <table class = "table">
-								   <tr><th></th><th></th></tr>
-                                   <tr ng-repeat="x in commentForGame"><td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
-
-                                   </table>
-                                    <form data-ng-submit=submit()>
-                                       <input id = "sendComment" type="text" data-ng-model="comment"><input
-                                          type="submit" ng-click="addComment">
-                                    </form>
+ 								   <tr><th></th><th></th></tr>
+                                    <tr ng-repeat="x in commentForGame">
+                                    <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
+                                    </table>
+                                     <form data-ng-submit=submit()>
+                                        <input id = "sendComment" type="text" data-ng-model="comment"><input
+                                           type="submit" ng-click="addComment">
+                                     </form>
                                  </div>
 							</div>
 						</div>

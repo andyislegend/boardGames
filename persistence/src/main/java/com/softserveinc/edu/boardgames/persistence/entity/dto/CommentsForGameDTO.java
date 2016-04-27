@@ -13,9 +13,10 @@ public class CommentsForGameDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommentsForGameDTO(Integer gameID, String commentText) {
+	public CommentsForGameDTO(Integer gameID, String commentText, String username) {
 		this.gameID = gameID;
 		this.commentText = commentText;
+		this.username = username;
 	}
 	
 	public CommentsForGameDTO(Integer gameID, String commentText, String username, Date date) {

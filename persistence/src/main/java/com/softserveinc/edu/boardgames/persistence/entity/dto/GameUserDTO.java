@@ -27,7 +27,7 @@ public class GameUserDTO {
 		this.maxPlayers = maxPlayers;
 		this.minPlayers = minPlayers;
 	}
-
+	
 	public int getId() {
 		return id;
 	}

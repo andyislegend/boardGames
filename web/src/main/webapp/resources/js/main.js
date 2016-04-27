@@ -1,14 +1,11 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
-
+var user = "userName";
+console.log(user);
 app.controller("allUsersGameCtrl", function ($scope, $http) {
 	
     $http.get('getAllGamesCurUser').then(function (result) {
     	$scope.allGame = result.data;});
-    
-    $scope.$on('myCustomEvent', function(event, fromChild) {
-        $scope.allGame = fromChild;
-    });
-    
+        
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
@@ -397,7 +394,9 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 	$scope.submit = function () {
 		var comment  = {
 				"gameID" : ''+$scope.gameuserId,
-				"commentText" : $scope.comment
+				"commentText" : $scope.comment,
+				"username":"root",
+				"date":new Date()
 			 };
 			 $http({
 				  method: 'POST',
@@ -411,7 +410,7 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 				  }, function errorCallback(response) {
 				    
 				  });
-			 $scope.comments.push(comment);
+			 $scope.commentForGame.push(comment);
 	}
 });
 app.controller("showAllTournaments", function ($scope, $http) {
