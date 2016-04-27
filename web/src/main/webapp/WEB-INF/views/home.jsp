@@ -147,7 +147,7 @@
             <div class="grid-8">
             	<div class="column-5" ng-controller="getGamesGlobalController"
 					ng-hide="hideTournaments" ng-show="gamesFade">
-					<div class="mainbar">
+					<div>
 						<div class="widget widget_top-posts">
 							<h2 class="title">Games</h2>
 						</div>
@@ -265,7 +265,7 @@
 					</div>
 				</div>
                <!-- EVENTS -->
-               <div class="mainbar" ng-controller="eventListCtrl" ng-show="eventsFade">
+               <div ng-controller="eventListCtrl" ng-show="eventsFade">
                   <div class="column-1" >
                      <header class="section-header" >
                         <div class="section-title title-with-sep">
@@ -461,7 +461,7 @@
                <!--------------------------------------- tournaments  -------------------------------------------------->
                <div class="column-5" ng-controller="showAllTournaments"
                    ng-show="tournamentsFade">
-                  <div class="mainbar">
+                  <div>
                      <div class="widget widget_top-posts">
                         <h2 class="title">Tournament search</h2>
                         <a style="align-content: center;" href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
