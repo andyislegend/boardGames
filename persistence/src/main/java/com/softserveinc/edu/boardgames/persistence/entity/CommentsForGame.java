@@ -7,6 +7,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +28,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "comments")
 public class CommentsForGame implements Serializable {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -40,15 +47,19 @@ public class CommentsForGame implements Serializable {
 
     @Column(name = "text")
     private String text;
+    
+    @Column(name = "dateOfComment")
+    private Date date;
 
     public CommentsForGame(){
-
+    	this.date = Calendar.getInstance().getTime();
     }
 
-    public CommentsForGame(GameUser gameUser, User user, String text){
+    public CommentsForGame(GameUser gameUser, User user, String text, Date date){
         this.gameUser = gameUser;
         this.user = user;
         this.text = text;
+        this.date = Calendar.getInstance().getTime();
     }
 
     public Integer getId() {
@@ -82,8 +93,16 @@ public class CommentsForGame implements Serializable {
     public void setText(final String text) {
         this.text = text;
     }
+    
+    public Date getDate() {
+		return date;
+	}
 
-    @Override
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	@Override
     public boolean equals(final Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);
     }

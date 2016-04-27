@@ -70,16 +70,17 @@ public class CurrentUserGameController {
 	@RequestMapping(value = "NewComment", method = RequestMethod.POST)
 	public String addComment(@RequestBody CommentsForGameDTO commentsForGameDTO) {
 		CommentsForGame commentsForGame = new CommentsForGame();
-		commentsForGame =  CommentForGameMapper.toEntity(commentsForGameDTO);
+		commentsForGame = CommentForGameMapper.toEntity(commentsForGameDTO);
+		commentsForGame.setGameUser(gameUserService.getUserGamesById(commentsForGameDTO.getGameID()));
 		commentsForGame.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		commentForGameService.addComment(commentsForGame);
 		return "";
 	}
 	
-	@RequestMapping(value = "comment/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "comment", method = RequestMethod.GET)
 	@ResponseBody
-	public List<CommentsForGame> commentForGame(@PathVariable("id") Integer id, Model model) {
-		List<CommentsForGame> commentsForGames = commentForGameService.getAllCommentsByGameId(id);
+	public List<CommentsForGameDTO> commentsForGame() {
+		List<CommentsForGameDTO> commentsForGames = commentForGameService.getAllCommentsDTO();
 		return commentsForGames;
 	}
 }

@@ -1,9 +1,14 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
 
 app.controller("allUsersGameCtrl", function ($scope, $http) {
-	$scope.allGame = [];
+	
     $http.get('getAllGamesCurUser').then(function (result) {
-        $scope.allGame = result.data;});
+    	$scope.allGame = result.data;});
+    
+    $scope.$on('myCustomEvent', function(event, fromChild) {
+        $scope.allGame = fromChild;
+    });
+    
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
@@ -15,8 +20,8 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
                 }
             }
         }
+        
 });
-
 app.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;
 	$scope.categories = [];
@@ -46,14 +51,18 @@ app.controller("CreateGameCtrl", function($scope, $http) {
 				   'Content-Type': 'application/json'
 				 },
 			  data:userGame
-			}).then(function successCallback(response) {
-			    $scope.list.push(response.data);
+			}).success(function(response) {
+				console.log("fjsdbfhbdshfsdhds")
+			    $scope.list.push(response.data); 
+				
 			  }, function errorCallback(response) {
 			    
 			  });
+		 $scope.$parent.allGame.push(userGame);
+		 
 	};
 });
-
+ 
 app.controller("eventListCtrl", function ($scope, $http) {
     $scope.events = [];
     $http({
@@ -346,24 +355,25 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 	
 	//comment
 	$scope.gameuserId = 0;
-	$scope.isShowComment = false;
-		
+	$scope.isShowComment = false;	
+	$scope.comments = [];
+	$http.get('comment').then(function(result) {
+		$scope.comments = result.data;
+	},function Error(result) {
+		$scope.comments = [{"text":"jdsfsjd"}];
+	})
+	
 	$scope.showComments = function(id) {
 		$scope.gameuserId = id;
 		$scope.isShowComment = !$scope.isShowComment
-		
-		return $http.get('comment/'+id).then(
-		function(response) {
-			 response.data;
-		},function(errResponse){
-			console.log("Error sending comment id");
-		}		
-		)	
-	}
-	
-	$http.get('comment/'+$scope.gameuserId, $scope.gameuserId).success(function(result) {
-		$scope.comments = result.data;
-	})
+		$scope.commentForGame = [];
+		for(var i = 0; i<$scope.comments.length;i++){
+			if($scope.comments[i].gameID === id){
+				console.log(id);
+				$scope.commentForGame.push($scope.comments[i]);
+			}
+		}	
+	}	
 	
 	$scope.list = [];
 	$scope.submit = function () {
@@ -371,8 +381,6 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 				"gameID" : ''+$scope.gameuserId,
 				"commentText" : $scope.comment
 			 };
-		console.log(comment.gameID);
-		console.log(comment.commentText);
 			 $http({
 				  method: 'POST',
 				  url: '/NewComment',
@@ -381,10 +389,11 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 					 },
 				  data:comment
 				}).then(function successCallback(response) {
-				    $scope.list.push(response.data);
+				    $scope.list.push(response.data);	
 				  }, function errorCallback(response) {
 				    
-				  }); 
+				  });
+			 $scope.comments.push(comment);
 	}
 });
 

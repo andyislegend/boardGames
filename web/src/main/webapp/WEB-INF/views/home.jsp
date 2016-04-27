@@ -176,17 +176,16 @@
 												</tr>
 											</tbody>
 										</table>
-
 										 <div>
                                  <div ng-show="isShowComment">
                                    <table>
                                    <thead>
-                                   <tr><th></th><th></th></tr>
+                                   <tr><th>f</th><th>f</th></tr>
                                    </thead>
                                    <tbody>
-                                   <tr ng-repeat="x in comments"></td>{x.text}<td></td></tr>
+                                   <tr ng-repeat="x in comments"><td>{{x.id}}</td><td>{{x.text}}</td></tr>
                                    </tbody>
-                                                                      </table>
+                                   </table>
                                     <form data-ng-submit=submit()>
                                        <input type="text" data-ng-model="comment"><input
                                           type="submit" ng-click="addComment">
@@ -625,8 +624,9 @@
 					<!-- sidebar MYGAMES-->
 					<div class="widget">
 						<h2 class="title">My Games</h2>
-						<div ng-controller="CreateGameCtrl">
-							<div>
+						<div ng-controller="allUsersGameCtrl">
+							<div ng-controller="CreateGameCtrl">
+								<div>
 								<input type="submit" value="ADD GAME"
 									class="btn btn-primary btn-lg" data-toggle="modal"
 									data-target="#myModalHorizontal">
@@ -668,21 +668,19 @@
 														data-ng-model="year" placeholder="Year">
 												</div>
 												<div>
-													<input type="submit" value="ADD"
+													<input type="submit" value="ADD" 
 														style="width: 30%; margin-bottom: 10px"> <input
 														type="submit" value="Close" data-dismiss="modal"
 														style="width: 30%; margin-bottom: 10px">
-
-
 												</div>
 											</form>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div ng-controller="allUsersGameCtrl">
-							<div>
+						 </div>
+						
+							<div ng-controller = "getGameDetailedInfoController">
 								<table class="table">
 									<tr>
 										<th>Name</th>
@@ -699,7 +697,10 @@
 													style="border: 1px solid #787878; border-radius: 1px;">
 											</div>
 										</td>
-										<td>com</td>
+										<td><div>
+												<input type="submit" value="More" ng-click="showComments(game.id)"
+													style="border: 1px solid #787878; border-radius: 1px;">
+											</div></td>
 									</tr>
 								</table>
 								<div ng-show="showMe">
@@ -712,7 +713,19 @@
 										<p>Min players: {{game.minPlayers}}</p>
 									</div>
 								</div>
+								<div ng-show="isShowComment">
+                                   <table class = "table">
+								   <tr><th></th><th></th></tr>
+                                   <tr ng-repeat="x in commentForGame"><td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
+
+                                   </table>
+                                    <form data-ng-submit=submit()>
+                                       <input id = "sendComment" type="text" data-ng-model="comment"><input
+                                          type="submit" ng-click="addComment">
+                                    </form>
+                                 </div>
 							</div>
+						</div>
 						</div>
 					</div>
 					<!-- /sidebar MYGAMES-->
