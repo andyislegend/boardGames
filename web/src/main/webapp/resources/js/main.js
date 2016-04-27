@@ -98,7 +98,7 @@ app.controller("eventListCtrl", function ($scope, $http) {
         });
     };
 });*/
-app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) {
+app.controller("friendsCtrl", function($scope, friendService, $http) {
     $scope.users;
 	 friendService.getAllFriends().success(function(data) {
 		$scope.friends = data;
@@ -112,14 +112,8 @@ app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) 
          console.log(error)
      });
     
-    $scope.open = function () {
-		   $uibModal.open({
-		      templateUrl: 'OfferingForm.html'
-		 });
-	};
-    
-	friendService.getAllOfferedUsers().success(function(data) {
-        $scope.users = data;
+    friendService.getAllOfferedUsers().success(function(data) {
+        $scope.allOfferedUsers = data;
 	}).error(function(error) {
 		console.log(error);
 	});
@@ -129,10 +123,10 @@ app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) 
           $scope.count =  $scope.count-1;
         $http.post('addUserToFriend', userId).success(function(data){
             var user = data;
-            for(var i = 0; i < $scope.users.length; i++){
-                if($scope.users[i].id === user.id){
-                    $scope.friends.push($scope.users[i]);
-                    $scope.users.splice(i, 1)
+            for(var i = 0; i < $scope.allOfferedUsers.length; i++){
+                if($scope.allOfferedUsers[i].id === user.id){
+                    $scope.friends.push($scope.allOfferedUsers[i]);
+                    $scope.allOfferedUsers.splice(i, 1)
                 };
             };
         }).error(function(error){
@@ -145,9 +139,9 @@ app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) 
          $scope.count =  $scope.count-1;
         $http.post('rejectedUserToFriend', userId).success(function(data){
              var user = data;
-            for(var i = 0; i < $scope.users.length; i++){
-                if($scope.users[i].id === user.id){
-                    $scope.users.splice(i, 1)
+            for(var i = 0; i < $scope.allOfferedUsers.length; i++){
+                if($scope.allOfferedUsers[i].id === user.id){
+                    $scope.allOfferedUsers.splice(i, 1)
                 };
             };
         }).error(function(error){
@@ -164,7 +158,7 @@ app.controller("friendsCtrl", function($scope, friendService, $http, $uibModal) 
     $scope.addUserToFriend = function(id){
       console.log(id);
          $http.post('addOfferToFriendship/', id).success(function(data){
-             $scope.answer = data;
+             $scope.answer = "Done";
              console.log(data);
          }).error(function(error){
              console.log(error);

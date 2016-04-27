@@ -591,7 +591,7 @@
                                                 </h4>
                                              </div>
                                              <div class="background">
-                                                <div ng-repeat="user in users" class="col-sm-4">
+                                                <div ng-repeat="user in allOfferedUsers" class="col-sm-4">
                                                    <div class="user">
                                                       <div class="rows">
                                                          <img class="ava"
