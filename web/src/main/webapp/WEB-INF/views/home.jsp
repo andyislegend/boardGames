@@ -143,8 +143,7 @@
 													<td><input type="range" id="myRange" value="100"
 														ng-change="ratingSliderChanged()" ng-model="gameRating"></td>
 													<td>
-														<p class="text-primary">{{gameRatingText}}:
-															{{gameRating}}</p>
+														<p class="text-primary">{{gameRatingRoot}}</p>
 													</td>
 													<td>
 														<p>{{gameDetail.rating}}</p>

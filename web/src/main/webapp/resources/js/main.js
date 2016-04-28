@@ -310,6 +310,7 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 
 		$scope.currentGameId = id;
 		$rootScope.currentGameRootId = $scope.currentGameId;
+		$rootScope.gameRatingRoot = $scope.gameRating
 		
 		$http({
 			method: "GET",
@@ -325,7 +326,7 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 			method: "GET",
 			url : 'getGameRatedByUser' + '/' + id
 		}).then(function mySucces(response){
-			$scope.gameRating = response.data;
+			$rootScope.gameRatingRoot = response.data;
 		}, function myError(response) {
 			alert("Getting isRated game error");
 		});
@@ -345,20 +346,7 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $http) {
 	
 	$scope.ratingSliderChanged = function(){
-		if ($scope.gameRating <= 15)
-			$scope.gameRatingText = "Bad as hell";
-		else if ($scope.gameRating > 15 && $scope.gameRating <= 30)
-			$scope.gameRatingText = "Actually bad";
-		else if ($scope.gameRating > 30 && $scope.gameRating <= 45)
-			$scope.gameRatingText = "Averege";
-		else if ($scope.gameRating > 45 && $scope.gameRating <= 60)
-			$scope.gameRatingText = "Pretty good";
-		else if ($scope.gameRating > 60 && $scope.gameRating <= 75)
-			$scope.gameRatingText = "Good stuff";
-		else if ($scope.gameRating > 75 && $scope.gameRating <= 90)
-			$scope.gameRatingText = "Exelent!";
-		else if ($scope.gameRating > 90 && $scope.gameRating <= 100)
-			$scope.gameRatingText = "Legendary";
+		$rootScope.gameRatingRoot = $scope.gameRating;
 	}
 	
 	$scope.ratingSaved = function() {
@@ -367,7 +355,7 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 			method: "POST",
 			url : 'calculateRatings' + '/' + $rootScope.currentGameRootId + '/' + $scope.gameRating,
 		}).then(function mySucces(response){
-			
+			$rootScope.gameRatingRoot = $scope.gameRating;
 		}, function myError(response) {
 			alert("Saving rating error");
 		});
