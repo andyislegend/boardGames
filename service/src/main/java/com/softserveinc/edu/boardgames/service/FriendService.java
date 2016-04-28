@@ -1,7 +1,5 @@
 package com.softserveinc.edu.boardgames.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,23 +8,33 @@ import com.softserveinc.edu.boardgames.persistence.entity.Friend;
 import com.softserveinc.edu.boardgames.persistence.entity.Status;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.repository.FriendRepository;
-
+/**
+ * This class is realization of DB CRUD other operation wich are used for manipulation with friend 
+ * 
+ * @author Vasyl Bervetskyy
+ */
 @Service
 @Transactional
 public class FriendService {
 	
+	/**
+	 * This field are used for update status of friends in accordance
+	 * notconsider - for make offer to another user
+	 * accepted - for accept friendship
+	 * 
+	 * 
+	 */
 	private static Status NOTCONSIDER = new Status(1, "NOTCONSIDER");
 	private static Status ACCEPTED = new Status(2, "ACCEPTED");
-	private static Status REJECTED = new Status(3, "REJECTED");
 	
 	@Autowired
 	private FriendRepository friendRepository;
 	
-	public Integer findCountNoConsiderFrinds(String username){
+	public Integer findCountNoConsiderFrinds(String username) {
 		return friendRepository.findCountNoConsiderFrinds(username);
 	}
 	
-	public Friend addOfferToFriendship(User user, User userId){
+	public Friend addOfferToFriendship(User user, User userId) {
 		Friend friend = new Friend();
 		friend.setUser(user);
 		friend.setUserId(userId);
@@ -34,35 +42,17 @@ public class FriendService {
 		return friendRepository.saveAndFlush(friend);
 	}
 	
-	public void acceptFrienship(User user, User userId){
-		friendRepository.changeStatusOfFriendshipToAccepted(userId, user);
+	public void acceptFrienship(User currentUser, User userId) {
+		friendRepository.changeStatusOfFriendshipToAccepted(userId, currentUser);// change status of friendship to accepted
 		Friend friend = new Friend();
-		friend.setUser(user);
+		friend.setUser(currentUser);
 		friend.setUserId(userId);
 		friend.setStatus(ACCEPTED);
-		friendRepository.saveAndFlush(friend);
+		friendRepository.saveAndFlush(friend); // make feedback in relationship between two users in table "Friends" 
 	}
-	/*public void acceptFrienship(String curretUserName, String friendsUserName){
-		friendRepository.changeStatusOfFriendshipToAccepted(friendsUserName, curretUserName);
-		Friend friend = new Friend();
-		
-		User user = new User();
-		user.setUsername(curretUserName);
-		
-		User user2 = new User();
-		user.setUsername(friendsUserName);
-		
-		friend.setUser(user);
-		friend.setUserId(user2);
-		friend.setStatus(ACCEPTED);
-		friendRepository.saveAndFlush(friend);
-	}*/
 	
-	public void rejectedFrienship(User user, User userId){
-		friendRepository.changeStatusOfFriendshipToRejected(userId, user);
+	public void rejectedFrienship(User currentUser, User userId) {
+		friendRepository.changeStatusOfFriendshipToRejected(userId, currentUser);
 	}
-	/*public void rejectedFrienship(String curretUserName, String friendsUserName){
-		friendRepository.changeStatusOfFriendshipToRejected(friendsUserName, curretUserName);
-	}*/
 	
 }

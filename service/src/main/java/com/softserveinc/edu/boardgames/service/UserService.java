@@ -201,14 +201,14 @@ public class UserService {
 	}
 
 	public List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName) {
-		String name = nameAndLastName.trim();
+		String name = nameAndLastName.trim(); // At first we cut whitespace around word
 		String lastName = "";
-		if (nameAndLastName.indexOf(" ") != -1) {
+		if (nameAndLastName.indexOf(" ") != -1) { // If in middle of this word we have whitespace we  divide it on  2 parts
 			name = nameAndLastName.substring(0, nameAndLastName.indexOf(" ")).trim();
 			lastName = nameAndLastName.substring(nameAndLastName.indexOf(" "), nameAndLastName.length()).trim();
 		}
 		name = name.concat("%");
-		lastName = lastName.concat("%");
+		lastName = lastName.concat("%"); // Add symbol '%' for use LIKE in query
 		return userRepository.findAllUserByFirstNameAndLastName(userName, name, lastName);
 	}
 
