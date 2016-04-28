@@ -25,10 +25,11 @@ public class GetAllUsersGames {
 	GameUserService gameUserService;
 
 	/**
-     * Returns needed information about games some user owns.
-     *
-     * @param userName	username of user, who's games we want to find
-     */
+	 * Returns needed information about games that user owns.
+	 *
+	 * @param userName
+	 *            username of user, who's games we want to find
+	 */
 	@RequestMapping(value = {"/allUsersGames"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames(@RequestParam("userName") String userName) {

@@ -15,7 +15,12 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
+/**
+ * This entity represents info about global games ratings
+ * Contains Many-To-One relationship with Game
+ * And Many-To-One relationship with User
+ * @author TARAZIDZE
+ */
 @Entity
 @Table(name = "gameRatingNumeric")
 public class GameRatingNumeric implements Serializable{

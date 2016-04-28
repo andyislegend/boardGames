@@ -1,14 +1,10 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
 
 app.controller("allUsersGameCtrl", function ($scope, $http) {
-	
+	$scope.countsOfComments = 1;
     $http.get('getAllGamesCurUser').then(function (result) {
     	$scope.allGame = result.data;});
-    
-    $scope.$on('myCustomEvent', function(event, fromChild) {
-        $scope.allGame = fromChild;
-    });
-    
+        
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
@@ -127,7 +123,10 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
     
      $scope.add = function(id){
         var userId = id;
-          $scope.count =  $scope.count-1;
+        if($scope.count == 1){
+            $scope.NameOfModalWindow = 'modal';
+        }
+        $scope.count =  $scope.count-1;
         $http.post('addUserToFriend', userId).success(function(data){
             var user = data;
             for(var i = 0; i < $scope.allOfferedUsers.length; i++){
@@ -135,9 +134,7 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.friends.push($scope.allOfferedUsers[i]);
                     $scope.allOfferedUsers.splice(i, 1)
                 };
-            if($scope.count == 1){
-                $scope.NameOfModalWindow = 'modal';
-            }
+            
             };
         }).error(function(error){
             console.log(error);
@@ -146,7 +143,10 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
 
     $scope.rejected = function(id){
         var userId = id;
-         $scope.count =  $scope.count-1;
+        if($scope.count == 1){
+            $scope.NameOfModalWindow = 'modal';
+        }
+        $scope.count =  $scope.count-1;
         $http.post('rejectedUserToFriend', userId).success(function(data){
              var user = data;
             for(var i = 0; i < $scope.allOfferedUsers.length; i++){
@@ -154,9 +154,7 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
                     $scope.allOfferedUsers.splice(i, 1)
                 };
             };
-            if($scope.count == 1){
-                $scope.NameOfModalWindow = 'modal';
-            }
+            
         }).error(function(error){
             console.log(error);
         });
@@ -171,8 +169,12 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
     $scope.addUserToFriend = function(id){
       console.log(id);
          $http.post('addOfferToFriendship/', id).success(function(data){
-             $scope.answer = "Done";
-             console.log(data);
+             $scope.userWhoYouSentOffering = data;
+             for(var i = 0; i < $scope.allUsers.length; i++){
+                if($scope.allUsers[i].id === id){
+                    $scope.allUsers.splice(i, 1)
+                };
+            };
          }).error(function(error){
              console.log(error);
          });
@@ -308,6 +310,7 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 
 		$scope.currentGameId = id;
 		$rootScope.currentGameRootId = $scope.currentGameId;
+		$rootScope.gameRatingRoot = $scope.gameRating
 		
 		$http({
 			method: "GET",
@@ -323,7 +326,7 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 			method: "GET",
 			url : 'getGameRatedByUser' + '/' + id
 		}).then(function mySucces(response){
-			$scope.gameRating = response.data;
+			$rootScope.gameRatingRoot = response.data;
 		}, function myError(response) {
 			alert("Getting isRated game error");
 		});
@@ -343,20 +346,7 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $http) {
 	
 	$scope.ratingSliderChanged = function(){
-		if ($scope.gameRating <= 15)
-			$scope.gameRatingText = "Bad as hell";
-		else if ($scope.gameRating > 15 && $scope.gameRating <= 30)
-			$scope.gameRatingText = "Actually bad";
-		else if ($scope.gameRating > 30 && $scope.gameRating <= 45)
-			$scope.gameRatingText = "Averege";
-		else if ($scope.gameRating > 45 && $scope.gameRating <= 60)
-			$scope.gameRatingText = "Pretty good";
-		else if ($scope.gameRating > 60 && $scope.gameRating <= 75)
-			$scope.gameRatingText = "Good stuff";
-		else if ($scope.gameRating > 75 && $scope.gameRating <= 90)
-			$scope.gameRatingText = "Exelent!";
-		else if ($scope.gameRating > 90 && $scope.gameRating <= 100)
-			$scope.gameRatingText = "Legendary";
+		$rootScope.gameRatingRoot = $scope.gameRating;
 	}
 	
 	$scope.ratingSaved = function() {
@@ -365,7 +355,7 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 			method: "POST",
 			url : 'calculateRatings' + '/' + $rootScope.currentGameRootId + '/' + $scope.gameRating,
 		}).then(function mySucces(response){
-			
+			$rootScope.gameRatingRoot = $scope.gameRating;
 		}, function myError(response) {
 			alert("Saving rating error");
 		});
@@ -397,7 +387,9 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 	$scope.submit = function () {
 		var comment  = {
 				"gameID" : ''+$scope.gameuserId,
-				"commentText" : $scope.comment
+				"commentText" : $scope.comment,
+				"username":"root",
+				"date":new Date()
 			 };
 			 $http({
 				  method: 'POST',
@@ -411,8 +403,11 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 				  }, function errorCallback(response) {
 				    
 				  });
-			 $scope.comments.push(comment);
+			 $scope.commentForGame.push(comment);
 	}
+	
+	
+	
 });
 app.controller("showAllTournaments", function ($scope, $http) {
     $http.get('/tournaments').success(function (data) {
@@ -420,9 +415,6 @@ app.controller("showAllTournaments", function ($scope, $http) {
     });
 
 
-    $scope.$on('myCustomEvent', function(event, fromChild) {
-        $scope.tournaments = fromChild;
-    });
 
     $http({
         method : "GET",
@@ -438,7 +430,7 @@ app.controller("showAllTournaments", function ($scope, $http) {
         console.log(idTournament);
         $http.post("/joinTournament", idTournament)
             .success(function (data) {
-                if($scope.tournaments === data){
+                if($scope.tournaments == data){
                     alert("You've already join this tournament");
                 }
                 $scope.tournaments = data;
@@ -467,7 +459,6 @@ app.controller("CtreateNewTournament",function($scope,$http){
             .success(function (data) {
                 console.log(data);
                 $scope.$parent.tournaments=data;
-                /*$scope.$emit('myCustomEvent',data);*/
             });
 
     }

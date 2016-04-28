@@ -21,6 +21,54 @@ insert into users (age, email, firstName, lastName, password, phoneNumber,userRa
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
 (37, 'khariv@gmail.com', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0, 'NOOB', 'male', 'ACTIVE', 'khariv', 3);
 
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  0,'NOOB', 'male', 'ACTIVE', 'winston', 1);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(25, 'borodin@gmail.com', 'Vitalik', 'Borodin', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987454', 0,'NOOB', 'male', 'ACTIVE', 'borodin', 1);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, sex, state, username, addressId) values
+(38, 'nasty@gmail.com', 'Nasty', 'Ptashnyk', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987614', 0,'NOOB', 'female', 'ACTIVE', 'ptashnyk', 2);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(47, 'lida@gmail.com', 'Lida', 'Berkyt', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957957654', 0, 'NOOB', 'female', 'ACTIVE', 'berkyt', 3);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(26, 'zencarych@gmail.com', 'Oleg', 'Zencarych', '$2a$10$e2qEa0wuno23cRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957937654', 0,'NOOB', 'male', 'ACTIVE', 'zencarych', 2);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, sex, state, username, addressId) values
+(47, 'lama@gmail.com', 'Roman', 'Lama', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TD0htrQ3FG3tkYsOpPmW', '+380907987654', 0,'NOOB', 'male', 'ACTIVE', 'lama', 3);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(57, 'vytryk@gmail.com', 'Katy', 'Vytryk', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXb12y3TDMhtrQ3FG3tkYsOpPmW', '+380951987654', 0, 'NOOB', 'female', 'ACTIVE', 'vytryk', 3);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(26, 'plotnikov@root.com', 'Volody', 'Plotnikov', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3F83tkYsOpPmW', '+380000780000',  0,'NOOB', 'male', 'ACTIVE', 'plotnikov', 1);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(27, 'kaban@gmail.com', 'Sasha', 'Kaban', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMht673FG3tkYsOpPmW', '+380957917454', 0,'NOOB', 'male', 'ACTIVE', 'kaban', 1);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, sex, state, username, addressId) values
+(39, 'konovalchyk@gmail.com', 'Valeriy', 'Konovalchyk', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOphjW', '+380957987604', 0,'NOOB', 'female', 'ACTIVE', 'konovalchyk', 2);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(17, 'trysh@gmail.com', 'Khrustuna', 'Trysh', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YsdbUy3TDMhtrQ3FG3tkYsOpPmW', '+388957957654', 0, 'NOOB', 'female', 'ACTIVE', 'trysh', 3);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(55, 'aslamov@gmail.com', 'Igor', 'Aslamov', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXb12y3TDMhtrQ34G3tkYsOpPmW', '+380941987654', 0, 'NOOB', 'male', 'ACTIVE', 'aslamov', 3);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(16, 'gorbach@root.com', 'Ivan', 'Gorbach', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3F83tkYsj5PmW', '+380000780600',  0,'NOOB', 'male', 'ACTIVE', 'gorbach', 1);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(37, 'andreeva@gmail.com', 'Olya', 'Andreeva', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMht67b3G3tkYsOpPmW', '+380957927454', 0,'NOOB', 'female', 'ACTIVE', 'andreeva', 1);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, sex, state, username, addressId) values
+(19, 'konotopska@gmail.com', 'Ulia', 'Konotopska', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ334G3tkYsOphjW', '+380957487604', 0,'NOOB', 'female', 'ACTIVE', 'konotopska', 2);
+
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, sex, state, username, addressId) values
+(87, 'morison@gmail.com', 'Jim', 'Morison', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YsdbUy3T22htrQ3FG3tkYsOpPmW', '+388957227654', 0, 'NOOB', 'male', 'ACTIVE', 'morison', 3);
+
 -- inserts into user_role table
 insert into user_role (username, value) values
 (1, 'ADMIN'),
@@ -70,7 +118,17 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1'
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '2', '1');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1', '3');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '3', '1');
-INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '4', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1', '7');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '7', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1', '11');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '11', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1', '5');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '5', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '10', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '12', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '13', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '15', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '16', '1');
 
 
 

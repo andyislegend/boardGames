@@ -11,6 +11,13 @@ import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
 
+/**
+ * Controller for receiving avatar of all users when administrator is looking
+ * through their information.
+ * 
+ * @author Volodymyr Terlyha
+ *
+ */
 @Controller
 public class GetUsersAvatar {
 
@@ -23,6 +30,12 @@ public class GetUsersAvatar {
 	@Autowired
 	ImageConfiguration imageConfiguration;
 
+	/**
+	 * Returns needed url to users avatar location.
+	 * 
+	 * @param userName
+	 *            username of user, who's avatar we want to find
+	 */
 	@RequestMapping(value = {"/getUsersAvatar"}, method = RequestMethod.GET)
 	@ResponseBody
 	public String getUsersAvatar(@RequestParam("username") String username) {

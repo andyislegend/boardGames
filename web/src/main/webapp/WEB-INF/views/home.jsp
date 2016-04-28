@@ -16,8 +16,6 @@
       <link rel="stylesheet" href="resources/css/tournament.css" />
       <link rel="stylesheet" href="resources/css/friend.css" />
       <link rel="stylesheet" href="resources/css/users.css" />
-      <script type="text/javascript"
-         src="resources/bower_components/angular/angular.js"></script>
       <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
       <script type="text/javascript"
          src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -78,67 +76,7 @@
          </div>
       </section>
       <!-- /top-strip -->
-      <div class="anmtd main-menu-container" role="navigation">
-         <nav class="wrapper main-menu">
-            <ul id="menu-main-menu" class="menu">
-               <li class="dropdown">
-                  <a href="#" class="dropdown.toggle"
-                     data-toggle="dropdown" style="font-weight: bold;"><span>Tournaments</span></a>
-                  <ul class="dropdown-menu">
-                     <div class="sub-posts">
-                        <!-- TOURNAMENTS -->
-                        <div class="column-5" ng-controller="showAllTournaments"
-                           ng-hide="hideTournaments">
-                           <div class="mainbar">
-                              <div class="widget widget_top-posts">
-                                 <h2 class="title">Tournament search</h2>
-                                 <a href="#" type="button" data-toggle="modal"
-                                    data-target="#myModalTournament"> <img
-                                    class="tournamentIco" src="resources/ico/plus_white.png"></a>
-                              </div>
-                              <table class="table">
-                                 <thead>
-                                    <tr>
-                                       <th>Tournament name</th>
-                                       <th>User creator</th>
-                                       <th>Required rating</th>
-                                       <th>Max Participants</th>
-                                       <th>Address</th>
-                                       <th>Users Guests</th>
-                                       <th>Join</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    <tr ng-repeat="x in tournaments">
-                                       <td>{{ x.tournamentName }}</td>
-                                       <td>{{ x.username }}</td>
-                                       <td>{{x.requiredRating}}</td>
-                                       <td>{{x.maxParticipants}}</td>
-                                       <td>{{x.country}} {{x.city}} <br /> {{x.street}}
-                                          {{x.houseNumber}} {{x.roomNumber}}
-                                       </td>
-                                       <td>
-                                          <table>
-                                             <tr ng-repeat="y in x.userGuests">
-                                                <td>{{y}}</td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                       <td><button ng-disabled="x.isCanJoin" class="button"
-                                          style="color: black"
-                                          ng-click="JoinTournament(x.tournamentId)">Join</button></td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </div>
-                        </div>
-                        <!-- /TOURNAMENTS -->
-                     </div>
-                  </ul>
-               </li>
-            </ul>
-         </nav>
-      </div>
+
       <!-- Main Section-->
       <section class="wrapper home-section posts-section with-sidebar" ng-controller="eventsVisibleController">
       <button class="btn btn-success" ng-click="onlyUsers()" id="blackBut">Users</button>
@@ -149,7 +87,7 @@
             <div class="grid-8">
             	<div class="column-5" ng-controller="getGamesGlobalController"
 					ng-hide="hideTournaments" ng-show="gamesFade">
-					<div class="mainbar">
+					<div>
 						<div class="widget widget_top-posts">
 							<h2 class="title">Games</h2>
 						</div>
@@ -205,8 +143,7 @@
 													<td><input type="range" id="myRange" value="100"
 														ng-change="ratingSliderChanged()" ng-model="gameRating"></td>
 													<td>
-														<p class="text-primary">{{gameRatingText}}:
-															{{gameRating}}</p>
+														<p class="text-primary">{{gameRatingRoot}}</p>
 													</td>
 													<td>
 														<p>{{gameDetail.rating}}</p>
@@ -239,24 +176,17 @@
 
 										<div>
 											<div ng-show="isShowComment">
-												<table>
-													<thead>
-														<tr>
-															<th></th>
-															<th></th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr ng-repeat="x in comments">
-															<td>{x.text}</td>
-															<td></td>
-														</tr>
-													</tbody>
-												</table>
+												<table class = "table">
+ 								   <tr><th></th><th></th></tr>
+                                    <tr ng-repeat="x in commentForGame">
+                                    <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
+                                    </table>
+												<div >
 												<form data-ng-submit=submit()>
-													<input type="text" data-ng-model="comment"><input
-														type="submit" ng-click="addComment">
+													<input type="text" data-ng-model="comment" style = "width:80%" ><input
+														type="submit" ng-click="addComment" style = "width:20%">
 												</form>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -267,7 +197,7 @@
 					</div>
 				</div>
                <!-- EVENTS -->
-               <div class="mainbar" ng-controller="eventListCtrl" ng-show="eventsFade">
+               <div ng-controller="eventListCtrl" ng-show="eventsFade">
                   <div class="column-1" >
                      <header class="section-header" >
                         <div class="section-title title-with-sep">
@@ -281,8 +211,8 @@
                               <li class="jcarousel-item jcarousel-item-horizontal ">
                                  <a
                                     ng-repeat="event in events" href="#" class="item">
-                                    <img width="240" height="240" 
-                                       ng-src={{event.imgsrc}} alt={{event.name}}> 
+                                    <img width="240" height="240"
+                                       ng-src={{event.imgsrc}} alt={{event.name}}>
                                     <span class="game_name">{{event.game}}</span>
                                     <div class="name" style="top: 201px;">
                                        <div class="num">
@@ -347,12 +277,12 @@
                         <h2 class="title">Users</h2>
                      </div>
                   </header>
-                  
+
                   <table class="table">
                   	 <tr>
                         <th>
                         	<input type="text" class="form-control"
-                     			ng-model="searchText.lastName" 
+                     			ng-model="searchText.lastName"
                      			placeholder="Search by last name">
                      	</th>
                         <th></th>
@@ -405,7 +335,7 @@
                                  <!-- Modal Header -->
                                  <div class="modal-header">
                                     <h1>{{oneGame.name}}</h1>
-     
+
                                  </div>
                                  <div class="modal-body">
                                     <p>Year of production: {{oneGame.yearOfProduction}}</p>
@@ -463,62 +393,68 @@
                <!--------------------------------------- tournaments  -------------------------------------------------->
                <div class="column-5" ng-controller="showAllTournaments"
                    ng-show="tournamentsFade">
-                  <div class="mainbar">
+                  <div>
                      <div class="widget widget_top-posts">
                         <h2 class="title">Tournament search</h2>
-                        <a style="align-content: center;" href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
-                        <img class="tournamentIco" src="resources/ico/plus.ico"></a>
-                        <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="showAllTournaments">
-                           <div class="modal-dialog">
-                              <!-- Modal content-->
-                              <div class="modal-content"  >
-                                 <div class="modal-header">
-                                    <h2>Create the best tournament ever</h2>
-                                 </div>
-                                 <div class="modal-body">
-                                    <form>
-                                       <label>Select game for your awsome tournament</label>
-                                       <select required="required" class="field-form" data-ng-model="selectedGame">
-                                          <option  ng-repeat="game in games" value="{{game.name}}">{{game.name}}</option>
-                                       </select>
-                                       <label>Name of your awsome tournament</label>
-                                       <input required="required" class="field-form" data-ng-model="tournamentName" placeholder="Name">
-                                       <br/>
-                                       <label>Required rating to join to your tournament</label>
-                                       <input class="field-form" data-ng-model="requiredRating" placeholder="0.0">
-                                       <br/>
-                                       <label>Max count of players</label>
-                                       <input class="field-form" data-ng-model="maxParticipants" placeholder="2">
-                                       <br/>
-                                       <label>Choose date of your tournament</label>
-                                       <input required="required" class="field-form" data-ng-model="date" type="date">
-                                       <br/><br/>
-                                       <label>Enter place where tournament will be</label>
-                                       <input class="field-form" data-ng-model="countryTournament" placeholder="Country">
-                                       <input class="field-form" data-ng-model="cityTournament" placeholder="City">
-                                       <br/>
-                                       <textarea rows="3"  class="field-form" data-ng-model="additionTournament" placeholder="City"></textarea>
-                                       <br/>
-                                       <button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
-                                       <button type="button" class="btn btn-default" ng-click="modalClose()"
-                                          data-dismiss="modal">Close</button>
-                                    </form>
-                                 </div>
-                                 <div class="modal-footer">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
                      </div>
+
                      <table class="table">
                         <thead>
+                        <tr>
+                            <th/> <th/> <th/> <th/> <th/> <th/> <th/>
+                            <th><a style="align-content: center;" href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
+                                <img class="tournamentIco" src="resources/ico/plus.ico"></a>
+                                <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="showAllTournaments">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content"  >
+                                            <div class="modal-header">
+                                                <h2>Create the best tournament ever</h2>
+                                                <p>P.S. ALL fields are necessarily </p>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <label>Select game for your awsome tournament</label>
+                                                    <select required="required" class="field-form" data-ng-model="selectedGame">
+                                                        <option  ng-repeat="game in games" value="{{game.name}}">{{game.name}}</option>
+                                                    </select>
+                                                    <label>Name of your awsome tournament</label>
+                                                    <input required="required" class="field-form" data-ng-model="tournamentName" placeholder="Name">
+                                                    <br/>
+                                                    <label>Required rating to join to your tournament</label>
+                                                    <input type="number" class="field-form" data-ng-model="requiredRating" placeholder="0.0">
+                                                    <br/>
+                                                    <label>Max count of players</label>
+                                                    <input type="number" class="field-form" data-ng-model="maxParticipants" placeholder="2">
+                                                    <br/>
+                                                    <label>Choose date of your tournament</label>
+                                                    <input required="required" class="field-form" data-ng-model="date" type="date">
+                                                    <br/><br/>
+                                                    <label>Enter place where tournament will be</label>
+                                                    <input class="field-form" data-ng-model="countryTournament" placeholder="Country">
+                                                    <input class="field-form" data-ng-model="cityTournament" placeholder="City">
+                                                    <br/>
+                                                    <textarea rows="3"  class="field-form" data-ng-model="additionTournament" placeholder="City"></textarea>
+                                                    <br/>
+                                                    <button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
+                                                    <button type="button" class="btn btn-default" ng-click="modalClose()"
+                                                            data-dismiss="modal">Close</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></th>
+                        </tr>
                            <tr>
-                              <th>Tournament name</th>
-                              <th>User creator</th>
-                              <th>Required rating</th>
-                              <th>Max Participants</th>
-                              <th>Address</th>
-                              <th>Users Guests</th>
+                              <th/>Tournament name</th>
+                              <th/>User creator</th>
+                              <th/>Required rating</th>
+                              <th/>Max Participants</th>
+                              <th/>Address</th>
+                               <th/>Addition</th>
+                              <th/>Users Guests</th>
                               <th>Join</th>
                            </tr>
                         </thead>
@@ -571,7 +507,7 @@
                                     </a>
                                  </td>
                                  <td>
-                                    <a href="#" ng-disabled="count < 1" type="button" data-toggle="modal"
+                                    <a href="#" ng-class="{myStyle: count < 1}" ng-disabled="count < 1" type="button" data-toggle="modal"
                                        data-target="#myModal">
                                        <div class="proba">
                                           <div class="count" ng-hide="count < 1">{{count}}</div>
@@ -661,8 +597,8 @@
 										ng-click="addUserToFriend(user.id)" >
                                         Send offer to friend
                                     </button>
-                                    
-                                    
+
+
 								</div>
 
 							</div>
@@ -677,9 +613,10 @@
 											<h4 class="modal-title">Modal Header</h4>
 										</div>
 										<div class="modal-body done">
-											<img ng-show="answer == 'Done'"
-												src="resources/ico/checkmark.gif" width="250">
-											{{answer}}!
+											<img src="resources/ico/checkmark.gif" width="250" class="col-sm-4">
+                                            <div class="col-sm-8 modalUserInformation">
+											     You've just sent offer to {{userWhoYouSentOffering.firstName}} {{ userWhoYouSentOffering.lastName }}, please wait for response.
+                                            </div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
@@ -700,7 +637,8 @@
 								<div>
 								<input type="submit" value="ADD GAME"
 									class="btn btn-primary btn-lg" data-toggle="modal"
-									data-target="#myModalHorizontal">
+									data-target="#myModalHorizontal"
+									style = "background-color: gray;">
 							</div>
 							<div class="modal fade" id="myModalHorizontal" tabindex="-1"
 								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -739,7 +677,7 @@
 														data-ng-model="year" placeholder="Year">
 												</div>
 												<div>
-													<input type="submit" value="ADD" 
+													<input type="submit" value="ADD"
 														style="width: 30%; margin-bottom: 10px"> <input
 														type="submit" value="Close" data-dismiss="modal"
 														style="width: 30%; margin-bottom: 10px">
@@ -750,50 +688,60 @@
 								</div>
 							</div>
 						 </div>
-						
+
 							<div ng-controller = "getGameDetailedInfoController">
 								<table class="table">
 									<tr>
 										<th>Name</th>
 										<th>Category</th>
-										<th>More</th>
 										<th>Comment</th>
 									<tr>
 									<tr ng-repeat="game in allGame">
-										<td>{{game.name}}</td>
+										<td><a href = "" ng-click="myFunc(game.id)" data-toggle="modal" data-target="#myModalMyGames">
+										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
 										<td>
-											<div>
-												<input type="submit" value="More" ng-click="myFunc(game.id)"
-													style="border: 1px solid #787878; border-radius: 1px;">
-											</div>
-										</td>
-										<td><div>
-												<input type="submit" value="More" ng-click="showComments(game.id)"
-													style="border: 1px solid #787878; border-radius: 1px;">
-											</div></td>
+												<a href = "" ng-click="showComments(game.id)">
+												<span class="glyphicon glyphicon-comment"></span>
+												</a>
+													
+											
+</td>
 									</tr>
 								</table>
-								<div ng-show="showMe">
-									<div ng-repeat="game in games">
-										<p>Category:{{game.category}}</p>
-										<p>Year of production: {{game.yearOfProduction}}</p>
-										<p>Edition: {{game.edition}}</p>
-										<p>Description: {{game.description}}</p>
-										<p>Max players: {{game.maxPlayers}}</p>
-										<p>Min players: {{game.minPlayers}}</p>
-									</div>
+								
+									<div class="modal fade" id="myModalMyGames" tabindex="-1" role="dialog"
+                           aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                              <div class="modal-header">
+                                    <h1 ng-repeat = "game in games">{{game.name}}</h1>
+                                    </div>
+                                 <div class="modal-body" ng-repeat = "game in games">
+                                    <p>Year of production: {{game.yearOfProduction}}</p>
+                                    <p>Edition: {{game.edition}}</p>
+                                    <p>Description: {{game.description}}</p>
+                                    <p>Max players: {{game.maxPlayers}}</p>
+                                    <p>Min players: {{game.minPlayers}}</p>
+                                 </div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									
 								</div>
+                           </div>
+                        </div>
+					</div>
 								<div ng-show="isShowComment">
                                    <table class = "table">
-								   <tr><th></th><th></th></tr>
-                                   <tr ng-repeat="x in commentForGame"><td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
-
-                                   </table>
-                                    <form data-ng-submit=submit()>
-                                       <input id = "sendComment" type="text" data-ng-model="comment"><input
-                                          type="submit" ng-click="addComment">
-                                    </form>
+ 								   <tr><th></th><th></th></tr>
+                                    <tr ng-repeat="x in commentForGame">
+                                    <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
+                                    </table>
+                                     <form data-ng-submit=submit()>
+													<input type="text" data-ng-model="comment" style = "width:80%" ><input
+														type="submit" ng-click="addComment" style = "width:20%">
+												</form>
                                  </div>
 							</div>
 						</div>
