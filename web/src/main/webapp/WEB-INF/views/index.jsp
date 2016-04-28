@@ -17,13 +17,14 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
-<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="resources/bower_components/jquery/dist/jquery.js"></script>
 <script
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script src="resources/js/index.js"></script>
-
 
 </head>
 <body ng-app="indexModule">

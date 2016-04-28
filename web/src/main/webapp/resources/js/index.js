@@ -1,10 +1,11 @@
-var indexModule = angular.module('indexModule', [ 'ngRoute']);
+var indexModule = angular.module('indexModule', [ 'ngRoute', 'ui.bootstrap' ]);
 
 indexModule.config(function($routeProvider) {
 	$routeProvider
 
 	.when('/', {
-		templateUrl : 'resources/pages/index-home.html'
+		templateUrl : 'resources/pages/index-home.html',
+		controller : "carouselCtrl"
 
 	})
 
@@ -20,7 +21,31 @@ indexModule.config(function($routeProvider) {
 	});
 });
 
-
+indexModule.controller('carouselCtrl', function($scope) {
+	$scope.slides = [ {
+		image : 'resources/images/index-carousel/scrabble.jpg'
+	}, {
+		image : 'resources/images/index-carousel/politics.jpeg'
+	}, {
+		image : 'resources/images/index-carousel/go.jpg'
+	}, {
+		image : 'resources/images/index-carousel/monopoly.jpg'
+	} ];
+	
+	$scope.next = function() {
+	     var total = $scope.slides.length;
+	     if (total > 0) {
+	         $scope.$slideIndex = ($scope.$slideIndex == total - 1) ? 0 : $scope.$slideIndex + 1;
+	     }
+	};
+	
+	$scope.play = function() {
+	     timeOut = $timeout(function() {
+	         $scope.next();
+	         $scope.play();
+	     }, 2000);
+	};
+});
 
 indexModule.controller('loginCntrl', [
 		'$scope',
@@ -72,63 +97,63 @@ indexModule.controller('loginCntrl', [
 
 		} ]);
 
-//indexModule.controller('addUserCtrl', [
-//		'$scope',
-//		'CreateUserService',
-//		function($scope, CreateUserService) {
-//			var ctrl = this;
-//			ctrl.userDTO = {
-//				username : '',
-//				firstName : '',
-//				lastName : '',
-//				password : '',
-//				confirmPassword : '',
-//				sex : '',
-//				age : '',
-//				phoneNumber : '',
-//				country : '',
-//				zipCode : '',
-//				city : '',
-//				street : '',
-//				roomNumber : '',
-//				houseNumber : '',
-//				email : ''
-//			};
+// indexModule.controller('addUserCtrl', [
+// '$scope',
+// 'CreateUserService',
+// function($scope, CreateUserService) {
+// var ctrl = this;
+// ctrl.userDTO = {
+// username : '',
+// firstName : '',
+// lastName : '',
+// password : '',
+// confirmPassword : '',
+// sex : '',
+// age : '',
+// phoneNumber : '',
+// country : '',
+// zipCode : '',
+// city : '',
+// street : '',
+// roomNumber : '',
+// houseNumber : '',
+// email : ''
+// };
 //
-//			ctrl.createUser = function(userDTO) {
-//				CreateUserService.createUser(userDTO).then(
-//						function(errResponse) {
-//							console.error('Error while creating User.');
-//						});
-//			};
+// ctrl.createUser = function(userDTO) {
+// CreateUserService.createUser(userDTO).then(
+// function(errResponse) {
+// console.error('Error while creating User.');
+// });
+// };
 //
-//			ctrl.submit = function() {
+// ctrl.submit = function() {
 //
-//				console.log('Saving New User', ctrl.userDTO);
-//				ctrl.createUser(ctrl.userDTO);
+// console.log('Saving New User', ctrl.userDTO);
+// ctrl.createUser(ctrl.userDTO);
 //
-//				ctrl.reset();
-//			};
+// ctrl.reset();
+// };
 //
-//			ctrl.reset = function() {
-//				ctrl.userDTO = {
-//					username : '',
-//					firstName : '',
-//					lastName : '',
-//					password : '',
-//					confirmPassword : '',
-//					sex : '',
-//					age : '',
-//					phoneNumber : '',
-//					country : '',
-//					zipCode : '',
-//					city : '',
-//					street : '',
-//					roomNumber : '',
-//					houseNumber : '',
-//					email : ''
-//				};
-//				$scope.myForm.$setPristine();
-//			};
+// ctrl.reset = function() {
+// ctrl.userDTO = {
+// username : '',
+// firstName : '',
+// lastName : '',
+// password : '',
+// confirmPassword : '',
+// sex : '',
+// age : '',
+// phoneNumber : '',
+// country : '',
+// zipCode : '',
+// city : '',
+// street : '',
+// roomNumber : '',
+// houseNumber : '',
+// email : ''
+// };
+// $scope.myForm.$setPristine();
+// };
 //
-//		} ]);
+// } ]);
