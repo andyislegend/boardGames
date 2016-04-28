@@ -614,9 +614,10 @@
 											<h4 class="modal-title">Modal Header</h4>
 										</div>
 										<div class="modal-body done">
-											<img ng-show="answer == 'Done'"
-												src="resources/ico/checkmark.gif" width="250">
-											{{answer}}!
+											<img src="resources/ico/checkmark.gif" width="250" class="col-sm-4">
+                                            <div class="col-sm-8 modalUserInformation">
+											     You've just sent offer to {{userWhoYouSentOffering.firstName}} {{ userWhoYouSentOffering.lastName }}, please wait for response.
+                                            </div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"

@@ -122,7 +122,8 @@
     font-family: Oswald;
     font-weight: normal;
     font-style: normal;
-    font-size: 70px;
+    font-size: 20px;
+    display: inline-table;
     
 }
 .firsName{
@@ -138,4 +139,7 @@
 .myStyle{
     pointer-events: none;
     cursor: default;
+}
+.modalUserInformation{
+    padding-top: 35px;
 }

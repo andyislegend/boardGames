@@ -112,9 +112,13 @@ public class FriendController {
 	 * 
 	 */
 	@RequestMapping(value = "/addOfferToFriendship",method = RequestMethod.POST)
-	public void addOfferToFriendship(@RequestBody Integer id) {
+	public User addOfferToFriendship(@RequestBody Integer id) {
 		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
 		User userId = userService.findById(id);
+		if(userId == null) {
+			return null;
+		}
 		friendService.addOfferToFriendship(currentUser, userId);
+		return userId;
 	}
 }

@@ -169,7 +169,7 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
     $scope.addUserToFriend = function(id){
       console.log(id);
          $http.post('addOfferToFriendship/', id).success(function(data){
-             $scope.answer = "Done";
+             $scope.userWhoYouSentOffering = data;
              console.log(data);
          }).error(function(error){
              console.log(error);
