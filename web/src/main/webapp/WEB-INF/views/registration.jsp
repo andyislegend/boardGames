@@ -19,7 +19,6 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/new-css.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
-<!-- <link rel="stylesheet" href="resources/css/index.css" /> -->
 
 </head>
 

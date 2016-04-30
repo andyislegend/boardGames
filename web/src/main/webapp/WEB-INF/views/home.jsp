@@ -404,7 +404,7 @@
                             <th/> <th/> <th/> <th/> <th/> <th/> <th/>
                             <th><a style="align-content: center;" href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
                                 <img class="tournamentIco" src="resources/ico/plus.ico"></a>
-                                <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="showAllTournaments">
+                                <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournament">
                                     <div class="modal-dialog">
                                         <!-- Modal content-->
                                         <div class="modal-content"  >
@@ -739,8 +739,8 @@
                                     <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
                                     </table>
                                      <form data-ng-submit=submit()>
-													<input type="text" data-ng-model="comment" style = "width:80%" ><input
-														type="submit" ng-click="addComment" style = "width:20%">
+													<input type="text" data-ng-model="comment" style = "width:70%" ><input
+														type="submit" ng-click="addComment" style = "width:20%; margin: 5px;">
 												</form>
                                  </div>
 							</div>

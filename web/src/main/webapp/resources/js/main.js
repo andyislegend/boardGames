@@ -388,7 +388,7 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 		var comment  = {
 				"gameID" : ''+$scope.gameuserId,
 				"commentText" : $scope.comment,
-				"username":"root",
+				"username":"",
 				"date":new Date()
 			 };
 			 $http({

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +43,11 @@ public class CurrentUserGameController {
 	@Autowired
 	private CommentForGameService commentForGameService;
 	
+	
+	/**
+	 * 	
+	 * @return list of current user games
+	 */
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
@@ -51,6 +55,13 @@ public class CurrentUserGameController {
 		return allGames;
 	}
 	
+	/**
+	 * Add new game for user
+	 * 
+	 * @param gameUserDTO
+	 * 					 user game
+	 * @return
+	 */
 	@RequestMapping(value = "NewGame", method = RequestMethod.POST)
 	public String addNewGame(@RequestBody GameUserDTO gameUserDTO){	
 		GameUser gameUser = new GameUser();
@@ -60,6 +71,11 @@ public class CurrentUserGameController {
 		return "";
 	}
 	
+	/**
+	 * Return all categories 
+	 * 
+	 * @return all Categories
+	 */
 	@RequestMapping(value = "/getAllCategories", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Category> allCategories (){
@@ -67,6 +83,13 @@ public class CurrentUserGameController {
 		return categories;
 	}
 	
+	/**
+	 * Add new comments for game
+	 * 
+	 * @param commentsForGameDTO 
+	 * 							comments for game
+	 * @return
+	 */
 	@RequestMapping(value = "NewComment", method = RequestMethod.POST)
 	public String addComment(@RequestBody CommentsForGameDTO commentsForGameDTO) {
 		CommentsForGame commentsForGame = new CommentsForGame();
@@ -77,6 +100,10 @@ public class CurrentUserGameController {
 		return "";
 	}
 	
+	/**
+	 * 
+	 * @return all comments
+	 */
 	@RequestMapping(value = "comment", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CommentsForGameDTO> commentsForGame() {
