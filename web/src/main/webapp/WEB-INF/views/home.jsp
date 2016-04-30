@@ -304,7 +304,7 @@
                         </td>
                         <td>{{user.email}}</td>
                         <td>{{user.phoneNumber}}</td>
-                        <td>{{user.address.country}} {{user.address.city}}
+                        <td>{{user.address.country.name}} {{user.address.city.name}}
                            {{user.address.street}} {{user.address.houseNumber}}
                            {{user.address.roomNumber}}
                         </td>

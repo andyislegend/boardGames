@@ -77,8 +77,8 @@ public class User implements Serializable {
 	/**
 	 * Describes users sex.
 	 */
-	@Column(name = "sex")
-	private String sex;
+	@Column(name = "gender")
+	private String gender;
 
 	/**
 	 * Describes users age.
@@ -206,12 +206,12 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public Integer getAge() {

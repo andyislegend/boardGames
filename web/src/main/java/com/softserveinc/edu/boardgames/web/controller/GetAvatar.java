@@ -39,7 +39,7 @@ public class GetAvatar {
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
 		String imageName = imageService.findImageNameByUsername(username);
 		if (imageName == null) {
-			if (userService.findUsersSex(username).equals("male")) {
+			if (userService.findUsersGender(username).equals("male")) {
 				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
 			} else {
 				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();

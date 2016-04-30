@@ -225,7 +225,7 @@ public class UserService {
 	 * @param username
 	 *            finding users sex by username
 	 */
-	public String findUsersSex(String username) {
-		return userRepository.findUsersSex(username);
+	public String findUsersGender(String username) {
+		return userRepository.findUsersGender(username);
 	}
 }

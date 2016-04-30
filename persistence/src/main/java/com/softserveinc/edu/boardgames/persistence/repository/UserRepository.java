@@ -81,6 +81,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT u FROM Friend f RIGHT JOIN f.user u WHERE f.userId.username = ?1 AND f.status.id = 1")
 	public List<User> getAllNoConsiderFriendByUser(String userName);
 	
-	@Query("Select u.sex FROM User u WHERE u.username = :username")
-	public String findUsersSex(@Param("username") String username);
+	@Query("Select u.gender FROM User u WHERE u.username = :username")
+	public String findUsersGender(@Param("username") String username);
 }
