@@ -319,7 +319,7 @@
                      <div class="col-sm-3" id="backgroundForOneUser">
                         <p>Last Name:{{oneUser.lastName}}</p>
                         <p>First Name:{{oneUser.firstName}}</p>
-                        <p>Sex:{{oneUser.sex}}</p>
+                        <p>Sex:{{oneUser.gender}}</p>
                         <p>Age:{{oneUser.age}}</p>
                         <p>Rating:{{oneUser.rating}}</p>
                      </div>
