@@ -288,8 +288,13 @@
                         <th></th>
                         <th></th>
                         <th>
-                        	<input type="text" class="form-control"
-                    			ng-model="searchText.address.city" placeholder="Search by city">
+                        	<select name="selectCountries" id="repeatSelectCountry" ng-model="data.repeatSelectCountry" 
+                        		ng-change="getCitiesByCountry()">
+                        		<option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option>
+                        	</select>
+                        	<select name="repeatSelect" id="repeatSelectCity" ng-model="searchText.address.city.name">
+                        		<option ng-repeat="city in cities">{{city.name}}</option>
+                        	</select>
                     	</th>
                      </tr>
                      <tr>

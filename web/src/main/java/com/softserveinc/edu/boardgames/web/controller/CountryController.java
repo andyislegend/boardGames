@@ -8,28 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.persistence.entity.Country;
+import com.softserveinc.edu.boardgames.service.CountryService;
 
 /**
- * Controller for receiving all users.
+ * Controller for receiving info about Country entity.
  * 
  * @author Volodymyr Terlyha
  *
  */
 @Controller
-public class UsersController {
+public class CountryController {
 
 	@Autowired
-	UserService userSevice;
+	CountryService countrySevice;
 
 	/**
-	 * Returns all users.
+	 * Returns all countries.
 	 */
-	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/getAllCountries"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<User> getAllUsers() {
-		List<User> userList = userSevice.findAll();
+	public List<Country> getAllCountries() {
+		List<Country> userList = countrySevice.findAll();
 		return userList;
 	}
 }

@@ -227,6 +227,15 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 			});
 		};
 	});
+	$http.get('getAllCountries').then(function(result) {
+		$scope.countries = result.data;	
+		$scope.getCitiesByCountry = function(){
+			var countryId = $('select[name=selectCountries]').val();
+			$http.get('getAllCities?countryId=' + countryId).then(function(result) {
+				$scope.cities = result.data;
+			});
+		};
+	});
 });
 
 app.controller("getAllUsersWithNegativeRating", function($scope, $http) {
@@ -238,10 +247,6 @@ app.controller("getAllUsersWithNegativeRating", function($scope, $http) {
 		        $scope.bannedUsers = ('These users have to be banned: ' + $scope.usersWithNegRate);        
 		}
 	});
-});
-
-app.controller("getAllUsersTournaments", function ($scope, $http) {
-    
 });
 
 app.controller("getAvatar", function($scope, $http) {

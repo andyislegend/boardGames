@@ -32,7 +32,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	public User findByFirstName(String firstName);
 
-	@Query("Select u FROM User u JOIN u.address address" + " WHERE address.city =:cityName")
+	@Query("Select u FROM User u JOIN u.address address WHERE address.city.name =:cityName")
 	public List<User> findUserByCity(@Param("cityName") String cityName);
 	
 	@Query("Select u.username FROM User u WHERE u.userRating <=-5")
