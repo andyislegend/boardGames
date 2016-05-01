@@ -32,8 +32,8 @@ public class GetAllUsersGames {
 	 */
 	@RequestMapping(value = {"/allUsersGames"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<GameUserDTO> showGames(@RequestParam("userName") String userName) {
-		List<GameUserDTO> allGames = gameUserService.getGameUsersFromUsername(userName);
+	public List<GameUserDTO> showGames(@RequestParam("username") String username) {
+		List<GameUserDTO> allGames = gameUserService.getGameUsersFromUsername(username);
 		return allGames;
 	}
 }

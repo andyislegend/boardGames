@@ -299,7 +299,7 @@
                         <th>Address</th>
                      </tr>
                      <tr ng-repeat="user in users|filter:searchText">
-                        <td><a href="" ng-click="getInfoAboutUserFunc(user.id)">
+                        <td><a href="" ng-click="getInfoAboutUserFunc(user.username)">
                            {{user.lastName}} {{user.firstName}}</a>
                         </td>
                         <td>{{user.email}}</td>
@@ -319,11 +319,9 @@
                         <p>Age:{{oneUser.age}}</p>
                         <p>Rating:{{oneUser.rating}}</p>
                      </div>
-                     <div class="col-sm-3" id="backgroundForOneUser"
-                        ng-controller="getAllUsersGames">
-                        <a href="" ng-click="getInfoAboutUserGames(oneUser.username)">
-                        Games user owns</a>
-                        <ul ng-show="showUsersGames" ng-repeat="game in games">
+                     <div class="col-sm-3" id="backgroundForOneUser">
+                        <b>Games user owns:</b>
+                        <ul ng-repeat="game in games">
                            <li><a href="" ng-click="getInfoAboutGame(game.id)" data-toggle="modal" data-target="#myModalGames">
                               {{game.name}}</a>
                            </li>
@@ -352,12 +350,9 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-sm-3" id="backgroundForOneUser"
-                        ng-controller="getAllUsersTournaments">
-                        <a href=""
-                           ng-click="allUsersTournaments(oneUser.username)">
-                        Users tournaments</a>
-                        <ul ng-show="showUsersTournaments" ng-repeat="tournament in tournaments">
+                     <div class="col-sm-3" id="backgroundForOneUser">
+                        <b>Users tournaments:</b>
+                        <ul ng-repeat="tournament in tournaments">
                            <li><a href="" ng-click="getInfoAboutTournament(tournament.tournamentId)" data-toggle="modal" data-target="#myModalTournaments">
                               {{tournament.tournamentName}}</a>
                            </li>

@@ -187,15 +187,41 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;
 		$scope.showUser = false;
-		$scope.getInfoAboutUserFunc = function(id) {
+		$scope.getInfoAboutUserFunc = function(username) {
 			$scope.oneUser
 			$scope.showUser = !$scope.showUser;
 			for (var i = 0; i < $scope.users.length; i++) {
-				if ($scope.users[i].id === id) {
+				if ($scope.users[i].username === username) {
 					$scope.oneUser = $scope.users[i];
 					break;
 				};
 			};
+			$http.get('allUsersGames?username=' + username).then(function(result) {
+				$scope.games = result.data;
+			});
+		    $scope.showModal = false;
+		    $scope.getInfoAboutGame = function(id){
+		        $scope.showModal = !$scope.showModal;
+		        for (var i = 0; i < $scope.games.length; i++) {
+					if ($scope.games[i].id === id) {
+						$scope.oneGame = $scope.games[i];
+						break;
+					};
+				};
+		    };
+		    $http.get('allUsersTournaments?username=' + username).then(function (result) {
+		        $scope.tournaments = result.data;
+		    });
+		    $scope.showModal1 = false;
+		    $scope.getInfoAboutTournament = function(tournamentId){
+		        $scope.showModal1 = !$scope.showModal1;
+		        for (var i = 0; i < $scope.tournaments.length; i++) {
+					if ($scope.tournaments[i].tournamentId === tournamentId) {
+						$scope.oneTournament = $scope.tournaments[i];
+						break;
+					};
+				};
+		    };
 			$http.get('getUsersAvatar?username=' + $scope.oneUser.username).then(function(result) {
 				$scope.userAvatar = result.data;
 			});
@@ -214,44 +240,8 @@ app.controller("getAllUsersWithNegativeRating", function($scope, $http) {
 	});
 });
 
-app.controller("getAllUsersGames", function($scope, $http) {
-	$scope.showUsersGames = false;
-	$scope.getInfoAboutUserGames = function(userName) {
-		$scope.showUsersGames = !$scope.showUsersGames;
-		$http.get('allUsersGames?userName=' + userName).then(function(result) {
-			$scope.games = result.data;
-		});
-	};
-    $scope.showModal = false;
-    $scope.getInfoAboutGame = function(id){
-        $scope.showModal = !$scope.showModal;
-        for (var i = 0; i < $scope.games.length; i++) {
-			if ($scope.games[i].id === id) {
-				$scope.oneGame = $scope.games[i];
-				break;
-			};
-		};
-    };
-});
-
 app.controller("getAllUsersTournaments", function ($scope, $http) {
-    $scope.showUsersTournaments = false;
-    $scope.allUsersTournaments = function (username) {
-        $scope.showUsersTournaments = !$scope.showUsersTournaments;
-        $http.get('allUsersTournaments?username=' + username).then(function (result) {
-            $scope.tournaments = result.data;
-        });
-    };
-    $scope.showModal1 = false;
-    $scope.getInfoAboutTournament = function(tournamentId){
-        $scope.showModal1 = !$scope.showModal1;
-        for (var i = 0; i < $scope.tournaments.length; i++) {
-			if ($scope.tournaments[i].tournamentId === tournamentId) {
-				$scope.oneTournament = $scope.tournaments[i];
-				break;
-			};
-		};
-    };
+    
 });
 
 app.controller("getAvatar", function($scope, $http) {
