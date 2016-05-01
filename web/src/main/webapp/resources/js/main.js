@@ -225,7 +225,7 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 			$http.get('getUsersAvatar?username=' + $scope.oneUser.username).then(function(result) {
 				$scope.userAvatar = result.data;
 			});
-		};		
+		};
 	});
 });
 

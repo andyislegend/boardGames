@@ -282,8 +282,8 @@
                   	 <tr>
                         <th>
                         	<input type="text" class="form-control"
-                     			ng-model="searchText.lastName"
-                     			placeholder="Search by last name">
+                     			ng-model="searchText.username"
+                     			placeholder="Search by username">
                      	</th>
                         <th></th>
                         <th></th>
@@ -293,14 +293,14 @@
                     	</th>
                      </tr>
                      <tr>
-                        <th>Last Name, First Name</th>
+                        <th>Username</th>
                         <th>Email</th>
                         <th>PhoneNumber</th>
                         <th>Address</th>
                      </tr>
                      <tr ng-repeat="user in users|filter:searchText">
                         <td><a href="" ng-click="getInfoAboutUserFunc(user.username)">
-                           {{user.lastName}} {{user.firstName}}</a>
+                           {{user.username}}</a>
                         </td>
                         <td>{{user.email}}</td>
                         <td>{{user.phoneNumber}}</td>
@@ -314,7 +314,6 @@
                      <div class="col-sm-3" id="backgroundForOneUser">
                         <p>Last Name:{{oneUser.lastName}}</p>
                         <p>First Name:{{oneUser.firstName}}</p>
-                        <p>Username:{{oneUser.username}}</p>
                         <p>Sex:{{oneUser.sex}}</p>
                         <p>Age:{{oneUser.age}}</p>
                         <p>Rating:{{oneUser.rating}}</p>
