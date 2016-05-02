@@ -29,8 +29,8 @@ public class CityController {
 	 */
 	@RequestMapping(value = {"/getAllCities"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<City> getAllUsers(@RequestParam("countryId") Integer countryId) {
-		List<City> cityList = citySevice.findCitiesByCountryId(countryId);
+	public List<City> getAllUsers(@RequestParam("countryName") String countryName) {
+		List<City> cityList = citySevice.findCitiesByCountryId(countryName);
 		return cityList;
 	}
 }

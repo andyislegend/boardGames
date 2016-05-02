@@ -15,6 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface CityRepository extends JpaRepository<City, Integer> {
 	
-	@Query("Select c FROM City c WHERE c.country.id = :countryId")
-	public List<City> findCitiesByCountryId(@Param("countryId")Integer countryId);
+	@Query("Select c FROM City c WHERE c.country.name = :countryName")
+	public List<City> findCitiesByCountryId(@Param("countryName")String countryName);
 }
