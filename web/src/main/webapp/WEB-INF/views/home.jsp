@@ -410,7 +410,7 @@
 									<br>
 									<a href="#" ng-click="save()">Save</a> 
 									or 
-									<a href="#" ng-click="disableEditor()">cancel</a>.
+									<a href="#" ng-click="disableNameEditor()">cancel</a>.
 								</div> <span class="col-sm-4"> <a href="" ng-click="enableNameEditor()">Edit</a>
 							</span>
 							</li>							
@@ -422,7 +422,7 @@
 									<input ng-model="editableUsername"> <br>
 									<a href="#" ng-click="save()">Save</a> 
 									or 
-									<a href="#" ng-click="disableEditor()">cancel</a>.
+									<a href="#" ng-click="disableUsernameEditor()">cancel</a>.
 								</div> 
 								<span class="col-sm-4"><a href="" ng-click="enableUsernameEditor()">Edit</a>
 								</span>
@@ -435,7 +435,7 @@
 									<input ng-model="editableEmail"> <br>
 									<a href="#" ng-click="save()">Save</a> 
 									or 
-									<a href="#" ng-click="disableEditor()">cancel</a>.
+									<a href="#" ng-click="disableEmailEditor()">cancel</a>.
 								</div> 
 								<span class="col-sm-4"><a href="" ng-click="enableEmailEditor()">Edit</a>
 								</span>
@@ -448,7 +448,7 @@
 									<input ng-model="editablePassword"> <br>
 									<a href="#" ng-click="save()">Save</a> 
 									or 
-									<a href="#" ng-click="disableEditor()">cancel</a>.
+									<a href="#" ng-click="disablePasswordEditor()">cancel</a>.
 								</div> 
 								<span class="col-sm-4"><a href="" ng-click="enablePasswordEditor()">Edit</a>
 								</span>
@@ -465,7 +465,7 @@
 									<br>
 									<a href="#" ng-click="save()">Save</a> 
 									or 
-									<a href="#" ng-click="disableEditor()">cancel</a>.
+									<a href="#" ng-click="disableGenderEditor()">cancel</a>.
 								</div> 
 								<span class="col-sm-4"><a href="" ng-click="enableGenderEditor()">Edit</a>
 								</span>
@@ -478,7 +478,7 @@
 									<input ng-model="editableAge"> <br>
 									<a href="#" ng-click="save()">Save</a> 
 									or 
-									<a href="#" ng-click="disableEditor()">cancel</a>.
+									<a href="#" ng-click="disableAgeEditor()">cancel</a>.
 								</div> 
 								<span class="col-sm-4"><a href="" ng-click="enableAgeEditor()">Edit</a>
 								</span>
@@ -491,7 +491,7 @@
 									<input ng-model="editablePhoneNumber"> <br>
 									<a href="#" ng-click="save()">Save</a> 
 									or 
-									<a href="#" ng-click="disableEditor()">cancel</a>.
+									<a href="#" ng-click="disablePhoneNumberEditor()">cancel</a>.
 								</div> 
 								<span class="col-sm-4"><a href="" ng-click="enablePhoneNumberEditor()">Edit</a>
 								</span>

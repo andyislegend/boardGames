@@ -259,41 +259,70 @@ app.controller("editProfileCtrl", function($scope, $http) {
 	$http.get('getProfile').then(function(result) {
 		$scope.userProfile = result.data;
 	});
+	
 	$scope.editorNameEnabled = false;
 	$scope.enableNameEditor = function() {
 	    $scope.editorNameEnabled = true;
 	    $scope.editableFirstName = $scope.userProfile.firstName;
 	    $scope.editableLastName = $scope.userProfile.lastName;
 	};
+	$scope.disableNameEditor = function() {
+	    $scope.editorNameEnabled = false;
+	};
+	 
 	$scope.editorUsernameEnabled = false;
 	$scope.enableUsernameEditor = function() {
 	    $scope.editorUsernameEnabled = true;
 	    $scope.editableUsername = $scope.userProfile.username;
 	};
+	$scope.disableUsernameEditor = function() {
+	    $scope.editorUsernameEnabled = false;
+	};
+	  
 	$scope.editorEmailEnabled = false;
 	$scope.enableEmailEditor = function() {
 	    $scope.editorEmailEnabled = true;
 	    $scope.editableEmail = $scope.userProfile.email;
 	};
+	$scope.disableEmailEditor = function() {
+	    $scope.editorEmailEnabled = false;
+	};
+	
 	$scope.editorPasswordEnabled = false;
 	$scope.enablePasswordEditor = function() {
 	    $scope.editorPasswordEnabled = true;
 	    $scope.editablePassword = "Type new password";
 	};
+	$scope.disablePasswordEditor = function() {
+	    $scope.editorPasswordEnabled = false;
+	};
+	
 	$scope.editorGenderEnabled = false;
 	$scope.enableGenderEditor = function() {
 	    $scope.editorGenderEnabled = true;
 	};
+	$scope.disableGenderEditor = function() {
+	    $scope.editorGenderEnabled = false;
+	};
+	
 	$scope.editorAgeEnabled = false;
 	$scope.enableAgeEditor = function() {
 	    $scope.editorAgeEnabled = true;
 	    $scope.editableAge = $scope.userProfile.age;
 	};
+	$scope.disableAgeEditor = function() {
+	    $scope.editorAgeEnabled = false;
+	};
+	
 	$scope.editorPhoneNumberEnabled = false;
 	$scope.enablePhoneNumberEditor = function() {
 	    $scope.editorPhoneNumberEnabled = true;
 	    $scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
 	};
+	$scope.disablePhoneNumberEditor = function() {
+	    $scope.editorPhoneNumberEnabled = false;
+	};
+	
 });
 
 
