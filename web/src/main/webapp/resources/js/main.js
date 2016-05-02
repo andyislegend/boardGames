@@ -269,6 +269,22 @@ app.controller("editProfileCtrl", function($scope, $http) {
 	$scope.disableNameEditor = function() {
 	    $scope.editorNameEnabled = false;
 	};
+	$scope.saveName = function() {
+		$http({
+		    method: 'PUT',
+		    url: 'updateUserFirstLastName',
+		    data: $.param({
+	            firstName: $scope.editableFirstName,
+	            lastName: $scope.editableLastName,
+	            username: $scope.userProfile.username
+	        }),
+	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		$scope.userProfile.firstName = $scope.editableFirstName;
+		$scope.userProfile.lastName = $scope.editableLastName;
+		$scope.editorNameEnabled = false;
+	}
+	
 	 
 	$scope.editorUsernameEnabled = false;
 	$scope.enableUsernameEditor = function() {

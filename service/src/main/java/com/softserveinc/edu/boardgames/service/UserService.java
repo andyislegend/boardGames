@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -223,9 +224,14 @@ public class UserService {
 	/**
 	 * 
 	 * @param username
-	 *            finding users sex by username
+	 *            finding users gender by username
 	 */
 	public String findUsersGender(String username) {
 		return userRepository.findUsersGender(username);
+	}
+	
+	@Transactional
+	public void updateUserFirstLastName(String firstName, String lastName, String username) {
+		userRepository.updateUserFirstLastName(firstName, lastName, username);
 	}
 }

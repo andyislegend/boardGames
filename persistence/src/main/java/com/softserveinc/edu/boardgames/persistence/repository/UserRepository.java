@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -83,4 +84,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query("Select u.gender FROM User u WHERE u.username = :username")
 	public String findUsersGender(@Param("username") String username);
+	
+	@Modifying
+	@Query("Update User u Set u.firstName = :firstName, u.lastName = :lastName where u.username = :username")
+	public void updateUserFirstLastName(@Param("firstName") String firstName, 
+			@Param("lastName") String lastName, @Param("username") String username);
 }
