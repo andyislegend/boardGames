@@ -24,7 +24,7 @@
       <script type="text/javascript" src="resources/js/main.js"></script>
       <script type="text/javascript" src="resources/js/service.js"></script>
    </head>
-   <body ng-app="usersGameApp" class="layout-boxed">
+   <body ng-app="usersGameApp" class="layout-boxed" ng-controller="eventsVisibleController">
       <!-- top-strip -->
       <section class="top-strip">
          <div class="wrapper clearfix">
@@ -49,7 +49,7 @@
                         class="img-circle dropdown-toggle profile-image"
                         data-toggle="dropdown"> <span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-pencil"
+                        <li><a href="" ng-click="onlyEditProfile()"><span class="glyphicon glyphicon-pencil"
                            aria-hidden="true"></span> Edit profile</a></li>
                         <li><a href="#"><span
                            class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
@@ -78,7 +78,7 @@
       <!-- /top-strip -->
 
       <!-- Main Section-->
-      <section class="wrapper home-section posts-section with-sidebar" ng-controller="eventsVisibleController">
+      <section class="wrapper home-section posts-section with-sidebar">
       <button class="btn btn-success" ng-click="onlyUsers()" id="blackBut">Users</button>
       <button class="btn btn-success" ng-click="onlyGames()" id="blackBut">Games</button>
       <button class="btn btn-success" ng-click="onlyEvents()" id="blackBut">Events</button>
@@ -272,7 +272,7 @@
                   </div>
                </div>
                <div ng-controller="getAllUsersCtrl" ng-show="usersFade">
-                  <header class="section-header" ng-controller="eventListCtrl">
+                  <header class="section-header">
                      <div class="section-title title-with-sep">
                         <h2 class="title">Users</h2>
                      </div>
@@ -288,9 +288,9 @@
                         <th></th>
                         <th></th>
                         <th>
-                        	<select name="selectCountries" id="repeatSelectCountry" ng-model="data.repeatSelectCountry" 
+                        	<select name="selectCountries" id="repeatSelectCountry" ng-model="searchText.address.country.name" 
                         		ng-change="getCitiesByCountry()">
-                        		<option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option>
+                        		<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
                         	</select>
                         	<select name="repeatSelect" id="repeatSelectCity" ng-model="searchText.address.city.name">
                         		<option ng-repeat="city in cities">{{city.name}}</option>
@@ -389,6 +389,117 @@
                   </div>
                </div>
                <!---------------------------------------- end of users -------------------------------------------------->
+               <!---------------------------------------- edit users profile -------------------------------------------->
+				<div ng-controller="editProfileCtrl" ng-show="editProfileFade">
+					<header class="section-header">
+						<div class="section-title title-with-sep">
+							<h2 class="title">Account settings</h2>
+						</div>
+					</header>
+					<div class="col-sm-12">
+						<ul>
+							<li class="col-sm-12"><span class="col-sm-4">Name</span> 
+							<span class="col-sm-4" ng-hide="editorNameEnabled">
+									{{userProfile.firstName}} {{userProfile.lastName}}</span>
+								<div ng-show="editorNameEnabled" class="col-sm-4">
+									First Name: 
+									<input ng-model="editableFirstName"> 
+									<br>
+									Last Name 
+									<input ng-model="editableLastName"> 
+									<br>
+									<a href="#" ng-click="save()">Save</a> 
+									or 
+									<a href="#" ng-click="disableEditor()">cancel</a>.
+								</div> <span class="col-sm-4"> <a href="" ng-click="enableNameEditor()">Edit</a>
+							</span>
+							</li>							
+							<li class="col-sm-12"><span class="col-sm-4">Username</span>
+								<span class="col-sm-4" ng-hide="editorUsernameEnabled">
+									{{userProfile.username}}</span>
+								<div ng-show="editorUsernameEnabled" class="col-sm-4">
+									Username: 
+									<input ng-model="editableUsername"> <br>
+									<a href="#" ng-click="save()">Save</a> 
+									or 
+									<a href="#" ng-click="disableEditor()">cancel</a>.
+								</div> 
+								<span class="col-sm-4"><a href="" ng-click="enableUsernameEditor()">Edit</a>
+								</span>
+							</li>
+							<li class="col-sm-12"><span class="col-sm-4">Email</span>
+								<span class="col-sm-4" ng-hide="editorEmailEnabled">
+									{{userProfile.email}}</span>
+								<div ng-show="editorEmailEnabled" class="col-sm-4">
+									Email: 
+									<input ng-model="editableEmail"> <br>
+									<a href="#" ng-click="save()">Save</a> 
+									or 
+									<a href="#" ng-click="disableEditor()">cancel</a>.
+								</div> 
+								<span class="col-sm-4"><a href="" ng-click="enableEmailEditor()">Edit</a>
+								</span>
+							</li>
+							<li class="col-sm-12"><span class="col-sm-4">Password</span>
+								<span class="col-sm-4" ng-hide="editorPasswordEnabled">
+									Change Password</span>
+								<div ng-show="editorPasswordEnabled" class="col-sm-4">
+									Password: 
+									<input ng-model="editablePassword"> <br>
+									<a href="#" ng-click="save()">Save</a> 
+									or 
+									<a href="#" ng-click="disableEditor()">cancel</a>.
+								</div> 
+								<span class="col-sm-4"><a href="" ng-click="enablePasswordEditor()">Edit</a>
+								</span>
+							</li>
+							<li class="col-sm-12"><span class="col-sm-4">Gender</span>
+								<span class="col-sm-4" ng-hide="editorGenderEnabled">
+									{{userProfile.gender}}</span>
+								<div ng-show="editorGenderEnabled" class="col-sm-4">
+									Gender: 
+									<select id="sex" name="sex" ng-model="editableGender">
+										<option value="male">Male</option>
+										<option value="female">Female</option>
+									</select>
+									<br>
+									<a href="#" ng-click="save()">Save</a> 
+									or 
+									<a href="#" ng-click="disableEditor()">cancel</a>.
+								</div> 
+								<span class="col-sm-4"><a href="" ng-click="enableGenderEditor()">Edit</a>
+								</span>
+							</li>
+							<li class="col-sm-12"><span class="col-sm-4">Age</span>
+								<span class="col-sm-4" ng-hide="editorAgeEnabled">
+									{{userProfile.age}}</span>
+								<div ng-show="editorAgeEnabled" class="col-sm-4">
+									Age: 
+									<input ng-model="editableAge"> <br>
+									<a href="#" ng-click="save()">Save</a> 
+									or 
+									<a href="#" ng-click="disableEditor()">cancel</a>.
+								</div> 
+								<span class="col-sm-4"><a href="" ng-click="enableAgeEditor()">Edit</a>
+								</span>
+							</li>
+							<li class="col-sm-12"><span class="col-sm-4">Phone Number</span>
+								<span class="col-sm-4" ng-hide="editorPhoneNumberEnabled">
+									{{userProfile.phoneNumber}}</span>
+								<div ng-show="editorPhoneNumberEnabled" class="col-sm-4">
+									Phone Number: 
+									<input ng-model="editablePhoneNumber"> <br>
+									<a href="#" ng-click="save()">Save</a> 
+									or 
+									<a href="#" ng-click="disableEditor()">cancel</a>.
+								</div> 
+								<span class="col-sm-4"><a href="" ng-click="enablePhoneNumberEditor()">Edit</a>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!---------------------------------------- end of users profile ------------------------------------------>
                <!--------------------------------------- tournaments  -------------------------------------------------->
                <div class="column-5" ng-controller="showAllTournaments"
                    ng-show="tournamentsFade">

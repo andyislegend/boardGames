@@ -230,8 +230,8 @@ app.controller("getAllUsersCtrl", function($scope, $http) {
 	$http.get('getAllCountries').then(function(result) {
 		$scope.countries = result.data;	
 		$scope.getCitiesByCountry = function(){
-			var countryId = $('select[name=selectCountries]').val();
-			$http.get('getAllCities?countryId=' + countryId).then(function(result) {
+			var countryName = $('select[name=selectCountries]').val();
+			$http.get('getAllCities?countryName=' + countryName).then(function(result) {
 				$scope.cities = result.data;
 			});
 		};
@@ -255,35 +255,88 @@ app.controller("getAvatar", function($scope, $http) {
 	});
 });
 
+app.controller("editProfileCtrl", function($scope, $http) {
+	$http.get('getProfile').then(function(result) {
+		$scope.userProfile = result.data;
+	});
+	$scope.editorNameEnabled = false;
+	$scope.enableNameEditor = function() {
+	    $scope.editorNameEnabled = true;
+	    $scope.editableFirstName = $scope.userProfile.firstName;
+	    $scope.editableLastName = $scope.userProfile.lastName;
+	};
+	$scope.editorUsernameEnabled = false;
+	$scope.enableUsernameEditor = function() {
+	    $scope.editorUsernameEnabled = true;
+	    $scope.editableUsername = $scope.userProfile.username;
+	};
+	$scope.editorEmailEnabled = false;
+	$scope.enableEmailEditor = function() {
+	    $scope.editorEmailEnabled = true;
+	    $scope.editableEmail = $scope.userProfile.email;
+	};
+	$scope.editorPasswordEnabled = false;
+	$scope.enablePasswordEditor = function() {
+	    $scope.editorPasswordEnabled = true;
+	    $scope.editablePassword = "Type new password";
+	};
+	$scope.editorGenderEnabled = false;
+	$scope.enableGenderEditor = function() {
+	    $scope.editorGenderEnabled = true;
+	};
+	$scope.editorAgeEnabled = false;
+	$scope.enableAgeEditor = function() {
+	    $scope.editorAgeEnabled = true;
+	    $scope.editableAge = $scope.userProfile.age;
+	};
+	$scope.editorPhoneNumberEnabled = false;
+	$scope.enablePhoneNumberEditor = function() {
+	    $scope.editorPhoneNumberEnabled = true;
+	    $scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
+	};
+});
+
 
 app.controller("eventsVisibleController", function($scope) {
 	$scope.eventsFade = false;
 	$scope.tournamentsFade = false;
 	$scope.gamesFade = true;
 	$scope.usersFade = false;
+	$scope.editProfileFade = false;
 	$scope.onlyUsers = function () {
 		$scope.eventsFade = false;
 		$scope.tournamentsFade = false;
 		$scope.gamesFade = false;
 		$scope.usersFade = true;
+		$scope.editProfileFade = false;
 	};
 	$scope.onlyGames = function () {
 		$scope.eventsFade = false;
 		$scope.tournamentsFade = false;
 		$scope.gamesFade = true;
 		$scope.usersFade = false;
+		$scope.editProfileFade = false;
 	};
 	$scope.onlyEvents = function () {
 		$scope.eventsFade = true;
 		$scope.tournamentsFade = false;
 		$scope.gamesFade = false;
 		$scope.usersFade = false;
+		$scope.editProfileFade = false;
 	};
 	$scope.onlyTournaments = function () {
 		$scope.eventsFade = false;
 		$scope.tournamentsFade = true;
 		$scope.gamesFade = false;
 		$scope.usersFade = false;
+		$scope.editProfileFade = false;
+	};
+	$scope.onlyEditProfile = function () {
+		$scope.eventsFade = false;
+		$scope.tournamentsFade = false;
+		$scope.gamesFade = false;
+		$scope.usersFade = false;
+		$scope.editProfileFade = true;
 	};
 });
 
