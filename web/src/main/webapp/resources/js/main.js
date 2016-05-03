@@ -399,7 +399,7 @@ app.controller("eventsVisibleController", function($scope) {
 /*users Angular controller -- end*/
 
 
-app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) {
+app.controller('getGamesGlobalController', function ($scope, $http) {
 
 	$http({
 		method : "GET",
@@ -413,15 +413,19 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 	$scope.gameSelect = function(id, name, $event) {
 
 		$scope.currentGameId = id;
-		$rootScope.currentGameRootId = $scope.currentGameId;
-		$rootScope.gameRatingRoot = $scope.gameRating
+		$scope.$broadcast('sharingIdToDetailsModal', id);
+		
+		$scope.$on('settingRootRating', function (event, data) {
+			 $scope.gameRatingDisplay = data;
+		});
 		
 		$http({
 			method: "GET",
 			url : 'getGameDetails' + '/' + id
 		}).then(function mySucces(response){
 			$scope.gameDetail = response.data;
-			$scope.gameRating = $scope.gameDetail.rating;
+			$scope.gameRating = response.data.rating;
+			document.getElementById("ratingsRange").value = response.data.rating;
 		}, function myError(response) {
 			alert("Getting games general data error");
 		});
@@ -430,7 +434,8 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 			method: "GET",
 			url : 'getGameRatedByUser' + '/' + id
 		}).then(function mySucces(response){
-			$rootScope.gameRatingRoot = response.data;
+			$scope.gameRatingDisplay = response.data;
+			$scope.gameRating = response.data;
 		}, function myError(response) {
 			alert("Getting isRated game error");
 		});
@@ -447,19 +452,24 @@ app.controller('getGamesGlobalController', function ($scope, $rootScope, $http) 
 	
 });
 
-app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $http) {
-	
+app.controller('getGameDetailedInfoController', function ($scope, $http) {
+		
 	$scope.ratingSliderChanged = function(){
-		$rootScope.gameRatingRoot = $scope.gameRating;
+		$scope.$emit('settingRootRating', $scope.gameRating);
 	}
+	
+	$scope.$on('sharingIdToDetailsModal', function (event, data) {
+		$scope.currentGameId = data;
+	});
 	
 	$scope.ratingSaved = function() {
 		
 		$http({
 			method: "POST",
-			url : 'calculateRatings' + '/' + $rootScope.currentGameRootId + '/' + $scope.gameRating,
+			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + $scope.gameRating,
 		}).then(function mySucces(response){
-			$rootScope.gameRatingRoot = $scope.gameRating;
+			$scope.$emit('settingRootRating', $scope.gameRating);
+			alert("Rating saved");
 		}, function myError(response) {
 			alert("Saving rating error");
 		});

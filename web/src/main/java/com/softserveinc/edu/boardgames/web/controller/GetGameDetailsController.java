@@ -37,9 +37,8 @@ public class GetGameDetailsController {
 	@RequestMapping(value="/getGameDetails/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
 	public GameDetailsDTO getGameDetails(@PathVariable Integer gameId){
-		GameDetailsDTO  gameDetailsDTO = gameService.getGamesById(gameId);
-		if (gameDetailsDTO.getRating() == null)
-			gameDetailsDTO.setRating(0);
+		
+		GameDetailsDTO gameDetailsDTO = gameService.getGamesById(gameId);
 		return gameDetailsDTO;
 	}
 	
