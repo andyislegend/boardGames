@@ -23,6 +23,7 @@
          src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
       <script type="text/javascript" src="resources/js/main.js"></script>
       <script type="text/javascript" src="resources/js/service.js"></script>
+      <script type="text/javascript" src="resources/js/gamesGlobal.js"></script>
    </head>
    <body ng-app="usersGameApp" class="layout-boxed" ng-controller="eventsVisibleController">
       <!-- top-strip -->
@@ -140,10 +141,10 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td><input type="range" id="myRange" value="100"
+													<td><input type="range" id="ratingsRange" value="100"
 														ng-change="ratingSliderChanged()" ng-model="gameRating"></td>
 													<td>
-														<p class="text-primary">{{gameRatingRoot}}</p>
+														<p class="text-primary">{{gameRatingDisplay}}</p>
 													</td>
 													<td>
 														<p>{{gameDetail.rating}}</p>
