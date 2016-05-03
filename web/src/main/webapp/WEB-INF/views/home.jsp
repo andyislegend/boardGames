@@ -408,7 +408,7 @@
 									Last Name 
 									<input ng-model="editableLastName"> 
 									<br>
-									<a href="#" ng-click="saveName(userProfile.firstName, userProfile.lastName)">Save</a> 
+									<a href="#" ng-click="saveName()">Save</a> 
 									or 
 									<a href="#" ng-click="disableNameEditor()">cancel</a>.
 								</div> <span class="col-sm-4"> <a href="" ng-click="enableNameEditor()">Edit</a>
@@ -420,7 +420,7 @@
 								<div ng-show="editorUsernameEnabled" class="col-sm-4">
 									Username: 
 									<input ng-model="editableUsername"> <br>
-									<a href="#" ng-click="save()">Save</a> 
+									<a href="#" ng-click="saveUsername()">Save</a> 
 									or 
 									<a href="#" ng-click="disableUsernameEditor()">cancel</a>.
 								</div> 

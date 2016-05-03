@@ -234,4 +234,9 @@ public class UserService {
 	public void updateUserFirstLastName(String firstName, String lastName, String username) {
 		userRepository.updateUserFirstLastName(firstName, lastName, username);
 	}
+	
+	@Transactional
+	public void updateUsername(String newUsername, String username) {
+		userRepository.updateUsername(newUsername, username);
+	}
 }

@@ -43,10 +43,24 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = {"/updateUserFirstLastName"}, method = RequestMethod.PUT)
-	public User updateUserFirstLastName(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("username") String username) {
-		userSevice.updateUserFirstLastName(firstName, lastName, username);
+	@ResponseBody
+	public String updateUserFirstLastName(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName) {
 		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
-		return user;
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		userSevice.updateUser(user);
+		return "good";
+	}
+	
+	@RequestMapping(value = {"/updateUsername"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public String updateUsername(@RequestParam("username") String username) {
+		if (userSevice.findOne(username) == null) {
+			User user = userSevice.findOne(WebUtil.getPrincipalUsername());
+			user.setUsername(username);
+			userSevice.updateUser(user);
+		}
+		return "good";
 	}
 }

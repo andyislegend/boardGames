@@ -276,7 +276,6 @@ app.controller("editProfileCtrl", function($scope, $http) {
 		    data: $.param({
 	            firstName: $scope.editableFirstName,
 	            lastName: $scope.editableLastName,
-	            username: $scope.userProfile.username
 	        }),
 	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
@@ -294,6 +293,18 @@ app.controller("editProfileCtrl", function($scope, $http) {
 	$scope.disableUsernameEditor = function() {
 	    $scope.editorUsernameEnabled = false;
 	};
+	$scope.saveUsername = function() {
+		$http({
+		    method: 'PUT',
+		    url: 'updateUsername',
+		    data: $.param({
+	            username: $scope.editableUsername
+	        }),
+	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		$scope.userProfile.username = $scope.editableUsername;
+		$scope.editorUsernameEnabled = false;
+	}
 	  
 	$scope.editorEmailEnabled = false;
 	$scope.enableEmailEditor = function() {
