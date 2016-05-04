@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,12 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	public UserService() {
+	}
+
+	public UserService(UserRepository userRepository) {
+	}
 
 	/**
 	 * 
@@ -195,15 +202,15 @@ public class UserService {
 	}
 
 	public List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName) {
-		String name = nameAndLastName.trim();
+		String name = nameAndLastName.trim(); // At first we cut whitespace around word
 		String lastName = "";
-		if (nameAndLastName.indexOf(" ") != -1) {
+		if (nameAndLastName.indexOf(" ") != -1) { // If in middle of this word we have whitespace we  divide it on  2 parts
 			name = nameAndLastName.substring(0, nameAndLastName.indexOf(" ")).trim();
 			lastName = nameAndLastName.substring(nameAndLastName.indexOf(" "), nameAndLastName.length()).trim();
 		}
 		name = name.concat("%");
-		lastName = lastName.concat("%");
-		return userRepository.findAllUserByFirstNameAndLastName(name, lastName, userName);
+		lastName = lastName.concat("%"); // Add symbol '%' for use LIKE in query
+		return userRepository.findAllUserByFirstNameAndLastName(userName, name, lastName);
 	}
 
 	/**
@@ -217,9 +224,19 @@ public class UserService {
 	/**
 	 * 
 	 * @param username
-	 *            finding users sex by username
+	 *            finding users gender by username
 	 */
-	public String findUsersSex(String username) {
-		return userRepository.findUsersSex(username);
+	public String findUsersGender(String username) {
+		return userRepository.findUsersGender(username);
+	}
+	
+	@Transactional
+	public void updateUserFirstLastName(String firstName, String lastName, String username) {
+		userRepository.updateUserFirstLastName(firstName, lastName, username);
+	}
+	
+	@Transactional
+	public void updateUsername(String newUsername, String username) {
+		userRepository.updateUsername(newUsername, username);
 	}
 }

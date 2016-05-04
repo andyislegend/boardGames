@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
  * images uploaded by users
  */
 @Configuration
-@PropertySource(value = "classpath:/properties/image.properties")
+@PropertySource(value = "classpath:/image.properties")
 public class ImageConfiguration {
 
 	/**
@@ -23,18 +23,18 @@ public class ImageConfiguration {
 	 */
 	@Value("${gamesUrl}")
 	private String gamesUrl;
-
+	
 	/**
-	 * Describes physical address of avatar storage package.
+	 * Describes url to users tournaments images package.
 	 */
-	@Value("${avatarPackage}")
-	private String avatarPackage;
-
+	@Value("${tournamentsUrl}")
+	private String tournamentsUrl;
+	
 	/**
-	 * Describes physical address of games images storage package.
+	 * Describes url to usersevents images package.
 	 */
-	@Value("${gamesUrl}")
-	private String gamesPackage;
+	@Value("${eventsUrl}")
+	private String eventsUrl;	
 
 	/**
 	 * Describes url to default male avatar.
@@ -47,6 +47,30 @@ public class ImageConfiguration {
 	 */
 	@Value("${defaultFemaleAvatarUrl}")
 	private String defaultFemaleAvatarUrl;
+
+	/**
+	 * Describes physical address of avatar storage package.
+	 */
+	@Value("${avatarPackage}")
+	private String avatarPackage;
+
+	/**
+	 * Describes physical address of games images storage package.
+	 */
+	@Value("${gamesPackage}")
+	private String gamesPackage;
+	
+	/**
+	 * Describes physical address of tournaments images storage package.
+	 */
+	@Value("${tournamentsPackage}")
+	private String tournamentsPackage;
+	
+	/**
+	 * Describes physical address of events images storage package.
+	 */
+	@Value("${eventsPackage}")
+	private String eventsPackage;
 
 	/**
 	 * Get value of users avatar url.

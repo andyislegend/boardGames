@@ -1,11 +1,16 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -41,14 +46,16 @@ public class Address implements Serializable {
 	/**
 	 * Describes the country where user lives.
 	 */
-	@Column(name = "country")
-	private String country;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "countryId", referencedColumnName = "id")
+	private Country country;
 
 	/**
 	 * Describes the city where user lives.
 	 */
-	@Column(name = "city")
-	private String city;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "cityId", referencedColumnName = "id")
+	private City city;
 
 	/**
 	 * Describes the post code where user lives.
@@ -85,19 +92,19 @@ public class Address implements Serializable {
 		this.id = id;
 	}
 
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 
-	public String getCity() {
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 

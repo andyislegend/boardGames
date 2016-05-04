@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -32,26 +33,64 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	public User findByFirstName(String firstName);
 
-	@Query("Select u FROM User u JOIN u.address address" + " WHERE address.city =:cityName")
+	@Query("Select u FROM User u JOIN u.address address WHERE address.city.name =:cityName")
 	public List<User> findUserByCity(@Param("cityName") String cityName);
 	
 	@Query("Select u.username FROM User u WHERE u.userRating <=-5")
 	public List<String> findUsesrWithNegativeRating();
 	
-	/*@Query("Select u FROM User u WHERE u.firstName LIKE ?1 AND u.lastName LIKE ?2 OR u.firstName LIKE ?2 AND u.lastName LIKE ?1")
-	public List<User> findAllUserByFirstNameAndLastName(String name, String lastName);*/
+	/**
+	 * This method for finding all users wich is not your friends or 
+	 * users who you sent request to be friends.
+	 * You can find user by name and last name or at first last name and name, it doesn't matter
+	 * 
+	 * @author Vasyl Bervetskyy
+	 * 
+	 * @param userName it's your name
+	 * @param name it's name of user that you are finding 
+	 * @param last name it's last name of user that you are finding 
+	 * @return list of users
+	 */	
+	@Query("SELECT u FROM User u WHERE u.username != ?1 "
+			+ "AND u NOT IN ("
+			+ "SELECT u FROM Friend f RIGHT JOIN f.userId u WHERE f.user.username = ?1 AND (f.status.id = 2 OR f.status.id = 1))"
+			+ "AND u NOT IN("
+			+ "SELECT u FROM Friend f RIGHT JOIN f.user u WHERE f.userId.username = ?1 AND f.status.id = 1)"
+			+ "AND ((u.firstName LIKE ?2 AND u.lastName LIKE ?3) OR (u.firstName LIKE ?3 AND u.lastName LIKE ?2))")
+	public List<User> findAllUserByFirstNameAndLastName(String userName, String name, String lastName);
 	
-	@Query("Select u FROM User u WHERE (u.firstName LIKE ?1 AND u.lastName LIKE ?2 OR u.firstName LIKE ?2 AND u.lastName LIKE ?1)"
-			+ "AND u.username != ?3")
-	public List<User> findAllUserByFirstNameAndLastName(String name, String lastName, String userName);
-	
+	/**
+	 * This method for finding all your friends
+	 * 
+	 * @author Vasyl Bervetskyy
+	 * 
+	 * @param userName
+	 * @return list of users
+	 */	
 	@Query("SELECT u FROM Friend f RIGHT JOIN f.userId u WHERE f.user.username = ?1 AND f.status.id = 2")
 	public List<User> findAllFriends(String userName);
 	
+	/**
+	 * This method for finding your all not consider friends.
+	 * This users want to be your friends, and they sent you request to be them.
+	 * 
+	 * @author Vasyl Bervetskyy
+	 * 
+	 * @param userName
+	 * @return list of users
+	 */	
 	@Query("SELECT u FROM Friend f RIGHT JOIN f.user u WHERE f.userId.username = ?1 AND f.status.id = 1")
 	public List<User> getAllNoConsiderFriendByUser(String userName);
 	
-	@Query("Select u.sex FROM User u WHERE u.username = :username")
-	public String findUsersSex(@Param("username") String username);
-
+	@Query("Select u.gender FROM User u WHERE u.username = :username")
+	public String findUsersGender(@Param("username") String username);
+	
+	@Modifying
+	@Query("Update User u Set u.firstName = :firstName, u.lastName = :lastName where u.username = :username")
+	public void updateUserFirstLastName(@Param("firstName") String firstName, 
+			@Param("lastName") String lastName, @Param("username") String username);
+	
+	@Modifying
+	@Query("Update User u Set u.username = :newUsername where u.username = :username")
+	public void updateUsername(@Param("newUsername") String newUsername, @Param("username") String username);
 }

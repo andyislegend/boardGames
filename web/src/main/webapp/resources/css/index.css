@@ -1,7 +1,52 @@
-body {
-    color: black;
-    background-image: url("../../resources/images/Background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+.item {
+	background: #333;
+	text-align: center;
+	height: 450px !important;
 }
 
+.carousel {
+	margin-top: 5%;
+}
+
+body {
+	
+	font-size: 16px;
+}
+
+body {
+    background-color: #fff;
+}
+
+body,
+p {
+    font-family: Lato;
+    font-weight: normal;
+    font-style: normal;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.24s ease-in-out;
+    -moz-transition: opacity 0.24s ease-in-out;
+    transition: opacity 0.24s ease-in-out;
+}
+
+.title,  .title a {
+    
+       
+    text-align: center;
+    margin-top: 10px;     
+    font-size: 8px;
+    opacity: 1;
+    visibility: visible;
+    
+}
+
+p {
+    font-family: Lato;
+    font-weight: normal;
+    font-style: normal;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.24s ease-in-out;
+    -moz-transition: opacity 0.24s ease-in-out;
+    transition: opacity 0.24s ease-in-out;
+}

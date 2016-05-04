@@ -32,6 +32,13 @@ public class CommentsController {
 	@Autowired
 	private CommentForGameService commentForGameService;
 	
+	/**
+	 * Add new comments for game
+	 * 
+	 * @param commentsForGameDTO 
+	 * 							comments for game
+	 * @return
+	 */
 	@RequestMapping(value = "NewComment", method = RequestMethod.POST)
 	public String addCommentForUserGame(@RequestBody CommentsForGameDTO commentsForGameDTO) {
 		CommentsForGame commentsForGame = new CommentsForGame();

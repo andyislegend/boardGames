@@ -41,8 +41,17 @@ public class GameService {
 	}
 	
 	public GameDetailsDTO getGamesById(Integer id){
-		GameDetailsDTO gameDetails = gameRepo.getGameDescription(id);
-		gameDetails.setRating(gameRepo.getAverageGameRating(id));
+		
+		GameDetailsDTO gameDetails = new GameDetailsDTO();
+		try{
+			gameDetails = gameRepo.getGameDescription(id);
+			if (gameDetails.getRating() == null)
+				gameDetails.setRating(new Double(0));
+		}
+		catch(NullPointerException ex) {
+			System.out.println("Getting gameDetails error");
+			ex.printStackTrace();
+		}
 		return gameDetails;
 	}
 
