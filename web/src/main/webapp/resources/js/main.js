@@ -17,6 +17,12 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
             }
         }
         
+        $scope.deleteGame = function(id) {
+    		$http.get('deleteUserGame').success(function (data) {    			
+    	    });
+    		 $scope.allGame.splice(id-1,1);
+    	}
+        
 });
 app.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;
@@ -522,7 +528,6 @@ app.controller('getGameDetailedInfoController', function ($scope, $http) {
 			}
 		}	
 	}	
-	
 	$scope.list = [];
 	$scope.submit = function () {
 		var comment  = {
@@ -554,8 +559,6 @@ app.controller("showAllTournaments", function ($scope, $http) {
         $scope.tournaments = data;
     });
 
-
-
     $http({
         method : "GET",
         url : 'getAllGames'
@@ -576,9 +579,7 @@ app.controller("showAllTournaments", function ($scope, $http) {
                 $scope.tournaments = data;
 
             });
-
     }
-
 });
 
 app.controller("CtreateNewTournament",function($scope,$http){

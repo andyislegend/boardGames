@@ -840,7 +840,8 @@
 										<th>Name</th>
 										<th>Category</th>
 										<th>Comment</th>
-									<tr>
+										<th></th>
+									</tr>
 									<tr ng-repeat="game in allGame">
 										<td><a href = "" ng-click="myFunc(game.id)" data-toggle="modal" data-target="#myModalMyGames">
 										{{game.name}}</a></td>
@@ -848,13 +849,15 @@
 										<td>
 												<a href = "" ng-click="showComments(game.id)">
 												<span class="glyphicon glyphicon-comment"></span>
-												</a>
-													
-											
-</td>
+												</a>				
+										</td>
+										<td>
+												<a href = "" ng-click="deleteGame(game.id)">
+												<span class="glyphicon glyphicon-remove"></span>
+												</a>				
+										</td>
 									</tr>
 								</table>
-								
 									<div class="modal fade" id="myModalMyGames" tabindex="-1" role="dialog"
                            aria-labelledby="myModalLabel" aria-hidden="true">
                            <div class="modal-dialog">
@@ -878,6 +881,7 @@
                         </div>
 					</div>
 								<div ng-show="isShowComment">
+								
                                    <table class = "table">
  								   <tr><th></th><th></th></tr>
                                     <tr ng-repeat="x in commentForGame">

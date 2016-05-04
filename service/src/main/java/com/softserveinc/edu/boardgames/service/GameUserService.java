@@ -37,6 +37,11 @@ public class GameUserService {
 	public void create(GameUser gameUser) {
 		gameUserRepo.save(gameUser);
 	}
+	
+	@Transactional
+	public void delete(Integer id) {
+		gameUserRepo.delete(id);
+	}
 
 	public List<GameUserDTO> getGameUsersFromUsername(String username) {
 		return gameUserRepo.getAllGameUserByUsername(username);
