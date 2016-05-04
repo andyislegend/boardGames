@@ -17,6 +17,12 @@ app.controller("allUsersGameCtrl", function ($scope, $http) {
             }
         }
         
+        $scope.deleteGame = function(id) {
+    		$http.get('deleteUserGame').success(function (data) {    			
+    	    });
+    		 $scope.allGame.splice(id-1,1);
+    	}
+        
 });
 app.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;
@@ -388,13 +394,11 @@ app.controller('getGameDetailedInfoController', function ($scope, $rootScope, $h
 			}
 		}	
 	}	
-	
 	$scope.list = [];
 	$scope.submit = function () {
 		var comment  = {
 				"gameID" : ''+$scope.gameuserId,
 				"commentText" : $scope.comment,
-				"username":"root",
 				"date":new Date()
 			 };
 			 $http({
