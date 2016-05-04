@@ -279,9 +279,16 @@ app.controller("editProfileCtrl", function($scope, $http) {
 	        }),
 	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
-		$scope.userProfile.firstName = $scope.editableFirstName;
-		$scope.userProfile.lastName = $scope.editableLastName;
-		$scope.editorNameEnabled = false;
+		.success(function(result, status) {
+			$scope.nameAnswer = result;
+			$scope.userProfile.firstName = $scope.editableFirstName;
+			$scope.userProfile.lastName = $scope.editableLastName;
+			$scope.editorNameEnabled = false;
+			$scope.nameMessage = false;
+		})
+		.error(function(data, status) {
+			$scope.nameAnswer = "Error happened. Please try again";
+		})		
 	}
 	
 	 
@@ -314,6 +321,25 @@ app.controller("editProfileCtrl", function($scope, $http) {
 	$scope.disableEmailEditor = function() {
 	    $scope.editorEmailEnabled = false;
 	};
+	$scope.saveEmail = function() {
+		$http({
+		    method: 'PUT',
+		    url: 'updateUserEmail',
+		    data: $.param({
+	            email: $scope.editableEmail
+	        }),
+	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.success(function(result, status) {
+			$scope.emailAnswer = result;
+			$scope.userProfile.email = $scope.editableEmail;
+			$scope.editorEmailEnabled = false;
+			$scope.emailMessage = false;
+		})
+		.error(function(data, status) {
+			$scope.emailAnswer = "Error happened. Please try again";
+		})		
+	}
 	
 	$scope.editorPasswordEnabled = false;
 	$scope.enablePasswordEditor = function() {

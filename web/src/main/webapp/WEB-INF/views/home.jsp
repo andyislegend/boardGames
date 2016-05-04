@@ -398,10 +398,13 @@
 						</div>
 					</header>
 					<div class="col-sm-12">
+					
 						<ul>
-							<li class="col-sm-12"><span class="col-sm-4">Name</span> 
-							<span class="col-sm-4" ng-hide="editorNameEnabled">
-									{{userProfile.firstName}} {{userProfile.lastName}}</span>
+							<li class="col-sm-12">
+								<span class="col-sm-3">Name</span> 
+								<span class="col-sm-4" ng-hide="editorNameEnabled">
+									{{userProfile.firstName}} {{userProfile.lastName}}
+								</span>
 								<div ng-show="editorNameEnabled" class="col-sm-4">
 									First Name: 
 									<input ng-model="editableFirstName"> 
@@ -412,12 +415,19 @@
 									<a href="#" ng-click="saveName()">Save</a> 
 									or 
 									<a href="#" ng-click="disableNameEditor()">cancel</a>.
-								</div> <span class="col-sm-4"> <a href="" ng-click="enableNameEditor()">Edit</a>
-							</span>
+								</div> 
+								<span class="col-sm-2"> 
+									<a href="" ng-click="enableNameEditor()">Edit</a>
+								</span>
+								<span class="col-sm-3" ng-hide="nameMessage">
+									{{nameAnswer}}
+								</span>
 							</li>							
-							<li class="col-sm-12"><span class="col-sm-4">Username</span>
+							<li class="col-sm-12">
+								<span class="col-sm-3">Username</span>
 								<span class="col-sm-4" ng-hide="editorUsernameEnabled">
-									{{userProfile.username}}</span>
+									{{userProfile.username}}
+								</span>
 								<div ng-show="editorUsernameEnabled" class="col-sm-4">
 									Username: 
 									<input ng-model="editableUsername"> <br>
@@ -425,23 +435,31 @@
 									or 
 									<a href="#" ng-click="disableUsernameEditor()">cancel</a>.
 								</div> 
-								<span class="col-sm-4"><a href="" ng-click="enableUsernameEditor()">Edit</a>
+								<span class="col-sm-2">
+									<a href="" ng-click="enableUsernameEditor()">Edit</a>
+								</span>
+								<span class="col-sm-3" ng-hide="usernameMessage">
+									{{usernameAnswer}}
 								</span>
 							</li>
-							<li class="col-sm-12"><span class="col-sm-4">Email</span>
+							<li class="col-sm-12"><span class="col-sm-3">Email</span>
 								<span class="col-sm-4" ng-hide="editorEmailEnabled">
 									{{userProfile.email}}</span>
 								<div ng-show="editorEmailEnabled" class="col-sm-4">
 									Email: 
 									<input ng-model="editableEmail"> <br>
-									<a href="#" ng-click="save()">Save</a> 
+									<a href="#" ng-click="saveEmail()">Save</a> 
 									or 
 									<a href="#" ng-click="disableEmailEditor()">cancel</a>.
 								</div> 
-								<span class="col-sm-4"><a href="" ng-click="enableEmailEditor()">Edit</a>
+								<span class="col-sm-2">
+									<a href="" ng-click="enableEmailEditor()">Edit</a>
+								</span>
+								<span class="col-sm-3" ng-hide="emailMessage">
+									{{emailAnswer}}
 								</span>
 							</li>
-							<li class="col-sm-12"><span class="col-sm-4">Password</span>
+							<li class="col-sm-12"><span class="col-sm-3">Password</span>
 								<span class="col-sm-4" ng-hide="editorPasswordEnabled">
 									Change Password</span>
 								<div ng-show="editorPasswordEnabled" class="col-sm-4">
@@ -451,15 +469,19 @@
 									or 
 									<a href="#" ng-click="disablePasswordEditor()">cancel</a>.
 								</div> 
-								<span class="col-sm-4"><a href="" ng-click="enablePasswordEditor()">Edit</a>
+								<span class="col-sm-2">
+									<a href="" ng-click="enablePasswordEditor()">Edit</a>
+								</span>
+								<span class="col-sm-3" ng-hide="passwordMessage">
+									{{passwordAnswer}}
 								</span>
 							</li>
-							<li class="col-sm-12"><span class="col-sm-4">Gender</span>
+							<li class="col-sm-12"><span class="col-sm-3">Gender</span>
 								<span class="col-sm-4" ng-hide="editorGenderEnabled">
 									{{userProfile.gender}}</span>
 								<div ng-show="editorGenderEnabled" class="col-sm-4">
 									Gender: 
-									<select id="sex" name="sex" ng-model="editableGender">
+									<select id="gender" name="gender" ng-model="editableGender">
 										<option value="male">Male</option>
 										<option value="female">Female</option>
 									</select>
@@ -468,10 +490,14 @@
 									or 
 									<a href="#" ng-click="disableGenderEditor()">cancel</a>.
 								</div> 
-								<span class="col-sm-4"><a href="" ng-click="enableGenderEditor()">Edit</a>
+								<span class="col-sm-2">
+									<a href="" ng-click="enableGenderEditor()">Edit</a>
+								</span>
+								<span class="col-sm-3" ng-hide="genderMessage">
+									{{genderAnswer}}
 								</span>
 							</li>
-							<li class="col-sm-12"><span class="col-sm-4">Age</span>
+							<li class="col-sm-12"><span class="col-sm-3">Age</span>
 								<span class="col-sm-4" ng-hide="editorAgeEnabled">
 									{{userProfile.age}}</span>
 								<div ng-show="editorAgeEnabled" class="col-sm-4">
@@ -481,10 +507,14 @@
 									or 
 									<a href="#" ng-click="disableAgeEditor()">cancel</a>.
 								</div> 
-								<span class="col-sm-4"><a href="" ng-click="enableAgeEditor()">Edit</a>
+								<span class="col-sm-2">
+									<a href="" ng-click="enableAgeEditor()">Edit</a>
+								</span>
+								<span class="col-sm-3" ng-hide="ageMessage">
+									{{ageAnswer}}
 								</span>
 							</li>
-							<li class="col-sm-12"><span class="col-sm-4">Phone Number</span>
+							<li class="col-sm-12"><span class="col-sm-3">Phone Number</span>
 								<span class="col-sm-4" ng-hide="editorPhoneNumberEnabled">
 									{{userProfile.phoneNumber}}</span>
 								<div ng-show="editorPhoneNumberEnabled" class="col-sm-4">
@@ -494,7 +524,11 @@
 									or 
 									<a href="#" ng-click="disablePhoneNumberEditor()">cancel</a>.
 								</div> 
-								<span class="col-sm-4"><a href="" ng-click="enablePhoneNumberEditor()">Edit</a>
+								<span class="col-sm-2">
+									<a href="" ng-click="enablePhoneNumberEditor()">Edit</a>
+								</span>
+								<span class="col-sm-3" ng-hide="phoneNumberMessage">
+									{{phoneNumberAnswer}}
 								</span>
 							</li>
 						</ul>

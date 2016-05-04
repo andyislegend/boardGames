@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,23 +46,32 @@ public class UsersController {
 	
 	@RequestMapping(value = {"/updateUserFirstLastName"}, method = RequestMethod.PUT)
 	@ResponseBody
-	public String updateUserFirstLastName(@RequestParam("firstName") String firstName,
+	public ResponseEntity<String> updateUserFirstLastName(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName) {
 		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		userSevice.updateUser(user);
-		return "good";
+		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/updateUsername"}, method = RequestMethod.PUT)
 	@ResponseBody
-	public String updateUsername(@RequestParam("username") String username) {
+	public ResponseEntity<String> updateUsername(@RequestParam("username") String username) {
 		if (userSevice.findOne(username) == null) {
 			User user = userSevice.findOne(WebUtil.getPrincipalUsername());
 			user.setUsername(username);
 			userSevice.updateUser(user);
 		}
-		return "good";
+		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = {"/updateUserEmail"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<String> updateUserEmail(@RequestParam("email") String email) {
+		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
+		user.setEmail(email);
+		userSevice.updateUser(user);
+		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
 }
