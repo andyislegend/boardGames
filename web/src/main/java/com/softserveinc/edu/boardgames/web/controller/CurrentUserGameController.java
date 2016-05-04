@@ -41,9 +41,6 @@ public class CurrentUserGameController {
 	@Autowired
 	private GameUserService gameUserService;
 	
-	@Autowired
-	private CommentForGameService commentForGameService;
-	
 	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
@@ -67,26 +64,13 @@ public class CurrentUserGameController {
 		return categories;
 	}
 	
-	@RequestMapping(value = "NewComment", method = RequestMethod.POST)
-	public String addComment(@RequestBody CommentsForGameDTO commentsForGameDTO) {
-		CommentsForGame commentsForGame = new CommentsForGame();
-		commentsForGame = CommentForGameMapper.toEntity(commentsForGameDTO);
-		commentsForGame.setGameUser(gameUserService.getUserGamesById(commentsForGameDTO.getGameID()));
-		commentsForGame.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-		commentForGameService.addComment(commentsForGame);
-		return "";
-	}
 	
-	@RequestMapping(value = "comment", method = RequestMethod.GET)
-	@ResponseBody
-	public List<CommentsForGameDTO> commentsForGame() {
-		List<CommentsForGameDTO> commentsForGames = commentForGameService.getAllCommentsDTO();
-		return commentsForGames;
-	}
 	
-	@RequestMapping(value = "getCountOfCommentsByGame/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Integer countOfComments(@PathVariable Integer id) {
-		 return commentForGameService.getCountOfCommentsByGameId(id);
+	@RequestMapping(value = "deleteUserGame",method = RequestMethod.GET)
+	public String deleteGame(){
+		System.out.println("dfefdfdfdsfs");
+		//System.out.println(id);
+		gameUserService.delete(1);
+		return"";
 	}
 }
