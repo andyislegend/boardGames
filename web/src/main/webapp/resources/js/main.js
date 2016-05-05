@@ -266,7 +266,6 @@ app.controller("editProfileCtrl", function($scope, $http) {
 		$scope.userProfile = result.data;
 		$scope.editableFirstName = $scope.userProfile.firstName;
 	    $scope.editableLastName = $scope.userProfile.lastName;
-	    $scope.editableUsername = $scope.userProfile.username;
 	    $scope.editableEmail = $scope.userProfile.email;
 	    $scope.editableGender = $scope.userProfile.gender;
 	    $scope.editableAge = $scope.userProfile.age;
@@ -279,7 +278,6 @@ app.controller("editProfileCtrl", function($scope, $http) {
 		    data: $.param({
 	            firstName: $scope.editableFirstName,
 	            lastName: $scope.editableLastName,
-	            username: $scope.editableUsername,
 	            email: $scope.editableEmail,
 	            gender: $scope.editableGender,
 	            age : $scope.editableAge,

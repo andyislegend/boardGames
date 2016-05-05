@@ -428,12 +428,6 @@
 								</div> 
 							</li>
 							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Username:</span> 
-								<div class="col-sm-4">	 									 
-									<input ng-model="editableUsername"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
 								<span class="col-sm-3">Email:</span> 
 								<div class="col-sm-4">	 									 
 									<input ng-model="editableEmail"> 

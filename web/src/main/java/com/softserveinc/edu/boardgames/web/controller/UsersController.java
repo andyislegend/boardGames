@@ -47,13 +47,12 @@ public class UsersController {
 	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUserGender(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("username") String username,
-			@RequestParam("email") String email, @RequestParam("gender") String gender,
-			@RequestParam("age") Integer age, @RequestParam("phoneNumber") String phoneNumber) {
+			@RequestParam("lastName") String lastName,@RequestParam("email") String email, 
+			@RequestParam("gender") String gender, 	@RequestParam("age") Integer age, 
+			@RequestParam("phoneNumber") String phoneNumber) {
 		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		user.setUsername(username);
 		user.setEmail(email);
 		user.setGender(gender);
 		user.setAge(age);
