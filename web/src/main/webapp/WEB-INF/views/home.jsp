@@ -141,8 +141,20 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td><input type="range" id="ratingsRange" value="100"
-														ng-change="ratingSliderChanged()" ng-model="gameRating"></td>
+													<td><!-- <input type="range" id="ratingsRange" value="100"
+														ng-change="ratingSliderChanged()" ng-model="gameRating">-->
+														
+														<div star-rating rating="starRating" read-only="false" max-rating="10" 
+															click="ratingClick(param)" mouse-hover="ratingHover(param)" 
+															mouse-leave="ratingLeave(param)">
+														</div>
+	            										<div> 
+	            											<span class="label label-primary">
+	            												Star Rating: {{starRating}}</span>
+	 														<span class="label label-primary">
+	 															Hover Rating: {{hoverRating}}</span>
+	            										</div>
+													</td>
 													<td>
 														<p class="text-primary">{{gameRatingDisplay}}</p>
 													</td>
@@ -152,8 +164,8 @@
 												</tr>
 											</tbody>
 										</table>
-										<button class="btn btn-success" ng-click="ratingSaved()">Save
-											rate</button>
+										<!-- <button class="btn btn-success" ng-click="ratingSaved()">Save
+											rate</button>-->
 										<hr />
 										<h4>Owners</h4>
 										<table class="table">
