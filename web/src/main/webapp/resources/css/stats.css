@@ -1,0 +1,49 @@
+#stats_main {
+
+    width: 100%;
+    height: 100%;
+}
+
+#d1 {
+    
+    width: 380px;
+    height: 250px;
+    background: darkred;
+    float: left;
+    margin-left: 5%;
+    margin-top: 4%;
+    
+}
+
+#d2 {
+
+    width: 380px;
+    height: 250px;
+    background: blueviolet;
+    float: left;
+    margin-left: 2%;
+    margin-top: 4%;
+
+}
+
+#d3 {
+
+    width: 380px;
+    height: 250px;
+    float: left;
+    background: aquamarine;
+    margin-left: 5%;
+    margin-top: 2%;
+
+}
+
+#d4 {
+
+    width: 380px;
+    height: 250px;
+    background: darkcyan;
+    float: left;
+    margin-left: 2%;
+    margin-top: 2%;
+
+}
