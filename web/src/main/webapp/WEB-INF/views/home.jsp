@@ -291,7 +291,7 @@
                      </div>
                   </header>
 
-                  <table class="table">
+                  <table class="table" ng-table="users.Table">
                   	 <tr>
                         <th>
                         	<input type="text" class="form-control"
@@ -303,9 +303,11 @@
                         <th>
                         	<select name="selectCountries" id="repeatSelectCountry" ng-model="searchText.address.country.name" 
                         		ng-change="getCitiesByCountry()">
+                        		<option selected>Country</option>
                         		<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
                         	</select>
                         	<select name="repeatSelect" id="repeatSelectCity" ng-model="searchText.address.city.name">
+                        		<option selected>City</option>
                         		<option ng-repeat="city in cities">{{city.name}}</option>
                         	</select>
                     	</th>
@@ -317,7 +319,7 @@
                         <th>Address</th>
                      </tr>
                      <tr ng-repeat="user in users|filter:searchText">
-                        <td><a href="" ng-click="getInfoAboutUserFunc(user.username)">
+                        <td data-title="'Username'"><a href="" ng-click="getInfoAboutUserFunc(user.username)">
                            {{user.username}}</a>
                         </td>
                         <td>{{user.email}}</td>
@@ -396,7 +398,7 @@
                         </div>
                      </div>
                      <div class="col-sm-3" id="backgroundForOneUser">
-                        <img ng-src="{{userAvatar}}" height="92" width="92">
+                        <img ng-src="{{userAvatar}}" id="userAvatar">
                         <p>Score: {{oneUser.userRating}}</p>
                      </div>
                   </div>

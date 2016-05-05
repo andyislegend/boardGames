@@ -278,6 +278,7 @@ app.controller("editProfileCtrl", function($scope, $http) {
 		    data: $.param({
 	            firstName: $scope.editableFirstName,
 	            lastName: $scope.editableLastName,
+	            username: $scope.editableUsername,
 	            email: $scope.editableEmail,
 	            gender: $scope.editableGender,
 	            age : $scope.editableAge,
