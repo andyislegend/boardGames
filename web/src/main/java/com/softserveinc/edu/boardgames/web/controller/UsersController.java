@@ -25,7 +25,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class UsersController {
 
 	@Autowired
-	UserService userSevice;
+	UserService userService;
 
 	/**
 	 * Returns all users.
@@ -33,31 +33,31 @@ public class UsersController {
 	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> getAllUsers() {
-		List<User> userList = userSevice.findAll();
+		List<User> userList = userService.findAll();
 		return userList;
 	}
 	
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
 	public User getUser() {
-		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		return user;
 	}
 	
 	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<String> updateUserGender(@RequestParam("firstName") String firstName,
+	public ResponseEntity<String> updateUser(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName,@RequestParam("email") String email, 
 			@RequestParam("gender") String gender, 	@RequestParam("age") Integer age, 
 			@RequestParam("phoneNumber") String phoneNumber) {
-		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setGender(gender);
 		user.setAge(age);
 		user.setPhoneNumber(phoneNumber);
-		userSevice.updateUser(user);
+		userService.updateUser(user);
 		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
 }

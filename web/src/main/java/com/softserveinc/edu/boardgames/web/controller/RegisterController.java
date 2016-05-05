@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,6 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
@@ -22,6 +26,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
  * This conrollers is responsible for add new user and validating field in
@@ -48,6 +53,9 @@ public class RegisterController {
 
 	@Autowired
 	ImageConfiguration imageConfiguration;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	/**
 	 * @param VALID_EMAIL_ADDRESS_REGEX
@@ -178,6 +186,28 @@ public class RegisterController {
 	private static boolean validateUsername(String username) {
 		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
 		return matcher.find();
+	}
+	
+	@RequestMapping(value = {"/updateUserPassword"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<String> updateUserPassword(@RequestParam("oldPassword") String oldPassword,
+			@RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+			return new ResponseEntity<String>("Sorry, but you typed wrong password", HttpStatus.CONFLICT);
+		}
+		
+		if (!validatePassword(newPassword)) {
+			return new ResponseEntity<String>("Sorry, but Your password must contain at least one lower case symbol, "
+					+ "one Upper case symbol, one number and be from 6 to 20 chars long", HttpStatus.CONFLICT);
+		}
+
+		if (!newPassword.equals(confirmPassword)) {
+			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
+		}
+		user.setPassword(passwordEncoder.encode(newPassword));		
+		userService.updateUser(user);
+		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
 
 }

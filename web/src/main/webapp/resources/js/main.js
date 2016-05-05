@@ -271,7 +271,7 @@ app.controller("editProfileCtrl", function($scope, $http) {
 	    $scope.editableAge = $scope.userProfile.age;
 	    $scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
 	});
-	$scope.saveName = function() {
+	$scope.saveUser = function() {
 		$http({
 		    method: 'PUT',
 		    url: 'updateUser',
@@ -295,13 +295,32 @@ app.controller("editProfileCtrl", function($scope, $http) {
 		    $scope.userProfile.gender = $scope.editableGender;
 		    $scope.userProfile.age = $scope.editableAge;
 		    $scope.userProfile.phoneNumber = $scope.editablePhoneNumber;
-			$scope.editorNameEnabled = false;
 			$scope.editProfileMessage = false;
 		})
-		.error(function(data, status) {
-			$scope.nameAnswer = "Error happened. Please try again";
+		.error(function(result, status) {
+			$scope.editProfileAnswer = result;
 		})		
-	}	
+	}
+	
+	$scope.saveNewUserPassword = function() {
+		$http({
+		    method: 'PUT',
+		    url: 'updateUserPassword',
+		    data: $.param({
+	            oldPassword: $scope.editableOldPassword,
+	            newPassword: $scope.editableNewPassword,
+	            confirmPassword: $scope.editableConfirmPassword,
+	        }),
+	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.success(function(result, status) {
+			$scope.editPasswordAnswer = result;
+			$scope.editPasswordMessage = false;
+		})
+		.error(function(data, status) {
+			$scope.editPasswordAnswer = result;
+		})		
+	}
 });
 
 

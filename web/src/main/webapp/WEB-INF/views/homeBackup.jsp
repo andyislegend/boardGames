@@ -412,6 +412,11 @@
 						</div>
 					</header>
 					<div class="col-sm-12">
+						<span class="col-sm-3"></span>
+						<b>User profile</b>
+					</div>
+
+					<div class="col-sm-12">
 					
 						<ul id="userProfile">
 							<li class="col-sm-12" id="userProfile">
@@ -451,7 +456,7 @@
 								</div> 
 							</li>
 							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Phone Number:</span> 
+								<span class="col-sm-3">Phone number:</span> 
 								<div class="col-sm-4">	 									 
 									<input ng-model="editablePhoneNumber"> 
 								</div> 
@@ -459,12 +464,47 @@
 							<li class="col-sm-12" id="userProfile">
 								<span class="col-sm-3"></span> 
 								<div class="col-sm-4">	 									 
-									<button ng-click="saveName()" id="saveUserUpdate">
+									<button ng-click="saveUser()" id="saveUserUpdate">
   										Save
 									</button> 
 								</div>
 								<span class="col-sm-3" ng-hide="editProfileMessage">
 									{{editProfileAnswer}}
+								</span> 
+							</li>												
+						</ul>
+						<div class="col-sm-12">
+							<span class="col-sm-3"></span>
+							<b>Password settings</b>
+						</div>
+						<ul id="userProfile">					
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Old password:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableOldPassword"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">New password:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableNewPassword"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Confirm password:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableConfirmPassword"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3"></span> 
+								<div class="col-sm-4">	 									 
+									<button ng-click="saveNewUserPassword()" id="saveUserUpdate">
+  										Save
+									</button> 
+								</div>
+								<span class="col-sm-3" ng-hide="editProfileMessage">
+									{{editPasswordAnswer}}
 								</span> 
 							</li>												
 						</ul>
