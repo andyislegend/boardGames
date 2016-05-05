@@ -264,124 +264,45 @@ app.controller("getAvatar", function($scope, $http) {
 app.controller("editProfileCtrl", function($scope, $http) {
 	$http.get('getProfile').then(function(result) {
 		$scope.userProfile = result.data;
-	});
-	
-	$scope.editorNameEnabled = false;
-	$scope.enableNameEditor = function() {
-	    $scope.editorNameEnabled = true;
-	    $scope.editableFirstName = $scope.userProfile.firstName;
+		$scope.editableFirstName = $scope.userProfile.firstName;
 	    $scope.editableLastName = $scope.userProfile.lastName;
-	};
-	$scope.disableNameEditor = function() {
-	    $scope.editorNameEnabled = false;
-	};
+	    $scope.editableUsername = $scope.userProfile.username;
+	    $scope.editableEmail = $scope.userProfile.email;
+	    $scope.editableGender = $scope.userProfile.gender;
+	    $scope.editableAge = $scope.userProfile.age;
+	    $scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
+	});
 	$scope.saveName = function() {
 		$http({
 		    method: 'PUT',
-		    url: 'updateUserFirstLastName',
+		    url: 'updateUser',
 		    data: $.param({
 	            firstName: $scope.editableFirstName,
 	            lastName: $scope.editableLastName,
+	            username: $scope.editableUsername,
+	            email: $scope.editableEmail,
+	            gender: $scope.editableGender,
+	            age : $scope.editableAge,
+	            phoneNumber: $scope.editablePhoneNumber
 	        }),
 	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 		.success(function(result, status) {
-			$scope.nameAnswer = result;
+			$scope.editProfileAnswer = result;
 			$scope.userProfile.firstName = $scope.editableFirstName;
 			$scope.userProfile.lastName = $scope.editableLastName;
+			$scope.userProfile.username = $scope.editableUsername;
+		    $scope.userProfile.email = $scope.editableEmail;
+		    $scope.userProfile.gender = $scope.editableGender;
+		    $scope.userProfile.age = $scope.editableAge;
+		    $scope.userProfile.phoneNumber = $scope.editablePhoneNumber;
 			$scope.editorNameEnabled = false;
-			$scope.nameMessage = false;
+			$scope.editProfileMessage = false;
 		})
 		.error(function(data, status) {
 			$scope.nameAnswer = "Error happened. Please try again";
 		})		
-	}
-	
-	 
-	$scope.editorUsernameEnabled = false;
-	$scope.enableUsernameEditor = function() {
-	    $scope.editorUsernameEnabled = true;
-	    $scope.editableUsername = $scope.userProfile.username;
-	};
-	$scope.disableUsernameEditor = function() {
-	    $scope.editorUsernameEnabled = false;
-	};
-	$scope.saveUsername = function() {
-		$http({
-		    method: 'PUT',
-		    url: 'updateUsername',
-		    data: $.param({
-	            username: $scope.editableUsername
-	        }),
-	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		})
-		$scope.userProfile.username = $scope.editableUsername;
-		$scope.editorUsernameEnabled = false;
-	}
-	  
-	$scope.editorEmailEnabled = false;
-	$scope.enableEmailEditor = function() {
-	    $scope.editorEmailEnabled = true;
-	    $scope.editableEmail = $scope.userProfile.email;
-	};
-	$scope.disableEmailEditor = function() {
-	    $scope.editorEmailEnabled = false;
-	};
-	$scope.saveEmail = function() {
-		$http({
-		    method: 'PUT',
-		    url: 'updateUserEmail',
-		    data: $.param({
-	            email: $scope.editableEmail
-	        }),
-	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		})
-		.success(function(result, status) {
-			$scope.emailAnswer = result;
-			$scope.userProfile.email = $scope.editableEmail;
-			$scope.editorEmailEnabled = false;
-			$scope.emailMessage = false;
-		})
-		.error(function(data, status) {
-			$scope.emailAnswer = "Error happened. Please try again";
-		})		
-	}
-	
-	$scope.editorPasswordEnabled = false;
-	$scope.enablePasswordEditor = function() {
-	    $scope.editorPasswordEnabled = true;
-	    $scope.editablePassword = "Type new password";
-	};
-	$scope.disablePasswordEditor = function() {
-	    $scope.editorPasswordEnabled = false;
-	};
-	
-	$scope.editorGenderEnabled = false;
-	$scope.enableGenderEditor = function() {
-	    $scope.editorGenderEnabled = true;
-	};
-	$scope.disableGenderEditor = function() {
-	    $scope.editorGenderEnabled = false;
-	};
-	
-	$scope.editorAgeEnabled = false;
-	$scope.enableAgeEditor = function() {
-	    $scope.editorAgeEnabled = true;
-	    $scope.editableAge = $scope.userProfile.age;
-	};
-	$scope.disableAgeEditor = function() {
-	    $scope.editorAgeEnabled = false;
-	};
-	
-	$scope.editorPhoneNumberEnabled = false;
-	$scope.enablePhoneNumberEditor = function() {
-	    $scope.editorPhoneNumberEnabled = true;
-	    $scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
-	};
-	$scope.disablePhoneNumberEditor = function() {
-	    $scope.editorPhoneNumberEnabled = false;
-	};
-	
+	}	
 });
 
 

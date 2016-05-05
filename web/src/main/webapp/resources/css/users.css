@@ -9,3 +9,13 @@
 	color: black;
 	border-color:grey;
 }
+
+#userProfile {
+	margin: 0 0 6px 0;
+}
+
+#saveUserUpdate {
+	 left:-13%;
+	 position:relative;
+	 float:right;
+}

@@ -44,33 +44,20 @@ public class UsersController {
 		return user;
 	}
 	
-	@RequestMapping(value = {"/updateUserFirstLastName"}, method = RequestMethod.PUT)
+	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<String> updateUserFirstLastName(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName) {
+	public ResponseEntity<String> updateUserGender(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("username") String username,
+			@RequestParam("email") String email, @RequestParam("gender") String gender,
+			@RequestParam("age") Integer age, @RequestParam("phoneNumber") String phoneNumber) {
 		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		userSevice.updateUser(user);
-		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = {"/updateUsername"}, method = RequestMethod.PUT)
-	@ResponseBody
-	public ResponseEntity<String> updateUsername(@RequestParam("username") String username) {
-		if (userSevice.findOne(username) == null) {
-			User user = userSevice.findOne(WebUtil.getPrincipalUsername());
-			user.setUsername(username);
-			userSevice.updateUser(user);
-		}
-		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = {"/updateUserEmail"}, method = RequestMethod.PUT)
-	@ResponseBody
-	public ResponseEntity<String> updateUserEmail(@RequestParam("email") String email) {
-		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
+		user.setUsername(username);
 		user.setEmail(email);
+		user.setGender(gender);
+		user.setAge(age);
+		user.setPhoneNumber(phoneNumber);
 		userSevice.updateUser(user);
 		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
