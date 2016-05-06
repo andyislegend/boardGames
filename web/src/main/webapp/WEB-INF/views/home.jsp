@@ -805,16 +805,17 @@
 									<tr>
 										<th>Name</th>
 										<th>Category</th>
-										<th>Comment</th>
+										<th></th>
 										<th></th>
 									</tr>
 									<tr ng-repeat="game in allGame">
 										<td><a href = "" ng-click="myFunc(game.id)" data-toggle="modal" data-target="#myModalMyGames">
 										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
-										<td>
-												<a href = "" ng-click="showComments(game.id)">
-												<span class="glyphicon glyphicon-comment"></span>
+										<td  >
+												
+												<a href = "" ng-click="showComments(game.id)" >
+												<span id = "UserGameNum{{game.id}}" class="glyphicon glyphicon-comment"></span>
 												</a>				
 										</td>
 										<td>

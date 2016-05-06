@@ -23,6 +23,10 @@ public class GameUserService {
 	public GameUser getUserGamesById(Integer id) {
 		return gameUserRepo.getGameUserById(id);
 	}
+	
+	public GameUserDTO getUserGamesDTOById(Integer id) {
+		return gameUserRepo.getGameUserDTOById(id);
+	}
 
 	public List<GameUser> getAllUserGames() {
 		return gameUserRepo.findAll();

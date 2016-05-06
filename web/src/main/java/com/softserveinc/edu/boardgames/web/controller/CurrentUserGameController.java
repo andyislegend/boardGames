@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,5 +80,21 @@ public class CurrentUserGameController {
 		System.out.println("dfefdfdfdsfs");
 		gameUserService.delete(1);
 		return"";
+	}
+	
+	@RequestMapping(value = "/gameUserDetail/{userGameId}", method = RequestMethod.GET)
+	@ResponseBody
+	public GameUserDTO getGameUserDetailById(@PathVariable Integer userGameId){
+		GameUserDTO dto = gameUserService.getUserGamesDTOById(userGameId);
+		return dto;
+	}
+	
+	@RequestMapping(value = "/updateCountOfComment/{idGame}/{countOfComment}",method = RequestMethod.PUT)
+	public String updateCounOfComments(@PathVariable Integer idGame, @PathVariable Integer countOfComment){
+		System.out.println("idGame = "+idGame+" countOfComment==="+countOfComment);
+		GameUser gameUser = gameUserService.getUserGamesById(idGame);
+		gameUser.setCountOfComments(countOfComment);
+		gameUserService.update(gameUser);
+		return "";
 	}
 }

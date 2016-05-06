@@ -1,21 +1,40 @@
 var app = angular.module("usersGameApp", ['ui.bootstrap']);
 
-app.controller("allUsersGameCtrl", function ($scope, $http) {
-	$scope.countsOfComments = 1;
+app.controller("allUsersGameCtrl", function ($scope, $http,$rootScope) {
+	$rootScope.NN = 100;
+	$scope.allGame = [];
     $http.get('getAllGamesCurUser').then(function (result) {
-    	$scope.allGame = result.data;});
+    	$scope.allGame = result.data;
+    	for(var i = 0; i<$scope.allGame.length;i++){
+        	$scope.isNewComments($scope.allGame[i].id);
+        }
+    	});
         
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
             $scope.showMe = !$scope.showMe;
-            for (var i = 0; i < $scope.allGame.length; i++) {
-                if ($scope.allGame[i].id === id) {
-                    $scope.games[0] = $scope.allGame[i];
-                    break;
-                }
-            }
+            $http.get('gameUserDetail/'+id).then(function(result) {
+            	$scope.games = result;
+			});
         }
+        
+        $scope.isNewComments = function(id){
+        	var countOfComments = 0;
+        	$scope.userGame = [];
+        	$http.get('getCountOfCommentsByGameId/'+id).then(function(result){
+        		countOfComments = result.data;
+        		$http.get('gameUserDetail/'+id).success(function(result) {				
+            		$scope.userGame = result;           	
+            		if(countOfComments>$scope.userGame.countOfComments){
+            			$rootScope.NN = countOfComments;
+                		document.getElementById("UserGameNum"+$scope.userGame.id).className = "glyphicon glyphicon-envelope";
+                	}
+            	});    	
+        	}); 	
+			
+        	}
+        
         
         $scope.deleteGame = function(id) {
     		$http.get('deleteUserGame').success(function (data) {    			
@@ -54,14 +73,11 @@ app.controller("CreateGameCtrl", function($scope, $http) {
 				 },
 			  data:userGame
 			}).success(function(response) {
-				console.log("fjsdbfhbdshfsdhds")
-			    $scope.list.push(response.data); 
-				
-			  }, function errorCallback(response) {
-			    
+			    $scope.list.push(response.data); 		
+			  }, function errorCallback(response) {			    
 			  });
 		 $scope.$parent.allGame.push(userGame);
-		 
+		 $scope.$parent.allGame = {};
 	};
 });
 
@@ -405,7 +421,7 @@ app.controller("eventsVisibleController", function($scope) {
 /*users Angular controller -- end*/
 
 
-app.controller('getGamesGlobalController', function ($scope, $http) {
+app.controller('getGamesGlobalController', function ($scope, $http,$rootScope) {
 
 	$http({
 		method : "GET",
@@ -458,7 +474,7 @@ app.controller('getGamesGlobalController', function ($scope, $http) {
 	
 });
 
-app.controller('getGameDetailedInfoController', function ($scope, $http) {
+app.controller('getGameDetailedInfoController', function ($scope, $http,$rootScope) {
 		
 	$scope.ratingSliderChanged = function(){
 		$scope.$emit('settingRootRating', $scope.gameRating);
@@ -484,24 +500,26 @@ app.controller('getGameDetailedInfoController', function ($scope, $http) {
 	//comment
 	$scope.gameuserId = 0;
 	$scope.isShowComment = false;	
-	$scope.comments = [];
-	$http.get('comment').then(function(result) {
-		$scope.comments = result.data;
-	},function Error(result) {
-		$scope.comments = [{"text":"jdsfsjd"}];
-	})
-	
 	$scope.showComments = function(id) {
+		
 		$scope.gameuserId = id;
 		$scope.isShowComment = !$scope.isShowComment
+		
 		$scope.commentForGame = [];
-		for(var i = 0; i<$scope.comments.length;i++){
-			if($scope.comments[i].gameID === id){
-				console.log(id);
-				$scope.commentForGame.push($scope.comments[i]);
+		
+		$http.get('getCommentsForGame/'+id).then(function(result) {
+			$scope.commentForGame = result.data;
+		});
+				
+				if(document.getElementById("UserGameNum"+id).className === "glyphicon glyphicon-envelope"){
+					console.log($rootScope.NN);
+					$http.put("updateCountOfComment/"+id+"/"+$rootScope.NN).then(function(result) {						
+					});
+				document.getElementById("UserGameNum"+id).className = "glyphicon glyphicon-comment";}
+				
+		
 			}
-		}	
-	}	
+	
 	$scope.list = [];
 	$scope.submit = function () {
 		var comment  = {
@@ -512,7 +530,7 @@ app.controller('getGameDetailedInfoController', function ($scope, $http) {
 			 };
 			 $http({
 				  method: 'POST',
-				  url: '/NewComment',
+				  url: 'newComment',
 				  headers: {
 					   'Content-Type': 'application/json'
 					 },
