@@ -335,7 +335,7 @@ app.controller("editProfileCtrl", function($scope, $http) {
 		})
 		.error(function(data, status) {
 			$scope.editPasswordAnswer = result;
-		})		
+		});		
 	}
 });
 
