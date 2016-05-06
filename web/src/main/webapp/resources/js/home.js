@@ -92,48 +92,51 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 		alert("Getting games general data error");
 	});
 
-	$scope.gameSelect = function(id, name, $event) {
-		
-		$scope.$on('settingRootRating', function (event, data) {
-			 $scope.gameRatingDisplay = data;
-		});
-		
-		$scope.$on('refreshingGameDetails', function (event, data) {
-			$http({
-				method: "GET",
-				url : 'getGameDetails' + '/' + data
-			}).then(function mySucces(response){
-				$scope.gameDetail = response.data;
-			}, function myError(response) {
-				alert("Getting games general data error");
-			});
-		});
-		$scope.$emit('refreshingGameDetails', id);
-		
-		$http({
-			method: "GET",
-			url : 'getGameRatedByUser' + '/' + id
-		}).then(function mySucces(response){
-			$scope.gameRatingDisplay = response.data;
-			$scope.currentGameId = id;
-			
-			$scope.$broadcast('sharingIdToDetailsModal', 
-					{id:$scope.currentGameId, rating:$scope.gameRatingDisplay});
-			
-		}, function myError(response) {
-			alert("Getting isRated game error");
-		});
-		
-		$http({
-			method: "GET",
-			url : 'getUserGamesOfGame' + '/' + name
-		}).then(function mySucces(response){
-			$scope.userGamesOfGame = response.data;
-		}, function myError(response) {
-			alert("Getting games userGames of game error");
-		});
-	}
+});
+
+homeApp.controller('gameSelectController', function ($scope, $http, $routeParams) {
 	
+	var id = $routeParams.id;
+	var name = $routeParams.name;
+	$scope.$on('settingRootRating', function (event, data) {
+		 $scope.gameRatingDisplay = data;
+	});
+	
+	$scope.$on('refreshingGameDetails', function (event, data) {
+		$http({
+			method: "GET",
+			url : 'getGameDetails' + '/' + data
+		}).then(function mySucces(response){
+			$scope.gameDetail = response.data;
+			console.log("Response data: " + responseData);
+		}, function myError(response) {
+			alert("Getting games general data error");
+		});
+	});
+	$scope.$emit('refreshingGameDetails', id);
+	
+	$http({
+		method: "GET",
+		url : 'getGameRatedByUser' + '/' + id
+	}).then(function mySucces(response){
+		$scope.gameRatingDisplay = response.data;
+		$scope.currentGameId = id;
+		
+		$scope.$broadcast('sharingIdToDetailsModal', 
+				{id:$scope.currentGameId, rating:$scope.gameRatingDisplay});
+		
+	}, function myError(response) {
+		alert("Getting isRated game error");
+	});
+	
+	$http({
+		method: "GET",
+		url : 'getUserGamesOfGame' + '/' + name
+	}).then(function mySucces(response){
+		$scope.userGamesOfGame = response.data;
+	}, function myError(response) {
+		alert("Getting games userGames of game error");
+	});
 });
 
 homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $rootScope) {
@@ -278,13 +281,16 @@ homeApp.config(function ($routeProvider) {
     	.when('/statistics', {
             templateUrl: 'resources/pages/home-statistics.html',
             //controller : "...Ctrl"
-
         })
 
         .when('/allGames', {
             templateUrl: 'resources/pages/home-allGames.html',
             controller : 'getGamesGlobalController'
-
+        })
+        
+        .when('/gameSelect/:id/:name', {
+            templateUrl: 'resources/pages/home-gameDetails.html',
+            controller : 'gameSelectController'
         })
 
         .when('/events', {
