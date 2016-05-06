@@ -124,7 +124,7 @@
 			<!-- Friends Widget -->
 			<div id="friends_div">
 				<div>
-					<h1>FRIENDS</h1>
+					<h1>MY FRIENDS</h1>
 				</div>
 			</div>
 			<!-- End of Friends Widget -->
