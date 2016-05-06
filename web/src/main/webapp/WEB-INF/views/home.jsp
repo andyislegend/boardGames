@@ -132,7 +132,6 @@
 				<div >
 					<h1 style="text-align: center">MY GAMES</h1>
 				<div>
-					<h1>MY GAMES</h1>
 					<div ng-controller="allUsersGameCtrl">
 							<div ng-controller="CreateGameCtrl">
 								<div>
