@@ -31,10 +31,8 @@ homeApp.controller("allUsersGameCtrl", function ($scope, $http, $rootScope) {
                 		document.getElementById("UserGameNum"+$scope.userGame.id).className = "glyphicon glyphicon-envelope";
                 	}
             	});    	
-        	}); 	
-			
+        	}); 				
         	}
-        
         
         $scope.deleteGame = function(id) {
     		$http.get('deleteUserGame').success(function (data) {    			
@@ -103,15 +101,14 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 		$scope.$on('refreshingGameDetails', function (event, data) {
 			$http({
 				method: "GET",
-				url : 'getGameDetails' + '/' + id
+				url : 'getGameDetails' + '/' + data
 			}).then(function mySucces(response){
 				$scope.gameDetail = response.data;
 			}, function myError(response) {
 				alert("Getting games general data error");
 			});
 		});
-		
-		$scope.$emit('refreshingGameDetails');
+		$scope.$emit('refreshingGameDetails', id);
 		
 		$http({
 			method: "GET",
@@ -122,6 +119,7 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 			
 			$scope.$broadcast('sharingIdToDetailsModal', 
 					{id:$scope.currentGameId, rating:$scope.gameRatingDisplay});
+			
 		}, function myError(response) {
 			alert("Getting isRated game error");
 		});
@@ -153,7 +151,7 @@ homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $ro
 			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + param,
 		}).then(function mySucces(response){
 			$scope.$emit('settingRootRating', $scope.starRating);
-			$scope.$emit('refreshingGameDetails');
+			$scope.$emit('refreshingGameDetails', $scope.currentGameId);
 		}, function myError(response) {
 			alert("Saving rating error");
 		});
