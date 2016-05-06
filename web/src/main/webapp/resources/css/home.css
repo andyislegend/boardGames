@@ -61,3 +61,6 @@ ol, ul {
     height: 50%;
     overflow-y: scroll;
 }
+span.label {
+	font-size: 15px;
+}

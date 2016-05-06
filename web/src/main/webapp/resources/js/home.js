@@ -100,14 +100,18 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 			 $scope.gameRatingDisplay = data;
 		});
 		
-		$http({
-			method: "GET",
-			url : 'getGameDetails' + '/' + id
-		}).then(function mySucces(response){
-			$scope.gameDetail = response.data;
-		}, function myError(response) {
-			alert("Getting games general data error");
+		$scope.$on('refreshingGameDetails', function (event, data) {
+			$http({
+				method: "GET",
+				url : 'getGameDetails' + '/' + id
+			}).then(function mySucces(response){
+				$scope.gameDetail = response.data;
+			}, function myError(response) {
+				alert("Getting games general data error");
+			});
 		});
+		
+		$scope.$emit('refreshingGameDetails');
 		
 		$http({
 			method: "GET",
@@ -137,12 +141,9 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $rootScope) {
 
 	$scope.$on('sharingIdToDetailsModal', function (event, data) {
-		console.log('rating transferes(' + data.rating + ')');
-		console.log('id transferes(' + data.id + ')');
 		$scope.currentGameId = data.id;
 		$scope.starRating = data.rating;
 		$scope.hoverRating = 0;
-		console.log('setting successfully');
 	});
 	
     $scope.ratingClick = function (param) {
@@ -152,6 +153,7 @@ homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $ro
 			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + param,
 		}).then(function mySucces(response){
 			$scope.$emit('settingRootRating', $scope.starRating);
+			$scope.$emit('refreshingGameDetails');
 		}, function myError(response) {
 			alert("Saving rating error");
 		});
