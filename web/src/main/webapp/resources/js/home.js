@@ -31,10 +31,8 @@ homeApp.controller("allUsersGameCtrl", function ($scope, $http, $rootScope) {
                 		document.getElementById("UserGameNum"+$scope.userGame.id).className = "glyphicon glyphicon-envelope";
                 	}
             	});    	
-        	}); 	
-			
+        	}); 				
         	}
-        
         
         $scope.deleteGame = function(id) {
     		$http.get('deleteUserGame').success(function (data) {    			

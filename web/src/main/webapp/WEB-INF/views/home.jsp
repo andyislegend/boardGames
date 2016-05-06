@@ -129,7 +129,7 @@
 
 			<!-- MyGames Widget -->
 			<div id="mygames_div">
-				<div class="jumbotron">
+				<div >
 					<h1 style="text-align: center">MY GAMES</h1>
 					<div ng-controller="allUsersGameCtrl">
 							<div ng-controller="CreateGameCtrl">
