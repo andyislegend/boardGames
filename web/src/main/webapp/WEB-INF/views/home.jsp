@@ -245,7 +245,7 @@
                                     <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
                                     </table>
                                      <form data-ng-submit=submit()>
-													<input type="text" data-ng-model="comment" style = "width:70%" ><input
+													<input type="text" data-ng-model="comment" style = "width:70%" ><input value="Submit"
 														type="submit" ng-click="addComment" style = "width:20%; margin: 5px;">
 												</form>
                                  </div>
