@@ -120,8 +120,8 @@
 			
 			<!-- Friends Widget -->
 			<div id="friends_div">
-				<div class="jumbotron">
-					<h1 style="text-align: center">FRIENDS</h1>
+				<div>
+					<h1>FRIENDS</h1>
 				</div>
 			</div>
 			<!-- End of Friends Widget -->
@@ -129,13 +129,13 @@
 
 			<!-- MyGames Widget -->
 			<div id="mygames_div">
-				<div class="jumbotron">
-					<h1 style="text-align: center">MY GAMES</h1>
+				<div>
+					<h1>MY GAMES</h1>
 					<div ng-controller="allUsersGameCtrl">
 							<div ng-controller="CreateGameCtrl">
 								<div>
 								<input type="submit" value="ADD GAME"
-									class="btn btn-primary btn-lg" data-toggle="modal"
+									class="btn btn-primary btn-sm" data-toggle="modal"
 									data-target="#myModalHorizontal"
 									style = "background-color: gray;">
 							</div>
