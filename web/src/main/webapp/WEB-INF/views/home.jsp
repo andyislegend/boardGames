@@ -4,9 +4,11 @@
 <!DOCTYPE html>
 <html >
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- CSS -->
+<link rel="stylesheet"
+	href="resources/bower_components/normalize-css/normalize.css" />
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
