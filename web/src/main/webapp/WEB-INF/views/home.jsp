@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 <meta charset="utf-8">
 
@@ -32,6 +32,7 @@
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="resources/js/home.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
+
 <!-- End of Scripts -->
 
 </head>
