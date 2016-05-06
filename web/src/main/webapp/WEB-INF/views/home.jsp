@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,6 +34,7 @@
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="resources/js/home.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
+
 <!-- End of Scripts -->
 
 </head>
@@ -131,8 +132,9 @@
 
 			<!-- MyGames Widget -->
 			<div id="mygames_div">
+				<div >
+					<h1 style="text-align: center">MY GAMES</h1>
 				<div>
-					<h1>MY GAMES</h1>
 					<div ng-controller="allUsersGameCtrl">
 							<div ng-controller="CreateGameCtrl">
 								<div>

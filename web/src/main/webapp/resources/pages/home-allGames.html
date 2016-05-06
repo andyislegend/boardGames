@@ -1,4 +1,121 @@
 <div class="jumbotron">
 
-    <h1 style="text-align: center"> All Games </h1>
+	<h1 style="text-align: center">All Games</h1>
+	<div ng-controller="getGamesGlobalController">
+		<div class="widget widget_top-posts">
+			<h2 class="title">Games</h2>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Game</th>
+					<th>Category</th>
+					<th>Min/Max players</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in gamesGlobal" ng-click="gameSelect(x.id, x.name)"
+					data-toggle="modal" data-target="#GameModal">
+					<td>{{ x.name }}</td>
+					<td>{{ x.categoryName }}</td>
+					<td>{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
+				</tr>
+				<tr>
+				</tr>
+			</tbody>
+		</table>
+		<div id="GameModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Games</h4>
+					</div>
+					<div class="modal-body"
+						ng-controller="getGameDetailedInfoController">
+						<h4>Name</h4>
+						<p>{{gameDetail.name}}</p>
+						<hr />
+						<h4>Description</h4>
+						<pre>{{gameDetail.description}}</pre>
+						<hr />
+						<h4>Rules</h4>
+						<pre>{{gameDetail.rules}}</pre>
+						<hr />
+						<h4>Rating</h4>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Rate this game</th>
+									<th>Your rate</th>
+									<th>General</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<div star-rating rating="starRating" read-only="false"
+											max-rating="10" click="ratingClick(param)"
+											mouse-hover="ratingHover(param)"
+											mouse-leave="ratingLeave(param)"></div>
+										<div>
+											
+										</div>
+									</td>
+									<td>
+										<span class="label label-primary">{{starRating}}/10</span> 
+									</td>
+									<td>
+										<span class="label label-primary">{{gameDetail.rating}}/10</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<hr />
+						<h4>Owners</h4>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Game edition</th>
+									<th>Year of production</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in userGamesOfGame">
+									<td>{{ x.username }}</td>
+									<td>{{ x.edition }}</td>
+									<td>{{ x.yearOfProduction }}</td>
+									<td><button ng-click="showComments(x.id)">Comment</button></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div>
+							<div ng-show="isShowComment">
+								<table class="table">
+									<tr>
+										<th></th>
+										<th></th>
+									</tr>
+									<tr ng-repeat="x in commentForGame">
+										<td>{{x.username}}</td>
+										<td>{{x.commentText}}</td>
+										<td>{{x.date | date:dateFormat}}</td>
+									</tr>
+								</table>
+								<div>
+									<form data-ng-submit=submit()>
+										<input type="text" data-ng-model="comment" style="width: 80%"><input
+											type="submit" ng-click="addComment" style="width: 20%">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

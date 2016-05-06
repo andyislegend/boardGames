@@ -31,10 +31,8 @@ homeApp.controller("allUsersGameCtrl", function ($scope, $http, $rootScope) {
                 		document.getElementById("UserGameNum"+$scope.userGame.id).className = "glyphicon glyphicon-envelope";
                 	}
             	});    	
-        	}); 	
-			
+        	}); 				
         	}
-        
         
         $scope.deleteGame = function(id) {
     		$http.get('deleteUserGame').success(function (data) {    			
@@ -100,14 +98,17 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 			 $scope.gameRatingDisplay = data;
 		});
 		
-		$http({
-			method: "GET",
-			url : 'getGameDetails' + '/' + id
-		}).then(function mySucces(response){
-			$scope.gameDetail = response.data;
-		}, function myError(response) {
-			alert("Getting games general data error");
+		$scope.$on('refreshingGameDetails', function (event, data) {
+			$http({
+				method: "GET",
+				url : 'getGameDetails' + '/' + data
+			}).then(function mySucces(response){
+				$scope.gameDetail = response.data;
+			}, function myError(response) {
+				alert("Getting games general data error");
+			});
 		});
+		$scope.$emit('refreshingGameDetails', id);
 		
 		$http({
 			method: "GET",
@@ -118,6 +119,7 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 			
 			$scope.$broadcast('sharingIdToDetailsModal', 
 					{id:$scope.currentGameId, rating:$scope.gameRatingDisplay});
+			
 		}, function myError(response) {
 			alert("Getting isRated game error");
 		});
@@ -137,12 +139,9 @@ homeApp.controller('getGamesGlobalController', function ($scope, $http) {
 homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $rootScope) {
 
 	$scope.$on('sharingIdToDetailsModal', function (event, data) {
-		console.log('rating transferes(' + data.rating + ')');
-		console.log('id transferes(' + data.id + ')');
 		$scope.currentGameId = data.id;
 		$scope.starRating = data.rating;
 		$scope.hoverRating = 0;
-		console.log('setting successfully');
 	});
 	
     $scope.ratingClick = function (param) {
@@ -152,6 +151,7 @@ homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $ro
 			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + param,
 		}).then(function mySucces(response){
 			$scope.$emit('settingRootRating', $scope.starRating);
+			$scope.$emit('refreshingGameDetails', $scope.currentGameId);
 		}, function myError(response) {
 			alert("Saving rating error");
 		});
@@ -207,6 +207,71 @@ homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $ro
 	}	
 });
 
+homeApp.directive('starRating', function () {
+    return {
+        scope: {
+            rating: '=',
+            maxRating: '@',
+            readOnly: '@',
+            click: "&",
+            mouseHover: "&",
+            mouseLeave: "&"
+        },
+        restrict: 'EA',
+        template:
+            "<div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' " +
+            		"ng-repeat='idx in maxRatings track by $index'> \
+                    <img ng-src='{{((hoverValue + _rating) <= $index) " +
+                    "&& \"http://www.codeproject.com/script/ratings/images/star-empty-lg.png\" " +
+                    "|| \"http://www.codeproject.com/script/ratings/images/star-fill-lg.png\"}}' \
+                    ng-Click='isolatedClick($index + 1)' \
+                    ng-mouseenter='isolatedMouseHover($index + 1)' \
+                    ng-mouseleave='isolatedMouseLeave($index + 1)'></img> \
+            </div>",
+        compile: function (element, attrs) {
+            if (!attrs.maxRating || (Number(attrs.maxRating) <= 0)) {
+                attrs.maxRating = '5';
+            };
+        },
+        controller: function ($scope, $element, $attrs) {
+            $scope.maxRatings = [];
+
+            for (var i = 1; i <= $scope.maxRating; i++) {
+                $scope.maxRatings.push({});
+            };
+
+            $scope._rating = $scope.rating;
+			
+			$scope.isolatedClick = function (param) {
+
+				$scope.rating = $scope._rating = param;
+				$scope.hoverValue = 0;
+				$scope.click({
+					param: param
+				});
+			};
+
+			$scope.isolatedMouseHover = function (param) {
+
+				$scope._rating = 0;
+				$scope.hoverValue = param;
+				$scope.mouseHover({
+					param: param
+				});
+			};
+
+			$scope.isolatedMouseLeave = function (param) {
+
+				$scope._rating = $scope.rating;
+				$scope.hoverValue = 0;
+				$scope.mouseLeave({
+					param: param
+				});
+			};
+        }
+    };
+});
+
 homeApp.config(function ($routeProvider) {
     $routeProvider
 
@@ -218,7 +283,7 @@ homeApp.config(function ($routeProvider) {
 
         .when('/allGames', {
             templateUrl: 'resources/pages/home-allGames.html',
-            //controller : '...Cntrl'
+            controller : 'getGamesGlobalController'
 
         })
 
