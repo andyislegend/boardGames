@@ -1,0 +1,63 @@
+body {
+    padding-top: 70px;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+#footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:40px;
+    width:100%;
+    background:#333333;
+    text-align: right;
+}
+
+
+#main_container {
+    /*margin-top: 2.5%;*/
+    margin-left: 0.5%;
+    height: 570px;
+    margin-bottom: 2%;
+}
+
+#main_div {
+
+    float: left;
+    width: 69%;
+    height: 100%;
+    /*margin-left: 0.5%;*/
+    border: none;
+    overflow-y: scroll;
+
+}
+
+#sidebar {
+
+    float: left;
+    width: 30%;
+    height: 100%;
+    margin-left: 0.5%;
+    border: groove;
+}
+
+
+#friends_div {
+
+    width: 100%;
+    height: 50%;
+    overflow-y: scroll;
+    border-bottom: groove;
+}
+
+#mygames_div {
+
+    width: 100%;
+    height: 50%;
+    overflow-y: scroll;
+}

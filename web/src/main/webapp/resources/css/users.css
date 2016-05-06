@@ -9,3 +9,23 @@
 	color: black;
 	border-color:grey;
 }
+
+#userProfile {
+	margin: 0 0 6px 0;
+}
+
+#saveUserUpdate {
+
+	 position:relative;
+	 float:right;
+}
+
+#avatar {
+	 height: 35px; 
+	 width: 35px;
+}
+
+#userAvatar {
+	 height: 92px; 
+	 width: 92px;
+}

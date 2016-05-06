@@ -1,0 +1,94 @@
+<div class="jumbotron">
+    <h1 style="text-align: center"> Edit User </h1>
+    <div ng-controller="editProfileCtrl">
+					<div class="col-sm-12">
+					
+						<ul id="userProfile">
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">First Name:</span> 
+								<div class="col-sm-4">	 
+									<input ng-model="editableFirstName"> 
+								</div> 
+								<!-- <span class="col-sm-3" ng-hide="editProfileMessage">
+									{{nameAnswer}}
+								</span> -->
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Last Name:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableLastName"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Email:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableEmail"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Gender:</span> 
+								<div class="col-sm-4">	 									 
+									<select id="gender" name="gender" ng-model="editableGender">
+										<option value="male">Male</option>
+										<option value="female">Female</option>
+									</select> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Age:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableAge"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Phone Number:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editablePhoneNumber"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3"></span> 
+								<div class="col-sm-2">	 									 
+									<button ng-click="saveUser()" id="saveUserUpdate">
+  										Save
+									</button> 
+								</div>
+								<span class="col-sm-3" ng-hide="editProfileMessage">
+									{{editProfileAnswer}}
+								</span> 
+							</li>												
+						</ul>
+						<ul id="userProfile">					
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Old password:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableOldPassword"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">New password:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableNewPassword"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3">Confirm password:</span> 
+								<div class="col-sm-4">	 									 
+									<input ng-model="editableConfirmPassword"> 
+								</div> 
+							</li>
+							<li class="col-sm-12" id="userProfile">
+								<span class="col-sm-3"></span> 
+								<div class="col-sm-2">	 									 
+									<button ng-click="saveNewUserPassword()" id="saveUserUpdate">
+  										Save
+									</button> 
+								</div>
+								<span class="col-sm-3" ng-hide="editProfileMessage">
+									{{editPasswordAnswer}}
+								</span> 
+							</li>												
+						</ul>
+					</div>
+				</div>
+</div>

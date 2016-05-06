@@ -19,6 +19,8 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/new-css.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
+<script type="text/javascript" src="resources/js/registration.js"></script>
+<link rel="stylesheet" href="resources/css/users.css" />
 
 </head>
 
@@ -164,10 +166,14 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" style="margin-left: 1%;">
-						<div class="col-md-7">
+						<div class="col-md-3">
+						
 							 Choose foto to upload : <input type="file" name="fileUpload"
-                              class="fileUpload">
+                              class="fileUpload" accept="image/*" onchange="loadFile(event)">                        
 						</div>
+						<div class="col-md-4">
+                              <img id="avatar" src="#" class="img-circle dropdown-toggle profile-image"/>
+                        </div>
 					</div>
 				</div>
 

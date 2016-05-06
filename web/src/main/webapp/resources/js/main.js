@@ -280,98 +280,63 @@ app.controller("getAvatar", function($scope, $http) {
 app.controller("editProfileCtrl", function($scope, $http) {
 	$http.get('getProfile').then(function(result) {
 		$scope.userProfile = result.data;
-	});
-	
-	$scope.editorNameEnabled = false;
-	$scope.enableNameEditor = function() {
-	    $scope.editorNameEnabled = true;
-	    $scope.editableFirstName = $scope.userProfile.firstName;
+		$scope.editableFirstName = $scope.userProfile.firstName;
 	    $scope.editableLastName = $scope.userProfile.lastName;
-	};
-	$scope.disableNameEditor = function() {
-	    $scope.editorNameEnabled = false;
-	};
-	$scope.saveName = function() {
+	    $scope.editableEmail = $scope.userProfile.email;
+	    $scope.editableGender = $scope.userProfile.gender;
+	    $scope.editableAge = $scope.userProfile.age;
+	    $scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
+	});
+	$scope.saveUser = function() {
 		$http({
 		    method: 'PUT',
-		    url: 'updateUserFirstLastName',
+		    url: 'updateUser',
 		    data: $.param({
 	            firstName: $scope.editableFirstName,
 	            lastName: $scope.editableLastName,
+	            username: $scope.editableUsername,
+	            email: $scope.editableEmail,
+	            gender: $scope.editableGender,
+	            age : $scope.editableAge,
+	            phoneNumber: $scope.editablePhoneNumber
 	        }),
 	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
-		$scope.userProfile.firstName = $scope.editableFirstName;
-		$scope.userProfile.lastName = $scope.editableLastName;
-		$scope.editorNameEnabled = false;
+		.success(function(result, status) {
+			$scope.editProfileAnswer = result;
+			$scope.userProfile.firstName = $scope.editableFirstName;
+			$scope.userProfile.lastName = $scope.editableLastName;
+			$scope.userProfile.username = $scope.editableUsername;
+		    $scope.userProfile.email = $scope.editableEmail;
+		    $scope.userProfile.gender = $scope.editableGender;
+		    $scope.userProfile.age = $scope.editableAge;
+		    $scope.userProfile.phoneNumber = $scope.editablePhoneNumber;
+			$scope.editProfileMessage = false;
+		})
+		.error(function(result, status) {
+			$scope.editProfileAnswer = result;
+		})		
 	}
 	
-	 
-	$scope.editorUsernameEnabled = false;
-	$scope.enableUsernameEditor = function() {
-	    $scope.editorUsernameEnabled = true;
-	    $scope.editableUsername = $scope.userProfile.username;
-	};
-	$scope.disableUsernameEditor = function() {
-	    $scope.editorUsernameEnabled = false;
-	};
-	$scope.saveUsername = function() {
+	$scope.saveNewUserPassword = function() {
 		$http({
 		    method: 'PUT',
-		    url: 'updateUsername',
+		    url: 'updateUserPassword',
 		    data: $.param({
-	            username: $scope.editableUsername
+	            oldPassword: $scope.editableOldPassword,
+	            newPassword: $scope.editableNewPassword,
+	            confirmPassword: $scope.editableConfirmPassword,
 	        }),
 	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
-		$scope.userProfile.username = $scope.editableUsername;
-		$scope.editorUsernameEnabled = false;
+		.success(function(result, status) {
+			$scope.editPasswordAnswer = result;
+			$scope.editPasswordMessage = false;
+		})
+		.error(function(data, status) {
+			$scope.editPasswordAnswer = result;
+		})		
 	}
-	  
-	$scope.editorEmailEnabled = false;
-	$scope.enableEmailEditor = function() {
-	    $scope.editorEmailEnabled = true;
-	    $scope.editableEmail = $scope.userProfile.email;
-	};
-	$scope.disableEmailEditor = function() {
-	    $scope.editorEmailEnabled = false;
-	};
-	
-	$scope.editorPasswordEnabled = false;
-	$scope.enablePasswordEditor = function() {
-	    $scope.editorPasswordEnabled = true;
-	    $scope.editablePassword = "Type new password";
-	};
-	$scope.disablePasswordEditor = function() {
-	    $scope.editorPasswordEnabled = false;
-	};
-	
-	$scope.editorGenderEnabled = false;
-	$scope.enableGenderEditor = function() {
-	    $scope.editorGenderEnabled = true;
-	};
-	$scope.disableGenderEditor = function() {
-	    $scope.editorGenderEnabled = false;
-	};
-	
-	$scope.editorAgeEnabled = false;
-	$scope.enableAgeEditor = function() {
-	    $scope.editorAgeEnabled = true;
-	    $scope.editableAge = $scope.userProfile.age;
-	};
-	$scope.disableAgeEditor = function() {
-	    $scope.editorAgeEnabled = false;
-	};
-	
-	$scope.editorPhoneNumberEnabled = false;
-	$scope.enablePhoneNumberEditor = function() {
-	    $scope.editorPhoneNumberEnabled = true;
-	    $scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
-	};
-	$scope.disablePhoneNumberEditor = function() {
-	    $scope.editorPhoneNumberEnabled = false;
-	};
-	
 });
 
 
@@ -433,9 +398,6 @@ app.controller('getGamesGlobalController', function ($scope, $http,$rootScope) {
 	});
 
 	$scope.gameSelect = function(id, name, $event) {
-
-		$scope.currentGameId = id;
-		$scope.$broadcast('sharingIdToDetailsModal', id);
 		
 		$scope.$on('settingRootRating', function (event, data) {
 			 $scope.gameRatingDisplay = data;
@@ -446,18 +408,19 @@ app.controller('getGamesGlobalController', function ($scope, $http,$rootScope) {
 			url : 'getGameDetails' + '/' + id
 		}).then(function mySucces(response){
 			$scope.gameDetail = response.data;
-			$scope.gameRating = response.data.rating;
-			document.getElementById("ratingsRange").value = response.data.rating;
 		}, function myError(response) {
 			alert("Getting games general data error");
 		});
-
+		
 		$http({
 			method: "GET",
 			url : 'getGameRatedByUser' + '/' + id
 		}).then(function mySucces(response){
 			$scope.gameRatingDisplay = response.data;
-			$scope.gameRating = response.data;
+			$scope.currentGameId = id;
+			
+			$scope.$broadcast('sharingIdToDetailsModal', 
+					{id:$scope.currentGameId, rating:$scope.gameRatingDisplay});
 		}, function myError(response) {
 			alert("Getting isRated game error");
 		});
@@ -474,28 +437,45 @@ app.controller('getGamesGlobalController', function ($scope, $http,$rootScope) {
 	
 });
 
+<<<<<<< HEAD
 app.controller('getGameDetailedInfoController', function ($scope, $http,$rootScope) {
 		
 	$scope.ratingSliderChanged = function(){
 		$scope.$emit('settingRootRating', $scope.gameRating);
 	}
 	
+=======
+app.controller('getGameDetailedInfoController', function ($scope, $http) {
+
+>>>>>>> e3b9790cbd4e3010a276111b37cdd1ca6af04a4d
 	$scope.$on('sharingIdToDetailsModal', function (event, data) {
-		$scope.currentGameId = data;
+		console.log('rating transferes(' + data.rating + ')');
+		console.log('id transferes(' + data.id + ')');
+		$scope.currentGameId = data.id;
+		$scope.starRating = data.rating;
+		$scope.hoverRating = 0;
+		console.log('setting successfully');
 	});
 	
-	$scope.ratingSaved = function() {
-		
-		$http({
-			method: "POST",
-			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + $scope.gameRating,
+    $scope.ratingClick = function (param) {
+    	console.log('mouseClick(' + param + ')');
+    	$http({
+    		method: "POST",
+			url : 'calculateRatings' + '/' + $scope.currentGameId + '/' + param,
 		}).then(function mySucces(response){
-			$scope.$emit('settingRootRating', $scope.gameRating);
-			alert("Rating saved");
+			$scope.$emit('settingRootRating', $scope.starRating);
 		}, function myError(response) {
 			alert("Saving rating error");
 		});
-	}
+    };
+
+    $scope.ratingHover = function (param) {
+        $scope.hoverRating = param;
+    };
+
+    $scope.ratingLeave = function (param) {
+        $scope.hoverRating = param + '*';
+    };
 	
 	//comment
 	$scope.gameuserId = 0;
@@ -542,10 +522,73 @@ app.controller('getGameDetailedInfoController', function ($scope, $http,$rootSco
 				  });
 			 $scope.commentForGame.push(comment);
 	}
-	
-	
-	
 });
+
+app.directive('starRating', function () {
+    return {
+        scope: {
+            rating: '=',
+            maxRating: '@',
+            readOnly: '@',
+            click: "&",
+            mouseHover: "&",
+            mouseLeave: "&"
+        },
+        restrict: 'EA',
+        template:
+            "<div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' " +
+            		"ng-repeat='idx in maxRatings track by $index'> \
+                    <img ng-src='{{((hoverValue + _rating) <= $index) " +
+                    "&& \"http://www.codeproject.com/script/ratings/images/star-empty-lg.png\" " +
+                    "|| \"http://www.codeproject.com/script/ratings/images/star-fill-lg.png\"}}' \
+                    ng-Click='isolatedClick($index + 1)' \
+                    ng-mouseenter='isolatedMouseHover($index + 1)' \
+                    ng-mouseleave='isolatedMouseLeave($index + 1)'></img> \
+            </div>",
+        compile: function (element, attrs) {
+            if (!attrs.maxRating || (Number(attrs.maxRating) <= 0)) {
+                attrs.maxRating = '5';
+            };
+        },
+        controller: function ($scope, $element, $attrs) {
+            $scope.maxRatings = [];
+
+            for (var i = 1; i <= $scope.maxRating; i++) {
+                $scope.maxRatings.push({});
+            };
+
+            $scope._rating = $scope.rating;
+			
+			$scope.isolatedClick = function (param) {
+
+				$scope.rating = $scope._rating = param;
+				$scope.hoverValue = 0;
+				$scope.click({
+					param: param
+				});
+			};
+
+			$scope.isolatedMouseHover = function (param) {
+
+				$scope._rating = 0;
+				$scope.hoverValue = param;
+				$scope.mouseHover({
+					param: param
+				});
+			};
+
+			$scope.isolatedMouseLeave = function (param) {
+
+				$scope._rating = $scope.rating;
+				$scope.hoverValue = 0;
+				$scope.mouseLeave({
+					param: param
+				});
+			};
+        }
+    };
+});
+
 app.controller("showAllTournaments", function ($scope, $http) {
     $http.get('/tournaments').success(function (data) {
         $scope.tournaments = data;

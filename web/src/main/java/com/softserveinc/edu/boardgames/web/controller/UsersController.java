@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +25,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class UsersController {
 
 	@Autowired
-	UserService userSevice;
+	UserService userService;
 
 	/**
 	 * Returns all users.
@@ -31,36 +33,31 @@ public class UsersController {
 	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> getAllUsers() {
-		List<User> userList = userSevice.findAll();
+		List<User> userList = userService.findAll();
 		return userList;
 	}
 	
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
 	public User getUser() {
-		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		return user;
 	}
 	
-	@RequestMapping(value = {"/updateUserFirstLastName"}, method = RequestMethod.PUT)
+	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
 	@ResponseBody
-	public String updateUserFirstLastName(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName) {
-		User user = userSevice.findOne(WebUtil.getPrincipalUsername());
+	public ResponseEntity<String> updateUser(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName,@RequestParam("email") String email, 
+			@RequestParam("gender") String gender, 	@RequestParam("age") Integer age, 
+			@RequestParam("phoneNumber") String phoneNumber) {
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		userSevice.updateUser(user);
-		return "good";
-	}
-	
-	@RequestMapping(value = {"/updateUsername"}, method = RequestMethod.PUT)
-	@ResponseBody
-	public String updateUsername(@RequestParam("username") String username) {
-		if (userSevice.findOne(username) == null) {
-			User user = userSevice.findOne(WebUtil.getPrincipalUsername());
-			user.setUsername(username);
-			userSevice.updateUser(user);
-		}
-		return "good";
+		user.setEmail(email);
+		user.setGender(gender);
+		user.setAge(age);
+		user.setPhoneNumber(phoneNumber);
+		userService.updateUser(user);
+		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
 }
