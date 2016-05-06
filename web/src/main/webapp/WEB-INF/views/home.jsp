@@ -4,9 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- CSS -->
+<link rel="stylesheet"
+	href="resources/bower_components/normalize-css/normalize.css" />
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
@@ -122,7 +124,7 @@
 			<!-- Friends Widget -->
 			<div id="friends_div">
 				<div>
-					<h1>FRIENDS</h1>
+					<h1>MY FRIENDS</h1>
 				</div>
 			</div>
 			<!-- End of Friends Widget -->
@@ -238,13 +240,13 @@
 								<div ng-show="isShowComment">
 								
                                    <table class = "table">
- 								   <tr><th></th><th></th></tr>
+ 								   <!-- <tr><th></th><th></th></tr> -->
                                     <tr ng-repeat="x in commentForGame">
                                     <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
                                     </table>
                                      <form data-ng-submit=submit()>
-													<input type="text" data-ng-model="comment" style = "width:70%" ><input
-														type="submit" ng-click="addComment" style = "width:20%; margin: 5px;">
+													<input type="text" data-ng-model="comment" style = "width:65%; margin-left: 2%; margin-bottom: 2%" ><input value="Comment"
+														type="submit" ng-click="addComment" style = "width:25%; margin-left: 2%; margin-bottom: 2%">
 												</form>
                                  </div>
 							</div>
