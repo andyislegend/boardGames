@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap' ]);
+var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable' ]);
 
 homeApp.config(function($routeProvider) {
 	$routeProvider
@@ -142,152 +142,188 @@ homeApp.controller("CreateGameCtrl", function($scope, $http) {
 	};
 });
 
-homeApp.controller('getGamesGlobalController', function($scope, $http) {
+homeApp.controller('getGamesGlobalController', function($scope, $http, $filter, ngTableParams) {
 
 	$http({
 		method : "GET",
 		url : 'getAllGames'
 	}).then(function mySucces(response) {
 		$scope.gamesGlobal = response.data;
+		$scope.$broadcast('sharingToInitGamesTable', $scope.gamesGlobal);	
 	}, function myError(response) {
 		alert("Getting games general data error");
 	});
-
+	
+	$scope.$on('sharingToInitGamesTable',
+		function(event, data) {
+		$scope.allGamesTable = new ngTableParams({
+		    page: 1,
+		    count: 8
+		 }, {
+		     total: data.length, 
+		     getData: function ($defer, params) {
+		    	 
+		    	 $scope.gamesGlobalDisplay = params.sorting() ? 
+		      			$filter('orderBy')(data, params.orderBy()) 
+		       			: data;
+		       	 $scope.gamesGlobalDisplay = params.filter() ? 
+		       			$filter('filter')($scope.gamesGlobalDisplay, params.filter()) 
+		       			: $scope.gamesGlobalDisplay;
+		         $scope.gamesGlobalDisplay = $scope.gamesGlobalDisplay.slice((params.page() - 1) 
+		            	* params.count(), params.page() * params.count());
+		         $defer.resolve($scope.gamesGlobalDisplay);
+		     }
+		 });
+	});
 });
 
-homeApp.controller('gameSelectController',
-		function($scope, $http, $routeParams) {
+homeApp.controller('gameSelectController', function($scope, $http, $routeParams) {
+	var id = $routeParams.id;
+	var name = $routeParams.name;
+	$scope.$on('settingRootRating', function(event, data) {
+		$scope.gameRatingDisplay = data;
+	});
 
-			var id = $routeParams.id;
-			var name = $routeParams.name;
-			$scope.$on('settingRootRating', function(event, data) {
-				$scope.gameRatingDisplay = data;
-			});
+	$scope.$on('refreshingGameDetails', function(event, data) {
+		$http({
+			method : "GET",
+			url : 'getGameDetails' + '/' + data
+		}).then(function mySucces(response) {
+			$scope.gameDetail = response.data;
+			console.log("Response data: " + responseData);
+		}, function myError(response) {
+			alert("Getting games general data error");
+		});
+	});
+	$scope.$emit('refreshingGameDetails', id);
 
-			$scope.$on('refreshingGameDetails', function(event, data) {
-				$http({
-					method : "GET",
-					url : 'getGameDetails' + '/' + data
-				}).then(function mySucces(response) {
-					$scope.gameDetail = response.data;
-					console.log("Response data: " + responseData);
-				}, function myError(response) {
-					alert("Getting games general data error");
-				});
-			});
-			$scope.$emit('refreshingGameDetails', id);
+	$http({
+		method : "GET",
+		url : 'getGameRatedByUser' + '/' + id
+	}).then(function mySucces(response) {
+		$scope.gameRatingDisplay = response.data;
+		$scope.currentGameId = id;
 
-			$http({
-				method : "GET",
-				url : 'getGameRatedByUser' + '/' + id
-			}).then(function mySucces(response) {
-				$scope.gameRatingDisplay = response.data;
-				$scope.currentGameId = id;
+		$scope.$broadcast('sharingIdToDetailsModal', {
+			id : $scope.currentGameId,
+			rating : $scope.gameRatingDisplay
+		});
 
-				$scope.$broadcast('sharingIdToDetailsModal', {
-					id : $scope.currentGameId,
-					rating : $scope.gameRatingDisplay
-				});
+	}, function myError(response) {
+		alert("Getting isRated game error");
+	});
 
-			}, function myError(response) {
-				alert("Getting isRated game error");
-			});
+	$http({
+		method : "GET",
+		url : 'getUserGamesOfGame' + '/' + name
+	}).then(function mySucces(response) {
+		$scope.userGamesOfGame = response.data;
+		$scope.$broadcast('sharingUserGamesOfGame', $scope.userGamesOfGame);
+	}, function myError(response) {
+		alert("Getting games userGames of game error");
+	});
+});	
 
-			$http({
-				method : "GET",
-				url : 'getUserGamesOfGame' + '/' + name
-			}).then(function mySucces(response) {
-				$scope.userGamesOfGame = response.data;
-			}, function myError(response) {
-				alert("Getting games userGames of game error");
+homeApp.controller('getGameDetailedInfoController', function($scope, $http, $rootScope, $filter, ngTableParams) {
+	
+		$scope.$on('sharingIdToDetailsModal', function(event, data) {
+			$scope.currentGameId = data.id;
+			$scope.starRating = data.rating;
+			$scope.hoverRating = 0;
+		});   
+		
+		$scope.$on('sharingUserGamesOfGame',
+			function(event, data) {
+			$scope.userGamesOfGameTable = new ngTableParams({
+				page: 1,
+				count: 8
+				}, {
+				    total: data.length, 
+				    getData: function ($defer, params) {	 
+				    $scope.userGamesOfGameDisplay = params.sorting() ? 
+				      	$filter('orderBy')(data, params.orderBy()) 
+				        : data;
+				    $scope.userGamesOfGameDisplay = params.filter() ? 
+				       	$filter('filter')($scope.userGamesOfGameDisplay, params.filter()) 
+				        : $scope.userGamesOfGameDisplay;
+				    $scope.userGamesOfGameDisplay = $scope.userGamesOfGameDisplay.slice((params.page() - 1) 
+				         * params.count(), params.page() * params.count());
+				    $defer.resolve($scope.userGamesOfGameDisplay);
+				}
 			});
 		});
 
-homeApp
-		.controller(
-				'getGameDetailedInfoController',
-				function($scope, $http, $rootScope) {
+		$scope.ratingClick = function(param) {
+			
+			console.log('mouseClick(' + param + ')');
+			$http({
+				method : "POST",
+				url : 'calculateRatings' + '/'
+					+ $scope.currentGameId + '/' + param,
+			}).then(function mySucces(response) {
+				$scope.$emit('settingRootRating',
+				$scope.starRating);
+				$scope.$emit('refreshingGameDetails',
+				$scope.currentGameId);
+			}, function myError(response) {
+				alert("Saving rating error");
+			});
+		};
 
-					$scope.$on('sharingIdToDetailsModal',
-							function(event, data) {
-								$scope.currentGameId = data.id;
-								$scope.starRating = data.rating;
-								$scope.hoverRating = 0;
-							});
+		$scope.ratingHover = function(param) {
+			$scope.hoverRating = param;
+		};
 
-					$scope.ratingClick = function(param) {
-						console.log('mouseClick(' + param + ')');
-						$http(
-								{
-									method : "POST",
-									url : 'calculateRatings' + '/'
-											+ $scope.currentGameId + '/'
-											+ param,
-								}).then(
-								function mySucces(response) {
-									$scope.$emit('settingRootRating',
-											$scope.starRating);
-									$scope.$emit('refreshingGameDetails',
-											$scope.currentGameId);
-								}, function myError(response) {
-									alert("Saving rating error");
-								});
-					};
+		$scope.ratingLeave = function(param) {
+			$scope.hoverRating = param + '*';
+		};
 
-					$scope.ratingHover = function(param) {
-						$scope.hoverRating = param;
-					};
+		// comment
+		$scope.gameuserId = 0;
+		$scope.isShowComment = false;
+		$scope.showComments = function(id) {
 
-					$scope.ratingLeave = function(param) {
-						$scope.hoverRating = param + '*';
-					};
+			$scope.gameuserId = id;
+			$scope.isShowComment = !$scope.isShowComment
+			$scope.commentForGame = [];
 
-					// comment
-					$scope.gameuserId = 0;
-					$scope.isShowComment = false;
-					$scope.showComments = function(id) {
+			$http.get('getCommentsForGame/' + id).then(
+					function(result) {
+						$scope.commentForGame = result.data;
+					});
 
-						$scope.gameuserId = id;
-						$scope.isShowComment = !$scope.isShowComment
-						$scope.commentForGame = [];
-
-						$http.get('getCommentsForGame/' + id).then(
-								function(result) {
-									$scope.commentForGame = result.data;
-								});
-
-						if (document.getElementById("UserGameNum" + id).className === "glyphicon glyphicon-envelope") {
-							$http.put(
-									"updateCountOfComment/" + id + "/"
-											+ $rootScope.NN).then(
-									function(result) {
-									});
-							document.getElementById("UserGameNum" + id).className = "glyphicon glyphicon-comment";
-						}
-					}
-
-					$scope.list = [];
-					$scope.submit = function() {
-						var comment = {
-							"gameID" : '' + $scope.gameuserId,
-							"commentText" : $scope.comment,
-							"username" : "",
-							"date" : new Date()
-						};
-						$http({
-							method : 'POST',
-							url : 'newComment',
-							headers : {
-								'Content-Type' : 'application/json'
-							},
-							data : comment
-						}).then(function successCallback(response) {
-							$scope.list.push(response.data);
-						}, function errorCallback(response) {
+			if (document.getElementById("UserGameNum" + id).className === "glyphicon glyphicon-envelope") {
+				$http.put(
+						"updateCountOfComment/" + id + "/"
+								+ $rootScope.NN).then(
+						function(result) {
 						});
-						$scope.commentForGame.push(comment);
-					}
-				});
+				document.getElementById("UserGameNum" + id).className = "glyphicon glyphicon-comment";
+			}
+		}
+
+		$scope.list = [];
+		$scope.submit = function() {
+		var comment = {
+			"gameID" : '' + $scope.gameuserId,
+			"commentText" : $scope.comment,
+			"username" : "",
+			"date" : new Date()
+		};
+		$http({
+			method : 'POST',
+			url : 'newComment',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : comment
+		}).then(function successCallback(response) {
+				$scope.list.push(response.data);
+		}, function errorCallback(response) {
+		});
+		$scope.commentForGame.push(comment);
+	}
+});
 
 homeApp
 		.directive(
