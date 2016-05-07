@@ -33,23 +33,20 @@
 	</table>
 	<hr />
 	<h4>Owners</h4>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Game edition</th>
-				<th>Year of production</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="x in userGamesOfGame">
-				<td>{{ x.username }}</td>
-				<td>{{ x.edition }}</td>
-				<td>{{ x.yearOfProduction }}</td>
-				<td><button ng-click="showComments(x.id)">Comment</button></td>
-			</tr>
-		</tbody>
+	<table ng-table="userGamesOfGameTable" show-filter="true" class="table table-striped">
+		<tr ng-repeat="x in userGamesOfGameDisplay">
+			<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }">
+				{{ x.username }}
+			</td>
+			<td title="'Edition'" sortable="'edition'" filter="{ 'edition': 'text' }">
+				{{ x.edition }}
+			</td>
+			<td title="'Year of production'" sortable="'yearOfProduction'" 
+				filter="{ 'yearOfProduction': 'number' }">{{ x.yearOfProduction }}</td>
+			<td title="'Action'">
+				<button ng-click="showComments(x.id)">Comment</button>
+			</td>
+		</tr>
 	</table>
 
 	<div>
