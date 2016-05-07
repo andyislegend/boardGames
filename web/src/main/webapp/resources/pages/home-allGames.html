@@ -2,12 +2,13 @@
 	<h3 style="text-align: center" class="text-primary">All Games</h3>
 	<div ng-controller="getGamesGlobalController">
 		<div class="widget widget_top-posts"></div>
-		<table ng-table="allGamesTable" class="table table-striped">
+		<table ng-table="allGamesTable" show-filter="true" class="table table-striped">
 			<tr ng-repeat="x in gamesGlobalDisplay">
-				<td title="'Name'">
+				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
 					<a href="#gameSelect/{{x.id}}/{{x.name}}">{{ x.name }}</a>
 				</td>
-				<td title="'Category'">{{ x.categoryName }}</td>
+				<td title="'Category'" sortable="'categoryName'" 
+					filter="{ 'categoryName': 'text' }">{{ x.categoryName }}</td>
 				<td title="'Min/Max players'">{{ x.minPlayers }}/{{ x.maxPlayers }}</td>
 			</tr>
 		</table>

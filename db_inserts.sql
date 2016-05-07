@@ -131,19 +131,21 @@ insert into user_role (username, value) values
 insert into category (name) values ('strategy');
 insert into category (name) values ('children games');
 insert into category (name) values ('logical');
+INSERT INTO `boardgames`.`category` (`id`, `name`) VALUES ('4', 'gambling');
 
 
 --  inserts to table game
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Monopoly','Bla la description',  2,4,1,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Memo','Bla la description',  2,4,2,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Mafia','Bla la description',  2,4,1,0.0); 
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Chess','Bla la description',  2,4,3,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Skrabble','Bla la description',  2,4,3,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Tic Tac Toe','Bla la description',  2,4,2,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Pictionary','Bla la description',  2,4,3,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Utopia','Bla la description',  2,4,1,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Dominos','Bla la description',  2,4,1,0.0);
-
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Monopoly','Bla la description',  2,4,1);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Memo','Bla la description',  2,4,2);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Mafia','Bla la description',  2,4,1); 
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Chess','Bla la description',  2,4,3);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Skrabble','Bla la description',  2,4,3);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Tic Tac Toe','Bla la description',  2,4,2);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Pictionary','Bla la description',  2,4,3);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Utopia','Bla la description',  2,4,1);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Dominos','Bla la description',  2,4,1);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Uno','Bla la description',  2,4,4);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Bridge','Bla la description',  2,4,4);
 
 -- inserts to table of users
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Ivory edition', '2008', '1', '1');
