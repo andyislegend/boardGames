@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap' ]);
+var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable' ]);
 
 homeApp.config(function($routeProvider) {
 	$routeProvider
@@ -142,17 +142,30 @@ homeApp.controller("CreateGameCtrl", function($scope, $http) {
 	};
 });
 
-homeApp.controller('getGamesGlobalController', function($scope, $http) {
+homeApp.controller('getGamesGlobalController', 
+		function($scope, $http, $filter, ngTableParams) {
 
 	$http({
 		method : "GET",
 		url : 'getAllGames'
 	}).then(function mySucces(response) {
 		$scope.gamesGlobal = response.data;
+		$scope.allGamesTable = new ngTableParams({
+	        page: 1,
+	        count: 10
+	    }, {
+	        total: $scope.gamesGlobal.length, 
+	        getData: function ($defer, params) {
+	            $scope.gamesGlobalDisplay = $scope.gamesGlobal.slice(
+	            		(params.page() - 1) * params.count()
+	            		, params.page() * params.count());
+	            $defer.resolve($scope.gamesGlobalDisplay);
+	        }
+	    });
+		
 	}, function myError(response) {
 		alert("Getting games general data error");
 	});
-
 });
 
 homeApp.controller('gameSelectController',
