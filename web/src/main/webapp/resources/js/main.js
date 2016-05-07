@@ -437,17 +437,16 @@ app.controller('getGamesGlobalController', function ($scope, $http,$rootScope) {
 	
 });
 
-<<<<<<< HEAD
+
 app.controller('getGameDetailedInfoController', function ($scope, $http,$rootScope) {
 		
 	$scope.ratingSliderChanged = function(){
 		$scope.$emit('settingRootRating', $scope.gameRating);
 	}
 	
-=======
+
 app.controller('getGameDetailedInfoController', function ($scope, $http) {
 
->>>>>>> e3b9790cbd4e3010a276111b37cdd1ca6af04a4d
 	$scope.$on('sharingIdToDetailsModal', function (event, data) {
 		console.log('rating transferes(' + data.rating + ')');
 		console.log('id transferes(' + data.id + ')');
