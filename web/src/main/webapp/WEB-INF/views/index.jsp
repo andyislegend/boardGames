@@ -36,14 +36,14 @@
 						style="height: 100px; weight: 100px;"></a>
 				</div>
 
-				<ul class="nav navbar-nav navbar-center">
+				<!-- <ul class="nav navbar-nav navbar-center">
 					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
 					<li><a href="#allGames"><i class="fa fa-home"></i> All
 							Games</a></li>
 					<li><a href="#about"><i class="fa fa-shield"></i> Events</a></li>
 					<li><a href="#tournaments"><i class="fa fa-comment"></i>
 							Tournaments</a></li>
-				</ul>
+				</ul> -->
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#myModal">Login</a></li>
