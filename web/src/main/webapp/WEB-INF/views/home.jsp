@@ -72,7 +72,7 @@
 					<li class="dropdown" style="background-color: transparent;"><a
 						href="" class="dropdown-toggle profile-image"
 						data-toggle="dropdown"> <img
-							style="height: 35px; width: 35px;" ng-src="{{avatar}}"
+							style="height: 25px; width: 25px;" ng-src="{{avatar}}"
 							class="img-circle dropdown-toggle profile-image"
 							data-toggle="dropdown"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
