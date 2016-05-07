@@ -28,7 +28,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Table(name = "gameUser")
 public class GameUser implements Serializable {
 
-
 	private static final long serialVersionUID = 9107019551046622111L;
 
 	@Id
@@ -45,10 +44,10 @@ public class GameUser implements Serializable {
 	@Column(name = "countOfComments")
 	private Integer countOfComments;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.REMOVE})
 	private Game game;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	private User user;
 
 	public GameUser() {
@@ -59,6 +58,16 @@ public class GameUser implements Serializable {
 		super();
 		this.edition = edition;
 		this.yearOfProduction = yearOfProduction;
+		this.countOfComments = 0;
+		this.game = game;
+		this.user = user;
+	}
+	
+	public GameUser(String edition, Integer yearOfProduction,Integer countOfComments, Game game, User user) {
+		super();
+		this.edition = edition;
+		this.yearOfProduction = yearOfProduction;
+		this.countOfComments = countOfComments;
 		this.game = game;
 		this.user = user;
 	}

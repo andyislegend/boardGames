@@ -37,7 +37,7 @@ public class CommentForGameService {
 		commentsForGameRepository.save(commentsForGame);
 	}
 	
-	public List<CommentsForGame> getAllCommentsByGameId(Integer id){
+	public List<CommentsForGameDTO> getAllCommentsByGameId(Integer id){
 		return commentsForGameRepository.getAllCommentsForGame(id);
 	}
 	

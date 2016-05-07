@@ -57,6 +57,7 @@
     color: whitesmoke;
     line-height: 30px;
     font-size: 14px;
-    letter-spacing: 2px
+    letter-spacing: 2px;
+    font-family: monospace;
 }
 

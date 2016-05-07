@@ -36,14 +36,14 @@
 						style="height: 100px; weight: 100px;"></a>
 				</div>
 
-				<ul class="nav navbar-nav navbar-center">
+				<!-- <ul class="nav navbar-nav navbar-center">
 					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
 					<li><a href="#allGames"><i class="fa fa-home"></i> All
 							Games</a></li>
 					<li><a href="#about"><i class="fa fa-shield"></i> Events</a></li>
 					<li><a href="#tournaments"><i class="fa fa-comment"></i>
 							Tournaments</a></li>
-				</ul>
+				</ul> -->
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#myModal">Login</a></li>
@@ -133,13 +133,13 @@
 
 						<div class="form-group"
 							ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-							<input type="text" name="username" id="username"
+							<input style="margin-left: 25%; width: 50%" type="text" name="username" id="username"
 								class="form-control" ng-model="loginForm.username"
 								placeholder="Enter Username" required />
 						</div>
 						<div class="form-group"
 							ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-							<input type="password" name="password" id="password"
+							<input style="margin-left: 25%; width: 50%" type="password" name="password" id="password"
 								class="form-control" ng-model="loginForm.password"
 								placeholder="Enter Password" required />
 						</div>
@@ -151,7 +151,7 @@
 						</p>
 						<div class="form-actions">
 							<button type="submit" ng-disabled="form.$invalid"
-								class="btn btn-info btn-lg btn-block">Login</button>
+								class="btn btn-info btn-lg btn-block" style="width: 50%;margin-left: 25%">Login</button>
 							<br> <a style="margin-left: 1%;" href="/newuser"
 								class="btn btn-link"><b>Don't Have an Account? Click
 									here!<b></a> <a style="margin-left: 35%;" type="button"
