@@ -5,16 +5,25 @@ public class UserGamesOfGameDTO {
 	private Integer id;
 	private String username;
 	private String edition;
+	private String status;
 	private Integer yearOfProduction;
 	
 	public UserGamesOfGameDTO() {}
 	
-	public UserGamesOfGameDTO(Integer id, String username, String edition, Integer yearOfProduction) {
+	public UserGamesOfGameDTO(Integer id, String username, 
+			String edition, Integer yearOfProduction, String status) {
 		super();
 		this.id = id;
+		this.status = status;
 		this.username = username;
 		this.edition = edition;
 		this.yearOfProduction = yearOfProduction;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public Integer getId() {
 		return id;

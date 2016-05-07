@@ -42,7 +42,12 @@
 				{{ x.edition }}
 			</td>
 			<td title="'Year of production'" sortable="'yearOfProduction'" 
-				filter="{ 'yearOfProduction': 'number' }">{{ x.yearOfProduction }}</td>
+				filter="{ 'yearOfProduction': 'number' }">
+				{{ x.yearOfProduction }}
+			</td>
+			<td title="'Availability'" sortable="'status'" filter="{ 'status': 'text' }">
+				{{x.status}}
+			</td>
 			<td title="'Action'">
 				<button ng-click="showComments(x.id)">Comment</button>
 			</td>

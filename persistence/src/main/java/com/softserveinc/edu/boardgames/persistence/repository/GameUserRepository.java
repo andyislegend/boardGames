@@ -26,7 +26,7 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 	public GameUserDTO getGameUserDTOById(@Param("id") Integer id);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO"
-			+"(gu.id, gu.user.username, gu.edition, gu.yearOfProduction) " +
+			+"(gu.id, gu.user.username, gu.edition, gu.yearOfProduction, gu.status) " +
 	       "from GameUser gu where gu.game.name = :name")
 	List<UserGamesOfGameDTO> getUserGameOfGame(@Param("name")String name);
 }
