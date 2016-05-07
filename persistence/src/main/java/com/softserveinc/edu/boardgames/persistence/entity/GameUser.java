@@ -43,6 +43,9 @@ public class GameUser implements Serializable {
 	
 	@Column(name = "countOfComments")
 	private Integer countOfComments;
+	
+	@Column(name = "status", columnDefinition="varchar(20) default 'private'")
+	private String status;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.REMOVE})
 	private Game game;
@@ -51,7 +54,7 @@ public class GameUser implements Serializable {
 	private User user;
 
 	public GameUser() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public GameUser(String edition, Integer yearOfProduction, Game game, User user) {
@@ -72,6 +75,14 @@ public class GameUser implements Serializable {
 		this.user = user;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public User getUser() {
 		return user;
 	}
