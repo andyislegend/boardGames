@@ -55,29 +55,18 @@
 				<p style="font-size: 14pt;" class="navbar-text">
 					<b>Board Games Crossing Web Project</b>
 				</p>
-				<div ng-controller = "GlobalSearchCTRL">
+
 				<form style="margin-left: 15%;" class="navbar-form navbar-left"
-					role="search"  role="form" >
-					<form id="searchthis"  action="/search" style="display: inline;"
+					role="search">
+					<form id="searchthis" action="/search" style="display: inline;"
 						method="get">
 						<input id="search-box" name="q" size="50" type="text"
-							placeholder="Search" data-ng-model = "searchWord" />
-						<button id="search-btn" ng-click = "search(searchWord)" type="submit" data-toggle="modal"
-									data-target="#SearchResultModal">
-							<span class="glyphicon glyphicon-search"></span>
+							placeholder="Search" />
+						<button id="search-btn" type="submit">
+							<span class="	glyphicon glyphicon-search"></span>
 						</button>
 					</form>
 				</form>
-				
-				<div ng-show = "test">
-				<div ng-repeat = "t in tournaments">
-				<p style = "color: white;">{{t.city}}</p>
-				</div>
-				
-				</div>
-								
-				</div>
-				
 
 				<ul class="nav navbar-nav navbar-right" ng-controller='getAvatar'>
 					<li><a class="btn btn-secondary btn-lg disabled">Welcome
@@ -108,32 +97,7 @@
 		</nav>
 	</header>
 	<!-- End of Top header -->
- 						<div >
- 						<div class="modal fade"  id="SearchResultModal" tabindex="-1"
-								role="dialog" role="document" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-										<h2>Result {{sear}}</h2>
-											<button type="button" class="close" data-dismiss="modal">
-												<span aria-hidden="true">&times;</span> <span
-													class="sr-only">Close</span>
-											</button>
-										</div>
-										<div class="modal-body" >	
-										<div ng-if = "time">
-										<div class = "resultOfSearchByUserGame"></div>	
-										<div ng-repeat = "t in tournaments">
-											<p>{{t.city}}</p>										
-										</div>
-										<div class = "resultOfSearchByEvents"></div>
-										</div>								
-										</div>
-									</div>
-								</div>
-							</div>
-							</div>
- 
+
 	<!-- Menu slider -->
 	<div>
 		<button class="btn btn-default" id="menu_btn">

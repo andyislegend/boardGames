@@ -69,7 +69,7 @@ homeApp
 						$scope.showMe = !$scope.showMe;
 						$http.get('gameUserDetail/' + id).then(
 								function(result) {
-									$scope.games = result;
+									$scope.games = result.data;
 								});
 					}
 
@@ -140,17 +140,6 @@ homeApp.controller("CreateGameCtrl", function($scope, $http) {
 		$scope.$parent.allGame.push(userGame);
 		$scope.$parent.allGame = {};
 	};
-});
-
-homeApp.controller('GlobalSearchCTRL', function($scope, $http, $rootScope) {
-	$scope.sear = 'M';
-	$scope.search = function(word){
-		$scope.test = true;
-		$http.get('searchBy/'+word).then(function(response) {			
-			$scope.searchResult = response;
-			$scope.tournaments = $scope.searchResult.data.tournaments;
-		}) ; 
-	}
 });
 
 homeApp.controller('getGamesGlobalController', function($scope, $http, $filter, ngTableParams) {
