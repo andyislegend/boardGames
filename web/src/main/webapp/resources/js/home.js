@@ -37,9 +37,9 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-users.html',
 		controller : 'getAllUsersCtrl'
 	})
-	.when('/search', {
+	.when('/search/:word', {
 		templateUrl : 'resources/pages/home-GlobalSearch.html',
-		controller : 'GlobalSearchController'
+		controller : 'search'
 	})
 	.when('/gameUserDetails/:id', {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
@@ -57,16 +57,43 @@ homeApp.controller("getAvatar", function($scope, $http) {
 		$scope.avatar = result.data;
 	});
 });
+homeApp.controller('getSearchWordCTRL', function($scope, $rootScope) {
+	$scope.searchWord = {id:'Monopf'};
+	$scope.submit = function(){
+		
+		$rootScope.n = 'n';
+	}
+})
+homeApp.controller('search', function($scope, $rootScope){
 
-homeApp.controller('GlobalSearchCTRL', function($scope, $http) {
-	$scope.sear = 'M';
-	$scope.search = function(word){
-		$scope.test = true;
-		$http.get('searchBy/'+word).then(function(response) {			
+	$scope.searchWord = {id:'f'+document.getElementById("search-box").value}; 
+	
+});
+
+homeApp.controller('GlobalSearchCTRL', function($scope, $http, $routeParams, ngTableParams) {
+	
+	$scope.searchWord = $scope.searchWord
+		$http.get('searchBy/'+$routeParams.word).then(function(response) {			
 			$scope.searchResult = response;
 			$scope.tournaments = $scope.searchResult.data.tournaments;
+			$scope.games = $scope.searchResult.data.gameUsers;
+			$scope.events = $scope.earchResult.data.events;
+			
+			$scope.usersTable = new ngTableParams({
+		        page: 1,
+		        count: 10
+		    }, {
+		        total: $scope.tournaments.length+$scope.games.length+$scope.events.length, 
+		        getData: function ($defer, params) {
+		            $scope.data = $scope.tournaments.slice((params.page() - 1) * params.count(), params.page() * params.count());
+		            $defer.resolve($scope.data);
+		        }
+		    });
+			
 		}) ; 
-	}
+	
+	
+	
 });
 
 homeApp

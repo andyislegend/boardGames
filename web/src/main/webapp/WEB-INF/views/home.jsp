@@ -55,19 +55,22 @@
 				<p style="font-size: 14pt;" class="navbar-text">
 					<b>Board Games Crossing Web Project</b>
 				</p>
-
-				<form style="margin-left: 15%;" class="navbar-form navbar-left"
+				
+		  <div ng-controller = "getSearchWordCTRL">	
+			<div ng-controller = "search">		
+				<form data-ng-submit=submit() style="margin-left: 15%;" class="navbar-form navbar-left"
 					role="search">
-					<form id="searchthis" action="/search" style="display: inline;"
+					<form id="searchthis"  style="display: inline;"
 						method="get">
 						<input id="search-box" name="q" size="50" type="text"
-							placeholder="Search" />
-						<button id="search-btn" type="submit">
-							<span class="	glyphicon glyphicon-search"></span>
-						</button>
+							placeholder="Search" data-ng-model ="search" />
+						<a href = "#search/{{searchWord.id}}">
+						<input type="submit">
+						</a>												
 					</form>
 				</form>
-
+		    </div>
+		   </div>
 				<ul class="nav navbar-nav navbar-right" ng-controller='getAvatar'>
 					<li><a class="btn btn-secondary btn-lg disabled">Welcome
 							back, <em><b style="color: white">${user}</b></em>
