@@ -28,7 +28,7 @@ public class GameUserService {
 		return gameUserRepo.getGameUserDTOById(id);
 	}
 	
-	public List<GameUser> getGameUsersByName(String name){
+	public List<GameUserDTO> getGameUsersByName(String name){
 		return gameUserRepo.getGameUserByName(name);
 	}
 

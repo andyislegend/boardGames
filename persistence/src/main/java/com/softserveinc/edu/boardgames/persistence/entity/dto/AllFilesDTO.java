@@ -6,7 +6,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 public class AllFilesDTO {
 	
-	List<GameUser> gameUsers;
+	List<GameUserDTO> gameUsers;
 	List<AllTournamentsDTO> tournaments;
 	List<Event> events;
 	
@@ -14,10 +14,10 @@ public class AllFilesDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public List<GameUser> getGameUsers() {
+	public List<GameUserDTO> getGameUsers() {
 		return gameUsers;
 	}
-	public void setGameUsers(List<GameUser> gameUsers) {
+	public void setGameUsers(List<GameUserDTO> gameUsers) {
 		this.gameUsers = gameUsers;
 	}
 	public List<AllTournamentsDTO> getTournaments() {

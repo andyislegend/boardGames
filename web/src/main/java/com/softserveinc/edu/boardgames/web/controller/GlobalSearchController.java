@@ -28,7 +28,7 @@ public class GlobalSearchController {
 	@ResponseBody
 	public AllFilesDTO getResultByGlobalSearch(@PathVariable String keyWord){
 		AllFilesDTO allFilesDTO = new AllFilesDTO();
-//		allFilesDTO.setGameUsers(gameUserService.getGameUsersByName(keyWord));
+		allFilesDTO.setGameUsers(gameUserService.getGameUsersByName(keyWord));
 		allFilesDTO.setTournaments(tournamentService.getTournamentsByWord(keyWord));
 		allFilesDTO.setEvents(eventsService.getAllEventsByName(keyWord));
 		return allFilesDTO;
