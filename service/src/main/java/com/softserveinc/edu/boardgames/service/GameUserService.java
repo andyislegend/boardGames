@@ -27,6 +27,10 @@ public class GameUserService {
 	public GameUserDTO getUserGamesDTOById(Integer id) {
 		return gameUserRepo.getGameUserDTOById(id);
 	}
+	
+	public List<GameUser> getGameUsersByName(String name){
+		return gameUserRepo.getGameUserByName(name);
+	}
 
 	public List<GameUser> getAllUserGames() {
 		return gameUserRepo.findAll();
@@ -38,7 +42,7 @@ public class GameUserService {
 	}
 
 	@Transactional
-	public void create(GameUser gameUser) {
+	public void add(GameUser gameUser) {
 		gameUserRepo.save(gameUser);
 	}
 	

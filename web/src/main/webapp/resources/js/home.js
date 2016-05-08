@@ -5,17 +5,19 @@ homeApp.controller("allUsersGameCtrl", function ($scope, $http, $rootScope) {
 	$scope.allGame = [];
     $http.get('getAllGamesCurUser').then(function (result) {
     	$scope.allGame = result.data;
+    	console.log($scope.allGame);
     	for(var i = 0; i<$scope.allGame.length;i++){
         	$scope.isNewComments($scope.allGame[i].id);
         }
     	});
-        
+    
+    
         $scope.showMe = false;
         $scope.myFunc = function (id) {
             $scope.games = [];
             $scope.showMe = !$scope.showMe;
             $http.get('gameUserDetail/'+id).then(function(result) {
-            	$scope.games = result;
+            	$scope.games = result.data;
 			});
         }
         
@@ -171,17 +173,16 @@ homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $ro
 		$scope.gameuserId = id;
 		$scope.isShowComment = !$scope.isShowComment		
 		$scope.commentForGame = [];
-		
+				
 		$http.get('getCommentsForGame/'+id).then(function(result) {
 			$scope.commentForGame = result.data;
 		});
+		if(document.getElementById("UserGameNum"+id).className === "glyphicon glyphicon-envelope"){
+			$http.put("updateCountOfComment/"+id+"/"+$rootScope.NN).then(function(result) {						
+			});
+		document.getElementById("UserGameNum"+id).className = "glyphicon glyphicon-comment";}		
+	}
 				
-				if(document.getElementById("UserGameNum"+id).className === "glyphicon glyphicon-envelope"){
-					$http.put("updateCountOfComment/"+id+"/"+$rootScope.NN).then(function(result) {						
-					});
-				document.getElementById("UserGameNum"+id).className = "glyphicon glyphicon-comment";}		
-			}
-	
 	$scope.list = [];
 	$scope.submit = function () {
 		var comment  = {
@@ -203,6 +204,17 @@ homeApp.controller('getGameDetailedInfoController', function ($scope, $http, $ro
 				  });
 			 $scope.commentForGame.push(comment);
 	}	
+});
+
+homeApp.controller('GlobalSearchCTRL', function($scope, $http, $rootScope) {
+	$scope.sear = 'M';
+	$scope.search = function(word){
+		$scope.test = true;
+		$http.get('searchBy/'+word).then(function(response) {			
+			$scope.searchResult = response;
+			$scope.tournaments = $scope.searchResult.data.tournaments;
+		}) ; 
+	}
 });
 
 homeApp.config(function ($routeProvider) {

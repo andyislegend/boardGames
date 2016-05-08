@@ -40,5 +40,9 @@ public class EventService {
 		return eventRepository.getAllEvents();
 	}
 	
+	public List<Event> getAllEventsByName(String name){
+		return eventRepository.findAllEventsByName(name);
+	}
+	
 	
 }
