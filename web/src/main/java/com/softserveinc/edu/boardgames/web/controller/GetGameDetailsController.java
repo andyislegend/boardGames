@@ -68,7 +68,7 @@ public class GetGameDetailsController {
 	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
 		User user = userService.getUser(WebUtil.getPrincipalUsername());
 		GameRatingNumeric gameRateNum;
-		try {
+		try { 
 			gameRateNum = gameRateNumService.getFromGameAndUser(gameId, user.getId());
 			System.out.println(gameId + " " + user.getId() + " " +  rating);
 			gameRateNumService.update(gameId, user.getId(), rating);

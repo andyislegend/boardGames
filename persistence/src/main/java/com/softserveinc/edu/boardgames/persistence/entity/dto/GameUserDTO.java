@@ -7,6 +7,7 @@ public class GameUserDTO {
 	private int yearOfProduction;
 	private String edition;
 	private int countOfComments;
+	private String status;
 	private String description;
 	private String rules;
 	private int maxPlayers;
@@ -17,7 +18,8 @@ public class GameUserDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GameUserDTO(int id, String name, String category, int yearOfProduction, String edition, int countOfComments, String description,
+	public GameUserDTO(int id, String name, String category, int yearOfProduction, String edition, 
+			int countOfComments, String status, String description,
 			String rules, int maxPlayers, int minPlayers) {
 		this.id = id;
 		this.name = name;
@@ -29,8 +31,17 @@ public class GameUserDTO {
 		this.rules = rules;
 		this.maxPlayers = maxPlayers;
 		this.minPlayers = minPlayers;
+		this.status = status;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public int getId() {
 		return id;
 	}

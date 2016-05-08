@@ -7,4 +7,20 @@
 <p>Description: {{games.description}}</p>
 <p>Max players: {{games.maxPlayers}}</p>
 <p>Min players: {{games.minPlayers}}</p>
+<p>Availability: {{games.status}}</p>
+
+<div class="container-fluid" ng-show="isYourGame">
+	<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
+</div>
+
+<div class="container-fluid" ng-show="isntYourGame">
+	<button class="btn btn-primary" ng-click="askOwnerToShare(games.id)">Ask owner!</button>
+</div>
+
+<div class="container-fluid" ng-show="isThereConfiramtion">
+	<p class="text-important">{{Username}} asks you to share this game</p>
+	<button class="btn btn-primary" ng-click="acceptGameConfirmation(games.id)">Accept</button>
+	<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
+</div>
+
 </div>

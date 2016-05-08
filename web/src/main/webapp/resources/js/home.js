@@ -96,63 +96,129 @@ homeApp.controller('GlobalSearchCTRL', function($scope, $http, $routeParams, ngT
 	
 });
 
-homeApp
-		.controller(
-				"allUsersGameCtrl",
-				function($scope, $http, $rootScope, $routeParams) {
-					$rootScope.NN = 100;
-					$scope.allGame = [];
-					$http.get('getAllGamesCurUser').then(function(result) {
-						$scope.allGame = result.data;
-						for (var i = 0; i < $scope.allGame.length; i++) {
-							$scope.isNewComments($scope.allGame[i].id);
+homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $routeParams) {
+	
+	$scope.isYourGame = false;
+	$scope.isntYourGame = false;
+	$scope.isThereConfiramtion = false;
+	
+	$rootScope.NN = 100;
+	$scope.allGame = [];
+	$http.get('getAllGamesCurUser').then(function(result) {
+		$scope.allGame = result.data;
+		for (var i = 0; i < $scope.allGame.length; i++) {
+			$scope.isNewComments($scope.allGame[i].id);
+		}
+	});
+
+	$http.get('gameUserDetail/' + $routeParams.id).then(
+		function(result) {
+			$scope.games = result.data;
+			$http({
+				method : "GET",
+				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
+			}).then(function mySucces(response) {
+				alert(response.data);
+				if (response.data === true && $scope.games.status === 'private') {
+					$scope.isYourGame = true;
+					$scope.isntYourGame = false;
+					$scope.isThereConfiramtion = false;
+				}
+				else if (response.data === false && $scope.games.status === 'available') {
+					$scope.isntYourGame = true;
+					$scope.isYourGame = false;
+					$scope.isThereConfiramtion = false;
+				}
+				else if (response.data === true && $scope.games.status === 'confirmation') {
+					$scope.isntYourGame = false;
+					$scope.isYourGame = false;
+					$scope.isThereConfiramtion = true;
+				}
+				else {
+					$scope.isYourGame = false;
+					$scope.isntYourGame = false;
+					$scope.isThereConfiramtion = false;
+				}
+			}, function myError(response) {
+				alert("checking if game belongs to user error");
+			});
+			
+	});
+	
+	$scope.showMe = false;
+	$scope.myFunc = function(id) {
+		$scope.games = [];
+		$scope.showMe = !$scope.showMe;
+		
+	}
+	
+	$scope.makeGameUserAvailable = function(id) {
+		$http({
+			method : "PUT",
+			url : 'makeGameUserAvailable' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Making game available success!");
+		}, function myError(response) {
+			alert("Making game available failed");
+		});
+	}
+	
+	$scope.askOwnerToShare = function(id) {
+		$http({
+			method : "PUT",
+			url : 'askGameUserOwnerToShare' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Your request has been sent!)");
+		}, function myError(response) {
+			alert("Failed to send your request");
+		});
+	}
+	
+	$scope.acceptGameConfirmation = function(id) {
+		$http({
+			method : "PUT",
+			url : 'acceptGameConfirmationRequest' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Accept request success");
+		}, function myError(response) {
+			alert("Accept request failed");
+		});
+	}
+	
+	$scope.declineGameConfirmation = function(id) {
+		$http({
+			method : "PUT",
+			url : 'declineGameConfirmationRequest' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Decline request success");
+		}, function myError(response) {
+			alert("Decline request failed");
+		});
+	}
+
+	$scope.isNewComments = function(id) {
+		var countOfComments = 0;
+		$scope.userGame = [];
+		$http.get('getCountOfCommentsByGameId/' + id)
+			.then(function(result) {
+				countOfComments = result.data;
+				$http.get('gameUserDetail/' + id)
+					.success(function(result) {
+						$scope.userGame = result;
+						if (countOfComments > $scope.userGame.countOfComments) {
+							$rootScope.NN = countOfComments;
+							document.getElementById("UserGameNum" + 
+									$scope.userGame.id).className = "glyphicon glyphicon-envelope";
 						}
-					});
-
-					$http.get('gameUserDetail/' + $routeParams.id).then(
-							function(result) {
-								$scope.games = result.data;
-							});
-					
-					$scope.showMe = false;
-					$scope.myFunc = function(id) {
-						$scope.games = [];
-						$scope.showMe = !$scope.showMe;
-						
-					}
-
-					$scope.isNewComments = function(id) {
-						var countOfComments = 0;
-						$scope.userGame = [];
-						$http
-								.get('getCountOfCommentsByGameId/' + id)
-								.then(
-										function(result) {
-											countOfComments = result.data;
-											$http
-													.get('gameUserDetail/' + id)
-													.success(
-															function(result) {
-																$scope.userGame = result;
-																if (countOfComments > $scope.userGame.countOfComments) {
-																	$rootScope.NN = countOfComments;
-																	document
-																			.getElementById("UserGameNum"
-																					+ $scope.userGame.id).className = "glyphicon glyphicon-envelope";
-																}
-															});
-										});
-					}
-
-					$scope.deleteGame = function(id) {
-						$http.get('deleteUserGame').success(function(data) {
-						});
-						$scope.allGame.splice(id - 1, 1);
-					}
-
 				});
-
-
+		});
+	}
+	$scope.deleteGame = function(id) {
+		$http.get('deleteUserGame').success(function(data) {
+		});
+		$scope.allGame.splice(id - 1, 1);
+	}
+});
 
 homeApp.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;
