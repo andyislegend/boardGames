@@ -18,7 +18,8 @@ public class GameUserDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GameUserDTO(int id, String name, String category, int yearOfProduction, String edition, int countOfComments, String status, String description,
+	public GameUserDTO(int id, String name, String category, int yearOfProduction, String edition, 
+			int countOfComments, String status, String description,
 			String rules, int maxPlayers, int minPlayers) {
 		this.id = id;
 		this.name = name;

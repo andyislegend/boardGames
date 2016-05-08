@@ -10,11 +10,11 @@
 <p>Availability: {{games.status}}</p>
 
 <div class="container-fluid" ng-show="isYourGame">
-	<button class="btn btn-primary">Want to share it</button>
+	<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
 </div>
 
 <div class="container-fluid" ng-show="isntYourGame">
-	<button class="btn btn-primary">Would like it</button>
+	<button class="btn btn-primary" ng-click="askOwnerToShare(games.id)">Ask owner!</button>
 </div>
 
 </div>

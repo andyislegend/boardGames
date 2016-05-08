@@ -79,18 +79,18 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 				method : "GET",
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
-				alert(response.data)
-				if (response.data === true){
-					isYourGame = true;
-					isntYourGame = false;
+				alert(response.data);
+				if (response.data === true && $scope.games.status === 'private'){
+					$scope.isYourGame = true;
+					$scope.isntYourGame = false;
 				}
-				else if (response.data === false) {
-					isYourGame = false;
-					isntYourGame = true;
+				else if (response.data === false && $scope.games.status === 'available') {
+					$scope.isntYourGame = true;
+					$scope.isYourGame = false;
 				}
 				else {
-					isYourGame = false;
-					isntYourGame = false;
+					$scope.isYourGame = false;
+					$scope.isntYourGame = false;
 				}
 			}, function myError(response) {
 				alert("checking if game belongs to user error");
@@ -103,6 +103,28 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 		$scope.games = [];
 		$scope.showMe = !$scope.showMe;
 		
+	}
+	
+	$scope.makeGameUserAvailable = function(id) {
+		$http({
+			method : "PUT",
+			url : 'makeGameUserAvailable' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Making game available success!");
+		}, function myError(response) {
+			alert("Making game available failed");
+		});
+	}
+	
+	$scope.askOwnerToShare = function(id) {
+		$http({
+			method : "PUT",
+			url : 'askGameUserOwnerToShare' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Your request has been sent!)");
+		}, function myError(response) {
+			alert("Failed to send your request");
+		});
 	}
 
 	$scope.isNewComments = function(id) {
