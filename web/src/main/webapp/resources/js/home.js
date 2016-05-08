@@ -37,6 +37,14 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-users.html',
 		controller : 'getAllUsersCtrl'
 	})
+	.when('/search', {
+		templateUrl : 'resources/pages/home-GlobalSearch.html',
+		controller : 'GlobalSearchController'
+	})
+	.when('/gameUserDetails/:id', {
+		templateUrl : 'resources/pages/home-gameUserDetails.html',
+		controller : 'getGameDetailedInfoController'
+	})
 
 	.otherwise({
 		redirectTo : '/statistics'
@@ -50,59 +58,76 @@ homeApp.controller("getAvatar", function($scope, $http) {
 	});
 });
 
-homeApp
-		.controller(
-				"allUsersGameCtrl",
-				function($scope, $http, $rootScope) {
-					$rootScope.NN = 100;
-					$scope.allGame = [];
-					$http.get('getAllGamesCurUser').then(function(result) {
-						$scope.allGame = result.data;
-						for (var i = 0; i < $scope.allGame.length; i++) {
-							$scope.isNewComments($scope.allGame[i].id);
+homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $routeParams) {
+	
+	$scope.isYourGame = false;
+	$scope.isntYourGame = false;
+	
+	$rootScope.NN = 100;
+	$scope.allGame = [];
+	$http.get('getAllGamesCurUser').then(function(result) {
+		$scope.allGame = result.data;
+		for (var i = 0; i < $scope.allGame.length; i++) {
+			$scope.isNewComments($scope.allGame[i].id);
+		}
+	});
+
+	$http.get('gameUserDetail/' + $routeParams.id).then(
+		function(result) {
+			$scope.games = result.data;
+			$http({
+				method : "GET",
+				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
+			}).then(function mySucces(response) {
+				alert(response.data)
+				if (response.data === true){
+					isYourGame = true;
+					isntYourGame = false;
+				}
+				else if (response.data === false) {
+					isYourGame = false;
+					isntYourGame = true;
+				}
+				else {
+					isYourGame = false;
+					isntYourGame = false;
+				}
+			}, function myError(response) {
+				alert("checking if game belongs to user error");
+			});
+			
+	});
+	
+	$scope.showMe = false;
+	$scope.myFunc = function(id) {
+		$scope.games = [];
+		$scope.showMe = !$scope.showMe;
+		
+	}
+
+	$scope.isNewComments = function(id) {
+		var countOfComments = 0;
+		$scope.userGame = [];
+		$http.get('getCountOfCommentsByGameId/' + id)
+			.then(function(result) {
+				countOfComments = result.data;
+				$http.get('gameUserDetail/' + id)
+					.success(function(result) {
+						$scope.userGame = result;
+						if (countOfComments > $scope.userGame.countOfComments) {
+							$rootScope.NN = countOfComments;
+							document.getElementById("UserGameNum" + 
+									$scope.userGame.id).className = "glyphicon glyphicon-envelope";
 						}
-					});
-
-					$scope.showMe = false;
-					$scope.myFunc = function(id) {
-						$scope.games = [];
-						$scope.showMe = !$scope.showMe;
-						$http.get('gameUserDetail/' + id).then(
-								function(result) {
-									$scope.games = result.data;
-								});
-					}
-
-					$scope.isNewComments = function(id) {
-						var countOfComments = 0;
-						$scope.userGame = [];
-						$http
-								.get('getCountOfCommentsByGameId/' + id)
-								.then(
-										function(result) {
-											countOfComments = result.data;
-											$http
-													.get('gameUserDetail/' + id)
-													.success(
-															function(result) {
-																$scope.userGame = result;
-																if (countOfComments > $scope.userGame.countOfComments) {
-																	$rootScope.NN = countOfComments;
-																	document
-																			.getElementById("UserGameNum"
-																					+ $scope.userGame.id).className = "glyphicon glyphicon-envelope";
-																}
-															});
-										});
-					}
-
-					$scope.deleteGame = function(id) {
-						$http.get('deleteUserGame').success(function(data) {
-						});
-						$scope.allGame.splice(id - 1, 1);
-					}
-
 				});
+		});
+	}
+	$scope.deleteGame = function(id) {
+		$http.get('deleteUserGame').success(function(data) {
+		});
+		$scope.allGame.splice(id - 1, 1);
+	}
+});
 
 homeApp.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;

@@ -60,13 +60,14 @@ public class GameUser implements Serializable {
 		
 	}
 	
-	public GameUser(String edition, Integer yearOfProduction, Game game, User user) {
+	public GameUser(String edition, Integer yearOfProduction, Game game, User user, String status) {
 		super();
 		this.edition = edition;
 		this.yearOfProduction = yearOfProduction;
 		this.countOfComments = 0;
 		this.game = game;
 		this.user = user;
+		this.status = status;
 	}
 	
 	public GameUser(String edition, Integer yearOfProduction,Integer countOfComments, Game game, User user) {
@@ -87,6 +88,10 @@ public class GameUser implements Serializable {
 	}
 
 	public String getStatus() {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+				+ " " + status);
 		return status;
 	}
 

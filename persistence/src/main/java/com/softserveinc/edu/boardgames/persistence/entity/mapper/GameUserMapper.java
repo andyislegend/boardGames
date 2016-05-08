@@ -19,6 +19,7 @@ public class GameUserMapper  {
 		gameUserDTO.setRules(gameUser.getGame().getRules());
 		gameUserDTO.setMaxPlayers(gameUser.getGame().getMaxPlayers());
 		gameUserDTO.setMinPlayers(gameUser.getGame().getMinPlayers());
+		gameUserDTO.setStatus(gameUser.getStatus());
 		return gameUserDTO;
 	}
 	

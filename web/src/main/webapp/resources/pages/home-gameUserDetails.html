@@ -1,0 +1,20 @@
+<div ng-controller = "allUsersGameCtrl" >
+
+<h1>{{games.name}}</h1>
+
+<p>Year of production: {{games.yearOfProduction}}</p>
+<p>Edition: {{games.edition}}</p>
+<p>Description: {{games.description}}</p>
+<p>Max players: {{games.maxPlayers}}</p>
+<p>Min players: {{games.minPlayers}}</p>
+<p>Availability: {{games.status}}</p>
+
+<div class="container-fluid" ng-show="isYourGame">
+	<button class="btn btn-primary">Want to share it</button>
+</div>
+
+<div class="container-fluid" ng-show="isntYourGame">
+	<button class="btn btn-primary">Would like it</button>
+</div>
+
+</div>
