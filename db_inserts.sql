@@ -126,42 +126,54 @@ insert into user_role (username, value) values
 (1, 'SUPERADMIN'),
 (1, 'USER');
 
-
 --  inserts to table category
 insert into category (name) values ('strategy');
 insert into category (name) values ('children games');
 insert into category (name) values ('logical');
-
+insert into category (name) values ('gambling');
 
 --  inserts to table game
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Monopoly','Bla la description',  2,4,1,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Memo','Bla la description',  2,4,2,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Mafia','Bla la description',  2,4,1,0.0); 
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Chess','Bla la description',  2,4,3,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Skrabble','Bla la description',  2,4,3,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Tic Tac Toe','Bla la description',  2,4,2,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Pictionary','Bla la description',  2,4,3,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Utopia','Bla la description',  2,4,1,0.0);
-insert into game (name,description,minPlayers,maxPlayers,categoryId, gameRating) values ('Dominos','Bla la description',  2,4,1,0.0);
-
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Monopoly','Bla la description',   2,4,1);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Memo','Bla la description',       2,4,2);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Mafia','Bla la description',      2,8,1); 
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Chess','Bla la description',      2,2,3);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Skrabble','Bla la description',   2,6,3);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Tic Tac Toe','Bla la description',2,4,2);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Pictionary','Bla la description', 2,4,3);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Utopia','Bla la description',     2,4,1);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Dominos','Bla la description',    2,6,1);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Uno','Bla la description',        2,8,4);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Bridge','Bla la description',     2,6,4);
+insert into game (name,description,minPlayers,maxPlayers,categoryId) values ('Poker','Poker description',       2,6,4);
 
 -- inserts to table of users
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Ivory edition', '2008', '1', '1');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart edition', '2010', '4', '2');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart edition', '1998', '3', '3');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Legendary edition', '1980', '2', '4');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart', '1999', '5', '2');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Golden rode', '2001', '6', '3');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Platinum', '2008', '7', '1');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart', '1300', '8', '2');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Awesome', '2010', '9', '3');
-
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart edition', '2010', '1', '2');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart edition', '1998', '1', '4');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Legendary edition', '1980', '1', '8');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart', '1999', '2', '2');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Golden rode', '2001', '2', '4');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Platinum', '2008', '2', '6');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart', '1300', '2', '8');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Awesome', '2010', '2', '10');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','EditionOfGame', '2030', '3', '1');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Awesome', '2010', '3', '3');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart edition', '2010', '3', '5');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Ivory edition', '2010', '3', '7');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Legendary edition', '2010', '3', '9');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Awesome', '2010', '4', '4');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Golden rode', '2010', '4', '6');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart edition', '2010', '4', '8');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Ivory edition', '2010', '4', '10');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Legendary edition', '2010', '5', '5');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Awesome', '2010', '5', '7');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Ivory edition', '2010', '5', '9');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`,`edition`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0','Standart edition', '2010', '5', '11');
 
 --  inserts to table status
 INSERT INTO `boardgames`.`status` (`statusOfFriend`) VALUES ('NOTCONSIDER');
 INSERT INTO `boardgames`.`status` (`statusOfFriend`) VALUES ('ACCEPTED');
 INSERT INTO `boardgames`.`status` (`statusOfFriend`) VALUES ('REJECTED');
-
 
 --  inserts to table friends
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '1', '2');

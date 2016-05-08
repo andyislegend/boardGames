@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div>
     <h1 style="text-align: center"> Users </h1>
     <div class="modal fade"
                   ng-controller="getAllUsersWithNegativeRating" id="myModalBannedUsers"
@@ -34,11 +34,11 @@
                         <th>
                         	<select name="selectCountries" id="repeatSelectCountry" ng-model="searchText.address.country.name" 
                         		ng-change="getCitiesByCountry()">
-                        		<option selected>Country</option>
+                        		<option value="">--Select Country--</option>
                         		<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
                         	</select>
                         	<select name="repeatSelect" id="repeatSelectCity" ng-model="searchText.address.city.name">
-                        		<option selected>City</option>
+                        		<option value="">--Select City--</option>
                         		<option ng-repeat="city in cities">{{city.name}}</option>
                         	</select>
                     	</th>

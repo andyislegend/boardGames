@@ -29,7 +29,6 @@ import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeader
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-//	SecurityUserDetailsService userDetailsService;
 	@Qualifier("customUserDetailsService")
 	UserDetailsService userDetailsService;
 
@@ -46,11 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-//	@Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//    	auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-//    }
 	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -71,9 +65,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			
 			
 			.authorizeRequests()
-			.antMatchers("/", "/index")
-			.permitAll().antMatchers("/newuser")
-			.permitAll()
+			.antMatchers("/", "/index").permitAll()
+			.antMatchers("/newuser").permitAll()
 			.antMatchers("/home/**").fullyAuthenticated()
 			
 			.and()
@@ -82,8 +75,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.usernameParameter("username")
 			.passwordParameter("password")
 			.successHandler(new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
-			.loginPage("/#/login")
-			.permitAll()
+//			.loginPage("/#/login")
+//			.permitAll()
             .and()
             .csrf().disable()
             .httpBasic()

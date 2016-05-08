@@ -76,10 +76,6 @@ public class Game implements Serializable{
 	
 	@OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL },mappedBy = "game")
     private Set<GameRatingNumeric> gameRatingNumeric;
-
-	@NotEmpty
-	@Column(name = "gameRating", nullable=false)
-	private String gameRating = GameRating.NOT_RATED.name();
 	
 	public Game(){}
 	
@@ -175,14 +171,6 @@ public class Game implements Serializable{
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-	
-	public String getGameRating() {
-		return gameRating;
-	}
-
-	public void setGameRating(String gameRating) {
-		this.gameRating = gameRating;
 	}
     
     public Set<Event> getEvents() {

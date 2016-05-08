@@ -2,15 +2,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
 <!DOCTYPE html>
-<html >
+<html>
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- CSS -->
+<link rel="stylesheet"
+	href="resources/bower_components/normalize-css/normalize.css" />
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
 	rel="stylesheet" />
+<link href="resources/bower_components/ng-table/dist/ng-table.min.css"
+	rel="stylesheet"/>
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
@@ -32,6 +36,8 @@
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="resources/js/home.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
+<script type="text/javascript" 
+	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
 <!-- End of Scripts -->
 
 </head>
@@ -80,7 +86,7 @@
 					<li class="dropdown" style="background-color: transparent;"><a
 						href="" class="dropdown-toggle profile-image"
 						data-toggle="dropdown"> <img
-							style="height: 35px; width: 35px;" ng-src="{{avatar}}"
+							style="height: 25px; width: 25px;" ng-src="{{avatar}}"
 							class="img-circle dropdown-toggle profile-image"
 							data-toggle="dropdown"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -157,7 +163,7 @@
 			<!-- Friends Widget -->
 			<div id="friends_div">
 				<div>
-					<h1>FRIENDS</h1>
+					<h1>MY FRIENDS</h1>
 				</div>
 			</div>
 			<!-- End of Friends Widget -->
@@ -273,13 +279,13 @@
 								<div ng-show="isShowComment">
 								
                                    <table class = "table">
- 								   <tr><th></th><th></th></tr>
+ 								   <!-- <tr><th></th><th></th></tr> -->
                                     <tr ng-repeat="x in commentForGame">
                                     <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
                                     </table>
                                      <form data-ng-submit=submit()>
-													<input type="text" data-ng-model="comment" style = "width:70%" ><input
-														type="submit" ng-click="addComment" style = "width:20%; margin: 5px;">
+													<input type="text" data-ng-model="comment" style = "width:65%; margin-left: 2%; margin-bottom: 2%" ><input value="Comment"
+														type="submit" ng-click="addComment" style = "width:25%; margin-left: 2%; margin-bottom: 2%">
 												</form>
                                  </div>
 							</div>
