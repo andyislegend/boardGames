@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.service.GameUserService;
+import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController
 public class UserGameSharingController {
@@ -16,11 +18,15 @@ public class UserGameSharingController {
 	@Autowired
 	private GameUserService gameUserService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value="/sendGameBorrowRequest/{gameUserId}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void sendGameBorrowRequest(@PathVariable Integer gameUserId) {
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus("confirmation");
+		gameUserToUpdate.setUserApplierId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
 		gameUserService.update(gameUserToUpdate);
 	}
 

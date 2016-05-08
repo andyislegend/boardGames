@@ -46,13 +46,16 @@ public class GameUser implements Serializable {
 	
 	@Column(name = "status", columnDefinition="varchar(20) default 'private'")
 	private String status;
+	
+	@Column(name = "userApplierId", columnDefinition="int(11) default '0'")
+	private Integer userApplierId;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.REMOVE})
 	private Game game;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	private User user;
-
+	
 	public GameUser() {
 		
 	}
@@ -75,6 +78,14 @@ public class GameUser implements Serializable {
 		this.user = user;
 	}
 	
+	public Integer getUserApplierId() {
+		return userApplierId;
+	}
+
+	public void setUserApplierId(Integer userApplierId) {
+		this.userApplierId = userApplierId;
+	}
+
 	public String getStatus() {
 		return status;
 	}
