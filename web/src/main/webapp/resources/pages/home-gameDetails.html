@@ -46,7 +46,7 @@
 				{{ x.yearOfProduction }}
 			</td>
 			<td title="'Availability'" sortable="'status'" filter="{ 'status': 'text' }">
-				{{x.status}}
+				<a href="#gameUserDetails">{{x.status}}</a>
 			</td>
 			<td title="'Action'">
 				<button ng-click="showComments(x.id)">Comment</button>

@@ -96,15 +96,6 @@ public class Game implements Serializable{
 		this.rating = rating;
 	}
 
-	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category, GameRating gameRating) {
-		this.name = name;
-		this.description = description;
-		this.minPlayers = minPlayers;
-		this.maxPlayers = maxPlayers;
-		this.category = category;
-	}
-
 	public Set<GameRatingNumeric> getGameRatingNumeric() {
 		return gameRatingNumeric;
 	}
