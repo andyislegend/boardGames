@@ -62,6 +62,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 	
 	$scope.isYourGame = false;
 	$scope.isntYourGame = false;
+	$scope.isThereConfiramtion = false;
 	
 	$rootScope.NN = 100;
 	$scope.allGame = [];
@@ -80,17 +81,25 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
 				alert(response.data);
-				if (response.data === true && $scope.games.status === 'private'){
+				if (response.data === true && $scope.games.status === 'private') {
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
+					$scope.isThereConfiramtion = false;
 				}
 				else if (response.data === false && $scope.games.status === 'available') {
 					$scope.isntYourGame = true;
 					$scope.isYourGame = false;
+					$scope.isThereConfiramtion = false;
+				}
+				else if (response.data === true && $scope.games.status === 'confirmation') {
+					$scope.isntYourGame = false;
+					$scope.isYourGame = false;
+					$scope.isThereConfiramtion = true;
 				}
 				else {
 					$scope.isYourGame = false;
 					$scope.isntYourGame = false;
+					$scope.isThereConfiramtion = false;
 				}
 			}, function myError(response) {
 				alert("checking if game belongs to user error");
@@ -124,6 +133,28 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			alert("Your request has been sent!)");
 		}, function myError(response) {
 			alert("Failed to send your request");
+		});
+	}
+	
+	$scope.acceptGameConfirmation = function(id) {
+		$http({
+			method : "PUT",
+			url : 'acceptGameConfirmationRequest' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Accept request success");
+		}, function myError(response) {
+			alert("Accept request failed");
+		});
+	}
+	
+	$scope.declineGameConfirmation = function(id) {
+		$http({
+			method : "PUT",
+			url : 'declineGameConfirmationRequest' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Decline request success");
+		}, function myError(response) {
+			alert("Decline request failed");
 		});
 	}
 

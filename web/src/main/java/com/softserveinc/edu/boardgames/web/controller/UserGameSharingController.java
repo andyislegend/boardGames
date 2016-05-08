@@ -46,4 +46,23 @@ public class UserGameSharingController {
 		gameUserToUpdate.setUserApplierId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
 		gameUserService.update(gameUserToUpdate);
 	}
+	
+	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public void acceptGameConfirmation(@PathVariable Integer gameUserId) {
+		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setUser(userService.findById(gameUserToUpdate.getUserApplierId()));
+		gameUserToUpdate.setUserApplierId(0);
+		gameUserToUpdate.setStatus("private");
+		gameUserService.update(gameUserToUpdate);
+	}
+	
+	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public void declineGameConfirmation(@PathVariable Integer gameUserId) {
+		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setUserApplierId(0);
+		gameUserToUpdate.setStatus("available");
+		gameUserService.update(gameUserToUpdate);
+	}
 }

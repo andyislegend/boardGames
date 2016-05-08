@@ -17,4 +17,10 @@
 	<button class="btn btn-primary" ng-click="askOwnerToShare(games.id)">Ask owner!</button>
 </div>
 
+<div class="container-fluid" ng-show="isThereConfiramtion">
+	<p class="text-important">{{Username}} asks you to share this game</p>
+	<button class="btn btn-primary" ng-click="acceptGameConfirmation(games.id)">Accept</button>
+	<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
+</div>
+
 </div>
