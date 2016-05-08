@@ -273,10 +273,10 @@
 
 			<!-- MyGames Widget -->
 			<div id="mygames_div">
-				<div >
-					<h1 style="text-align: center">MY GAMES</h1>
+				<div ng-controller="allUsersGameCtrl" >
+					<h1 style="text-align: center">MY GAMES:{{allGame.length}}</h1>
 				<div>
-					<div ng-controller="allUsersGameCtrl">
+					<div >
 							<div ng-controller="CreateGameCtrl">
 								<div>
 								<input type="submit" value="ADD GAME"
