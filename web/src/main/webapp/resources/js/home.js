@@ -37,6 +37,14 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-users.html',
 		controller : 'getAllUsersCtrl'
 	})
+	.when('/search', {
+		templateUrl : 'resources/pages/home-GlobalSearch.html',
+		controller : 'GlobalSearchController'
+	})
+	.when('/gameUserDetails/:id', {
+		templateUrl : 'resources/pages/home-gameUserDetails.html',
+		controller : 'getGameDetailedInfoController'
+	})
 
 	.otherwise({
 		redirectTo : '/statistics'
@@ -53,7 +61,7 @@ homeApp.controller("getAvatar", function($scope, $http) {
 homeApp
 		.controller(
 				"allUsersGameCtrl",
-				function($scope, $http, $rootScope) {
+				function($scope, $http, $rootScope, $routeParams) {
 					$rootScope.NN = 100;
 					$scope.allGame = [];
 					$http.get('getAllGamesCurUser').then(function(result) {
@@ -63,14 +71,16 @@ homeApp
 						}
 					});
 
+					$http.get('gameUserDetail/' + $routeParams.id).then(
+							function(result) {
+								$scope.games = result.data;
+							});
+					
 					$scope.showMe = false;
 					$scope.myFunc = function(id) {
 						$scope.games = [];
 						$scope.showMe = !$scope.showMe;
-						$http.get('gameUserDetail/' + id).then(
-								function(result) {
-									$scope.games = result.data;
-								});
+						
 					}
 
 					$scope.isNewComments = function(id) {
@@ -103,6 +113,8 @@ homeApp
 					}
 
 				});
+
+
 
 homeApp.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;

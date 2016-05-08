@@ -203,7 +203,7 @@
 										<th></th>
 									</tr>
 									<tr ng-repeat="game in allGame">
-										<td><a href = "" ng-click="myFunc(game.id)" data-toggle="modal" data-target="#myModalMyGames">
+										<td><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">
 										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
 										<td  >												
@@ -218,30 +218,7 @@
 										</td>
 									</tr>
 								</table>
-									<div class="modal fade" id="myModalMyGames" tabindex="-1" role="dialog"
-                           aria-labelledby="myModalLabel" aria-hidden="true">
-                           <div class="modal-dialog">
-                              <div class="modal-content">
-                              <div class="modal-header">
-                                    <h1>{{games.name}}</h1>
-                                    </div>
-                                 <div class="modal-body">
-                                    <p>Year of production: {{games.yearOfProduction}}</p>
-                                    <p>Edition: {{games.edition}}</p>
-                                    <p>Description: {{games.description}}</p>
-                                    <p>Max players: {{games.maxPlayers}}</p>
-                                    <p>Min players: {{games.minPlayers}}</p>
-                                 </div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
-									
-								</div>
-                           </div>
-                        </div>
-					</div>
-								<div ng-show="isShowComment">
-								
+								<div ng-show="isShowComment">		
                                    <table class = "table">
  								   <!-- <tr><th></th><th></th></tr> -->
                                     <tr ng-repeat="x in commentForGame">
