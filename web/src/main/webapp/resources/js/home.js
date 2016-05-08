@@ -58,6 +58,17 @@ homeApp.controller("getAvatar", function($scope, $http) {
 	});
 });
 
+homeApp.controller('GlobalSearchCTRL', function($scope, $http) {
+	$scope.sear = 'M';
+	$scope.search = function(word){
+		$scope.test = true;
+		$http.get('searchBy/'+word).then(function(response) {			
+			$scope.searchResult = response;
+			$scope.tournaments = $scope.searchResult.data.tournaments;
+		}) ; 
+	}
+});
+
 homeApp
 		.controller(
 				"allUsersGameCtrl",
