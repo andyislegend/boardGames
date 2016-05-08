@@ -69,7 +69,7 @@ homeApp
 						$scope.showMe = !$scope.showMe;
 						$http.get('gameUserDetail/' + id).then(
 								function(result) {
-									$scope.games = result;
+									$scope.games = result.data;
 								});
 					}
 

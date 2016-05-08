@@ -223,14 +223,14 @@
                            <div class="modal-dialog">
                               <div class="modal-content">
                               <div class="modal-header">
-                                    <h1 ng-repeat = "game in games">{{game.name}}</h1>
+                                    <h1>{{games.name}}</h1>
                                     </div>
-                                 <div class="modal-body" ng-repeat = "game in games">
-                                    <p>Year of production: {{game.yearOfProduction}}</p>
-                                    <p>Edition: {{game.edition}}</p>
-                                    <p>Description: {{game.description}}</p>
-                                    <p>Max players: {{game.maxPlayers}}</p>
-                                    <p>Min players: {{game.minPlayers}}</p>
+                                 <div class="modal-body">
+                                    <p>Year of production: {{games.yearOfProduction}}</p>
+                                    <p>Edition: {{games.edition}}</p>
+                                    <p>Description: {{games.description}}</p>
+                                    <p>Max players: {{games.maxPlayers}}</p>
+                                    <p>Min players: {{games.minPlayers}}</p>
                                  </div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"

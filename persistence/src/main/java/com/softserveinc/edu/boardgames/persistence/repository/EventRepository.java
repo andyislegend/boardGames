@@ -27,5 +27,6 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 			+ "from Event event")
       List<AllEventsDto> getAllEvents();
 
+	List<Event> findAllEventsByName(String name);
 
 }

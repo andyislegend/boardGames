@@ -50,4 +50,8 @@ public class TournamentService {
     public List<AllTournamentsDTO> findTournamentsByUserName(String username){
         return tournamentRepository.getUserTournamentsByUserName(username);
     }
+    
+    public List<AllTournamentsDTO> getTournamentsByWord(String name){
+    	return tournamentRepository.findAllTournamentsByWord(name);
+    }
 }

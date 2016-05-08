@@ -59,7 +59,7 @@ public class CurrentUserGameController {
 		GameUser gameUser = new GameUser();
 		gameUser = GameUserMapper.toEntity(gameUserDTO);
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-		gameUserService.create(gameUser);
+		gameUserService.add(gameUser);
 		return "";
 	}
 	

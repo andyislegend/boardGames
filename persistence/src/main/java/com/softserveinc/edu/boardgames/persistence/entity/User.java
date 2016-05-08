@@ -20,6 +20,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.PostUpdate;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -292,6 +294,14 @@ public class User implements Serializable {
 
 	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
 		this.gameRatingNumeric = gameRatingNumeric;
+	}
+	
+	@PreUpdate
+	public void banUser() {
+		if(this.getUserRating() < -5) {
+			this.setState(UserStatus.BANNED.name());
+			System.out.println("This works");
+		}
 	}
 
 	@Override

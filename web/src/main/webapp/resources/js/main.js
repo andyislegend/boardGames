@@ -15,7 +15,7 @@ app.controller("allUsersGameCtrl", function ($scope, $http,$rootScope) {
             $scope.games = [];
             $scope.showMe = !$scope.showMe;
             $http.get('gameUserDetail/'+id).then(function(result) {
-            	$scope.games = result;
+            	$scope.games = result.data;
 			});
         }
         
