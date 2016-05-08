@@ -21,6 +21,7 @@ margin-right: 10px;
 }
 
 .count{
+	position: absolute;
     background: #D00000;
     height: 20px;
     width: 20px;
@@ -36,6 +37,7 @@ margin-right: 10px;
     z-index: 1;
 }
 .count-of-messages{
+	position: absolute;
     background: #004C99;
     height: 20px;
     width: 20px;
@@ -54,7 +56,7 @@ margin-right: 10px;
 float: left;
 display: inline-table;
 width: 300px;
-height: 300px;
+height: 100%;
 box-shadow: 0 0 10px rgba(0,0,0,0.5);
 border: 1px solid #FFF;
 }
@@ -225,7 +227,7 @@ display: inline-flex;
 margin-top: 10px;
 margin-left: 10px;
 text-decoration: none;
-width: 100%;
+width: 90%;
 height: 50px;
 
 }
@@ -315,7 +317,6 @@ border: 1px solid #FFF;
 } 
 .global{
 display: flex;
-/* margin-left: 150px; */
 } 
 .messanger-model{
     border-radius: 5px;
@@ -369,4 +370,8 @@ box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	margin-bottom: 2px;
 	border-radius: 5px;
 	background: linear-gradient(#E8F2FF, #99CCFF);
+}
+.persons{
+	max-height: 170px;
+    overflow: auto;
 }

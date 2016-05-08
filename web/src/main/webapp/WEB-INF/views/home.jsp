@@ -128,8 +128,6 @@
 			<!-- Friends Widget -->
 			<div id="friends_div">
 				<div>
-				
-				
 				<div class="global" ng-controller="friendsCtrl">
 		<div class="search-result" ng-show="click" > <!-- ng-show="name.length > 0" -->
 			<div class="header-search">Find your friends in our Application</div>
@@ -164,7 +162,7 @@
 				</div>
 			</div>
 		</div>
-													<!-- Start modal window -->
+						<!-- Start modal window -->
 		<div id="myModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content over-modal-content">
@@ -187,9 +185,6 @@
 								</div>
 							</div>
 							<div id="menu2" class="tab-pane fade">
-								
-								
-								
 								<div ng-repeat="friendShip in userOffered">
 									<div class="user-offered" ng-class="{myRejected: friendShip.status.statusOfFriend == 'REJECTED'}">
 										<div class="person">
@@ -203,8 +198,6 @@
 									</div>
 								</div>
 							</div>
-							
-							
 						</div>
 						</div>
 						<div class="modal-footer">
@@ -234,7 +227,7 @@
 							  </li>
 							</ul>
 						</div>
-						
+			
 						<div class="message-state">
 							<div class="messages" >
 							<div ng-repeat="message in messages" ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}" ng-mouseenter="readMessage(message.id)">
@@ -250,7 +243,6 @@
 						
 					</div>
 			      </div>
-			      
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			      </div>
@@ -258,14 +250,8 @@
 			
 			  </div>
 			</div>
-
-			
-			
-			
-			
-			
-			
-			<div class="persons" ng-repeat="friend in friends">
+			<div class="persons">
+			<div ng-repeat="friend in friends">
 				<div class="proba">
 					<div class="person">
 						<div class="over-ava"><a href="" type="button"><img class="ava" src="resources/images/default-avatar.jpg" /></a></div>
@@ -274,20 +260,9 @@
 					</div>
 				</div>
 			</div>
+			</div>
 		</div>
 		</div>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-
 				</div>
 			</div>
 			<!-- End of Friends Widget -->
