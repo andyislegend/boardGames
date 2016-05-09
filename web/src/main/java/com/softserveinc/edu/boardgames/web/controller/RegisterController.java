@@ -72,7 +72,7 @@ public class RegisterController {
 	@ResponseBody
 	public ResponseEntity<String> addNewUser(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName,@RequestParam("email") String email, 
-			@RequestParam("gender") String gender, 	@RequestParam("password") String username, 
+			@RequestParam("gender") String gender, 	@RequestParam("username") String username, 
 			@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
 
 		
