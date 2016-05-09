@@ -129,7 +129,7 @@ public class RegisterController {
 		newUser.setGender(gender);
 		userService.createUser(newUser);
 
-		return new ResponseEntity<String>("New User successfully registered", HttpStatus.OK);
+		return new ResponseEntity<String>("Dear,"+newUser.getUsername()+" We have sent you a message in order to verify Your email and confirm Your registration. After You confirm, You will be able to Sign in.", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
