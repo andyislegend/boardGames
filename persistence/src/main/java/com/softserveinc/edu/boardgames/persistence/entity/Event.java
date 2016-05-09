@@ -49,18 +49,17 @@ public class Event implements Serializable{
 	@Column(name = "imgsrc")
 	private String imgsrc;
 	
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Game.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Game.class, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "gameId", referencedColumnName = "id")
 	private Game game;
 
 	public Event(){}
 	
 	
-
 	public String getImgsrc() {
 		return imgsrc;
 	}

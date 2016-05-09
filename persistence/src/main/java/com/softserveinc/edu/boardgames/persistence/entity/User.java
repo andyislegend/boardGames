@@ -139,7 +139,7 @@ public class User implements Serializable {
 	 * Describes address where user lives. Has a many to one relationship to
 	 * address table.
 	 */
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL})
 	@JoinColumn(name = "addressId", referencedColumnName = "id")
 	private Address address;
 

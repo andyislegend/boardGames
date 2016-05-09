@@ -48,7 +48,7 @@ public class Tournament implements Serializable {
      * Kind of game which is tournament organized on
      */
     @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
     private Game game;
 
     @Column

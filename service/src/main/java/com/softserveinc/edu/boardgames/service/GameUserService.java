@@ -12,6 +12,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
+import com.softserveinc.edu.boardgames.persistence.repository.CommentsForGameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 
 @Service
@@ -20,6 +21,9 @@ public class GameUserService {
 
 	@Autowired
 	private GameUserRepository gameUserRepo;
+	
+	@Autowired
+	private CommentsForGameRepository commentsForGameRepository;
 
 	public GameUser getUserGamesById(Integer id) {
 		return gameUserRepo.getGameUserById(id);
@@ -45,6 +49,11 @@ public class GameUserService {
 	@Transactional
 	public void add(GameUser gameUser) {
 		gameUserRepo.save(gameUser);
+	}
+	@Transactional
+	public void deleteById(Integer id) {
+		commentsForGameRepository.deleteByGameUser(id);
+		gameUserRepo.deleteById(id);
 	}
 	
 	@Transactional

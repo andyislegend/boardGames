@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.persistence.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,10 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO
 
 @Repository
 public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
+	
+	@Modifying
+	@Query("delete from GameUser g where g.id = :id")
+	public void deleteById(@Param("id")Integer id);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO(u.id, u.game.name, u.game.category.name, u.yearOfProduction,"
 			+ " u.edition, u.countOfComments, u.status, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.game.name like %:name% ")

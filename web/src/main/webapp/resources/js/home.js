@@ -285,9 +285,9 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 		});
 	}
 	$scope.deleteGame = function(id) {
-		$http.get('deleteUserGame').success(function(data) {
+		$http.delete('deleteUserGame/'+id).success(function(data) {
 		});
-		$scope.allGame.splice(id - 1, 1);
+		$scope.allGame.splice($scope.allGame[id], 1);
 		scope.$apply();
 	}
 });
