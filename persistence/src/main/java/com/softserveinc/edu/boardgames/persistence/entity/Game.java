@@ -51,9 +51,6 @@ public class Game implements Serializable{
 	@Column(name = "rules")
 	private String rules;
 	
-	@Column(name = "ratings")
-	private Integer rating;
-	
 	@Column(name = "minPlayers")
 	private Integer minPlayers;
 	
@@ -88,23 +85,6 @@ public class Game implements Serializable{
 		this.category = category;
 	}
 	
-	public Integer getRating() {
-		return rating;
-	}
-
-	public void setRating(Integer rating) {
-		this.rating = rating;
-	}
-
-	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category, GameRating gameRating) {
-		this.name = name;
-		this.description = description;
-		this.minPlayers = minPlayers;
-		this.maxPlayers = maxPlayers;
-		this.category = category;
-	}
-
 	public Set<GameRatingNumeric> getGameRatingNumeric() {
 		return gameRatingNumeric;
 	}

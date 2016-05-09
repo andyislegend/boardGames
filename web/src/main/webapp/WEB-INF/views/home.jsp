@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="resources/css/menu.css" />
 <link rel="stylesheet" href="resources/css/search.css" />
 <link rel="stylesheet" href="resources/css/users.css" />
+<link rel="stylesheet" href="resources/css/friend.css" />
 <!-- End of CSS -->
 
 <!-- Scripts -->
@@ -55,19 +56,22 @@
 				<p style="font-size: 14pt;" class="navbar-text">
 					<b>Board Games Crossing Web Project</b>
 				</p>
-
-				<form style="margin-left: 15%;" class="navbar-form navbar-left"
+				
+		  <div ng-controller = "getSearchWordCTRL">	
+			<div ng-controller = "search">		
+				<form data-ng-submit=submit() style="margin-left: 15%;" class="navbar-form navbar-left"
 					role="search">
-					<form id="searchthis" action="/search" style="display: inline;"
+					<form id="searchthis"  style="display: inline;"
 						method="get">
 						<input id="search-box" name="q" size="50" type="text"
-							placeholder="Search" />
-						<button id="search-btn" type="submit">
-							<span class="	glyphicon glyphicon-search"></span>
-						</button>
+							placeholder="Search" data-ng-model ="search" />
+						<a href = "#search/{{searchWord.id}}">
+						<input type="submit">
+						</a>												
 					</form>
 				</form>
-
+		    </div>
+		   </div>
 				<ul class="nav navbar-nav navbar-right" ng-controller='getAvatar'>
 					<li><a class="btn btn-secondary btn-lg disabled">Welcome
 							back, <em><b style="color: white">${user}</b></em>
@@ -127,7 +131,141 @@
 			<!-- Friends Widget -->
 			<div id="friends_div">
 				<div>
-					<h1>MY FRIENDS</h1>
+				<div class="global" ng-controller="friendsCtrl">
+		<div class="search-result" ng-show="click" > <!-- ng-show="name.length > 0" -->
+			<div class="header-search">Find your friends in our Application</div>
+			<div class="content">
+				<div ng-repeat="user in allUsers">
+					<div class="proba">
+						<div class="person">
+							<div class="over-ava"><a href="" type="button"><img class="ava" src="resources/images/default-avatar.jpg" /></a></div>
+							<div class="name">{{ user.firstName }} {{ user.lastName}}</div>
+							<div class="over-add-remove"><a href="" type="button" ng-click="addUserToFriend(user.id)"><img class="add-remove" src="resources/ico/add_user.png" /></a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="main">
+		<div class="header">
+			<div class="overInput">
+				<input type="text" class="input" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()" ng-click="click = !click">
+			</div>
+			<div class="underInput">
+				<div class="headerWords">Friends {{friends.length}}</div>
+				<div class="overBell">
+					<a href="" type="button" data-toggle="modal" data-target="#myModal">
+						<div class="count" ng-hide="count < 1">{{count}}</div> <img class="bell" src="resources/ico/bell.png" />
+					</a>
+				</div>
+				<div class="overMessage">
+					<a href="" type="button" data-toggle="modal" data-target="#messanger">
+						<div class="count" ng-hide="count < 1">{{countOfNotReadMessage}}</div><img class="message" src="resources/ico/message.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+						<!-- Start modal window -->
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content over-modal-content">
+					<div>
+						<ul class="nav nav-tabs bigger-tab">
+							<li><a data-toggle="tab" href="#menu1">Fiend request</a></li>
+							<li><a data-toggle="tab" href="#menu2">Fiend responce</a></li>
+						</ul>
+						<div class="tab-content ">
+							<div id="menu1" class="tab-pane fade bigger-content">
+								<div ng-repeat="user in allOfferedUsers">
+									<div class="proba">
+										<div class="person">
+											<a href="" type="button"><img class="ava" src="resources/images/default-avatar.jpg" /></a>
+											<div class="name">{{ user.firstName }} {{user.lastName }}</div>
+											<div class="over-add-remove"><a href="" type="button" ng-click="add(user.id)"><img class="add-remove" src="resources/ico/add_user.png" /></a></div>
+											<div class="over-add-remove"><a href="" type="button" ng-click="rejected(user.id)"><img class="add-remove" src="resources/ico/remove_user.png" /></a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="menu2" class="tab-pane fade">
+								<div ng-repeat="friendShip in userOffered">
+									<div class="user-offered" ng-class="{myRejected: friendShip.status.statusOfFriend == 'REJECTED'}">
+										<div class="person">
+											<a href="" type="button"><img class="ava" src="resources/images/default-avatar.jpg" /></a>
+											<div class="name-of-my-offered-user">
+												{{ friendShip.userId.firstName }} {{friendShip.userId.lastName }}
+												<p><strong>status:</strong> {{friendShip.status.statusOfFriend.toLowerCase()}} </p>
+											</div>
+											<div class="over-cancel"><a href="" type="button" ng-click="cancelOffering(friendShip.userId.username)"><img class="cancel" src="resources/ico/cancel.png" /></a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"  value="">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End modal window -->
+			
+											<!-- Modal message -->
+			<div id="messanger" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-body">
+				      <div class="main-message-content">				      	
+				      	
+				      	<div class="message-friends">
+					      	<ul class="nav nav-pills nav-stacked messanger-model" ng-class="{myFriendMessage: allNotReadMessagesByFriend[friends.indexOf(friend)] > 0}" ng-repeat="friend in friends">
+							  <li>
+							  	<a href="#" class="list-messangers" style="padding-left: 5px; padding-top: 5px;" ng-click="setFriendName(friend.username)">
+							  		<img class="ava-messanger" src="resources/images/default-avatar.jpg" />{{ friend.firstName }} {{ friend.lastName}}
+							  	</a>
+							  	<div class="count-of-messages" ng-show="allNotReadMessagesByFriend[friends.indexOf(friend)] > 0 ">{{allNotReadMessagesByFriend[friends.indexOf(friend)]}}</div>
+							  </li>
+							</ul>
+						</div>
+			
+						<div class="message-state">
+							<div class="messages" >
+							<div ng-repeat="message in messages" ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}" ng-mouseenter="readMessage(message.id)">
+								<div><strong>{{message.currentUser.firstName}} {{message.currentUser.lastName}}:</strong></div>
+								<div>{{message.message}}</div>
+							</div>
+							</div>
+							<div style="display: flex; margin-top: 5px;">
+								<textarea rows="3" cols="40" name="text" style="resize: none; margin-right: 10px;" ng-model="newMessage"></textarea>
+								<button type="button" class="btn btn-default" ng-click="sendMessage(newMessage)">Send</button>
+							</div>
+						</div>
+						
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+			<div class="persons">
+			<div ng-repeat="friend in friends">
+				<div class="proba">
+					<div class="person">
+						<div class="over-ava"><a href="" type="button"><img class="ava" src="resources/images/default-avatar.jpg" /></a></div>
+						<div class="name">{{ friend.firstName }} {{ friend.lastName}}</div>
+						<div class="iconMessagediv"><a href="" type="button"><img class="iconChampionship" src="resources/ico/championship.png" /></a></div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		</div>
 				</div>
 			</div>
 			<!-- End of Friends Widget -->
@@ -135,10 +273,10 @@
 
 			<!-- MyGames Widget -->
 			<div id="mygames_div">
-				<div >
-					<h1 style="text-align: center">MY GAMES</h1>
+				<div ng-controller="allUsersGameCtrl" >
+					<h1 style="text-align: center">MY GAMES:{{allGame.length}}</h1>
 				<div>
-					<div ng-controller="allUsersGameCtrl">
+					<div >
 							<div ng-controller="CreateGameCtrl">
 								<div>
 								<input type="submit" value="ADD GAME"
@@ -203,7 +341,7 @@
 										<th></th>
 									</tr>
 									<tr ng-repeat="game in allGame">
-										<td><a href = "" ng-click="myFunc(game.id)" data-toggle="modal" data-target="#myModalMyGames">
+										<td><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">
 										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
 										<td  >												
@@ -218,30 +356,7 @@
 										</td>
 									</tr>
 								</table>
-									<div class="modal fade" id="myModalMyGames" tabindex="-1" role="dialog"
-                           aria-labelledby="myModalLabel" aria-hidden="true">
-                           <div class="modal-dialog">
-                              <div class="modal-content">
-                              <div class="modal-header">
-                                    <h1 ng-repeat = "game in games">{{game.name}}</h1>
-                                    </div>
-                                 <div class="modal-body" ng-repeat = "game in games">
-                                    <p>Year of production: {{game.yearOfProduction}}</p>
-                                    <p>Edition: {{game.edition}}</p>
-                                    <p>Description: {{game.description}}</p>
-                                    <p>Max players: {{game.maxPlayers}}</p>
-                                    <p>Min players: {{game.minPlayers}}</p>
-                                 </div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
-									
-								</div>
-                           </div>
-                        </div>
-					</div>
-								<div ng-show="isShowComment">
-								
+								<div ng-show="isShowComment">		
                                    <table class = "table">
  								   <!-- <tr><th></th><th></th></tr> -->
                                     <tr ng-repeat="x in commentForGame">

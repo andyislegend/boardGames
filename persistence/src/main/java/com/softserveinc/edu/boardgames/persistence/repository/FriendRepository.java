@@ -1,8 +1,11 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Friend;
@@ -48,4 +51,10 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
 		@Query("UPDATE Friend f SET f.status.id = 3 WHERE f.user = ?1 AND f.userId = ?2")
 		public void changeStatusOfFriendshipToRejected(User currentUser, User userId);
 		
+		@Query("SELECT f FROM Friend f WHERE f.user.username = ?1 AND (f.status.id = 1 OR f.status.id = 3)")
+		public List<Friend> getAllMyOffering(String userName);
+		
+		@Modifying
+		@Query("DELETE FROM Friend f WHERE f.user = ?1 AND f.userId = ?2")
+		public void cancelOffering(User currentUser, User otherUser);
 }

@@ -18,7 +18,6 @@ import java.util.List;
 public interface TournamentRepository extends JpaRepository<Tournament,Long> {
 
     Tournament findByName(String name);
-
     
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
 			"(t.id, t.name, t.userCreator.username, t.country, " +
@@ -31,4 +30,10 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
             "t.city, t.addition, t.dateOfTournament, t.requiredRating,t.maxParticipants) " +
             "from Tournament t")
     public List<AllTournamentsDTO> findAllTournamentsDTO();
+    
+    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
+            "(t.id, t.name, t.userCreator.username, t.country, " +
+            "t.city, t.addition, t.dateOfTournament, t.requiredRating,t.maxParticipants) " +
+            "from Tournament t where t.name like %:name%")
+    public List<AllTournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
 }

@@ -37,6 +37,14 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-users.html',
 		controller : 'getAllUsersCtrl'
 	})
+	.when('/search/:word', {
+		templateUrl : 'resources/pages/home-GlobalSearch.html',
+		controller : 'search'
+	})
+	.when('/gameUserDetails/:id', {
+		templateUrl : 'resources/pages/home-gameUserDetails.html',
+		controller : 'getGameDetailedInfoController'
+	})
 
 	.otherwise({
 		redirectTo : '/statistics'
@@ -49,60 +57,168 @@ homeApp.controller("getAvatar", function($scope, $http) {
 		$scope.avatar = result.data;
 	});
 });
+homeApp.controller('getSearchWordCTRL', function($scope, $rootScope) {
+	$scope.searchWord = {id:'Monopf'};
+	$scope.submit = function(){
+		
+		$rootScope.n = 'n';
+	}
+})
+homeApp.controller('search', function($scope, $rootScope){
 
-homeApp
-		.controller(
-				"allUsersGameCtrl",
-				function($scope, $http, $rootScope) {
-					$rootScope.NN = 100;
-					$scope.allGame = [];
-					$http.get('getAllGamesCurUser').then(function(result) {
-						$scope.allGame = result.data;
-						for (var i = 0; i < $scope.allGame.length; i++) {
-							$scope.isNewComments($scope.allGame[i].id);
+	$scope.searchWord = {id:'f'+document.getElementById("search-box").value}; 
+	
+});
+
+homeApp.controller('GlobalSearchCTRL', function($scope, $http, $routeParams, ngTableParams) {
+	
+	$scope.searchWord = $scope.searchWord
+		$http.get('searchBy/'+$routeParams.word).then(function(response) {			
+			$scope.searchResult = response;
+			$scope.tournaments = $scope.searchResult.data.tournaments;
+			$scope.games = $scope.searchResult.data.gameUsers;
+			$scope.events = $scope.earchResult.data.events;
+			
+			$scope.usersTable = new ngTableParams({
+		        page: 1,
+		        count: 10
+		    }, {
+		        total: $scope.tournaments.length+$scope.games.length+$scope.events.length, 
+		        getData: function ($defer, params) {
+		            $scope.data = $scope.tournaments.slice((params.page() - 1) * params.count(), params.page() * params.count());
+		            $defer.resolve($scope.data);
+		        }
+		    });
+			
+		}) ; 
+	
+	
+	
+});
+
+homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $routeParams) {
+	
+	$scope.isYourGame = false;
+	$scope.isntYourGame = false;
+	$scope.isThereConfiramtion = false;
+	
+	$rootScope.NN = 100;
+	$scope.allGame = [];
+	$http.get('getAllGamesCurUser').then(function(result) {
+		$scope.allGame = result.data;
+		for (var i = 0; i < $scope.allGame.length; i++) {
+			$scope.isNewComments($scope.allGame[i].id);
+		}
+	});
+
+	$http.get('gameUserDetail/' + $routeParams.id).then(
+		function(result) {
+			$scope.games = result.data;
+			$http({
+				method : "GET",
+				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
+			}).then(function mySucces(response) {
+				alert(response.data);
+				if (response.data === true && $scope.games.status === 'private') {
+					$scope.isYourGame = true;
+					$scope.isntYourGame = false;
+					$scope.isThereConfiramtion = false;
+				}
+				else if (response.data === false && $scope.games.status === 'available') {
+					$scope.isntYourGame = true;
+					$scope.isYourGame = false;
+					$scope.isThereConfiramtion = false;
+				}
+				else if (response.data === true && $scope.games.status === 'confirmation') {
+					$scope.isntYourGame = false;
+					$scope.isYourGame = false;
+					$scope.isThereConfiramtion = true;
+				}
+				else {
+					$scope.isYourGame = false;
+					$scope.isntYourGame = false;
+					$scope.isThereConfiramtion = false;
+				}
+			}, function myError(response) {
+				alert("checking if game belongs to user error");
+			});
+			
+	});
+	
+	$scope.showMe = false;
+	$scope.myFunc = function(id) {
+		$scope.games = [];
+		$scope.showMe = !$scope.showMe;
+		
+	}
+	
+	$scope.makeGameUserAvailable = function(id) {
+		$http({
+			method : "PUT",
+			url : 'makeGameUserAvailable' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Making game available success!");
+		}, function myError(response) {
+			alert("Making game available failed");
+		});
+	}
+	
+	$scope.askOwnerToShare = function(id) {
+		$http({
+			method : "PUT",
+			url : 'askGameUserOwnerToShare' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Your request has been sent!)");
+		}, function myError(response) {
+			alert("Failed to send your request");
+		});
+	}
+	
+	$scope.acceptGameConfirmation = function(id) {
+		$http({
+			method : "PUT",
+			url : 'acceptGameConfirmationRequest' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Accept request success");
+		}, function myError(response) {
+			alert("Accept request failed");
+		});
+	}
+	
+	$scope.declineGameConfirmation = function(id) {
+		$http({
+			method : "PUT",
+			url : 'declineGameConfirmationRequest' + '/' + id
+		}).then(function mySucces(response) {
+			alert("Decline request success");
+		}, function myError(response) {
+			alert("Decline request failed");
+		});
+	}
+
+	$scope.isNewComments = function(id) {
+		var countOfComments = 0;
+		$scope.userGame = [];
+		$http.get('getCountOfCommentsByGameId/' + id)
+			.then(function(result) {
+				countOfComments = result.data;
+				$http.get('gameUserDetail/' + id)
+					.success(function(result) {
+						$scope.userGame = result;
+						if (countOfComments > $scope.userGame.countOfComments) {
+							$rootScope.NN = countOfComments;
+							document.getElementById("UserGameNum" + 
+									$scope.userGame.id).className = "glyphicon glyphicon-envelope";
 						}
-					});
-
-					$scope.showMe = false;
-					$scope.myFunc = function(id) {
-						$scope.games = [];
-						$scope.showMe = !$scope.showMe;
-						$http.get('gameUserDetail/' + id).then(
-								function(result) {
-									$scope.games = result;
-								});
-					}
-
-					$scope.isNewComments = function(id) {
-						var countOfComments = 0;
-						$scope.userGame = [];
-						$http
-								.get('getCountOfCommentsByGameId/' + id)
-								.then(
-										function(result) {
-											countOfComments = result.data;
-											$http
-													.get('gameUserDetail/' + id)
-													.success(
-															function(result) {
-																$scope.userGame = result;
-																if (countOfComments > $scope.userGame.countOfComments) {
-																	$rootScope.NN = countOfComments;
-																	document
-																			.getElementById("UserGameNum"
-																					+ $scope.userGame.id).className = "glyphicon glyphicon-envelope";
-																}
-															});
-										});
-					}
-
-					$scope.deleteGame = function(id) {
-						$http.get('deleteUserGame').success(function(data) {
-						});
-						$scope.allGame.splice(id - 1, 1);
-					}
-
 				});
+		});
+	}
+	$scope.deleteGame = function(id) {
+		$http.get('deleteUserGame').success(function(data) {
+		});
+		$scope.allGame.splice(id - 1, 1);
+	}
+});
 
 homeApp.controller("CreateGameCtrl", function($scope, $http) {
 	$scope.showText = false;
@@ -566,3 +682,147 @@ homeApp
 										}
 									});
 				});
+
+homeApp.controller("friendsCtrl", ['$scope', '$interval', '$http', function($scope, friendService, $http, $interval) {
+    $scope.users;
+    $http.get("allFriends").success(function(data) {
+		$scope.friends = data;
+	}).error(function(error) {
+		console.log(error);
+	});
+    
+    $http.get("allMyOffering").success(function(data) {
+		$scope.userOffered = data;
+	}).error(function(error) {
+		console.log(error);
+	});
+    
+    $http.get('allOffering').success(function(data){
+         $scope.count = data;
+     }).error(function(error){
+         console.log(error)
+     });
+    
+    $http.get("allOfferedUsers").success(function(data) {
+        $scope.allOfferedUsers = data;
+	}).error(function(error) {
+		console.log(error);
+	});
+    
+     $scope.add = function(id){
+        var userId = id;
+        if($scope.count == 1){
+            $scope.NameOfModalWindow = 'modal';
+        }
+        $scope.count =  $scope.count-1;
+        $http.post('addUserToFriend', userId).success(function(data){
+            var user = data;
+            for(var i = 0; i < $scope.allOfferedUsers.length; i++){
+                if($scope.allOfferedUsers[i].id === user.id){
+                    $scope.friends.push($scope.allOfferedUsers[i]);
+                    $scope.allOfferedUsers.splice(i, 1)
+                };
+            
+            };
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+
+    $scope.rejected = function(id){
+        var userId = id;
+        if($scope.count == 1){
+            $scope.NameOfModalWindow = 'modal';
+        }
+        $scope.count =  $scope.count-1;
+        $http.post('rejectedUserToFriend', userId).success(function(data){
+             var user = data;
+            for(var i = 0; i < $scope.allOfferedUsers.length; i++){
+                if($scope.allOfferedUsers[i].id === user.id){
+                    $scope.allOfferedUsers.splice(i, 1)
+                };
+            };
+            
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+
+   $scope.findAllUsers = function(){
+        $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
+            $scope.allUsers = data;
+        }).error(function(error){
+    });
+   };
+    $scope.addUserToFriend = function(id){
+         $http.post('addOfferToFriendship/', id).success(function(data){
+             $scope.userWhoYouSentOffering = data;
+             for(var i = 0; i < $scope.allUsers.length; i++){
+                if($scope.allUsers[i].id === id){
+                    $scope.allUsers.splice(i, 1)
+                };
+            };
+         }).error(function(error){
+             console.log(error);
+         });
+    };
+    $scope.setFriendName = function(friendName){
+        $scope.currentFriend = friendName;
+        getUpdate(friendName);
+    };
+    var getUpdate = function() { 
+          $http.post('getAllMessage/' +  $scope.currentFriend ,  $scope.currentFriend ).success(function(data){
+              
+              if($scope.messages != data){
+                $scope.messages = data;
+                  console.log($scope.messages == data);
+                  console.log($scope.messages.length);
+                  console.log(data.length);
+              }
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+    $scope.sendMessage = function(message){
+        $scope.currentFriend
+        $http.post('sendMessage/' + $scope.currentFriend + "/" + message, $scope.currentFriend, message).success(function(){
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+    $scope.readMessage = function(messageId){
+        $http.post('readMessage/' + messageId, messageId).success(function(){
+        }).error(function(error){
+            console.log(error);
+        });
+        
+    };
+    
+    $http.get('findAllNotReadMessage').success(function(data){
+         $scope.countOfNotReadMessage = data;
+     }).error(function(error){
+         console.log(error)
+     });
+    $scope.cancelOffering = function(userName){
+        $http.post('canselOffering/' + userName, userName).success(function(){
+            for(var i = 0; i < $scope.userOffered.length; i++){
+                if($scope.userOffered[i].user.username === userName || $scope.userOffered[i].userId.username === userName){
+                    $scope.userOffered.splice(i, 1)
+                };
+            };
+        }).error(function(error){
+            console.log(error);
+    });
+};
+    $http.get('allMessageByCurrentUserFriends').success(function(data){
+        $scope.allNotReadMessagesByFriend = data;
+    }).error(function(error){
+        console.log(error);
+    });
+    
+   
+  /*setInterval(function(){
+       getUpdate();
+   }, 10000)*/
+   
+}]);

@@ -15,18 +15,27 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO
 public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO(u.id, u.game.name, u.game.category.name, u.yearOfProduction,"
-			+ " u.edition, u.countOfComments, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.user.username = :username")   
+			+ " u.edition, u.countOfComments, u.status, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.game.name like %:name% ")
+	public List<GameUserDTO> getGameUserByName(@Param("name")String name);
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
+			+ "u.id, u.game.name, u.game.category.name, "
+			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"
+			+ "u.game.description, u.game.rules, u.game.maxPlayers, "
+			+ "u.game.minPlayers) "
+			+ "from GameUser u where u.user.username = :username")   
 	public List<GameUserDTO> getAllGameUserByUsername(@Param("username") String username);
 	
 	@Query("select u from GameUser u where u.id = :id")
 	public GameUser getGameUserById(@Param("id") Integer id);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO(u.id, u.game.name, u.game.category.name, u.yearOfProduction,"
-			+ " u.edition, u.countOfComments, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.id = :id")
+			+ " u.edition, u.countOfComments, u.status, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.id = :id")
 	public GameUserDTO getGameUserDTOById(@Param("id") Integer id);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO"
 			+"(gu.id, gu.user.username, gu.edition, gu.yearOfProduction, gu.status) " +
 	       "from GameUser gu where gu.game.name = :name")
 	List<UserGamesOfGameDTO> getUserGameOfGame(@Param("name")String name);
+	
 }

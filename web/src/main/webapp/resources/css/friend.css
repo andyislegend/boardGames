@@ -1,3 +1,25 @@
+.bigger-tab li{
+background: linear-gradient(#788093, #4d596c);
+width: 50%;
+}
+.bigger-tab li a{
+color: white;
+text-align:  center; 
+}
+.bigger-tab:hover li a{
+color: #464E65;
+text-align:  center; 
+}
+.bigger-content{
+margin-left: 10px;
+margin-right: 10px;
+}
+.over-modal-content{
+	margin-top: 200px;
+	margin-left: 100px;
+	width: 300px;
+}
+
 .count{
 	position: absolute;
     background: #D00000;
@@ -13,133 +35,343 @@
     margin-top: -5px;
     margin-left: 13px;
     z-index: 1;
+}
+.count-of-messages{
+	position: absolute;
+    background: #004C99;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    padding-top: 0px;
+    vertical-align:middle;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    font-size: 15px; 
+    margin-top: -30px;
+    margin-left: 170px;
+    z-index: 1;
+}
+.main{
+float: left;
+display: inline-table;
+width: 300px;
+height: 100%;
+box-shadow: 0 0 10px rgba(0,0,0,0.5);
+border: 1px solid #FFF;
+}
+input:focus{
+    outline:none;
+}
+.header{
+    height: 100px;
+    width: 100%;
+    background: linear-gradient(#788093, #4d596c);
+}
+.overInput{
+    width: 100%;
+    height: 60px;
+}
+.input{
+    float: right;
+    width: 200px;
+    height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.underInput{
+    height: 40px;
+    width: 100%;
+}
+.headerWords{
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 100px;
+    color: white;
+}
+.megaclass{
+display: flex;
+height: 50px;
+width: 100%;
+}
+.circle{
+width: 50px;
+height: 50px;
+background: #86abd0;
+border-radius: 25px;
+z-index: 3;
+text-decoration: none; 
 
 }
-.ava{
-	padding-top: 10px;
-	height: 150px;
-	width: 140px;
+.circle:hover{
+background: #477f88;
 }
-.FriendIco{
-    opacity: .7;
-    width: 25px;
-    -webkit-transition: .1s ease-in-out;
-	transition: .1s ease-in-out;
+.circle:hover h1{
+margin-top: 5px;
+margin-left: 15px;
+font-size: 35px;
 }
-/*.FriendIco:hover{
+.leter{
+margin-top: 8px;
+margin-left: 17px;
+font-family: sans-serif;
+font-size: 30px;
+z-index: 4;
+color: white;
+}
+.toolbar{
+display: flex;
+margin-left: -30px;
+margin-top: 5px;
+box-shadow: 0 0 5px rgba(0,0,0,0.5);
+width: 280px;
+height:40px;
+border-radius: 20px;
+}
+.overBell{
+	height: 30px;
+    width: 30px;
+    margin-left:150px ;
+    margin-top: -24px;
+}
+.overBell:hover img{
     opacity: 1;
-    width: 27px;
-}*/
-.plus-minus{
-    margin-top: -7px;
-    margin-left: 8px;
-    cursor: pointer;
-    opacity: .2;
-    width: 25px;
-    -webkit-transition: .1s ease-in-out;
-	transition: .1s ease-in-out;
+    width: 30px;
+    height: 30px;
 }
-/*.plus-minus:hover{
-
-    opacity: 1;
-    width: 27px;
-}*/
-.proba{
+.bell{
+    transition: .1s ease-in-out;
+    opacity: .5;
     width: 27px;
     height: 27px;
 }
-.proba:hover .FriendIco{
-    opacity: 1;
+.message{
+    transition: .1s ease-in-out;
+    opacity: .5;
     width: 27px;
+    height: 27px;
 }
-.background{
-    display: inline-block;
-    background: #D0D0D0;
-    margin-bottom: -10px;
-    width: 100%;
+.overMessage{
+   height: 30px;
+    width: 30px;
+    margin-left:236px ;
+    margin-top: -30px; 
 }
-.user{
-    padding-left: 15px;
-    padding-bottom: 10px;
-    background: #FFF;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 170px;
-}
-.buton{
-    width: 67px;
+.overMessage:hover img{
+    opacity: 1;
+    width: 30px;
     height: 30px;
 }
-.buton:hover .plus-minus{
+.add-remove{
+	margin-right: 20px;
+	margin-top: 10px;
+	transition: .1s ease-in-out;
+	opacity: .6;
+	width: 30px;
+    height:30px;
+}
+.cancel{
+    margin-left: 10px;
+	margin-top: 10px;
+	transition: .1s ease-in-out;
+	opacity: .6;
+	width: 30px;
+    height:30px;
+}
+over-add-remove{
+	width: 35px;
+    height:35px;
+}
+.over-cancel:hover img{
+	margin-right: 15px;
     opacity: 1;
-    width: 27px;
+    width: 35px;
+    height: 35px;
 }
-.addUsers{
-    width: 100%;
-    height: 30px;
-    text-align-last: justify;
-    font-family: Oswald;
-    font-weight: normal;
-    font-style: normal;
-    display: flex;
-    margin-left: 2px;
+.over-cancel{
+    margin-left: 10px;
+    width: 35px;
+    height:35px;
 }
-.addUserImg{
-    opacity: 0.6;
-    width: 25px;
-}
-.addUserImg:hover{
-     opacity: 1;
-    width: 27px;
-}
-::-webkit-input-placeholder {
-    font-family: Oswald;
-    font-weight: normal;
-    font-style: normal;
-    color: #DCDCDC;
-}
-:-moz-placeholder { 
-    font-family: Oswald;
-    font-weight: normal;
-    font-style: normal;
-    color: #DCDCDC;
+.over-add-remove:hover img{
+	margin-right: 15px;
+    opacity: 1;
+    width: 35px;
+    height: 35px;
 }
 
-::-moz-placeholder {  
-    font-family: Oswald;
-    font-weight: normal;
-    font-style: normal;
-    color: #DCDCDC;
+.search{
+width: 25px;
+margin-top: 5px;
+margin-left: 5px;
+transition: .1s ease-in-out;
+opacity: .6;
+}
+.search:hover{
+width: 27px;
+}
+.searchdiv{
+margin-top: 0px;
+margin-left: 50px;
+width:40px;
+height: 40px;
+
+border-radius: 20px;
 }
 
-:-ms-input-placeholder {  
-   font-family: Oswald;
-    font-weight: normal;
-    font-style: normal;
-    color: #DCDCDC;
+.person{
+display: inline-flex;
+margin-top: 10px;
+margin-left: 10px;
+text-decoration: none;
+width: 90%;
+height: 50px;
+
 }
-.done{
-    font-family: Oswald;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 20px;
-    display: inline-table;
+.user-offered{
+    background: linear-gradient(#BBF6CD, #36F268);
+    border-radius: 10px;
+    margin-bottom: 2px;
+}
+.ava:hover{
+width: 50px;
+height: 50px;
+}
+.ava{
+width: 45px;
+height: 45px;
+background: #86abd0;
+border-radius: 25px;
+z-index: 3;
+text-decoration: none; 
+transition: .1s ease-in-out;
+}
+.over-ava{
+	width: 50px;
+	height: 50px;
+}
+.name{
+width: 150px;
+height: 20px;
+margin-left: 10px;
+margin-top: 15px;
+color: black;
+font-family: sans-serif;
+font-size: 14px;
+}
+.name-of-my-offered-user{
+  width: 150px;
+height: 20px;
+margin-left: 10px;
+margin-top: 0px;
+color: black;
+font-family: sans-serif;
+font-size: 14px;  
+}
+.myRejected{
+    background: linear-gradient(#F6BBBB, #F23636);
     
 }
-.firsName{
-    margin-right: 5px;
-    width: 130px;
-    height: 29px;
-    padding-top: 5px;
+.iconMessagediv{
+    width: 80px;
 }
-.mybutton{
-    height: 29px;
-    width: 130px;
+.iconChampionship{
+transition: .1s ease-in-out;
+opacity: .6;
+margin-left: 15px;
+margin-top: 7px;
+height: 30px;
+width: 30px;
+}
+.iconChampionship:hover{
+opacity: 1;
+height: 35px;
+width: 35px;
+}
+.search-result{
+height: 300px;
+width: 300px;
+margin-top: 200px;
+margin-right: 10px;
+display: inline-table;
+box-shadow: 0 0 10px rgba(0,0,0,0.5);
+border: 1px solid #FFF;
+}
+.header-search{
+	width: 100%;
+	height: 100px;
+	background: linear-gradient(#788093, #4d596c);
+	color: #FFF;
+	font-size: 15px;
+	padding-left: 10px;
+	padding-top: 70px;
+	
+}
+.content{
+	display: inline-table;
+	height: 300px;
+	width: 100%;
+} 
+.global{
+display: flex;
+} 
+.messanger-model{
+    border-radius: 5px;
+	width: 200px;
+}
+.myFriendMessage{
+    background: linear-gradient(#E8F2FF, #99CCFF);
+}
+.list-messangers{
+color: #000;
+height: 40px;
+}
+
+.ava-messanger{
+margin-right: 20px;	
+width: 30px;
+height: 30px;
+border-radius: 15px;
+z-index: 3;
+text-decoration: none; 
+}
+.messages{
+padding: 10px;
+height: 400px;
+max-height:300px;
+overflow: auto;
+word-wrap: break-word;
+box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.write-message-filds{
+}
+.main-message-content{
+	display: flex;
+}
+.message-state{
+	width: 60%;
+}
+.message-friends{
+	width: 40%;
+		max-height: 400px;
+	overflow: auto;
+}
+.input-message{
+	padding-left: 5px;
+	margin-top: 10px;
+	width:221px;
+	height: 34px;
+	border-radius: 5px;
 }
 .myStyle{
-    pointer-events: none;
-    cursor: default;
+	margin-bottom: 2px;
+	border-radius: 5px;
+	background: linear-gradient(#E8F2FF, #99CCFF);
 }
-.modalUserInformation{
-    padding-top: 35px;
+.persons{
+	max-height: 170px;
+    overflow: auto;
 }

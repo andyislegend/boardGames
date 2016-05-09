@@ -4,20 +4,33 @@ import java.util.List;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
-import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-
 public class AllFilesDTO {
-	List<GameUser> gameUsers;
-	List<Tournament> tournaments;
+	
+	List<GameUserDTO> gameUsers;
+	List<AllTournamentsDTO> tournaments;
 	List<Event> events;
-
+	
 	public AllFilesDTO() {
-
+		// TODO Auto-generated constructor stub
 	}
-
-	public AllFilesDTO(List<GameUser> gameUsers, List<Tournament> tournaments, List<Event> events) {
+	
+	public List<GameUserDTO> getGameUsers() {
+		return gameUsers;
+	}
+	public void setGameUsers(List<GameUserDTO> gameUsers) {
 		this.gameUsers = gameUsers;
+	}
+	public List<AllTournamentsDTO> getTournaments() {
+		return tournaments;
+	}
+	public void setTournaments(List<AllTournamentsDTO> tournaments) {
 		this.tournaments = tournaments;
+	}
+	public List<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
+
 }
