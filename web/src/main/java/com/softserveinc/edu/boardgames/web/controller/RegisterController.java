@@ -1,28 +1,19 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
-import com.softserveinc.edu.boardgames.persistence.entity.Address;
-import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -77,97 +68,68 @@ public class RegisterController {
 	 */
 	public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,15}");
 
-	/**
-	 * Answer the request for registration from web
-	 * 
-	 * @param model
-	 * @return a registration form which is connected to user-entity object
-	 *         fields
-	 */
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
-	public String newUser(ModelMap model) {
-		User user = new User();
-		Address address = new Address();
-		model.addAttribute("user", user);
-		model.addAttribute("address", address);
-		return "registration";
-	}
+	@RequestMapping(value = { "/addNewUser" }, method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> addNewUser(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
+			@RequestParam("gender") String gender, @RequestParam("username") String username,
+			@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
 
-	/**
-	 * Validate the registration form and saves the user to database.
-	 * 
-	 * @param fileUpload
-	 * @param user
-	 * @param confirmPassword
-	 * @param result
-	 * @param model
-	 * @return instance of User and transmit it to service layer
-	 * @throws Exception
-	 */
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
-	public String saveUser(@RequestParam("fileUpload") CommonsMultipartFile fileUpload, @Valid User user,
-			@RequestParam("confirmPassword") String confirmPassword, BindingResult result, ModelMap model)
-			throws Exception {
+		if (username.isEmpty() || gender.isEmpty() || email.isEmpty() || password.isEmpty()) {
 
-		if (!validateUsername(user.getUsername())) {
+			return new ResponseEntity<String>("Fields marked with \"*\" are required. Plese enter valid data.", HttpStatus.CONFLICT);
 
-			FieldError usernameError = new FieldError("user", "username",
-					"Soory, but Your Username should be at least 3 charters long and no more then 15 chars!");
-			result.addError(usernameError);
-			return "registration";
 		}
 
-		if (userService.isExistsWithUsername(user.getUsername())) {
+		if (!validateUsername(username)) {
 
-			FieldError usernameError = new FieldError("user", "username",
-					"Sorry, but this usernmae is already taken. Choose another one");
-			result.addError(usernameError);
-			return "registration";
+			return new ResponseEntity<String>("Sorry, but Username must contain from 3 to 15 symbols.",
+					HttpStatus.CONFLICT);
 		}
 
-		if (!validatePassword(user.getPassword())) {
+		if (userService.isExistsWithUsername(username)) {
 
-			FieldError passwordError = new FieldError("user", "password",
-					"Sorry, but Your password must contain at least one lower case symbol, "
-							+ "one Upper case symbol, one number and be from 6 to 20 chars long");
-			result.addError(passwordError);
-			return "registration";
+			return new ResponseEntity<String>("Sorry, but this Usernmae is already taken. Choose another one!",
+					HttpStatus.CONFLICT);
+
 		}
 
-		if (!user.getPassword().equals(confirmPassword)) {
+		if (!validateMail(email)) {
 
-			FieldError passwordError = new FieldError("user", "password", "Sorry, but You must confirm Your password");
-			result.addError(passwordError);
-			return "registration";
+			return new ResponseEntity<String>("Please enter a valid email address", HttpStatus.CONFLICT);
+
 		}
 
-		if (userService.isExistsWithEmail(user.getEmail())) {
+		if (userService.isExistsWithEmail(email)) {
 
-			FieldError emailError = new FieldError("user", "email", "Sorry, but this email is already in use!");
-			result.addError(emailError);
-			return "registration";
+			return new ResponseEntity<String>("Sorry, but this email is already in use!", HttpStatus.CONFLICT);
+
 		}
 
-		if (!validateMail(user.getEmail())) {
+		if (!validatePassword(password)) {
 
-			FieldError emailError = new FieldError("user", "email", "Sorry, but Your email seems to be wrong");
-			result.addError(emailError);
-			return "registration";
+			return new ResponseEntity<String>(
+					"Password must contain from 6 to 20 symbols with at least 1 upper case symbol and 1 number",
+					HttpStatus.CONFLICT);
+
 		}
 
-		userService.createUser(user);
+		if (!password.equals(confirmPassword)) {
 
-		if (!fileUpload.isEmpty()) {
-			Image image = new Image();
-			image.setUser(user);
-			image.setImageName(user.getUsername());
-			image.setImageLocation(imageConfiguration.getAvatarPackage(user.getUsername()));
-			imageService.create(image);
-			String saveDirectory = image.getImageLocation();
-			fileUpload.transferTo(new File(saveDirectory));
+			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
+
 		}
 
-		return "index";
+		User newUser = new User();
+		newUser.setEmail(email);
+		newUser.setFirstName(firstName);
+		newUser.setLastName(lastName);
+		newUser.setUsername(username);
+		newUser.setPassword(password);
+		newUser.setGender(gender);
+		userService.createUser(newUser);
+
+		return new ResponseEntity<String>("New User successfully registered", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
@@ -206,4 +168,104 @@ public class RegisterController {
 		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
 		return matcher.find();
 	}
+
+	// /**
+	// * Answer the request for registration from web
+	// *
+	// * @param model
+	// * @return a registration form which is connected to user-entity object
+	// * fields
+	// */
+	// @RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
+	// public String newUser(ModelMap model) {
+	// User user = new User();
+	// Address address = new Address();
+	// model.addAttribute("user", user);
+	// model.addAttribute("address", address);
+	// return "registration";
+	// }
+	//
+	// /**
+	// * Validate the registration form and saves the user to database.
+	// *
+	// * @param fileUpload
+	// * @param user
+	// * @param confirmPassword
+	// * @param result
+	// * @param model
+	// * @return instance of User and transmit it to service layer
+	// * @throws Exception
+	// */
+	// @RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
+	// public String saveUser(@RequestParam("fileUpload") CommonsMultipartFile
+	// fileUpload, @Valid User user,
+	// @RequestParam("confirmPassword") String confirmPassword, BindingResult
+	// result, ModelMap model)
+	// throws Exception {
+	//
+	// if (!validateUsername(user.getUsername())) {
+	//
+	// FieldError usernameError = new FieldError("user", "username",
+	// "Sorry, but Your Username should be at least 3 charters long and no more
+	// then 15 chars!");
+	// result.addError(usernameError);
+	// return "registration";
+	// }
+	//
+	// if (userService.isExistsWithUsername(user.getUsername())) {
+	//
+	// FieldError usernameError = new FieldError("user", "username",
+	// "Sorry, but this usernmae is already taken. Choose another one");
+	// result.addError(usernameError);
+	// return "registration";
+	// }
+	//
+	// if (!validatePassword(user.getPassword())) {
+	//
+	// FieldError passwordError = new FieldError("user", "password",
+	// "Sorry, but Your password must contain at least one lower case symbol, "
+	// + "one Upper case symbol, one number and be from 6 to 20 chars long");
+	// result.addError(passwordError);
+	// return "registration";
+	// }
+	//
+	// if (!user.getPassword().equals(confirmPassword)) {
+	//
+	// FieldError passwordError = new FieldError("user", "password", "Sorry, but
+	// You must confirm Your password");
+	// result.addError(passwordError);
+	// return "registration";
+	// }
+	//
+	// if (userService.isExistsWithEmail(user.getEmail())) {
+	//
+	// FieldError emailError = new FieldError("user", "email", "Sorry, but this
+	// email is already in use!");
+	// result.addError(emailError);
+	// return "registration";
+	// }
+	//
+	// if (!validateMail(user.getEmail())) {
+	//
+	// FieldError emailError = new FieldError("user", "email", "Sorry, but Your
+	// email seems to be wrong");
+	// result.addError(emailError);
+	// return "registration";
+	// }
+	//
+	// userService.createUser(user);
+	//
+	// if (!fileUpload.isEmpty()) {
+	// Image image = new Image();
+	// image.setUser(user);
+	// image.setImageName(user.getUsername());
+	// image.setImageLocation(imageConfiguration.getAvatarPackage(user.getUsername()));
+	// imageService.create(image);
+	// String saveDirectory = image.getImageLocation();
+	// fileUpload.transferTo(new File(saveDirectory));
+	// }
+	//
+	// return "index";
+	// }
+
 }

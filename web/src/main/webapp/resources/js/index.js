@@ -49,3 +49,51 @@ indexModule.controller('loginCntrl', [
 			};
 
 		} ]);
+
+indexModule.controller('registerCntrl', [ '$scope', '$http',
+		function($scope, $http) {
+
+			$scope.register = function() {
+
+				$http({
+					method : 'POST',
+					url : 'addNewUser',
+					data : $.param({
+						username : $scope.regusername,
+						email : $scope.regemail,
+						firstName : $scope.regfirstName,
+						lastName : $scope.reglastName,
+						password : $scope.regpassword,
+						confirmPassword : $scope.regconfirmPassword,
+						gender : $scope.reggender
+					}),
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded'
+					}
+				}).success(function(result, status) {
+					$scope.regUserResp = result;
+					$scope.regusername = '';
+					$scope.regemail = '';
+					$scope.regfirstName = '';
+					$scope.reglastName = '';
+					$scope.regpassword = '';
+					$scope.regconfirmPassword = '';
+					$scope.regUserMssg = false;
+				}).error(function(result, status) {
+					$scope.regUserResp = result;
+				})
+
+			}
+
+			$scope.eraseForm = function() {
+
+				$scope.regUserResp = '';
+				$scope.regusername = '';
+				$scope.regemail = '';
+				$scope.regfirstName = '';
+				$scope.reglastName = '';
+				$scope.regpassword = '';
+				$scope.regconfirmPassword = '';
+			}
+
+		} ]);
