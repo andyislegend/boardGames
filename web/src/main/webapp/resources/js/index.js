@@ -71,8 +71,6 @@ indexModule.controller('registerCntrl', [ '$scope', '$http',
 						'Content-Type' : 'application/x-www-form-urlencoded'
 					}
 				}).success(function(result, status) {
-//					$scope.regUserResp = result;
-//					$scope.regUserMssg = false;
 					$scope.closeModal();
 					$scope.showAlert(result)
 				}).error(function(result, status) {
