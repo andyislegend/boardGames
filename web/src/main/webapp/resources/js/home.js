@@ -41,6 +41,11 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-GlobalSearch.html',
 		controller : 'search'
 	})
+	.when('/gameUser/:id', {
+		templateUrl : 'resources/pages/home-gameUser.html',
+		controller : 'getGameDetailedInfoController'
+	})
+	
 	.when('/gameUserDetails/:id', {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
 		controller : 'getGameDetailedInfoController'
