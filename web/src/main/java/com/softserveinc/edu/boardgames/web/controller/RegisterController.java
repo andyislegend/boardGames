@@ -71,57 +71,53 @@ public class RegisterController {
 	@RequestMapping(value = { "/addNewUser" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> addNewUser(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName,@RequestParam("email") String email, 
-			@RequestParam("gender") String gender, 	@RequestParam("username") String username, 
+			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
+			@RequestParam("gender") String gender, @RequestParam("username") String username,
 			@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
 
-		
+		if (username.isEmpty() || gender.isEmpty() || email.isEmpty() || password.isEmpty()) {
+
+			return new ResponseEntity<String>("Fields marked with \"*\" are required. Plese enter valid data.", HttpStatus.CONFLICT);
+
+		}
+
 		if (!validateUsername(username)) {
 
-			return new ResponseEntity<String>(
-					"Sorry, but Your Username should be at least 3 charters long and no more then 15 chars!",
+			return new ResponseEntity<String>("Sorry, but Username must contain from 3 to 15 symbols.",
 					HttpStatus.CONFLICT);
 		}
 
 		if (userService.isExistsWithUsername(username)) {
 
-			return new ResponseEntity<String>(
-					"Sorry, but this usernmae is already taken. Choose another one!",
+			return new ResponseEntity<String>("Sorry, but this Usernmae is already taken. Choose another one!",
 					HttpStatus.CONFLICT);
-	
-		}
 
-		if (!validatePassword(password)) {
-			
-			return new ResponseEntity<String>(
-					"Sorry, but Your password must contain at least one lower case symbol, "
-							+ "one Upper case symbol, one number and be from 6 to 20 chars long",
-					HttpStatus.CONFLICT);
-		
-		}
-
-		if (!password.equals(confirmPassword)) {
-
-			return new ResponseEntity<String>(
-					"Sorry, but You must confirm Your password",
-					HttpStatus.CONFLICT);
-		
-		}
-
-		if (userService.isExistsWithEmail(email)) {
-
-			return new ResponseEntity<String>(
-					"Sorry, but this email is already in use!",
-					HttpStatus.CONFLICT);
-		
 		}
 
 		if (!validateMail(email)) {
 
+			return new ResponseEntity<String>("Please enter a valid email address", HttpStatus.CONFLICT);
+
+		}
+
+		if (userService.isExistsWithEmail(email)) {
+
+			return new ResponseEntity<String>("Sorry, but this email is already in use!", HttpStatus.CONFLICT);
+
+		}
+
+		if (!validatePassword(password)) {
+
 			return new ResponseEntity<String>(
-					"Sorry, but Your email seems to be wrong",
+					"Password must contain from 6 to 20 symbols with at least 1 upper case symbol and 1 number",
 					HttpStatus.CONFLICT);
-			
+
+		}
+
+		if (!password.equals(confirmPassword)) {
+
+			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
+
 		}
 
 		User newUser = new User();
