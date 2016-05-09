@@ -30,13 +30,14 @@
 				</td>
 				<td title="'Email'" sortable="'email'">{{user.email}}</td>
 				<td title="'Phone Number'">{{user.phoneNumber}}</td>
-				<td title="'Address'" filter="{'address.country.name': 'select'}" filter-data="countries()">
+				<td title="'Address'" filter="{'countryName': 'select'}" filter-data="countries()">
 					{{user.address.country.name}} {{user.address.city.name}}
                 	{{user.address.street}} {{user.address.houseNumber}}
                 	{{user.address.roomNumber}}
                 </td>
 			</tr>
 		</table>
+		<p>{{countries}}</p>
 
                   <div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
                      <div class="col-sm-3" id="backgroundForOneUser">

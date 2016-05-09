@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,12 @@ public class CountryController {
 	 */
 	@RequestMapping(value = {"/getAllCountries"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<Country> getAllCountries() {
-		List<Country> userList = countrySevice.findAll();
-		return userList;
+	public List<String> getAllCountries() {
+		List<Country> countryList = countrySevice.findAll();
+		List<String> countryNames = new ArrayList<String>();
+		for (Country country : countryList) {
+			countryNames.add(country.getName());
+		}
+		return countryNames;
 	}
 }

@@ -620,14 +620,17 @@ homeApp.controller("getAllUsersCtrl", function($scope, $http, $filter, $q, ngTab
 		};
 	});
 	
-	$scope.countries = function ($scope, $defer) {
+	$scope.countries = function ($scope, $window) {
 		var def = $q.defer();
-	    var country = $http.get('getAllCountries');
-	    def.resolve(country);
+	    $http.get('getAllCountries').then(function(result) {
+	    	var someCountries = result.data;
+	    	def.resolve(someCountries);
+	    });
+	    console.log(def.promise);
 	    return def;
 	};
 	
-	$http.get('getAllCountries').then(function(result) {
+/*	$http.get('getAllCountries').then(function(result) {
 		$scope.countries = result.data;
 		$scope.getCitiesByCountry = function() {
 			var countryName = $('select[name=selectCountries]').val();
@@ -636,15 +639,21 @@ homeApp.controller("getAllUsersCtrl", function($scope, $http, $filter, $q, ngTab
 				$scope.$broadcast('sharingAddress', { countries:$scope.countries, cities:$scope.cities});
 			});
 		};
-	});
+	});*/
 
 	$scope.$on('sharingToUsersTable', function(event, data) {
 	$scope.usersTable = new ngTableParams({
 		page: 1,
 		count: 7
 	}, {
-		total: data.length, 
+		total: data.length,
 		getData: function ($defer, params) {
+				  for (var i = 0; i < data.length; i++) {
+					  data[i].countryName = "";
+					  data[i].cityName = "";
+					  data[i].countryName = data[i].address.country.name;
+					  data[i].cityName = data[i].address.city.name;
+				  }
 		    	 $scope.usersByParams = params.sorting() ? 
 		      			$filter('orderBy')(data, params.orderBy()) 
 		       			: data;
