@@ -104,6 +104,11 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 	$scope.isYourGamePrivate = false;
 	$scope.isntYourGame = false;
 	$scope.isThereConfiramtion = false;
+	$scope.makingGameAvailableMessage = "";
+	$scope.makingGamePrivateMessage = "";
+	$scope.sendingRequestToOwnerMessage = "";
+	$scope.aceptingRequestMessage = "";
+	$scope.decliningRequestMessage = "";
 	
 	$scope.updateGame = function(){
 		var game = {
@@ -208,10 +213,11 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'makeGameUserAvailable' + '/' + id
 		}).then(function mySucces(response) {
-			
+			$scope.makingGameAvailableMessage = "your game now is available!";	
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
+		
 	}
 	
 	$scope.keepGameUserPrivate = function(id) {
@@ -219,10 +225,12 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'makeGameUserPrivate' + '/' + id
 		}).then(function mySucces(response) {
-			
+			$scope.makingGamePrivateMessage = "your game is now private";	
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
+		
+		
 	}
 	
 	$scope.askOwnerToShare = function(id) {
@@ -230,7 +238,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'askGameUserOwnerToShare' + '/' + id
 		}).then(function mySucces(response) {
-			
+			$scope.sendingRequestToOwnerMessage = "Your request was successfully sent!";
 		}, function myError(response) {
 			alert("Failed to send your request");
 		});
@@ -241,7 +249,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'acceptGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
-			
+			$scope.aceptingRequestMessage = "Generous action!";
 		}, function myError(response) {
 			alert("Accept request failed");
 		});
@@ -252,6 +260,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'declineGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
+			$scope.decliningRequestMessage = "This man is not worth of my game!";
 			
 		}, function myError(response) {
 			alert("Decline request failed");
