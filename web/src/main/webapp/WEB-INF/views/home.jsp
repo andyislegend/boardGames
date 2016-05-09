@@ -66,7 +66,7 @@
 						method="get">
 						<input id="search-box" name="q" size="50" type="text"
 							placeholder="Search" ng-model ="search" />
-						<a href = "#search/{{searchWord.id}}">
+						<a href = "#search/M">
 						<input type="submit">
 						</a>												
 					</form>
@@ -288,7 +288,7 @@
 								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
-										<!-- Modal Header -->
+										
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">
 												<span aria-hidden="true">&times;</span> <span
@@ -296,30 +296,45 @@
 											</button>
 										</div>
 										<div class="modal-body">
-											<form data-ng-submit=submit() role="form">
-												<div>
-													<input class="field-form" data-ng-model="name"
-														placeholder="Name">
+											<div class = "addGame">
+											<form role="form" data-ng-submit=submit() >
+												<div class="form-group">
+												<label>Name: </label>
+													<input class="form-control" data-ng-model="name">							
 												</div>
-												<div>
-													<label>Select Category:</label> <select class="field-form"
+												<div class="form-group">
+													<label>Select Category:</label> <select class="form-control"
 														id="exampleSelect1" data-ng-model="category">
 														<option ng-repeat="category in categories"
 															value="{{category.name}}">{{category.name}}</option>
 													</select>
 												</div>
-												<div>
-													<input class="field-form" data-ng-model="description"
-														placeholder="Description"> <input
-														class="field-form" data-ng-model="rules"
-														placeholder="Rules"> <input class="field-form"
-														data-ng-model="maxPlayers" placeholder="Max Players">
-													<input class="field-form" data-ng-model="minPlayers"
-														placeholder="Min Players"> <input
-														class="field-form" data-ng-model="edition"
-														placeholder="Edition"> <input class="field-form"
-														data-ng-model="year" placeholder="Year">
+												<div class="form-group">
+												 	<label>Description: </label>
+													<input class="form-control" data-ng-model="description">
+												</div>		
+												<div> 
+													<label>Rules :</label>
+													<input class="form-control" data-ng-model="rules">
 												</div>
+												<div class="form-group">
+													<label>Max players: </label>
+													<input class="form-control" data-ng-model="maxPlayers" type="number">
+													
+												</div>	
+												<div class="form-group">
+												    <label>Min players: </label>
+													<input class="form-control" data-ng-model="minPlayers" type="number">
+													
+												</div>
+												<div class="form-group">
+													<label>Edition</label>
+													<input class="form-control" data-ng-model="edition">
+												</div>
+												<div class="form-group">
+												<label>Year of Production: </label>
+													<input class="form-control" data-ng-model="year" type="number" >
+												</div>	
 												<div>
 													<input type="submit" value="ADD"
 														style="width: 30%; margin-bottom: 10px"> <input
@@ -328,6 +343,7 @@
 												</div>
 											</form>
 										</div>
+									  </div>
 									</div>
 								</div>
 							</div>

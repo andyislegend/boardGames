@@ -3,7 +3,7 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 import java.util.List;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
-import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+
 public class AllFilesDTO {
 	
 	List<GameUserDTO> gameUsers;

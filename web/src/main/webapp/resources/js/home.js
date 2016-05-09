@@ -67,15 +67,14 @@ homeApp.controller("getAvatar", function($scope, $http) {
 	});
 });
 homeApp.controller('getSearchWordCTRL', function($scope, $rootScope) {
-	$scope.searchWord = {id:'Monopf'};
+	
 	$scope.submit = function(){
 		
 		$rootScope.n = 'n';
 	}
 })
 homeApp.controller('search', function($scope, $rootScope){
-
-	$scope.searchWord = {id:'M'+document.getElementById("search-box").value}; 
+	$scope.searchWord = {id:'Monopf'};
 	
 });
 
@@ -86,23 +85,22 @@ homeApp.controller('GlobalSearchCTRL', function($scope, $http, $routeParams, ngT
 			$scope.searchResult = response;
 			$scope.tournaments = $scope.searchResult.data.tournaments;
 			$scope.games = $scope.searchResult.data.gameUsers;
-			$scope.events = $scope.earchResult.data.events;
-			
-			$scope.usersTable = new ngTableParams({
-		        page: 1,
-		        count: 10
-		    }, {
-		        total: $scope.tournaments.length+$scope.games.length+$scope.events.length, 
-		        getData: function ($defer, params) {
-		            $scope.data = $scope.tournaments.slice((params.page() - 1) * params.count(), params.page() * params.count());
-		            $defer.resolve($scope.data);
-		        }
-		    });
-			
-		}) ; 
-	
-	
-	
+			$scope.events = $scope.searchResult.data.events;	
+			$scope.$broadcast('globalSearch', $scope.games);
+	  }) ;
+	$scope.$on('globalSearch',
+			function(event, data) {
+			$scope.allFilesTable = new ngTableParams({
+			    page: 1,
+			    count: 4
+			 }, {
+			     total: $scope.games.length, 
+			     getData: function ($defer, params) {
+	                    $scope.data = $scope.games.slice((params.page() - 1) * params.count(), params.page() * params.count());
+	                    $defer.resolve($scope.data);
+	                }
+			 });
+		});
 });
 
 homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $routeParams) {
@@ -132,9 +130,10 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			},
 			data : game
 		}).success(function(response) {
-			//$scope.list.push(response.data);
+			
 		}, function errorCallback(response) {
 		});
+		scope.$apply();
 	}
 	
 	$rootScope.NN = 100;
@@ -188,10 +187,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 					rules : $scope.games.rules,
 					maxPlayers : $scope.games.maxPlayers,
 					minPlayers : $scope.games.minPlayers
-			}
-			 console.log($scope.editGameData.gameName);
-			
-			
+		}		
 	});
 	
 	$scope.showMe = false;
@@ -228,9 +224,9 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'acceptGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
-			alert("Accept request success");
+			
 		}, function myError(response) {
-			alert("Accept request failed");
+			
 		});
 	}
 	
@@ -266,6 +262,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 		$http.get('deleteUserGame').success(function(data) {
 		});
 		$scope.allGame.splice(id - 1, 1);
+		scope.$apply();
 	}
 });
 
@@ -304,6 +301,7 @@ homeApp.controller("CreateGameCtrl", function($scope, $http) {
 		});
 		$scope.$parent.allGame.push(userGame);
 	};
+	
 });
 
 homeApp.controller('getGamesGlobalController', function($scope, $http, $filter, ngTableParams) {
@@ -356,7 +354,7 @@ homeApp.controller('gameSelectController', function($scope, $http, $routeParams)
 			$scope.gameDetail = response.data;
 			console.log("Response data: " + responseData);
 		}, function myError(response) {
-			alert("Getting games general data error");
+			
 		});
 	});
 	$scope.$emit('refreshingGameDetails', id);
@@ -430,7 +428,7 @@ homeApp.controller('getGameDetailedInfoController', function($scope, $http, $roo
 				$scope.$emit('refreshingGameDetails',
 				$scope.currentGameId);
 			}, function myError(response) {
-				alert("Saving rating error");
+				
 			});
 		};
 
@@ -486,6 +484,7 @@ homeApp.controller('getGameDetailedInfoController', function($scope, $http, $roo
 		}, function errorCallback(response) {
 		});
 		$scope.commentForGame.push(comment);
+		
 	}
 });
 

@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
-import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
@@ -71,10 +69,9 @@ public class CurrentUserGameController {
 	
 	@RequestMapping(value = "updateGameDetails", method = RequestMethod.PUT)
 	public String updateGame(@RequestBody GameUserDTO gameUserDTO){
-		GameUser gameUser = gameUserService.getUserGamesById(1);
-		//gameUser.setEdition(gameUserDTO.getEdition());
+		GameUser gameUser = gameUserService.getUserGamesById(gameUserDTO.getId());
+		gameUser.setEdition(gameUserDTO.getEdition());
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
-		gameUser.setCountOfComments(gameUserDTO.getCountOfComments());
 		gameUser.setStatus(gameUserDTO.getStatus());
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.update(gameUser);
