@@ -363,7 +363,7 @@
 										<th></th>
 									</tr>
 									<tr ng-repeat="game in allGame">
-										<td><a href = "#gameUser/{{game.id}}" ng-click = "myFunc(game.id)">
+										<td><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">
 										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
 										<td  >												

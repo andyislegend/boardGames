@@ -41,11 +41,6 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-GlobalSearch.html',
 		controller : 'search'
 	})
-	.when('/gameUser/:id', {
-		templateUrl : 'resources/pages/home-gameUser.html',
-		controller : 'getGameDetailedInfoController'
-	})
-	
 	.when('/gameUserDetails/:id', {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
 		controller : 'getGameDetailedInfoController'
@@ -106,6 +101,7 @@ homeApp.controller('GlobalSearchCTRL', function($scope, $http, $routeParams, ngT
 homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $routeParams) {
 	
 	$scope.isYourGame = false;
+	$scope.isYourGamePrivate = false;
 	$scope.isntYourGame = false;
 	$scope.isThereConfiramtion = false;
 	
@@ -157,21 +153,31 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
 					$scope.isThereConfiramtion = false;
+					$scope.isYourGamePrivate = false;
 				}
 				else if (response.data === false && $scope.games.status === 'available') {
 					$scope.isntYourGame = true;
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = false;
+					$scope.isYourGamePrivate = false;
+				}
+				else if (response.data === true && $scope.games.status === 'available'){
+					$scope.isYourGame = false;
+					$scope.isntYourGame = false;
+					$scope.isThereConfiramtion = false;
+					$scope.isYourGamePrivate = true;
 				}
 				else if (response.data === true && $scope.games.status === 'confirmation') {
 					$scope.isntYourGame = false;
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = true;
+					$scope.isYourGamePrivate = false;
 				}
 				else {
 					$scope.isYourGame = false;
 					$scope.isntYourGame = false;
 					$scope.isThereConfiramtion = false;
+					$scope.isYourGamePrivate = false;
 				}
 			}, function myError(response) {
 				
@@ -202,7 +208,18 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'makeGameUserAvailable' + '/' + id
 		}).then(function mySucces(response) {
-			alert("Making game available success!");
+			
+		}, function myError(response) {
+			alert("Making game available failed");
+		});
+	}
+	
+	$scope.keepGameUserPrivate = function(id) {
+		$http({
+			method : "PUT",
+			url : 'makeGameUserPrivate' + '/' + id
+		}).then(function mySucces(response) {
+			
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
@@ -213,7 +230,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'askGameUserOwnerToShare' + '/' + id
 		}).then(function mySucces(response) {
-			alert("Your request has been sent!)");
+			
 		}, function myError(response) {
 			alert("Failed to send your request");
 		});
@@ -226,7 +243,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 		}).then(function mySucces(response) {
 			
 		}, function myError(response) {
-			
+			alert("Accept request failed");
 		});
 	}
 	
@@ -235,7 +252,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 			method : "PUT",
 			url : 'declineGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
-			alert("Decline request success");
+			
 		}, function myError(response) {
 			alert("Decline request failed");
 		});

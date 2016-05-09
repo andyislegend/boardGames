@@ -38,6 +38,14 @@ public class UserGameSharingController {
 		gameUserService.update(gameUserToUpdate);
 	}
 	
+	@RequestMapping(value="/makeGameUserPrivate/{gameUserId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public void makeGameUserPrivate(@PathVariable Integer gameUserId) {
+		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setStatus("private");
+		gameUserService.update(gameUserToUpdate);
+	}
+	
 	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId) {
