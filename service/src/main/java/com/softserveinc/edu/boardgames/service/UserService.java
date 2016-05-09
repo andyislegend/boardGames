@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
-//import com.softserveinc.edu.boardgames.service.util.EmailSenderApp;
 
 /**
  * UserService.class responsible for realization of DB CRUD and other operation
@@ -55,6 +54,7 @@ public class UserService {
 		Set<UserRoles> roles = new HashSet<>();
 		roles.add(role);
 		user.setUserRoles(roles);
+		user.setState(UserStatus.UNDER_VERIFICATION.name());
 		userRepository.save(user);
 	}
 

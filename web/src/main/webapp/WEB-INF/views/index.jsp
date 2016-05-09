@@ -178,7 +178,7 @@
 	<div id="myReg" class="modal fade  col-md-6 col-md-offset-3"
 		role="dialog">
 		<div class="modal-dialog">
-			
+
 			<!-- Modal content-->
 			<div class="modal-content" ng-controller="registerCntrl">
 				<div class="modal-header">
@@ -240,13 +240,27 @@
 
 					</div>
 
+					<div class="row">
+						<div class="form-group col-md-12" style="margin-left: 1%;">
+							<div class="col-md-3">
+
+								Choose foto to upload : <input type="file" name="fileUpload"
+									class="fileUpload" accept="image/*" onchange="loadFile(event)">
+							</div>
+							<div class="col-md-4">
+								<img id="avatar" src="#"
+									class="img-circle dropdown-toggle profile-image" />
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
-			<!-- End of Modal Content --> 
-		
+			<!-- End of Modal Content -->
+
 		</div>
 	</div>
 	<!-- End of Registration Modal -->
-	
+
 </body>
 </html>
