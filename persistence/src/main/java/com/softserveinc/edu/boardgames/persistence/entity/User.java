@@ -20,7 +20,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.PostUpdate;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 
