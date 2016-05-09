@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable' ]);
+var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 'ng.q']);
 
 homeApp.config(function($routeProvider) {
 	$routeProvider
@@ -457,97 +457,91 @@ homeApp.controller("editProfileCtrl", function($scope, $http) {
 	}
 });
 
-homeApp
-		.controller(
-				"getAllUsersCtrl",
-				function($scope, $http) {
-					$scope.users = [];
-					$http
-							.get('users')
-							.then(
-									function(result) {
-										$scope.users = result.data;
-										$scope.showUser = false;
-										$scope.getInfoAboutUserFunc = function(
-												username) {
-											$scope.oneUser
-											$scope.showUser = !$scope.showUser;
-											for (var i = 0; i < $scope.users.length; i++) {
-												if ($scope.users[i].username === username) {
-													$scope.oneUser = $scope.users[i];
-													break;
-												}
-												;
-											}
-											;
-											$http
-													.get(
-															'allUsersGames?username='
-																	+ username)
-													.then(
-															function(result) {
-																$scope.games = result.data;
-															});
-											$scope.showModal = false;
-											$scope.getInfoAboutGame = function(
-													id) {
-												$scope.showModal = !$scope.showModal;
-												for (var i = 0; i < $scope.games.length; i++) {
-													if ($scope.games[i].id === id) {
-														$scope.oneGame = $scope.games[i];
-														break;
-													}
-													;
-												}
-												;
-											};
-											$http
-													.get(
-															'allUsersTournaments?username='
-																	+ username)
-													.then(
-															function(result) {
-																$scope.tournaments = result.data;
-															});
-											$scope.showModal1 = false;
-											$scope.getInfoAboutTournament = function(
-													tournamentId) {
-												$scope.showModal1 = !$scope.showModal1;
-												for (var i = 0; i < $scope.tournaments.length; i++) {
-													if ($scope.tournaments[i].tournamentId === tournamentId) {
-														$scope.oneTournament = $scope.tournaments[i];
-														break;
-													}
-													;
-												}
-												;
-											};
-											$http
-													.get(
-															'getUsersAvatar?username='
-																	+ $scope.oneUser.username)
-													.then(
-															function(result) {
-																$scope.userAvatar = result.data;
-															});
-										};
-									});
-					$http.get('getAllCountries').then(
-							function(result) {
-								$scope.countries = result.data;
-								$scope.getCitiesByCountry = function() {
-									var countryName = $(
-											'select[name=selectCountries]')
-											.val();
-									$http.get(
-											'getAllCities?countryName='
-													+ countryName).then(
-											function(result) {
-												$scope.cities = result.data;
-											});
-								};
-							});
-				});
+homeApp.controller("getAllUsersCtrl", function($scope, $http, $filter, $q, ngTableParams) {
+	$scope.users = [];
+	$http.get('users').then(function(result) {
+		$scope.users = result.data;
+		$scope.$broadcast('sharingToUsersTable', $scope.users);
+		$scope.showUser = false;
+		$scope.getInfoAboutUserFunc = function(username) {
+			$scope.oneUser
+			$scope.showUser = !$scope.showUser;
+			for (var i = 0; i < $scope.users.length; i++) {
+				if ($scope.users[i].username === username) {
+					$scope.oneUser = $scope.users[i];
+					break;
+					};
+				};
+			$http.get('allUsersGames?username='+ username).then(function(result) {
+				$scope.games = result.data;
+			});
+			$scope.showModal = false;
+			$scope.getInfoAboutGame = function(id) {
+				$scope.showModal = !$scope.showModal;
+				for (var i = 0; i < $scope.games.length; i++) {
+					if ($scope.games[i].id === id) {
+						$scope.oneGame = $scope.games[i];
+						break;
+					};
+				};
+			};
+			$http.get('allUsersTournaments?username='+ username).then(function(result) {
+				$scope.tournaments = result.data;
+			});
+			$scope.showModal1 = false;
+			$scope.getInfoAboutTournament = function(tournamentId) {
+				$scope.showModal1 = !$scope.showModal1;
+				for (var i = 0; i < $scope.tournaments.length; i++) {
+					if ($scope.tournaments[i].tournamentId === tournamentId) {
+						$scope.oneTournament = $scope.tournaments[i];
+						break;
+					};
+				};
+			};
+			$http.get('getUsersAvatar?username=' + $scope.oneUser.username).then(function(result) {
+				$scope.userAvatar = result.data;
+			});
+		};
+	});
+	
+	$scope.countries = function ($scope, $defer) {
+		var def = $q.defer();
+	    var country = $http.get('getAllCountries');
+	    def.resolve(country);
+	    return def;
+	};
+	
+	$http.get('getAllCountries').then(function(result) {
+		$scope.countries = result.data;
+		$scope.getCitiesByCountry = function() {
+			var countryName = $('select[name=selectCountries]').val();
+			$http.get('getAllCities?countryName=' + countryName).then(function(result) {
+				$scope.cities = result.data;
+				$scope.$broadcast('sharingAddress', { countries:$scope.countries, cities:$scope.cities});
+			});
+		};
+	});
+
+	$scope.$on('sharingToUsersTable', function(event, data) {
+	$scope.usersTable = new ngTableParams({
+		page: 1,
+		count: 7
+	}, {
+		total: data.length, 
+		getData: function ($defer, params) {
+		    	 $scope.usersByParams = params.sorting() ? 
+		      			$filter('orderBy')(data, params.orderBy()) 
+		       			: data;
+		       	 $scope.usersByParams = params.filter() ? 
+		       			$filter('filter')($scope.usersByParams, params.filter()) 
+		       			: $scope.usersByParams;
+		         $scope.usersByParams = $scope.usersByParams.slice((params.page() - 1) 
+		            	* params.count(), params.page() * params.count());
+		         $defer.resolve($scope.usersByParams);
+		     }
+		 });
+	});
+});
 
 homeApp
 		.controller(

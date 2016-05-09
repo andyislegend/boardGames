@@ -38,6 +38,8 @@
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript" 
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
+	<script type="text/javascript" 
+	src="resources/bower_components/ng-q/q.module.js"></script>
 <!-- End of Scripts -->
 
 </head>
