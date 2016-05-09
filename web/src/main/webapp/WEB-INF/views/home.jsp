@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="resources/css/search.css" />
 <link rel="stylesheet" href="resources/css/users.css" />
 <link rel="stylesheet" href="resources/css/friend.css" />
+<link rel="stylesheet" href="resources/css/editPage.css" />
 <!-- End of CSS -->
 
 <!-- Scripts -->
@@ -66,7 +67,7 @@
 					<form id="searchthis"  style="display: inline;"
 						method="get">
 						<input id="search-box" name="q" size="50" type="text"
-							placeholder="Search" data-ng-model ="search" />
+							placeholder="Search" ng-model ="search" />
 						<a href = "#search/{{searchWord.id}}">
 						<input type="submit">
 						</a>												
@@ -343,7 +344,7 @@
 										<th></th>
 									</tr>
 									<tr ng-repeat="game in allGame">
-										<td><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">
+										<td><a href = "#gameUser/{{game.id}}" ng-click = "myFunc(game.id)">
 										{{game.name}}</a></td>
 										<td>{{game.category}}</td>
 										<td  >												

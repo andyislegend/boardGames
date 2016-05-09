@@ -1,0 +1,12 @@
+<div ng-controller = "allUsersGameCtrl" >
+
+<h1>{{games.name}}</h1>
+
+<p>Year of production: {{games.yearOfProduction}}</p>
+<p>Edition: {{games.edition}}</p>
+<p>Description: {{games.description}}</p>
+<p>Max players: {{games.maxPlayers}}</p>
+<p>Min players: {{games.minPlayers}}</p>
+<p>Availability: {{games.status}}</p>
+<a href = "#gameEdit/{{games.id}}"><button>Edit</button></a>
+</div>

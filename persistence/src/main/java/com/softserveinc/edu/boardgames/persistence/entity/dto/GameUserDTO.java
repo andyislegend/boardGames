@@ -17,6 +17,15 @@ public class GameUserDTO {
 	public GameUserDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public GameUserDTO(int id,int yearOfProduction, String edition, 
+			int countOfComments, String status) {
+		this.id = id;
+		this.yearOfProduction = yearOfProduction;
+		this.edition = edition;
+		this.countOfComments = countOfComments;
+		this.status = status;
+	}
 
 	public GameUserDTO(int id, String name, String category, int yearOfProduction, String edition, 
 			int countOfComments, String status, String description,

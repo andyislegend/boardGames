@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
+import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.service.CategoryService;
+import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -35,6 +38,9 @@ public class CurrentUserGameController {
 	
 	@Autowired
 	private GameUserService gameUserService;
+	
+	@Autowired
+	private GameService gameService;
 	
 	/**
 	 * 	
@@ -60,6 +66,18 @@ public class CurrentUserGameController {
 		gameUser = GameUserMapper.toEntity(gameUserDTO);
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.add(gameUser);
+		return "";
+	}
+	
+	@RequestMapping(value = "updateGameDetails", method = RequestMethod.PUT)
+	public String updateGame(@RequestBody GameUserDTO gameUserDTO){
+		GameUser gameUser = gameUserService.getUserGamesById(1);
+		//gameUser.setEdition(gameUserDTO.getEdition());
+		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
+		gameUser.setCountOfComments(gameUserDTO.getCountOfComments());
+		gameUser.setStatus(gameUserDTO.getStatus());
+		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
+		gameUserService.update(gameUser);
 		return "";
 	}
 	
@@ -91,7 +109,6 @@ public class CurrentUserGameController {
 	
 	@RequestMapping(value = "/updateCountOfComment/{idGame}/{countOfComment}",method = RequestMethod.PUT)
 	public String updateCounOfComments(@PathVariable Integer idGame, @PathVariable Integer countOfComment){
-		System.out.println("idGame = "+idGame+" countOfComment==="+countOfComment);
 		GameUser gameUser = gameUserService.getUserGamesById(idGame);
 		gameUser.setCountOfComments(countOfComment);
 		gameUserService.update(gameUser);

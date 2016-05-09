@@ -47,7 +47,8 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#myModal">Login</a></li>
-					<li><a type="button" class="btn btn-link" href="/newuser"> Registration</a></li>
+					<li><a type="button" class="btn btn-link" data-toggle="modal"
+						data-target="#myReg"> Registration</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -82,19 +83,19 @@
 				<div class="item">
 					<img src="resources/images/index-carousel/image2.jpg">
 				</div>
-				
+
 				<div class="item">
 					<img src="resources/images/index-carousel/image3.jpg">
 				</div>
-				
+
 				<div class="item">
 					<img src="resources/images/index-carousel/image4.jpg">
 				</div>
-				
+
 				<div class="item">
 					<img src="resources/images/index-carousel/image5.jpg">
 				</div>
-				
+
 				<div class="item">
 					<img src="resources/images/index-carousel/image6.jpg">
 				</div>
@@ -116,8 +117,9 @@
 	<!-- Carousel End -->
 
 
-	<!-- Modal -->
-	<div id="myModal" class="modal fade  col-md-6 col-md-offset-3" role="dialog" ng-controller="loginCntrl">
+	<!-- Login Modal -->
+	<div id="myModal" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog" ng-controller="loginCntrl">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -133,29 +135,33 @@
 
 						<div class="form-group"
 							ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-							<input style="margin-left: 25%; width: 50%" type="text" name="username" id="username"
-								class="form-control" ng-model="loginForm.username"
-								placeholder="Enter Username" required />
+							<input style="margin-left: 25%; width: 50%" type="text"
+								name="username" id="username" class="form-control"
+								ng-model="loginForm.username" placeholder="Enter Username"
+								required />
 						</div>
 						<div class="form-group"
 							ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-							<input style="margin-left: 25%; width: 50%" type="password" name="password" id="password"
-								class="form-control" ng-model="loginForm.password"
-								placeholder="Enter Password" required />
+							<input style="margin-left: 25%; width: 50%" type="password"
+								name="password" id="password" class="form-control"
+								ng-model="loginForm.password" placeholder="Enter Password"
+								required />
 						</div>
 
 						<p style="color: red; font-size: 10pt; text-align: center;"
 							id="incorrectLoginMessage" ng-show="loginCorrect"
 							class="incortLebStyle">
-							<b>INCORRECT LOGIN OR PASSWORD!<b>
+							<b>INCORRECT LOGIN OR PASSWORD!</b>
 						</p>
 						<div class="form-actions">
 							<button type="submit" ng-disabled="form.$invalid"
-								class="btn btn-info btn-lg btn-block" style="width: 50%;margin-left: 25%">Login</button>
-							<br> <a style="margin-left: 1%;" href="/newuser"
-								class="btn btn-link"><b>Don't Have an Account? Click
+								class="btn btn-info btn-lg btn-block"
+								style="width: 50%; margin-left: 25%">Login</button>
+							<br> <a style="margin-left: 1%;" type="button"
+								data-dismiss="modal" class="btn btn-link" data-toggle="modal"
+								data-target="#myReg"><b>Don't Have an Account? Click
 									here!<b></a> <a style="margin-left: 35%;" type="button"
-								data-dismiss="modal" class="btn btn-link"><b>Cancel<b></a>
+								data-dismiss="modal" class="btn btn-link"><b>Cancel</b></a>
 						</div>
 					</form>
 
@@ -165,6 +171,82 @@
 			</div>
 			<!-- Modal Content End -->
 		</div>
-		<!-- End of Modal -->
+		<!-- End of LOGIN Modal -->
+	</div>
+
+	<!-- Modal Registration -->
+	<div id="myReg" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
+			
+			<!-- Modal content-->
+			<div class="modal-content" ng-controller="registerCntrl">
+				<div class="modal-header">
+					<button ng-click="register()" class="btn btn-info">Sign up</button>
+					<a style="margin-left: 15%; font-size: 12pt;" class="btn disabled">REGISTARTION
+						OF NEW USER</a>
+					<button style="margin-left: 14%;" type="submit"
+						data-dismiss="modal" class="btn btn-danger" ng-click="eraseForm()">Cancel</button>
+					<span style="color: red; font-size: 10pt; margin-left: 5%"
+						ng-hide="regUserMssg"> {{regUserResp}} </span>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label>Username</label><span style="color: red">*</span> <input
+							ng-model="regusername" type="text" class="form-control"
+							required="required" />
+
+					</div>
+
+					<div class="form-group">
+						<label>Email</label><span style="color: red">*</span> <input
+							ng-model="regemail" type="email" class="form-control"
+							required="required" />
+
+					</div>
+
+					<div class="form-group">
+						<label>First name</label> <input ng-model="regfirstName"
+							type="text" class="form-control" />
+					</div>
+
+					<div class="form-group">
+						<label>Last name</label> <input ng-model="reglastName" type="text"
+							class="form-control" />
+
+					</div>
+
+					<div class="form-group">
+						<label>Password</label><span style="color: red">*</span> <input
+							ng-model="regpassword" type="password" class="form-control"
+							required="required" />
+
+					</div>
+
+					<div class="form-group">
+						<label>Confirm Password</label><span style="color: red">*</span> <input
+							ng-model="regconfirmPassword" type="password"
+							class="form-control" required="required" />
+
+					</div>
+
+					<div class="form-group">
+						<label>Gender</label> <select ng-model="reggender"
+							class="form-control" id="gender" required="required">
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
+
+					</div>
+
+				</div>
+			</div>
+			<!-- End of Modal Content --> 
+		
+		</div>
+	</div>
+	<!-- End of Registration Modal -->
+	
 </body>
 </html>
