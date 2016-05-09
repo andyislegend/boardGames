@@ -53,7 +53,7 @@ public class RegisterController {
 
 	@Autowired
 	ImageConfiguration imageConfiguration;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -76,7 +76,7 @@ public class RegisterController {
 	 *            is used to validate the safety of username
 	 */
 	public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,15}");
-	
+
 	/**
 	 * Answer the request for registration from web
 	 * 
@@ -109,9 +109,6 @@ public class RegisterController {
 			@RequestParam("confirmPassword") String confirmPassword, BindingResult result, ModelMap model)
 			throws Exception {
 
-		// if (result.hasErrors()) {
-		// return "registration";
-		// }
 		if (!validateUsername(user.getUsername())) {
 
 			FieldError usernameError = new FieldError("user", "username",
@@ -173,6 +170,28 @@ public class RegisterController {
 		return "index";
 	}
 
+	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<String> updateUserPassword(@RequestParam("oldPassword") String oldPassword,
+			@RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+			return new ResponseEntity<String>("Sorry, but you typed wrong password", HttpStatus.CONFLICT);
+		}
+
+		if (!validatePassword(newPassword)) {
+			return new ResponseEntity<String>("Sorry, but Your password must contain at least one lower case symbol, "
+					+ "one Upper case symbol, one number and be from 6 to 20 chars long", HttpStatus.CONFLICT);
+		}
+
+		if (!newPassword.equals(confirmPassword)) {
+			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
+		}
+		user.setPassword(passwordEncoder.encode(newPassword));
+		userService.updateUser(user);
+		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
+	}
+
 	private static boolean validateMail(String emailStr) {
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
 		return matcher.find();
@@ -187,27 +206,4 @@ public class RegisterController {
 		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
 		return matcher.find();
 	}
-	
-	@RequestMapping(value = {"/updateUserPassword"}, method = RequestMethod.PUT)
-	@ResponseBody
-	public ResponseEntity<String> updateUserPassword(@RequestParam("oldPassword") String oldPassword,
-			@RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
-		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-			return new ResponseEntity<String>("Sorry, but you typed wrong password", HttpStatus.CONFLICT);
-		}
-		
-		if (!validatePassword(newPassword)) {
-			return new ResponseEntity<String>("Sorry, but Your password must contain at least one lower case symbol, "
-					+ "one Upper case symbol, one number and be from 6 to 20 chars long", HttpStatus.CONFLICT);
-		}
-
-		if (!newPassword.equals(confirmPassword)) {
-			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
-		}
-		user.setPassword(passwordEncoder.encode(newPassword));		
-		userService.updateUser(user);
-		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
-	}
-
 }

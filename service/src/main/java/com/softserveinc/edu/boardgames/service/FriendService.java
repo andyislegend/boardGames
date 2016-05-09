@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +55,14 @@ public class FriendService {
 	
 	public void rejectedFrienship(User currentUser, User userId) {
 		friendRepository.changeStatusOfFriendshipToRejected(userId, currentUser);
+	}
+	
+	public List<Friend> getAllMyOffering(String userName){
+		return friendRepository.getAllMyOffering(userName);
+	}
+	
+	public void cancelOffering(User currentUser, User otherUser){
+		friendRepository.cancelOffering(currentUser, otherUser);
 	}
 	
 }

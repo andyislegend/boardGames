@@ -15,7 +15,7 @@ app.controller("allUsersGameCtrl", function ($scope, $http,$rootScope) {
             $scope.games = [];
             $scope.showMe = !$scope.showMe;
             $http.get('gameUserDetail/'+id).then(function(result) {
-            	$scope.games = result;
+            	$scope.games = result.data;
 			});
         }
         
@@ -123,21 +123,32 @@ app.controller("eventListCtrl", function($scope, $http) {
     }
 
 });
-app.controller("friendsCtrl", function($scope, friendService, $http) {
+
+
+
+
+
+app.controller("friendsCtrl", ['$scope', '$interval', '$http', function($scope, friendService, $http, $interval) {
     $scope.users;
-	 friendService.getAllFriends().success(function(data) {
+    $http.get("allFriends").success(function(data) {
 		$scope.friends = data;
 	}).error(function(error) {
 		console.log(error);
-	})
+	});
     
-    friendService.getCount().success(function(data){
+    $http.get("allMyOffering").success(function(data) {
+		$scope.userOffered = data;
+	}).error(function(error) {
+		console.log(error);
+	});
+    
+    $http.get('allOffering').success(function(data){
          $scope.count = data;
      }).error(function(error){
          console.log(error)
      });
     
-    friendService.getAllOfferedUsers().success(function(data) {
+    $http.get("allOfferedUsers").success(function(data) {
         $scope.allOfferedUsers = data;
 	}).error(function(error) {
 		console.log(error);
@@ -189,7 +200,6 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
     });
    };
     $scope.addUserToFriend = function(id){
-      console.log(id);
          $http.post('addOfferToFriendship/', id).success(function(data){
              $scope.userWhoYouSentOffering = data;
              for(var i = 0; i < $scope.allUsers.length; i++){
@@ -201,7 +211,78 @@ app.controller("friendsCtrl", function($scope, friendService, $http) {
              console.log(error);
          });
     };
-});
+    $scope.setFriendName = function(friendName){
+        $scope.currentFriend = friendName;
+        getUpdate(friendName);
+    };
+    var getUpdate = function() { 
+          $http.post('getAllMessage/' +  $scope.currentFriend ,  $scope.currentFriend ).success(function(data){
+              
+              if($scope.messages != data){
+                $scope.messages = data;
+                  console.log($scope.messages == data);
+                  console.log($scope.messages.length);
+                  console.log(data.length);
+              }
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+    $scope.sendMessage = function(message){
+        $scope.currentFriend
+        $http.post('sendMessage/' + $scope.currentFriend + "/" + message, $scope.currentFriend, message).success(function(){
+        }).error(function(error){
+            console.log(error);
+        });
+    };
+    $scope.readMessage = function(messageId){
+        $http.post('readMessage/' + messageId, messageId).success(function(){
+        }).error(function(error){
+            console.log(error);
+        });
+        
+    };
+    
+    $http.get('findAllNotReadMessage').success(function(data){
+         $scope.countOfNotReadMessage = data;
+     }).error(function(error){
+         console.log(error)
+     });
+    $scope.cancelOffering = function(userName){
+        $http.post('canselOffering/' + userName, userName).success(function(){
+            for(var i = 0; i < $scope.userOffered.length; i++){
+                if($scope.userOffered[i].user.username === userName || $scope.userOffered[i].userId.username === userName){
+                    $scope.userOffered.splice(i, 1)
+                };
+            };
+        }).error(function(error){
+            console.log(error);
+    });
+};
+    $http.get('allMessageByCurrentUserFriends').success(function(data){
+        $scope.allNotReadMessagesByFriend = data;
+    }).error(function(error){
+        console.log(error);
+    });
+    
+   
+  setInterval(function(){
+       getUpdate();
+   }, 10000)
+   
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*users Angular controller -- start*/
 app.controller("getAllUsersCtrl", function($scope, $http) {
