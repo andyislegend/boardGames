@@ -38,7 +38,7 @@ public class CommentsForGame implements Serializable {
     private Integer id;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = GameUser.class, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY,targetEntity = GameUser.class, cascade = { CascadeType.MERGE, CascadeType.REMOVE})
     private GameUser gameUser;
 
     @JsonBackReference

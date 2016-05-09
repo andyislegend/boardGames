@@ -90,10 +90,9 @@ public class CurrentUserGameController {
 		return categories;
 	}
 	
-	@RequestMapping(value = "deleteUserGame",method = RequestMethod.GET)
-	public String deleteGame(){
-		System.out.println("dfefdfdfdsfs");
-		gameUserService.delete(1);
+	@RequestMapping(value = "deleteUserGame/{id}",method = RequestMethod.DELETE)
+	public String deleteGame(@PathVariable Integer id){
+		gameUserService.deleteById(id);
 		return"";
 	}
 	
