@@ -186,7 +186,7 @@
 					<a style="margin-left: 15%; font-size: 12pt;" class="btn disabled">REGISTARTION
 						OF NEW USER</a>
 					<button style="margin-left: 14%;" type="submit"
-						data-dismiss="modal" class="btn btn-danger" ng-click="eraseForm()">Cancel</button>
+						class="btn btn-danger" ng-click="closeModal()">Cancel</button>
 					<span style="color: red; font-size: 10pt; margin-left: 5%"
 						ng-hide="regUserMssg"> {{regUserResp}} </span>
 				</div>

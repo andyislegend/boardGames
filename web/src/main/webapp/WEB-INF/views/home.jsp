@@ -70,7 +70,8 @@
 						<input id="search-box" name="q" size="50" type="text"
 							placeholder="Search" ng-model ="search" />
 						<a href = "#search/M">
-						<input type="submit">
+						<button id="search-btn" type="submit"><span class="	glyphicon glyphicon-search"></span></button>
+						<!-- <input type="submit"> -->
 						</a>												
 					</form>
 				</form>
