@@ -1,0 +1,32 @@
+<div ng-controller = "allUsersGameCtrl" >
+
+<h1>{{games.name}}</h1>
+
+<form role="form">
+  <div class="form-group">
+    <label>Name:</label>
+    <input type="email" class="form-control" id="email" ng-model = "games.name" >
+  </div>
+  <div class="form-group">
+    <label>Year Of Production:</label>
+    <input type="number" class="form-control" ng-model = "games.yearOfProduction">
+  </div>
+  <div class="form-group">
+    <label>Edition:</label>
+    <input type="text" class="form-control" ng-model = "games.edition">
+  </div>
+  <div class="form-group">
+    <label>Description:</label>
+    <input type="text" class="form-control" ng-model = "games.description">
+  </div>
+  <div class="form-group">
+    <label>Max players:</label>
+    <input type="number" class="form-control" ng-model = "games.maxPlayers">
+  </div>
+  <div class="form-group">
+    <label>Min players:</label>
+    <input type="number" class="form-control" ng-model = "games.minPlayers">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>

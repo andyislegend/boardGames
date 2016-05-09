@@ -45,6 +45,10 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
 		controller : 'getGameDetailedInfoController'
 	})
+	.when('/gameEdit/:id', {
+		templateUrl : 'resources/pages/home-editGame.html',
+		controller : 'allUsersGameCtrl'
+	})
 
 	.otherwise({
 		redirectTo : '/statistics'
