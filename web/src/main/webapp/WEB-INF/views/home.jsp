@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="resources/css/search.css" />
 <link rel="stylesheet" href="resources/css/users.css" />
 <link rel="stylesheet" href="resources/css/friend.css" />
+<link rel="stylesheet" href="resources/css/editPage.css" />
 <!-- End of CSS -->
 
 <!-- Scripts -->
@@ -64,7 +65,7 @@
 					<form id="searchthis"  style="display: inline;"
 						method="get">
 						<input id="search-box" name="q" size="50" type="text"
-							placeholder="Search" data-ng-model ="search" />
+							placeholder="Search" ng-model ="search" />
 						<a href = "#search/{{searchWord.id}}">
 						<input type="submit">
 						</a>												

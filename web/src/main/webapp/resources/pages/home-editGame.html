@@ -1,32 +1,34 @@
 <div ng-controller = "allUsersGameCtrl" >
 
+<div class = "mainContainer">
 <h1>{{games.name}}</h1>
-
+<h3>{{games.category}}</h3>
 <form role="form">
   <div class="form-group">
-    <label>Name:</label>
-    <input type="email" class="form-control" id="email" ng-model = "games.name" >
-  </div>
-  <div class="form-group">
     <label>Year Of Production:</label>
-    <input type="number" class="form-control" ng-model = "games.yearOfProduction">
+    <input type="number" class="form-control" ng-model = "editGameData.yearOfProduction">
   </div>
   <div class="form-group">
     <label>Edition:</label>
-    <input type="text" class="form-control" ng-model = "games.edition">
+    <input type="text" class="form-control" ng-model = "editGameData.edition">
   </div>
   <div class="form-group">
     <label>Description:</label>
-    <input type="text" class="form-control" ng-model = "games.description">
+    <input type="text" size="200" class="form-control" ng-model = "editGameData.description">
+  </div> 
+  <div class="form-group">
+    <label>Rules:</label>
+    <input type="text" size="200" class="form-control" ng-model = "editGameData.rules">
   </div>
   <div class="form-group">
     <label>Max players:</label>
-    <input type="number" class="form-control" ng-model = "games.maxPlayers">
+    <input type="number" class="form-control" ng-model = "editGameData.maxPlayers">
   </div>
   <div class="form-group">
     <label>Min players:</label>
-    <input type="number" class="form-control" ng-model = "games.minPlayers">
+    <input type="number" class="form-control" ng-model = "editGameData.minPlayers">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" ng-click = "updateGame()" value="Update" class="btn btn-default">Update</button>
 </form>
+</div>
 </div>

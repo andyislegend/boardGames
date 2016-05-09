@@ -70,7 +70,7 @@ homeApp.controller('getSearchWordCTRL', function($scope, $rootScope) {
 })
 homeApp.controller('search', function($scope, $rootScope){
 
-	$scope.searchWord = {id:'f'+document.getElementById("search-box").value}; 
+	$scope.searchWord = {id:'M'+document.getElementById("search-box").value}; 
 	
 });
 
@@ -106,6 +106,32 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 	$scope.isntYourGame = false;
 	$scope.isThereConfiramtion = false;
 	
+	$scope.updateGame = function(){
+		var game = {
+			id : $scope.editGameData.id,
+			yearOfProduction : $scope.editGameData.yearOfProduction,
+			edition : $scope.editGameData.edition,
+			countOfComments : $scope.editGameData.countOfComments,
+			status : $scope.editGameData.status,
+			description : $scope.editGameData.description,
+			rules : $scope.editGameData.rules,
+			maxPlayers : $scope.editGameData.maxPlayers,
+			minPlayers : $scope.editGameData.minPlayers
+		}
+		
+		$http({
+			method : 'PUT',
+			url : '/updateGameDetails',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : game
+		}).success(function(response) {
+			//$scope.list.push(response.data);
+		}, function errorCallback(response) {
+		});
+	}
+	
 	$rootScope.NN = 100;
 	$scope.allGame = [];
 	$http.get('getAllGamesCurUser').then(function(result) {
@@ -122,7 +148,7 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 				method : "GET",
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
-				alert(response.data);
+				
 				if (response.data === true && $scope.games.status === 'private') {
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
@@ -144,8 +170,22 @@ homeApp.controller("allUsersGameCtrl", function($scope, $http, $rootScope, $rout
 					$scope.isThereConfiramtion = false;
 				}
 			}, function myError(response) {
-				alert("checking if game belongs to user error");
+				
 			});
+			 $scope.editGameData = {
+					id : $scope.games.id,
+					gameName : $scope.games.name,
+					yearOfProduction: $scope.games.yearOfProduction,
+					edition : $scope.games.edition,
+					countOfComments : $scope.games.countOfComments,
+					status : $scope.games.status,
+					description : $scope.games.description,
+					rules : $scope.games.rules,
+					maxPlayers : $scope.games.maxPlayers,
+					minPlayers : $scope.games.minPlayers
+			}
+			 console.log($scope.editGameData.gameName);
+			
 			
 	});
 	
@@ -258,7 +298,6 @@ homeApp.controller("CreateGameCtrl", function($scope, $http) {
 		}, function errorCallback(response) {
 		});
 		$scope.$parent.allGame.push(userGame);
-		$scope.$parent.allGame = {};
 	};
 });
 
