@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -40,6 +41,8 @@
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript" 
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
+	<script type="text/javascript" 
+	src="resources/bower_components/ng-q/q.module.js"></script>
 <!-- End of Scripts -->
 
 </head>
@@ -90,8 +93,10 @@
 							<li><a href=""><span
 									class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 									Messages <span class="badge">2</span></a></li>
+							<sec:authorize access="hasRole('ADMIN')">
 							<li><a href="#users"><span class="glyphicon glyphicon-user"
 									aria-hidden="true"></span> Users </a></li>
+							</sec:authorize>
 							<li class="divider"></li>
 							<li><a href="logout"><span
 									class="glyphicon glyphicon-off" aria-hidden="true"></span>

@@ -22,45 +22,23 @@
                </div>
                <div ng-controller="getAllUsersCtrl">
 
-                  <table class="table" ng-table="users.Table">
-                  	 <tr>
-                        <th>
-                        	<input type="text" class="form-control"
-                     			ng-model="searchText.username"
-                     			placeholder="Search by username">
-                     	</th>
-                        <th></th>
-                        <th></th>
-                        <th>
-                        	<select name="selectCountries" id="repeatSelectCountry" ng-model="searchText.address.country.name" 
-                        		ng-change="getCitiesByCountry()">
-                        		<option value="">--Select Country--</option>
-                        		<option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
-                        	</select>
-                        	<select name="repeatSelect" id="repeatSelectCity" ng-model="searchText.address.city.name">
-                        		<option value="">--Select City--</option>
-                        		<option ng-repeat="city in cities">{{city.name}}</option>
-                        	</select>
-                    	</th>
-                     </tr>
-                     <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>PhoneNumber</th>
-                        <th>Address</th>
-                     </tr>
-                     <tr ng-repeat="user in users|filter:searchText">
-                        <td data-title="'Username'"><a href="" ng-click="getInfoAboutUserFunc(user.username)">
-                           {{user.username}}</a>
-                        </td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phoneNumber}}</td>
-                        <td>{{user.address.country.name}} {{user.address.city.name}}
-                           {{user.address.street}} {{user.address.houseNumber}}
-                           {{user.address.roomNumber}}
-                        </td>
-                     </tr>
-                  </table>
+		<table ng-table="usersTable" show-filter="true"
+			class="table table-striped">
+			<tr ng-repeat="user in usersByParams">
+				<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }">
+					<a href="" ng-click="getInfoAboutUserFunc(user.username)">{{user.username}}</a>
+				</td>
+				<td title="'Email'" sortable="'email'">{{user.email}}</td>
+				<td title="'Phone Number'">{{user.phoneNumber}}</td>
+				<td title="'Address'" filter="{'countryName': 'select'}" filter-data="countries()">
+					{{user.address.country.name}} {{user.address.city.name}}
+                	{{user.address.street}} {{user.address.houseNumber}}
+                	{{user.address.roomNumber}}
+                </td>
+			</tr>
+		</table>
+		<p>{{countries}}</p>
+
                   <div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
                      <div class="col-sm-3" id="backgroundForOneUser">
                         <p>Last Name:{{oneUser.lastName}}</p>
