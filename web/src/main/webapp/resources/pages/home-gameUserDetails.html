@@ -8,8 +8,13 @@
 <p>Max players: {{games.maxPlayers}}</p>
 <p>Min players: {{games.minPlayers}}</p>
 <p>Availability: {{games.status}}</p>
+
 <div class="container-fluid" ng-show="isYourGame">
 	<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
+</div>
+
+<div class="container-fluid" ng-show="isYourGamePrivate">
+	<button class="btn btn-primary" ng-click="keepGameUserPrivate(games.id)">Keep it for me</button>
 </div>
 
 <div class="container-fluid" ng-show="isntYourGame">
@@ -21,4 +26,7 @@
 	<button class="btn btn-primary" ng-click="acceptGameConfirmation(games.id)">Accept</button>
 	<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
 </div>
+
+<a href = "#gameEdit/{{games.id}}" ng-show="isYourGame"><button>Edit</button></a>
+
 </div>

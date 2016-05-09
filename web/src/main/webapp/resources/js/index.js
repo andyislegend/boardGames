@@ -71,14 +71,8 @@ indexModule.controller('registerCntrl', [ '$scope', '$http',
 						'Content-Type' : 'application/x-www-form-urlencoded'
 					}
 				}).success(function(result, status) {
-					$scope.regUserResp = result;
-					$scope.regusername = '';
-					$scope.regemail = '';
-					$scope.regfirstName = '';
-					$scope.reglastName = '';
-					$scope.regpassword = '';
-					$scope.regconfirmPassword = '';
-					$scope.regUserMssg = false;
+					$scope.closeModal();
+					$scope.showAlert(result)
 				}).error(function(result, status) {
 					$scope.regUserResp = result;
 				})
@@ -96,4 +90,13 @@ indexModule.controller('registerCntrl', [ '$scope', '$http',
 				$scope.regconfirmPassword = '';
 			}
 
+			$scope.closeModal = function() {
+				$('#myReg').modal('hide');
+				$scope.eraseForm();
+			}
+			
+			$scope.showAlert = function (result) {
+				alert(result);
+			}
+			
 		} ]);
