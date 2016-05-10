@@ -21,6 +21,10 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Integer> {
 	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto"
+			+"(event.name, event.description, event.place, event.imgsrc, event.user.firstName, event.game.name, event.date) "
+			+ "from Event event where event.name like %:name%")
+	public List<AllEventsDto> getAllEventsByWord(@Param("name") String name);
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto"
 			+"(event.name, event.description, event.place, event.imgsrc, event.user.firstName, event.game.name, event.date) "
