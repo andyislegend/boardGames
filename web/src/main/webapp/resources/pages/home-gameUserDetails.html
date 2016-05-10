@@ -11,20 +11,25 @@
 
 <div class="container-fluid" ng-show="isYourGame">
 	<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
+	<p class="text-success">{{makingGameAvailableMessage}}</p>
 </div>
 
 <div class="container-fluid" ng-show="isYourGamePrivate">
 	<button class="btn btn-primary" ng-click="keepGameUserPrivate(games.id)">Keep it for me</button>
+	<p class="text-success">{{makingGamePrivateMessage}}</p>
 </div>
 
 <div class="container-fluid" ng-show="isntYourGame">
 	<button class="btn btn-primary" ng-click="askOwnerToShare(games.id)">Ask owner!</button>
+	<p class="text-success">{{sendingRequestToOwnerMessage}}</p>
 </div>
 
 <div class="container-fluid" ng-show="isThereConfiramtion">
 	<p class="text-important">{{Username}} asks you to share this game</p>
 	<button class="btn btn-primary" ng-click="acceptGameConfirmation(games.id)">Accept</button>
 	<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
+	<p class="text-success">{{aceptingRequestMessage}}</p>
+	<p class="text-danger">{{decliningRequestMessage}}</p>
 </div>
 
 <a href = "#gameEdit/{{games.id}}" ng-show="isYourGame"><button>Edit</button></a>
