@@ -63,7 +63,7 @@ border: 1px solid #FFF;
 input:focus{
     outline:none;
 }
-.header{
+#header{
     height: 100px;
     width: 100%;
     background: linear-gradient(#788093, #4d596c);

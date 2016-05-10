@@ -154,7 +154,7 @@
 			</div>
 		</div>
 	<div class="main">
-		<div class="header">
+		<div id="header">
 			<div class="overInput">
 				<input type="text" class="input" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()" ng-click="click = !click">
 			</div>

@@ -837,13 +837,15 @@ homeApp.controller("friendsCtrl", ['$scope', '$interval', '$http', function($sco
     };
     var getUpdate = function() { 
           $http.post('getAllMessage/' +  $scope.currentFriend ,  $scope.currentFriend ).success(function(data){
-              
-              if($scope.messages != data){
-                $scope.messages = data;
-                  console.log($scope.messages == data);
-                  console.log($scope.messages.length);
-                  console.log(data.length);
-              }
+             
+              if($scope.messages == undefined){
+               $scope.messages = data;  
+             }else{
+                 if($scope.messages.length != data.length){
+                      $scope.messages = data;
+                 }
+             }
+
         }).error(function(error){
             console.log(error);
         });
@@ -886,8 +888,8 @@ homeApp.controller("friendsCtrl", ['$scope', '$interval', '$http', function($sco
     });
     
    
-  /*setInterval(function(){
+  setInterval(function(){
        getUpdate();
-   }, 10000)*/
+   }, 1000)
    
 }]);
