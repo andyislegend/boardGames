@@ -357,23 +357,25 @@
 
 							<div ng-controller = "getGameDetailedInfoController">
 								<table ng-table="" class="table table-condensed table-bordered table-hover">
-									<tr>
-										<th>Name</th>
-										<th>Category</th>
-									</tr>
-									<tr ng-repeat="game in allGame">
-										<td><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">
-										{{game.name}}</a></td>
-										<td>{{game.category}}</td>
-										<td  >												
-												<a href = "" ng-click="showComments(game.id)" >
-												<span id = "UserGameNum{{game.id}}" class="glyphicon glyphicon-comment"></span>
-												</a>				
+									<tr ng-repeat = "game in allGame" >
+										<td title ="'Name'"><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">
+											{{game.name}}</a>
+										</td>
+										
+										<td title = "'Category'">
+											{{game.category}}
 										</td>
 										<td>
-												<a href = "" ng-click="deleteGame(game.id)">
+										
+											<a href = "" ng-hide = "isShowComment"" ng-click="showComments(game.id)" >
+												<span id = "UserGameNum{{game.id}}" class="glyphicon glyphicon-comment"></span>
+												</a>
+										</td>
+																				
+										<td>
+											<a href = "" ng-click="deleteGame(game.id)">
 												<span class="glyphicon glyphicon-remove"></span>
-												</a>				
+											</a>
 										</td>
 									</tr>
 								</table>
@@ -384,9 +386,9 @@
                                     <td >{{x.username}}</td><td>{{x.commentText}}</td><td>{{x.date | date:dateFormat}}</td></tr>
                                     </table>
                                      <form data-ng-submit=submit()>
-													<input type="text" data-ng-model="comment" style = "width:65%; margin-left: 2%; margin-bottom: 2%" ><input value="Comment"
-														type="submit" ng-click="addComment" style = "width:25%; margin-left: 2%; margin-bottom: 2%">
-												</form>
+										<input type="text" data-ng-model="comment" style = "width:65%; margin-left: 2%; margin-bottom: 2%" ><input value="Comment"
+										type="submit" ng-click="addComment" style = "width:25%; margin-left: 2%; margin-bottom: 2%">
+									 </form>
                                  </div>
 							</div>
 						</div>
