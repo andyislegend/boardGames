@@ -64,7 +64,7 @@ homeApp.controller("getAvatar", function($scope, $http) {
 
 homeApp.controller('search', function($scope, $rootScope){
 	$scope.searchAll = function($scope){
-		$scope.searchWord = {id:'M'};
+		
 	}
 	
 });
@@ -322,6 +322,7 @@ homeApp.controller("CreateGameCtrl", function($scope, $http) {
 		}, function errorCallback(response) {
 		});
 		$scope.$parent.allGame.push(userGame);
+		$scope.$apply
 	};
 	
 });
