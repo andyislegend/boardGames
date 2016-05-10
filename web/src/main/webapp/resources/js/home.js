@@ -374,7 +374,6 @@ homeApp.controller('gameSelectController', function($scope, $http, $routeParams)
 			url : 'getGameDetails' + '/' + data
 		}).then(function mySucces(response) {
 			$scope.gameDetail = response.data;
-			console.log("Response data: " + responseData);
 		}, function myError(response) {
 			
 		});
@@ -456,6 +455,17 @@ homeApp.controller('getGameDetailedInfoController', function($scope, $http, $roo
 
 		$scope.ratingHover = function(param) {
 			$scope.hoverRating = param;
+			if (param >= 0 && param <= 1)
+				$scope.hoverRatingText = "Bad as hell";
+			else if (param >= 2 && param <= 3)
+				$scope.hoverRatingText = "Not worth to be mensioned";
+			else if (param >= 4 && param <= 5)
+				$scope.hoverRatingText = "Could be better";
+			else if (param >= 6 && param <= 7)
+				$scope.hoverRatingText = "Pretty good";
+			else if (param >= 8 && param <= 9)
+				$scope.hoverRatingText = "Awesome thing";
+			else $scope.hoverRatingText = "Must have!";
 		};
 
 		$scope.ratingLeave = function(param) {
@@ -523,9 +533,9 @@ homeApp.directive('starRating', function() {
 		restrict : 'EA',
 		template : "<div style='display: inline-block; margin: 0px; padding: 0px; cursor:pointer;' "
 					+ "ng-repeat='idx in maxRatings track by $index'> \
-					<img ng-src='{{((hoverValue + _rating) <= $index) "
-					+ "&& \"http://www.codeproject.com/script/ratings/images/star-empty-lg.png\" "
-					+ "|| \"http://www.codeproject.com/script/ratings/images/star-fill-lg.png\"}}' \
+					<img width='30px' ng-src='{{((hoverValue + _rating) <= $index) "
+					+ "&& \"resources/images/star_empty.png\" "
+					+ "|| \"resources/images/star_filled.png\"}}' \
                     ng-Click='isolatedClick($index + 1)' \
                     ng-mouseenter='isolatedMouseHover($index + 1)' \
                     ng-mouseleave='isolatedMouseLeave($index + 1)'></img> \
