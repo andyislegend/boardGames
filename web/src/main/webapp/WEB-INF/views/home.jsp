@@ -365,13 +365,11 @@
 										<td title = "'Category'">
 											{{game.category}}
 										</td>
-										<td>
-										
-											<a href = "" ng-hide = "isShowComment"" ng-click="showComments(game.id)" >
+										<td>									
+											<a href = "" ng-click="showComments(game.id)" >
 												<span id = "UserGameNum{{game.id}}" class="glyphicon glyphicon-comment"></span>
 												</a>
-										</td>
-																				
+										</td>									
 										<td>
 											<a href = "" ng-click="deleteGame(game.id)">
 												<span class="glyphicon glyphicon-remove"></span>
