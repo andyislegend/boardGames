@@ -14,23 +14,23 @@ import com.softserveinc.edu.boardgames.service.TournamentService;
 
 @Controller
 public class GlobalSearchController {
-	
+
 	@Autowired
 	private GameUserService gameUserService;
-	
+
 	@Autowired
 	private TournamentService tournamentService;
-	
+
 	@Autowired
 	private EventService eventsService;
 
 	@RequestMapping(value = "/searchBy/{keyWord}", method = RequestMethod.GET)
 	@ResponseBody
-	public AllFilesDTO getResultByGlobalSearch(@PathVariable String keyWord){
+	public AllFilesDTO getResultByGlobalSearch(@PathVariable String keyWord) {
 		AllFilesDTO allFilesDTO = new AllFilesDTO();
 		allFilesDTO.setGameUsers(gameUserService.getGameUsersByName(keyWord));
 		allFilesDTO.setTournaments(tournamentService.getTournamentsByWord(keyWord));
-		allFilesDTO.setEvents(eventsService.getAllEventsByName(keyWord));
+		allFilesDTO.setEvents(eventsService.getAllEventsByWord(keyWord));
 		return allFilesDTO;
-}
+	}
 }

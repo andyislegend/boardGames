@@ -61,15 +61,11 @@ homeApp.controller("getAvatar", function($scope, $http) {
 		$scope.avatar = result.data;
 	});
 });
-homeApp.controller('getSearchWordCTRL', function($scope, $rootScope) {
-	
-	$scope.submit = function(){
-		
-		$rootScope.n = 'n';
-	}
-})
+
 homeApp.controller('search', function($scope, $rootScope){
-	$scope.searchWord = {id:'Monopf'};
+	$scope.searchAll = function($scope){
+		$scope.searchWord = {id:'M'};
+	}
 	
 });
 
@@ -87,7 +83,7 @@ homeApp.controller('GlobalSearchCTRL', function($scope, $http, $routeParams, ngT
 			function(event, data) {
 			$scope.allFilesTable = new ngTableParams({
 			    page: 1,
-			    count: 4
+			    count: 5
 			 }, {
 			     total: data.length, 
 			     getData: function ($defer, params) {

@@ -44,5 +44,8 @@ public class EventService {
 		return eventRepository.findAllEventsByName(name);
 	}
 	
+	public List<AllEventsDto> getAllEventsByWord(String word) {
+		return eventRepository.getAllEventsByWord(word);
+	}
 	
 }

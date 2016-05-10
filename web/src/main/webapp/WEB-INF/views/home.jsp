@@ -61,7 +61,7 @@
 					<b>Board Games Crossing Web Project</b>
 				</p>
 				
-		  <div ng-controller = "getSearchWordCTRL">	
+		  <div>	
 			<div ng-controller = "search">		
 				<form data-ng-submit=submit() style="margin-left: 15%;" class="navbar-form navbar-left"
 					role="search">
@@ -69,8 +69,8 @@
 						method="get">
 						<input id="search-box" name="q" size="50" type="text"
 							placeholder="Search" ng-model ="search" />
-						<a href = "#search/M">
-						<button id="search-btn" type="submit"><span class="	glyphicon glyphicon-search"></span></button>
+						<a ng-href = "#search/{{search}}">
+						<button id="search-btn" ng-click = "searchAll()" type="submit"><span class="	glyphicon glyphicon-search"></span></button>
 						<!-- <input type="submit"> -->
 						</a>												
 					</form>
@@ -330,7 +330,7 @@
 												</div>	
 												<div class="form-group">
 												    <label>Min players: </label>
-													<input class="form-control" data-ng-model="minPlayers" type="number">
+													<input class="form-control" ng-minlength = "0" data-ng-model="minPlayers" type="number">
 													
 												</div>
 												<div class="form-group">
@@ -356,12 +356,10 @@
 						 </div>
 
 							<div ng-controller = "getGameDetailedInfoController">
-								<table class="table">
+								<table ng-table="" class="table table-condensed table-bordered table-hover">
 									<tr>
 										<th>Name</th>
 										<th>Category</th>
-										<th></th>
-										<th></th>
 									</tr>
 									<tr ng-repeat="game in allGame">
 										<td><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">

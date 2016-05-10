@@ -2,13 +2,11 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 import java.util.List;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Event;
-
 public class AllFilesDTO {
 	
 	List<GameUserDTO> gameUsers;
 	List<AllTournamentsDTO> tournaments;
-	List<Event> events;
+	List<AllEventsDto> events;
 	
 	public AllFilesDTO() {
 		// TODO Auto-generated constructor stub
@@ -26,10 +24,10 @@ public class AllFilesDTO {
 	public void setTournaments(List<AllTournamentsDTO> tournaments) {
 		this.tournaments = tournaments;
 	}
-	public List<Event> getEvents() {
+	public List<AllEventsDto> getEvents() {
 		return events;
 	}
-	public void setEvents(List<Event> events) {
+	public void setEvents(List<AllEventsDto> events) {
 		this.events = events;
 	}
 
