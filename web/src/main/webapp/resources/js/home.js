@@ -837,7 +837,8 @@ homeApp.controller("friendsCtrl", ['$scope', '$interval', '$http', function($sco
     };
     var getUpdate = function() { 
           $http.post('getAllMessage/' +  $scope.currentFriend ,  $scope.currentFriend ).success(function(data){
-             
+             var objDiv = document.getElementById("messages");
+            objDiv.scrollTop = objDiv.scrollHeight;
               if($scope.messages == undefined){
                $scope.messages = data;  
              }else{
@@ -845,11 +846,13 @@ homeApp.controller("friendsCtrl", ['$scope', '$interval', '$http', function($sco
                       $scope.messages = data;
                  }
              }
-
+            
         }).error(function(error){
             console.log(error);
         });
     };
+    
+    
     $scope.sendMessage = function(message){
         $scope.currentFriend
         $http.post('sendMessage/' + $scope.currentFriend + "/" + message, $scope.currentFriend, message).success(function(){
@@ -890,6 +893,6 @@ homeApp.controller("friendsCtrl", ['$scope', '$interval', '$http', function($sco
    
   setInterval(function(){
        getUpdate();
-   }, 1000)
+   }, 500)
    
 }]);

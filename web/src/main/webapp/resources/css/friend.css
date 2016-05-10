@@ -338,7 +338,7 @@ border-radius: 15px;
 z-index: 3;
 text-decoration: none; 
 }
-.messages{
+#messages{
 padding: 10px;
 height: 400px;
 max-height:300px;

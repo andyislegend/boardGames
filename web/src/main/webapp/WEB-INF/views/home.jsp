@@ -239,7 +239,7 @@
 						</div>
 			
 						<div class="message-state">
-							<div class="messages" >
+							<div id="messages" >
 							<div ng-repeat="message in messages" ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}" ng-mouseenter="readMessage(message.id)">
 								<div><strong>{{message.currentUser.firstName}} {{message.currentUser.lastName}}:</strong></div>
 								<div>{{message.message}}</div>
