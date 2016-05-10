@@ -38,10 +38,19 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="resources/js/home.js"></script>
+<script type="text/javascript" src="resources/js/controllers/gamesGlobalController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/gameSelectController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/gameDetailsController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/allUserGamesController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/globalSearchController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/createGameController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/editProfileController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/getAllUsersController.js"></script>
+<script type="text/javascript" src="resources/js/controllers/friendsController.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript" 
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
-	<script type="text/javascript" 
+<script type="text/javascript" 
 	src="resources/bower_components/ng-q/q.module.js"></script>
 <!-- End of Scripts -->
 
