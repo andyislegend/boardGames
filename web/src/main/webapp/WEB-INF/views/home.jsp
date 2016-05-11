@@ -167,7 +167,7 @@
 				</div>
 				<div class="overMessage">
 					<a href="" type="button" data-toggle="modal" data-target="#messanger">
-						<div class="count" ng-hide="count < 1">{{countOfNotReadMessage}}</div><img class="message" src="resources/ico/message.png" />
+						<div class="count" ng-hide="countOfNotReadMessage < 1">{{countOfNotReadMessage}}</div><img class="message" src="resources/ico/message.png" />
 					</a>
 				</div>
 			</div>
