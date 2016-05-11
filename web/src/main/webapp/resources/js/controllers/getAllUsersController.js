@@ -1,18 +1,16 @@
-angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, $filter, $q, ngTableParams) {
+angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, $filter, $q, $timeout, ngTableParams) {
 	$scope.users = [];
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;
 		$scope.$broadcast('sharingToUsersTable', $scope.users);
 		$scope.showUser = false;
-		$scope.getInfoAboutUserFunc = function(username) {
-			$scope.oneUser
-			$scope.showUser = !$scope.showUser;
+		$scope.getInfoAboutUserFunc = function(username) {			
 			for (var i = 0; i < $scope.users.length; i++) {
 				if ($scope.users[i].username === username) {
 					$scope.oneUser = $scope.users[i];
 					break;
-					};
 				};
+			};
 			$http.get('allUsersGames?username='+ username).then(function(result) {
 				$scope.games = result.data;
 			});
@@ -45,15 +43,21 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		};
 	});
 	
-	$scope.countries = function ($scope, $window) {
-		var def = $q.defer();
-	    $http.get('getAllCountries').then(function(result) {
-	    	var someCountries = result.data;
-	    	def.resolve(someCountries);
-	    });
-	    console.log(def.promise);
-	    return def;
-	};
+	$scope.countries = function () {
+		  var def = $q.defer();
+		  $http.get('getAllCountries').then(function (result) {
+		   var filterData = [];
+		   angular.forEach(result.data, function (country) {
+		    filterData.push({
+		         id: country,
+		         title: country
+		        })
+		   });
+		   def.resolve(filterData);
+		  });
+
+		  return def;
+		 };
 	
 /*	$http.get('getAllCountries').then(function(result) {
 		$scope.countries = result.data;
