@@ -111,7 +111,7 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 			for (var i = 0; i < $rootScope.allGame.length; i++) {
 				$rootScope.isNewComments($rootScope.allGame[i].id);
 			}
-    }, 400);
+    }, 200);
 		
 		$scope.commentForGame.push(comment);
 		$scope.comment = '';

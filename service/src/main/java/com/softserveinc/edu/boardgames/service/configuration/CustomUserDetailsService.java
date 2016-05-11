@@ -29,14 +29,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private UserService userService;
 
 	/**
-	 * Load USerDetails into security
+	 * Load UserDetails into security
 	 * 
 	 * @param usernmae
 	 *            is used for searching a user and providing its password, role,
 	 *            state
 	 * 
 	 */
-	@Transactional(readOnly = true)
+	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userService.getUser(username);
 		if (user == null) {
@@ -51,8 +51,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		for (UserRoles userRoles : user.getUserRoles()) {
 			authorities.add(new SimpleGrantedAuthority("ROLE_"+userRoles.toString()));
+//			authorities.add(new SimpleGrantedAuthority(userRoles.name()));
 		}
+		System.out.println("-------------------------");
 		System.out.print("authorities :" + authorities);
+		System.out.println("");
+		System.out.println("-------------------------");
 		return authorities;
 	}
 }

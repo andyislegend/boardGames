@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http) {
+angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $route, $timeout) {
 	$scope.showText = false;
 	$scope.categories = [];
 	$scope.showForm = function() {
@@ -7,7 +7,7 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http) {
 	$http.get('getAllCategories').then(function(result) {
 		$scope.categories = result.data;
 	});
-	$scope.list = [];
+	
 	$scope.submit = function() {
 		var userGame = {
 			"name" : $scope.name,
@@ -28,11 +28,20 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http) {
 			},
 			data : userGame
 		}).success(function(response) {
-			$scope.list.push(response.data);
-			$scope.name = '';
+			
 		}, function errorCallback(response) {
 		});
-		$scope.$parent.allGame.push(userGame);
+		
+		$scope.$parent.allGame.push(userGame);	
+		$route.reload();
+		$scope.name = '';
+		$scope.category = '';
+		$scope.year = '';
+		$scope.edition = '';
+		$scope.description = '';
+		$scope.rules = '';
+		$scope.maxPlayers = '';
+		$scope.minPlayers = '';
+		
 	};
-	
 });
