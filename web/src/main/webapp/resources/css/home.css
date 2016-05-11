@@ -20,8 +20,7 @@ ol, ul {
 
 
 #main_container {
-    /* margin-top: 2.5%; */
-    margin-left: 0.5%;
+    
     height: 570px;
     margin-bottom: 2%;
 }
@@ -29,8 +28,9 @@ ol, ul {
 #main_div {
 
     float: left;
-    width: 73%;
+    width: 55%;
     height: 100%;
+    margin-left: 0.2%;
     border: none;
     overflow-y: scroll;
 
@@ -49,10 +49,13 @@ ol, ul {
 
 #friends_div {
 
-    width: 100%;
-    height: 50%;
-    /* overflow-y: scroll;  */
-    border-bottom: groove;
+    float: left;
+    width: 22%;
+    height: 100%;
+    margin-left: 0.2%;
+    margin-right: 0.2%;
+    overflow-y: scroll;
+    border: groove;
 }
 
 #friends_div h1 {
@@ -69,9 +72,12 @@ ol, ul {
 
 #mygames_div {
 
-    width: 100%;
-    height: 50%;
+    float: left;
+    width: 22%;
+    height: 100%;
+    margin-left: 0.2%;
     overflow-y: scroll;
+    border: groove;
 }
 
 span.label {
