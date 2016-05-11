@@ -29,6 +29,7 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http) {
 			data : userGame
 		}).success(function(response) {
 			$scope.list.push(response.data);
+			$scope.name = '';
 		}, function errorCallback(response) {
 		});
 		$scope.$parent.allGame.push(userGame);

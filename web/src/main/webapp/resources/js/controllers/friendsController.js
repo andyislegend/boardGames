@@ -130,9 +130,9 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     });
     
    
-  setInterval(function(){
+ /* setInterval(function(){
        getUpdate();
-   }, 500)
+   }, 500)*/
    
 }]);
 
