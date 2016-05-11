@@ -72,6 +72,7 @@ homeApp.controller('getSearchWordCTRL', function($scope, $rootScope) {
 		
 		$rootScope.n = 'n';
 	}
+<<<<<<< HEAD
 })
 homeApp.controller('search', function($scope, $rootScope){
 
@@ -881,3 +882,6 @@ homeApp.controller("friendsCtrl", ['$scope', '$interval', '$http', function($sco
    }, 10000)*/
    
 }]);
+=======
+});
+>>>>>>> c149d61227e35b3517651daf8f00bf8c92ff8227

@@ -55,7 +55,7 @@ margin-right: 10px;
 .main{
 float: left;
 display: inline-table;
-width: 300px;
+width: 100%;
 height: 100%;
 box-shadow: 0 0 10px rgba(0,0,0,0.5);
 border: 1px solid #FFF;
@@ -74,7 +74,7 @@ input:focus{
 }
 .input{
     float: right;
-    width: 200px;
+    width: 60%;
     height: 35px;
     padding-left: 10px;
     padding-right: 10px;
@@ -134,7 +134,7 @@ border-radius: 20px;
 .overBell{
 	height: 30px;
     width: 30px;
-    margin-left:150px ;
+    margin-left:40% ;
     margin-top: -24px;
 }
 .overBell:hover img{
@@ -157,7 +157,7 @@ border-radius: 20px;
 .overMessage{
    height: 30px;
     width: 30px;
-    margin-left:236px ;
+    margin-left:75% ;
     margin-top: -30px; 
 }
 .overMessage:hover img{
@@ -254,7 +254,7 @@ transition: .1s ease-in-out;
 	height: 50px;
 }
 .name{
-width: 150px;
+width: 60%;
 height: 20px;
 margin-left: 10px;
 margin-top: 15px;
@@ -292,10 +292,11 @@ height: 35px;
 width: 35px;
 }
 .search-result{
-height: 300px;
+    background: #EEE;
+height: 400px;
 width: 300px;
-margin-top: 200px;
-margin-right: 10px;
+margin-left: 47%;
+position: absolute;
 display: inline-table;
 box-shadow: 0 0 10px rgba(0,0,0,0.5);
 border: 1px solid #FFF;
@@ -375,3 +376,4 @@ box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	max-height: 170px;
     overflow: auto;
 }
+
