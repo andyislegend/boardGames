@@ -77,6 +77,16 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = true;
 					$scope.isYourGamePrivate = false;
+					
+					$http({
+						method : "GET",
+						url : 'getApplierUsername' + '/' + $scope.games.id
+					}).then(function mySucces(response) {
+						alert(response.data);
+						$scope.applierUsername = response.data;
+					}, function myError(response) {
+						alert("Getting user applier username error");
+					});
 				}
 				else {
 					$scope.isYourGame = false;
@@ -117,7 +127,6 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
-		
 	}
 	
 	$scope.keepGameUserPrivate = function(id) {

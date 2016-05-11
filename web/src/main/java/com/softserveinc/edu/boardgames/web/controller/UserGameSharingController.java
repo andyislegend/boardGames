@@ -30,6 +30,12 @@ public class UserGameSharingController {
 		return currentUser.getId().equals(gamesGameUser.getUser().getId());
 	}
 	
+	@RequestMapping(value="/getApplierUsername/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getUserToDisplayOnRequest(@PathVariable Integer gameUserId) {
+		return gameUserService.getApplierUsernameFromGameId(gameUserId);
+	}
+	
 	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void makeGameUserAvailable(@PathVariable Integer gameUserId) {
