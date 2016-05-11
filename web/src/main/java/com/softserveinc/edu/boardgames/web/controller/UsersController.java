@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
@@ -25,7 +27,13 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class UsersController {
 
 	@Autowired
+	ImageService imageService;
+	
+	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ImageConfiguration imageConfiguration;
 
 	/**
 	 * Returns all users.
@@ -59,5 +67,42 @@ public class UsersController {
 		user.setPhoneNumber(phoneNumber);
 		userService.updateUser(user);
 		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
+	}
+	
+	/**
+	 * Returns needed url to users avatar location.
+	 * 
+	 * @param userName
+	 *            username of user, who's avatar we want to find
+	 */
+	@RequestMapping(value = {"/getUsersAvatar"}, method = RequestMethod.GET)
+	@ResponseBody
+	public String getUsersAvatar(@RequestParam("username") String username) {
+		String avatarUrl = checkGender(username);
+		return avatarUrl;
+	}
+	
+	/**
+	 * Returns needed url to avatar location.
+	 */
+	@RequestMapping(value = {"/getAvatar"}, method = RequestMethod.GET)
+	@ResponseBody
+	public String getLoggedUsersAvatar() {
+		String username = WebUtil.getPrincipalUsername();		
+		String avatarUrl = checkGender(username);
+		return avatarUrl;
+	}
+	
+	private String checkGender(String username) {
+		String avatarUrl = imageConfiguration.getAvatarUrl(username);
+		String imageName = imageService.findImageNameByUsername(username);
+		if (imageName == null) {
+			if (userService.findUsersGender(username).equals("male")) {
+				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
+			} else {
+				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
+			}
+		}
+		return avatarUrl;
 	}
 }
