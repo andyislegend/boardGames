@@ -357,7 +357,7 @@ box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .message-friends{
 	width: 40%;
-		max-height: 400px;
+	max-height: 400px;
 	overflow: auto;
 }
 .input-message{
@@ -373,7 +373,7 @@ box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	background: linear-gradient(#E8F2FF, #99CCFF);
 }
 .persons{
-	max-height: 170px;
+	max-height: 370px;
     overflow: auto;
 }
 

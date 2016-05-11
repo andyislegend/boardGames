@@ -1,47 +1,48 @@
 #stats_main {
-	margin-top: 4%;
+
     width: 100%;
     height: 100%;
 }
 
 #d1 {
     
-    width: 380px;
+    width: 49%;
     height: 250px;
     background: darkred;
     float: left;
-    margin-left: 5%;
-   
+    margin-left: 0.5%;
+    margin-top: 10%;
 }
 
 #d2 {
 
-    width: 380px;
+    width: 49%;
     height: 250px;
     background: blueviolet;
     float: left;
-    margin-left: 5%;
+    margin-left: 1%;
+    margin-top: 10%;
 
 }
 
 #d3 {
 
-    width: 380px;
+    width: 49%;
     height: 250px;
     float: left;
     background: aquamarine;
-    margin-left: 5%;
+    margin-left: 0.5%;
     margin-top: 2%;
 
 }
 
 #d4 {
 
-    width: 380px;
+    width: 49%;
     height: 250px;
     background: darkcyan;
     float: left;
-    margin-left: 5%;
+    margin-left: 1%;
     margin-top: 2%;
 
 }
