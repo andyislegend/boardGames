@@ -42,6 +42,10 @@ indexModule.controller('loginCntrl', [
 							|| role == "ROLE_MODERATOR"
 							|| role == "ROLE_SUPERADMIN" || role == "ROLE_DBA")
 						path = 'home';
+//					if (role == "USER" || role == "ADMIN"
+//						|| role == "MODERATOR"
+//						|| role == "SUPERADMIN" || role == "DBA")
+//					path = 'home';
 
 					return path;
 				}
