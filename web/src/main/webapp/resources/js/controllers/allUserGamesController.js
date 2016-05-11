@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http, $rootScope, $routeParams) {
+angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http, $rootScope, $route, $routeParams) {
 	
 	$scope.isYourGame = false;
 	$scope.isYourGamePrivate = false;
@@ -113,7 +113,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'makeGameUserAvailable' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.makingGameAvailableMessage = "your game now is available!";	
+			$route.reload();
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
@@ -125,12 +125,10 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'makeGameUserPrivate' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.makingGamePrivateMessage = "your game is now private";	
+			$route.reload();
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
-		
-		
 	}
 	
 	$scope.askOwnerToShare = function(id) {
@@ -138,7 +136,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'askGameUserOwnerToShare' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.sendingRequestToOwnerMessage = "Your request was successfully sent!";
+			$route.reload();
 		}, function myError(response) {
 			alert("Failed to send your request");
 		});
@@ -149,7 +147,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'acceptGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.aceptingRequestMessage = "Generous action!";
+			$route.reload();
 		}, function myError(response) {
 			alert("Accept request failed");
 		});
@@ -160,8 +158,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'declineGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.decliningRequestMessage = "This man is not worth of my game!";
-			
+			$route.reload();
 		}, function myError(response) {
 			alert("Decline request failed");
 		});
