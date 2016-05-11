@@ -58,6 +58,12 @@
 	src="resources/js/controllers/getAllUsersController.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/friendsController.js"></script>
+<script type="text/javascript"
+	src="resources/js/controllers/CreateNewTournamentCtrl.js"></script>
+	<script type="text/javascript"
+	src="resources/js/controllers/showAllTournamentsCtrl.js"></script>
+	<script type="text/javascript"
+	src="resources/js/controllers/eventListCtrl.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
