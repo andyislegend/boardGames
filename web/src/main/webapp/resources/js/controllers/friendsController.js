@@ -1,6 +1,6 @@
-angular.module('homeApp').controller("friendsCtrl", ['$scope', '$interval', '$http', function($scope, friendService, $http, $interval) {
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', '$http', function($scope,$rootScope, friendService, $http, $interval) {
     $scope.users;
-    $http.get("allFriends").success(function(data) {
+   var allf = $http.get("allFriends").success(function(data) {
 		$scope.friends = data;
 	}).error(function(error) {
 		console.log(error);
@@ -62,25 +62,15 @@ angular.module('homeApp').controller("friendsCtrl", ['$scope', '$interval', '$ht
             console.log(error);
         });
     };
-
    $scope.findAllUsers = function(){
-        $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
-            $scope.allUsers = data;
-        }).error(function(error){
-    });
+       if($scope.name.length > 0){
+                $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
+                    $rootScope.$broadcast('message', data);
+                }).error(function(error){
+            });
+       }
    };
-    $scope.addUserToFriend = function(id){
-         $http.post('addOfferToFriendship/', id).success(function(data){
-             $scope.userWhoYouSentOffering = data;
-             for(var i = 0; i < $scope.allUsers.length; i++){
-                if($scope.allUsers[i].id === id){
-                    $scope.allUsers.splice(i, 1)
-                };
-            };
-         }).error(function(error){
-             console.log(error);
-         });
-    };
+
     $scope.setFriendName = function(friendName){
         $scope.currentFriend = friendName;
         getUpdate(friendName);
@@ -101,8 +91,7 @@ angular.module('homeApp').controller("friendsCtrl", ['$scope', '$interval', '$ht
             console.log(error);
         });
     };
-    
-    
+
     $scope.sendMessage = function(message){
         $scope.currentFriend
         $http.post('sendMessage/' + $scope.currentFriend + "/" + message, $scope.currentFriend, message).success(function(){
@@ -145,4 +134,28 @@ angular.module('homeApp').controller("friendsCtrl", ['$scope', '$interval', '$ht
        getUpdate();
    }, 500)
    
+}]);
+
+app.controller('searchUserCtrl',['$scope', '$rootScope', '$http', function($scope, $rootScope, $http){
+    $scope.message = 'Hello';
+    $scope.$on('message', function(event,responce){
+        if(responce.length < 1){
+             $scope.open = false;
+        }else{
+             $scope.open = true;
+        }
+        $scope.allUsers = responce;
+    });
+    $scope.addUserToFriend = function(id){
+         $http.post('addOfferToFriendship/', id).success(function(data){
+             $scope.userWhoYouSentOffering = data;
+             for(var i = 0; i < $scope.allUsers.length; i++){
+                if($scope.allUsers[i].id === id){
+                    $scope.allUsers.splice(i, 1)
+                };
+            };
+         }).error(function(error){
+             console.log(error);
+         });
+    };
 }]);
