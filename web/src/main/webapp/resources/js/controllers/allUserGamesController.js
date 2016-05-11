@@ -82,7 +82,6 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 						method : "GET",
 						url : 'getApplierUsername' + '/' + $scope.games.id
 					}).then(function mySucces(response) {
-						alert(response.data);
 						$scope.applierUsername = response.data;
 					}, function myError(response) {
 						alert("Getting user applier username error");

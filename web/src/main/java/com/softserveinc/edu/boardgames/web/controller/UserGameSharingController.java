@@ -65,9 +65,10 @@ public class UserGameSharingController {
 	@ResponseBody
 	public void acceptGameConfirmation(@PathVariable Integer gameUserId) {
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setUserOwnerId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
 		gameUserToUpdate.setUser(userService.findById(gameUserToUpdate.getUserApplierId()));
 		gameUserToUpdate.setUserApplierId(0);
-		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setStatus("borrowed");
 		gameUserService.update(gameUserToUpdate);
 	}
 	
