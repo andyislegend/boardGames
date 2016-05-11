@@ -1,13 +1,19 @@
 <div ng-controller = "allUsersGameCtrl" >
 
-<h1>{{games.name}}</h1>
+<div class = "title">
+<a id = "EditButton" href = "#gameEdit/{{games.id}}" ng-show="isYourGame">
+<button class="btn btn-default navbar-btn" ><span class = "glyphicon glyphicon-edit"></span></button></a>
+<h1 id = "titleHeader" >{{games.name}}</h1> 
 
+</div>
+<div class = "mainContent">
 <p>Year of production: {{games.yearOfProduction}}</p>
 <p>Edition: {{games.edition}}</p>
 <p>Description: {{games.description}}</p>
 <p>Max players: {{games.maxPlayers}}</p>
 <p>Min players: {{games.minPlayers}}</p>
 <p>Availability: {{games.status}}</p>
+</div>
 
 <div class="container-fluid" ng-show="isYourGame">
 	<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
@@ -32,6 +38,6 @@
 	<p class="text-danger">{{decliningRequestMessage}}</p>
 </div>
 
-<a href = "#gameEdit/{{games.id}}" ng-show="isYourGame"><button>Edit</button></a>
+
 
 </div>
