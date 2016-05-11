@@ -20,7 +20,7 @@ homeApp.config(function($routeProvider) {
 
 	.when('/events', {
 		templateUrl : 'resources/pages/home-events.html',
-	// controller : '...Ctrl'
+		controller : 'eventListCtrl'
 	})
 
 	.when('/edit', {
@@ -30,7 +30,7 @@ homeApp.config(function($routeProvider) {
 
 	.when('/tournaments', {
 		templateUrl : 'resources/pages/home-tournaments.html',
-	// controller : '...Ctrl'
+	    controller : 'showAllTournamentsCtrl'
 	})
 
 	.when('/users', {
