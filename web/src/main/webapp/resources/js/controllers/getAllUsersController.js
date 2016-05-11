@@ -57,7 +57,24 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		  });
 
 		  return def;
-		 };
+	};
+	
+	$scope.cities = function () {
+		  var def = $q.defer();
+		  var countryName = $('select[name=countryName]').val();
+		  $http.get('getAllCities?countryName=' + countryName).then(function (result) {
+		   var filterData = [];
+		   angular.forEach(result.data, function (city) {
+		    filterData.push({
+		         id: city,
+		         title: city
+		        })
+		   });
+		   def.resolve(filterData);
+		  });
+
+		  return def;
+	};
 	
 /*	$http.get('getAllCountries').then(function(result) {
 		$scope.countries = result.data;
