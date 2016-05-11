@@ -63,4 +63,7 @@ homeApp.controller("getAvatar", function($scope, $http) {
 });
 
 homeApp.controller('search', function($scope, $rootScope){
+
 });
+
+

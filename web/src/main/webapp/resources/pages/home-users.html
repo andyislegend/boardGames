@@ -1,115 +1,106 @@
 <div>
     <h1 style="text-align: center"> Users </h1>
-    <div class="modal fade"
-                  ng-controller="getAllUsersWithNegativeRating" id="myModalBannedUsers"
-                  tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                  aria-hidden="true" >
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                           <div class="modal-body">
-                              <b>Attention!</b>
-                              <p>{{bannedUsers}}</p>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-default"
-                              data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
                <div ng-controller="getAllUsersCtrl">
 
 		<table ng-table="usersTable" show-filter="true"
 			class="table table-striped">
-			<tr ng-repeat="user in usersByParams">
-				<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }">
-					<a href="" ng-click="getInfoAboutUserFunc(user.username)">{{user.username}}</a>
+			<tbody >
+			<tr ng-repeat-start="user in usersByParams">
+				<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
+					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
 				</td>
-				<td title="'Email'" sortable="'email'">{{user.email}}</td>
-				<td title="'Phone Number'">{{user.phoneNumber}}</td>
-				<td title="'Address'" filter="{'countryName': 'select'}" filter-data="countries()">
+				<td title="'Email'" sortable="'email'" class="col-sm-3">{{user.email}}</td>
+				<td title="'Phone Number'" class="col-sm-3">{{user.phoneNumber}}</td>
+				<td title="'Address'" filter="{'countryName': 'select'}" filter-data="countries()" class="col-sm-3">
 					{{user.address.country.name}} {{user.address.city.name}}
                 	{{user.address.street}} {{user.address.houseNumber}}
                 	{{user.address.roomNumber}}
                 </td>
-			</tr>
-		</table>
-		<p>{{countries}}</p>
+                </tr>
+			<tr ng-show="showUser" ng-repeat-end>
+				<td class="col-sm-3">
+						<div id="backgroundForOneUser">
+							<p>Last Name:{{oneUser.lastName}}</p>
+							<p>First Name:{{oneUser.firstName}}</p>
+							<p>Sex:{{oneUser.gender}}</p>
+							<p>Age:{{oneUser.age}}</p>
+							<p>Rating:{{oneUser.rating}}</p>
+						</div>
+				</td>
+				<td class="col-sm-3">
 
-                  <div ng-show="showUser" class="col-sm-12" id="backgroundForOneUser">
-                     <div class="col-sm-3" id="backgroundForOneUser">
-                        <p>Last Name:{{oneUser.lastName}}</p>
-                        <p>First Name:{{oneUser.firstName}}</p>
-                        <p>Sex:{{oneUser.gender}}</p>
-                        <p>Age:{{oneUser.age}}</p>
-                        <p>Rating:{{oneUser.rating}}</p>
-                     </div>
-                     <div class="col-sm-3" id="backgroundForOneUser">
-                        <b>Games user owns:</b>
-                        <ul ng-repeat="game in games">
-                           <li><a href="" ng-click="getInfoAboutGame(game.id)" data-toggle="modal" data-target="#myModalGames">
-                              {{game.name}}</a>
-                           </li>
-                        </ul>
-                        <div class="modal fade" id="myModalGames" tabindex="-1" role="dialog"
-                           aria-labelledby="myModalLabel" aria-hidden="true">
-                           <div class="modal-dialog">
-                              <div class="modal-content">
-                                 <!-- Modal Header -->
-                                 <div class="modal-header">
-                                    <h1>{{oneGame.name}}</h1>
+							<b>Games user owns:</b>
+							<ul ng-repeat="game in games">
+								<li><a href="" ng-click="getInfoAboutGame(game.id)"
+									data-toggle="modal" data-target="#myModalGames">
+										{{game.name}}</a></li>
+							</ul>
+							<div class="modal fade" id="myModalGames" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- Modal Header -->
+										<div class="modal-header">
+											<h1>{{oneGame.name}}</h1>
 
-                                 </div>
-                                 <div class="modal-body">
-                                    <p>Year of production: {{oneGame.yearOfProduction}}</p>
-                                    <p>Edition: {{oneGame.edition}}</p>
-                                    <p>Description: {{oneGame.description}}</p>
-                                    <p>Max players: {{oneGame.maxPlayers}}</p>
-                                    <p>Min players: {{oneGame.minPlayers}}</p>
-                                 </div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
+										</div>
+										<div class="modal-body">
+											<p>Year of production: {{oneGame.yearOfProduction}}</p>
+											<p>Edition: {{oneGame.edition}}</p>
+											<p>Description: {{oneGame.description}}</p>
+											<p>Max players: {{oneGame.maxPlayers}}</p>
+											<p>Min players: {{oneGame.minPlayers}}</p>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
 									</div>
 								</div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-3" id="backgroundForOneUser">
-                        <b>Users tournaments:</b>
-                        <ul ng-repeat="tournament in tournaments">
-                           <li><a href="" ng-click="getInfoAboutTournament(tournament.tournamentId)" data-toggle="modal" data-target="#myModalTournaments">
-                              {{tournament.tournamentName}}</a>
-                           </li>
-                        </ul>
-                        <div class="modal fade" id="myModalTournaments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                           <div class="modal-dialog">
-                              <div class="modal-content">
-                                 <!-- Modal Header -->
-                                 <div class="modal-header">
-                                    <h1>{{oneTournament.tournamentName}}</h1>
-                                 </div>
-                                 <div class="modal-body">
-                                    <p>User creator: {{oneTournament.username}}</p>
-                                    <p>Adress: {{oneTournament.country}}, {{oneTournament.city}}</p>
-                                    <p>Date: {{oneTournament.dateUtil}}</p>
-                                    <p>Required rating: {{oneTournament.requiredRating}}</p>
-                                 </div>
-                                 <div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
+							</div>
+
+				</td>
+				<td class="col-sm-3">
+						<div id="backgroundForOneUser">
+							<b>Users tournaments:</b>
+							<ul ng-repeat="tournament in tournaments">
+								<li><a href=""
+									ng-click="getInfoAboutTournament(tournament.tournamentId)"
+									data-toggle="modal" data-target="#myModalTournaments">
+										{{tournament.tournamentName}}</a></li>
+							</ul>
+							<div class="modal fade" id="myModalTournaments" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- Modal Header -->
+										<div class="modal-header">
+											<h1>{{oneTournament.tournamentName}}</h1>
+										</div>
+										<div class="modal-body">
+											<p>User creator: {{oneTournament.username}}</p>
+											<p>Adress: {{oneTournament.country}},
+												{{oneTournament.city}}</p>
+											<p>Date: {{oneTournament.dateUtil}}</p>
+											<p>Required rating: {{oneTournament.requiredRating}}</p>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
 								</div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-3" id="backgroundForOneUser">
-                        <img ng-src="{{userAvatar}}" id="userAvatar">
-                        <p>Score: {{oneUser.userRating}}</p>
-                     </div>
-                  </div>
+							</div>
+						</div>
+				</td>
+				<td class="col-sm-3">					
+							<img ng-src="{{userAvatar}}" id="userAvatar">
+							<p>Score: {{oneUser.userRating}}</p>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+                  
                </div>
 </div>

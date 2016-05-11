@@ -136,19 +136,8 @@
 
 
 	<div id="main_container">
-
-		<!-- ng-route div -->
-		<div id="main_div" ng-view></div>
-		<!-- End of ng-route div -->
-
-		<!-- Sidebar -->
-		<div id="sidebar">
-			
-			<!-- Friends Widget -->
-			<div id="friends_div">
-				<div>
-				<div class="global" ng-controller="friendsCtrl">
-		<div class="search-result" ng-show="click" > <!-- ng-show="name.length > 0" -->
+        
+        <div class="search-result" ng-controller="searchUserCtrl" ng-show="open" >
 			<div class="header-search">Find your friends in our Application</div>
 			<div class="content">
 				<div ng-repeat="user in allUsers">
@@ -156,16 +145,28 @@
 						<div class="person">
 							<div class="over-ava"><a href="" type="button"><img class="ava" src="resources/images/default-avatar.jpg" /></a></div>
 							<div class="name">{{ user.firstName }} {{ user.lastName}}</div>
-							<div class="over-add-remove"><a href="" type="button" ng-click="addUserToFriend(user.id)"><img class="add-remove" src="resources/ico/add_user.png" /></a></div>
+							<div class="over-add-remove"><a href="" type="button" ng-click="addUserToFriend(user.id)" ><img class="add-remove" src="resources/ico/add_user.png" /></a></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- ng-route div -->
+		<div id="main_div" ng-view></div>
+		<!-- End of ng-route div -->
+
+        <!-- Sidebar -->
+		<div id="sidebar">
+			
+			<!-- Friends Widget -->
+			<div id="friends_div">
+<div>
+<div class="global" ng-controller="friendsCtrl">
 	<div class="main">
 		<div id="header">
 			<div class="overInput">
-				<input type="text" class="input" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()" ng-click="click = !click">
+				<input type="text" class="input" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()" ng-click="click = true">
 			</div>
 			<div class="underInput">
 				<div class="headerWords">Friends {{friends.length}}</div>
@@ -176,7 +177,7 @@
 				</div>
 				<div class="overMessage">
 					<a href="" type="button" data-toggle="modal" data-target="#messanger">
-						<div class="count" ng-hide="count < 1">{{countOfNotReadMessage}}</div><img class="message" src="resources/ico/message.png" />
+						<div class="count" ng-hide="countOfNotReadMessage < 1">{{countOfNotReadMessage}}</div><img class="message" src="resources/ico/message.png" />
 					</a>
 				</div>
 			</div>
@@ -188,7 +189,7 @@
 					<div>
 						<ul class="nav nav-tabs bigger-tab">
 							<li><a data-toggle="tab" href="#menu1">Fiend request</a></li>
-							<li><a data-toggle="tab" href="#menu2">Fiend responce</a></li>
+							<li class="active"><a data-toggle="tab" href="#menu2">Fiend responce</a></li>
 						</ul>
 						<div class="tab-content ">
 							<div id="menu1" class="tab-pane fade bigger-content">
@@ -282,11 +283,9 @@
 			</div>
 		</div>
 		</div>
-				</div>
-			</div>
+</div>
+</div>
 			<!-- End of Friends Widget -->
-
-
 			<!-- MyGames Widget -->
 			<div id="mygames_div">
 				<div ng-controller="allUsersGameCtrl" >
@@ -404,12 +403,30 @@
 			<!-- End of MyGames Widget -->
 
 		</div>
+            
+            
+            
+            
 		<!-- end of Sidebar -->
 
 		<div style="clear: both;"></div>
 
 	</div>
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 	<!-- Footer -->
 	<footer id="footer">
