@@ -29,3 +29,12 @@
 	 height: 92px; 
 	 width: 92px;
 }
+
+#phoneNumber {
+	  text-align: left;
+        list-style-type: none;
+        padding: 0px;
+}
+a {
+	text-align: left;
+}
