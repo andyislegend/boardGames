@@ -366,7 +366,7 @@
 							<div ng-controller = "getGameDetailedInfoController">
 								<table ng-table="" class="table table-condensed table-bordered table-hover">
 									<tr ng-repeat = "game in allGame" >
-										<td title ="'Name'"><a href = "#gameUserDetails/{{game.id}}" ng-click = "myFunc(game.id)">
+										<td title ="'Name'"><a href = "#gameUserDetails/{{game.id}}" ng-click = "gameDetailById(game.id)">
 											{{game.name}}</a>
 										</td>
 										

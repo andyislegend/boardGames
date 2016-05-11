@@ -90,7 +90,7 @@ public class CurrentUserGameController {
 		return categories;
 	}
 	
-	@RequestMapping(value = "deleteUserGame/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deleteUserGame/{id}",method = RequestMethod.DELETE)
 	public String deleteGame(@PathVariable Integer id){
 		gameUserService.deleteById(id);
 		return"";
