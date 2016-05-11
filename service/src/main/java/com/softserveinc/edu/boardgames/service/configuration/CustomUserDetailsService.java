@@ -51,8 +51,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		for (UserRoles userRoles : user.getUserRoles()) {
 			authorities.add(new SimpleGrantedAuthority("ROLE_"+userRoles.toString()));
+//			authorities.add(new SimpleGrantedAuthority(userRoles.name()));
 		}
+		System.out.println("-------------------------");
 		System.out.print("authorities :" + authorities);
+		System.out.println("");
+		System.out.println("-------------------------");
 		return authorities;
 	}
 }
