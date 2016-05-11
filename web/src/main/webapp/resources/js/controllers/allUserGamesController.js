@@ -105,11 +105,8 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		}		
 	});
 	
-	$scope.showMe = false;
-	$scope.myFunc = function(id) {
+	$scope.gameDetailById = function(id) {
 		$scope.games = [];
-		$scope.showMe = !$scope.showMe;
-		
 	}
 	
 	$scope.makeGameUserAvailable = function(id) {
@@ -189,9 +186,15 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		});
 	}
 	$scope.deleteGame = function(id) {
-		$http.delete('deleteUserGame/'+id).success(function(data) {
+		for(var i = 0; i<$rootScope.allGame.length; i++){
+			if($rootScope.allGame[i].id === id){
+				$rootScope.allGame.splice($rootScope.allGame[i], 1);
+				break;
+			}
+		}
+		$http.delete('deleteUserGame/'+id).success(function(data) {					
 		});
-		$rootScope.allGame.splice($scope.allGame[id], 1);
-		scope.$apply();
+		
+		//scope.$apply();
 	}
 });
