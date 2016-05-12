@@ -6,18 +6,22 @@ angular.module('homeApp').controller('GlobalSearchCTRL', function($scope, $http,
 			$scope.tournaments = $scope.searchResult.data.tournaments;
 			$scope.games = $scope.searchResult.data.gameUsers;
 			$scope.events = $scope.searchResult.data.events;	
-			$scope.$broadcast('globalSearch', $scope.games);
+			$scope.searchResult = [{game:$scope.games},
+					   			   {tournaments:$scope.tournaments},
+					   			   {events:$scope.events}]
+			$scope.$broadcast('globalSearch', $scope.searchResult);
 	  }) ;
-	$scope.$on('globalSearch',
-			function(event, data) {
+	$scope.$on('globalSearch',function(event, data) {		
 			$scope.allFilesTable = new ngTableParams({
 			    page: 1,
 			    count: 5
 			 }, {
-			     total: data.length, 
+			     total: $scope.searchResult[0].length, 
 			     getData: function ($defer, params) {
-	                    $scope.games = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
-	                    $defer.resolve($scope.games);
+			    	// $scope.searchResult.games = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
+			    	 	$scope.searchResult = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
+	                    $defer.resolve($scope.searchResult);
+	                    //$defer.resolve($scope.searchResult.tournaments);
 	                }
 			 });
 		});

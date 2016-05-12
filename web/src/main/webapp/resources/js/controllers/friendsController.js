@@ -65,12 +65,24 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
    $scope.findAllUsers = function(){
        if($scope.name.length > 0){
                 $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
-                    $rootScope.$broadcast('message', data);
+                   /* $rootScope.$broadcast('message', data);*/
+                    $scope.allUsers = data;
                 }).error(function(error){
             });
        }
    };
-
+    $scope.addUserToFriend = function(id){
+         $http.post('addOfferToFriendship/', id).success(function(data){
+             $scope.userWhoYouSentOffering = data;
+             for(var i = 0; i < $scope.allUsers.length; i++){
+                if($scope.allUsers[i].id === id){
+                    $scope.allUsers.splice(i, 1)
+                };
+            };
+         }).error(function(error){
+             console.log(error);
+         });
+    };
     $scope.setFriendName = function(friendName){
         $scope.currentFriend = friendName;
         getUpdate(friendName);
@@ -79,13 +91,14 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
           $http.post('getAllMessage/' +  $scope.currentFriend ,  $scope.currentFriend ).success(function(data){
              var objDiv = document.getElementById("messages");
             objDiv.scrollTop = objDiv.scrollHeight;
-              if($scope.messages == undefined){
+              /*if($scope.messages == undefined){
                $scope.messages = data;  
              }else{
                  if($scope.messages.length != data.length){
                       $scope.messages = data;
                  }
-             }
+             }*/
+               $scope.messages = data;
             
         }).error(function(error){
             console.log(error);
@@ -130,32 +143,9 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     });
     
    
-  setInterval(function(){
+/* setInterval(function(){
        getUpdate();
-   }, 500)
+   }, 100)*/
    
 }]);
 
-app.controller('searchUserCtrl',['$scope', '$rootScope', '$http', function($scope, $rootScope, $http){
-    $scope.message = 'Hello';
-    $scope.$on('message', function(event,responce){
-        if(responce.length < 1){
-             $scope.open = false;
-        }else{
-             $scope.open = true;
-        }
-        $scope.allUsers = responce;
-    });
-    $scope.addUserToFriend = function(id){
-         $http.post('addOfferToFriendship/', id).success(function(data){
-             $scope.userWhoYouSentOffering = data;
-             for(var i = 0; i < $scope.allUsers.length; i++){
-                if($scope.allUsers[i].id === id){
-                    $scope.allUsers.splice(i, 1)
-                };
-            };
-         }).error(function(error){
-             console.log(error);
-         });
-    };
-}]);

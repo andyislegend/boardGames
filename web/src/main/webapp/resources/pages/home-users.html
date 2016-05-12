@@ -6,19 +6,21 @@
 			class="table table-striped">
 			<tbody >
 			<tr ng-repeat-start="user in usersByParams">
-				<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
+				<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-2">
 					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
 				</td>
-				<td title="'Email'" sortable="'email'" class="col-sm-3">{{user.email}}</td>
+				<td title="'Email'" sortable="'email'" class="col-sm-2">{{user.email}}</td>
 				<td title="'Phone Number'" class="col-sm-3">{{user.phoneNumber}}</td>
-				<td title="'Address'" filter="{'countryName': 'select'}" filter-data="countries()" class="col-sm-3">
-					{{user.address.country.name}} {{user.address.city.name}}
-                	{{user.address.street}} {{user.address.houseNumber}}
-                	{{user.address.roomNumber}}
+				<td title="'Country'" filter="{'countryName': 'select'}" filter-data="countries()" class="col-sm-2">
+					{{user.address.country.name}}
+                </td>
+				<td title="'Address'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
+					 {{user.address.city.name}} {{user.address.street}} 
+					 {{user.address.houseNumber}} {{user.address.roomNumber}}
                 </td>
                 </tr>
 			<tr ng-show="showUser" ng-repeat-end>
-				<td class="col-sm-3">
+				<td class="col-sm-2">
 						<div id="backgroundForOneUser">
 							<p>Last Name:{{oneUser.lastName}}</p>
 							<p>First Name:{{oneUser.firstName}}</p>
@@ -27,12 +29,11 @@
 							<p>Rating:{{oneUser.rating}}</p>
 						</div>
 				</td>
-				<td class="col-sm-3">
+				<td class="col-sm-2">
 
 							<b>Games user owns:</b>
-							<ul ng-repeat="game in games">
-								<li><a href="" ng-click="getInfoAboutGame(game.id)"
-									data-toggle="modal" data-target="#myModalGames">
+							<ul ng-repeat="game in games" id="phoneNumber">
+								<li><a href="#gameUserDetails/{{game.id}}" ng-click="myFunc(game.id)">
 										{{game.name}}</a></li>
 							</ul>
 							<div class="modal fade" id="myModalGames" tabindex="-1"
@@ -63,11 +64,10 @@
 				<td class="col-sm-3">
 						<div id="backgroundForOneUser">
 							<b>Users tournaments:</b>
-							<ul ng-repeat="tournament in tournaments">
+							<ul ng-repeat="tournament in tournaments" id="phoneNumber">
 								<li><a href=""
 									ng-click="getInfoAboutTournament(tournament.tournamentId)"
-									data-toggle="modal" data-target="#myModalTournaments">
-										{{tournament.tournamentName}}</a></li>
+									data-toggle="modal" data-target="#myModalTournaments">{{tournament.tournamentName}}</a></li>
 							</ul>
 							<div class="modal fade" id="myModalTournaments" tabindex="-1"
 								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -93,9 +93,11 @@
 							</div>
 						</div>
 				</td>
-				<td class="col-sm-3">					
+				<td class="col-sm-2">					
 							<img ng-src="{{userAvatar}}" id="userAvatar">
 							<p>Score: {{oneUser.userRating}}</p>
+				</td>
+				<td class="col-sm-3">					
 				</td>
 			</tr>
 			</tbody>

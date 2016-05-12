@@ -1,4 +1,4 @@
-angular.module('homeApp').controller('getGameDetailedInfoController', function($scope, $http, $rootScope, $filter, ngTableParams) {
+angular.module('homeApp').controller('getGameDetailedInfoController', function($scope, $http, $rootScope, $filter,$timeout, ngTableParams) {
 	
 		$scope.$on('sharingIdToDetailsModal', function(event, data) {
 			$scope.currentGameId = data.id;
@@ -103,11 +103,19 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 			},
 			data : comment
 		}).then(function successCallback(response) {
-				$scope.list.push(response.data);
+				$scope.list.push(response.data);	
+				
 		}, function errorCallback(response) {
-		});
-		$scope.commentForGame.push(comment);
+		})
+		$timeout(function() {
+			for (var i = 0; i < $rootScope.allGame.length; i++) {
+				$rootScope.isNewComments($rootScope.allGame[i].id);
+			}
+    }, 200);
 		
+		$scope.commentForGame.push(comment);
+		$scope.comment = '';
+			
 	}
 });
 

@@ -1,4 +1,14 @@
-angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http, $rootScope, $route, $routeParams) {
+angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http, $rootScope, $route, $routeParams,$timeout) {
+	
+	$rootScope.NN = 100;
+	$rootScope.allGame = [];
+	$http.get('getAllGamesCurUser').then(function(result) {
+		$rootScope.allGame = result.data;
+		
+			for (var i = 0; i < $rootScope.allGame.length; i++) {
+				$rootScope.isNewComments($rootScope.allGame[i].id);
+			}
+	});
 	
 	$scope.isYourGame = false;
 	$scope.isYourGamePrivate = false;
@@ -34,17 +44,9 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			
 		}, function errorCallback(response) {
 		});
+		
 		scope.$apply();
 	}
-	
-	$rootScope.NN = 100;
-	$scope.allGame = [];
-	$http.get('getAllGamesCurUser').then(function(result) {
-		$scope.allGame = result.data;
-		for (var i = 0; i < $scope.allGame.length; i++) {
-			$scope.isNewComments($scope.allGame[i].id);
-		}
-	});
 
 	$http.get('gameUserDetail/' + $routeParams.id).then(
 		function(result) {
@@ -110,11 +112,8 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		}		
 	});
 	
-	$scope.showMe = false;
-	$scope.myFunc = function(id) {
+	$scope.gameDetailById = function(id) {
 		$scope.games = [];
-		$scope.showMe = !$scope.showMe;
-		
 	}
 	
 	$scope.makeGameUserAvailable = function(id) {
@@ -172,7 +171,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		});
 	}
 
-	$scope.isNewComments = function(id) {
+	$rootScope.isNewComments = function(id) {
 		var countOfComments = 0;
 		$scope.userGame = [];
 		$http.get('getCountOfCommentsByGameId/' + id)
@@ -190,9 +189,15 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		});
 	}
 	$scope.deleteGame = function(id) {
-		$http.delete('deleteUserGame/'+id).success(function(data) {
+		for(var i = 0; i<$rootScope.allGame.length; i++){
+			if($rootScope.allGame[i].id === id){
+				$rootScope.allGame.splice($rootScope.allGame[i], 1);
+				break;
+			}
+		}
+		$http.delete('deleteUserGame/'+id).success(function(data) {					
 		});
-		$scope.allGame.splice($scope.allGame[id], 1);
-		scope.$apply();
+		
+		//scope.$apply();
 	}
 });
