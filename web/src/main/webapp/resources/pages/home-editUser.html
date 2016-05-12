@@ -1,63 +1,86 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
+	rel="stylesheet" crossorigin="anonymous" />
+<link rel="stylesheet" href="resources/css/fonts.css" />
+<script type="text/javascript" src="resources/js/registration.js"></script>
+<link rel="stylesheet" href="resources/css/users.css" />
+
+</head>
+<body>
 <div>
     <h1 style="text-align: center"> Edit User </h1>
     <div ng-controller="editProfileCtrl">
-					<div class="col-sm-12">
+		<div class="col-sm-12">
 					
-						<ul id="userProfile">
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">First Name:</span> 
-								<div class="col-sm-4">	 
-									<input ng-model="editableFirstName"> 
-								</div> 
-								<!-- <span class="col-sm-3" ng-hide="editProfileMessage">
-									{{nameAnswer}}
-								</span> -->
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Last Name:</span> 
-								<div class="col-sm-4">	 									 
-									<input ng-model="editableLastName"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Email:</span> 
-								<div class="col-sm-4">	 									 
-									<input type="email" ng-model="editableEmail"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Gender:</span> 
-								<div class="col-sm-4">	 									 
-									<select id="gender" name="gender" ng-model="editableGender">
-										<option value="male">Male</option>
-										<option value="female">Female</option>
-									</select> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Age:</span> 
-								<div class="col-sm-4">	 									 
-									<input ng-model="editableAge"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Phone Number:</span> 
-								<div class="col-sm-4">	 									 
-									<input ng-model="editablePhoneNumber"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3"></span> 
-								<div class="col-sm-2">	 									 
-									<button ng-click="saveUser()" id="saveUserUpdate">
-  										Save
-									</button> 
-								</div>
-								<span class="col-sm-3" ng-hide="editProfileMessage">
-									{{editProfileAnswer}}
-								</span> 
-							</li>												
-						</ul>
+				<div class="row">
+					<div class="form-group col-md-12" style="margin-left: 1%;">
+						<label class="col-md-3 control-lable">First Name:</label>
+						<div class="col-md-5">
+							<input ng-model="editableFirstName" class="form-control input-sm">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" style="margin-left: 1%;">
+						<label class="col-md-3 control-lable">Last Name:</label>
+						<div class="col-md-5">
+							<input ng-model="editableLastName" class="form-control input-sm">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" style="margin-left: 1%;">
+						<label class="col-md-3 control-lable">Email:</label>
+						<div class="col-md-5">
+							<input type="email" ng-model="editableEmail" class="form-control input-sm">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" style="margin-left: 1%;">
+						<label class="col-md-3 control-lable">Gender:</label>
+						<div class="col-md-5">
+							<select id="gender" name="gender" ng-model="editableGender" class="form-control">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select> 
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" style="margin-left: 1%;">
+						<label class="col-md-3 control-lable">Age:</label>
+						<div class="col-md-5">
+							<input ng-model="editableAge" class="form-control input-sm">
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" style="margin-left: 1%;">
+						<label class="col-md-3 control-lable">Phone Number:</label>
+						<div class="col-md-5">
+							<input ng-model="editablePhoneNumber" class="form-control input-sm">
+						</div>
+					</div>
+				</div>
+				<span class="col-sm-3"></span>
+				<div class="col-sm-5">
+					<button ng-click="saveNewUserPassword()" id="saveUserUpdate" class="btn btn-primary btn-bg">
+						Save</button>
+				</div>
+				<span class="col-sm-3" ng-hide="editProfileMessage">
+					{{editPasswordAnswer}} </span>
+
+
+
 						<ul id="userProfile">					
 							<li class="col-sm-12" id="userProfile">
 								<span class="col-sm-3">Old password:</span> 
@@ -92,3 +115,5 @@
 					</div>
 				</div>
 </div>
+</body>
+</html>
