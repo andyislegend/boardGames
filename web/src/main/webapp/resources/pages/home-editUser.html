@@ -73,46 +73,57 @@
 				</div>
 				<span class="col-sm-3"></span>
 				<div class="col-sm-5">
-					<button ng-click="saveNewUserPassword()" id="saveUserUpdate" class="btn btn-primary btn-bg">
+					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg">
 						Save</button>
 				</div>
 				<span class="col-sm-3" ng-hide="editProfileMessage">
-					{{editPasswordAnswer}} </span>
+									{{editProfileAnswer}}
+				</span> 
+				</div>
 
-
-
-						<ul id="userProfile">					
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Old password:</span> 
-								<div class="col-sm-4">	 									 
-									<input type="password" ng-model="editableOldPassword"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">New password:</span> 
-								<div class="col-sm-4">	 									 
-									<input type="password" ng-model="editableNewPassword"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3">Confirm password:</span> 
-								<div class="col-sm-4">	 									 
-									<input type="password" ng-model="editableConfirmPassword"> 
-								</div> 
-							</li>
-							<li class="col-sm-12" id="userProfile">
-								<span class="col-sm-3"></span> 
-								<div class="col-sm-2">	 									 
-									<button ng-click="saveNewUserPassword()" id="saveUserUpdate">
-  										Save
-									</button> 
-								</div>
-								<span class="col-sm-3" ng-hide="editProfileMessage">
-									{{editPasswordAnswer}}
-								</span> 
-							</li>												
-						</ul>
+				<div class="col-sm-12">
+				<p style="margin-left: 1%;" class="form-group col-md-12"><a href="" ng-click="showPasswordChange = !showPasswordChange">Change password</a></p>
+				<div ng-show="showPasswordChange">
+					<div class="row">
+						<div class="form-group col-md-12" style="margin-left: 1%;">
+							<label class="col-md-3 control-lable">Old password:</label>
+							<div class="col-md-5">
+								<input type="password" ng-model="editableOldPassword" 
+									class="form-control input-sm">
+							</div>
+						</div>
 					</div>
+					<div class="row">
+						<div class="form-group col-md-12" style="margin-left: 1%;">
+							<label class="col-md-3 control-lable">New password:</label>
+							<div class="col-md-5">
+								<input type="password" ng-model="editableNewPassword" 
+									class="form-control input-sm">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12" style="margin-left: 1%;">
+							<label class="col-md-3 control-lable">Confirm password:</label>
+							<div class="col-md-5">
+								<input type="password" ng-model="editableConfirmPassword" 
+									class="form-control input-sm">
+							</div>
+						</div>
+					</div>
+					<span class="col-sm-3"></span>
+						<div class="col-sm-5">
+						<button ng-click="saveNewUserPassword()" id="saveUserUpdate" 
+							class="btn btn-primary btn-bg">Save
+						</button>
+						</div>
+					<span class="col-sm-3" ng-hide="editProfileMessage">
+									{{editPasswordAnswer}}
+					</span>
+						
+						</div>
+					
+				</div>
 				</div>
 </div>
 </body>

@@ -1,4 +1,5 @@
 angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) {
+	$scope.showPasswordChange = false;
 	$http.get('getProfile').then(function(result) {
 		$scope.userProfile = result.data;
 		$scope.editableFirstName = $scope.userProfile.firstName;
