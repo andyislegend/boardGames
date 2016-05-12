@@ -277,9 +277,11 @@
 		<div id="main_div" ng-view></div>
 		<!-- End of ng-route div -->
 
-		<!-- Some weird thing??!! -->
-		<div class="search-result" ng-controller="searchUserCtrl"
-			ng-show="open">
+		<!-- Friends Widget -->
+        
+		<div id="friends_div">
+			<div ng-controller="friendsCtrl">
+		<div class="search-result" ng-show="click">
 			<div class="header-search">Find your friends in our Application</div>
 			<div class="content">
 				<div ng-repeat="user in allUsers">
@@ -299,18 +301,14 @@
 				</div>
 			</div>
 		</div>
-		<!-- End of weird thing -->
 
-		<!-- Friends Widget -->
-		<div id="friends_div">
-			<div>
-				<div class="global" ng-controller="friendsCtrl">
+                <div class="global">
 					<div class="main">
 						<div id="header">
 							<div class="overInput">
 								<input type="text" class="input" placeholder="Find new friends"
 									ng-model="name" ng-keyup="findAllUsers()"
-									ng-click="click = true">
+									ng-click="click = !click">
 							</div>
 							<div class="underInput">
 								<div class="headerWords">Friends {{friends.length}}</div>
@@ -455,7 +453,7 @@
 						</div>
 						<div class="persons">
 							<div ng-repeat="friend in friends">
-								<div class="proba">
+								
 									<div class="person">
 										<div class="over-ava">
 											<a href="" type="button"><img class="ava"
@@ -468,7 +466,7 @@
 												src="resources/ico/championship.png" /></a>
 										</div>
 									</div>
-								</div>
+								
 							</div>
 						</div>
 					</div>
