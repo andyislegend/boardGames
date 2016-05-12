@@ -80,4 +80,14 @@ public class UserGameSharingController {
 		gameUserToUpdate.setStatus("available");
 		gameUserService.update(gameUserToUpdate);
 	}
+	
+	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public void giveGameBack(@PathVariable Integer gameUserId) {
+		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setUserApplierId(0);
+		gameUserToUpdate.setUser(userService.findById(gameUserToUpdate.getUserOwnerId()));
+		gameUserService.update(gameUserToUpdate);
+	}
 }

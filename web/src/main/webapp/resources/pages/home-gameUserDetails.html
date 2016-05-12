@@ -33,6 +33,8 @@
 	<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
 </div>
 
-
+<div class="container-fluid" ng-show="canGiveBack">
+	<button class="btn btn-primary" ng-click="giveBackGame(games.id)">Give back to owner</button>
+</div>
 
 </div>
