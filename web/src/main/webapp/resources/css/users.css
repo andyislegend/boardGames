@@ -30,11 +30,21 @@
 	 width: 92px;
 }
 
-#phoneNumber {
+#tournamentsList {
 	  text-align: left;
-        list-style-type: none;
-        padding: 0px;
+      list-style-type: none;
+      padding: 0px;
 }
-a {
-	text-align: left;
+
+#gamesList {
+	  text-align: left;
+      list-style-type: none;
+      padding: 0px;
 }
+
+#phoneNumber {
+	  text-align: center;
+      list-style-type: none;
+      padding: 0px;
+}
+
