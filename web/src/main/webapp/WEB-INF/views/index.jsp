@@ -159,7 +159,7 @@
 							<br> <a style="margin-left: 1%;" type="button"
 								data-dismiss="modal" class="btn btn-link" data-toggle="modal"
 								data-target="#myReg"><b>Don't Have an Account? Click
-									here!<b></a> <a style="margin-left: 35%;" type="button"
+									here!</b></a> <a style="margin-left: 35%;" type="button"
 								ng-click="closeModal()" class="btn btn-link"><b>Cancel</b></a>
 						</div>
 					</form>
