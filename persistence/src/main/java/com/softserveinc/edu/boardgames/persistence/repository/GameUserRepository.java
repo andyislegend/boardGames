@@ -19,8 +19,13 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 	@Query("delete from GameUser g where g.id = :id")
 	public void deleteById(@Param("id")Integer id);
 	
-	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO(u.id, u.game.name, u.game.category.name, u.yearOfProduction,"
-			+ " u.edition, u.countOfComments, u.status, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.game.name like %:name% ")
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
+			+ "u.id, u.game.name, "
+			+ "u.game.category.name, u.yearOfProduction,"
+			+ " u.edition, u.countOfComments, u.status, "
+			+ "u.game.description, u.game.rules, "
+			+ "u.game.maxPlayers, u.game.minPlayers) "
+			+ "from GameUser u where u.game.name like %:name% ")
 	public List<GameUserDTO> getGameUserByName(@Param("name")String name);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
@@ -34,13 +39,23 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 	@Query("select u from GameUser u where u.id = :id")
 	public GameUser getGameUserById(@Param("id") Integer id);
 	
-	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO(u.id, u.game.name, u.game.category.name, u.yearOfProduction,"
-			+ " u.edition, u.countOfComments, u.status, u.game.description, u.game.rules, u.game.maxPlayers, u.game.minPlayers) from GameUser u where u.id = :id")
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
+			+ "u.id, u.game.name, "
+			+ "u.game.category.name, u.yearOfProduction,"
+			+ " u.edition, u.countOfComments, u.status, u.game.description, "
+			+ "u.game.rules, u.game.maxPlayers, u.game.minPlayers) "
+			+ "from GameUser u where u.id = :id")
 	public GameUserDTO getGameUserDTOById(@Param("id") Integer id);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO"
 			+"(gu.id, gu.user.username, gu.edition, gu.yearOfProduction, gu.status) " +
 	       "from GameUser gu where gu.game.name = :name")
-	List<UserGamesOfGameDTO> getUserGameOfGame(@Param("name")String name);
+	public List<UserGamesOfGameDTO> getUserGameOfGame(@Param("name")String name);
+	
+	@Query(value="select u.username "
+			+ "from gameuser gu "
+			+ "inner join users u on gu.userApplierId = u.id "
+			+ "where gu.id = :id", nativeQuery=true)
+	public String findApplierUsernameFromGameId(@Param("id") Integer id);
 	
 }

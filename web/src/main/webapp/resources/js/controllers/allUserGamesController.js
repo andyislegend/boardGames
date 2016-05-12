@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http, $rootScope, $routeParams,$timeout) {
+angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http, $rootScope, $route, $routeParams,$timeout) {
 	
 	$rootScope.NN = 100;
 	$rootScope.allGame = [];
@@ -10,17 +10,11 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			}
 	});
 	
-	
-	
 	$scope.isYourGame = false;
 	$scope.isYourGamePrivate = false;
 	$scope.isntYourGame = false;
 	$scope.isThereConfiramtion = false;
-	$scope.makingGameAvailableMessage = "";
-	$scope.makingGamePrivateMessage = "";
-	$scope.sendingRequestToOwnerMessage = "";
-	$scope.aceptingRequestMessage = "";
-	$scope.decliningRequestMessage = "";
+	$scope.canGiveBack = false;
 	
 	$scope.updateGame = function(){
 		var game = {
@@ -63,23 +57,43 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					$scope.isntYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
+					$scope.canGiveBack = false;
 				}
 				else if (response.data === false && $scope.games.status === 'available') {
 					$scope.isntYourGame = true;
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
+					$scope.canGiveBack = false;
 				}
 				else if (response.data === true && $scope.games.status === 'available'){
 					$scope.isYourGame = false;
 					$scope.isntYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = true;
+					$scope.canGiveBack = false;
 				}
 				else if (response.data === true && $scope.games.status === 'confirmation') {
 					$scope.isntYourGame = false;
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = true;
+					$scope.isYourGamePrivate = false;
+					$scope.canGiveBack = false;
+					
+					$http({
+						method : "GET",
+						url : 'getApplierUsername' + '/' + $scope.games.id
+					}).then(function mySucces(response) {
+						$scope.applierUsername = response.data;
+					}, function myError(response) {
+						alert("Getting user applier username error");
+					});
+				}
+				else if (response.data === true && $scope.games.status === 'borrowed') {
+					$scope.canGiveBack = true;
+					$scope.isntYourGame = false;
+					$scope.isYourGame = false;
+					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
 				}
 				else {
@@ -114,11 +128,10 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'makeGameUserAvailable' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.makingGameAvailableMessage = "your game now is available!";	
+			$route.reload();
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
-		
 	}
 	
 	$scope.keepGameUserPrivate = function(id) {
@@ -126,12 +139,10 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'makeGameUserPrivate' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.makingGamePrivateMessage = "your game is now private";	
+			$route.reload();
 		}, function myError(response) {
 			alert("Making game available failed");
 		});
-		
-		
 	}
 	
 	$scope.askOwnerToShare = function(id) {
@@ -139,7 +150,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'askGameUserOwnerToShare' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.sendingRequestToOwnerMessage = "Your request was successfully sent!";
+			$route.reload();
 		}, function myError(response) {
 			alert("Failed to send your request");
 		});
@@ -150,7 +161,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'acceptGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.aceptingRequestMessage = "Generous action!";
+			$route.reload();
 		}, function myError(response) {
 			alert("Accept request failed");
 		});
@@ -161,10 +172,20 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			method : "PUT",
 			url : 'declineGameConfirmationRequest' + '/' + id
 		}).then(function mySucces(response) {
-			$scope.decliningRequestMessage = "This man is not worth of my game!";
-			
+			$route.reload();
 		}, function myError(response) {
 			alert("Decline request failed");
+		});
+	}
+	
+	$scope.giveBackGame = function(id) {
+		$http({
+			method : "PUT",
+			url : 'giveGameBack' + '/' + id
+		}).then(function mySucces(response) {
+			$route.reload();
+		}, function myError(response) {
+			alert("Giving game back request failed");
 		});
 	}
 

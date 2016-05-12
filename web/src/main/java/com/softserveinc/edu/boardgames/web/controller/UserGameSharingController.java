@@ -30,6 +30,12 @@ public class UserGameSharingController {
 		return currentUser.getId().equals(gamesGameUser.getUser().getId());
 	}
 	
+	@RequestMapping(value="/getApplierUsername/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getUserToDisplayOnRequest(@PathVariable Integer gameUserId) {
+		return gameUserService.getApplierUsernameFromGameId(gameUserId);
+	}
+	
 	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void makeGameUserAvailable(@PathVariable Integer gameUserId) {
@@ -59,9 +65,10 @@ public class UserGameSharingController {
 	@ResponseBody
 	public void acceptGameConfirmation(@PathVariable Integer gameUserId) {
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setUserOwnerId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
 		gameUserToUpdate.setUser(userService.findById(gameUserToUpdate.getUserApplierId()));
 		gameUserToUpdate.setUserApplierId(0);
-		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setStatus("borrowed");
 		gameUserService.update(gameUserToUpdate);
 	}
 	
@@ -71,6 +78,16 @@ public class UserGameSharingController {
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setUserApplierId(0);
 		gameUserToUpdate.setStatus("available");
+		gameUserService.update(gameUserToUpdate);
+	}
+	
+	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public void giveGameBack(@PathVariable Integer gameUserId) {
+		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setUserApplierId(0);
+		gameUserToUpdate.setUser(userService.findById(gameUserToUpdate.getUserOwnerId()));
 		gameUserService.update(gameUserToUpdate);
 	}
 }

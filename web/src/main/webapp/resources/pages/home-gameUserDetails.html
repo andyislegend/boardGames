@@ -1,37 +1,40 @@
 <div ng-controller = "allUsersGameCtrl" >
 
-<h1>{{games.name}}</h1>
+<div class = "title">
+<a id = "EditButton" href = "#gameEdit/{{games.id}}" ng-show="isYourGame">
+<button class="btn btn-default navbar-btn" ><span class = "glyphicon glyphicon-edit"></span></button></a>
+<h1 id = "titleHeader" >{{games.name}}</h1> 
 
+</div>
+<div class = "mainContent">
 <p>Year of production: {{games.yearOfProduction}}</p>
 <p>Edition: {{games.edition}}</p>
 <p>Description: {{games.description}}</p>
 <p>Max players: {{games.maxPlayers}}</p>
 <p>Min players: {{games.minPlayers}}</p>
 <p>Availability: {{games.status}}</p>
+</div>
 
 <div class="container-fluid" ng-show="isYourGame">
 	<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
-	<p class="text-success">{{makingGameAvailableMessage}}</p>
 </div>
 
 <div class="container-fluid" ng-show="isYourGamePrivate">
 	<button class="btn btn-primary" ng-click="keepGameUserPrivate(games.id)">Keep it for me</button>
-	<p class="text-success">{{makingGamePrivateMessage}}</p>
 </div>
 
 <div class="container-fluid" ng-show="isntYourGame">
 	<button class="btn btn-primary" ng-click="askOwnerToShare(games.id)">Ask owner!</button>
-	<p class="text-success">{{sendingRequestToOwnerMessage}}</p>
 </div>
 
 <div class="container-fluid" ng-show="isThereConfiramtion">
-	<p class="text-important">{{Username}} asks you to share this game</p>
+	<p class="text-important">{{applierUsername}} asks you to share this game</p>
 	<button class="btn btn-primary" ng-click="acceptGameConfirmation(games.id)">Accept</button>
 	<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
-	<p class="text-success">{{aceptingRequestMessage}}</p>
-	<p class="text-danger">{{decliningRequestMessage}}</p>
 </div>
 
-<a href = "#gameEdit/{{games.id}}" ng-show="isYourGame"><button>Edit</button></a>
+<div class="container-fluid" ng-show="canGiveBack">
+	<button class="btn btn-primary" ng-click="giveBackGame(games.id)">Give back to owner</button>
+</div>
 
 </div>

@@ -13,3 +13,20 @@
 	width: 80%;
 	height: 60%
 }
+.title {
+	width: 30%;
+	position:relative;
+}
+.mainContent{
+	height: 50%;
+	width: 40%;
+}
+
+#titleHeader {
+	width: 50%;
+	
+}
+#EditButton {
+	width: 50%;
+	float:right;
+}

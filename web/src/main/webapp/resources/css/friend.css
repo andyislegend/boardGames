@@ -21,7 +21,7 @@ margin-right: 10px;
 }
 
 .count{
-	position: absolute;
+    position: absolute;
     background: #D00000;
     height: 20px;
     width: 20px;
@@ -37,7 +37,7 @@ margin-right: 10px;
     z-index: 1;
 }
 .count-of-messages{
-	position: absolute;
+    position: absolute;
     background: #004C99;
     height: 20px;
     width: 20px;
@@ -53,12 +53,9 @@ margin-right: 10px;
     z-index: 1;
 }
 .main{
-float: left;
 display: inline-table;
 width: 100%;
 height: 100%;
-box-shadow: 0 0 10px rgba(0,0,0,0.5);
-border: 1px solid #FFF;
 }
 input:focus{
     outline:none;
@@ -132,6 +129,7 @@ height:40px;
 border-radius: 20px;
 }
 .overBell{
+    position: relative;
 	height: 30px;
     width: 30px;
     margin-left:40% ;
@@ -155,10 +153,11 @@ border-radius: 20px;
     height: 27px;
 }
 .overMessage{
+    position: relative;
    height: 30px;
     width: 30px;
     margin-left:75% ;
-    margin-top: -30px; 
+    margin-top: -30px;
 }
 .overMessage:hover img{
     opacity: 1;
@@ -228,7 +227,7 @@ margin-top: 10px;
 margin-left: 10px;
 text-decoration: none;
 width: 90%;
-height: 50px;
+height: 10%;
 
 }
 .user-offered{
@@ -295,7 +294,7 @@ width: 35px;
     background: #EEE;
 height: 400px;
 width: 300px;
-margin-left: 47%;
+margin-left: -350px;
 position: absolute;
 display: inline-table;
 box-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -318,6 +317,7 @@ border: 1px solid #FFF;
 } 
 .global{
 display: flex;
+    height: 100%;
 } 
 .messanger-model{
     border-radius: 5px;
@@ -373,7 +373,6 @@ box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	background: linear-gradient(#E8F2FF, #99CCFF);
 }
 .persons{
-	max-height: 370px;
     overflow: auto;
 }
 
