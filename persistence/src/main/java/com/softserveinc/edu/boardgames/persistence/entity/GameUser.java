@@ -9,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -46,18 +48,15 @@ public class GameUser implements Serializable {
 	
 	@Column(name = "status", columnDefinition="varchar(20) default 'private'")
 	private String status;
-	
-	@Column(name = "userApplierId", columnDefinition="int(11) default '0'")
-	private Integer userApplierId;
-	
-	@Column(name = "userOwnerId")
-	private Integer userOwnerId;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.REMOVE})
 	private Game game;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private User user;
+	
+	@OneToOne(mappedBy="gameUser")
+	private Exchange exchange;
 	
 	public GameUser() {
 		
@@ -81,21 +80,13 @@ public class GameUser implements Serializable {
 		this.game = game;
 		this.user = user;
 	}
-	
-	public Integer getUserOwnerId() {
-		return userOwnerId;
+
+	public Exchange getExchange() {
+		return exchange;
 	}
 
-	public void setUserOwnerId(Integer userOwnerId) {
-		this.userOwnerId = userOwnerId;
-	}
-
-	public Integer getUserApplierId() {
-		return userApplierId;
-	}
-
-	public void setUserApplierId(Integer userApplierId) {
-		this.userApplierId = userApplierId;
+	public void setExchange(Exchange exchange) {
+		this.exchange = exchange;
 	}
 
 	public String getStatus() {

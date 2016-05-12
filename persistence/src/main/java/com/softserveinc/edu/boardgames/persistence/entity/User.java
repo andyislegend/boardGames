@@ -135,6 +135,9 @@ public class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<GameUser> userGames;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	private Set<Exchange> exchanges;
+	
 	/**
 	 * Describes address where user lives. Has a many to one relationship to
 	 * address table.
@@ -173,6 +176,38 @@ public class User implements Serializable {
 	private List<TournamentComposition> takenpartTounaments;
 
 	public User() {
+	}
+
+	public Set<GameUser> getUserGames() {
+		return userGames;
+	}
+
+	public void setUserGames(Set<GameUser> userGames) {
+		this.userGames = userGames;
+	}
+
+	public Set<Exchange> getExchanges() {
+		return exchanges;
+	}
+
+	public void setExchanges(Set<Exchange> exchanges) {
+		this.exchanges = exchanges;
+	}
+
+	public List<Tournament> getCreatedTounaments() {
+		return createdTounaments;
+	}
+
+	public void setCreatedTounaments(List<Tournament> createdTounaments) {
+		this.createdTounaments = createdTounaments;
+	}
+
+	public List<TournamentComposition> getTakenpartTounaments() {
+		return takenpartTounaments;
+	}
+
+	public void setTakenpartTounaments(List<TournamentComposition> takenpartTounaments) {
+		this.takenpartTounaments = takenpartTounaments;
 	}
 
 	public Integer getId() {

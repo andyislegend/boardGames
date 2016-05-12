@@ -18,14 +18,14 @@ public interface GameRepository extends JpaRepository<Game, Integer>  {
 				+"(game.id, game.name, game.category.name, "
 				+ "game.minPlayers, game.maxPlayers) " +
 		       "from Game game")
-	List<AllGamesDto> getAllGames();
+	public List<AllGamesDto> getAllGames();
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO"
 			+"(game.name, game.description, game.rules, avg(gRateNum.rating)) "
 			+ "from Game game "
 			+ "inner join game.gameRatingNumeric gRateNum "
 			+ "where game.id = :id")
-	GameDetailsDTO getGameDescription(@Param("id")Integer id);
+	public GameDetailsDTO getGameDescription(@Param("id")Integer id);
 	
 	public Game findByName(String name);
 }
