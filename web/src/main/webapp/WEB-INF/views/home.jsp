@@ -334,12 +334,12 @@
 								<div class="modal-content over-modal-content">
 									<div>
 										<ul class="nav nav-tabs bigger-tab">
-											<li><a data-toggle="tab" href="#menu1">Fiend request</a></li>
-											<li class="active"><a data-toggle="tab" href="#menu2">Fiend
+											<li class="active"><a data-toggle="tab" href="#menu1">Fiend request</a></li>
+											<li><a data-toggle="tab" href="#menu2">Fiend
 													responce</a></li>
 										</ul>
 										<div class="tab-content ">
-											<div id="menu1" class="tab-pane fade bigger-content">
+											<div id="menu1" class="tab-pane fade in active">
 												<div ng-repeat="user in allOfferedUsers">
 													<div class="proba">
 														<div class="person">
