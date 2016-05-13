@@ -112,7 +112,7 @@ public class UsersController {
 	/**
 	 * Updating users avatar
 	 */
-	@RequestMapping(value = {"/updateAvatar"}, method = RequestMethod.PUT)
+	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data" ,method = RequestMethod.POST)
 	@ResponseBody
 	public void updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
 			throws Exception {

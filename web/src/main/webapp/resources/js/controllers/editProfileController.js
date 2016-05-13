@@ -108,7 +108,7 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
 	    var uploadUrl = 'updateAvatar';
 	    console.log(fileUpload)
 
-	    $http.put(uploadUrl, fileUpload, {
+	    $http.post(uploadUrl, fileUpload, {
 	        withCredentials: true,
 	        headers: {'Content-Type': undefined },
 	        transformRequest: angular.identity
