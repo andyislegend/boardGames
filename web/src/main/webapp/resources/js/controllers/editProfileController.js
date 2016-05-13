@@ -63,6 +63,9 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
 			$scope.editPasswordMessage = false;
 		}).error(function(result, status) {
 			$scope.editPasswordAnswer = result;
+			$scope.editableOldPassword = '';
+			 $scope.editableNewPassword = '';
+			 $scope.editableConfirmPassword = '';
 		})
 	}
 	
