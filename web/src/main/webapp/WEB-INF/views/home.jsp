@@ -60,9 +60,9 @@
 	src="resources/js/controllers/friendsController.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/CreateNewTournamentCtrl.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="resources/js/controllers/showAllTournamentsCtrl.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="resources/js/controllers/eventListCtrl.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
@@ -278,31 +278,32 @@
 		<!-- End of ng-route div -->
 
 		<!-- Friends Widget -->
-        
+
 		<div id="friends_div">
 			<div ng-controller="friendsCtrl">
-		<div class="search-result" ng-show="click">
-			<div class="header-search">Find your friends in our Application</div>
-			<div class="content">
-				<div ng-repeat="user in allUsers">
-					<div class="proba">
-						<div class="person">
-							<div class="over-ava">
-								<a href="" type="button"><img class="ava"
-									src="resources/images/default-avatar.jpg" /></a>
-							</div>
-							<div class="name">{{ user.firstName }} {{ user.lastName}}</div>
-							<div class="over-add-remove">
-								<a href="" type="button" ng-click="addUserToFriend(user.id)"><img
-									class="add-remove" src="resources/ico/add_user.png" /></a>
+				<div class="search-result" ng-show="click">
+					<div class="header-search">Find your friends in our
+						Application</div>
+					<div class="content">
+						<div ng-repeat="user in allUsers">
+							<div class="proba">
+								<div class="person">
+									<div class="over-ava">
+										<a href="" type="button"><img class="ava"
+											src="resources/images/default-avatar.jpg" /></a>
+									</div>
+									<div class="name">{{ user.firstName }} {{ user.lastName}}</div>
+									<div class="over-add-remove">
+										<a href="" type="button" ng-click="addUserToFriend(user.id)"><img
+											class="add-remove" src="resources/ico/add_user.png" /></a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
 
-                <div class="global">
+				<div class="global">
 					<div class="main">
 						<div id="header">
 							<div class="overInput">
@@ -334,7 +335,8 @@
 								<div class="modal-content over-modal-content">
 									<div>
 										<ul class="nav nav-tabs bigger-tab">
-											<li class="active"><a data-toggle="tab" href="#menu1">Fiend request</a></li>
+											<li class="active"><a data-toggle="tab" href="#menu1">Fiend
+													request</a></li>
 											<li><a data-toggle="tab" href="#menu2">Fiend
 													responce</a></li>
 										</ul>
@@ -402,20 +404,21 @@
 								<div class="modal-content">
 									<div class="modal-body">
 										<div class="main-message-content">
-
 											<div class="message-friends">
 												<ul class="nav nav-pills nav-stacked messanger-model"
 													ng-class="{myFriendMessage: allNotReadMessagesByFriend[friends.indexOf(friend)] > 0}"
 													ng-repeat="friend in friends">
-													<li><a href="#" class="list-messangers"
+													<li ng-class="{active: friend.username == highlightFriend">
+														<a href="#" class="list-messangers"
 														style="padding-left: 5px; padding-top: 5px;"
 														ng-click="setFriendName(friend.username)"> <img
 															class="ava-messanger"
-															src="resources/images/default-avatar.jpg" />{{
-															friend.firstName }} {{ friend.lastName}}
+															src="resources/images/default-avatar.jpg" />{{friend.firstName
+															}} {{ friend.lastName}}
 													</a>
 														<div class="count-of-messages"
-															ng-show="allNotReadMessagesByFriend[friends.indexOf(friend)] > 0 ">{{allNotReadMessagesByFriend[friends.indexOf(friend)]}}</div>
+															ng-show="allNotReadMessagesByFriend[friends.indexOf(friend)] > 0 ">{{allNotReadMessagesByFriend[friends.indexOf(friend)]}}
+														</div>
 													</li>
 												</ul>
 											</div>
@@ -452,21 +455,29 @@
 							</div>
 						</div>
 						<div class="persons">
+
 							<div ng-repeat="friend in friends">
-								
-									<div class="person">
-										<div class="over-ava">
-											<a href="" type="button"><img class="ava"
-												src="resources/images/default-avatar.jpg" /></a>
-										</div>
-										<div class="name">{{ friend.firstName }} {{
-											friend.lastName}}</div>
-										<div class="iconMessagediv">
-											<a href="" type="button"><img class="iconChampionship"
-												src="resources/ico/championship.png" /></a>
-										</div>
+
+								<div class="person">
+									<div class="over-ava">
+										<a href="" type="button"><img class="ava"
+											src="resources/images/default-avatar.jpg" /></a>
 									</div>
-								
+									<div class="name">{{ friend.firstName }} {{
+										friend.lastName}}</div>
+									<div class="over-mes">
+										<a href="" type="button" data-toggle="modal"
+											data-target="#messanger"
+											ng-click="setFriendName(friend.username); highlightFriend = friend.username">
+											<img class="message" src="resources/ico/message.png" />
+										</a>
+									</div>
+									<div class="iconMessagediv">
+										<a href="" type="button"><img class="iconChampionship"
+											src="resources/ico/championship.png" /></a>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
