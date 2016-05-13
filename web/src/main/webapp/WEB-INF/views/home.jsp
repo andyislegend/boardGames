@@ -408,7 +408,7 @@
 												<ul class="nav nav-pills nav-stacked messanger-model"
 													ng-class="{myFriendMessage: allNotReadMessagesByFriend[friends.indexOf(friend)] > 0}"
 													ng-repeat="friend in friends">
-													<li ng-class="{active: friend.username == highlightFriend">
+													<li>
 														<a href="#" class="list-messangers"
 														style="padding-left: 5px; padding-top: 5px;"
 														ng-click="setFriendName(friend.username)"> <img
@@ -438,7 +438,7 @@
 												<div style="display: flex; margin-top: 5px;">
 													<textarea rows="3" cols="40" name="text"
 														style="resize: none; margin-right: 10px;"
-														ng-model="newMessage"></textarea>
+														ng-model="newMessage" ng-enter="sendMessage(newMessage)"></textarea>
 													<button type="button" class="btn btn-default"
 														ng-click="sendMessage(newMessage)">Send</button>
 												</div>
@@ -468,7 +468,7 @@
 									<div class="over-mes">
 										<a href="" type="button" data-toggle="modal"
 											data-target="#messanger"
-											ng-click="setFriendName(friend.username); highlightFriend = friend.username">
+											ng-click="setFriendName(friend.username)">
 											<img class="message" src="resources/ico/message.png" />
 										</a>
 									</div>

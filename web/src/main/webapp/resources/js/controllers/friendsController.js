@@ -108,6 +108,7 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     $scope.sendMessage = function(message){
         $scope.currentFriend
         $http.post('sendMessage/' + $scope.currentFriend + "/" + message, $scope.currentFriend, message).success(function(){
+        	$scope.newMessage = '';
         }).error(function(error){
             console.log(error);
         });
@@ -143,9 +144,23 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     });
     
    
-/* setInterval(function(){
+/*setInterval(function(){
        getUpdate();
    }, 100)*/
    
 }]);
+
+app.directive('ngEnter', function() {
+       return function(scope, element, attrs) {
+           element.bind("keydown keypress", function(event) {
+               if(event.which == 13) {
+                       scope.$apply(function(){
+                               scope.$eval(attrs.ngEnter);
+                       });
+                       
+                       event.preventDefault();
+               }
+           });
+       };
+});
 
