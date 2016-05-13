@@ -1,4 +1,5 @@
 angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) {
+	$scope.showPasswordChange = false;
 	$http.get('getProfile').then(function(result) {
 		$scope.userProfile = result.data;
 		$scope.editableFirstName = $scope.userProfile.firstName;
@@ -7,6 +8,11 @@ angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) 
 		$scope.editableGender = $scope.userProfile.gender;
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
+
+			$http.get('getAvatar').then(function(result) {
+				$scope.avatar = result.data;
+			});
+
 	});
 	$scope.saveUser = function() {
 		$http({
@@ -37,6 +43,7 @@ angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) 
 		}).error(function(result, status) {
 			$scope.editProfileAnswer = result;
 		})
+
 	}
 
 	$scope.saveNewUserPassword = function() {
@@ -58,4 +65,9 @@ angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) 
 			$scope.editPasswordAnswer = result;
 		})
 	}
+
 });
+var loadFile = function(event) {
+    var output = document.getElementById('avatar');
+    output.src = URL.createObjectURL(event.target.files[0]);
+  };

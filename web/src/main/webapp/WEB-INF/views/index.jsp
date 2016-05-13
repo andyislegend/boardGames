@@ -134,15 +134,13 @@
 					<form name="form" ng-submit="login()" AutoCompleteType="Disabled"
 						autocomplete="off">
 
-						<div class="form-group"
-							ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+						<div class="form-group">
 							<input style="margin-left: 25%; width: 50%" type="text"
 								name="username" id="username" class="form-control"
 								ng-model="loginForm.username" placeholder="Enter Username"
 								required />
 						</div>
-						<div class="form-group"
-							ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+						<div class="form-group">
 							<input style="margin-left: 25%; width: 50%" type="password"
 								name="password" id="password" class="form-control"
 								ng-model="loginForm.password" placeholder="Enter Password"
@@ -161,11 +159,10 @@
 							<br> <a style="margin-left: 1%;" type="button"
 								data-dismiss="modal" class="btn btn-link" data-toggle="modal"
 								data-target="#myReg"><b>Don't Have an Account? Click
-									here!<b></a> <a style="margin-left: 35%;" type="button"
-								data-dismiss="modal" class="btn btn-link"><b>Cancel</b></a>
+									here!</b></a> <a style="margin-left: 35%;" type="button"
+								ng-click="closeModal()" class="btn btn-link"><b>Cancel</b></a>
 						</div>
 					</form>
-
 
 				</div>
 
@@ -183,79 +180,86 @@
 			<!-- Modal content-->
 			<div class="modal-content" ng-controller="registerCntrl">
 				<div class="modal-header">
-					<button ng-click="register()" class="btn btn-info">Sign up</button>
-					<a style="margin-left: 15%; font-size: 12pt;" class="btn disabled">REGISTARTION
-						OF NEW USER</a>
-					<button style="margin-left: 14%;" type="submit"
-						class="btn btn-danger" ng-click="closeModal()">Cancel</button>
-					<span style="color: red; font-size: 10pt; margin-left: 5%"
-						ng-hide="regUserMssg"> {{regUserResp}} </span>
+
+					<h4 style="text-align: center;" class="modal-title">REGISTARTION
+						OF NEW USER</h4>
+					<p style="color: red; font-size: 10pt; text-align: center;"
+						ng-hide="regUserMssg">{{regUserResp}}</p>
 				</div>
 				<div class="modal-body">
 
-					<div class="form-group">
-						<label>Username</label><span style="color: red">*</span> <input
-							ng-model="regusername" type="text" class="form-control"
-							required="required" />
+					<form class="form-horizontal" name="form" ng-submit="register()"
+						role="form">
 
-					</div>
-
-					<div class="form-group">
-						<label>Email</label><span style="color: red">*</span> <input
-							ng-model="regemail" type="email" class="form-control"
-							required="required" />
-
-					</div>
-
-					<div class="form-group">
-						<label>First name</label> <input ng-model="regfirstName"
-							type="text" class="form-control" />
-					</div>
-
-					<div class="form-group">
-						<label>Last name</label> <input ng-model="reglastName" type="text"
-							class="form-control" />
-
-					</div>
-
-					<div class="form-group">
-						<label>Password</label><span style="color: red">*</span> <input
-							ng-model="regpassword" type="password" class="form-control"
-							required="required" />
-
-					</div>
-
-					<div class="form-group">
-						<label>Confirm Password</label><span style="color: red">*</span> <input
-							ng-model="regconfirmPassword" type="password"
-							class="form-control" required="required" />
-
-					</div>
-
-					<div class="form-group">
-						<label>Gender</label> <select ng-model="reggender"
-							class="form-control" id="gender" required="required">
-							<option value="male">Male</option>
-							<option value="female">Female</option>
-						</select>
-
-					</div>
-
-					<div class="row">
-						<div class="form-group col-md-12" style="margin-left: 1%;">
-							<div class="col-md-3">
-
-								Choose foto to upload : <input type="file" name="fileUpload"
-									class="fileUpload" accept="image/*" onchange="loadFile(event)">
-							</div>
-							<div class="col-md-4">
-								<img id="avatar" src="#"
-									class="img-circle dropdown-toggle profile-image" />
-							</div>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"> Username <span style="color: red">*</span>
+							</span> <input ng-model="regusername" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1"
+								required="required">
 						</div>
-					</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon2"> First Name</span> <input
+								ng-model="regfirstName" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon2">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon3"> Last Name</span> <input
+								ng-model="reglastName" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon3">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"> Email <span style="color: red">*</span>
+							</span> <input ng-model="regemail" style="width: 400px;" type="email"
+								class="form-control" aria-describedby="basic-addon4"
+								required="required">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon5"> Password <span style="color: red">*</span>
+							</span> <input ng-model="regpassword" style="width: 400px;"
+								type="password" class="form-control"
+								aria-describedby="basic-addon5" required="required">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon6"> Confirm Password <span
+								style="color: red">*</span>
+							</span> <input ng-model="regconfirmPassword" style="width: 400px;"
+								type="password" class="form-control"
+								aria-describedby="basic-addon6" required="required">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon7"> Gender <span style="color: red">*</span>
+							</span> <select ng-model="reggender" style="width: 400px;"
+								class="form-control" aria-describedby="basic-addon7" id="gender"
+								name="gender" required="required">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+						</div>
+						<br>
+
+					</form>
+
+					<button ng-click="register()" class="btn btn-info btn-md">Sign
+						up</button>
+
+					<button style="margin-left: 75%;" type="submit"
+						class="btn btn-danger btn-md" ng-click="closeModal()">Cancel</button>
 
 				</div>
+
 			</div>
 			<!-- End of Modal Content -->
 

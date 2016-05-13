@@ -18,6 +18,7 @@
 
 	 position:relative;
 	 float:right;
+	 left:3%;
 }
 
 #avatar {
@@ -30,11 +31,30 @@
 	 width: 92px;
 }
 
-#phoneNumber {
-	  text-align: left;
-        list-style-type: none;
-        padding: 0px;
+#avatar {
+	 height: 102px; 
+	 width: 90px;
 }
-a {
-	text-align: left;
+
+
+#tournamentsList {
+	  text-align: left;
+      list-style-type: none;
+      padding: 0px;
+}
+
+#gamesList {
+	  text-align: left;
+      list-style-type: none;
+      padding: 0px;
+}
+
+#phoneNumber {
+	  text-align: center;
+      list-style-type: none;
+      padding: 0px;
+}
+
+#uploadButton {
+    font-size:10px;
 }

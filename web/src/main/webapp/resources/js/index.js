@@ -51,6 +51,19 @@ indexModule.controller('loginCntrl', [
 				}
 
 			};
+			
+			$scope.eraseForm = function() {
+
+				$scope.loginForm.password = '';
+				$scope.loginForm.username = '';
+			}
+			
+			$scope.closeModal = function() {
+				$('#myModal').modal('hide');
+				$scope.eraseForm();
+			}
+			
+			
 
 		} ]);
 
