@@ -4,7 +4,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$scope.users = result.data;
 		$scope.$broadcast('sharingToUsersTable', $scope.users);
 		$scope.showUser = false;
-		$scope.getInfoAboutUserFunc = function(username) {			
+		$scope.getInfoAboutUserFunc = function(username) {
 			for (var i = 0; i < $scope.users.length; i++) {
 				if ($scope.users[i].username === username) {
 					$scope.oneUser = $scope.users[i];
@@ -58,23 +58,24 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 
 		  return def;
 	};
-	
-	$scope.cities = function () {
-		  var def = $q.defer();
-		  var countryName = $('select[name=countryName]').val();
-		  $http.get('getAllCities?countryName=' + countryName).then(function (result) {
-		   var filterData = [];
-		   angular.forEach(result.data, function (city) {
-		    filterData.push({
-		         id: city,
-		         title: city
-		        })
-		   });
-		   def.resolve(filterData);
-		  });
 
-		  return def;
-	};
+	$scope.$watch('params.filter()[countryName]', function(newVal, oldVal) {
+		$scope.cities = function () {
+			var def = $q.defer();
+			var countryName = $('select[name=countryName]').val().split(/[: ]+/).pop();
+			$http.get('getAllCities?countryName=' + countryName).then(function (result) {
+				var filterData = [];
+				angular.forEach(result.data, function (city) {
+					filterData.push({
+						id: city,
+						title: city
+					})
+				});
+				def.resolve(filterData);
+			});
+			return def;
+		};
+	});
 	
 /*	$http.get('getAllCountries').then(function(result) {
 		$scope.countries = result.data;
