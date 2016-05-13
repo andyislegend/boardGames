@@ -34,7 +34,7 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
-<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="resources/bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript"
@@ -69,6 +69,7 @@
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-q/q.module.js"></script>
+	<script src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
 <!-- End of Scripts -->
 
 </head>

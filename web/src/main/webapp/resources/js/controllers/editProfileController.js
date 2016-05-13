@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) {
+angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
 	$scope.showPasswordChange = false;
 	$http.get('getProfile').then(function(result) {
 		$scope.userProfile = result.data;
@@ -53,7 +53,7 @@ angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) 
 			data : $.param({
 				oldPassword : $scope.editableOldPassword,
 				newPassword : $scope.editableNewPassword,
-				confirmPassword : $scope.editableConfirmPassword,
+				confirmPassword : $scope.editableConfirmPassword
 			}),
 			headers : {
 				'Content-Type' : 'application/x-www-form-urlencoded'
@@ -65,6 +65,62 @@ angular.module('homeApp').controller("editProfileCtrl", function($scope, $http) 
 			$scope.editPasswordAnswer = result;
 		})
 	}
+	
+	homeApp.directive('fileModel', ['$parse', function ($parse) {
+         return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+               var model = $parse(attrs.fileModel);
+               var modelSetter = model.assign;
+               
+               element.bind('change', function(){
+                  scope.$apply(function(){
+                     modelSetter(scope, element[0].files[0]);
+                  });
+               });
+            }
+         };
+      }]);
+	/*
+	homeApp.service('fileUpload', ['$http', function ($http) {
+         this.uploadFileToUrl = function(file, uploadUrl){
+            var fd = new FormData();
+            fd.append('file', file);
+         
+            $http.put(uploadUrl, fd, {
+               transformRequest: angular.identity,
+               headers: {'Content-Type': undefined}
+            })
+         
+            .success(function(){
+            })
+         
+            .error(function(){
+            });
+         }
+      }]);*/
+   
+
+	$scope.uploadAvatar = function() {
+		var file = $scope.myFile;
+	    var fileUpload = new FormData();
+	    fileUpload.append("fileUpload", file);
+	    var uploadUrl = 'updateAvatar';
+	    console.log(fileUpload)
+
+	    $http.put(uploadUrl, fileUpload, {
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    }).success(function(){
+	    	console.log("good");
+        })
+        
+        .error(function(){
+        	console.log("bad");
+        });
+
+	};
 
 });
 var loadFile = function(event) {

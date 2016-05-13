@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
+import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -104,5 +107,22 @@ public class UsersController {
 			}
 		}
 		return avatarUrl;
+	}
+	
+	/**
+	 * Updating users avatar
+	 */
+	@RequestMapping(value = {"/updateAvatar"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public void updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
+			throws Exception {
+		User user = userService.findOne(WebUtil.getPrincipalUsername());		
+		Image image = new Image();
+		image.setUser(user);
+		image.setImageName(user.getUsername());
+		image.setImageLocation(imageConfiguration.getAvatarPackage(user.getUsername()));
+		imageService.create(image);
+		String saveDirectory = image.getImageLocation();
+		fileUpload.transferTo(new File(saveDirectory));
 	}
 }

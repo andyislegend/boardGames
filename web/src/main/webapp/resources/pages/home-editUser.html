@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="resources/css/fonts.css" />
 <script type="text/javascript" src="resources/js/registration.js"></script>
 <link rel="stylesheet" href="resources/css/users.css" />
-<script src="resources/bower_components/jquery/dist/jquery.js"></script>
+<script src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
 
 </head>
 <body>
@@ -22,10 +22,13 @@
 							<img src="#" ng-src="{{avatar}}" id="avatar" />
 								<br>
 								<label id="uploadButton" style="margin-top: 3%;" >
-								<input type="file" name="fileUpload"
-									class="fileUpload" accept="image/*" onchange="loadFile(event)">
+								<input type="file" file-model="myFile" name="fileUpload"
+									class="fileUpload" accept="image/*" onchange="loadFile(event)"
+									>
 
 								</label>
+								<button ng-click = "uploadAvatar()" id="uploadButton" 
+									class="btn btn-primary btn-bg" >upload me</button>
 						</div>
 						
 					</div>
@@ -130,7 +133,7 @@
 					<span class="col-sm-3"></span>
 						<div class="col-sm-5">
 						<button ng-click="saveNewUserPassword()" id="saveUserUpdate" 
-							class="btn btn-primary btn-bg">Save
+							class="btn btn-primary btn-bg">Save password
 						</button>
 						</div>
 					<span class="col-sm-3" ng-hide="editProfileMessage">
