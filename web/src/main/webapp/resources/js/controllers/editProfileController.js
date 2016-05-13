@@ -81,25 +81,6 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
             }
          };
       }]);
-	/*
-	homeApp.service('fileUpload', ['$http', function ($http) {
-         this.uploadFileToUrl = function(file, uploadUrl){
-            var fd = new FormData();
-            fd.append('file', file);
-         
-            $http.put(uploadUrl, fd, {
-               transformRequest: angular.identity,
-               headers: {'Content-Type': undefined}
-            })
-         
-            .success(function(){
-            })
-         
-            .error(function(){
-            });
-         }
-      }]);*/
-   
 
 	$scope.uploadAvatar = function() {
 		var file = $scope.myFile;
