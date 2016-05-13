@@ -196,21 +196,21 @@
 								id="basic-addon1"> Username <span style="color: red">*</span>
 							</span> <input ng-model="regusername" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon1"
-								required="required">
+								required="required" placeholder="Enter Your Username. From 3 to 15 symbols required">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon2"> First Name</span> <input
 								ng-model="regfirstName" style="width: 400px;" type="text"
-								class="form-control" aria-describedby="basic-addon2">
+								class="form-control" aria-describedby="basic-addon2" placeholder="Enter Your Name">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon3"> Last Name</span> <input
 								ng-model="reglastName" style="width: 400px;" type="text"
-								class="form-control" aria-describedby="basic-addon3">
+								class="form-control" aria-describedby="basic-addon3" placeholder="Enter Your Last Name">
 						</div>
 						<br>
 						<div class="input-group">
@@ -218,7 +218,7 @@
 								id="basic-addon4"> Email <span style="color: red">*</span>
 							</span> <input ng-model="regemail" style="width: 400px;" type="email"
 								class="form-control" aria-describedby="basic-addon4"
-								required="required">
+								required="required" placeholder="Enter Your email address">
 						</div>
 						<br>
 						<div class="input-group">
@@ -226,7 +226,7 @@
 								id="basic-addon5"> Password <span style="color: red">*</span>
 							</span> <input ng-model="regpassword" style="width: 400px;"
 								type="password" class="form-control"
-								aria-describedby="basic-addon5" required="required">
+								aria-describedby="basic-addon5" required="required" placeholder="From 6 to 20 symbols. 1 Upper case and 1 number is required">
 						</div>
 						<br>
 						<div class="input-group">
@@ -235,7 +235,7 @@
 								style="color: red">*</span>
 							</span> <input ng-model="regconfirmPassword" style="width: 400px;"
 								type="password" class="form-control"
-								aria-describedby="basic-addon6" required="required">
+								aria-describedby="basic-addon6" required="required" placeholder="Please, confirm Your password">
 						</div>
 						<br>
 						<div class="input-group">
