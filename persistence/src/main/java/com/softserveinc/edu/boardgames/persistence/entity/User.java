@@ -135,6 +135,9 @@ public class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<GameUser> userGames;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	private Set<Exchange> exchanges;
+	
 	/**
 	 * Describes address where user lives. Has a many to one relationship to
 	 * address table.

@@ -164,6 +164,17 @@ border-radius: 20px;
     width: 30px;
     height: 30px;
 }
+.over-mes{
+    position: relative;
+    height: 30px;
+    width: 30px;
+    margin-top: 10px;
+}
+.over-mes:hover img{
+    opacity: 1;
+    width: 30px;
+    height: 30px;
+}
 .add-remove{
 	margin-right: 20px;
 	margin-top: 10px;
