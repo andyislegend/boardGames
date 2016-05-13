@@ -13,13 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
-@Table(name = "exchnge")
+@Table(name = "exchnge", uniqueConstraints=@UniqueConstraint(columnNames="gameUserId"))
 public class Exchange implements Serializable{
 
 	private static final long serialVersionUID = -4102098517901377047L;
@@ -38,10 +39,10 @@ public class Exchange implements Serializable{
 	@Column(name = "message")
 	private String message;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private User user;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name="gameUserId", nullable=false)
 	private GameUser gameUser;
 

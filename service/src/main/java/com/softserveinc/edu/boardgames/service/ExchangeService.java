@@ -26,6 +26,14 @@ public class ExchangeService {
 	
 	@Transactional
 	public void update(Exchange exchange) {
-		eRepo.save(exchange);
+		eRepo.saveAndFlush(exchange);
+	}
+	
+	public void delete(Exchange exchange) {
+		eRepo.delete(exchange);
+	}
+	
+	public Exchange getByGameUserId(Integer id) {
+		return eRepo.findByGameUserId(id);
 	}
 }

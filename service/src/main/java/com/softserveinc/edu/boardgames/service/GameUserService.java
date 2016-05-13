@@ -66,8 +66,4 @@ public class GameUserService {
 	public List<UserGamesOfGameDTO> getAllUserGamesOfGame(String name) {
 		return gameUserRepo.getUserGameOfGame(name);
 	}
-	
-	public String getApplierUsernameFromGameId(Integer id) {
-		return gameUserRepo.findApplierUsernameFromGameId(id);
-	}
 }

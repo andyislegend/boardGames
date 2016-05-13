@@ -178,38 +178,6 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public Set<GameUser> getUserGames() {
-		return userGames;
-	}
-
-	public void setUserGames(Set<GameUser> userGames) {
-		this.userGames = userGames;
-	}
-
-	public Set<Exchange> getExchanges() {
-		return exchanges;
-	}
-
-	public void setExchanges(Set<Exchange> exchanges) {
-		this.exchanges = exchanges;
-	}
-
-	public List<Tournament> getCreatedTounaments() {
-		return createdTounaments;
-	}
-
-	public void setCreatedTounaments(List<Tournament> createdTounaments) {
-		this.createdTounaments = createdTounaments;
-	}
-
-	public List<TournamentComposition> getTakenpartTounaments() {
-		return takenpartTounaments;
-	}
-
-	public void setTakenpartTounaments(List<TournamentComposition> takenpartTounaments) {
-		this.takenpartTounaments = takenpartTounaments;
-	}
-
 	public Integer getId() {
 		return id;
 	}
