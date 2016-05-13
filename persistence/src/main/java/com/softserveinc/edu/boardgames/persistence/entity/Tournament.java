@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -20,7 +19,12 @@ import java.util.List;
 @Table(name = "tournament")
 public class Tournament implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4802347940471571594L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

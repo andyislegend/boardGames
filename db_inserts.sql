@@ -59,7 +59,7 @@ INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postC
 
 
 --  inserts to table user
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, addressId) values
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating, rating, gender, state, username, addressId) values
 (99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000',  0,'GODLIKE', 'female', 'ACTIVE', 'root', 1);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, addressId) values

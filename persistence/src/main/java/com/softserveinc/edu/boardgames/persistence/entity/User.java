@@ -19,8 +19,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -29,7 +29,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserLevel;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
@@ -122,7 +122,7 @@ public class User implements Serializable {
 	 */
 	@NotEmpty
 	@Column(name = "rating", nullable = false)
-	private String rating = UserRating.NOOB.name();
+	private String rating = UserLevel.NOOB.name();
 
 	/**
 	 * Provides a description of User's current status. By default, after
