@@ -63,5 +63,27 @@ public class MailService {
         System.out.println("----Message to "+ to + " send successful---");
     }
 	
+	@Async
+    public void sendMailToBannedUser(String to, String userName) {
+
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                message.setTo(to);
+                message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+
+                Map<String, Object> templateVariables = new HashMap<>();
+                templateVariables.put("name", userName);
+                String body = mergeTemplateIntoString(velocityEngine, "/velocity/templates/userBanTemplate.vm", "UTF-8", templateVariables);
+                message.setText(body, true);
+                message.setSubject("Banning because of negative feedbacks");
+            }
+
+			
+        };
+        mailSender.send(preparator);
+        System.out.println("----Message to "+ to + " send successful---");
+    }
+	
 	
 }

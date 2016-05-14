@@ -302,7 +302,6 @@ public class User implements Serializable {
 	public void banUser() {
 		if(this.getUserRating() < -5) {
 			this.setState(UserStatus.BANNED.name());
-			System.out.println("This works");
 		}
 	}
 

@@ -129,7 +129,11 @@ public class UserService {
 
 	@Transactional
 	public void updateUser(User user) {
-		userRepository.save(user);
+		userRepository.saveAndFlush(user);
+		if (user.getState().equals(UserStatus.BANNED.name())) {
+			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
+			return;
+		}
 	}
 
 	@Transactional
