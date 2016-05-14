@@ -23,24 +23,46 @@ indexModule.controller('loginCntrl', [
 
 				var response = $http(request);
 				response.success(function(data) {
-					var path = redirectByStatus(data)
+					var path = redirectByState(data)
 					$scope.loginForm.password = null;
 
-					if (path)
+					if (path === "home") {
+						$scope.closeModal();
 						window.location.replace(path);
-					if (path == undefined) {
+					}
+					
+					else if (path === "under_verification") {
+						$scope.closeModal();
+						$scope.showModalVerification();
+					}
+					
+					else if (path == "banned") {
+						$scope.closeModal();
+						$scope.showModalBanned();
+					}
+					
+					else if (path === undefined) {
 						$scope.loginCorrect = true;
 					}
+					
 				});
 				response.error(function(data) {
 					console.dir(data);
 				});
 
-				function redirectByStatus(status) {
+				function redirectByState(state) {
 					var path = undefined;
-					if (status == "200")
+					
+					if (state == "ACTIVE") {
 						path = 'home';
-
+					}
+					if (state == "UNDER_VERIFICATION") {
+						path = 'under_verification';
+					}
+					if (state =="BANNED") {
+						path = 'banned'
+					}
+					
 					return path;
 				}
 
@@ -50,11 +72,20 @@ indexModule.controller('loginCntrl', [
 
 				$scope.loginForm.password = '';
 				$scope.loginForm.username = '';
+				$scope.loginCorrect = false;
 			}
 
 			$scope.closeModal = function() {
 				$('#myModal').modal('hide');
 				$scope.eraseForm();
+			}
+			
+			$scope.showModalVerification = function() {
+				$('#myUnderVer').modal('show');
+			}
+			
+			$scope.showModalBanned = function() {
+				$('#myBanned').modal('show');
 			}
 
 		} ]);

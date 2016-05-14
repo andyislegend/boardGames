@@ -2,6 +2,9 @@
 <html>
 <head>
 
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"
 	crossorigin="anonymous" />
@@ -196,21 +199,24 @@
 								id="basic-addon1"> Username <span style="color: red">*</span>
 							</span> <input ng-model="regusername" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon1"
-								required="required" placeholder="Enter Your Username. From 3 to 15 symbols required">
+								required="required"
+								placeholder="Enter Your Username. From 3 to 15 symbols required">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon2"> First Name</span> <input
 								ng-model="regfirstName" style="width: 400px;" type="text"
-								class="form-control" aria-describedby="basic-addon2" placeholder="Enter Your Name">
+								class="form-control" aria-describedby="basic-addon2"
+								placeholder="Enter Your Name">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon3"> Last Name</span> <input
 								ng-model="reglastName" style="width: 400px;" type="text"
-								class="form-control" aria-describedby="basic-addon3" placeholder="Enter Your Last Name">
+								class="form-control" aria-describedby="basic-addon3"
+								placeholder="Enter Your Last Name">
 						</div>
 						<br>
 						<div class="input-group">
@@ -226,7 +232,8 @@
 								id="basic-addon5"> Password <span style="color: red">*</span>
 							</span> <input ng-model="regpassword" style="width: 400px;"
 								type="password" class="form-control"
-								aria-describedby="basic-addon5" required="required" placeholder="From 6 to 20 symbols. 1 Upper case and 1 number is required">
+								aria-describedby="basic-addon5" required="required"
+								placeholder="From 6 to 20 symbols. 1 Upper case and 1 number is required">
 						</div>
 						<br>
 						<div class="input-group">
@@ -235,7 +242,8 @@
 								style="color: red">*</span>
 							</span> <input ng-model="regconfirmPassword" style="width: 400px;"
 								type="password" class="form-control"
-								aria-describedby="basic-addon6" required="required" placeholder="Please, confirm Your password">
+								aria-describedby="basic-addon6" required="required"
+								placeholder="Please, confirm Your password">
 						</div>
 						<br>
 						<div class="input-group">
@@ -267,5 +275,68 @@
 	</div>
 	<!-- End of Registration Modal -->
 
+	<!-- Modal UNDER_VERIFICATION USER -->
+	<div id="myUnderVer" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content" ng-controller="indexCntrl">
+				<div class="modal-header">
+
+					<h4 style="text-align: center;" class="modal-title">UNDER
+						VERIFICATION</h4>
+
+				</div>
+				<div class="modal-body">
+
+					<p style="text-align: center;">Your account is temporary unavailable due to its
+						verification.</p>
+					<p style="text-align: center;">We have sent You email with confirmation link.</p>
+					<p style="text-align: center;">After You confirm Your registration You will be able to log
+						in</p>
+
+				</div>
+
+				<a style="margin-left: 45%; margin-bottom: 5%" type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md">Cancel</a>
+			</div>
+			<!-- End of Modal Content -->
+
+		</div>
+	</div>
+	<!-- End of UNDER_VERIFICATION Modal -->
+
+	<!-- Modal BANNED USER -->
+	<div id="myBanned" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content" ng-controller="indexCntrl">
+				<div class="modal-header">
+
+					<h4 style="text-align: center;" class="modal-title">YOU'VE BEEN BANNED</h4>
+
+				</div>
+				<div class="modal-body">
+
+					<p style="text-align: center;">The access to your account is temporary disabled</p>
+					<p style="text-align: center;">Your account have been banned due to Your inappropriate behavior</p>
+					<p style="text-align: center;">If there is some mistake, please contact with the administration</p>
+
+				</div>
+
+				<a style=" margin-bottom: 5%" type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md">Cancel</a>
+				<a style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
+					class="btn btn-infj btn-md"> Contact with Admins</a>
+			</div>
+			<!-- End of Modal Content -->
+
+		</div>
+	</div>
+	<!-- End of BANNED Modal -->
+	
 </body>
 </html>
