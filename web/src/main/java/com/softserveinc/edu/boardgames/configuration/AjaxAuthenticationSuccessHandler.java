@@ -37,10 +37,6 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 			Authentication authentication) throws IOException, ServletException {
 
-		// String status = authentication.isAuthenticated() ? "200" : "403";
-		// httpServletResponse.getWriter().print(status);
-		// httpServletResponse.getWriter().flush();
-
 		String state = null;
 
 		CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();

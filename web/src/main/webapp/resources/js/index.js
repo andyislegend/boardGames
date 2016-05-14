@@ -30,21 +30,21 @@ indexModule.controller('loginCntrl', [
 						$scope.closeModal();
 						window.location.replace(path);
 					}
-					
+
 					else if (path === "under_verification") {
 						$scope.closeModal();
 						$scope.showModalVerification();
 					}
-					
+
 					else if (path == "banned") {
 						$scope.closeModal();
 						$scope.showModalBanned();
 					}
-					
+
 					else if (path === undefined) {
 						$scope.loginCorrect = true;
 					}
-					
+
 				});
 				response.error(function(data) {
 					console.dir(data);
@@ -52,17 +52,17 @@ indexModule.controller('loginCntrl', [
 
 				function redirectByState(state) {
 					var path = undefined;
-					
+
 					if (state == "ACTIVE") {
 						path = 'home';
 					}
 					if (state == "UNDER_VERIFICATION") {
 						path = 'under_verification';
 					}
-					if (state =="BANNED") {
+					if (state == "BANNED") {
 						path = 'banned'
 					}
-					
+
 					return path;
 				}
 
@@ -79,11 +79,11 @@ indexModule.controller('loginCntrl', [
 				$('#myModal').modal('hide');
 				$scope.eraseForm();
 			}
-			
+
 			$scope.showModalVerification = function() {
 				$('#myUnderVer').modal('show');
 			}
-			
+
 			$scope.showModalBanned = function() {
 				$('#myBanned').modal('show');
 			}
