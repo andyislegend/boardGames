@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,8 @@ import static org.springframework.ui.velocity.VelocityEngineUtils.mergeTemplateI
 @PropertySource("classpath:properties/mail.properties")
 public class MailService {
 
+	private final Logger logger = Logger.getLogger(MailService.class);
+	
 	@Autowired
 	Environment env;
 	
@@ -38,7 +41,7 @@ public class MailService {
 	private String userName;
 
 	@Async
-    public void sendMail(String to, String userName, String password) {
+    public void sendMailAboutRegistration(String to, String userName, String password) {
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -60,7 +63,7 @@ public class MailService {
 			
         };
         mailSender.send(preparator);
-        System.out.println("----Message to "+ to + " send successful---");
+        logger.debug("----Message about registration to "+ to + " send successful---");
     }
 	
 	@Async
@@ -82,7 +85,7 @@ public class MailService {
 			
         };
         mailSender.send(preparator);
-        System.out.println("----Message to "+ to + " send successful---");
+        logger.debug("----Message about ban to "+ to + " send successful---");
     }
 	
 	

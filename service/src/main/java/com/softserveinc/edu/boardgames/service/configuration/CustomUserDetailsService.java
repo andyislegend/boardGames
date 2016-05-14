@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,6 +28,8 @@ import com.softserveinc.edu.boardgames.service.UserService;
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
+	private final Logger logger = Logger.getLogger(CustomUserDetailsService.class);
+	
 	@Autowired
 	private UserService userService;
 
@@ -42,6 +45,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userService.getUser(username);
 		if (user == null) {
+			logger.error("Username not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
 		// return new
@@ -87,10 +91,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + userRoles.toString()));
 		}
 
-		System.out.println("-------------------------");
-		System.out.print("authorities :" + authorities);
-		System.out.println("");
-		System.out.println("-------------------------");
+		logger.debug(authorities);
 		return authorities;
 	}
 

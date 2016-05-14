@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -19,6 +20,8 @@ import com.softserveinc.edu.boardgames.service.configuration.CustomUserDetailsSe
  */
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+	private final Logger logger = Logger.getLogger(AjaxAuthenticationSuccessHandler.class);
+	
 	private AuthenticationSuccessHandler defaultHandler;
 
 	public AjaxAuthenticationSuccessHandler(AuthenticationSuccessHandler defaultHandler) {
@@ -40,25 +43,25 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		String state = null;
 
 		CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
-		System.out.println(principal.getUserSatus());
+		logger.debug(principal.getUserSatus());
 
 		if (principal.getUserSatus().equals(UserStatus.ACTIVE.name())) {
 			state = "ACTIVE";
-			System.out.println("return DATA: ACTIVE");
+			logger.debug("returned DATA: ACTIVE");
 			httpServletResponse.getWriter().print(state);
 			httpServletResponse.getWriter().flush();
 		}
 		
 		if (principal.getUserSatus().equals(UserStatus.UNDER_VERIFICATION.name())) {
 			state = "UNDER_VERIFICATION";
-			System.out.println("return DATA: UNDER_VERIFICATION");
+			logger.debug("returned DATA: UNDER_VERIFICATION");
 			httpServletResponse.getWriter().print(state);
 			httpServletResponse.getWriter().flush();
 		}
 		
 		if (principal.getUserSatus().equals(UserStatus.BANNED.name())) {
 			state = "BANNED";
-			System.out.println("return DATA: BANNED");
+			logger.debug("returned DATA: BANNED");
 			httpServletResponse.getWriter().print(state);
 			httpServletResponse.getWriter().flush();
 		}

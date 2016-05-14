@@ -48,7 +48,7 @@ public class UserService {
 	 */
 	@Transactional
 	public void createUser(User user) {
-		mailService.sendMail(user.getEmail(), user.getUsername(), user.getPassword());
+		mailService.sendMailAboutRegistration(user.getEmail(), user.getUsername(), user.getPassword());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		UserRoles role = UserRoles.USER;
 		Set<UserRoles> roles = new HashSet<>();
