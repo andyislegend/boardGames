@@ -1,6 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.enumeration;
 
-public enum UserRating {
+public enum UserLevel {
 
 	NOOB,
 	SKILLED,

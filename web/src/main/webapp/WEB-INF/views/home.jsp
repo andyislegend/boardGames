@@ -85,11 +85,11 @@
 				</div>
 
 				<p style="font-size: 14pt;" class="navbar-text">
-					<b>Board Games Crossing Web Project</b>
+					<b>Board Games Exchange</b>
 				</p>
 
 				<div>
-					<div ng-controller="search">
+					<div style="margin-left: 48%" ng-controller="search">
 						<form data-ng-submit=submit() style="margin-left: 15%;"
 							class="navbar-form navbar-left" role="search">
 							<form id="searchthis" style="display: inline;" method="get">

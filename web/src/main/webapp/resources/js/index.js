@@ -17,13 +17,13 @@ indexModule.controller('loginCntrl', [
 					data : loginData,
 					headers : {
 						'Content-Type' : "application/x-www-form-urlencoded",
-						'X-Login-Ajax-call' : 'true'
+
 					}
 				};
 
 				var response = $http(request);
 				response.success(function(data) {
-					var path = redirectByRole(data);
+					var path = redirectByStatus(data)
 					$scope.loginForm.password = null;
 
 					if (path)
@@ -36,34 +36,26 @@ indexModule.controller('loginCntrl', [
 					console.dir(data);
 				});
 
-				function redirectByRole(role) {
+				function redirectByStatus(status) {
 					var path = undefined;
-					if (role == "ROLE_USER" || role == "ROLE_ADMIN"
-							|| role == "ROLE_MODERATOR"
-							|| role == "ROLE_SUPERADMIN" || role == "ROLE_DBA")
+					if (status == "200")
 						path = 'home';
-//					if (role == "USER" || role == "ADMIN"
-//						|| role == "MODERATOR"
-//						|| role == "SUPERADMIN" || role == "DBA")
-//					path = 'home';
 
 					return path;
 				}
 
 			};
-			
+
 			$scope.eraseForm = function() {
 
 				$scope.loginForm.password = '';
 				$scope.loginForm.username = '';
 			}
-			
+
 			$scope.closeModal = function() {
 				$('#myModal').modal('hide');
 				$scope.eraseForm();
 			}
-			
-			
 
 		} ]);
 
@@ -111,9 +103,9 @@ indexModule.controller('registerCntrl', [ '$scope', '$http',
 				$('#myReg').modal('hide');
 				$scope.eraseForm();
 			}
-			
-			$scope.showAlert = function (result) {
+
+			$scope.showAlert = function(result) {
 				alert(result);
 			}
-			
+
 		} ]);
