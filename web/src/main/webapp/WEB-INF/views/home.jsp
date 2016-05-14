@@ -235,22 +235,57 @@
 						</div>
 
 						<div ng-controller="getGameDetailedInfoController">
-							<table ng-table=""
-								class="table table-condensed table-bordered table-hover">
-								<tr ng-repeat="game in allGame">
-									<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
-										ng-click="myFunc(game.id)"> {{game.name}}</a></td>
-
-									<td title="'Category'">{{game.category}}</td>
-									<td><a href="" ng-click="showComments(game.id)"> <span
-											id="UserGameNum{{game.id}}"
-											class="glyphicon glyphicon-comment"></span>
-									</a></td>
-									<td><a href="" ng-click="deleteGame(game.id)"> <span
-											class="glyphicon glyphicon-remove"></span>
-									</a></td>
-								</tr>
-							</table>
+							
+							<ul class="nav nav-tabs">
+  								<li class="active"><a data-toggle="tab" href="#myGames">My</a></li>
+  								<li><a data-toggle="tab" href="#sharedGames">Shared</a></li>
+  								<li><a data-toggle="tab" href="#borrowedGames">Borrowed</a></li>
+							</ul>
+							
+							<div class="tab-content">
+  								<div id="myGames" class="tab-pane fade in active">
+    								<table ng-table="" class="table table-condensed table-hover">
+										<tr ng-repeat="game in allMyGames">
+											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
+												ng-click="myFunc(game.id)"> {{game.name}}</a></td>
+											<td title="'Category'">{{game.category}}</td>
+											<td><a href="" ng-click="showComments(game.id)"> <span
+												id="UserGameNum{{game.id}}"
+												class="glyphicon glyphicon-comment"></span>
+											</a></td>
+											<td><a href="" ng-click="deleteGame(game.id)"> <span
+												class="glyphicon glyphicon-remove"></span>
+											</a></td>
+										</tr>
+									</table>
+  								</div>
+  								<div id="sharedGames" class="tab-pane fade">
+    								<table ng-table="" class="table table-condensed table-hover">
+										<tr ng-repeat="game in allSharedGames">
+											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
+												ng-click="myFunc(game.id)"> {{game.name}}</a></td>
+											<td title="'Category'">{{game.category}}</td>
+											<td><a href="" ng-click="showComments(game.id)"> <span
+												id="SharedGameNum{{game.id}}"
+												class="glyphicon glyphicon-comment"></span>
+											</a></td>
+										</tr>
+									</table>
+  								</div>
+  								<div id="borrowedGames" class="tab-pane fade">
+    								<table ng-table="" class="table table-condensed table-hover">
+										<tr ng-repeat="game in allBorrowedGames">
+											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
+												ng-click="myFunc(game.id)"> {{game.name}}</a></td>
+											<td title="'Category'">{{game.category}}</td>
+											<td><a href="" ng-click="showComments(game.id)"> <span
+												id="BorrowedGameNum{{game.id}}"
+												class="glyphicon glyphicon-comment"></span>
+											</a></td>
+										</tr>
+									</table>
+  								</div>
+							</div>
 							<div ng-show="isShowComment">
 								<table class="table">
 									<!-- <tr><th></th><th></th></tr> -->

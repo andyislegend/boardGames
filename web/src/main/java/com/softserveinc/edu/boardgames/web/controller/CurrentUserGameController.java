@@ -44,10 +44,18 @@ public class CurrentUserGameController {
 	 * 	
 	 * @return list of current user games
 	 */
-	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/getAllMyGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
-		List<GameUserDTO> allGames = gameUserService.getGameUsersFromUsername(WebUtil.getPrincipalUsername());
+		List<GameUserDTO> allGames = gameUserService.getMyGameUsersFromUsername(WebUtil.getPrincipalUsername());
+		return allGames;
+	}
+	
+	@RequestMapping(value = "/getAllSharedGamesCurUser", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GameUserDTO> showSharedGames() {
+		List<GameUserDTO> allGames = gameUserService
+				.getSharedGameUsersFromUsername(WebUtil.getPrincipalUsername());
 		return allGames;
 	}
 	

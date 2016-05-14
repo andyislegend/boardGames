@@ -2,8 +2,17 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	
 	$rootScope.NN = 100;
 	$rootScope.allGame = [];
-	$http.get('getAllGamesCurUser').then(function(result) {
-		$rootScope.allGame = result.data;
+	
+	$http.get('getAllMyGamesCurUser').then(function(result) {
+		$rootScope.allMyGames = result.data;
+		
+			for (var i = 0; i < $rootScope.allGame.length; i++) {
+				$rootScope.isNewComments($rootScope.allGame[i].id);
+			}
+	});
+	
+	$http.get('getAllSharedGamesCurUser').then(function(result) {
+		$rootScope.sharedGames = result.data;
 		
 			for (var i = 0; i < $rootScope.allGame.length; i++) {
 				$rootScope.isNewComments($rootScope.allGame[i].id);
