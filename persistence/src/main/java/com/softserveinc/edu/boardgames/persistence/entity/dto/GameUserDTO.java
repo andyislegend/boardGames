@@ -15,7 +15,6 @@ public class GameUserDTO {
 	
 
 	public GameUserDTO() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public GameUserDTO(int id,int yearOfProduction, String edition, String status) {			 
