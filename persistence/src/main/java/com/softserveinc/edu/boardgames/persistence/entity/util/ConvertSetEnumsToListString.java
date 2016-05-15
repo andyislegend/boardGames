@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,20 +20,28 @@ public class ConvertSetEnumsToListString {
      * @return
      */
     public static <T extends Enum<T>> List<String> convertToListString(Set<T> enums) {
-        return enums.stream().map(Enum::name).collect(Collectors.toList());
+        
+    	List <String> list = new ArrayList<>();
+    	
+    	for (T string : enums) {
+			list.add(string.name());
+		}
+    	
+    	return list;
     }
 	
     
-    /**
-     * Convert to Set<T> from List<String>
-     * @param enumStringList
-     * @param clazz type of Enum
-     * @param <T> Enum
-     * @return
-     * @throws IllegalArgumentException
-     */
-    public static <T extends Enum<T>> Set<T> convertToSetUserRole(List<String> enumStringList, Class<T> clazz)
-            throws IllegalArgumentException {
-        return enumStringList.stream().map(s -> T.valueOf(clazz, s)).collect(Collectors.toSet());
-    }
+//    /**
+//     * Convert to Set<T> from List<String>
+//     * @param enumStringList
+//     * @param clazz type of Enum
+//     * @param <T> Enum
+//     * @return
+//     * @throws IllegalArgumentException
+//     */
+//    public static <T extends Enum<T>> Set<T> convertToSetUserRole(List<String> enumStringList, Class<T> clazz)
+//            throws IllegalArgumentException {
+//    	
+//        return enumStringList.stream().map(s -> T.valueOf(clazz, s)).collect(Collectors.toSet());
+//    }
 }

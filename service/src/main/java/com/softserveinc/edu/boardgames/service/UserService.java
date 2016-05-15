@@ -111,11 +111,11 @@ public class UserService {
 		return isChanged;
 	}
 
-	@Transactional
-	public List<User> findByRole(String role) {
-		return userRepository.findByUserRoleAllIgnoreCase(UserRoles.valueOf(role)).stream()
-				.collect(Collectors.toList());
-	}
+//	@Transactional
+//	public List<User> findByRole(String role) {
+//		return userRepository.findByUserRoleAllIgnoreCase(UserRoles.valueOf(role)).stream()
+//				.collect(Collectors.toList());
+//	}
 
 	@Transactional
 	public User findOne(String username) {
@@ -136,47 +136,28 @@ public class UserService {
 		}
 	}
 
-	@Transactional
-	public void createSuperAdminIfNotExists(User user) {
-		if (isExistsWithUsername(user.getUsername()) && findByRole("SUPER_ADMIN").isEmpty()) {
-			userRepository.save(user);
-		}
-	}
-
-	@Transactional
-	public void createAdmin(String username, String role) {
-		User user = userRepository.findByUsername(username);
-		List<String> roles = getRoles(username);
-		roles.add(role);
-		if (role.equals(UserRoles.ADMIN.toString())) {
-			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-		}
-		userRepository.save(user);
-	}
-
-	@Transactional
-	public void createModerator(String username, String role) {
-		User user = userRepository.findByUsername(username);
-		List<String> roles = getRoles(username);
-		roles.add(role);
-		if (role.equals(UserRoles.MODERATOR.toString())) {
-			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-		}
-		userRepository.save(user);
-
-	}
-
-	@Transactional
-	public void createDBA(String username, String role) {
-		User user = userRepository.findByUsername(username);
-		List<String> roles = getRoles(username);
-		roles.add(role);
-		if (role.equals(UserRoles.DBA.toString())) {
-			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-		}
-		userRepository.save(user);
-
-	}
+//	@Transactional
+//	public void createAdmin(String username, String role) {
+//		User user = userRepository.findByUsername(username);
+//		List<String> roles = getRoles(username);
+//		roles.add(role);
+//		if (role.equals(UserRoles.ADMIN.toString())) {
+//			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
+//		}
+//		userRepository.save(user);
+//	}
+//
+//	@Transactional
+//	public void createModerator(String username, String role) {
+//		User user = userRepository.findByUsername(username);
+//		List<String> roles = getRoles(username);
+//		roles.add(role);
+//		if (role.equals(UserRoles.MODERATOR.toString())) {
+//			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
+//		}
+//		userRepository.save(user);
+//
+//	}
 
 	@Transactional
 	public List<User> findAll() {

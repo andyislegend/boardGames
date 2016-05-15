@@ -27,12 +27,12 @@ import static org.springframework.ui.velocity.VelocityEngineUtils.mergeTemplateI
 public class MailService {
 
 	private final Logger logger = Logger.getLogger(MailService.class);
-	
+
 	@Autowired
 	Environment env;
-	
+
 	@Autowired
-    private VelocityEngine velocityEngine;
+	private VelocityEngine velocityEngine;
 
 	@Autowired
 	private JavaMailSender mailSender;
@@ -41,52 +41,51 @@ public class MailService {
 	private String userName;
 
 	@Async
-    public void sendMailAboutRegistration(String to, String userName, String password) {
+	public void sendMailAboutRegistration(final String to, final String userName, final String password) {
 
-        MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                message.setTo(to);
-                message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(to);
+				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
 
-                SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy");
-                String date = form.format(new Date());
-                Map<String, Object> templateVariables = new HashMap<>();
-                templateVariables.put("name", userName);
-                templateVariables.put("password", password);
-                templateVariables.put("date", date);
-                String body = mergeTemplateIntoString(velocityEngine, "/velocity/templates/registrationConfirmTemplate.vm", "UTF-8", templateVariables);
-                message.setText(body, true);
-                message.setSubject("Registration Confirmation");
-            }
+				SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy");
+				String date = form.format(new Date());
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", userName);
+				templateVariables.put("password", password);
+				templateVariables.put("date", date);
+				String body = mergeTemplateIntoString(velocityEngine,
+						"/velocity/templates/registrationConfirmTemplate.vm", "UTF-8", templateVariables);
+				message.setText(body, true);
+				message.setSubject("Registration Confirmation");
+			}
 
-			
-        };
-        mailSender.send(preparator);
-        logger.info("----Message about registration to "+ to + " send successful---");
-    }
-	
+		};
+		mailSender.send(preparator);
+		logger.info("----Message about registration to " + to + " send successful---");
+	}
+
 	@Async
-    public void sendMailToBannedUser(String to, String userName) {
+	public void sendMailToBannedUser(final String to, final String userName) {
 
-        MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                message.setTo(to);
-                message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(to);
+				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
 
-                Map<String, Object> templateVariables = new HashMap<>();
-                templateVariables.put("name", userName);
-                String body = mergeTemplateIntoString(velocityEngine, "/velocity/templates/userBanTemplate.vm", "UTF-8", templateVariables);
-                message.setText(body, true);
-                message.setSubject("Banning because of negative feedbacks");
-            }
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", userName);
+				String body = mergeTemplateIntoString(velocityEngine, "/velocity/templates/userBanTemplate.vm", "UTF-8",
+						templateVariables);
+				message.setText(body, true);
+				message.setSubject("Banning because of negative feedbacks");
+			}
 
-			
-        };
-        mailSender.send(preparator);
-        logger.info("----Message about ban to "+ to + " send successful---");
-    }
-	
-	
+		};
+		mailSender.send(preparator);
+		logger.info("----Message about ban to " + to + " send successful---");
+	}
+
 }
