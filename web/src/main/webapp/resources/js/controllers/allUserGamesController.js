@@ -3,20 +3,28 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	$rootScope.NN = 100;
 	$rootScope.allGame = [];
 	
-	$http.get('getAllMyGamesCurUser').then(function(result) {
-		$rootScope.allMyGames = result.data;
-		
-			for (var i = 0; i < $rootScope.allGame.length; i++) {
-				$rootScope.isNewComments($rootScope.allGame[i].id);
-			}
+	$http({
+		method : "GET",
+		url : 'getAllMyGamesCurUser'
+	}).then(function mySucces(response) {
+		$rootScope.allMyGames = response.data;
+		for (var i = 0; i < $rootScope.allGame.length; i++) {
+			$rootScope.isNewComments($rootScope.allGame[i].id);
+		}
+	}, function myError(response) {
+		alert("getting my games error");
 	});
 	
-	$http.get('getAllSharedGamesCurUser').then(function(result) {
-		$rootScope.sharedGames = result.data;
-		
-			for (var i = 0; i < $rootScope.allGame.length; i++) {
-				$rootScope.isNewComments($rootScope.allGame[i].id);
-			}
+	$http({
+		method : "GET",
+		url : 'getAllSharedGamesCurUser'
+	}).then(function mySucces(response) {
+		$rootScope.allSharedGames = response.data;
+		for (var i = 0; i < $rootScope.allGame.length; i++) {
+			$rootScope.isNewComments($rootScope.allGame[i].id);
+		}
+	}, function myError(response) {
+		alert("getting shared gaems error");
 	});
 	
 	$scope.isYourGame = false;

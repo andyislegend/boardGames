@@ -54,9 +54,9 @@ public class CurrentUserGameController {
 	@RequestMapping(value = "/getAllSharedGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showSharedGames() {
-		List<GameUserDTO> allGames = gameUserService
+		List<GameUserDTO> sharedGames = gameUserService
 				.getSharedGameUsersFromUsername(WebUtil.getPrincipalUsername());
-		return allGames;
+		return sharedGames;
 	}
 	
 	/**
