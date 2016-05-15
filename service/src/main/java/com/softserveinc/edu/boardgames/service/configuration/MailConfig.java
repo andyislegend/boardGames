@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.service.configuration;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.VelocityException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 @PropertySource("classpath:/properties/mail.properties")
 public class MailConfig {
 
+	 private final Logger logger = Logger.getLogger(MailConfig.class);
+	
 	@Autowired
 	private Environment env;
 
@@ -45,7 +48,7 @@ public class MailConfig {
 				env.getProperty("mail.config.smtp.starttls.enable")));
 		properties.put("mail.smtp.socketFactory.fallback", "true");
 		mailSender.setJavaMailProperties(properties);
-		System.out.println("---Gmail auth success---");
+		logger.info("---Gmail auth success---");
 		return mailSender;
 	}
 

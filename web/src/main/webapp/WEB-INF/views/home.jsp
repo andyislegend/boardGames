@@ -315,6 +315,7 @@
 
 		<div id="friends_div">
 			<div ng-controller="friendsCtrl">
+ 
 				<div class="search-result" ng-show="click">
 					<div class="header-search">Find your friends in our
 						Application</div>
@@ -337,16 +338,30 @@
 					</div>
 				</div>
 
+                <div class="proba-message" ng-show="jmessage" >
+                   <div class="proba-message-header">
+                       {{myfriend}}
+                       <a ng-click="jmessage = false"><img class="close" src="resources/ico/close2.png"/></a>
+                    </div>
+                    <div class="proba-message-body" id="messages" jq-scroll>
+                       <div class="message-state"  ng-repeat="message in messages" 
+				            ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}"
+				            ng-mouseenter="readMessage(message)">
+								<div>
+								    <strong>{{message.currentUser.firstName}} {{message.currentUser.lastName}}:</strong>
+								</div>
+								<div>{{message.message}}</div>
+				        </div>
+                    </div>
+                    <div class="proba-message-bootom">
+                        <textarea name="text" placeholder="write a message" ng-model="newMessage" ng-enter="sendMessage(newMessage)"></textarea>
+                    </div>
+                </div>
+
 				<div class="global">
 					<div class="main">
 						<div id="header">
-							<div class="overInput">
-								<input type="text" class="input" placeholder="Find new friends"
-									ng-model="name" ng-keyup="findAllUsers()"
-									ng-click="click = !click">
-							</div>
-							<div class="underInput">
-								<div class="headerWords">Friends {{friends.length}}</div>
+                            <div>Friends {{friends.length}}</div>
 								<div class="overBell">
 									<a href="" type="button" data-toggle="modal"
 										data-target="#myModal">
@@ -354,14 +369,9 @@
 										class="bell" src="resources/ico/bell.png" />
 									</a>
 								</div>
-								<div class="overMessage">
-									<a href="" type="button" data-toggle="modal"
-										data-target="#messanger">
-										<div class="count" ng-hide="countOfNotReadMessage < 1">{{countOfNotReadMessage}}</div>
-										<img class="message" src="resources/ico/message.png" />
-									</a>
-								</div>
-							</div>
+                                <!--<img class="search" src="resources/ico/search.png" />-->
+                                <input class="form-control" type="text" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()"
+                                        ng-click="click = !click">
 						</div>
 						<!-- Start modal window -->
 						<div id="myModal" class="modal fade" role="dialog">
@@ -429,65 +439,6 @@
 							</div>
 						</div>
 						<!-- End modal window -->
-
-						<!-- Modal message -->
-						<div id="messanger" class="modal fade" role="dialog">
-							<div class="modal-dialog">
-
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-body">
-										<div class="main-message-content">
-											<div class="message-friends">
-												<ul class="nav nav-pills nav-stacked messanger-model"
-													ng-class="{myFriendMessage: allNotReadMessagesByFriend[friends.indexOf(friend)] > 0}"
-													ng-repeat="friend in friends">
-													<li>
-														<a href="#" class="list-messangers"
-														style="padding-left: 5px; padding-top: 5px;"
-														ng-click="setFriendName(friend.username)"> <img
-															class="ava-messanger"
-															src="resources/images/default-avatar.jpg" />{{friend.firstName
-															}} {{ friend.lastName}}
-													</a>
-														<div class="count-of-messages"
-															ng-show="allNotReadMessagesByFriend[friends.indexOf(friend)] > 0 ">{{allNotReadMessagesByFriend[friends.indexOf(friend)]}}
-														</div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="message-state">
-												<div id="messages">
-													<div ng-repeat="message in messages"
-														ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}"
-														ng-mouseenter="readMessage(message.id)">
-														<div>
-															<strong>{{message.currentUser.firstName}}
-																{{message.currentUser.lastName}}:</strong>
-														</div>
-														<div>{{message.message}}</div>
-													</div>
-												</div>
-												<div style="display: flex; margin-top: 5px;">
-													<textarea rows="3" cols="40" name="text"
-														style="resize: none; margin-right: 10px;"
-														ng-model="newMessage" ng-enter="sendMessage(newMessage)"></textarea>
-													<button type="button" class="btn btn-default"
-														ng-click="sendMessage(newMessage)">Send</button>
-												</div>
-											</div>
-
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Close</button>
-									</div>
-								</div>
-
-							</div>
-						</div>
 						<div class="persons">
 
 							<div ng-repeat="friend in friends">
@@ -499,19 +450,18 @@
 									</div>
 									<div class="name">{{ friend.firstName }} {{
 										friend.lastName}}</div>
+                                    
 									<div class="over-mes">
-										<a href="" type="button" data-toggle="modal"
-											data-target="#messanger"
-											ng-click="setFriendName(friend.username)">
+										<a href="" type="button" ng-click="$parent.jmessage = true; 
+                                                                           $parent.myfriend=friend.firstName +' ' + friend.lastName; 
+                                                                           setFriendName(friend.username)">
 											<img class="message" src="resources/ico/message.png" />
+                                            <div class="count-of-messages" ng-show="allNotReadMessagesByFriend[friends.indexOf(friend)] > 0 ">{{allNotReadMessagesByFriend[friends.indexOf(friend)]}}
+								            </div>
 										</a>
 									</div>
-									<div class="iconMessagediv">
-										<a href="" type="button"><img class="iconChampionship"
-											src="resources/ico/championship.png" /></a>
-									</div>
-								</div>
-
+										<a href="" type="button"><img class="iconChampionship" src="resources/ico/championship.png" /></a>
+                                </div>
 							</div>
 						</div>
 					</div>
