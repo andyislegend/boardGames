@@ -48,7 +48,7 @@ public class MailConfig {
 				env.getProperty("mail.config.smtp.starttls.enable")));
 		properties.put("mail.smtp.socketFactory.fallback", "true");
 		mailSender.setJavaMailProperties(properties);
-		logger.debug("---Gmail auth success---");
+		logger.info("---Gmail auth success---");
 		return mailSender;
 	}
 

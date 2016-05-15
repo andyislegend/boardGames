@@ -63,7 +63,7 @@ public class MailService {
 			
         };
         mailSender.send(preparator);
-        logger.debug("----Message about registration to "+ to + " send successful---");
+        logger.info("----Message about registration to "+ to + " send successful---");
     }
 	
 	@Async
@@ -85,7 +85,7 @@ public class MailService {
 			
         };
         mailSender.send(preparator);
-        logger.debug("----Message about ban to "+ to + " send successful---");
+        logger.info("----Message about ban to "+ to + " send successful---");
     }
 	
 	
