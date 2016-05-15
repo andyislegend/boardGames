@@ -317,8 +317,11 @@
 			<div ng-controller="friendsCtrl">
  
 				<div class="search-result" ng-show="click">
-					<div class="header-search">Find your friends in our
-						Application</div>
+					<div class="header-search">
+                        <div class="find-friend-heder">Find your friends in our Application</div>
+                        <a ng-click="click = false"><img class="close" style="margin-top: -55px; margin-right: 0px;" src="resources/ico/close2.png"/></a>
+                    </div>
+                     
 					<div class="content">
 						<div ng-repeat="user in allUsers">
 							<div class="proba">
@@ -357,88 +360,84 @@
                         <textarea name="text" placeholder="write a message" ng-model="newMessage" ng-enter="sendMessage(newMessage)"></textarea>
                     </div>
                 </div>
+                
+                <div class="search-result" ng-show="showRequest">
+                    <div class="tabs">
+            
+                        <ul class="tab-links">
+                            <li class="active"><a href="#tab1">Fiend request</a></li>
+                            <li><a href="#tab2">Fiend responce</a></li>
+
+                        </ul>
+
+                        <div class="my-tab-content">
+                            
+                            <div id="tab1" class="tab active">
+                                <div ng-repeat="user in allOfferedUsers">
+                                    <div class="proba">
+                                        <div class="person">
+                                            <a href="" type="button"><img class="ava"
+                                                src="resources/images/default-avatar.jpg" /></a>
+                                            <div class="name">{{ user.firstName }}
+                                                {{user.lastName }}</div>
+                                            <div class="over-add-remove">
+                                                <a href="" type="button" ng-click="add(user.id)"><img
+                                                    class="add-remove" src="resources/ico/add_user.png" /></a>
+                                            </div>
+                                            <div class="over-add-remove">
+                                                <a href="" type="button" ng-click="rejected(user.id)"><img
+                                                    class="add-remove" src="resources/ico/remove_user.png" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tab2" class="tab">
+                                <div ng-repeat="friendShip in userOffered">
+                                    <div class="user-offered"
+                                        ng-class="{myRejected: friendShip.status.statusOfFriend == 'REJECTED'}">
+                                        <div class="person">
+                                            <a href="" type="button"><img class="ava"
+                                                src="resources/images/default-avatar.jpg" /></a>
+                                            <div class="name-of-my-offered-user">
+                                                {{ friendShip.userId.firstName }}
+                                                {{friendShip.userId.lastName }}
+                                                <p>
+                                                    <strong>status:</strong>
+                                                    {{friendShip.status.statusOfFriend.toLowerCase()}}
+                                                </p>
+                                            </div>
+                                            <div class="over-cancel">
+                                                <a href="" type="button"
+                                                    ng-click="cancelOffering(friendShip.userId.username)"><img
+                                                    class="cancel" src="resources/ico/cancel.png" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+            
+                    </div>
+                </div>
 
 				<div class="global">
 					<div class="main">
 						<div id="header">
-                            <div>Friends {{friends.length}}</div>
+                            <div class="name-main-part">Friends {{friends.length}}</div>
 								<div class="overBell">
-									<a href="" type="button" data-toggle="modal"
-										data-target="#myModal">
+									<a href="" type="button" data-toggle="modal" ng-click="showRequest = !showRequest">
 										<div class="count" ng-hide="count < 1">{{count}}</div> <img
 										class="bell" src="resources/ico/bell.png" />
 									</a>
 								</div>
                                 <!--<img class="search" src="resources/ico/search.png" />-->
                                 <input class="form-control" type="text" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()"
-                                        ng-click="click = !click">
+                                        ng-click="click = true">
 						</div>
-						<!-- Start modal window -->
-						<div id="myModal" class="modal fade" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content over-modal-content">
-									<div>
-										<ul class="nav nav-tabs bigger-tab">
-											<li class="active"><a data-toggle="tab" href="#menu1">Fiend
-													request</a></li>
-											<li><a data-toggle="tab" href="#menu2">Fiend
-													responce</a></li>
-										</ul>
-										<div class="tab-content ">
-											<div id="menu1" class="tab-pane fade in active">
-												<div ng-repeat="user in allOfferedUsers">
-													<div class="proba">
-														<div class="person">
-															<a href="" type="button"><img class="ava"
-																src="resources/images/default-avatar.jpg" /></a>
-															<div class="name">{{ user.firstName }}
-																{{user.lastName }}</div>
-															<div class="over-add-remove">
-																<a href="" type="button" ng-click="add(user.id)"><img
-																	class="add-remove" src="resources/ico/add_user.png" /></a>
-															</div>
-															<div class="over-add-remove">
-																<a href="" type="button" ng-click="rejected(user.id)"><img
-																	class="add-remove" src="resources/ico/remove_user.png" /></a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div id="menu2" class="tab-pane fade">
-												<div ng-repeat="friendShip in userOffered">
-													<div class="user-offered"
-														ng-class="{myRejected: friendShip.status.statusOfFriend == 'REJECTED'}">
-														<div class="person">
-															<a href="" type="button"><img class="ava"
-																src="resources/images/default-avatar.jpg" /></a>
-															<div class="name-of-my-offered-user">
-																{{ friendShip.userId.firstName }}
-																{{friendShip.userId.lastName }}
-																<p>
-																	<strong>status:</strong>
-																	{{friendShip.status.statusOfFriend.toLowerCase()}}
-																</p>
-															</div>
-															<div class="over-cancel">
-																<a href="" type="button"
-																	ng-click="cancelOffering(friendShip.userId.username)"><img
-																	class="cancel" src="resources/ico/cancel.png" /></a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal" value="">Close</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- End modal window -->
+						
 						<div class="persons">
 
 							<div ng-repeat="friend in friends">

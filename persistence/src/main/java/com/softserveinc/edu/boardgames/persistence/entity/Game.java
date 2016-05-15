@@ -67,10 +67,6 @@ public class Game implements Serializable{
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
 
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
-	@JsonBackReference
-    private Set<Tournament> tournaments;
-	
 	@OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL },mappedBy = "game")
     private Set<GameRatingNumeric> gameRatingNumeric;
 	
@@ -159,14 +155,6 @@ public class Game implements Serializable{
 
 	public void setEvents(Set<Event> events) {
 		this.events = events;
-	}
-
-	public Set<Tournament> getTournaments() {
-		return tournaments;
-	}
-
-	public void setTournaments(Set<Tournament> tournaments) {
-		this.tournaments = tournaments;
 	}
 
 	public void setId(Integer id) {

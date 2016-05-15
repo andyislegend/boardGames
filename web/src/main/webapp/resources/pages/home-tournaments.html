@@ -1,4 +1,5 @@
-<div>
+<div ng-controller="showAllTournamentsCtrl">
+<div ng-controller="allUsersGameCtrl">
     <h1 style="text-align: center"> Tournaments </h1>
     
     <!--------------------------------------- tournaments  -------------------------------------------------->
@@ -12,30 +13,26 @@
                         <thead>
                         <tr>
                             <th/> <th/> <th/> <th/> <th/> <th/> <th/>
-                            <th><a style="align-content: center;" href="#" type="button" data-toggle="modal" data-target="#myModalTournament">
-                                <img class="tournamentIco" src="resources/ico/plus.ico"></a>
+                            <th><a href="" data-toggle="modal" data-target="#myModalTournament">
+                                fgdfg</a>
                                 <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
                                     <div class="modal-dialog">
                                         <!-- Modal content-->
-                                        <div class="modal-content"  >
+                                        <div class="modal-content">
                                             <div class="modal-header">
                                                 <h2>Create the best tournament ever</h2>
                                                 <p>P.S. ALL fields are necessarily </p>
                                             </div>
                                             <div class="modal-body">
                                                 <form>
-                                                    <label>Select game for your awsome tournament</label>
+                                                    <label>Select game for your tournament</label>
                                                     <select required="required" class="field-form" data-ng-model="selectedGame">
-                                                        <option  ng-repeat="game in games" value="{{game.name}}">{{game.name}}</option>
+                                                        <option  ng-repeat="game in allGame" value="{{game.id}}">{{game.name}}</option>
                                                     </select>
-                                                    <label>Name of your awsome tournament</label>
+                                                    <label>Name of your tournament</label>
                                                     <input required="required" class="field-form" data-ng-model="tournamentName" placeholder="Name">
-                                                    <br/>
-                                                    <label>Required rating to join to your tournament</label>
-                                                    <input type="number" class="field-form" data-ng-model="requiredRating" placeholder="0.0">
-                                                    <br/>
-                                                    <label>Max count of players</label>
-                                                    <input type="number" class="field-form" data-ng-model="maxParticipants" placeholder="2">
+                                                    <label>Count of players</label>
+                                                    <input type="number" class="field-form" data-ng-model="countOfParticipants" placeholder="2">
                                                     <br/>
                                                     <label>Choose date of your tournament</label>
                                                     <input required="required" class="field-form" data-ng-model="date" type="date">
@@ -43,9 +40,7 @@
                                                     <label>Enter place where tournament will be</label>
                                                     <input class="field-form" data-ng-model="countryTournament" placeholder="Country">
                                                     <input class="field-form" data-ng-model="cityTournament" placeholder="City">
-                                                    <br/>
-                                                    <textarea rows="3"  class="field-form" data-ng-model="additionTournament" placeholder="City"></textarea>
-                                                    <br/>
+
                                                     <button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
                                                     <button type="button" class="btn btn-default" ng-click="modalClose()"
                                                             data-dismiss="modal">Close</button>
@@ -97,4 +92,4 @@
                </div>
                <!---------------------------------------- end of tournaments -------------------------------------------------->
             </div>
-</div>
+            </div>

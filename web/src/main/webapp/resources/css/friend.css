@@ -109,16 +109,21 @@ display: inline-table;
 width: 100%;
 height: 100%;
 }
+.name-main-part{
+    width: 80px;
+    margin-top: 8px;
+}
 input:focus{
     outline:none;
 }
 #header{
     display: flex;
-    height: 100px;
+    height: 57px;
     width: 100%;
-     background: #FFF;
     padding-left: 10px;
     padding-top: 10px;
+    margin-bottom: 5px;
+    background: #E0F1F6 
 }
 .overInput{
     width: 100%;
@@ -159,6 +164,8 @@ height:40px;
 border-radius: 20px;
 }
 .overBell{
+    margin-right: 10px;
+    margin-top: 5px;
 }
 .overBell:hover img{
     opacity: 1;
@@ -188,8 +195,8 @@ border-radius: 20px;
     opacity: 1;
 }
 .add-remove{
-	margin-right: 20px;
-	margin-top: 10px;
+	margin-right: 10px;
+	margin-top: 5px;
 	transition: .1s ease-in-out;
 	opacity: .6;
 	width: 30px;
@@ -204,25 +211,17 @@ border-radius: 20px;
     height:30px;
 }
 over-add-remove{
-	width: 35px;
-    height:35px;
 }
 .over-cancel:hover img{
 	margin-right: 15px;
     opacity: 1;
-    width: 35px;
-    height: 35px;
 }
 .over-cancel{
-    margin-left: 10px;
     width: 35px;
     height:35px;
 }
 .over-add-remove:hover img{
-	margin-right: 15px;
     opacity: 1;
-    width: 35px;
-    height: 35px;
 }
 
 .search{
@@ -245,7 +244,7 @@ height: 40px;
 
 }
 .user-offered{
-    background: linear-gradient(#BBF6CD, #36F268);
+    background: linear-gradient(#EDF4EF, #A5FBBC);
     border-radius: 10px;
     margin-bottom: 2px;
 }
@@ -277,7 +276,7 @@ font-family: sans-serif;
 font-size: 14px;  
 }
 .myRejected{
-    background: linear-gradient(#F6BBBB, #F23636);
+    background: linear-gradient(#FFE8E8, #FDB1B1);
 }
 .iconChampionship{
 transition: .1s ease-in-out;
@@ -291,24 +290,27 @@ width: 30px;
 opacity: 1;
 }
 .search-result{
-background: #EEE;
+background: #F6F7FD;
+border-radius: 5px 5px 0px 0px;
 height: 400px;
 width: 300px;
-margin-left: -350px;
+margin-left: -340px;
 position: absolute;
 display: inline-table;
-box-shadow: 0 0 10px rgba(0,0,0,0.5);
 border: 1px solid #FFF;
 }
 .header-search{
 	width: 100%;
-	height: 100px;
-	background: linear-gradient(#788093, #4d596c);
+	height: 55px;
+	background: #8995E8;
+    border-radius: 5px 5px 0px 0px;
 	color: #FFF;
 	font-size: 15px;
-	padding-left: 10px;
-	padding-top: 70px;
-	
+    margin-bottom: 5px;
+}
+.find-friend-heder{
+    padding-left: 5px;
+    padding-top: 33px;
 }
 .content{
 	display: inline-table;
@@ -335,4 +337,56 @@ word-wrap: break-word;
 .persons{
     overflow: auto;
 }
+/*********************************/
 
+
+
+.tabs {
+        width:100%;
+        display:inline-block;
+    }
+    .tab-links{
+        margin-left: -40px;
+    }
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+     .tab-links li {
+        margin:0px 0px;
+        float:left;
+        list-style:none;
+    }
+    .tab-links a {
+        margin-left: 0px;
+        width: 148px;
+        height: 41px;
+        padding:9px 15px;
+        text-decoration: none;
+        display:inline-block;
+        background:#7FB5DA;
+        font-size:16px;
+        color:#4c4c4c;
+    }
+    .tab-links a:hover {
+        background:#a7cce5;
+        text-decoration:none;
+    }
+    li.active a, li.active a:hover {
+        background:#F6F7FD;
+        color:#4c4c4c;
+    }
+    .my-tab-content {
+        width: 100%;
+        margin-top: -16px;
+        padding:15px;
+        background:#F6F7FD;
+    }
+    .tab {
+        display:none;
+    }
+
+    .tab.active {
+        display:block;
+    }

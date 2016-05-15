@@ -3,20 +3,30 @@ angular.module('homeApp').controller("CtreateNewTournamentCtrl",function($scope,
     $scope.createTournament = function () {
         var tournament = {
             "tournamentName": $scope.tournamentName,
-            "rating": $scope.requiredRating,
-            "maxParticipants": $scope.maxParticipants,
+            "countOfParticipants": $scope.countOfParticipants,
+            "gameUserId": $scope.selectedGame,
             "date": $scope.date,
-            "gameName": $scope.selectedGame,
             "country": $scope.countryTournament,
             "city": $scope.cityTournament,
-            "addition":$scope.additionTournament
         };
         console.log(tournament);
+        
+        $http({
+			method : 'POST',
+			url : '/addTournament',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : tournament
+		}).success(function(response) {
+			
+		}, function errorCallback(response) {
+		});
+        
         $http.post("/addTournament", tournament)
             .success(function (data) {
                 console.log(data);
                 $scope.$parent.tournaments=data;
             });
-
     }
 });
