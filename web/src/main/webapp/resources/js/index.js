@@ -17,53 +17,76 @@ indexModule.controller('loginCntrl', [
 					data : loginData,
 					headers : {
 						'Content-Type' : "application/x-www-form-urlencoded",
-						'X-Login-Ajax-call' : 'true'
+
 					}
 				};
 
 				var response = $http(request);
 				response.success(function(data) {
-					var path = redirectByRole(data);
+					var path = redirectByState(data)
 					$scope.loginForm.password = null;
 
-					if (path)
+					if (path === "home") {
+						$scope.closeModal();
 						window.location.replace(path);
-					if (path == undefined) {
+					}
+
+					else if (path === "under_verification") {
+						$scope.closeModal();
+						$scope.showModalVerification();
+					}
+
+					else if (path == "banned") {
+						$scope.closeModal();
+						$scope.showModalBanned();
+					}
+
+					else if (path === undefined) {
 						$scope.loginCorrect = true;
 					}
+
 				});
 				response.error(function(data) {
 					console.dir(data);
 				});
 
-				function redirectByRole(role) {
+				function redirectByState(state) {
 					var path = undefined;
-					if (role == "ROLE_USER" || role == "ROLE_ADMIN"
-							|| role == "ROLE_MODERATOR"
-							|| role == "ROLE_SUPERADMIN" || role == "ROLE_DBA")
+
+					if (state == "ACTIVE") {
 						path = 'home';
-//					if (role == "USER" || role == "ADMIN"
-//						|| role == "MODERATOR"
-//						|| role == "SUPERADMIN" || role == "DBA")
-//					path = 'home';
+					}
+					if (state == "UNDER_VERIFICATION") {
+						path = 'under_verification';
+					}
+					if (state == "BANNED") {
+						path = 'banned'
+					}
 
 					return path;
 				}
 
 			};
-			
+
 			$scope.eraseForm = function() {
 
 				$scope.loginForm.password = '';
 				$scope.loginForm.username = '';
+				$scope.loginCorrect = false;
 			}
-			
+
 			$scope.closeModal = function() {
 				$('#myModal').modal('hide');
 				$scope.eraseForm();
 			}
-			
-			
+
+			$scope.showModalVerification = function() {
+				$('#myUnderVer').modal('show');
+			}
+
+			$scope.showModalBanned = function() {
+				$('#myBanned').modal('show');
+			}
 
 		} ]);
 
@@ -111,9 +134,9 @@ indexModule.controller('registerCntrl', [ '$scope', '$http',
 				$('#myReg').modal('hide');
 				$scope.eraseForm();
 			}
-			
-			$scope.showAlert = function (result) {
+
+			$scope.showAlert = function(result) {
 				alert(result);
 			}
-			
+
 		} ]);

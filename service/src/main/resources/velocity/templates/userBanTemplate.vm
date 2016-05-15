@@ -1,0 +1,10 @@
+<html>
+	<body>
+			
+			Dear<b> $name </b>. You have 5 or more negative feedbacks.<br>
+			So from now you can't use our website.  
+			<br>
+        	If you believe this is a mistake, please contact us.
+             
+	</body>
+</html>

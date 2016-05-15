@@ -9,45 +9,46 @@
 }
 
 body {
-	
 	font-size: 16px;
 }
 
 body {
-    background-color: #fff;
+	background-color: #fff;
 }
 
-body,
-p {
-    font-family: Lato;
-    font-weight: normal;
-    font-style: normal;
-    opacity: 1;
-    visibility: visible;
-    -webkit-transition: opacity 0.24s ease-in-out;
-    -moz-transition: opacity 0.24s ease-in-out;
-    transition: opacity 0.24s ease-in-out;
+body, p {
+	font-family: Lato;
+	font-weight: normal;
+	font-style: normal;
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: opacity 0.24s ease-in-out;
+	-moz-transition: opacity 0.24s ease-in-out;
+	transition: opacity 0.24s ease-in-out;
 }
 
-.title,  .title a {
-    
-       
-    text-align: center;
-    margin-top: 10px;     
-    font-size: 8px;
-    opacity: 1;
-    visibility: visible;
-    
+.title, .title a {
+	text-align: center;
+	margin-top: 10px;
+	font-size: 8px;
+	opacity: 1;
+	visibility: visible;
 }
 
 a 
 p {
-    font-family: Lato;
-    font-weight: normal;
-    font-style: normal;
-    opacity: 1;
-    visibility: visible;
-    -webkit-transition: opacity 0.24s ease-in-out;
-    -moz-transition: opacity 0.24s ease-in-out;
-    transition: opacity 0.24s ease-in-out;
+	font-family: Lato;
+	font-weight: normal;
+	font-style: normal;
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: opacity 0.24s ease-in-out;
+	-moz-transition: opacity 0.24s ease-in-out;
+	transition: opacity 0.24s ease-in-out;
+}
+
+.input-group-addon {
+
+	border: none;
+	background: none;
 }

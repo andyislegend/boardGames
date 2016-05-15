@@ -63,6 +63,9 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
 			$scope.editPasswordMessage = false;
 		}).error(function(result, status) {
 			$scope.editPasswordAnswer = result;
+			$scope.editableOldPassword = '';
+			 $scope.editableNewPassword = '';
+			 $scope.editableConfirmPassword = '';
 		})
 	}
 	
@@ -81,25 +84,6 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
             }
          };
       }]);
-	/*
-	homeApp.service('fileUpload', ['$http', function ($http) {
-         this.uploadFileToUrl = function(file, uploadUrl){
-            var fd = new FormData();
-            fd.append('file', file);
-         
-            $http.put(uploadUrl, fd, {
-               transformRequest: angular.identity,
-               headers: {'Content-Type': undefined}
-            })
-         
-            .success(function(){
-            })
-         
-            .error(function(){
-            });
-         }
-      }]);*/
-   
 
 	$scope.uploadAvatar = function() {
 		var file = $scope.myFile;
@@ -108,7 +92,7 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
 	    var uploadUrl = 'updateAvatar';
 	    console.log(fileUpload)
 
-	    $http.put(uploadUrl, fileUpload, {
+	    $http.post(uploadUrl, fileUpload, {
 	        withCredentials: true,
 	        headers: {'Content-Type': undefined },
 	        transformRequest: angular.identity

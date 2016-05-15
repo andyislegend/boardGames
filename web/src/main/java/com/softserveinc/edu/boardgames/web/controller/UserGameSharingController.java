@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -37,9 +38,9 @@ public class UserGameSharingController {
 	
 	@RequestMapping(value="/getApplierUsername/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
-	public String getUserToDisplayOnRequest(@PathVariable Integer gameUserId) {
+	public InfoFromApplierDTO getUserToDisplayOnRequest(@PathVariable Integer gameUserId) {
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		return userService.findById(exchange.getUserApplierId()).getUsername();
+		return exchangeService.getExchangeDTO(exchange.getId());
 	}
 	
 	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}", method = RequestMethod.PUT)
@@ -70,9 +71,9 @@ public class UserGameSharingController {
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
 	}
 	
-	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}", method = RequestMethod.PUT)
+	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId) {
+	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus("confirmation");
@@ -80,6 +81,7 @@ public class UserGameSharingController {
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		exchange.setUserApplierId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
+		exchange.setMessage(message);
 		exchangeService.update(exchange);
 	}
 	

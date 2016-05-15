@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.ExchangeRepository;
 
 @Service
@@ -35,5 +36,13 @@ public class ExchangeService {
 	
 	public Exchange getByGameUserId(Integer id) {
 		return eRepo.findByGameUserId(id);
+	}
+	
+	public InfoFromApplierDTO getExchangeDTO(Integer id) {
+		return eRepo.getInfoFromAppliersDTO(id);
+	}
+	
+	public List<InfoFromApplierDTO> getAllBorrowedGames(Integer userId) {
+		return eRepo.getAllBorrowedGames(userId);
 	}
 }

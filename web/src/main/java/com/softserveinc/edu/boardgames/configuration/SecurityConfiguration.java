@@ -66,7 +66,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			
 			.authorizeRequests()
 			.antMatchers("/", "/index").permitAll()
-//			.antMatchers("/home/**").hasAnyAuthority( "ROLE_ADMIN", "ROLE_USER", "ROLE_SUPERADMIN")
 			.antMatchers("/home/**").fullyAuthenticated()
 			.and()
 			.formLogin()
@@ -74,7 +73,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.usernameParameter("username")
 			.passwordParameter("password")
 			.successHandler(new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
-            .and()
+			.loginPage("/index")
+			.and()
             .csrf().disable()
             .httpBasic()
             .and()

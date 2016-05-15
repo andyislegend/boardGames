@@ -2,8 +2,6 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -20,7 +18,11 @@ public class Tournament implements Serializable {
     /**
 	 * 
 	 */
+
 	private static final long serialVersionUID = -4938895533945763751L;
+	/**
+	 * 
+	 */
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +38,11 @@ public class Tournament implements Serializable {
      * User that created this tournament
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonManagedReference
     private User userCreator;
 
     /**
      * Kind of game which is tournament organized on
      */
-    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
     private GameUser game;
 
