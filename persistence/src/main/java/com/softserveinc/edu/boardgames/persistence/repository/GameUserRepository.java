@@ -50,10 +50,12 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "u.id, u.game.name, u.game.category.name, "
 			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"
 			+ "u.game.description, u.game.rules, u.game.maxPlayers, "
-			+ "u.game.minPlayers) "
-			+ "from GameUser u "
+			+ "u.game.minPlayers, user.username) "
+			+ "from GameUser u, Exchange e, User user "
 			+ "where u.user.username = :username "
-			+ "and u.status = 'shared'")   
+			+ "and u.status = 'shared' "
+			+ "and e.gameUser.id = u.id "
+			+ "and user.id = e.userApplierId")   
 	public List<GameUserDTO> getAllSharedGameUserByUsername(@Param("username") String username);
 	
 	@Query("select u from GameUser u where u.id = :id")

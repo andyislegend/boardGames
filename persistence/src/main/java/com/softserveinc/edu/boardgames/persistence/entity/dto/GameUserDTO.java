@@ -12,6 +12,7 @@ public class GameUserDTO {
 	private String rules;
 	private int maxPlayers;
 	private int minPlayers;
+	private String applierUsername;
 	
 
 	public GameUserDTO() {
@@ -40,6 +41,31 @@ public class GameUserDTO {
 		this.status = status;
 	}
 	
+	public GameUserDTO(int id, String name, String category, int yearOfProduction, String edition, 
+			int countOfComments, String status, String description,
+			String rules, int maxPlayers, int minPlayers, String applierUsername) {
+		this.id = id;
+		this.name = name;
+		this.category = category;
+		this.yearOfProduction = yearOfProduction;
+		this.edition = edition;
+		this.countOfComments = countOfComments;
+		this.description = description;
+		this.rules = rules;
+		this.maxPlayers = maxPlayers;
+		this.minPlayers = minPlayers;
+		this.status = status;
+		this.applierUsername = applierUsername;
+	}
+	
+	public String getApplierUsername() {
+		return applierUsername;
+	}
+
+	public void setApplierUsername(String applierUsername) {
+		this.applierUsername = applierUsername;
+	}
+
 	public String getStatus() {
 		return status;
 	}

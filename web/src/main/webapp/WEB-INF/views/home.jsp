@@ -249,11 +249,11 @@
 											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
 												ng-click="myFunc(game.id)"> {{game.name}}</a></td>
 											<td title="'Category'">{{game.category}}</td>
-											<td><a href="" ng-click="showComments(game.id)"> <span
+											<td title="'Comments'"><a href="" ng-click="showComments(game.id)"> <span
 												id="UserGameNum{{game.id}}"
 												class="glyphicon glyphicon-comment"></span>
 											</a></td>
-											<td><a href="" ng-click="deleteGame(game.id)"> <span
+											<td title="'Delete'"><a href="" ng-click="deleteGame(game.id)"> <span
 												class="glyphicon glyphicon-remove"></span>
 											</a></td>
 										</tr>
@@ -265,10 +265,11 @@
 											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
 												ng-click="myFunc(game.id)"> {{game.name}}</a></td>
 											<td title="'Category'">{{game.category}}</td>
-											<td><a href="" ng-click="showComments(game.id)"> <span
+											<td title="'Comments'"><a href="" ng-click="showComments(game.id)"> <span
 												id="SharedGameNum{{game.id}}"
 												class="glyphicon glyphicon-comment"></span>
 											</a></td>
+											<td title="'Applier'"><a href="#">{{game.applierUsername}}</a></td>
 										</tr>
 									</table>
   								</div>

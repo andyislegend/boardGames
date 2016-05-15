@@ -15,6 +15,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.service.CategoryService;
+import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -40,6 +41,9 @@ public class CurrentUserGameController {
 	@Autowired
 	private GameService gameService;
 	
+	@Autowired
+	private ExchangeService exchangeService;
+	
 	/**
 	 * 	
 	 * @return list of current user games
@@ -47,7 +51,8 @@ public class CurrentUserGameController {
 	@RequestMapping(value = "/getAllMyGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
-		List<GameUserDTO> allGames = gameUserService.getMyGameUsersFromUsername(WebUtil.getPrincipalUsername());
+		List<GameUserDTO> allGames = gameUserService
+				.getMyGameUsersFromUsername(WebUtil.getPrincipalUsername());
 		return allGames;
 	}
 	
