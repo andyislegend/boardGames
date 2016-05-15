@@ -2,7 +2,6 @@ package com.softserveinc.edu.boardgames.service.util;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class TypeConverter {
 

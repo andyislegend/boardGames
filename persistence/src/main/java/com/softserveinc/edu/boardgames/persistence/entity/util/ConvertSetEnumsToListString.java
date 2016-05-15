@@ -3,7 +3,6 @@ package com.softserveinc.edu.boardgames.persistence.entity.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Convert List<Sting> to Set<UserRoles>
