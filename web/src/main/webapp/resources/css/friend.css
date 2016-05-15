@@ -120,9 +120,9 @@ input:focus{
     display: flex;
     height: 57px;
     width: 100%;
-    background: #FFF;
     padding-left: 10px;
     padding-top: 10px;
+    margin-bottom: 5px;
     background: #E0F1F6 
 }
 .overInput{
@@ -196,7 +196,7 @@ border-radius: 20px;
 }
 .add-remove{
 	margin-right: 20px;
-	margin-top: 10px;
+	margin-top: 5px;
 	transition: .1s ease-in-out;
 	opacity: .6;
 	width: 30px;
@@ -211,8 +211,6 @@ border-radius: 20px;
     height:30px;
 }
 over-add-remove{
-	width: 35px;
-    height:35px;
 }
 .over-cancel:hover img{
 	margin-right: 15px;
@@ -228,8 +226,6 @@ over-add-remove{
 .over-add-remove:hover img{
 	margin-right: 15px;
     opacity: 1;
-    width: 35px;
-    height: 35px;
 }
 
 .search{
@@ -298,24 +294,27 @@ width: 30px;
 opacity: 1;
 }
 .search-result{
-background: #EEE;
+background: #F6F7FD;
+border-radius: 5px 5px 0px 0px;
 height: 400px;
 width: 300px;
 margin-left: -350px;
 position: absolute;
 display: inline-table;
-box-shadow: 0 0 10px rgba(0,0,0,0.5);
 border: 1px solid #FFF;
 }
 .header-search{
 	width: 100%;
-	height: 100px;
-	background: linear-gradient(#788093, #4d596c);
+	height: 55px;
+	background: #8995E8;
+    border-radius: 5px 5px 0px 0px;
 	color: #FFF;
 	font-size: 15px;
-	padding-left: 10px;
-	padding-top: 70px;
-	
+    margin-bottom: 5px;
+}
+.find-friend-heder{
+    padding-left: 5px;
+    padding-top: 33px;
 }
 .content{
 	display: inline-table;

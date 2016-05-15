@@ -317,8 +317,11 @@
 			<div ng-controller="friendsCtrl">
  
 				<div class="search-result" ng-show="click">
-					<div class="header-search">Find your friends in our
-						Application</div>
+					<div class="header-search">
+                        <div class="find-friend-heder">Find your friends in our Application</div>
+                        <a ng-click="click = false"><img class="close" style="margin-top: -55px; margin-right: 0px;" src="resources/ico/close2.png"/></a>
+                    </div>
+                     
 					<div class="content">
 						<div ng-repeat="user in allUsers">
 							<div class="proba">
@@ -371,7 +374,7 @@
 								</div>
                                 <!--<img class="search" src="resources/ico/search.png" />-->
                                 <input class="form-control" type="text" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()"
-                                        ng-click="click = !click">
+                                        ng-click="click = true">
 						</div>
 						<!-- Start modal window -->
 						<div id="myModal" class="modal fade" role="dialog">
