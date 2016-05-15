@@ -361,7 +361,7 @@
 				<div class="global">
 					<div class="main">
 						<div id="header">
-                            <div>Friends {{friends.length}}</div>
+                            <div class="name-main-part">Friends {{friends.length}}</div>
 								<div class="overBell">
 									<a href="" type="button" data-toggle="modal"
 										data-target="#myModal">
