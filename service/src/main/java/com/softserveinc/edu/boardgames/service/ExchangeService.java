@@ -41,4 +41,8 @@ public class ExchangeService {
 	public InfoFromApplierDTO getExchangeDTO(Integer id) {
 		return eRepo.getInfoFromAppliersDTO(id);
 	}
+	
+	public List<InfoFromApplierDTO> getAllBorrowedGames(Integer userId) {
+		return eRepo.getAllBorrowedGames(userId);
+	}
 }

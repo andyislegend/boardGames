@@ -159,7 +159,7 @@
 		<!-- MyGames Widget -->
 		<div id="mygames_div">
 			<div ng-controller="allUsersGameCtrl">
-				<h1 style="text-align: center">MY GAMES:{{allGame.length}}</h1>
+				<h1 style="text-align: center">MY GAMES:{{allMyGames.length}}</h1>
 				<div>
 					<div>
 						<div ng-controller="CreateGameCtrl">
@@ -277,12 +277,9 @@
     								<table ng-table="" class="table table-condensed table-hover">
 										<tr ng-repeat="game in allBorrowedGames">
 											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
-												ng-click="myFunc(game.id)"> {{game.name}}</a></td>
-											<td title="'Category'">{{game.category}}</td>
-											<td><a href="" ng-click="showComments(game.id)"> <span
-												id="BorrowedGameNum{{game.id}}"
-												class="glyphicon glyphicon-comment"></span>
-											</a></td>
+												ng-click="myFunc(game.id)"> {{game.gameUserName}}</a></td>
+											<td title="'Category'">{{game.gameUserCategory}}</td>
+											<td title="'Owner'"><a href="#">{{game.username}}</a></td>
 										</tr>
 									</table>
   								</div>

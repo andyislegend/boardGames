@@ -27,6 +27,18 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		alert("getting shared gaems error");
 	});
 	
+	$http({
+		method : "GET",
+		url : 'getAllBorrowedGamesCurUser'
+	}).then(function mySucces(response) {
+		$rootScope.allBorrowedGames = response.data;
+		for (var i = 0; i < $rootScope.allGame.length; i++) {
+			$rootScope.isNewComments($rootScope.allGame[i].id);
+		}
+	}, function myError(response) {
+		alert("getting borrowed games error");
+	});
+	
 	$scope.isYourGame = false;
 	$scope.isYourGamePrivate = false;
 	$scope.isntYourGame = false;

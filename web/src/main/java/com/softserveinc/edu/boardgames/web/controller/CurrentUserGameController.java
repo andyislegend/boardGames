@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
@@ -62,6 +63,15 @@ public class CurrentUserGameController {
 		List<GameUserDTO> sharedGames = gameUserService
 				.getSharedGameUsersFromUsername(WebUtil.getPrincipalUsername());
 		return sharedGames;
+	}
+	
+	@RequestMapping(value = "/getAllBorrowedGamesCurUser", method = RequestMethod.GET)
+	@ResponseBody
+	public List<InfoFromApplierDTO> showBorrowedGames() {
+		List<InfoFromApplierDTO> borrowedGames = 
+				exchangeService.getAllBorrowedGames(
+						userService.getUser(WebUtil.getPrincipalUsername()).getId());
+		return borrowedGames;
 	}
 	
 	/**
