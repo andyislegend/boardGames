@@ -167,14 +167,6 @@ public class User implements Serializable {
 	@JsonBackReference
 	private List<Tournament> createdTounaments;
 
-	/**
-	 * List if tounaments which user take part in
-	 */
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
-			CascadeType.REFRESH }, mappedBy = "userGuest")
-	@JsonBackReference
-	private List<TournamentComposition> takenpartTounaments;
-
 	public User() {
 	}
 

@@ -1,7 +1,6 @@
 package com.softserveinc.edu.boardgames.service;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -43,15 +42,15 @@ public class TournamentService {
         return tournamentRepository.findOne(id);
     }
 
-    public List<AllTournamentsDTO> findAllTournamentsDTO(){
-        return tournamentRepository.findAllTournamentsDTO();
-    }
-    
-    public List<AllTournamentsDTO> findTournamentsByUserName(String username){
-        return tournamentRepository.getUserTournamentsByUserName(username);
-    }
-    
-    public List<AllTournamentsDTO> getTournamentsByWord(String name){
-    	return tournamentRepository.findAllTournamentsByWord(name);
-    }
+//    public List<AllTournamentsDTO> findAllTournamentsDTO(){
+//        return tournamentRepository.findAllTournamentsDTO();
+//    }
+//    
+//    public List<AllTournamentsDTO> findTournamentsByUserName(String username){
+//        return tournamentRepository.getUserTournamentsByUserName(username);
+//    }
+//    
+//    public List<AllTournamentsDTO> getTournamentsByWord(String name){
+//    	return tournamentRepository.findAllTournamentsByWord(name);
+//    }
 }
