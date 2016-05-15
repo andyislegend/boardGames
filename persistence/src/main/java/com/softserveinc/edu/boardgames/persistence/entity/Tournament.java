@@ -2,17 +2,13 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
+import java.util.Set;
 
 /**
- * @author Daria Bondar
- * @since 12.04.2016
- *
+ * @author Volodymyr Krokhmalyuk
+ * 
  * This entity is for storing information abot tournament which users want to hold
  */
 @Entity
@@ -22,7 +18,11 @@ public class Tournament implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 4802347940471571594L;
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,30 +38,20 @@ public class Tournament implements Serializable {
      * User that created this tournament
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonManagedReference
     private User userCreator;
-
-    /**
-     * List of tournament compositions (users) that take part in this tounament
-     */
-    @JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "tournament")
-    private List<TournamentComposition> tournamentComposition;
 
     /**
      * Kind of game which is tournament organized on
      */
-    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
-    private Game game;
-
-    @Column
-    private Double requiredRating;
+    private GameUser game;
 
     @Column(nullable = false)
-    private Integer maxParticipants;
+    private Integer countOfParticipants;
 
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<User> users;
+    
     @Column(nullable = false)
     private Date dateOfTournament;
 
@@ -71,122 +61,79 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private String city;
 
-    @Column
-    private String addition;
-
     public Tournament() {
-    }
+		
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public User getUserCreator() {
-        return userCreator;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public User getUserCreator() {
+		return userCreator;
+	}
 
-    public void setUserCreator(User userCreator) {
-        this.userCreator = userCreator;
-    }
+	public void setUserCreator(User userCreator) {
+		this.userCreator = userCreator;
+	}
 
-    public List<TournamentComposition> getTournamentComposition() {
-        return tournamentComposition;
-    }
+	public GameUser getGame() {
+		return game;
+	}
 
-    public void setTournamentComposition(List<TournamentComposition> tournamentComposition) {
-        this.tournamentComposition = tournamentComposition;
-    }
+	public void setGame(GameUser game) {
+		this.game = game;
+	}
 
-    public Game getGame() {
-        return game;
-    }
+	public Integer getCountOfParticipants() {
+		return countOfParticipants;
+	}
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
+	public void setCountOfParticipants(Integer countOfParticipants) {
+		this.countOfParticipants = countOfParticipants;
+	}
 
-    public Double getRequiredRating() {
-        return requiredRating;
-    }
+	public Set<User> getUsers() {
+		return users;
+	}
 
-    public void setRequiredRating(Double requiredRating) {
-        this.requiredRating = requiredRating;
-    }
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 
-    public Integer getMaxParticipants() {
-        return maxParticipants;
-    }
+	public Date getDateOfTournament() {
+		return dateOfTournament;
+	}
 
-    public void setMaxParticipants(Integer maxParticipants) {
-        this.maxParticipants = maxParticipants;
-    }
+	public void setDateOfTournament(Date dateOfTournament) {
+		this.dateOfTournament = dateOfTournament;
+	}
 
-    public Date getDateOfTournament() {
-        return dateOfTournament;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    public void setDateOfTournament(Date dateOfTournament) {
-        this.dateOfTournament = dateOfTournament;
-    }
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getAddition() {
-        return addition;
-    }
-
-    public void setAddition(String addition) {
-        this.addition = addition;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Tournament that = (Tournament) o;
-
-        if (!name.equals(that.name)) return false;
-        if (!userCreator.equals(that.userCreator)) return false;
-        if (tournamentComposition != null ? !tournamentComposition.equals(that.tournamentComposition) : that.tournamentComposition != null)
-            return false;
-        if (game != null ? !game.equals(that.game) : that.game != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + userCreator.hashCode();
-        result = 31 * result + (tournamentComposition != null ? tournamentComposition.hashCode() : 0);
-        result = 31 * result + (game != null ? game.hashCode() : 0);
-        return result;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 }
