@@ -90,13 +90,19 @@
 					<b>Board Games Exchange</b>
 				</p>
 				
-				<div ng-controller="getUser">
+				<div ng-controller="getUser" ng-mouseenter="showIt()" ng-mouseleave="hideIt()">
 					<div class="navbar-form navbar-left">
-						
-							<p id="userRating">Your level is {{user.rating}}</p>
-									<progress value="0" max="100" id=ratingBar></progress>
-
+							<ul id="container">       
+								<li id="userRating">Your level is {{user.rating}}</li>
+								<li><progress value="0" max="100" id=ratingBar></progress></li>
+								<li class="outerDiv" ng-show="hovering">
+									<p>Your rating is <b id="insideRating">{{user.userRating}}</b></p>
+									<p class="innerDiv">You need <b id="insideRating">{{neededRating}}</b> 
+										to achieve new level</p>
+								</li>
+            			</ul>
 					</div>
+
 				</div>
 
 				<div>
