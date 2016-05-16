@@ -13,5 +13,10 @@ $(document).ready(function(){
         }
 
     });
+    
+    $('#main_menu ul li').click(function() {
+        $('li').removeClass('isSelected');
+        $(this).addClass('isSelected');
+    });
    
 });
