@@ -1,4 +1,4 @@
-var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', 'friendsUsername', '$http', function($scope,$rootScope, friendService, friendsUsername, $http, $interval) {
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$http', '$interval', function($scope,$rootScope, $http, $interval) {
     $scope.friends = [];
    var allfriends = function(){
            $http.get("allFriends").success(function(data) {
@@ -204,4 +204,3 @@ jQuery(document).ready(function() {
         e.preventDefault();
     });
 });
-

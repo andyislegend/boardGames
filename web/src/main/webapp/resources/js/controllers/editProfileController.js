@@ -1,9 +1,13 @@
-angular.module('homeApp').controller("editProfileCtrl", ['$scope', 'friendsUsername', '$http', function($scope, friendsUsername, $http, $window) {
+angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
 	$scope.showPasswordChange = false;
 	$scope.myProfile = false;
-	$http.get('getProfile?username='+ friendsUsername.getObject().data).then(function(result) {
+	$scope.username = $routeParams.username;
+	if ($routeParams.username==null) {
+		$scope.username = "My profile";
+	}
+	$http.get('getProfile?username='+ $scope.username).then(function(result) {
 		$scope.userProfile = result.data;
-		if (friendsUsername.getObject().data=="My profile") {
+		if ($routeParams.username==null) {
 			$scope.myProfile = true;
 		}
 		$scope.editableFirstName = $scope.userProfile.firstName;
@@ -15,7 +19,6 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', 'friendsUsern
 
 		$http.get('getAvatar').then(function(result) {
 			$scope.avatar = result.data;
-			friendsUsername.getObject().data = "My profile";
 		});
 		
 	});

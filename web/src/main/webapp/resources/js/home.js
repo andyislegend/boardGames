@@ -23,6 +23,11 @@ homeApp.config(function($routeProvider) {
 		controller : 'eventListCtrl'
 	})
 
+	.when('/edit/:username', {
+		templateUrl : 'resources/pages/home-editUser.html',
+		controller : 'editProfileCtrl'
+	})
+	
 	.when('/edit/', {
 		templateUrl : 'resources/pages/home-editUser.html',
 		controller : 'editProfileCtrl'

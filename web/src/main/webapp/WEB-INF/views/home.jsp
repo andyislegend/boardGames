@@ -71,7 +71,6 @@
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-q/q.module.js"></script>
-	<script type="text/javascript" src="resources/js/friendsUsernameService.js"></script>
 	<script src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
 <!-- End of Scripts -->
 
@@ -456,7 +455,7 @@
 
 								<div class="person">
 									<div class="over-ava">
-										<a href="#edit" type="button" ng-click="setString(friend.username)">
+										<a href="#edit/{{friend.username}}" type="button">
 											<img class="ava" src="resources/images/default-avatar.jpg" /></a>
 									</div>
 									<div class="name">{{ friend.firstName }} {{
