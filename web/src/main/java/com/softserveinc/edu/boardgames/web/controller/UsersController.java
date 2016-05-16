@@ -50,7 +50,11 @@ public class UsersController {
 	
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
-	public User getUser() {
+	public User getUser(@RequestParam("username") String username) {
+		if (!username.equals("My profile")) {
+			User user = userService.findOne(username);
+			return user;
+		}
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		return user;
 	}
@@ -124,5 +128,12 @@ public class UsersController {
 		imageService.create(image);
 		String saveDirectory = image.getImageLocation();
 		fileUpload.transferTo(new File(saveDirectory));
+	}
+	
+	@RequestMapping(value = {"/getUser"}, method = RequestMethod.GET)
+	@ResponseBody
+	public User getOneUser() {
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		return user;
 	}
 }

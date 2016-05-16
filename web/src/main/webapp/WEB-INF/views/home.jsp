@@ -64,11 +64,14 @@
 	src="resources/js/controllers/showAllTournamentsCtrl.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/eventListCtrl.js"></script>
+	<script type="text/javascript"
+	src="resources/js/controllers/getOneUser.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-q/q.module.js"></script>
+	<script type="text/javascript" src="resources/js/friendsUsernameService.js"></script>
 	<script src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
 <!-- End of Scripts -->
 
@@ -87,6 +90,15 @@
 				<p style="font-size: 14pt;" class="navbar-text">
 					<b>Board Games Exchange</b>
 				</p>
+				
+				<div ng-controller="getUser">
+					<div class="navbar-form navbar-left">
+						
+							<p id="userRating">Your level is {{user.rating}}</p>
+									<progress value="0" max="100" id=ratingBar></progress>
+
+					</div>
+				</div>
 
 				<div>
 					<div style="margin-left: 48%" ng-controller="search">
@@ -115,10 +127,10 @@
 							class="img-circle dropdown-toggle profile-image"
 							data-toggle="dropdown"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#edit"><span
+							<li><a href="#/edit" ><span
 									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Edit profile</a></li>
-							<li><a href=""><span
+							<li><a ng-href=""><span
 									class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 									Messages <span class="badge">2</span></a></li>
 							<sec:authorize access="hasRole('ADMIN')">
@@ -461,8 +473,8 @@
 
 								<div class="person">
 									<div class="over-ava">
-										<a href="" type="button"><img class="ava"
-											src="resources/images/default-avatar.jpg" /></a>
+										<a href="#edit" type="button" ng-click="setString(friend.username)">
+											<img class="ava" src="resources/images/default-avatar.jpg" /></a>
 									</div>
 									<div class="name">{{ friend.firstName }} {{
 										friend.lastName}}</div>

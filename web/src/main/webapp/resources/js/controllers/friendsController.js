@@ -1,4 +1,4 @@
-var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', '$http', function($scope,$rootScope, friendService, $http, $interval) {
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval','friendsUsername', '$http', function($scope,$rootScope, friendService, friendsUsername, $http, $interval) {
     $scope.users;
    var allf = $http.get("allFriends").success(function(data) {
 		$scope.friends = data;
@@ -147,7 +147,11 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
 /*setInterval(function(){
        getUpdate();
    }, 100)*/
-   
+    $scope.setString = function(newValue) {
+    	friendsUsername.setObject(newValue);
+        var a = friendsUsername.getObject();
+        var b = 0;
+    };
 }]);
 
 app.directive('ngEnter', function() {
