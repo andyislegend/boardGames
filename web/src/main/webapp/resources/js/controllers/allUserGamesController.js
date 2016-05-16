@@ -76,7 +76,6 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 				url : 'checkIfGameIsBorrowed/' + $scope.games.id
 			}).then(function mySucces(response) {
 				isBorrowed = response.data;
-				alert(response.data);
 			}, function myError(response) {
 				alert("checking game status error");
 			});

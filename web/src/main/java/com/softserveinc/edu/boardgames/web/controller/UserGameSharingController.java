@@ -1,5 +1,8 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +64,11 @@ public class UserGameSharingController {
 		Exchange exchange = new Exchange();
 		exchange.setGameUser(gameUserToUpdate);
 		exchange.setMessage("Hey man!");
-		exchange.setPeriod(14);
+		LocalDate localDate = LocalDate.now();
+		localDate.plusDays(14);
+		exchange.setDateOfReturn(new Date(localDate.getYear(), 
+				localDate.getMonthValue(), 
+				localDate.getDayOfMonth()));
 		exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		exchange.setUserApplierId(0);
 		exchangeService.update(exchange);
@@ -111,7 +118,11 @@ public class UserGameSharingController {
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		exchange.setUserApplierId(0);
-		exchange.setPeriod(14);
+		LocalDate localDate = LocalDate.now();
+		localDate.plusDays(14);
+		exchange.setDateOfReturn(new Date(localDate.getYear(), 
+				localDate.getMonthValue(), 
+				localDate.getDayOfMonth()));
 		exchange.setMessage("Hey you!");
 		exchangeService.update(exchange);
 	}

@@ -1,6 +1,8 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,11 +35,11 @@ public class Exchange implements Serializable{
 	@Column(name = "userApplierId", columnDefinition="int(11) default '0'")
 	private Integer userApplierId;
 	
-	@Column(name = "period")
-    private Integer period;
+	@Column(name = "dateOfReturn")
+    private Date dateOfReturn = Calendar.getInstance().getTime();
 	
 	@Column(name = "message")
-	private String message;
+	private String message = "no message";
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private User user;
@@ -48,12 +50,12 @@ public class Exchange implements Serializable{
 
 	public Exchange() {}
 	
-	public Exchange(Integer id, Integer userApplierId, Integer period, 
+	public Exchange(Integer id, Integer userApplierId, Date dateOfReturn, 
 			String message, User user, GameUser gameUser) {
 		super();
 		this.id = id;
 		this.userApplierId = userApplierId;
-		this.period = period;
+		this.dateOfReturn = dateOfReturn;
 		this.message = message;
 		this.user = user;
 		this.gameUser = gameUser;
@@ -75,12 +77,12 @@ public class Exchange implements Serializable{
 		this.userApplierId = userApplierId;
 	}
 
-	public Integer getPeriod() {
-		return period;
+	public Date getDateOfReturn() {
+		return dateOfReturn;
 	}
 
-	public void setPeriod(Integer period) {
-		this.period = period;
+	public void setDateOfReturn(Date dateOfReturn) {
+		this.dateOfReturn = dateOfReturn;
 	}
 
 	public String getMessage() {
