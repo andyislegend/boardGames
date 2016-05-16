@@ -16,5 +16,5 @@ target
 .recommenders/*
 Servers/
 web/src/main/webapp/resources/bower_components
-.properties
+database.properties
 !.settings/.jsdtscope
