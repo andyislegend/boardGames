@@ -57,6 +57,7 @@
 
 #uploadButton {
     font-size:10px;
+
 }
 
 #userRating {
@@ -65,7 +66,7 @@
 }
 
 .outerDiv {
-    width: 88%;
+    width: 93%;
     height: 100%;
     text-align:center;
     background: #428BCA;
@@ -85,4 +86,12 @@
 
 #insideRating {
 	color:black;
+}
+
+#headerUsers {
+	text-align:center;
+}
+
+#profileDiv {
+	margin-left: 1%;
 }
