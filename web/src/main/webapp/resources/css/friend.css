@@ -1,9 +1,9 @@
 .proba-message{
     background: #CCC;
     width: 300px;
-    height: 400px;
+    height: 306px;
     margin-left: -340px;
-    margin-top: 165px;
+    margin-top: 260px;
     position: absolute;
     border-radius: 5px;
 }
@@ -294,7 +294,17 @@ opacity: 1;
 .search-result{
 background: #F6F7FD;
 border-radius: 5px 5px 0px 0px;
-height: 400px;
+height: 200px;
+width: 300px;
+margin-left: -340px;
+position: absolute;
+display: inline-table;
+border: 1px solid #FFF;
+}
+.users-offer{
+background: #F6F7FD;
+border-radius: 5px 5px 0px 0px;
+height: 200px;
 width: 300px;
 margin-left: -340px;
 position: absolute;
@@ -315,8 +325,9 @@ border: 1px solid #FFF;
     padding-top: 33px;
 }
 .content{
-	display: inline-table;
-	height: 300px;
+    height: 197px;
+	max-height: 200px;
+    overflow: auto;
 	width: 100%;
 } 
 .global{
@@ -325,7 +336,7 @@ display: flex;
 } 
 #messages{
 padding: 10px;
-height: 400px;
+height: 206px;
 max-height:300px;
 overflow: auto;
 word-wrap: break-word;
@@ -340,8 +351,6 @@ word-wrap: break-word;
     overflow: auto;
 }
 /*********************************/
-
-
 
 .tabs {
         width:100%;
@@ -380,8 +389,11 @@ word-wrap: break-word;
         color:#4c4c4c;
     }
     .my-tab-content {
+        height: 200px;
+        max-height: 200px;
+        overflow: auto;
         width: 100%;
-        margin-top: -16px;
+        margin-top: 0px;
         padding:15px;
         background:#F6F7FD;
     }

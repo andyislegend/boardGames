@@ -372,7 +372,7 @@
                     </div>
                 </div>
                 
-                <div class="search-result" ng-show="showRequest">
+                <div class="users-offer" ng-show="showRequest">
                     <div class="tabs">
             
                         <ul class="tab-links">
@@ -439,14 +439,14 @@
 						<div id="header">
                             <div class="name-main-part">Friends {{friends.length}}</div>
 								<div class="overBell">
-									<a href="" type="button" data-toggle="modal" ng-click="showRequest = !showRequest">
+									<a href="" type="button" data-toggle="modal" ng-click="showRequest = !showRequest; click = false">
 										<div class="count" ng-hide="count < 1">{{count}}</div> <img
 										class="bell" src="resources/ico/bell.png" />
 									</a>
 								</div>
                                 <!--<img class="search" src="resources/ico/search.png" />-->
                                 <input class="form-control" type="text" placeholder="Find new friends" ng-model="name" ng-keyup="findAllUsers()"
-                                        ng-click="click = true">
+                                        ng-click="click = true; showRequest = false">
 						</div>
 						
 						<div class="persons">
