@@ -67,26 +67,25 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 
 	$http.get('gameUserDetail/' + $routeParams.id).then(
 		function(result) {
+			
 			$scope.games = result.data;
-			$http({
+			
+			var isBorrowed = false;
+			$http ({
+				method : "GET",
+				url : 'checkIfGameIsBorrowed/' + $scope.games.id
+			}).then(function mySucces(response) {
+				isBorrowed = response.data;
+				alert(response.data);
+			}, function myError(response) {
+				alert("checking game status error");
+			});
+			
+			$http ({
 				method : "GET",
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
-				
-				var isBorrowed = false;
-				$scope.$on('emitingIsBorrowed',function(event, data){
-					isBorrowed = data;
-				}); 
-					
-				$http({
-					method : "GET",
-					url : 'checkIfGameIsBorrowed/' + $scope.games.id
-				}).then(function mySucces(response) {
-					$scope.$emit('emitingIsBorrowed', response.data);
-				}, function myError(response) {
-					alert("checking game status error");
-				});
-				
+			
 				if (response.data === true && $scope.games.status === 'private') {
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
@@ -115,7 +114,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					$scope.isYourGamePrivate = false;
 					$scope.canGiveBack = false;
 					
-					$http({
+					$http ({
 						method : "GET",
 						url : 'getApplierUsername' + '/' + $scope.games.id
 					}).then(function mySucces(response) {
