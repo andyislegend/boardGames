@@ -17,4 +17,5 @@ target
 Servers/
 web/src/main/webapp/resources/bower_components
 database.properties
+.properties
 !.settings/.jsdtscope
