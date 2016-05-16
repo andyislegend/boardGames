@@ -245,7 +245,7 @@
 							<div class="tab-content">
   								<div id="myGames" class="tab-pane fade in active">
     								<table ng-table="" class="table table-condensed table-hover">
-										<tr ng-repeat="game in allMyGames">
+										<tr ng-repeat="game in allGame">
 											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
 												ng-click="myFunc(game.id)"> {{game.name}}</a></td>
 											<td title="'Category'">{{game.category}}</td>
@@ -276,8 +276,8 @@
   								<div id="borrowedGames" class="tab-pane fade">
     								<table ng-table="" class="table table-condensed table-hover">
 										<tr ng-repeat="game in allBorrowedGames">
-											<td title="'Name'"><a href="#gameUserDetails/{{game.id}}"
-												ng-click="myFunc(game.id)"> {{game.gameUserName}}</a></td>
+											<td title="'Name'"><a href="#gameUserDetails/{{game.gameId}}"
+												ng-click="myFunc(game.gameId)"> {{game.gameUserName}}</a></td>
 											<td title="'Category'">{{game.gameUserCategory}}</td>
 											<td title="'Owner'"><a href="#">{{game.username}}</a></td>
 										</tr>

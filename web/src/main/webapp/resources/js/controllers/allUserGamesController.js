@@ -7,7 +7,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		method : "GET",
 		url : 'getAllMyGamesCurUser'
 	}).then(function mySucces(response) {
-		$rootScope.allMyGames = response.data;
+		$rootScope.allGame = response.data;
 		for (var i = 0; i < $rootScope.allGame.length; i++) {
 			$rootScope.isNewComments($rootScope.allGame[i].id);
 		}
@@ -19,9 +19,6 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		url : 'getAllSharedGamesCurUser'
 	}).then(function mySucces(response) {
 		$rootScope.allSharedGames = response.data;
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
 	}, function myError(response) {
 		alert("getting shared gaems error");
 	});
@@ -30,9 +27,6 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		url : 'getAllBorrowedGamesCurUser'
 	}).then(function mySucces(response) {
 		$rootScope.allBorrowedGames = response.data;
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
 	}, function myError(response) {
 		alert("getting borrowed games error");
 	});
@@ -79,6 +73,20 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
 				
+				var isBorrowed = false;
+				$scope.$on('emitingIsBorrowed',function(event, data){
+					isBorrowed = data;
+				}); 
+					
+				$http({
+					method : "GET",
+					url : 'checkIfGameIsBorrowed/' + $scope.games.id
+				}).then(function mySucces(response) {
+					$scope.$emit('emitingIsBorrowed', response.data);
+				}, function myError(response) {
+					alert("checking game status error");
+				});
+				
 				if (response.data === true && $scope.games.status === 'private') {
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
@@ -117,7 +125,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 						alert("Getting user applier username error");
 					});
 				}
-				else if (response.data === true && $scope.games.status === 'borrowed') {
+				else if (isBorrowed === true) {
 					$scope.canGiveBack = true;
 					$scope.isntYourGame = false;
 					$scope.isYourGame = false;

@@ -9,8 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -22,7 +25,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author TARAZIDZE
  */
 @Entity
-@Table(name = "gameRatingNumeric")
+@Table(name = "gameRatingNumeric", uniqueConstraints=@UniqueConstraint(columnNames="gameId"))
 public class GameRatingNumeric implements Serializable{
 	
 	private static final long serialVersionUID = 5911151982701538423L;
@@ -33,10 +36,10 @@ public class GameRatingNumeric implements Serializable{
 	private Integer id;
 	
 	@Column(name = "rating")
-	private Integer rating;
+	private Integer rating = 0;
 	
-	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Game.class, 
-			cascade={ CascadeType.MERGE, CascadeType.REFRESH })
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@JoinColumn(name="gameId", nullable=false)
 	private Game game;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, 

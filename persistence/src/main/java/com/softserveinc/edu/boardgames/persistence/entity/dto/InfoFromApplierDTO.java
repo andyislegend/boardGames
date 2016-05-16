@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 public class InfoFromApplierDTO {
 	
+	private Integer gameId;
 	private String gameUserName;
 	private String gameUserCategory;
 	private String username;
@@ -15,8 +16,9 @@ public class InfoFromApplierDTO {
 		this.username = username;
 		this.message = message;
 	}
-	public InfoFromApplierDTO(String username, String message, String gameUserName, String gameUserCategory) {
+	public InfoFromApplierDTO(Integer gameId, String username, String message, String gameUserName, String gameUserCategory) {
 		super();
+		this.gameId = gameId;
 		this.username = username;
 		this.message = message;
 		this.gameUserName = gameUserName;
@@ -45,5 +47,11 @@ public class InfoFromApplierDTO {
 	}
 	public void setGameUserCategory(String gameUserCategory) {
 		this.gameUserCategory = gameUserCategory;
+	}
+	public Integer getGameId() {
+		return gameId;
+	}
+	public void setGameId(Integer gameId) {
+		this.gameId = gameId;
 	}
 }

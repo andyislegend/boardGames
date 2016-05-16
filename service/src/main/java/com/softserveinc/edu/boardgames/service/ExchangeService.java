@@ -45,4 +45,8 @@ public class ExchangeService {
 	public List<InfoFromApplierDTO> getAllBorrowedGames(Integer userId) {
 		return eRepo.getAllBorrowedGames(userId);
 	}
+	
+	public boolean checkIfBorrowed(Integer userId, Integer gameUserId) {
+		return (eRepo.getBorrowedGameUser(gameUserId, userId) != null);
+	}
 }

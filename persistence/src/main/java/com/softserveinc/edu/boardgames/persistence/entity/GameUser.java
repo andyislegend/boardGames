@@ -142,7 +142,7 @@ public class GameUser implements Serializable {
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {	
 		return EqualsBuilder.reflectionEquals(this, obj);
