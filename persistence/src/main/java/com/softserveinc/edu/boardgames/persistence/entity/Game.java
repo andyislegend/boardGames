@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -67,12 +68,8 @@ public class Game implements Serializable{
 	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
 
-	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "game")
-	@JsonBackReference
-    private Set<Tournament> tournaments;
-	
-	@OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL },mappedBy = "game")
-    private Set<GameRatingNumeric> gameRatingNumeric;
+	@OneToOne(mappedBy="game")
+	private GameRatingNumeric gameRating;
 	
 	public Game(){}
 	
@@ -84,13 +81,13 @@ public class Game implements Serializable{
 		this.maxPlayers = maxPlayers;
 		this.category = category;
 	}
-	
-	public Set<GameRatingNumeric> getGameRatingNumeric() {
-		return gameRatingNumeric;
+
+	public GameRatingNumeric getGameRating() {
+		return gameRating;
 	}
 
-	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
-		this.gameRatingNumeric = gameRatingNumeric;
+	public void setGameRating(GameRatingNumeric gameRating) {
+		this.gameRating = gameRating;
 	}
 
 	public Set<GameUser> getUserGames() {
@@ -159,14 +156,6 @@ public class Game implements Serializable{
 
 	public void setEvents(Set<Event> events) {
 		this.events = events;
-	}
-
-	public Set<Tournament> getTournaments() {
-		return tournaments;
-	}
-
-	public void setTournaments(Set<Tournament> tournaments) {
-		this.tournaments = tournaments;
 	}
 
 	public void setId(Integer id) {

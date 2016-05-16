@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval','friendsUsername', '$http', function($scope,$rootScope, friendService, friendsUsername, $http, $interval) {
     $scope.users;
    var allf = $http.get("allFriends").success(function(data) {
@@ -5,6 +6,19 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
 	}).error(function(error) {
 		console.log(error);
 	});
+=======
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', '$http', function($scope,$rootScope, friendService, $http, $interval) {
+    $scope.friends = [];
+   var allfriends = function(){
+           $http.get("allFriends").success(function(data) {
+               if($scope.friends.length !== data.length){
+                    $scope.friends = data;
+               }
+        }).error(function(error) {
+            console.log(error);
+        });
+   }
+>>>>>>> 5d87240ab84b11944876a3537ddaf85290682096
     
     $http.get("allMyOffering").success(function(data) {
 		$scope.userOffered = data;
@@ -12,17 +26,25 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
 		console.log(error);
 	});
     
-    $http.get('allOffering').success(function(data){
-         $scope.count = data;
-     }).error(function(error){
-         console.log(error)
-     });
-    
-    $http.get("allOfferedUsers").success(function(data) {
-        $scope.allOfferedUsers = data;
+    var getCountOfOffering = function(){
+        $http.get('allOffering').success(function(data){
+            if($scope.count !== data){
+             $scope.count = data;
+            }
+         }).error(function(error){
+             console.log(error)
+         });
+    }
+    $scope.allOfferedUsers = [];
+    var getAllOfferedUsers = function(){
+        $http.get("allOfferedUsers").success(function(data) {
+        if($scope.allOfferedUsers.length !== data.length){
+            $scope.allOfferedUsers = data;
+        }
 	}).error(function(error) {
 		console.log(error);
 	});
+    }
     
      $scope.add = function(id){
         var userId = id;
@@ -85,25 +107,29 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     };
     $scope.setFriendName = function(friendName){
         $scope.currentFriend = friendName;
-        getUpdate(friendName);
+        getUpdate();
     };
+    $scope.messages = [];
     var getUpdate = function() { 
           $http.post('getAllMessage/' +  $scope.currentFriend ,  $scope.currentFriend ).success(function(data){
-             var objDiv = document.getElementById("messages");
-            objDiv.scrollTop = objDiv.scrollHeight;
-              /*if($scope.messages == undefined){
-               $scope.messages = data;  
-             }else{
-                 if($scope.messages.length != data.length){
-                      $scope.messages = data;
-                 }
-             }*/
-               $scope.messages = data;
-            
-        }).error(function(error){
-            console.log(error);
+            if(!arraysEqual($scope.messages, data)){
+                $scope.messages = data;
+            }
         });
     };
+    
+    function arraysEqual(a, b) {
+      if (a === b) return true;
+      if (a.length !== b.length) return false;
+       if(a.length > 0 && b.length > 0){
+          for (var i = 0; i < a.length; ++i) {
+            if (a[a.length-1].id !== b[b.length-1].id || a[i].statusOfReading !== b[i].statusOfReading){
+                return false;
+            }
+          }
+        }
+      return true;
+    }
 
     $scope.sendMessage = function(message){
         $scope.currentFriend
@@ -113,19 +139,14 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             console.log(error);
         });
     };
-    $scope.readMessage = function(messageId){
-        $http.post('readMessage/' + messageId, messageId).success(function(){
-        }).error(function(error){
-            console.log(error);
-        });
-        
+    $scope.readMessage = function(message){
+        if(!message.statusOfReading && message.currentUser.username == $scope.currentFriend){
+            $http.post('readMessage/' + message.id, message.id).success(function(){
+            }).error(function(error){
+                console.log(error);
+            });
+        }
     };
-    
-    $http.get('findAllNotReadMessage').success(function(data){
-         $scope.countOfNotReadMessage = data;
-     }).error(function(error){
-         console.log(error)
-     });
     $scope.cancelOffering = function(userName){
         $http.post('canselOffering/' + userName, userName).success(function(){
             for(var i = 0; i < $scope.userOffered.length; i++){
@@ -137,12 +158,23 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             console.log(error);
     });
 };
-    $http.get('allMessageByCurrentUserFriends').success(function(data){
-        $scope.allNotReadMessagesByFriend = data;
-    }).error(function(error){
-        console.log(error);
-    });
+    var getAllNumberNotReadMessageByFriend = function(){
+        $http.get('allMessageByCurrentUserFriends').success(function(data){
+            if($scope.allNotReadMessagesByFriend !== data){
+                $scope.allNotReadMessagesByFriend = data;
+            }
+        }).error(function(error){
+            console.log(error);
+        });
+    }
+setInterval(function(){
+        getUpdate();
+        getAllNumberNotReadMessageByFriend();
+        getCountOfOffering();
+        getAllOfferedUsers();
+        allfriends();
     
+<<<<<<< HEAD
    
 /*setInterval(function(){
        getUpdate();
@@ -152,6 +184,10 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
         var a = friendsUsername.getObject();
         var b = 0;
     };
+=======
+   }, 1000)
+   
+>>>>>>> 5d87240ab84b11944876a3537ddaf85290682096
 }]);
 
 app.directive('ngEnter', function() {
@@ -166,5 +202,24 @@ app.directive('ngEnter', function() {
                }
            });
        };
+});
+app.directive("jqScroll", function () {
+    return function (scope, element, attrs) {
+        scope.$watch("messages", function (value) {
+            var objDiv = document.getElementById("messages");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        });
+    };
+});
+jQuery(document).ready(function() {
+    jQuery('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = jQuery(this).attr('href');
+ 
+        jQuery('.tabs ' + currentAttrValue).slideDown(400).siblings().slideUp(400);
+ 
+        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+    });
 });
 

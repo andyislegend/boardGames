@@ -63,6 +63,14 @@ public class GameUserService {
 		return gameUserRepo.getAllGameUserByUsername(username);
 	}
 	
+	public List<GameUserDTO> getMyGameUsersFromUsername(String username) {
+		return gameUserRepo.getAllMyGameUserByUsername(username);
+	}
+	
+	public List<GameUserDTO> getSharedGameUsersFromUsername(String username) {
+		return gameUserRepo.getAllSharedGameUserByUsername(username);
+	}
+	
 	public List<UserGamesOfGameDTO> getAllUserGamesOfGame(String name) {
 		return gameUserRepo.getUserGameOfGame(name);
 	}

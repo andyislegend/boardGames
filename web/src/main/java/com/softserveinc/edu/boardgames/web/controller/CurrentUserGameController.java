@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.softserveinc.edu.boardgames.persistence.entity.Category;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.service.CategoryService;
+import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -40,15 +42,36 @@ public class CurrentUserGameController {
 	@Autowired
 	private GameService gameService;
 	
+	@Autowired
+	private ExchangeService exchangeService;
+	
 	/**
 	 * 	
 	 * @return list of current user games
 	 */
-	@RequestMapping(value = "/getAllGamesCurUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/getAllMyGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GameUserDTO> showGames() {
-		List<GameUserDTO> allGames = gameUserService.getGameUsersFromUsername(WebUtil.getPrincipalUsername());
+		List<GameUserDTO> allGames = gameUserService
+				.getMyGameUsersFromUsername(WebUtil.getPrincipalUsername());
 		return allGames;
+	}
+	
+	@RequestMapping(value = "/getAllSharedGamesCurUser", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GameUserDTO> showSharedGames() {
+		List<GameUserDTO> sharedGames = gameUserService
+				.getSharedGameUsersFromUsername(WebUtil.getPrincipalUsername());
+		return sharedGames;
+	}
+	
+	@RequestMapping(value = "/getAllBorrowedGamesCurUser", method = RequestMethod.GET)
+	@ResponseBody
+	public List<InfoFromApplierDTO> showBorrowedGames() {
+		List<InfoFromApplierDTO> borrowedGames = 
+				exchangeService.getAllBorrowedGames(
+						userService.getUser(WebUtil.getPrincipalUsername()).getId());
+		return borrowedGames;
 	}
 	
 	/**

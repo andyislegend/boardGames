@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -35,11 +38,18 @@ public class UserGameSharingController {
 		return currentUser.getId().equals(gamesGameUser.getUser().getId());
 	}
 	
+	@RequestMapping(value="/checkIfGameIsBorrowed/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean chechIfGameIsBorrowed(@PathVariable Integer gameUserId) {
+		User user = userService.getUser(WebUtil.getPrincipalUsername());
+		return exchangeService.checkIfBorrowed(user.getId(), gameUserId);
+	}
+	
 	@RequestMapping(value="/getApplierUsername/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
-	public String getUserToDisplayOnRequest(@PathVariable Integer gameUserId) {
+	public InfoFromApplierDTO getUserToDisplayOnRequest(@PathVariable Integer gameUserId) {
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		return userService.findById(exchange.getUserApplierId()).getUsername();
+		return exchangeService.getExchangeDTO(exchange.getId());
 	}
 	
 	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}", method = RequestMethod.PUT)
@@ -70,9 +80,9 @@ public class UserGameSharingController {
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
 	}
 	
-	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}", method = RequestMethod.PUT)
+	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId) {
+	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus("confirmation");
@@ -80,6 +90,7 @@ public class UserGameSharingController {
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		exchange.setUserApplierId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
+		exchange.setMessage(message);
 		exchangeService.update(exchange);
 	}
 	

@@ -1,7 +1,5 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +15,7 @@ public interface GameRatingNumericRepository extends JpaRepository<GameRatingNum
 			+ "from GameRatingNumeric gameRateNum "
 			+ "where gameRateNum.game.id = :gameId "
 			+ "and gameRateNum.user.id = :userId")
-	List<Integer> getGameRated(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
+	Integer getGameRated(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
 	
 	@Query("update GameRatingNumeric grn "
 			+ "set grn.rating = :rating "
@@ -28,8 +26,6 @@ public interface GameRatingNumericRepository extends JpaRepository<GameRatingNum
 			@Param("userId")Integer userId, @Param("rating")Integer rating);
 	
 	@Query("select grn from GameRatingNumeric grn "
-			+ "where grn.game.id = :gameId "
-			+ "and grn.user.id = :userId")
-	List<GameRatingNumeric> getFromGameAndUser(@Param("gameId")Integer gameId, 
-			@Param("userId")Integer userId);
+			+ "where grn.game.id = :gameId")
+	GameRatingNumeric getFromGame(@Param("gameId")Integer gameId);
 }
