@@ -1,16 +1,6 @@
 angular.module('homeApp').controller("CtreateNewTournamentCtrl",function($scope,$http){
 
     $scope.createTournament = function () {
-        var tournament = {
-            "tournamentName": $scope.tournamentName,
-            "countOfParticipants": $scope.countOfParticipants,
-            "gameUserId": $scope.selectedGame,
-            "date": $scope.date,
-            "country": $scope.countryTournament,
-            "city": $scope.cityTournament,
-        };
-        console.log(tournament);
-        
         $http({
 			method : 'POST',
 			url : '/addTournament',
