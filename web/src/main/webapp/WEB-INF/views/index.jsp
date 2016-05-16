@@ -1,3 +1,5 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,8 +131,8 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 style="text-align: center;" class="modal-title">Login with
-						Your Username and Password</h4>
+					<h4 style="text-align: center;" class="modal-title" >
+					<spring:message code="label.title"></spring:message></h4>
 				</div>
 				<div class="modal-body">
 
