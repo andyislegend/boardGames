@@ -21,9 +21,11 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 			$scope.avatar = result.data;
 		});
 		
-		$http.get('getUsersAvatar?username=' + $scope.username).then(function(result) {
-			$scope.userAvatar = result.data;
-		});
+		if ($routeParams.username!=null) {
+			$http.get('getUsersAvatar?username=' + $scope.username).then(function(result) {
+				$scope.userAvatar = result.data;
+			});
+		}
 		
 	});
 	
