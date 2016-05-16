@@ -1,6 +1,6 @@
 var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$http', '$interval', function($scope,$rootScope, $http, $interval) {
     $scope.friends = [];
-   var allfriends = function(){
+    var allfriends = function(){
            $http.get("allFriends").success(function(data) {
                if($scope.friends.length !== data.length){
                     $scope.friends = data;
@@ -9,12 +9,16 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             console.log(error);
         });
    }
-    
-    $http.get("allMyOffering").success(function(data) {
-		$scope.userOffered = data;
-	}).error(function(error) {
-		console.log(error);
-	});
+    $scope.userOffered = [];
+    var allMyOffering = function(){
+            $http.get("allMyOffering").success(function(data) {
+            if( $scope.userOffered.length !== data.length){    
+                $scope.userOffered = data;
+            }
+        }).error(function(error) {
+            console.log(error);
+        });
+    }
     
     var getCountOfOffering = function(){
         $http.get('allOffering').success(function(data){
@@ -163,6 +167,7 @@ setInterval(function(){
         getCountOfOffering();
         getAllOfferedUsers();
         allfriends();
+        allMyOffering();
         
 }, 1000)
 
