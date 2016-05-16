@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval','friendsUsername', '$http', function($scope,$rootScope, friendService, friendsUsername, $http, $interval) {
-    $scope.users;
-   var allf = $http.get("allFriends").success(function(data) {
-		$scope.friends = data;
-	}).error(function(error) {
-		console.log(error);
-	});
-=======
-var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', '$http', function($scope,$rootScope, friendService, $http, $interval) {
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', 'friendsUsername', '$http', function($scope,$rootScope, friendService, friendsUsername, $http, $interval) {
     $scope.friends = [];
    var allfriends = function(){
            $http.get("allFriends").success(function(data) {
@@ -18,7 +9,6 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             console.log(error);
         });
    }
->>>>>>> 5d87240ab84b11944876a3537ddaf85290682096
     
     $http.get("allMyOffering").success(function(data) {
 		$scope.userOffered = data;
@@ -173,21 +163,13 @@ setInterval(function(){
         getCountOfOffering();
         getAllOfferedUsers();
         allfriends();
-    
-<<<<<<< HEAD
-   
-/*setInterval(function(){
-       getUpdate();
-   }, 100)*/
+        
+}, 1000)
+
     $scope.setString = function(newValue) {
     	friendsUsername.setObject(newValue);
         var a = friendsUsername.getObject();
-        var b = 0;
     };
-=======
-   }, 1000)
-   
->>>>>>> 5d87240ab84b11944876a3537ddaf85290682096
 }]);
 
 app.directive('ngEnter', function() {
