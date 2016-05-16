@@ -11,9 +11,10 @@
 
 </head>
 <body>
-<div>
-    <h1 id="headerUsers"> Edit User </h1>
-    <div ng-controller="editProfileCtrl">
+<div ng-controller="editProfileCtrl">
+    <h1 id="headerUsers" ng-show="myProfile"> Edit Profile </h1>
+    <h1 id="headerUsers" ng-hide="myProfile"> Friend Profile </h1>
+    <div>
 		<div class="col-sm-12">
 
 				<div class="row">
