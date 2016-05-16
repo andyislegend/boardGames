@@ -11,8 +11,6 @@
 
 <!-- CSS -->
 <link rel="stylesheet"
-	href="resources/bower_components/normalize-css/normalize.css" />
-<link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />
 <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
 	rel="stylesheet" />
