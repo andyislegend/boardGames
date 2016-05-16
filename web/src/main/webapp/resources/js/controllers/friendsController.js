@@ -1,8 +1,10 @@
 var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', '$http', function($scope,$rootScope, friendService, $http, $interval) {
-    $scope.users;
+    $scope.friends = [];
    var allfriends = function(){
            $http.get("allFriends").success(function(data) {
-            $scope.friends = data;
+               if($scope.friends.length !== data.length){
+                    $scope.friends = data;
+               }
         }).error(function(error) {
             console.log(error);
         });
@@ -16,15 +18,19 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     
     var getCountOfOffering = function(){
         $http.get('allOffering').success(function(data){
+            if($scope.count !== data){
              $scope.count = data;
+            }
          }).error(function(error){
              console.log(error)
          });
     }
-    
+    $scope.allOfferedUsers = [];
     var getAllOfferedUsers = function(){
         $http.get("allOfferedUsers").success(function(data) {
-        $scope.allOfferedUsers = data;
+        if($scope.allOfferedUsers.length !== data.length){
+            $scope.allOfferedUsers = data;
+        }
 	}).error(function(error) {
 		console.log(error);
 	});
@@ -92,7 +98,6 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     $scope.setFriendName = function(friendName){
         $scope.currentFriend = friendName;
         getUpdate();
-        getAllNumberNotReadMessageByFriend();
     };
     $scope.messages = [];
     var getUpdate = function() { 
@@ -105,7 +110,7 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     
     function arraysEqual(a, b) {
       if (a === b) return true;
-      if (a.length != b.length) return false;
+      if (a.length !== b.length) return false;
        if(a.length > 0 && b.length > 0){
           for (var i = 0; i < a.length; ++i) {
             if (a[a.length-1].id !== b[b.length-1].id || a[i].statusOfReading !== b[i].statusOfReading){
@@ -131,7 +136,6 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
                 console.log(error);
             });
         }
-        
     };
     $scope.cancelOffering = function(userName){
         $http.post('canselOffering/' + userName, userName).success(function(){
@@ -146,18 +150,20 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
 };
     var getAllNumberNotReadMessageByFriend = function(){
         $http.get('allMessageByCurrentUserFriends').success(function(data){
-            $scope.allNotReadMessagesByFriend = data;
+            if($scope.allNotReadMessagesByFriend !== data){
+                $scope.allNotReadMessagesByFriend = data;
+            }
         }).error(function(error){
             console.log(error);
         });
     }
-    
 setInterval(function(){
         getUpdate();
         getAllNumberNotReadMessageByFriend();
         getCountOfOffering();
         getAllOfferedUsers();
         allfriends();
+    
    }, 1000)
    
 }]);
