@@ -21,6 +21,10 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 			$scope.avatar = result.data;
 		});
 		
+		$http.get('getUsersAvatar?username=' + $scope.username).then(function(result) {
+			$scope.userAvatar = result.data;
+		});
+		
 	});
 	
 	$scope.saveUser = function() {
