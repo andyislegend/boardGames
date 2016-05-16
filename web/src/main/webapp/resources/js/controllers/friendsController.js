@@ -1,10 +1,12 @@
 var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', '$http', function($scope,$rootScope, friendService, $http, $interval) {
     $scope.users;
-   var allf = $http.get("allFriends").success(function(data) {
-		$scope.friends = data;
-	}).error(function(error) {
-		console.log(error);
-	});
+   var allfriends = function(){
+           $http.get("allFriends").success(function(data) {
+            $scope.friends = data;
+        }).error(function(error) {
+            console.log(error);
+        });
+   }
     
     $http.get("allMyOffering").success(function(data) {
 		$scope.userOffered = data;
@@ -12,17 +14,21 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
 		console.log(error);
 	});
     
-    $http.get('allOffering').success(function(data){
-         $scope.count = data;
-     }).error(function(error){
-         console.log(error)
-     });
+    var getCountOfOffering = function(){
+        $http.get('allOffering').success(function(data){
+             $scope.count = data;
+         }).error(function(error){
+             console.log(error)
+         });
+    }
     
-    $http.get("allOfferedUsers").success(function(data) {
+    var getAllOfferedUsers = function(){
+        $http.get("allOfferedUsers").success(function(data) {
         $scope.allOfferedUsers = data;
 	}).error(function(error) {
 		console.log(error);
 	});
+    }
     
      $scope.add = function(id){
         var userId = id;
@@ -85,7 +91,8 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     };
     $scope.setFriendName = function(friendName){
         $scope.currentFriend = friendName;
-        getUpdate(friendName);
+        getUpdate();
+        getAllNumberNotReadMessageByFriend();
     };
     $scope.messages = [];
     var getUpdate = function() { 
@@ -137,14 +144,20 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             console.log(error);
     });
 };
-    $http.get('allMessageByCurrentUserFriends').success(function(data){
-        $scope.allNotReadMessagesByFriend = data;
-    }).error(function(error){
-        console.log(error);
-    });
+    var getAllNumberNotReadMessageByFriend = function(){
+        $http.get('allMessageByCurrentUserFriends').success(function(data){
+            $scope.allNotReadMessagesByFriend = data;
+        }).error(function(error){
+            console.log(error);
+        });
+    }
     
 setInterval(function(){
-       getUpdate();
+        getUpdate();
+        getAllNumberNotReadMessageByFriend();
+        getCountOfOffering();
+        getAllOfferedUsers();
+        allfriends();
    }, 1000)
    
 }]);
