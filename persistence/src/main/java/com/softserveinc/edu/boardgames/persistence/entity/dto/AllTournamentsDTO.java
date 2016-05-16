@@ -8,47 +8,36 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 /**
  * @author Volodymyr Krokhmaliuk
  */
-public class TournamentsDTO {
+public class AllTournamentsDTO {
 
-    private Long tournamentId;
+    private Integer tournamentId;
     private String tournamentName;
     private Integer countOfParticipants;
-    private Integer gameUserId;
-    private Date date;
+    private Integer userCreatorId;
+    private String userCreatorName;
+    private Date dateOfTournament;
     private Set<User> users;
     private String country;
     private String city;
 
-    public TournamentsDTO() {
+    public AllTournamentsDTO() {
     }
 
-    public TournamentsDTO(String tournamentName, Integer countOfParticipants,
-                            Integer gameUserId, Date date, String country, String city) {
-        this.tournamentName = tournamentName;
-        this.countOfParticipants = countOfParticipants;
-        this.gameUserId = gameUserId;
-        this.date = date;
-        this.country = country;
-        this.city = city;    
-    }
-    
-	public TournamentsDTO(Long tournamentId, String tournamentName, Integer countOfParticipants, Integer gameUserId,
-			Date date, Set<User> users, String country, String city) {
+    public AllTournamentsDTO(Integer tournamentId, String tournamentName, Integer countOfParticipants, Integer userCreatorId,
+			String userCreatorName, Date date) {
 		this.tournamentId = tournamentId;
 		this.tournamentName = tournamentName;
 		this.countOfParticipants = countOfParticipants;
-		this.gameUserId = gameUserId;
-		this.date = date;
-		this.users = users;
-		this.country = country;
-		this.city = city;
+		this.userCreatorId = userCreatorId;
+		this.userCreatorName = userCreatorName;
+		this.dateOfTournament = date;
 	}
 
-	public Long getTournamentId() {
+	public Integer getTournamentId() {
 		return tournamentId;
 	}
 
-	public void setTournamentId(Long tournamentId) {
+	public void setTournamentId(Integer tournamentId) {
 		this.tournamentId = tournamentId;
 	}
 
@@ -68,22 +57,30 @@ public class TournamentsDTO {
 		this.countOfParticipants = countOfParticipants;
 	}
 
-	public Integer getGameUserId() {
-		return gameUserId;
+	public Integer getUserCreatorId() {
+		return userCreatorId;
 	}
 
-	public void setGameUserId(Integer gameUserId) {
-		this.gameUserId = gameUserId;
+	public void setUserCreatorId(Integer userCreatorId) {
+		this.userCreatorId = userCreatorId;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getUserCreatorName() {
+		return userCreatorName;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setUserCreatorName(String userCreatorName) {
+		this.userCreatorName = userCreatorName;
 	}
-	
+
+	public Date getDateOfTournament() {
+		return dateOfTournament;
+	}
+
+	public void setDateOfTournament(Date dateOfTournament) {
+		this.dateOfTournament = dateOfTournament;
+	}
+
 	public Set<User> getUsers() {
 		return users;
 	}
@@ -106,5 +103,5 @@ public class TournamentsDTO {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
+	}    
 }

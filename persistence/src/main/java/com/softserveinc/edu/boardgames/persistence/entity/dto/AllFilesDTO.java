@@ -5,7 +5,7 @@ import java.util.List;
 public class AllFilesDTO {
 	
 	List<GameUserDTO> gameUsers;
-	List<TournamentsDTO> tournaments;
+	List<AllTournamentsDTO> tournaments;
 	List<AllEventsDto> events;
 	
 	public AllFilesDTO() {
@@ -18,10 +18,10 @@ public class AllFilesDTO {
 	public void setGameUsers(List<GameUserDTO> gameUsers) {
 		this.gameUsers = gameUsers;
 	}
-	public List<TournamentsDTO> getTournaments() {
+	public List<AllTournamentsDTO> getTournaments() {
 		return tournaments;
 	}
-	public void setTournaments(List<TournamentsDTO> tournaments) {
+	public void setTournaments(List<AllTournamentsDTO> tournaments) {
 		this.tournaments = tournaments;
 	}
 	public List<AllEventsDto> getEvents() {
