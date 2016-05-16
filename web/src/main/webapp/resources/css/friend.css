@@ -121,9 +121,11 @@ input:focus{
     height: 57px;
     width: 100%;
     padding-left: 10px;
+    padding-right: 10px;
     padding-top: 10px;
     margin-bottom: 5px;
-    background: #E0F1F6 
+    background: #428BCA;
+    color: white;
 }
 .overInput{
     width: 100%;

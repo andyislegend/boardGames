@@ -1,4 +1,4 @@
-var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', '$http', function($scope,$rootScope, friendService, $http, $interval) {
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$interval', 'friendsUsername', '$http', function($scope,$rootScope, friendService, friendsUsername, $http, $interval) {
     $scope.friends = [];
    var allfriends = function(){
            $http.get("allFriends").success(function(data) {
@@ -163,9 +163,13 @@ setInterval(function(){
         getCountOfOffering();
         getAllOfferedUsers();
         allfriends();
-    
-   }, 1000)
-   
+        
+}, 1000)
+
+    $scope.setString = function(newValue) {
+    	friendsUsername.setObject(newValue);
+        var a = friendsUsername.getObject();
+    };
 }]);
 
 app.directive('ngEnter', function() {

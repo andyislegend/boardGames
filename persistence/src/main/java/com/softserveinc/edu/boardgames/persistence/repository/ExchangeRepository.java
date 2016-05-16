@@ -23,11 +23,20 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer>{
 	        + "and user.id = exchange.userApplierId")
 	public InfoFromApplierDTO getInfoFromAppliersDTO(@Param("id")Integer id);
 	
-	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO("
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO(gameUser.game.id, "
 			+ "exchange.user.username, exchange.message , gameUser.game.name, gameUser.game.category.name) "
 	        + "from Exchange exchange "
 	        + "inner join exchange.gameUser gameUser "
 	        + "where exchange.userApplierId = :userId "
 	        + "and gameUser.status = 'shared'")
 	public List<InfoFromApplierDTO> getAllBorrowedGames(@Param("userId")Integer userId);
+	
+	@Query("select e from Exchange e "
+			+ "inner join e.gameUser gu "
+			+ "where e.userApplierId = :userId "
+			+ "and gu.id = :gameUserId "
+			+ "and gu.status = 'shared'")
+	public Exchange getBorrowedGameUser(
+			@Param("gameUserId")Integer gameUserId, 
+			@Param("userId")Integer urserId);
 }

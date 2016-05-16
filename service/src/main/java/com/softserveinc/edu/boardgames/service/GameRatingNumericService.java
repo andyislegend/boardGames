@@ -27,20 +27,23 @@ public class GameRatingNumericService {
 
 	@Transactional
 	@Modifying
-	public void update(Integer gameId, Integer userId, Integer rating) {
+	public void updateManualy(Integer gameId, Integer userId, Integer rating) {
 		gameRatingNumericRepo.updateRating(gameId, userId, rating);
 	}
-
+	
 	@Transactional
-	public void create(GameRatingNumeric gameRateNum) {
-		gameRatingNumericRepo.save(gameRateNum);
+	public void update(GameRatingNumeric gameRatingNumeric) {
+		gameRatingNumericRepo.save(gameRatingNumeric);
 	}
 	
 	public Integer getRatingforUser(Integer gameId, Integer userId){
-		return gameRatingNumericRepo.getGameRated(gameId, userId).get(0);
+		Integer rating = gameRatingNumericRepo.getGameRated(gameId, userId);
+		if (rating == null)
+			rating = 0;
+		return rating;
 	}
 	
-	public GameRatingNumeric getFromGameAndUser(Integer gameId, Integer userId){
-		return gameRatingNumericRepo.getFromGameAndUser(gameId, userId).get(0);
+	public GameRatingNumeric getFromGame(Integer gameId){
+		return gameRatingNumericRepo.getFromGame(gameId);
 	}
 }

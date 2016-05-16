@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +36,13 @@ public class UserGameSharingController {
 		User currentUser = userService.getUser(WebUtil.getPrincipalUsername());
 		GameUser gamesGameUser = gameUserService.getUserGamesById(gameUserId);
 		return currentUser.getId().equals(gamesGameUser.getUser().getId());
+	}
+	
+	@RequestMapping(value="/checkIfGameIsBorrowed/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean chechIfGameIsBorrowed(@PathVariable Integer gameUserId) {
+		User user = userService.getUser(WebUtil.getPrincipalUsername());
+		return exchangeService.checkIfBorrowed(user.getId(), gameUserId);
 	}
 	
 	@RequestMapping(value="/getApplierUsername/{gameUserId}", method = RequestMethod.GET)

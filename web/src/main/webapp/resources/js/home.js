@@ -23,7 +23,7 @@ homeApp.config(function($routeProvider) {
 		controller : 'eventListCtrl'
 	})
 
-	.when('/edit', {
+	.when('/edit/', {
 		templateUrl : 'resources/pages/home-editUser.html',
 		controller : 'editProfileCtrl'
 	})
@@ -63,6 +63,10 @@ homeApp.controller("getAvatar", function($scope, $http) {
 });
 
 homeApp.controller('search', function($scope, $rootScope){
+
+});
+
+homeApp.controller('rating', function($scope){
 
 });
 

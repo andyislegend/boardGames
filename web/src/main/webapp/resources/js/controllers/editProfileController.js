@@ -1,7 +1,11 @@
-angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
+angular.module('homeApp').controller("editProfileCtrl", ['$scope', 'friendsUsername', '$http', function($scope, friendsUsername, $http, $window) {
 	$scope.showPasswordChange = false;
-	$http.get('getProfile').then(function(result) {
+	$scope.myProfile = false;
+	$http.get('getProfile?username='+ friendsUsername.getObject().data).then(function(result) {
 		$scope.userProfile = result.data;
+		if (friendsUsername.getObject().data=="My profile") {
+			$scope.myProfile = true;
+		}
 		$scope.editableFirstName = $scope.userProfile.firstName;
 		$scope.editableLastName = $scope.userProfile.lastName;
 		$scope.editableEmail = $scope.userProfile.email;
@@ -9,11 +13,13 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
 
-			$http.get('getAvatar').then(function(result) {
-				$scope.avatar = result.data;
-			});
-
+		$http.get('getAvatar').then(function(result) {
+			$scope.avatar = result.data;
+			friendsUsername.getObject().data = "My profile";
+		});
+		
 	});
+	
 	$scope.saveUser = function() {
 		$http({
 			method : 'PUT',
@@ -105,8 +111,10 @@ angular.module('homeApp').controller("editProfileCtrl",function($scope, $http) {
         });
 
 	};
+	
+}]);
 
-});
+
 var loadFile = function(event) {
     var output = document.getElementById('avatar');
     output.src = URL.createObjectURL(event.target.files[0]);

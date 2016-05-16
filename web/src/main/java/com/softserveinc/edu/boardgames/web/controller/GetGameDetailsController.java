@@ -52,32 +52,25 @@ public class GetGameDetailsController {
 	@ResponseBody
 	public Integer getGameRatedByUser(@PathVariable Integer gameId) {
 		User user = userService.getUser(WebUtil.getPrincipalUsername());
-		Integer rating = new Integer(0);
-		try {
-			rating = gameRateNumService.getRatingforUser(gameId, user.getId());
-		} catch (NullPointerException nullPtrEx){
-			System.out.println("No rating found");
-		} catch (IndexOutOfBoundsException indexEx ){
-			System.out.println("No rating found");
-		}
+		Integer rating = gameRateNumService.getRatingforUser(gameId, user.getId());
+		if (rating == null)
+			rating = new Integer(0);
 		return rating;
 	}
 	
 	@RequestMapping(value="/calculateRatings/{gameId}/{rating}", method = RequestMethod.POST)
 	@ResponseBody
 	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
-		User user = userService.getUser(WebUtil.getPrincipalUsername());
-		GameRatingNumeric gameRateNum;
-		try { 
-			gameRateNum = gameRateNumService.getFromGameAndUser(gameId, user.getId());
-			System.out.println(gameId + " " + user.getId() + " " +  rating);
-			gameRateNumService.update(gameId, user.getId(), rating);
-		}catch (IndexOutOfBoundsException indexEx){
-			GameRatingNumeric gameRating = new GameRatingNumeric();
-			gameRating.setUser(user);
-			gameRating.setRating(rating);
-			gameRating.setGame(gameService.findById(gameId));
-			gameRateNumService.create(gameRating);
-		}
+		GameRatingNumeric existingRating = gameRateNumService.getFromGame(gameId);
+		if (existingRating != null) {
+			existingRating.setRating(rating);
+		}else {
+			existingRating = new GameRatingNumeric();
+			User user = userService.getUser(WebUtil.getPrincipalUsername());
+			existingRating.setGame(gameService.findById(gameId));
+			existingRating.setRating(rating);
+			existingRating.setUser(user);
+		}		
+		gameRateNumService.update(existingRating);
 	}
 }

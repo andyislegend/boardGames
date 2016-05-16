@@ -7,34 +7,26 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		method : "GET",
 		url : 'getAllMyGamesCurUser'
 	}).then(function mySucces(response) {
-		$rootScope.allMyGames = response.data;
+		$rootScope.allGame = response.data;
 		for (var i = 0; i < $rootScope.allGame.length; i++) {
 			$rootScope.isNewComments($rootScope.allGame[i].id);
 		}
 	}, function myError(response) {
 		alert("getting my games error");
 	});
-	
 	$http({
 		method : "GET",
 		url : 'getAllSharedGamesCurUser'
 	}).then(function mySucces(response) {
 		$rootScope.allSharedGames = response.data;
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
 	}, function myError(response) {
 		alert("getting shared gaems error");
 	});
-	
 	$http({
 		method : "GET",
 		url : 'getAllBorrowedGamesCurUser'
 	}).then(function mySucces(response) {
 		$rootScope.allBorrowedGames = response.data;
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
 	}, function myError(response) {
 		alert("getting borrowed games error");
 	});
@@ -81,6 +73,20 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
 				
+				var isBorrowed = false;
+				$scope.$on('emitingIsBorrowed',function(event, data){
+					isBorrowed = data;
+				}); 
+					
+				$http({
+					method : "GET",
+					url : 'checkIfGameIsBorrowed/' + $scope.games.id
+				}).then(function mySucces(response) {
+					$scope.$emit('emitingIsBorrowed', response.data);
+				}, function myError(response) {
+					alert("checking game status error");
+				});
+				
 				if (response.data === true && $scope.games.status === 'private') {
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
@@ -119,7 +125,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 						alert("Getting user applier username error");
 					});
 				}
-				else if (response.data === true && $scope.games.status === 'borrowed') {
+				else if (isBorrowed === true) {
 					$scope.canGiveBack = true;
 					$scope.isntYourGame = false;
 					$scope.isYourGame = false;
@@ -147,35 +153,36 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					rules : $scope.games.rules,
 					maxPlayers : $scope.games.maxPlayers,
 					minPlayers : $scope.games.minPlayers
-		}		
+			 }		
 	});
 	
 	$scope.gameDetailById = function(id) {
 		$scope.games = [];
 	}
 	
+	$scope.$on('changingGameStatus', function(event, data) {
+		$http({
+			method : "PUT",
+			url : data.url + data.userGameId
+		}).then(function mySucces(response) {
+			$route.reload();
+		}, function myError(response) {
+			alert("Changing game status error");
+		});
+	});
+	
 	$scope.makeGameUserAvailable = function(id) {
-		$http({
-			method : "PUT",
-			url : 'makeGameUserAvailable/' + id
-		}).then(function mySucces(response) {
-			$route.reload();
-		}, function myError(response) {
-			alert("Making game available failed");
+		$scope.$emit('changingGameStatus', {
+			url:'makeGameUserAvailable/',
+			userGameId: id
 		});
 	}
-	
 	$scope.keepGameUserPrivate = function(id) {
-		$http({
-			method : "PUT",
-			url : 'makeGameUserPrivate/' + id
-		}).then(function mySucces(response) {
-			$route.reload();
-		}, function myError(response) {
-			alert("Making game available failed");
+		$scope.$emit('changingGameStatus', {
+			url:'makeGameUserPrivate/',
+			userGameId: id
 		});
 	}
-	
 	$scope.askOwnerToShare = function(id, message) {
 		$http({
 			method : "PUT",
@@ -186,37 +193,22 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			alert("Failed to send your request");
 		});
 	}
-	
 	$scope.acceptGameConfirmation = function(id) {
-		$http({
-			method : "PUT",
-			url : 'acceptGameConfirmationRequest/' + id
-		}).then(function mySucces(response) {
-			$route.reload();
-		}, function myError(response) {
-			alert("Accept request failed");
+		$scope.$emit('changingGameStatus', {
+			url:'acceptGameConfirmationRequest/',
+			userGameId: id
 		});
 	}
-	
 	$scope.declineGameConfirmation = function(id) {
-		$http({
-			method : "PUT",
-			url : 'declineGameConfirmationRequest/' + id
-		}).then(function mySucces(response) {
-			$route.reload();
-		}, function myError(response) {
-			alert("Decline request failed");
+		$scope.$emit('changingGameStatus', {
+			url:'declineGameConfirmationRequest/',
+			userGameId: id
 		});
 	}
-	
 	$scope.giveBackGame = function(id) {
-		$http({
-			method : "PUT",
-			url : 'giveGameBack/' + id
-		}).then(function mySucces(response) {
-			$route.reload();
-		}, function myError(response) {
-			alert("Giving game back request failed");
+		$scope.$emit('changingGameStatus', {
+			url:'giveGameBack/',
+			userGameId: id
 		});
 	}
 

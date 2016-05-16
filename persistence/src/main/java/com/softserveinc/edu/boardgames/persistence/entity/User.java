@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostUpdate;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -290,11 +291,51 @@ public class User implements Serializable {
 		this.gameRatingNumeric = gameRatingNumeric;
 	}
 	
+	@PostUpdate
 	@PreUpdate
-	public void banUser() {
+	public void changeUser() {
 		if(this.getUserRating() < -5) {
 			this.setState(UserStatus.BANNED.name());
+		}	
+		
+		if (isBetween(this.getUserRating(), 1, 10)) {
+			this.setRating(UserLevel.SKILLED.name());
+			return;
 		}
+		
+		if (isBetween(this.getUserRating(), 11, 20)) {
+			this.setRating(UserLevel.PRO.name());
+			return;
+		}
+		
+		if (isBetween(this.getUserRating(), 21, 30)) {
+			this.setRating(UserLevel.VETERAN.name());
+			return;
+		}
+		
+		if (isBetween(this.getUserRating(), 31, 50)) {
+			this.setRating(UserLevel.MASTER.name());
+			return;
+		}
+		
+		if (isBetween(this.getUserRating(), 51, 70)) {
+			this.setRating(UserLevel.WICKED_SICK.name());
+			return;
+		}
+		
+		if (isBetween(this.getUserRating(), 71, 90)) {
+			this.setRating(UserLevel.EXTRATERESTRIAL.name());
+			return;
+		}
+		
+		if (isBetween(this.getUserRating(), 91, 100)) {
+			this.setRating(UserLevel.GODLIKE.name());
+			return;
+		}
+	}
+	
+	private boolean isBetween(int usersRating, int lower, int upper) {
+		  return lower <= usersRating && usersRating <= upper;
 	}
 
 	@Override
