@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Message;
-import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.repository.MessageRepository;
 
 @Service
@@ -35,6 +34,10 @@ public class MessageService {
 	
 	public Integer findAllNotReadMessageBySpecificFriend(String currentUserName, String friendUserName){
 		return messageRepository.findAllNotReadMessageBySpecificFriend(currentUserName, friendUserName);
+	}
+	
+	public Message getLastMessage(String currentUserName, String friendUserName){
+		return messageRepository.getLastMessage(currentUserName, friendUserName);
 	}
 
 }
