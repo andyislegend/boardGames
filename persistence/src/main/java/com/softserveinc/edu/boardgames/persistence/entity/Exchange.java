@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,10 +35,13 @@ public class Exchange implements Serializable{
 	private Integer userApplierId;
 	
 	@Column(name = "period")
-    private Integer period;
+    private Integer period = 14;
 	
 	@Column(name = "message")
-	private String message;
+	private String message = "no message";
+	
+	@Column(name = "applyingDate")
+	private Date applyingDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private User user;
@@ -48,15 +52,23 @@ public class Exchange implements Serializable{
 
 	public Exchange() {}
 	
-	public Exchange(Integer id, Integer userApplierId, Integer period, 
+	public Exchange(Integer id, Integer userApplierId, Integer dateOfReturn, 
 			String message, User user, GameUser gameUser) {
 		super();
 		this.id = id;
 		this.userApplierId = userApplierId;
-		this.period = period;
+		this.period = dateOfReturn;
 		this.message = message;
 		this.user = user;
 		this.gameUser = gameUser;
+	}
+
+	public Date getApplyingDate() {
+		return applyingDate;
+	}
+
+	public void setApplyingDate(Date applyingDate) {
+		this.applyingDate = applyingDate;
 	}
 
 	public Integer getId() {

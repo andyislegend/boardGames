@@ -28,6 +28,7 @@ indexModule.controller('loginCntrl', [
 
 					if (path === "home") {
 						$scope.closeModal();
+						$scope.showModalLoading();
 						window.location.replace(path);
 					}
 
@@ -49,7 +50,7 @@ indexModule.controller('loginCntrl', [
 				response.error(function(data) {
 					console.dir(data);
 				});
-
+				
 				function redirectByState(state) {
 					var path = undefined;
 
@@ -86,6 +87,10 @@ indexModule.controller('loginCntrl', [
 
 			$scope.showModalBanned = function() {
 				$('#myBanned').modal('show');
+			}
+			
+			$scope.showModalLoading = function() {
+				$('#myLoading').modal('show');
 			}
 
 		} ]);

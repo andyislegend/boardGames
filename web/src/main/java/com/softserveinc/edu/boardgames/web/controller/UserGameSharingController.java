@@ -1,6 +1,9 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.util.List;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,21 +55,30 @@ public class UserGameSharingController {
 		return exchangeService.getExchangeDTO(exchange.getId());
 	}
 	
-	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}", method = RequestMethod.PUT)
+	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}/{returnDate}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void makeGameUserAvailable(@PathVariable Integer gameUserId) {
-		
-		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("available");
-		gameUserService.update(gameUserToUpdate);
-		
-		Exchange exchange = new Exchange();
-		exchange.setGameUser(gameUserToUpdate);
-		exchange.setMessage("Hey man!");
-		exchange.setPeriod(14);
-		exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-		exchange.setUserApplierId(0);
-		exchangeService.update(exchange);
+	public void makeGameUserAvailable(@PathVariable Integer gameUserId, 
+			@PathVariable java.util.Date returnDate) {
+	
+		LocalDate localDate = LocalDate.now();
+		LocalDate userDate = returnDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
+		if (localDate.getYear() <= userDate.getYear()) {
+			if (localDate.getDayOfYear() <= userDate.getDayOfYear()) {
+					
+				GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+				gameUserToUpdate.setStatus("available");
+				gameUserService.update(gameUserToUpdate);
+					
+				Exchange exchange = new Exchange();
+				exchange.setGameUser(gameUserToUpdate);
+				exchange.setMessage("Hey man!");
+				Long days = localDate.until( userDate, ChronoUnit.DAYS);
+				exchange.setPeriod(days.intValue());
+				exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
+				exchange.setUserApplierId(0);
+				exchangeService.update(exchange);
+			}
+		}
 	}
 	
 	@RequestMapping(value="/makeGameUserPrivate/{gameUserId}", method = RequestMethod.PUT)
@@ -101,6 +113,12 @@ public class UserGameSharingController {
 		GameUser gameUserOfOwner = gameUserService.getUserGamesById(gameUserId);
 		gameUserOfOwner.setStatus("shared");
 		gameUserService.update(gameUserOfOwner);
+		
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		LocalDate localDate = LocalDate.now();
+		exchange.setApplyingDate(Date.from(localDate
+				.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		exchangeService.update(exchange);
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -113,7 +131,6 @@ public class UserGameSharingController {
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		exchange.setUserApplierId(0);
-		exchange.setPeriod(14);
 		exchange.setMessage("Hey you!");
 		exchangeService.update(exchange);
 	}
@@ -127,5 +144,23 @@ public class UserGameSharingController {
 		gameUserService.update(gameUserToUpdate);
 		
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
+	}
+	
+	@RequestMapping(value="/getHowManyDaysForExchange/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getHowManyDaysOwnerRequire(@PathVariable Integer gameUserId) {
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		return exchange.getPeriod();
+	}
+	
+	@RequestMapping(value="/getHowManyDaysRemains/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		LocalDate localDate = LocalDate.now();
+		LocalDate deadLine = exchange.getApplyingDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		deadLine.plusDays(exchange.getPeriod());
+		Long days = localDate.until(deadLine, ChronoUnit.DAYS);
+		return days.intValue();
 	}
 }

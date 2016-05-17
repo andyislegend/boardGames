@@ -36,6 +36,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	$scope.isntYourGame = false;
 	$scope.isThereConfiramtion = false;
 	$scope.canGiveBack = false;
+	$scope.doWantToApply = false;
 	
 	$scope.updateGame = function(){
 		var game = {
@@ -67,26 +68,24 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 
 	$http.get('gameUserDetail/' + $routeParams.id).then(
 		function(result) {
+			
 			$scope.games = result.data;
-			$http({
+			
+			var isBorrowed = false;
+			$http ({
+				method : "GET",
+				url : 'checkIfGameIsBorrowed/' + $scope.games.id
+			}).then(function mySucces(response) {
+				isBorrowed = response.data;
+			}, function myError(response) {
+				alert("checking game status error");
+			});
+			
+			$http ({
 				method : "GET",
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
-				
-				var isBorrowed = false;
-				$scope.$on('emitingIsBorrowed',function(event, data){
-					isBorrowed = data;
-				}); 
-					
-				$http({
-					method : "GET",
-					url : 'checkIfGameIsBorrowed/' + $scope.games.id
-				}).then(function mySucces(response) {
-					$scope.$emit('emitingIsBorrowed', response.data);
-				}, function myError(response) {
-					alert("checking game status error");
-				});
-				
+			
 				if (response.data === true && $scope.games.status === 'private') {
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
@@ -115,7 +114,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					$scope.isYourGamePrivate = false;
 					$scope.canGiveBack = false;
 					
-					$http({
+					$http ({
 						method : "GET",
 						url : 'getApplierUsername' + '/' + $scope.games.id
 					}).then(function mySucces(response) {
@@ -131,6 +130,15 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
+					
+					$http({
+						method : "GET",
+						url : 'getHowManyDaysRemains/' + id
+					}).then(function mySucces(response) {
+						$scope.howManyDaysRemains = response.data;
+					}, function myError(response) {
+						alert("getting exchange period error");
+					});
 				}
 				else {
 					$scope.isYourGame = false;
@@ -160,6 +168,23 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		$scope.games = [];
 	}
 	
+	$scope.displayRequestBlockClick = function(id) {
+		if ($scope.doWantToApply === true)
+			$scope.doWantToApply = false;
+		else {
+			$scope.doWantToApply = true;
+			
+			$http({
+				method : "GET",
+				url : 'getHowManyDaysForExchange/' + id
+			}).then(function mySucces(response) {
+				$scope.howManyDays = response.data;
+			}, function myError(response) {
+				alert("getting exchange period error");
+			});
+		}
+	}
+	
 	$scope.$on('changingGameStatus', function(event, data) {
 		$http({
 			method : "PUT",
@@ -172,9 +197,14 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	});
 	
 	$scope.makeGameUserAvailable = function(id) {
-		$scope.$emit('changingGameStatus', {
-			url:'makeGameUserAvailable/',
-			userGameId: id
+		alert($scope.returnDate);
+		$http({
+			method : "PUT",
+			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate
+		}).then(function mySucces(response) {
+			$route.reload();
+		}, function myError(response) {
+			alert("Changing game status error");
 		});
 	}
 	$scope.keepGameUserPrivate = function(id) {

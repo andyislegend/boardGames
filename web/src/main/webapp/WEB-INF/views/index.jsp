@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="resources/css/index.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
 <link rel="stylesheet" href="resources/css/users.css" />
+<link rel="stylesheet" href="resources/css/loading.css" />
 
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
@@ -43,6 +44,9 @@
 						style="height: 100px; weight: 100px;"></a>
 				</div>
 
+				<p style="font-size: 14pt;" class="navbar-text">
+					<b>Board Games Exchange</b>
+				</p>
 				<!-- <ul class="nav navbar-nav navbar-center">
 					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
 					<li><a href="#allGames"><i class="fa fa-home"></i> All
@@ -51,15 +55,16 @@
 					<li><a href="#tournaments"><i class="fa fa-comment"></i>
 							Tournaments</a></li>
 				</ul> -->
+
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
-						data-target="#myModal"><spring:message code="label.comeIn"/></a></li>
+						data-target="#myModal"><spring:message code="label.comeIn" /></a></li>
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
-						data-target="#myReg"><spring:message code="label.registration"/></a></li>
+						data-target="#myReg"><spring:message code="label.registration" /></a></li>
 					<li><span class="btn btn-link"><a href="?locale=en">
-						<img id="flag"src="resources/images/gb.png" /></a>
-						<a href="?locale=ua"><img id="flag"src="resources/images/ua.png" /></a></span>
-					</li>
+								<img id="flag" src="resources/images/gb.png" />
+						</a> <a href="?locale=ua"><img id="flag"
+								src="resources/images/ua.png" /></a></span></li>
 				</ul>
 
 			</div>
@@ -137,18 +142,19 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 style="text-align: center;" class="modal-title" >
-					<spring:message code="label.title"></spring:message></h4>
+					<h4 style="text-align: center;" class="modal-title">
+						<spring:message code="label.title"></spring:message>
+					</h4>
 				</div>
 				<div class="modal-body">
-					<spring:message code="label.enterUsername" var="enterUsername"/>
-					<spring:message code="label.enterPassword" var="enterPassword"/>
+					<spring:message code="label.enterUsername" var="enterUsername" />
+					<spring:message code="label.enterPassword" var="enterPassword" />
 					<form name="form" ng-submit="login()" AutoCompleteType="Disabled"
 						autocomplete="off">
-						
-						
+
+
 						<div class="form-group">
-						
+
 							<input style="margin-left: 25%; width: 50%" type="text"
 								name="username" id="username" class="form-control"
 								ng-model="loginForm.username" placeholder="${enterUsername}"
@@ -170,18 +176,17 @@
 							<button type="submit" ng-disabled="form.$invalid"
 								class="btn btn-info btn-lg btn-block"
 								style="width: 50%; margin-left: 25%">
-								<spring:message code="label.comeIn"/></button>
+								<spring:message code="label.comeIn" />
+							</button>
 							<br> <a style="margin-left: 1%;" type="button"
 								data-dismiss="modal" class="btn btn-link" data-toggle="modal"
-								data-target="#myReg">
-									<b>
-										<spring:message code="label.newAccountMessage"/>
-									</b>
-								</a> <a style="margin-left: 35%;" type="button"
-								ng-click="closeModal()" class="btn btn-link">
-								<b>
-									<spring:message code="label.cancel"/>
-								</b></a>
+								data-target="#myReg"> <b> <spring:message
+										code="label.newAccountMessage" />
+							</b>
+							</a> <a style="margin-left: 35%;" type="button"
+								ng-click="closeModal()" class="btn btn-link"> <b> <spring:message
+										code="label.cancel" />
+							</b></a>
 						</div>
 					</form>
 
@@ -299,7 +304,7 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content" ng-controller="indexCntrl">
+			<div class="modal-content">
 				<div class="modal-header">
 
 					<h4 style="text-align: center;" class="modal-title">UNDER
@@ -308,16 +313,17 @@
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">Your account is temporary unavailable due to its
-						verification.</p>
-					<p style="text-align: center;">We have sent You email with confirmation link.</p>
-					<p style="text-align: center;">After You confirm Your registration You will be able to log
-						in</p>
+					<p style="text-align: center;">Your account is temporary
+						unavailable due to its verification.</p>
+					<p style="text-align: center;">We have sent You email with
+						confirmation link.</p>
+					<p style="text-align: center;">After You confirm Your
+						registration You will be able to log in</p>
 
 				</div>
 
-				<a style="margin-left: 45%; margin-bottom: 5%" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md">Cancel</a>
+				<a style="margin-left: 45%; margin-bottom: 5%" type="button"
+					data-dismiss="modal" class="btn btn-danger btn-md">Cancel</a>
 			</div>
 			<!-- End of Modal Content -->
 
@@ -331,23 +337,27 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content" ng-controller="indexCntrl">
+			<div class="modal-content">
 				<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title">YOU'VE BEEN BANNED</h4>
+					<h4 style="text-align: center;" class="modal-title">YOU'VE
+						BEEN BANNED</h4>
 
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">The access to your account is temporary disabled</p>
-					<p style="text-align: center;">Your account have been banned due to Your inappropriate behavior</p>
-					<p style="text-align: center;">If there is some mistake, please contact with the administration</p>
+					<p style="text-align: center;">The access to your account is
+						temporary disabled</p>
+					<p style="text-align: center;">Your account have been banned
+						due to Your inappropriate behavior</p>
+					<p style="text-align: center;">If there is some mistake, please
+						contact with the administration</p>
 
 				</div>
 
-				<a style=" margin-bottom: 5%" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md">Cancel</a>
-				<a style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
+				<a style="margin-bottom: 5%" type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md">Cancel</a> <a
+					style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
 					class="btn btn-infj btn-md"> Contact with Admins</a>
 			</div>
 			<!-- End of Modal Content -->
@@ -355,6 +365,39 @@
 		</div>
 	</div>
 	<!-- End of BANNED Modal -->
-	
+
+	<!-- Modal LOADING -->
+	<div id="myLoading" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+
+				<div class="modal-body">
+
+					<div class="loading">
+						<div class="intro-stars"></div>
+
+						<div class="ufo light"></div>
+						<div class="ufo">
+							<div class="loading-small-cloud"></div>
+							<div class="loading-small-cloud reverse"></div>
+							<div class="small-ghost"></div>
+						</div>
+
+						<div class="loading-text">Loading...</div>
+					</div>
+
+				</div>
+
+
+			</div>
+			<!-- End of Modal Content -->
+
+		</div>
+	</div>
+	<!-- End of LOADING -->
+
 </body>
 </html>
