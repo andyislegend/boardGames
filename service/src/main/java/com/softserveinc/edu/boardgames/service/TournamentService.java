@@ -38,6 +38,10 @@ public class TournamentService {
     	return  tournamentRepository.getAllTournaments();
     }
 
+    public Tournament getTournamenById(Integer id){
+    	return tournamentRepository.findById(id);
+    }
+    
     public List<Tournament> findAll(){
         return tournamentRepository.findAll();
     }

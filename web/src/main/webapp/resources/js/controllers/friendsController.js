@@ -169,7 +169,7 @@ setInterval(function(){
         allfriends();
         allMyOffering();
         
-}, 1000)
+}, 900000)
 
     $scope.setString = function(newValue) {
     	friendsUsername.setObject(newValue);

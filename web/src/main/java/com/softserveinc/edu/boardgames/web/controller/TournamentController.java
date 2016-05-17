@@ -4,9 +4,11 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.TournamentMapper;
 import com.softserveinc.edu.boardgames.service.*;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
+import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,11 +46,38 @@ public class TournamentController {
     	return tournamentService.getTournamentById(id);
     }
     
+    @RequestMapping(value = "/joinToTournament/{tournamentId}", method = RequestMethod.PUT)
+    public void joinToTournament(@PathVariable Integer tournamentId){
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	Set<User> users = tournament.getUsers();
+    	users.add(userService.getUser(WebUtil.getPrincipalUsername()));
+    	tournament.setUsers(users);
+    	tournamentService.update(tournament);
+    }
+    
+    @RequestMapping(value = "/leaveTournament/{tournamentId}", method = RequestMethod.PUT)
+    public void leaveTournament(@PathVariable Integer tournamentId){
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	Set<User> users = tournament.getUsers();
+    	users.remove(userService.getUser(WebUtil.getPrincipalUsername()));
+    	tournament.setUsers(users);
+    	tournamentService.update(tournament);
+    }
+    
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
     public void addTournament(@RequestBody AllTournamentsDTO tournamentDTO) {
         Tournament tournament = TournamentMapper.toEntity(tournamentDTO);
         tournament.setUserCreator(userService.getUser(WebUtil.getPrincipalUsername()));
         tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getUserCreatorId()));
         tournamentService.save(tournament);
+    }
+    
+    
+    
+    @RequestMapping(value = "/getAllParticipants/{tournamentId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Set<User> getParticipantOfTournament(@PathVariable Integer tournamentId) {
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	return tournament.getUsers();
     }
 }
