@@ -20,7 +20,8 @@
 	
 	<div class="container-fluid" ng-show="isYourGame">
 		<p>Select limit date for your exchange</p>
-		<input type="date" name="returnDate" max="2020-12-31" min="2000-12-31" ng-model="returnDate"/>
+		<input type="date" class="form-control" name="returnDate" 
+			max="2020-12-31" min="2000-12-31" ng-model="returnDate"/>
 		<br/>
 		<br/>
 		<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
@@ -31,11 +32,13 @@
 	</div>
 	
 	<div class="container-fluid" ng-show="isntYourGame">
-		<div class="form-group">
+		<button class="btn btn-primary" ng-click="displayRequestBlockClick(games.id)">Let's make a deal!</button>
+		<div class="form-group" ng-show="doWantToApply">
+			<p>Days: {{howManyDays}}</p>
 	  		<label for="comment">Message for owner:</label>
 	  		<textarea class="form-control" rows="2" id="message" ng-model="messageToOwner"></textarea>
+			<button class="btn btn-primary" ng-click="askOwnerToShare(games.id, messageToOwner)">Ask owner</button>
 		</div>
-		<button class="btn btn-primary" ng-click="askOwnerToShare(games.id, messageToOwner)">Ask owner!</button>
 	</div>
 	
 	<div class="container-fluid" ng-show="isThereConfiramtion">

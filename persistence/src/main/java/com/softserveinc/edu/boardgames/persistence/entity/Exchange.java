@@ -35,8 +35,8 @@ public class Exchange implements Serializable{
 	@Column(name = "userApplierId", columnDefinition="int(11) default '0'")
 	private Integer userApplierId;
 	
-	@Column(name = "dateOfReturn")
-    private Date dateOfReturn = Calendar.getInstance().getTime();
+	@Column(name = "period")
+    private Integer period = 14;
 	
 	@Column(name = "message")
 	private String message = "no message";
@@ -50,12 +50,12 @@ public class Exchange implements Serializable{
 
 	public Exchange() {}
 	
-	public Exchange(Integer id, Integer userApplierId, Date dateOfReturn, 
+	public Exchange(Integer id, Integer userApplierId, Integer dateOfReturn, 
 			String message, User user, GameUser gameUser) {
 		super();
 		this.id = id;
 		this.userApplierId = userApplierId;
-		this.dateOfReturn = dateOfReturn;
+		this.period = dateOfReturn;
 		this.message = message;
 		this.user = user;
 		this.gameUser = gameUser;
@@ -77,12 +77,12 @@ public class Exchange implements Serializable{
 		this.userApplierId = userApplierId;
 	}
 
-	public Date getDateOfReturn() {
-		return dateOfReturn;
+	public Integer getPeriod() {
+		return period;
 	}
 
-	public void setDateOfReturn(Date dateOfReturn) {
-		this.dateOfReturn = dateOfReturn;
+	public void setPeriod(Integer period) {
+		this.period = period;
 	}
 
 	public String getMessage() {
