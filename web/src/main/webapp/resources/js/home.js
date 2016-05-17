@@ -3,6 +3,11 @@ var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 
 homeApp.config(function($routeProvider) {
 	$routeProvider
 
+	.when('/', {
+		templateUrl : 'resources/pages/home-statistics.html',
+	// controller : "...Ctrl"
+	})
+	
 	.when('/statistics', {
 		templateUrl : 'resources/pages/home-statistics.html',
 	// controller : "...Ctrl"

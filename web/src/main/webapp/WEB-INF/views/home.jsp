@@ -118,7 +118,7 @@
 									ng-href="#search/{{search}}">
 									<button id="search-btn" ng-click="searchAll()" type="submit">
 										<span class="	glyphicon glyphicon-search"></span>
-									</button> <!-- <input type="submit"> -->
+									</button>
 								</a>
 							</form>
 						</form>
@@ -186,9 +186,9 @@
 		<div id="widget_div">
 
 			<ul class="nav nav-tabs nav-justified">
-				<li class="active"><a data-toggle="tab" href="#Games"> My
+				<li class="active"><a data-toggle="tab" data-target="#Games"> My
 						Games</a></li>
-				<li><a data-toggle="tab" href="#Friends"> My Friends </a></li>
+				<li><a data-toggle="tab" data-target="#Friends"> My Friends </a></li>
 			</ul>
 
 			<div class="tab-content">
@@ -280,13 +280,13 @@
 									<div ng-controller="getGameDetailedInfoController">
 
 										<ul class="nav nav-tabs nav-justified">
-											<li class="active"><a data-toggle="tab" href="#myGames">My</a></li>
-											<li><a data-toggle="tab" href="#sharedGames">Shared</a></li>
-											<li><a data-toggle="tab" href="#borrowedGames">Borrowed</a></li>
+											<li class="active"><a data-toggle="tab" data-target="#ownGames">My</a></li>
+											<li><a data-toggle="tab" data-target="#sharedGames">Shared</a></li>
+											<li><a data-toggle="tab" data-target="#borrowedGames">Borrowed</a></li>
 										</ul>
 
 										<div class="tab-content">
-											<div id="myGames" class="tab-pane fade in active">
+											<div id="ownGames" class="tab-pane fade in active">
 												<table ng-table="" class="table table-condensed table-hover">
 													<tr ng-repeat="game in allGame">
 														<td title="'Name'"><a
