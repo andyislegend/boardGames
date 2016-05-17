@@ -296,39 +296,44 @@ public class User implements Serializable {
 	public void changeUser() {
 		if(this.getUserRating() < -5) {
 			this.setState(UserStatus.BANNED.name());
-		}	
+		}
 		
-		if (isBetween(this.getUserRating(), 1, 10)) {
-			this.setRating(UserLevel.SKILLED.name());
+		if (isBetween(this.getUserRating(), 0, 10)) {
+			this.setRating(UserLevel.NOOB.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 11, 20)) {
-			this.setRating(UserLevel.PRO.name());
+			this.setRating(UserLevel.SKILLED.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 21, 30)) {
+			this.setRating(UserLevel.PRO.name());
+			return;
+		}
+		
+		if (isBetween(this.getUserRating(), 31, 40)) {
 			this.setRating(UserLevel.VETERAN.name());
 			return;
 		}
 		
-		if (isBetween(this.getUserRating(), 31, 50)) {
+		if (isBetween(this.getUserRating(), 41, 50)) {
 			this.setRating(UserLevel.MASTER.name());
 			return;
 		}
 		
-		if (isBetween(this.getUserRating(), 51, 70)) {
+		if (isBetween(this.getUserRating(), 51, 60)) {
 			this.setRating(UserLevel.WICKED_SICK.name());
 			return;
 		}
 		
-		if (isBetween(this.getUserRating(), 71, 90)) {
+		if (isBetween(this.getUserRating(), 61, 70)) {
 			this.setRating(UserLevel.EXTRATERESTRIAL.name());
 			return;
 		}
 		
-		if (isBetween(this.getUserRating(), 91, 100)) {
+		if (isBetween(this.getUserRating(), 71, 100)) {
 			this.setRating(UserLevel.GODLIKE.name());
 			return;
 		}
@@ -340,16 +345,63 @@ public class User implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    User other = (User) obj;
+	    return new EqualsBuilder().append(getId(), other.getId())
+	                              .append(getUsername(), other.getUsername())
+	                              .append(getFirstName(), other.getFirstName())
+	                              .append(getLastName(), other.getLastName())
+	                              .append(getGender(), other.getGender())
+	                              .append(getAge(), other.getAge())
+	                              .append(getEmail(), other.getEmail())
+	                              .append(getPhoneNumber(), other.getPhoneNumber())
+	                              .append(getPassword(), other.getPassword())
+	                              .append(getUserRating(), other.getUserRating())
+	                              .append(getRating(), other.getRating())
+	                              .append(getState(), other.getState())
+	                              .append(getAddress(), other.getAddress())
+	                              .isEquals();
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		 return new HashCodeBuilder().append(getId())
+				 .append(getUsername())
+				 .append(getFirstName())
+				 .append(getLastName())
+				 .append(getGender())
+				 .append(getAge())
+				 .append(getEmail())
+				 .append(getPhoneNumber())
+				 .append(getPassword())
+				 .append(getUserRating())
+				 .append(getRating())
+				 .append(getState())
+				 .append(getAddress())
+                 .toHashCode();
 	}
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", getId())
+                .append("username", getUsername())
+                .append("firstName", getFirstName())
+                .append("lastName", getLastName())
+                .append("gender", getGender())
+                .append("age", getAge())
+                .append("email", getEmail())
+                .append("phoneNumber", getPhoneNumber())
+                .append("password", getPassword())
+                .append("userRating", getUserRating())
+                .append("rating", getRating())
+                .append("state", getState())
+                .append("address", getAddress())
+                .toString();
+    }
 }

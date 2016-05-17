@@ -3,6 +3,11 @@ var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 
 homeApp.config(function($routeProvider) {
 	$routeProvider
 
+	.when('/', {
+		templateUrl : 'resources/pages/home-statistics.html',
+	// controller : "...Ctrl"
+	})
+	
 	.when('/statistics', {
 		templateUrl : 'resources/pages/home-statistics.html',
 	// controller : "...Ctrl"
@@ -23,9 +28,18 @@ homeApp.config(function($routeProvider) {
 		controller : 'eventListCtrl'
 	})
 
+	.when('/edit/:username', {
+		templateUrl : 'resources/pages/home-editUser.html',
+		controller : 'editProfileCtrl'
+	})
+	
 	.when('/edit/', {
 		templateUrl : 'resources/pages/home-editUser.html',
 		controller : 'editProfileCtrl'
+	})
+	.when('/notification', {
+		templateUrl : 'resources/pages/home-notification.html',
+		controller : 'notificationCtrl'
 	})
 
 	.when('/tournaments', {
@@ -68,9 +82,3 @@ homeApp.controller("getAvatar", function($scope, $http) {
 homeApp.controller('search', function($scope, $rootScope){
 
 });
-
-homeApp.controller('rating', function($scope){
-
-});
-
-

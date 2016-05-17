@@ -11,31 +11,33 @@
 
 </head>
 <body>
-<div>
-    <h1 style="text-align: center"> Edit User </h1>
-    <div ng-controller="editProfileCtrl">
+<div ng-controller="editProfileCtrl">
+    <h1 id="headerUsers" ng-show="myProfile"> Edit Profile </h1>
+    <h1 id="headerUsers" ng-hide="myProfile"> Friend Profile </h1>
+    <div>
 		<div class="col-sm-12">
 
 				<div class="row">
-					<div class="form-group col-md-12" style="margin-left: 1%;">
-					<div class="col-md-4">
-							<img src="#" ng-src="{{avatar}}" id="avatar" />
+					<div class="form-group col-md-12" id="profileDiv">
+					<div class="col-md-3">
+					<img ng-src="{{userAvatar}}" id="userAvatar" ng-hide="myProfile">
+							<img src="#" ng-src="{{avatar}}" id="avatar" ng-show="myProfile"/>
 								<br>
-								<label id="uploadButton" style="margin-top: 3%;" ng-show="myProfile">
+								<label id="uploadButton" ng-show="myProfile">
 								<input type="file" file-model="myFile" name="fileUpload"
 									class="fileUpload" accept="image/*" onchange="loadFile(event)"
 									>
 
 								</label>
 								<button ng-click = "uploadAvatar()" id="uploadButton" ng-show="myProfile"
-									class="btn btn-primary btn-bg" >upload me</button>
+									class="btn btn-primary btn-bg" >upload avatar</button>
 						</div>
 						
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-12" style="margin-left: 1%;">
+					<div class="form-group col-md-12"id="profileDiv">
 						<label class="col-md-3 control-lable">First Name:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.firstName}}</p>
@@ -45,28 +47,41 @@
 				</div>
 				
 				<div class="row">
-					<div class="form-group col-md-12" style="margin-left: 1%;">
+					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable">Last Name:</label>
 						<div class="col-md-5">
+							<p ng-hide="myProfile">{{userProfile.lastName}}</p>
 							<input ng-model="editableLastName" class="form-control input-sm" ng-show="myProfile">
 						</div>
 					</div>
 				</div>
 				
+				<div class="row" ng-hide="myProfile">
+					<div class="form-group col-md-12" id="profileDiv">
+						<label class="col-md-3 control-lable">Username:</label>
+						<div class="col-md-5">
+							<p >{{userProfile.username}}</p>
+						</div>
+					</div>
+				</div>
+				
 				<div class="row">
-					<div class="form-group col-md-12" style="margin-left: 1%;">
+					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable">Email:</label>
 						<div class="col-md-5">
+							<p ng-hide="myProfile">{{userProfile.email}}</p>
 							<input type="email" ng-model="editableEmail" class="form-control input-sm" ng-show="myProfile">
 						</div>
 					</div>
 				</div>
 				
 				<div class="row">
-					<div class="form-group col-md-12" style="margin-left: 1%;">
+					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable">Gender:</label>
 						<div class="col-md-5">
-							<select id="gender" name="gender" ng-model="editableGender" class="form-control" ng-show="myProfile">
+							<p ng-hide="myProfile">{{userProfile.gender}}</p>
+							<select id="gender" name="gender" ng-model="editableGender" class="form-control" 
+								ng-show="myProfile">
 								<option value="male">Male</option>
 								<option value="female">Female</option>
 							</select> 
@@ -75,9 +90,10 @@
 				</div>
 				
 				<div class="row">
-					<div class="form-group col-md-12" style="margin-left: 1%;">
+					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable">Age:</label>
 						<div class="col-md-5">
+							<p ng-hide="myProfile">{{userProfile.age}}</p>
 							<input ng-model="editableAge" class="form-control input-sm" ng-show="myProfile">
 						</div>
 					</div>
@@ -85,7 +101,7 @@
 				
 				<div ng-show="myProfile">
 				<div class="row">
-					<div class="form-group col-md-12" style="margin-left: 1%;">
+					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable">Phone Number:</label>
 						<div class="col-md-5">
 							<input ng-model="editablePhoneNumber" class="form-control input-sm">
@@ -103,10 +119,10 @@
 				</div>
 				</div>
 				<div class="col-sm-12" ng-show="myProfile">
-				<p style="margin-left: 1%;" class="form-group col-md-12"><a href="" ng-click="showPasswordChange = !showPasswordChange">Change password</a></p>
+				<p id="profileDiv" class="form-group col-md-12"><a href="" ng-click="showPasswordChange = !showPasswordChange">Change password</a></p>
 				<div ng-show="showPasswordChange">
 					<div class="row">
-						<div class="form-group col-md-12" style="margin-left: 1%;">
+						<div class="form-group col-md-12" id="profileDiv">
 							<label class="col-md-3 control-lable">Old password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableOldPassword" 
@@ -115,7 +131,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-12" style="margin-left: 1%;">
+						<div class="form-group col-md-12" id="profileDiv">
 							<label class="col-md-3 control-lable">New password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableNewPassword" 
@@ -124,7 +140,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-12" style="margin-left: 1%;">
+						<div class="form-group col-md-12" id="profileDiv">
 							<label class="col-md-3 control-lable">Confirm password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableConfirmPassword" 

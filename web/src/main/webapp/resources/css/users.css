@@ -57,8 +57,41 @@
 
 #uploadButton {
     font-size:10px;
+
 }
 
 #userRating {
 	color : white;
+	width: 200px;
+}
+
+.outerDiv {
+    width: 93%;
+    height: 100%;
+    text-align:center;
+    background: #428BCA;
+    color:white;
+}
+
+.innerDiv {
+    background: #428BCA;
+}
+
+#container {
+  width: 190px;
+  height: 30px;
+  position: relative;
+  cursor:pointer;
+}
+
+#insideRating {
+	color:black;
+}
+
+#headerUsers {
+	text-align:center;
+}
+
+#profileDiv {
+	margin-left: 1%;
 }
