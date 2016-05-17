@@ -58,6 +58,9 @@ INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postC
 
 
 --  inserts to table user
+INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `gender`, `lastName`, `password`, `phoneNumber`, `rating`, `state`, `userRating`, `username`, `addressId`) 
+VALUES (NULL, '45', 'prosinecki', 'vladislav', 'male', 'prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '5');
+
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating, rating, gender, state, username, addressId) values
 (99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000',  0,'GODLIKE', 'female', 'ACTIVE', 'root', 1);
 

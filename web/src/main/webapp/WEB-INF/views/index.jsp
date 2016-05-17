@@ -18,6 +18,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="resources/css/index.css" />
 <link rel="stylesheet" href="resources/css/fonts.css" />
+<link rel="stylesheet" href="resources/css/users.css" />
 
 <script type="text/javascript"
 	src="resources/bower_components/angular/angular.js"></script>
@@ -55,7 +56,12 @@
 						data-target="#myModal">Login</a></li>
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#myReg"> Registration</a></li>
+					<li><span class="btn btn-link"><a href="?locale=en">
+						<img id="flag"src="resources/images/gb.png" /></a>
+						<a href="?locale=ua"><img id="flag"src="resources/images/ua.png" /></a></span>
+					</li>
 				</ul>
+
 			</div>
 		</nav>
 	</header>

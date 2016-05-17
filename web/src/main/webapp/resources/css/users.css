@@ -95,3 +95,9 @@
 #profileDiv {
 	margin-left: 1%;
 }
+
+#flag {
+	width: 35px;
+  	height: 26px;
+  	margin-top:5px;
+}
