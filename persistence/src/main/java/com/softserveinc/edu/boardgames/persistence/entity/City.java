@@ -82,16 +82,33 @@ public class City implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    City other = (City) obj;
+	    return new EqualsBuilder().append(getId(), other.getId())
+	                              .append(getName(), other.getName())
+	                              .append(getCountry(), other.getCountry())
+	                              .isEquals();
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		 return new HashCodeBuilder().append(getId())
+				 .append(getName())
+				 .append(getCountry())
+                 .toHashCode();
 	}
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return new ToStringBuilder(this)
+        		.append("id", getId())
+                .append("name", getName())
+                .append("country", getCountry())
+                .toString();
+    }
 }

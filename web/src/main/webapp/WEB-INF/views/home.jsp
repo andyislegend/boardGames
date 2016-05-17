@@ -63,6 +63,8 @@
 	src="resources/js/controllers/eventListCtrl.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/getOneUser.js"></script>
+<script type="text/javascript"
+	src="resources/js/controllers/notificationController.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
