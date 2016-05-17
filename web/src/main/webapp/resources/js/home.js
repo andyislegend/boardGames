@@ -32,6 +32,10 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-editUser.html',
 		controller : 'editProfileCtrl'
 	})
+	.when('/notification', {
+		templateUrl : 'resources/pages/home-notification.html',
+		controller : 'notificationCtrl'
+	})
 
 	.when('/tournaments', {
 		templateUrl : 'resources/pages/home-tournaments.html',

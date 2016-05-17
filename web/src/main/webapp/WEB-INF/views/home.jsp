@@ -63,6 +63,8 @@
 	src="resources/js/controllers/eventListCtrl.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/getOneUser.js"></script>
+<script type="text/javascript"
+	src="resources/js/controllers/notificationController.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
@@ -138,7 +140,7 @@
 							<li><a href="#/edit"><span
 									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Edit profile</a></li>
-							<li><a ng-href=""><span
+							<li><a ng-href="#/notification"><span
 									class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 									Messages <span class="badge">2</span></a></li>
 							<sec:authorize access="hasRole('ADMIN')">
