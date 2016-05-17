@@ -135,20 +135,23 @@
 					<spring:message code="label.title"></spring:message></h4>
 				</div>
 				<div class="modal-body">
-
+					<spring:message code="label.enterUsername" var="enterUsername"/>
+					<spring:message code="label.enterPassword" var="enterPassword"/>
 					<form name="form" ng-submit="login()" AutoCompleteType="Disabled"
 						autocomplete="off">
-
+						
+						
 						<div class="form-group">
+						
 							<input style="margin-left: 25%; width: 50%" type="text"
 								name="username" id="username" class="form-control"
-								ng-model="loginForm.username" placeholder="Enter Username"
+								ng-model="loginForm.username" placeholder="${enterUsername}"
 								required />
 						</div>
 						<div class="form-group">
 							<input style="margin-left: 25%; width: 50%" type="password"
 								name="password" id="password" class="form-control"
-								ng-model="loginForm.password" placeholder="Enter Password"
+								ng-model="loginForm.password" placeholder="${enterPassword}"
 								required />
 						</div>
 
@@ -160,12 +163,19 @@
 						<div class="form-actions">
 							<button type="submit" ng-disabled="form.$invalid"
 								class="btn btn-info btn-lg btn-block"
-								style="width: 50%; margin-left: 25%">Login</button>
+								style="width: 50%; margin-left: 25%">
+								<spring:message code="label.comeIn"/></button>
 							<br> <a style="margin-left: 1%;" type="button"
 								data-dismiss="modal" class="btn btn-link" data-toggle="modal"
-								data-target="#myReg"><b>Don't Have an Account? Click
-									here!</b></a> <a style="margin-left: 35%;" type="button"
-								ng-click="closeModal()" class="btn btn-link"><b>Cancel</b></a>
+								data-target="#myReg">
+									<b>
+										<spring:message code="label.newAccountMessage"/>
+									</b>
+								</a> <a style="margin-left: 35%;" type="button"
+								ng-click="closeModal()" class="btn btn-link">
+								<b>
+									<spring:message code="label.cancel"/>
+								</b></a>
 						</div>
 					</form>
 
