@@ -138,7 +138,7 @@
 							<li><a href="#/edit"><span
 									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Edit profile</a></li>
-							<li><a ng-href=""><span
+							<li><a ng-href="#/notification"><span
 									class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 									Messages <span class="badge">2</span></a></li>
 							<sec:authorize access="hasRole('ADMIN')">
