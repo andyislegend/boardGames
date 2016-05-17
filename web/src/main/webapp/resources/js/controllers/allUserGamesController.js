@@ -170,9 +170,14 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	});
 	
 	$scope.makeGameUserAvailable = function(id) {
-		$scope.$emit('changingGameStatus', {
-			url:'makeGameUserAvailable/',
-			userGameId: id
+		alert($scope.returnDate);
+		$http({
+			method : "PUT",
+			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate
+		}).then(function mySucces(response) {
+			$route.reload();
+		}, function myError(response) {
+			alert("Changing game status error");
 		});
 	}
 	$scope.keepGameUserPrivate = function(id) {

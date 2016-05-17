@@ -19,6 +19,10 @@
 	</div>
 	
 	<div class="container-fluid" ng-show="isYourGame">
+		<p>Select limit date for your exchange</p>
+		<input type="date" name="returnDate" max="2020-12-31" min="2000-12-31" ng-model="returnDate"/>
+		<br/>
+		<br/>
 		<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
 	</div>
 	

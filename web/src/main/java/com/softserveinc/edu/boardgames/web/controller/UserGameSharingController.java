@@ -2,8 +2,10 @@ package com.softserveinc.edu.boardgames.web.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,25 +55,30 @@ public class UserGameSharingController {
 		return exchangeService.getExchangeDTO(exchange.getId());
 	}
 	
-	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}", method = RequestMethod.PUT)
+	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}/{returnDate}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void makeGameUserAvailable(@PathVariable Integer gameUserId) {
-		
-		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("available");
-		gameUserService.update(gameUserToUpdate);
-		
-		Exchange exchange = new Exchange();
-		exchange.setGameUser(gameUserToUpdate);
-		exchange.setMessage("Hey man!");
+	public void makeGameUserAvailable(@PathVariable Integer gameUserId, 
+			@PathVariable java.util.Date returnDate) {
+	
 		LocalDate localDate = LocalDate.now();
-		localDate.plusDays(14);
-		exchange.setDateOfReturn(new Date(localDate.getYear(), 
-				localDate.getMonthValue(), 
-				localDate.getDayOfMonth()));
-		exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-		exchange.setUserApplierId(0);
-		exchangeService.update(exchange);
+		LocalDate userDate = returnDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
+		if (localDate.getYear() <= userDate.getYear()) {
+			if (localDate.getDayOfYear() <= userDate.getDayOfYear()) {
+					
+				GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+				gameUserToUpdate.setStatus("available");
+				gameUserService.update(gameUserToUpdate);
+					
+				Exchange exchange = new Exchange();
+				exchange.setGameUser(gameUserToUpdate);
+				exchange.setMessage("Hey man!");
+				localDate.plusDays(14);
+				exchange.setDateOfReturn(Date.from(userDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
+				exchange.setUserApplierId(0);
+				exchangeService.update(exchange);
+			}
+		}
 	}
 	
 	@RequestMapping(value="/makeGameUserPrivate/{gameUserId}", method = RequestMethod.PUT)
