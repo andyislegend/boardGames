@@ -2,7 +2,6 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,6 +40,9 @@ public class Exchange implements Serializable{
 	@Column(name = "message")
 	private String message = "no message";
 	
+	@Column(name = "applyingDate")
+	private Date applyingDate;
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private User user;
 	
@@ -59,6 +61,14 @@ public class Exchange implements Serializable{
 		this.message = message;
 		this.user = user;
 		this.gameUser = gameUser;
+	}
+
+	public Date getApplyingDate() {
+		return applyingDate;
+	}
+
+	public void setApplyingDate(Date applyingDate) {
+		this.applyingDate = applyingDate;
 	}
 
 	public Integer getId() {

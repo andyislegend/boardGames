@@ -113,6 +113,12 @@ public class UserGameSharingController {
 		GameUser gameUserOfOwner = gameUserService.getUserGamesById(gameUserId);
 		gameUserOfOwner.setStatus("shared");
 		gameUserService.update(gameUserOfOwner);
+		
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		LocalDate localDate = LocalDate.now();
+		exchange.setApplyingDate(Date.from(localDate
+				.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		exchangeService.update(exchange);
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
