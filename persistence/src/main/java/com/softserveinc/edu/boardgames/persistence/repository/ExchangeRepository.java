@@ -23,7 +23,7 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer>{
 	        + "and user.id = exchange.userApplierId")
 	public InfoFromApplierDTO getInfoFromAppliersDTO(@Param("id")Integer id);
 	
-	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO(gameUser.game.id, "
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO(gameUser.id, "
 			+ "exchange.user.username, exchange.message , gameUser.game.name, gameUser.game.category.name) "
 	        + "from Exchange exchange "
 	        + "inner join exchange.gameUser gameUser "
