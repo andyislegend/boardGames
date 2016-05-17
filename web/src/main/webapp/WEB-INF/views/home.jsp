@@ -127,6 +127,10 @@
 					</div>
 				</div>
 				<ul class="nav navbar-nav navbar-right" ng-controller='getAvatar'>
+					<li><span class="btn btn-link"><a href="?locale=en">
+						<img id="flag"src="resources/images/gb.png" /></a>
+						<a href="?locale=ua"><img id="flag"src="resources/images/ua.png" /></a></span>
+					</li>
 					<li><a class="btn btn-secondary btn-lg disabled">Welcome
 							back, <em><b style="color: white">${user}</b></em>
 					</a></li>

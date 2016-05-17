@@ -53,9 +53,9 @@
 				</ul> -->
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
-						data-target="#myModal">Login</a></li>
+						data-target="#myModal"><spring:message code="label.comeIn"/></a></li>
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
-						data-target="#myReg"> Registration</a></li>
+						data-target="#myReg"><spring:message code="label.registration"/></a></li>
 					<li><span class="btn btn-link"><a href="?locale=en">
 						<img id="flag"src="resources/images/gb.png" /></a>
 						<a href="?locale=ua"><img id="flag"src="resources/images/ua.png" /></a></span>
