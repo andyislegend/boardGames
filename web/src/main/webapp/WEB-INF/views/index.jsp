@@ -51,6 +51,7 @@
 					<li><a href="#tournaments"><i class="fa fa-comment"></i>
 							Tournaments</a></li>
 				</ul> -->
+				
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#myModal"><spring:message code="label.comeIn"/></a></li>

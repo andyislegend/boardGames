@@ -111,8 +111,8 @@
 				</div>
 
 				<div>
-					<div style="margin-left: 48%" ng-controller="search">
-						<form data-ng-submit=submit() style="margin-left: 15%;"
+					<div style="margin-left: 40%" ng-controller="search">
+						<form data-ng-submit=submit() style="margin-left: 12%;"
 							class="navbar-form navbar-left" role="search">
 							<form id="searchthis" style="display: inline;" method="get">
 								<input id="search-box" name="q" size="50" type="text"
