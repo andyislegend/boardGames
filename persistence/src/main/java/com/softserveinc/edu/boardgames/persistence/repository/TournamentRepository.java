@@ -30,6 +30,11 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
             "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
             + ") from Tournament t")
     public List<AllTournamentsDTO> getAllTournaments();
+    
+    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
+            + ") from Tournament t where t.id = :id")
+    public AllTournamentsDTO getTournamentsById(@Param("id") Integer id);
 //    
 //    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
 //            "(t.id, t.name, t.userCreator.username, t.country, " +
