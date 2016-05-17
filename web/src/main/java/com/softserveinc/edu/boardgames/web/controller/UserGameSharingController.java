@@ -3,9 +3,9 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,8 +72,8 @@ public class UserGameSharingController {
 				Exchange exchange = new Exchange();
 				exchange.setGameUser(gameUserToUpdate);
 				exchange.setMessage("Hey man!");
-				localDate.plusDays(14);
-				exchange.setDateOfReturn(Date.from(userDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				Long days = localDate.until( userDate, ChronoUnit.DAYS);
+				exchange.setPeriod(days.intValue());
 				exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 				exchange.setUserApplierId(0);
 				exchangeService.update(exchange);
@@ -113,6 +113,12 @@ public class UserGameSharingController {
 		GameUser gameUserOfOwner = gameUserService.getUserGamesById(gameUserId);
 		gameUserOfOwner.setStatus("shared");
 		gameUserService.update(gameUserOfOwner);
+		
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		LocalDate localDate = LocalDate.now();
+		exchange.setApplyingDate(Date.from(localDate
+				.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		exchangeService.update(exchange);
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -125,11 +131,6 @@ public class UserGameSharingController {
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		exchange.setUserApplierId(0);
-		LocalDate localDate = LocalDate.now();
-		localDate.plusDays(14);
-		exchange.setDateOfReturn(new Date(localDate.getYear(), 
-				localDate.getMonthValue(), 
-				localDate.getDayOfMonth()));
 		exchange.setMessage("Hey you!");
 		exchangeService.update(exchange);
 	}
@@ -143,5 +144,23 @@ public class UserGameSharingController {
 		gameUserService.update(gameUserToUpdate);
 		
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
+	}
+	
+	@RequestMapping(value="/getHowManyDaysForExchange/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getHowManyDaysOwnerRequire(@PathVariable Integer gameUserId) {
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		return exchange.getPeriod();
+	}
+	
+	@RequestMapping(value="/getHowManyDaysRemains/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		LocalDate localDate = LocalDate.now();
+		LocalDate deadLine = exchange.getApplyingDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		deadLine.plusDays(exchange.getPeriod());
+		Long days = localDate.until(deadLine, ChronoUnit.DAYS);
+		return days.intValue();
 	}
 }

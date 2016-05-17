@@ -36,6 +36,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	$scope.isntYourGame = false;
 	$scope.isThereConfiramtion = false;
 	$scope.canGiveBack = false;
+	$scope.doWantToApply = false;
 	
 	$scope.updateGame = function(){
 		var game = {
@@ -129,6 +130,15 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
+					
+					$http({
+						method : "GET",
+						url : 'getHowManyDaysRemains/' + id
+					}).then(function mySucces(response) {
+						$scope.howManyDaysRemains = response.data;
+					}, function myError(response) {
+						alert("getting exchange period error");
+					});
 				}
 				else {
 					$scope.isYourGame = false;
@@ -156,6 +166,23 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	
 	$scope.gameDetailById = function(id) {
 		$scope.games = [];
+	}
+	
+	$scope.displayRequestBlockClick = function(id) {
+		if ($scope.doWantToApply === true)
+			$scope.doWantToApply = false;
+		else {
+			$scope.doWantToApply = true;
+			
+			$http({
+				method : "GET",
+				url : 'getHowManyDaysForExchange/' + id
+			}).then(function mySucces(response) {
+				$scope.howManyDays = response.data;
+			}, function myError(response) {
+				alert("getting exchange period error");
+			});
+		}
 	}
 	
 	$scope.$on('changingGameStatus', function(event, data) {
