@@ -3,6 +3,7 @@ var indexModule = angular.module('indexModule', []);
 indexModule.controller('loginCntrl', [
 		'$scope',
 		'$http',
+		'$timeout',
 		function($scope, $http) {
 			$scope.login = function() {
 
@@ -28,7 +29,11 @@ indexModule.controller('loginCntrl', [
 
 					if (path === "home") {
 						$scope.closeModal();
-						window.location.replace(path);
+						$scope.showModalLoading();
+						window.setTimeout(function() {
+							window.location.replace(path);
+						}, 2500)
+
 					}
 
 					else if (path === "under_verification") {
@@ -49,7 +54,8 @@ indexModule.controller('loginCntrl', [
 				response.error(function(data) {
 					console.dir(data);
 				});
-
+				
+				
 				function redirectByState(state) {
 					var path = undefined;
 
@@ -86,6 +92,10 @@ indexModule.controller('loginCntrl', [
 
 			$scope.showModalBanned = function() {
 				$('#myBanned').modal('show');
+			}
+			
+			$scope.showModalLoading = function() {
+				$('#myLoading').modal('show');
 			}
 
 		} ]);

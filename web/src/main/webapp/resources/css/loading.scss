@@ -1,0 +1,226 @@
+/* Table of contents
+---------------
+- Imports
+- Mixins
+- Extends
+- Main Elements
+*/
+
+/*
+IMPORTS
+*/
+@import url('http://fonts.googleapis.com/css?family=Montserrat');
+
+/*
+MIXINS
+*/
+@mixin transition($n) {
+	-webkit-transition: $n;
+	-moz-transition: $n;
+	-o-transition: $n;
+	-ms-transition: $n;
+  transition: $n;
+}
+
+@mixin animation($a) {
+	-webkit-animation: $a;
+	-moz-animation: $a;
+	-o-animation: $a;
+	-ms-animation: $a;
+	animation: $a;
+}
+
+@mixin animation-name($an) {
+	-webkit-animation-name: $an;
+	-moz-animation-name: $an;
+	-o-animation-name: $an;
+	-ms-animation-name: $an;
+	animation-name: $an;
+}
+
+@mixin transform($t) {
+	-webkit-transform: $t;
+	-moz-transform: $t;
+	-o-transform: $t;
+	-ms-transform: $t;
+	transform: $t;
+}
+
+@mixin image-import($x, $y, $url) {
+	background-image: url($url);
+	width: $x;
+	height: $y;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+/*
+EXTENDS
+*/
+.center-hv
+{
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+}
+
+/*
+CONTAINER
+*/
+.loading
+{
+  font-family: 'Montserrat', sans-serif;
+  background-color: #292929;
+  color: white;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+  padding: 0;
+	top: 0;
+  left: 0;
+
+  @include transition(2s ease-in-out);
+}
+
+/*
+MAIN ELEMENTS
+*/
+.intro-stars
+{
+	position: absolute;
+  top: 40%;
+	opacity: 1;
+  @include image-import(100%, 960px, 'http://biacosta.com/img/loading/starsLoading.png');
+  @extend .center-hv;
+}
+
+.ufo
+{
+	position: absolute;
+  @extend .center-hv;
+  @include image-import(130px, 256px, 'http://biacosta.com/img/loading/ufo.png');
+	top: 55%;
+}
+
+.ufo.light
+{
+	background-image: url('http://biacosta.com/img/loading/ufoLight.png');
+	opacity: 0;
+  @include animation(3s ease-in-out infinite normal running);
+  @include animation-name(switch);
+}
+
+@include keyframes(switch) {
+	30% {
+		opacity: 0;
+	}
+	40% {
+		opacity: 1;
+	}
+	80% {
+		opacity: 1;
+	}
+	90%
+	{
+		opacity: 0;
+	}
+}
+
+.small-ghost
+{
+	position: absolute;
+  @include image-import(40px, 53px, 'http://biacosta.com/img/ghost/smallGhost.png');
+	bottom: 15px;
+	right: -130px;
+	opacity: 0;
+  @include animation(3s ease-in-out infinite normal running);
+  @include animation-name(float);
+}
+
+@include keyframes(float)
+{
+  0% {
+		opacity: 0;
+		right: -130px;
+		bottom: 15px;
+	}
+	20% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+		right: 45px;
+		bottom: 15px;
+		@include transform(rotate(0deg));
+	}
+	90% {
+		right: 45px;
+		bottom: 150px;
+	  @include transform(rotate(360deg));
+
+		opacity: 0;
+	}
+}
+
+.loading-small-cloud
+{
+	position: absolute;
+  @include image-import(57px, 38px, 'http://biacosta.com/img/loading/cloud.png');
+
+	top: -30px;
+	left: -40px;
+  
+  @include animation(1.5s ease-in-out infinite alternate running);
+  @include animation-name(cloudLeft);
+}
+
+.loading-small-cloud.reverse
+{
+	background-image: url('http://biacosta.com/img/loading/cloudReverse.png');
+	
+	top: -50px;
+	left: 100px;
+  
+  @include animation-name(cloudRight);
+}
+
+@include keyframes(cloudLeft)
+{
+	from {
+		left: -30px;
+	}
+	to {
+		left: -60px;
+	}
+}
+
+@include keyframes(cloudRight)
+{
+	from {
+		left: 100px;
+	}
+	to {
+		left: 80px;
+	}
+}
+
+.loading-text
+{
+  @extend .center-hv;
+	position: absolute;
+	top: 85%;
+	font-size: 25px;
+	text-transform: uppercase;
+	letter-spacing: 3px;	
+}

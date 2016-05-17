@@ -1,0 +1,320 @@
+/* Table of contents
+---------------
+- Imports
+- Mixins
+- Extends
+- Main Elements
+*/
+/*
+IMPORTS
+*/
+@import url("http://fonts.googleapis.com/css?family=Montserrat");
+/*
+MIXINS
+*/
+/*
+EXTENDS
+*/
+.center-hv, .intro-stars, .ufo, .loading-text {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/*
+CONTAINER
+*/
+.loading {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #292929;
+  color: white;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  -webkit-transition: 2s ease-in-out;
+  -moz-transition: 2s ease-in-out;
+  -o-transition: 2s ease-in-out;
+  -ms-transition: 2s ease-in-out;
+  transition: 2s ease-in-out;
+}
+
+/*
+MAIN ELEMENTS
+*/
+.intro-stars {
+  position: absolute;
+  top: 40%;
+  opacity: 1;
+  background-image: url("http://biacosta.com/img/loading/starsLoading.png");
+  width: 100%;
+  height: 960px;
+}
+
+.ufo {
+  position: absolute;
+  background-image: url("http://biacosta.com/img/loading/ufo.png");
+  width: 130px;
+  height: 256px;
+  top: 55%;
+}
+
+.ufo.light {
+  background-image: url("http://biacosta.com/img/loading/ufoLight.png");
+  opacity: 0;
+  -webkit-animation: 3s ease-in-out infinite normal running;
+  -moz-animation: 3s ease-in-out infinite normal running;
+  -o-animation: 3s ease-in-out infinite normal running;
+  -ms-animation: 3s ease-in-out infinite normal running;
+  animation: 3s ease-in-out infinite normal running;
+  -webkit-animation-name: switch;
+  -moz-animation-name: switch;
+  -o-animation-name: switch;
+  -ms-animation-name: switch;
+  animation-name: switch;
+}
+
+@-webkit-keyframes switch {
+  30% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes switch {
+  30% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+}
+@keyframes switch {
+  30% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+}
+.small-ghost {
+  position: absolute;
+  background-image: url("http://biacosta.com/img/ghost/smallGhost.png");
+  width: 40px;
+  height: 53px;
+  bottom: 15px;
+  right: -130px;
+  opacity: 0;
+  -webkit-animation: 3s ease-in-out infinite normal running;
+  -moz-animation: 3s ease-in-out infinite normal running;
+  -o-animation: 3s ease-in-out infinite normal running;
+  -ms-animation: 3s ease-in-out infinite normal running;
+  animation: 3s ease-in-out infinite normal running;
+  -webkit-animation-name: float;
+  -moz-animation-name: float;
+  -o-animation-name: float;
+  -ms-animation-name: float;
+  animation-name: float;
+}
+
+@-webkit-keyframes float {
+  0% {
+    opacity: 0;
+    right: -130px;
+    bottom: 15px;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+    right: 45px;
+    bottom: 15px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  90% {
+    right: 45px;
+    bottom: 150px;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+}
+@-moz-keyframes float {
+  0% {
+    opacity: 0;
+    right: -130px;
+    bottom: 15px;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+    right: 45px;
+    bottom: 15px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  90% {
+    right: 45px;
+    bottom: 150px;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+}
+@keyframes float {
+  0% {
+    opacity: 0;
+    right: -130px;
+    bottom: 15px;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+    right: 45px;
+    bottom: 15px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  90% {
+    right: 45px;
+    bottom: 150px;
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+}
+.loading-small-cloud {
+  position: absolute;
+  background-image: url("http://biacosta.com/img/loading/cloud.png");
+  width: 57px;
+  height: 38px;
+  top: -30px;
+  left: -40px;
+  -webkit-animation: 1.5s ease-in-out infinite alternate running;
+  -moz-animation: 1.5s ease-in-out infinite alternate running;
+  -o-animation: 1.5s ease-in-out infinite alternate running;
+  -ms-animation: 1.5s ease-in-out infinite alternate running;
+  animation: 1.5s ease-in-out infinite alternate running;
+  -webkit-animation-name: cloudLeft;
+  -moz-animation-name: cloudLeft;
+  -o-animation-name: cloudLeft;
+  -ms-animation-name: cloudLeft;
+  animation-name: cloudLeft;
+}
+
+.loading-small-cloud.reverse {
+  background-image: url("http://biacosta.com/img/loading/cloudReverse.png");
+  top: -50px;
+  left: 100px;
+  -webkit-animation-name: cloudRight;
+  -moz-animation-name: cloudRight;
+  -o-animation-name: cloudRight;
+  -ms-animation-name: cloudRight;
+  animation-name: cloudRight;
+}
+
+@-webkit-keyframes cloudLeft {
+  from {
+    left: -30px;
+  }
+  to {
+    left: -60px;
+  }
+}
+@-moz-keyframes cloudLeft {
+  from {
+    left: -30px;
+  }
+  to {
+    left: -60px;
+  }
+}
+@keyframes cloudLeft {
+  from {
+    left: -30px;
+  }
+  to {
+    left: -60px;
+  }
+}
+@-webkit-keyframes cloudRight {
+  from {
+    left: 100px;
+  }
+  to {
+    left: 80px;
+  }
+}
+@-moz-keyframes cloudRight {
+  from {
+    left: 100px;
+  }
+  to {
+    left: 80px;
+  }
+}
+@keyframes cloudRight {
+  from {
+    left: 100px;
+  }
+  to {
+    left: 80px;
+  }
+}
+.loading-text {
+  position: absolute;
+  top: 85%;
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}

@@ -404,3 +404,50 @@ word-wrap: break-word;
     .tab.active {
         display:block;
     }
+/***************************/
+
+.type-header{
+    width: 70px;
+}
+.sign-header{
+    width: 70px;
+    text-align: center;
+}
+.current-user-name{
+    width: 150px;
+    text-align: center;
+}
+.notification-message-body{
+    width: 420px;
+    word-wrap: break-word;
+    text-align: center;
+}
+.friend-user-name{
+    width: 150px;
+    text-align: center;
+}
+.notreadmessage{
+    transition: .15s ease-in-out;
+    border-radius: 0px;
+    background: #F43939;
+}
+.notreadmessage-body{
+    background: #F8EBEB;
+    height: 45px;
+}
+.notification-message{
+    width: 27px;
+    height: 27px;
+}
+.notification-line{
+}
+.nitification-a{
+    display: inline-flex;
+    text-decoration: none;
+    color: black;
+}
+.nitification-a:hover{
+    display: inline-flex;
+    text-decoration: none;
+    color: black;
+}
