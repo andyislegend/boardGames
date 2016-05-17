@@ -95,16 +95,36 @@ public class Image implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Image other = (Image) obj;
+	    return new EqualsBuilder().append(getId(), other.getId())
+	                              .append(getUser(), other.getUser())
+	                              .append(getImageName(), other.getImageName())
+	                              .append(getImageLocation(), other.getImageLocation())
+	                              .isEquals();
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		 return new HashCodeBuilder().append(getId())
+				 .append(getUser())
+                 .append(getImageName())
+                 .append(getImageLocation())
+                 .toHashCode();
 	}
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return new ToStringBuilder(this)
+        		.append("id", getId())
+                .append("name", getUser())
+                .append("country", getImageName())
+                .append("country", getImageLocation())
+                .toString();
+    }
 }

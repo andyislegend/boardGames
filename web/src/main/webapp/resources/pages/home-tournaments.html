@@ -46,7 +46,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div></th>
+                              </div></th>
                         </tr>
                            <tr>
                               <th/>Tournament name</th>
@@ -55,7 +55,7 @@
                         </thead>
                         <tbody>
                            <tr ng-repeat="x in tournaments">
-                              <td>{{ x.tournamentName }}</td>
+                              <td><a href = "#tournament/{{x.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ x.tournamentName }}</a></td>
                               <td>{{ x.userCreatorName }}</td>
                            </tr>
                         </tbody>

@@ -3,6 +3,11 @@ var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 
 homeApp.config(function($routeProvider) {
 	$routeProvider
 
+	.when('/', {
+		templateUrl : 'resources/pages/home-statistics.html',
+	// controller : "...Ctrl"
+	})
+	
 	.when('/statistics', {
 		templateUrl : 'resources/pages/home-statistics.html',
 	// controller : "...Ctrl"
@@ -32,6 +37,10 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-editUser.html',
 		controller : 'editProfileCtrl'
 	})
+	.when('/notification', {
+		templateUrl : 'resources/pages/home-notification.html',
+		controller : 'notificationCtrl'
+	})
 
 	.when('/tournaments', {
 		templateUrl : 'resources/pages/home-tournaments.html',
@@ -54,10 +63,13 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-editGame.html',
 		controller : 'allUsersGameCtrl'
 	})
-
+	.when('/tournament/:id', {
+		templateUrl : 'resources/pages/home-tournamentDetails.html',
+	    controller : 'showAllTournamentsCtrl'
+	})
 	.otherwise({
 		redirectTo : '/statistics'
-	});
+	})
 
 });
 

@@ -1,4 +1,3 @@
-
 use boardgames;
 
 --  inserts to table country
@@ -52,13 +51,16 @@ INSERT INTO city (name, countryId) VALUES ('Bytom', 2);
 
 
 --  inserts to table address
-INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (57, 1, '100', '79002', '23', 'pr. Svobody');
-INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (54, 1, '56', '86005', '78', 'Checheta');
-INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (49, 1, '12', '77445', '25', 'Ozerna');
-INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (59, 1, '86', '98765', '49', 'Shyroka');
+INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (13, 1, '100', '79002', '23', 'pr. Svobody');
+INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (10, 1, '56', '86005', '78', 'Checheta');
+INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (5, 1, '12', '77445', '25', 'Ozerna');
+INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (15, 1, '86', '98765', '49', 'Shyroka');
 
 
 --  inserts to table user
+INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `gender`, `lastName`, `password`, `phoneNumber`, `rating`, `state`, `userRating`, `username`, `addressId`) 
+VALUES (NULL, '45', 'prosinecki', 'vladislav', 'male', 'prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '5');
+
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating, rating, gender, state, username, addressId) values
 (99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000',  0,'GODLIKE', 'female', 'ACTIVE', 'root', 1);
 
