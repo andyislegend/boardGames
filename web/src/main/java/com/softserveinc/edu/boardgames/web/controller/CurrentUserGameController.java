@@ -17,7 +17,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.GameUserMapper;
 import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
-import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -38,9 +37,6 @@ public class CurrentUserGameController {
 	
 	@Autowired
 	private GameUserService gameUserService;
-	
-	@Autowired
-	private GameService gameService;
 	
 	@Autowired
 	private ExchangeService exchangeService;
@@ -69,16 +65,15 @@ public class CurrentUserGameController {
 	@ResponseBody
 	public List<InfoFromApplierDTO> showBorrowedGames() {
 		List<InfoFromApplierDTO> borrowedGames = 
-				exchangeService.getAllBorrowedGames(
-						userService.getUser(WebUtil.getPrincipalUsername()).getId());
+			exchangeService.getAllBorrowedGames(
+					userService.getUser(WebUtil.getPrincipalUsername()).getId());
 		return borrowedGames;
 	}
 	
 	/**
 	 * Add new game for user
 	 * 
-	 * @param gameUserDTO
-	 * 					 user game
+	 * @param gameUserDTO, user game
 	 * @return
 	 */
 	@RequestMapping(value = "NewGame", method = RequestMethod.POST)

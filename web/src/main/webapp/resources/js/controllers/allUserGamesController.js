@@ -133,7 +133,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					
 					$http({
 						method : "GET",
-						url : 'getHowManyDaysRemains/' + id
+						url : 'getHowManyDaysRemains/' + $scope.games.id
 					}).then(function mySucces(response) {
 						$scope.howManyDaysRemains = response.data;
 					}, function myError(response) {

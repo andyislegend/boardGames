@@ -1,9 +1,16 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
 import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
+import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -156,11 +163,17 @@ public class UserGameSharingController {
 	@RequestMapping(value="/getHowManyDaysRemains/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
+		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		LocalDate localDate = LocalDate.now();
-		LocalDate deadLine = exchange.getApplyingDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		deadLine.plusDays(exchange.getPeriod());
-		Long days = localDate.until(deadLine, ChronoUnit.DAYS);
-		return days.intValue();
+		
+		java.util.Date date = exchange.getApplyingDate();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DATE, exchange.getPeriod()); 
+		date = calendar.getTime();
+		
+		LocalDate deadLine = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return Period.between(localDate, deadLine).getDays();
 	}
 }
