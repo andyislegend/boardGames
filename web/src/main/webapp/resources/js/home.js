@@ -63,10 +63,13 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-editGame.html',
 		controller : 'allUsersGameCtrl'
 	})
-
+	.when('/tournament/:id', {
+		templateUrl : 'resources/pages/home-tournamentDetails.html',
+	    controller : 'showAllTournamentsCtrl'
+	})
 	.otherwise({
 		redirectTo : '/statistics'
-	});
+	})
 
 });
 

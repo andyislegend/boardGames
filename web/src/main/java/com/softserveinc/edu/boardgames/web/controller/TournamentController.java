@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +36,12 @@ public class TournamentController {
     @ResponseBody
     public List<AllTournamentsDTO> getAllTournaments() {
     	return tournamentService.getAllTornaments();
+    }
+    
+    @RequestMapping(value = "/tournament/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public AllTournamentsDTO getTournamentById(@PathVariable Integer id){
+    	return tournamentService.getTournamentById(id);
     }
     
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
