@@ -98,8 +98,10 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 				  for (var i = 0; i < data.length; i++) {
 					  data[i].countryName = "";
 					  data[i].cityName = "";
-					  data[i].countryName = data[i].address.country.name;
-					  data[i].cityName = data[i].address.city.name;
+					  if (data[i].address != null) {
+						  data[i].countryName = data[i].address.country.name;
+						  data[i].cityName = data[i].address.city.name;
+					  }	
 				  }
 		    	 $scope.usersByParams = params.sorting() ? 
 		      			$filter('orderBy')(data, params.orderBy()) 
