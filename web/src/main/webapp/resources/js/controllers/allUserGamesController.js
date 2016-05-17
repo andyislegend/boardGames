@@ -168,6 +168,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		$scope.games = [];
 	}
 	
+	
 	$scope.displayRequestBlockClick = function(id) {
 		if ($scope.doWantToApply === true)
 			$scope.doWantToApply = false;
@@ -182,7 +183,21 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			}, function myError(response) {
 				alert("getting exchange period error");
 			});
+			
+			$http({
+				method : "GET",
+				url : 'getAllMyGamesCurUser'
+			}).then(function mySucces(response) {
+				$scope.myGames = response.data;
+			}, function myError(response) {
+				alert("getting my games error");
+			});
 		}
+	}
+	
+	$scope.gamesToPropose = [];
+	$scope.addToProposes = function() {
+		$scope.gamesToPropose.push($scope.myGameSelect);
 	}
 	
 	$scope.$on('changingGameStatus', function(event, data) {
@@ -197,7 +212,6 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	});
 	
 	$scope.makeGameUserAvailable = function(id) {
-		alert($scope.returnDate);
 		$http({
 			method : "PUT",
 			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate
