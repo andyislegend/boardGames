@@ -152,4 +152,15 @@ public class UserGameSharingController {
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		return exchange.getPeriod();
 	}
+	
+	@RequestMapping(value="/getHowManyDaysRemains/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		LocalDate localDate = LocalDate.now();
+		LocalDate deadLine = exchange.getApplyingDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		deadLine.plusDays(exchange.getPeriod());
+		Long days = localDate.until(deadLine, ChronoUnit.DAYS);
+		return days.intValue();
+	}
 }

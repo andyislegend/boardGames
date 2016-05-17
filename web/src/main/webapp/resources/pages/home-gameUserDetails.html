@@ -33,6 +33,7 @@
 	
 	<div class="container-fluid" ng-show="isntYourGame">
 		<button class="btn btn-primary" ng-click="displayRequestBlockClick(games.id)">Let's make a deal!</button>
+		<br/>
 		<div class="form-group" ng-show="doWantToApply">
 			<p>Days: {{howManyDays}}</p>
 	  		<label for="comment">Message for owner:</label>
@@ -49,6 +50,7 @@
 	</div>
 	
 	<div class="container-fluid" ng-show="canGiveBack">
+		<p>Days remains: {{howManyDaysRemains}}</p>
 		<button class="btn btn-primary" ng-click="giveBackGame(games.id)">Give back to owner</button>
 	</div>
 

@@ -130,6 +130,15 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
+					
+					$http({
+						method : "GET",
+						url : 'getHowManyDaysRemains/' + id
+					}).then(function mySucces(response) {
+						$scope.howManyDaysRemains = response.data;
+					}, function myError(response) {
+						alert("getting exchange period error");
+					});
 				}
 				else {
 					$scope.isYourGame = false;
