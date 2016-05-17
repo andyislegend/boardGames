@@ -65,16 +65,30 @@ public class Country implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Country other = (Country) obj;
+	    return new EqualsBuilder().append(getId(), other.getId())
+	                              .append(getName(), other.getName())
+	                              .isEquals();
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		 return new HashCodeBuilder().append(getId())
+				 .append(getName())
+                 .toHashCode();
 	}
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return new ToStringBuilder(this)
+        		.append("id", getId())
+                .append("name", getName())
+                .toString();
+    }
 }

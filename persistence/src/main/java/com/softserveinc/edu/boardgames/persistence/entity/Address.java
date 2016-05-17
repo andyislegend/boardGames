@@ -142,16 +142,45 @@ public class Address implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Address other = (Address) obj;
+	    return new EqualsBuilder().append(getId(), other.getId())
+	                              .append(getCountry(), other.getCountry())
+	                              .append(getCity(), other.getCity())
+	                              .append(getPostCode(), other.getPostCode())
+	                              .append(getStreet(), other.getStreet())
+	                              .append(getHouseNumber(), other.getHouseNumber())
+	                              .append(getRoomNumber(), other.getRoomNumber())
+	                              .isEquals();
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		 return new HashCodeBuilder().append(getId())
+				 .append(getCountry())
+				 .append(getCity())
+				 .append(getPostCode())
+				 .append(getStreet())
+				 .append(getHouseNumber())
+				 .append(getRoomNumber())
+                 .toHashCode();
 	}
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", getId())
+                .append("username", getCountry())
+                .append("firstName", getCity())
+                .append("lastName", getPostCode())
+                .append("gender", getStreet())
+                .append("age", getHouseNumber())
+                .append("email", getRoomNumber())
+                .toString();
+    }
 }
