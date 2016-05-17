@@ -1,20 +1,7 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<link href="resources/bower_components/bootstrap/dist/css/bootstrap.css"
-	rel="stylesheet" crossorigin="anonymous" />
-<link rel="stylesheet" href="resources/css/fonts.css" />
-<script type="text/javascript" src="resources/js/registration.js"></script>
-<link rel="stylesheet" href="resources/css/users.css" />
-<script src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
-
-</head>
-<body>
-<div ng-controller="editProfileCtrl">
-    <h3 style="font-family: monospace" id="headerUsers" ng-show="myProfile"> Edit My Profile </h3>
-    <h3 style="font-family: monospace" id="headerUsers" ng-hide="myProfile"> Friend Profile </h3>
-    <div>
+<div ng-controller="editProfileCtrl" class="col-sm-12">
+    <h1 id="headerUsers" ng-show="myProfile"> Edit Profile </h1>
+    <h1 id="headerUsers" ng-hide="myProfile"> Friend Profile </h1>
+    <div >
 		<div class="col-sm-12">
 
 				<div class="row">
@@ -109,7 +96,7 @@
 					</div>
 				</div>
 				<span class="col-sm-3"></span>
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg">
 						Save</button>
 				</div>
@@ -150,7 +137,7 @@
 						</div>
 					</div>
 					<span class="col-sm-3"></span>
-						<div class="col-sm-5">
+						<div class="col-sm-3">
 						<button ng-click="saveNewUserPassword()" id="saveUserUpdate" 
 							class="btn btn-primary btn-bg">Save password
 						</button>
@@ -164,5 +151,3 @@
 				</div>
 				</div>
 </div>
-</body>
-</html>
