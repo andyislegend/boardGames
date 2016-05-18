@@ -1,4 +1,4 @@
-<div ng-controller="editProfileCtrl" class="col-sm-12">
+<div ng-controller="editProfileCtrl" class="col-sm-12" id="editProfile">
     <h1 id="headerUsers" ng-show="myProfile"> Edit Profile </h1>
     <h1 id="headerUsers" ng-hide="myProfile"> Friend Profile </h1>
     <div >
@@ -12,8 +12,7 @@
 								<br>
 								<label id="uploadButton" ng-show="myProfile">
 								<input type="file" file-model="myFile" name="fileUpload"
-									class="fileUpload" accept="image/*" onchange="loadFile(event)"
-									>
+									class="fileUpload" accept="image/*" onchange="loadFile(event)">
 
 								</label>
 								<button ng-click = "uploadAvatar()" id="uploadButton" ng-show="myProfile"
@@ -96,7 +95,7 @@
 					</div>
 				</div>
 				<span class="col-sm-3"></span>
-				<div class="col-sm-3">
+				<div class="col-sm-4">
 					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg">
 						Save</button>
 				</div>
@@ -137,7 +136,7 @@
 						</div>
 					</div>
 					<span class="col-sm-3"></span>
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 						<button ng-click="saveNewUserPassword()" id="saveUserUpdate" 
 							class="btn btn-primary btn-bg">Save password
 						</button>

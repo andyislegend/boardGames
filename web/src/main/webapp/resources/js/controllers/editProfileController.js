@@ -30,21 +30,23 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	});
 	
 	$scope.saveUser = function() {
+	var userDTO = {
+		firstName : $scope.editableFirstName,
+		lastName : $scope.editableLastName,
+		username : $scope.editableUsername,
+		email : $scope.editableEmail,
+		gender : $scope.editableGender,
+		age : $scope.editableAge,
+		phoneNumber : $scope.editablePhoneNumber
+		};
 		$http({
 			method : 'PUT',
 			url : 'updateUser',
-			data : $.param({
-				firstName : $scope.editableFirstName,
-				lastName : $scope.editableLastName,
-				username : $scope.editableUsername,
-				email : $scope.editableEmail,
-				gender : $scope.editableGender,
-				age : $scope.editableAge,
-				phoneNumber : $scope.editablePhoneNumber
-			}),
+			
 			headers : {
-				'Content-Type' : 'application/x-www-form-urlencoded'
-			}
+				'Content-Type' : 'application/json'
+			},
+			data : userDTO
 		}).success(function(result, status) {
 			$scope.editProfileAnswer = result;
 			$scope.userProfile.firstName = $scope.editableFirstName;

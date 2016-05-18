@@ -18,7 +18,7 @@
 
 	 position:relative;
 	 float:right;
-	 left:28%;
+	 right:8%;
 }
 
 #avatar {
@@ -62,7 +62,7 @@
 
 #userRating {
 	color : white;
-	width: 200px;
+	width: 220px;
 }
 
 .outerDiv {
@@ -100,4 +100,8 @@
 	width: 30px;
   	height: 20px;
   	margin-top:9px;
+}
+
+#editProfile {
+	margin-top:-19px;
 }

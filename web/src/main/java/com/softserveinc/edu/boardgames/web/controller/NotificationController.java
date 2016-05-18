@@ -39,4 +39,11 @@ public class NotificationController {
 		return listOfMessage;
 	}
 	
+	@RequestMapping(value = "/getCurrentUserName", method = RequestMethod.GET)
+	public String getCurrentUserName(){
+		return WebUtil.getPrincipalUsername();
+	}
+	
+	
+	
 }
