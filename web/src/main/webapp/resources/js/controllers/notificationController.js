@@ -5,4 +5,10 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
     }).error(function(error){
         console.log(error);
     });
+	
+	$http.get('getCurrentUserName').success(function(data){
+        $scope.currentUserName = data;
+    }).error(function(error){
+        console.log(error);
+    });
 }]);

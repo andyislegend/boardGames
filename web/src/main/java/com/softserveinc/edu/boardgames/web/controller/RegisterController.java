@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserPasswordDTO;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -134,11 +137,16 @@ public class RegisterController {
 
 	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<String> updateUserPassword(@RequestParam("oldPassword") String oldPassword,
-			@RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
+	public ResponseEntity<String> updateUserPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		String oldPassword = userPasswordDTO.getOldPassword();
+		String newPassword = userPasswordDTO.getNewPassword();
+		String confirmPassword = userPasswordDTO.getNewPassword();
+		if (oldPassword == null || newPassword == null || confirmPassword == null) {
+			return new ResponseEntity<String>("Some of your fields are empty", HttpStatus.CONFLICT);
+		}
 		if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-			return new ResponseEntity<String>("Sorry, but you typed wrong password", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Sorry, but you typed wrong old password", HttpStatus.CONFLICT);
 		}
 
 		if (!validatePassword(newPassword)) {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -61,17 +63,14 @@ public class UsersController {
 	
 	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseEntity<String> updateUser(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName,@RequestParam("email") String email, 
-			@RequestParam("gender") String gender, 	@RequestParam("age") Integer age, 
-			@RequestParam("phoneNumber") String phoneNumber) {
+	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setEmail(email);
-		user.setGender(gender);
-		user.setAge(age);
-		user.setPhoneNumber(phoneNumber);
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+		user.setEmail(userDTO.getEmail());
+		user.setGender(userDTO.getGender());
+		user.setAge(userDTO.getAge());
+		user.setPhoneNumber(userDTO.getPhoneNumber());
 		userService.updateUser(user);
 		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
@@ -118,8 +117,11 @@ public class UsersController {
 	 */
 	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data" ,method = RequestMethod.POST)
 	@ResponseBody
-	public void updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
+	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
 			throws Exception {
+		if (fileUpload.isEmpty()) {
+			return new ResponseEntity<String>("You haven't chosed the file", HttpStatus.CONFLICT);
+		}
 		User user = userService.findOne(WebUtil.getPrincipalUsername());		
 		Image image = new Image();
 		image.setUser(user);
@@ -128,6 +130,7 @@ public class UsersController {
 		imageService.create(image);
 		String saveDirectory = image.getImageLocation();
 		fileUpload.transferTo(new File(saveDirectory));
+		return new ResponseEntity<String>("Avatar uploaded", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/getUser"}, method = RequestMethod.GET)

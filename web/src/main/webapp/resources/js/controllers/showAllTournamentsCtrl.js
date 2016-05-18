@@ -13,7 +13,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     
     $scope.joinToTournament = function(id) {
     	$http.put('joinToTournament/'+id).success(function(result) {
-		})
+		});	
     }
     
     $scope.leaveTournament = function(id) {

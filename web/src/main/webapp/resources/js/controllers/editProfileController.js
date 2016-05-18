@@ -30,21 +30,23 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	});
 	
 	$scope.saveUser = function() {
+	var userDTO = {
+		firstName : $scope.editableFirstName,
+		lastName : $scope.editableLastName,
+		username : $scope.editableUsername,
+		email : $scope.editableEmail,
+		gender : $scope.editableGender,
+		age : $scope.editableAge,
+		phoneNumber : $scope.editablePhoneNumber
+		};
 		$http({
 			method : 'PUT',
 			url : 'updateUser',
-			data : $.param({
-				firstName : $scope.editableFirstName,
-				lastName : $scope.editableLastName,
-				username : $scope.editableUsername,
-				email : $scope.editableEmail,
-				gender : $scope.editableGender,
-				age : $scope.editableAge,
-				phoneNumber : $scope.editablePhoneNumber
-			}),
+			
 			headers : {
-				'Content-Type' : 'application/x-www-form-urlencoded'
-			}
+				'Content-Type' : 'application/json'
+			},
+			data : userDTO
 		}).success(function(result, status) {
 			$scope.editProfileAnswer = result;
 			$scope.userProfile.firstName = $scope.editableFirstName;
@@ -62,17 +64,18 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	}
 
 	$scope.saveNewUserPassword = function() {
-		$http({
-			method : 'PUT',
-			url : 'updateUserPassword',
-			data : $.param({
+		var userPasswordDTO = {
 				oldPassword : $scope.editableOldPassword,
 				newPassword : $scope.editableNewPassword,
 				confirmPassword : $scope.editableConfirmPassword
-			}),
+				};
+		$http({
+			method : 'PUT',
+			url : 'updateUserPassword',
 			headers : {
-				'Content-Type' : 'application/x-www-form-urlencoded'
-			}
+				'Content-Type' : 'application/json'
+			},
+			data : userPasswordDTO
 		}).success(function(result, status) {
 			$scope.editPasswordAnswer = result;
 			$scope.editPasswordMessage = false;
@@ -101,6 +104,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
       }]);
 
 	$scope.uploadAvatar = function() {
+		if ($scope.myFile == null) {
+			return $scope.editAvatarAnswer = "You haven't choosed the file";			
+		}
 		var file = $scope.myFile;
 	    var fileUpload = new FormData();
 	    fileUpload.append("fileUpload", file);
@@ -111,12 +117,12 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	        withCredentials: true,
 	        headers: {'Content-Type': undefined },
 	        transformRequest: angular.identity
-	    }).success(function(){
-	    	console.log("good");
+	    }).success(function(result, status){
+	    	$scope.editAvatarAnswer = result;
         })
         
-        .error(function(){
-        	console.log("bad");
+        .error(function(result, status){
+        	$scope.editAvatarAnswer = result;
         });
 
 	};

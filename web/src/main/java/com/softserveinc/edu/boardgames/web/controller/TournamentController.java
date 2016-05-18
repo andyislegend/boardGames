@@ -71,13 +71,17 @@ public class TournamentController {
         tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getUserCreatorId()));
         tournamentService.save(tournament);
     }
-    
-    
-    
+      
     @RequestMapping(value = "/getAllParticipants/{tournamentId}", method = RequestMethod.GET)
     @ResponseBody
     public Set<User> getParticipantOfTournament(@PathVariable Integer tournamentId) {
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	return tournament.getUsers();
+    }
+    
+    @RequestMapping(value = "/getCurentUser", method = RequestMethod.GET)
+    @ResponseBody
+    public User getCurrentUser(){
+    	return userService.getUser(WebUtil.getPrincipalUsername());
     }
 }
