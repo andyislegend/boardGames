@@ -1,6 +1,12 @@
 <div ng-controller = "showAllTournamentsCtrl" >
+<button ng-click = "joinToTournament(tournament.tournamentId)">Join</button>
+<button ng-click = "leaveTournament(tournament.tournamentId)">Leave</button>
 	<h1>{{tournament.tournamentName}}</h1>
 	<p>Count of participants: {{tournament.countOfParticipants}}</p>
 	<p>User creator: {{tournament.userCreatorName}}</p>
 	<p>date of tournament: {{tournament.dateOfTournament | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
+	<p>Participants :</p>
+	<div ng-repeat = "user in tournamentParticipants">
+		<p>{{user.username}}</p>
+	</div>
 </div>

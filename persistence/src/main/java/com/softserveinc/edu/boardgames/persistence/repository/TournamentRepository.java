@@ -18,7 +18,8 @@ import java.util.List;
 @Repository
 public interface TournamentRepository extends JpaRepository<Tournament,Integer> {
 
-     public Tournament findByName(String name);
+    public Tournament findById(Integer id); 
+	public Tournament findByName(String name);
     
 //    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
 //			"(t.id, t.name, t.userCreator.username, t.country, " +

@@ -3,6 +3,7 @@ var indexModule = angular.module('indexModule', []);
 indexModule.controller('loginCntrl', [
 		'$scope',
 		'$http',
+		'$timeout',
 		function($scope, $http) {
 			$scope.login = function() {
 
@@ -29,7 +30,10 @@ indexModule.controller('loginCntrl', [
 					if (path === "home") {
 						$scope.closeModal();
 						$scope.showModalLoading();
-						window.location.replace(path);
+						window.setTimeout(function() {
+							window.location.replace(path);
+						}, 2500)
+
 					}
 
 					else if (path === "under_verification") {
@@ -50,6 +54,7 @@ indexModule.controller('loginCntrl', [
 				response.error(function(data) {
 					console.dir(data);
 				});
+				
 				
 				function redirectByState(state) {
 					var path = undefined;
