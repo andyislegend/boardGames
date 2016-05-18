@@ -73,6 +73,12 @@ homeApp.config(function($routeProvider) {
 
 });
 
+homeApp.controller("getCurrentUser",function($scope, $rootScope, $http){
+	$http.get("/getCurentUser").success(function(result) {
+		$rootScope.currentUser = result.data;
+	});
+});
+
 homeApp.controller("getAvatar", function($scope, $http) {
 	$http.get('getAvatar').then(function(result) {
 		$scope.avatar = result.data;
@@ -80,5 +86,4 @@ homeApp.controller("getAvatar", function($scope, $http) {
 });
 
 homeApp.controller('search', function($scope, $rootScope){
-
 });
