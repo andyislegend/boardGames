@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
-import com.softserveinc.edu.boardgames.persistence.repository.GameRatingNumericRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.GameRatingRepository;
 
 @Service
 @Transactional
-public class GameRatingNumericService {
+public class GameRatingService {
 	
 	@Autowired
-	private GameRatingNumericRepository gameRatingNumericRepo;
+	private GameRatingRepository gameRatingNumericRepo;
 
 	public GameRating findById(Integer id) {
 		return gameRatingNumericRepo.findOne(id);

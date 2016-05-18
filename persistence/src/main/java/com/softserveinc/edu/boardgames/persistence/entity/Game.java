@@ -19,10 +19,8 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
+import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 
 /**
  * This class represents data model to game entity
