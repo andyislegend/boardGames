@@ -1,22 +1,9 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.lang.reflect.Array;
-import java.sql.Date;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,26 +63,23 @@ public class UserGameSharingController {
 	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}/{returnDate}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void makeGameUserAvailable(@PathVariable Integer gameUserId, 
-			@PathVariable java.util.Date returnDate) {
+			@PathVariable Date returnDate) {
 	
-		LocalDate localDate = LocalDate.now();
-		LocalDate userDate = returnDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
-		if (localDate.getYear() <= userDate.getYear()) {
-			if (localDate.getDayOfYear() <= userDate.getDayOfYear()) {
+		Date localDate = new Date();
+		if (returnDate.compareTo(localDate) > 0){
+		
+			GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+			gameUserToUpdate.setStatus("available");
+			gameUserService.update(gameUserToUpdate);
 					
-				GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-				gameUserToUpdate.setStatus("available");
-				gameUserService.update(gameUserToUpdate);
-					
-				Exchange exchange = new Exchange();
-				exchange.setGameUser(gameUserToUpdate);
-				exchange.setMessage("Hey man!");
-				Long days = localDate.until( userDate, ChronoUnit.DAYS);
-				exchange.setPeriod(days.intValue());
-				exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-				exchange.setUserApplierId(0);
-				exchangeService.update(exchange);
-			}
+			Exchange exchange = new Exchange();
+			exchange.setGameUser(gameUserToUpdate);
+			exchange.setMessage("Hey man!");
+			Long days = (returnDate.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
+			exchange.setPeriod(days.intValue());
+			exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
+			exchange.setUserApplierId(0);
+			exchangeService.update(exchange);			
 		}
 	}
 	
@@ -155,9 +139,8 @@ public class UserGameSharingController {
 		gameUserService.update(gameUserOfOwner);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		LocalDate localDate = LocalDate.now();
-		exchange.setApplyingDate(Date.from(localDate
-				.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		Date localDate = new Date();
+		exchange.setApplyingDate(localDate);
 		exchangeService.update(exchange);
 	}
 	
@@ -198,15 +181,14 @@ public class UserGameSharingController {
 	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		LocalDate localDate = LocalDate.now();
+		Date localDate = new Date();
 		
-		java.util.Date date = exchange.getApplyingDate();
+		Date deadLine = exchange.getApplyingDate();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+		calendar.setTime(deadLine);
 		calendar.add(Calendar.DATE, exchange.getPeriod()); 
-		date = calendar.getTime();
-		
-		LocalDate deadLine = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		return Period.between(localDate, deadLine).getDays();
+		deadLine = calendar.getTime();
+		Long days = (deadLine.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
+		return days.intValue();
 	}
 }

@@ -26,7 +26,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 @Entity
 @Table(name = "gameRatingNumeric", uniqueConstraints=@UniqueConstraint(columnNames="gameId"))
-public class GameRatingNumeric implements Serializable{
+public class GameRating implements Serializable{
 	
 	private static final long serialVersionUID = 5911151982701538423L;
 
@@ -46,9 +46,9 @@ public class GameRatingNumeric implements Serializable{
 			cascade={ CascadeType.MERGE, CascadeType.REFRESH })
 	private User user;
 
-	public GameRatingNumeric() {}
+	public GameRating() {}
 	
-	public GameRatingNumeric(Integer id, Integer rating, Game game, User user) {
+	public GameRating(Integer id, Integer rating, Game game, User user) {
 		super();
 		this.id = id;
 		this.rating = rating;
