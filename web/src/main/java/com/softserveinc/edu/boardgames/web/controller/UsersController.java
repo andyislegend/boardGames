@@ -17,7 +17,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -118,8 +117,11 @@ public class UsersController {
 	 */
 	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data" ,method = RequestMethod.POST)
 	@ResponseBody
-	public void updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
+	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
 			throws Exception {
+		if (fileUpload.isEmpty()) {
+			return new ResponseEntity<String>("You haven't chosed the file", HttpStatus.CONFLICT);
+		}
 		User user = userService.findOne(WebUtil.getPrincipalUsername());		
 		Image image = new Image();
 		image.setUser(user);
@@ -128,6 +130,7 @@ public class UsersController {
 		imageService.create(image);
 		String saveDirectory = image.getImageLocation();
 		fileUpload.transferTo(new File(saveDirectory));
+		return new ResponseEntity<String>("Avatar uploaded", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/getUser"}, method = RequestMethod.GET)
