@@ -25,13 +25,17 @@ public class GameProposition implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private GameUser gameUser;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Exchange exchange;
 
 	public GameProposition() {}
 	
-	public GameProposition(Integer id, GameUser gameUser) {
+	public GameProposition(Integer id, GameUser gameUser, Exchange exchange) {
 		super();
 		this.id = id;
 		this.gameUser = gameUser;
+		this.exchange = exchange;
 	}
 
 	public Integer getId() {
@@ -48,5 +52,13 @@ public class GameProposition implements Serializable{
 
 	public void setGameUser(GameUser gameUser) {
 		this.gameUser = gameUser;
+	}
+
+	public Exchange getExchange() {
+		return exchange;
+	}
+
+	public void setExchange(Exchange exchange) {
+		this.exchange = exchange;
 	}
 }

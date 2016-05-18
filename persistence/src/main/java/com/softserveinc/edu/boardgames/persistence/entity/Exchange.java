@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -49,6 +51,9 @@ public class Exchange implements Serializable{
 	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name="gameUserId", nullable=false)
 	private GameUser gameUser;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="exchange", cascade={CascadeType.ALL})
+    private Set<GameProposition> gamePropositions;
 
 	public Exchange() {}
 	
@@ -119,6 +124,14 @@ public class Exchange implements Serializable{
 		this.gameUser = gameUser;
 	}
 	
+	public Set<GameProposition> getGamePropositions() {
+		return gamePropositions;
+	}
+
+	public void setGamePropositions(Set<GameProposition> gamePropositions) {
+		this.gamePropositions = gamePropositions;
+	}
+
 	@Override
 	public boolean equals(Object obj) {	
 		return EqualsBuilder.reflectionEquals(this, obj);

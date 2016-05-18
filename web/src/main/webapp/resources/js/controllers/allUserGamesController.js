@@ -214,7 +214,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	$scope.makeGameUserAvailable = function(id) {
 		$http({
 			method : "PUT",
-			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate
+			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate 
 		}).then(function mySucces(response) {
 			$route.reload();
 		}, function myError(response) {
@@ -227,10 +227,10 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 			userGameId: id
 		});
 	}
-	$scope.askOwnerToShare = function(id, message) {
+	$scope.askOwnerToShare = function(id, message, propositionsList) {
 		$http({
 			method : "PUT",
-			url : 'askGameUserOwnerToShare/' + id + '/' + message
+			url : 'askGameUserOwnerToShare/' + id + '/' + message + '/' + propositionsList
 		}).then(function mySucces(response) {
 			$route.reload();
 		}, function myError(response) {

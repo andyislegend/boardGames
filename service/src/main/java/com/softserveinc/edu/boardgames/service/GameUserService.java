@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +72,10 @@ public class GameUserService {
 	
 	public List<UserGamesOfGameDTO> getAllUserGamesOfGame(String name) {
 		return gameUserRepo.getUserGameOfGame(name);
+	}
+	
+	public List<Integer> getFromNameAndEdition(String name, String edition) {
+		return gameUserRepo.getGameUserFromNameAndEdition(name, edition);
+		
 	}
 }

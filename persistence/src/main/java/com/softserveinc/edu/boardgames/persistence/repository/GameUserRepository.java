@@ -73,4 +73,9 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+"(gu.id, gu.user.username, gu.edition, gu.yearOfProduction, gu.status) " +
 	       "from GameUser gu where gu.game.name = :name")
 	public List<UserGamesOfGameDTO> getUserGameOfGame(@Param("name")String name);
+	
+	@Query("select u.id from GameUser u where "
+			+ "u.game.name = :name "
+			+ "and u.edition = :edition")
+	public List<Integer> getGameUserFromNameAndEdition(@Param("name")String name, @Param("edition")String edition);
 }
