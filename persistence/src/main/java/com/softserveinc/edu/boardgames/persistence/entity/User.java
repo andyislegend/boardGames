@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PostUpdate;
@@ -163,10 +164,10 @@ public class User implements Serializable {
 	@JsonBackReference
 	private Set<GameRatingNumeric> gameRatingNumeric;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
-			CascadeType.REFRESH }, mappedBy = "userCreator")
-	@JsonBackReference
-	private List<Tournament> createdTounaments;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "users_tournaments",joinColumns = {@JoinColumn(name = "user_id")},
+	inverseJoinColumns = {@JoinColumn(name = "tournament_id")})
+	private Set<Tournament> tournaments;
 
 	public User() {
 	}
@@ -291,6 +292,14 @@ public class User implements Serializable {
 		this.gameRatingNumeric = gameRatingNumeric;
 	}
 	
+	public Set<Tournament> getTournaments() {
+		return tournaments;
+	}
+
+	public void setTournaments(Set<Tournament> tournaments) {
+		this.tournaments = tournaments;
+	}
+
 	@PostUpdate
 	@PreUpdate
 	public void changeUser() {
