@@ -9,11 +9,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenRepository;
 
 /**
  * UserService.class responsible for realization of DB CRUD and other operation
@@ -24,6 +27,9 @@ import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 @Transactional
 public class UserService {
 
+	@Autowired
+	private VerificationTokenRepository tokenRepository;
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -47,7 +53,6 @@ public class UserService {
 	 */
 	@Transactional
 	public void createUser(User user) {
-		mailService.sendMailAboutRegistration(user.getEmail(), user.getUsername(), user.getPassword());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		UserRoles role = UserRoles.USER;
 		Set<UserRoles> roles = new HashSet<>();
@@ -110,12 +115,6 @@ public class UserService {
 		return isChanged;
 	}
 
-//	@Transactional
-//	public List<User> findByRole(String role) {
-//		return userRepository.findByUserRoleAllIgnoreCase(UserRoles.valueOf(role)).stream()
-//				.collect(Collectors.toList());
-//	}
-
 	@Transactional
 	public User findOne(String username) {
 		return userRepository.findByUsername(username);
@@ -135,28 +134,16 @@ public class UserService {
 		}
 	}
 
-//	@Transactional
-//	public void createAdmin(String username, String role) {
-//		User user = userRepository.findByUsername(username);
-//		List<String> roles = getRoles(username);
-//		roles.add(role);
-//		if (role.equals(UserRoles.ADMIN.toString())) {
-//			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-//		}
-//		userRepository.save(user);
-//	}
-//
-//	@Transactional
-//	public void createModerator(String username, String role) {
-//		User user = userRepository.findByUsername(username);
-//		List<String> roles = getRoles(username);
-//		roles.add(role);
-//		if (role.equals(UserRoles.MODERATOR.toString())) {
-//			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-//		}
-//		userRepository.save(user);
-//
-//	}
+	@Transactional
+	public void createAdmin(String username) {
+		User user = userRepository.findByUsername(username);
+		Set<UserRoles> roles = user.getUserRoles();
+		UserRoles newRole = UserRoles.ADMIN;
+		roles.add(newRole);
+		user.setUserRoles(roles);
+		
+		userRepository.save(user);
+	}
 
 	@Transactional
 	public List<User> findAll() {
@@ -214,4 +201,37 @@ public class UserService {
 		return userRepository.findUsersGender(username);
 	}
 
+	@Transactional
+	public void createVerificationTokenForUser(final User user, final String token) {
+        final VerificationToken myToken = new VerificationToken(token, user);
+        tokenRepository.save(myToken);
+    }
+	
+	public User getUserByToken(final String verificationToken) {
+        final User user = tokenRepository.findByToken(verificationToken).getUser();
+        return user;
+    }
+	
+    public VerificationToken getVerificationToken(final String VerificationToken) {
+        return tokenRepository.findByToken(VerificationToken);
+    }
+    
+    @Transactional
+    public String validateVerificationToken(String token) {
+        final VerificationToken verificationToken = tokenRepository.findByToken(token);
+        if (verificationToken == null) {
+            return "invalid";
+        }
+
+        final User user = verificationToken.getUser();
+       
+        user.setState(UserStatus.ACTIVE.name());;
+        userRepository.save(user);
+        tokenRepository.delete(verificationToken);
+        return null;
+    }
+    
+    
+    
+	
 }

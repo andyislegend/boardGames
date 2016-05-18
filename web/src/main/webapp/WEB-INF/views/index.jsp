@@ -45,7 +45,7 @@
 				</div>
 
 				<p style="font-size: 14pt;" class="navbar-text">
-					<b>Board Games Exchange</b>
+					<b>Board Games: Exchange</b>
 				</p>
 				<!-- <ul class="nav navbar-nav navbar-center">
 					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -365,6 +365,37 @@
 		</div>
 	</div>
 	<!-- End of BANNED Modal -->
+
+	<!-- Modal ON REGISTRATION SUCCESS -->
+	<div id="myRegSuccess" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<h4 style="text-align: center;" class="modal-title">SUCCESS
+						REGISTRATION</h4>
+
+				</div>
+				<div class="modal-body">
+
+					<p style="text-align: center;">Dear, User We have sent you a
+						message in order to verify Your email and confirm Your
+						registration.</p> 
+					<p style="text-align: center;">After You confirm, You will be able to Sign in.</p>
+
+				</div>
+				
+				<a style="margin-bottom: 2%; margin-left: 55%;" type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md">Cancel</a> 
+			</div>
+			<!-- End of Modal Content -->
+
+		</div>
+	</div>
+	<!-- End of ON REGISTRATION SUCCESS -->
 
 	<!-- Modal LOADING -->
 	<div id="myLoading" class="modal fade  col-md-6 col-md-offset-3"
