@@ -19,10 +19,8 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.softserveinc.edu.boardgames.persistence.enumeration.GameRating;
+import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 
 /**
  * This class represents data model to game entity
@@ -69,7 +67,7 @@ public class Game implements Serializable{
 	private Set<GameUser> userGames;
 
 	@OneToOne(mappedBy="game")
-	private GameRatingNumeric gameRating;
+	private GameRating gameRating;
 	
 	public Game(){}
 	
@@ -82,11 +80,11 @@ public class Game implements Serializable{
 		this.category = category;
 	}
 
-	public GameRatingNumeric getGameRating() {
+	public GameRating getGameRating() {
 		return gameRating;
 	}
 
-	public void setGameRating(GameRatingNumeric gameRating) {
+	public void setGameRating(GameRating gameRating) {
 		this.gameRating = gameRating;
 	}
 

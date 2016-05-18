@@ -1,15 +1,8 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.sql.Date;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
+import com.softserveinc.edu.boardgames.service.GamePropositionService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -39,6 +34,9 @@ public class UserGameSharingController {
 	
 	@Autowired
 	private ExchangeService exchangeService;
+	
+	@Autowired
+	private GamePropositionService gamePropoService;
 	
 	@RequestMapping(value="/checkIfGameBelongsToUser/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
@@ -65,26 +63,23 @@ public class UserGameSharingController {
 	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}/{returnDate}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void makeGameUserAvailable(@PathVariable Integer gameUserId, 
-			@PathVariable java.util.Date returnDate) {
+			@PathVariable Date returnDate) {
 	
-		LocalDate localDate = LocalDate.now();
-		LocalDate userDate = returnDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
-		if (localDate.getYear() <= userDate.getYear()) {
-			if (localDate.getDayOfYear() <= userDate.getDayOfYear()) {
+		Date localDate = new Date();
+		if (returnDate.compareTo(localDate) > 0){
+		
+			GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+			gameUserToUpdate.setStatus("available");
+			gameUserService.update(gameUserToUpdate);
 					
-				GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-				gameUserToUpdate.setStatus("available");
-				gameUserService.update(gameUserToUpdate);
-					
-				Exchange exchange = new Exchange();
-				exchange.setGameUser(gameUserToUpdate);
-				exchange.setMessage("Hey man!");
-				Long days = localDate.until( userDate, ChronoUnit.DAYS);
-				exchange.setPeriod(days.intValue());
-				exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-				exchange.setUserApplierId(0);
-				exchangeService.update(exchange);
-			}
+			Exchange exchange = new Exchange();
+			exchange.setGameUser(gameUserToUpdate);
+			exchange.setMessage("Hey man!");
+			Long days = (returnDate.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
+			exchange.setPeriod(days.intValue());
+			exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
+			exchange.setUserApplierId(0);
+			exchangeService.update(exchange);			
 		}
 	}
 	
@@ -99,9 +94,10 @@ public class UserGameSharingController {
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
 	}
 	
-	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}", method = RequestMethod.PUT)
+	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}/{propositions}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message) {
+	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message,
+			@PathVariable List<String> propositions) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus("confirmation");
@@ -111,6 +107,27 @@ public class UserGameSharingController {
 		exchange.setUserApplierId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
 		exchange.setMessage(message);
 		exchangeService.update(exchange);
+		
+		List<Integer> gameIdsToPerform = new ArrayList<Integer>();
+		boolean lock = false;
+		String name = "";
+		String edition = "";
+		for (String proposition: propositions) {
+			if (lock == false) {
+				name = proposition;
+			}
+			else {
+				edition = proposition;
+				gameIdsToPerform.addAll(gameUserService.getFromNameAndEdition(name, edition));
+			}
+			lock = !(lock);
+		}
+		for (Integer id : gameIdsToPerform) {
+			GameProposition gamePropo = new GameProposition();
+			gamePropo.setGameUser(gameUserService.getUserGamesById(id));
+			gamePropo.setExchange(exchange);
+			gamePropoService.update(gamePropo);
+		}
 	}
 	
 	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -122,9 +139,8 @@ public class UserGameSharingController {
 		gameUserService.update(gameUserOfOwner);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		LocalDate localDate = LocalDate.now();
-		exchange.setApplyingDate(Date.from(localDate
-				.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		Date localDate = new Date();
+		exchange.setApplyingDate(localDate);
 		exchangeService.update(exchange);
 	}
 	
@@ -165,15 +181,14 @@ public class UserGameSharingController {
 	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		LocalDate localDate = LocalDate.now();
+		Date localDate = new Date();
 		
-		java.util.Date date = exchange.getApplyingDate();
+		Date deadLine = exchange.getApplyingDate();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
+		calendar.setTime(deadLine);
 		calendar.add(Calendar.DATE, exchange.getPeriod()); 
-		date = calendar.getTime();
-		
-		LocalDate deadLine = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		return Period.between(localDate, deadLine).getDays();
+		deadLine = calendar.getTime();
+		Long days = (deadLine.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
+		return days.intValue();
 	}
 }

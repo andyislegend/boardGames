@@ -161,7 +161,7 @@ public class User implements Serializable {
 	 */
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, mappedBy = "user")
 	@JsonBackReference
-	private Set<GameRatingNumeric> gameRatingNumeric;
+	private Set<GameRating> gameRatingNumeric;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_tournaments",joinColumns = {@JoinColumn(name = "user_id")},
@@ -283,11 +283,11 @@ public class User implements Serializable {
 		this.userRoles = userRoles;
 	}
 
-	public Set<GameRatingNumeric> getGameRatingNumeric() {
+	public Set<GameRating> getGameRatingNumeric() {
 		return gameRatingNumeric;
 	}
 
-	public void setGameRatingNumeric(Set<GameRatingNumeric> gameRatingNumeric) {
+	public void setGameRatingNumeric(Set<GameRating> gameRatingNumeric) {
 		this.gameRatingNumeric = gameRatingNumeric;
 	}
 	

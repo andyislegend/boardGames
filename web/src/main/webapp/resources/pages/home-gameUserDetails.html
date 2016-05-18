@@ -49,11 +49,11 @@
  			<button class="btn btn-primary" ng-click="addToProposes()">Add proposition</button>  
    	  		
    	  		
-   	  		<ul class="list-group">
+   	  		<ul class="list-group" ng-model="propositionsList">
     			<li class="list-group-item" ng-repeat="game in gamesToPropose">{{game}}</li>
   			</ul>
 			
-			<button class="btn btn-primary" ng-click="askOwnerToShare(games.id, messageToOwner)">Ask owner</button>
+			<button class="btn btn-primary" ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)">Ask owner</button>
 		</div>
 	</div>
 	
