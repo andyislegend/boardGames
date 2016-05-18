@@ -69,7 +69,7 @@ public class Game implements Serializable{
 	private Set<GameUser> userGames;
 
 	@OneToOne(mappedBy="game")
-	private GameRatingNumeric gameRating;
+	private GameRating gameRating;
 	
 	public Game(){}
 	
@@ -82,11 +82,11 @@ public class Game implements Serializable{
 		this.category = category;
 	}
 
-	public GameRatingNumeric getGameRating() {
+	public GameRating getGameRating() {
 		return gameRating;
 	}
 
-	public void setGameRating(GameRatingNumeric gameRating) {
+	public void setGameRating(GameRating gameRating) {
 		this.gameRating = gameRating;
 	}
 

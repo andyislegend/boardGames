@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.softserveinc.edu.boardgames.persistence.entity.GameRatingNumeric;
+import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRatingNumericRepository;
 
 @Service
@@ -17,11 +17,11 @@ public class GameRatingNumericService {
 	@Autowired
 	private GameRatingNumericRepository gameRatingNumericRepo;
 
-	public GameRatingNumeric findById(Integer id) {
+	public GameRating findById(Integer id) {
 		return gameRatingNumericRepo.findOne(id);
 	}
 
-	public List<GameRatingNumeric> getAll() {
+	public List<GameRating> getAll() {
 		return gameRatingNumericRepo.findAll();
 	}
 
@@ -32,7 +32,7 @@ public class GameRatingNumericService {
 	}
 	
 	@Transactional
-	public void update(GameRatingNumeric gameRatingNumeric) {
+	public void update(GameRating gameRatingNumeric) {
 		gameRatingNumericRepo.save(gameRatingNumeric);
 	}
 	
@@ -43,7 +43,7 @@ public class GameRatingNumericService {
 		return rating;
 	}
 	
-	public GameRatingNumeric getFromGame(Integer gameId){
+	public GameRating getFromGame(Integer gameId){
 		return gameRatingNumericRepo.getFromGame(gameId);
 	}
 }

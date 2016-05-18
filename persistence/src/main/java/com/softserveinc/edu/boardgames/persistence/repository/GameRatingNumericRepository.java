@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.softserveinc.edu.boardgames.persistence.entity.GameRatingNumeric;
+import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 
 @Repository
-public interface GameRatingNumericRepository extends JpaRepository<GameRatingNumeric, Integer>{
+public interface GameRatingNumericRepository extends JpaRepository<GameRating, Integer>{
 
 	@Query("select gameRateNum.rating "
 			+ "from GameRatingNumeric gameRateNum "
@@ -27,5 +27,5 @@ public interface GameRatingNumericRepository extends JpaRepository<GameRatingNum
 	
 	@Query("select grn from GameRatingNumeric grn "
 			+ "where grn.game.id = :gameId")
-	GameRatingNumeric getFromGame(@Param("gameId")Integer gameId);
+	GameRating getFromGame(@Param("gameId")Integer gameId);
 }
