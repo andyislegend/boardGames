@@ -55,7 +55,7 @@ INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postC
 INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (10, 1, '56', '86005', '78', 'Checheta');
 INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (5, 1, '12', '77445', '25', 'Ozerna');
 INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (15, 1, '86', '98765', '49', 'Shyroka');
-
+INSERT INTO `boardgames`.`address` (`cityId`, `countryId`, `houseNumber`, `postCode`, `roomNumber`, `street`) VALUES (33, 2, '43', '98465', '34', 'Valensa');
 
 --  inserts to table user
 INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `gender`, `lastName`, `password`, `phoneNumber`, `rating`, `state`, `userRating`, `username`, `addressId`) 
