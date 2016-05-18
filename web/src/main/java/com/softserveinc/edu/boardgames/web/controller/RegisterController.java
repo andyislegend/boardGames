@@ -138,7 +138,7 @@ public class RegisterController {
 			@RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-			return new ResponseEntity<String>("Sorry, but you typed wrong password", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Sorry, but you typed wrong old password", HttpStatus.CONFLICT);
 		}
 
 		if (!validatePassword(newPassword)) {
