@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.lang.reflect.Array;
 import java.sql.Date;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -9,8 +10,13 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,10 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
+import com.softserveinc.edu.boardgames.service.GamePropositionService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -39,6 +47,9 @@ public class UserGameSharingController {
 	
 	@Autowired
 	private ExchangeService exchangeService;
+	
+	@Autowired
+	private GamePropositionService gamePropoService;
 	
 	@RequestMapping(value="/checkIfGameBelongsToUser/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
@@ -99,9 +110,10 @@ public class UserGameSharingController {
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
 	}
 	
-	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}", method = RequestMethod.PUT)
+	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}/{propositions}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message) {
+	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message,
+			@PathVariable List<String> propositions) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus("confirmation");
@@ -111,6 +123,27 @@ public class UserGameSharingController {
 		exchange.setUserApplierId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
 		exchange.setMessage(message);
 		exchangeService.update(exchange);
+		
+		List<Integer> gameIdsToPerform = new ArrayList<Integer>();
+		boolean lock = false;
+		String name = "";
+		String edition = "";
+		for (String proposition: propositions) {
+			if (lock == false) {
+				name = proposition;
+			}
+			else {
+				edition = proposition;
+				gameIdsToPerform.addAll(gameUserService.getFromNameAndEdition(name, edition));
+			}
+			lock = !(lock);
+		}
+		for (Integer id : gameIdsToPerform) {
+			GameProposition gamePropo = new GameProposition();
+			gamePropo.setGameUser(gameUserService.getUserGamesById(id));
+			gamePropo.setExchange(exchange);
+			gamePropoService.update(gamePropo);
+		}
 	}
 	
 	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
