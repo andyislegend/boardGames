@@ -3,7 +3,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	$scope.myProfile = false;
 	$scope.username = $routeParams.username;
 	if ($routeParams.username==null) {
-		$scope.username = "My profile";
+		$scope.username = "Logged in user";
 	}
 	$http.get('getProfile?username='+ $scope.username).then(function(result) {
 		$scope.userProfile = result.data;

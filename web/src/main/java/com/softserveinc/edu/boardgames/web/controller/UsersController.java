@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,8 @@ public class UsersController {
 	
 	@Autowired
 	ImageConfiguration imageConfiguration;
+	
+	
 
 	/**
 	 * Returns all users.
@@ -53,7 +56,7 @@ public class UsersController {
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
 	public User getUser(@RequestParam("username") String username) {
-		if (!username.equals("My profile")) {
+		if (!username.equals("Logged in user")) {
 			User user = userService.findOne(username);
 			return user;
 		}
@@ -100,10 +103,11 @@ public class UsersController {
 	}
 	
 	private String checkGender(String username) {
+		String maleGender = "male";
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
 		String imageName = imageService.findImageNameByUsername(username);
 		if (imageName == null) {
-			if (userService.findUsersGender(username).equals("male")) {
+			if (userService.findUsersGender(username).equals(maleGender)) {
 				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
 			} else {
 				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
@@ -118,7 +122,8 @@ public class UsersController {
 	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data" ,method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
-			throws Exception {
+			throws IOException {
+		try {
 		if (fileUpload.isEmpty()) {
 			return new ResponseEntity<String>("You haven't chosed the file", HttpStatus.CONFLICT);
 		}
@@ -130,6 +135,10 @@ public class UsersController {
 		imageService.create(image);
 		String saveDirectory = image.getImageLocation();
 		fileUpload.transferTo(new File(saveDirectory));
+		
+		} catch(IOException e) {
+			return new ResponseEntity<String>("Failed to upload image", HttpStatus.CONFLICT);
+		}
 		return new ResponseEntity<String>("Avatar uploaded", HttpStatus.OK);
 	}
 	
