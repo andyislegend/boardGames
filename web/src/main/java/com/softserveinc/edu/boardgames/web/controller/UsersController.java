@@ -19,6 +19,8 @@ import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+import com.softserveinc.edu.boardgames.service.CityService;
+import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -37,6 +39,12 @@ public class UsersController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CountryService countryService;
+	
+	@Autowired
+	CityService cityService;
 	
 	@Autowired
 	ImageConfiguration imageConfiguration;
@@ -74,6 +82,8 @@ public class UsersController {
 		user.setGender(userDTO.getGender());
 		user.setAge(userDTO.getAge());
 		user.setPhoneNumber(userDTO.getPhoneNumber());
+		user.setCountry(countryService.findById(userDTO.getCountryId()));
+		user.setCity(cityService.findById(userDTO.getCityId()));
 		userService.updateUser(user);
 		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
@@ -119,7 +129,7 @@ public class UsersController {
 	/**
 	 * Updating users avatar
 	 */
-	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data" ,method = RequestMethod.POST)
+	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
 			throws IOException {
@@ -137,7 +147,7 @@ public class UsersController {
 		fileUpload.transferTo(new File(saveDirectory));
 		
 		} catch(IOException e) {
-			return new ResponseEntity<String>("Failed to upload image", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("Failed to upload image. Try one more time", HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<String>("Avatar uploaded", HttpStatus.OK);
 	}

@@ -22,7 +22,7 @@ public class CityService {
 		return cityRepository.findOne(id);
 	}
 	
-	public List<City> findCitiesByCountryId(String countryName) {
-		return cityRepository.findCitiesByCountryId(countryName);
+	public List<City> findCitiesByCountryId(Integer countryId) {
+		return cityRepository.findCitiesByCountryId(countryId);
 	}
 }

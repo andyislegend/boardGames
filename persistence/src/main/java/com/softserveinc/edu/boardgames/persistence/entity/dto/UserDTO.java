@@ -8,7 +8,21 @@ public class UserDTO {
 	private String gender;
 	private Integer age;
 	private String phoneNumber;
+	private Integer countryId;
+	private Integer cityId;
 	
+	public Integer getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(Integer countryId) {
+		this.countryId = countryId;
+	}
+	public Integer getCityId() {
+		return cityId;
+	}
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
 	public Integer getId() {
 		return id;
 	}

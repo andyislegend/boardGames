@@ -16,7 +16,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 		$scope.editableGender = $scope.userProfile.gender;
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
-
+		$scope.editableCountry = $scope.userProfile.country;
+		$scope.editableCity = $scope.userProfile.city;
 		$http.get('getAvatar').then(function(result) {
 			$scope.avatar = result.data;
 		});
@@ -30,14 +31,17 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	});
 	
 	$scope.saveUser = function() {
+		var a = $scope.editableCountry.id;
+		var b = $scope.editableCity.id;
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,
-		username : $scope.editableUsername,
 		email : $scope.editableEmail,
 		gender : $scope.editableGender,
 		age : $scope.editableAge,
-		phoneNumber : $scope.editablePhoneNumber
+		phoneNumber : $scope.editablePhoneNumber,
+		countryId:$scope.editableCountry.id,
+		cityId:$scope.editableCity.id
 		};
 		$http({
 			method : 'PUT',
@@ -126,6 +130,16 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
         });
 
 	};
+	
+	$http.get('getAllCountries').then(function(result) {
+		$scope.countries = result.data;
+		$scope.editableCountry = $scope.countries[0].name;
+		$scope.getCitiesByCountry = function() {
+			$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
+				$scope.cities = result.data;
+			});
+		};
+	});
 	
 }]);
 

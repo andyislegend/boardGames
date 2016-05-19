@@ -18,7 +18,7 @@
 
 	 position:relative;
 	 float:right;
-	 right:8%;
+	 right:5%;
 }
 
 #avatar {
@@ -93,7 +93,7 @@
 }
 
 #profileDiv {
-	margin-left: 1%;
+	margin-left: 2%;
 }
 
 #flag {
@@ -104,4 +104,12 @@
 
 #editProfile {
 	margin-top:-19px;
+}
+
+#passwordDiv {
+	margin-left: 4%;
+}
+
+#passwordChange {
+	margin-bottom:40px;
 }

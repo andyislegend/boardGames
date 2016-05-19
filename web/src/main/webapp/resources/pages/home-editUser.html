@@ -1,4 +1,4 @@
-<div ng-controller="editProfileCtrl" class="col-sm-12" id="editProfile">
+<div ng-controller="editProfileCtrl" class="col-sm-10" id="editProfile">
     <h1 id="headerUsers" ng-show="myProfile"> Edit Profile </h1>
     <h1 id="headerUsers" ng-hide="myProfile"> Friend Profile </h1>
     <div >
@@ -29,7 +29,7 @@
 				</div>
 
 				<div class="row">
-					<div class="form-group col-md-12"id="profileDiv">
+					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable">First Name:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.firstName}}</p>
@@ -69,6 +69,31 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
+						<label class="col-md-3 control-lable">Country:</label>
+						<div class="col-md-5">
+							<p ng-hide="myProfile">{{userProfile.country.name}}</p>
+							<select id="repeatSelectCountry" ng-change="getCitiesByCountry()"
+								ng-model="editableCountry" ng-show="myProfile" class="form-control" 
+								ng-options= "c.name for c in countries" >
+                        	</select>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" id="profileDiv">
+						<label class="col-md-3 control-lable">City:</label>
+						<div class="col-md-5">
+							<p ng-hide="myProfile">{{userProfile.city.name}}</p>
+							<select id="repeatSelectCity" ng-show="myProfile"
+								ng-model="editableCity" class="form-control" ng-options= "c.name for c in cities">
+                        	</select>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable">Gender:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.gender}}</p>
@@ -100,6 +125,8 @@
 						</div>
 					</div>
 				</div>
+				
+				
 				<span class="col-sm-3"></span>
 				<div class="col-sm-4">
 					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg">
@@ -111,33 +138,33 @@
 				</div>
 				
 				</div>
-				<div class="col-sm-12" ng-show="myProfile" style="margin-bottom: 15px;">
-				<p id="profileDiv" class="form-group col-md-12"><a href="" ng-click="showPasswordChange = !showPasswordChange">Change password</a></p>
+				<div class="col-sm-12" ng-show="myProfile" id="passwordChange">
+				<p class="form-group col-md-12"><a href="" ng-click="showPasswordChange = !showPasswordChange">Change password</a></p>
 				<div ng-show="showPasswordChange">
 					<div class="row">
-						<div class="form-group col-md-12" id="profileDiv">
+						<div class="form-group col-md-12" >
 							<label class="col-md-3 control-lable">Old password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableOldPassword" 
-									class="form-control input-sm">
+									class="form-control input-sm" id="passwordDiv">
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-12" id="profileDiv">
+						<div class="form-group col-md-12" >
 							<label class="col-md-3 control-lable">New password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableNewPassword" 
-									class="form-control input-sm">
+									class="form-control input-sm" id="passwordDiv">
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-md-12" id="profileDiv">
+						<div class="form-group col-md-12" >
 							<label class="col-md-3 control-lable">Confirm password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableConfirmPassword" 
-									class="form-control input-sm">
+									class="form-control input-sm" id="passwordDiv">
 							</div>
 						</div>
 					</div>
@@ -155,4 +182,3 @@
 					
 				</div>
 				</div>
-</div>

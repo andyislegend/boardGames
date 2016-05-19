@@ -128,7 +128,7 @@ public class UserService {
 
 	@Transactional
 	public void updateUser(User user) {
-		userRepository.saveAndFlush(user);
+		userRepository.save(user);
 		if (user.getState().equals(UserStatus.BANNED.name())) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 			return;
@@ -169,8 +169,8 @@ public class UserService {
 	 *            finding users by cityName
 	 */
 	@Transactional
-	public List<User> findAllUsersByCity(String cityName) {
-		return userRepository.findUserByCity(cityName);
+	public List<User> findAllUsersByCity(Integer cityId) {
+		return userRepository.findUserByCity(cityId);
 	}
 
 	public User findById(int id) {

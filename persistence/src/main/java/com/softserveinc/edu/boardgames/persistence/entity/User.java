@@ -140,12 +140,18 @@ public class User implements Serializable {
 	private Set<Exchange> exchanges;
 	
 	/**
-	 * Describes address where user lives. Has a many to one relationship to
-	 * address table.
+	 * Describes the country where user lives.
 	 */
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST})
-	@JoinColumn(name = "addressId", referencedColumnName = "id")
-	private Address address;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "countryId", referencedColumnName = "id")
+	private Country country;
+
+	/**
+	 * Describes the city where user lives.
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cityId", referencedColumnName = "id")
+	private City city;
 
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
@@ -267,12 +273,20 @@ public class User implements Serializable {
 		this.state = state;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	public Set<UserRoles> getUserRoles() {
@@ -372,7 +386,8 @@ public class User implements Serializable {
 	                              .append(getUserRating(), other.getUserRating())
 	                              .append(getRating(), other.getRating())
 	                              .append(getState(), other.getState())
-	                              .append(getAddress(), other.getAddress())
+	                              .append(getCountry(), other.getCountry())
+	                              .append(getCity(), other.getCity())
 	                              .isEquals();
 	}
 	
@@ -390,7 +405,8 @@ public class User implements Serializable {
 				 .append(getUserRating())
 				 .append(getRating())
 				 .append(getState())
-				 .append(getAddress())
+				 .append(getCountry())
+				 .append(getCity())
                  .toHashCode();
 	}
 
@@ -409,7 +425,8 @@ public class User implements Serializable {
                 .append("userRating", getUserRating())
                 .append("rating", getRating())
                 .append("state", getState())
-                .append("address", getAddress())
+                .append("country", getCountry())
+                .append("city", getCity())
                 .toString();
     }
 }

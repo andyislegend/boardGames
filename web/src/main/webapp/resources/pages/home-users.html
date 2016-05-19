@@ -9,12 +9,12 @@
 					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
 				</td>
 				<td title="'Email'" sortable="'email'" class="col-sm-3">{{user.email}}</td>
-				<td title="'Country'" filter="{'countryName': 'select'}" filter-data="countries()" class="col-sm-3">
-					{{user.address.country.name}}
+				<td title="'Country'" filter="{'countryName': 'select'}" filter-data="countries()" 
+					class="col-sm-3" ng-model="country" ng-change="searchCities()">
+					{{user.country.name}}
                 </td>
-				<td title="'Address'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
-					 {{user.address.city.name}} {{user.address.street}} 
-					 {{user.address.houseNumber}} {{user.address.roomNumber}}
+				<td title="'City'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
+					 {{user.city.name}}
                 </td>
                 </tr>
 			<tr ng-show="showUser" ng-repeat-end>
