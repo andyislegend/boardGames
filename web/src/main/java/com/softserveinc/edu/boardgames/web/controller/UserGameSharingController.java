@@ -163,7 +163,17 @@ public class UserGameSharingController {
 		gameUserToUpdate.setStatus("private");
 		gameUserService.update(gameUserToUpdate);
 		
-		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		
+		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
+			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
+			gameUser.setStatus("private");
+			gameUserService.update(gameUser);
+		}
+		
+		gamePropoService.deleteForExchange(exchange.getId());
+		
+		exchangeService.delete(exchange);
 	}
 	
 	@RequestMapping(value="/getHowManyDaysForExchange/{gameUserId}", method = RequestMethod.GET)
