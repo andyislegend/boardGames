@@ -1,4 +1,5 @@
 angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+	$scope.userProfile;
 	$scope.showPasswordChange = false;
 	$scope.myProfile = false;
 	$scope.username = $routeParams.username;
@@ -16,7 +17,6 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 		$scope.editableGender = $scope.userProfile.gender;
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
-		$scope.editableCountry = $scope.userProfile.country;
 		$scope.editableCity = $scope.userProfile.city;
 		$http.get('getAvatar').then(function(result) {
 			$scope.avatar = result.data;
@@ -27,6 +27,36 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 				$scope.userAvatar = result.data;
 			});
 		}
+		
+		$http.get('getAllCountries').then(function(result) {
+			$scope.countries = result.data;
+			if ($scope.userProfile.country!=null) {
+				for (i=0; i<$scope.countries.length; i++) {				
+					if ($scope.countries[i].id==$scope.userProfile.country.id) {
+						$scope.editableCountry = $scope.countries[i];
+						break;
+					}
+				}
+			}
+			$scope.getCitiesByCountry = function() {
+				$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
+					$scope.cities = result.data;
+					if ($scope.userProfile.city!=null) {
+						for (i=0; i<$scope.cities.length; i++) {
+							if ($scope.cities[i].id==$scope.userProfile.city.id) {
+								$scope.editableCity = $scope.cities[i];
+								break;
+							}
+						}
+					}
+				});
+			};
+			angular.element(document).ready(function () {
+				$scope.getCitiesByCountry();
+			});
+		});
+		
+		
 		
 	});
 	
@@ -131,20 +161,11 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 
 	};
 	
-	$http.get('getAllCountries').then(function(result) {
-		$scope.countries = result.data;
-		$scope.editableCountry = $scope.countries[0].name;
-		$scope.getCitiesByCountry = function() {
-			$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
-				$scope.cities = result.data;
-			});
-		};
-	});
+	
 	
 }]);
 
-
 var loadFile = function(event) {
-    var output = document.getElementById('avatar');
-    output.src = URL.createObjectURL(event.target.files[0]);
-  };
+	var output = document.getElementById('avatar');
+	output.src = URL.createObjectURL(event.target.files[0]);
+};

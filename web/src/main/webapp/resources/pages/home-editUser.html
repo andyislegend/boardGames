@@ -74,7 +74,7 @@
 							<p ng-hide="myProfile">{{userProfile.country.name}}</p>
 							<select id="repeatSelectCountry" ng-change="getCitiesByCountry()"
 								ng-model="editableCountry" ng-show="myProfile" class="form-control" 
-								ng-options= "c.name for c in countries" >
+								ng-options= "c.name for c in countries"  >
                         	</select>
 						</div>
 					</div>
@@ -85,7 +85,7 @@
 						<label class="col-md-3 control-lable">City:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.city.name}}</p>
-							<select id="repeatSelectCity" ng-show="myProfile"
+							<select id="repeatSelectCity" ng-show="myProfile" data-ng-init="getCitiesByCountry()"
 								ng-model="editableCity" class="form-control" ng-options= "c.name for c in cities">
                         	</select>
 						</div>
