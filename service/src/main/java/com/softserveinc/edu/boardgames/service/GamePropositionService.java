@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GamePropositionRepository;
 
 @Service
@@ -31,5 +32,9 @@ public class GamePropositionService {
 	
 	public void delete(GameProposition gameProposition) {
 		gamePropositionRepo.delete(gameProposition);
+	}
+	
+	public List<GameUserDTO> getFromExchangeId(Integer id) {
+		return gamePropositionRepo.getAllForExchange(id);
 	}
 }

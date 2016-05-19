@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 public class GameUserDTO {
+	
 	private int id;
 	private String name;
 	private String category;
@@ -13,9 +14,15 @@ public class GameUserDTO {
 	private int maxPlayers;
 	private int minPlayers;
 	private String applierUsername;
-	
 
 	public GameUserDTO() {
+	}
+	
+	public GameUserDTO(int id, String name, String edition, int yearOfProduction) {
+		this.id = id;
+		this.name = name;
+		this.edition = edition;
+		this.yearOfProduction = yearOfProduction;
 	}
 	
 	public GameUserDTO(int id,int yearOfProduction, String edition, String status) {			 

@@ -18,6 +18,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
@@ -178,5 +179,12 @@ public class UserGameSharingController {
 		deadLine = calendar.getTime();
 		Long days = (deadLine.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
 		return days.intValue();
+	}
+	
+	@RequestMapping(value="/getPropositionsOfExchange/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GameUserDTO> getPropositionsOfExchange(@PathVariable Integer gameUserId) {
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		return gamePropoService.getFromExchangeId(exchange.getId());
 	}
 }

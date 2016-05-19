@@ -123,6 +123,15 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 					}, function myError(response) {
 						alert("Getting user applier username error");
 					});
+					
+					$http ({
+						method : "GET",
+						url : 'getPropositionsOfExchange' + '/' + $scope.games.id
+					}).then(function mySucces(response) {
+						$scope.propositions = response.data;
+					}, function myError(response) {
+						alert("Getting user applier username error");
+					});
 				}
 				else if (isBorrowed === true) {
 					$scope.canGiveBack = true;

@@ -43,7 +43,7 @@
 	  		<textarea class="form-control" rows="2" id="message" ng-model="messageToOwner"></textarea>
 	  		
 	  		<p>Select what you want to propose</p>
-      		<select ng-model="myGamesModel" ng-options="option.name for option in myGames"></select>
+      		<select class="form-control" ng-model="myGamesModel" ng-options="option.name for option in myGames"></select>
  			<button class="btn btn-primary" ng-click="addToProposes()">Add proposition</button>  
    	  		
    	  		<ul class="list-group" ng-model="propositionsList">
@@ -56,6 +56,11 @@
 	<div class="container-fluid" ng-show="isThereConfiramtion">
 		<p class="text-important">{{applierUsername}} asks you to share this game</p>
 		<pre class="text text-important">{{messageFromApplier}}</pre>
+		<p>{{applierUsername}} offers: </p>
+		<ul class="list-group" ng-model="propositionsFromUser">
+    		<li class="list-group-item" ng-repeat="game in propositions">
+    			{{game.name}} - {{game.edition}}, {{game.yearOfProduction}}</li>
+  		</ul>
 		<button class="btn btn-primary" ng-click="acceptGameConfirmation(games.id)">Accept</button>
 		<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
 	</div>
