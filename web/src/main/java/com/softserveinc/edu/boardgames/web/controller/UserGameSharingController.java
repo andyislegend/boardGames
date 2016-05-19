@@ -66,24 +66,20 @@ public class UserGameSharingController {
 	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}/{returnDate}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void makeGameUserAvailable(@PathVariable Integer gameUserId, 
-			@PathVariable Date returnDate) {
-	
-		Date localDate = new Date();
-		if (returnDate.compareTo(localDate) > 0){
+			@PathVariable Integer returnDate) {
 		
-			GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-			gameUserToUpdate.setStatus("available");
-			gameUserService.update(gameUserToUpdate);
+		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setStatus("available");
+		gameUserService.update(gameUserToUpdate);
 					
-			Exchange exchange = new Exchange();
-			exchange.setGameUser(gameUserToUpdate);
-			exchange.setMessage("Hey man!");
-			Long days = (returnDate.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
-			exchange.setPeriod(days.intValue());
-			exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-			exchange.setUserApplierId(0);
-			exchangeService.update(exchange);			
-		}
+		Exchange exchange = new Exchange();
+		exchange.setGameUser(gameUserToUpdate);
+		exchange.setMessage("Hey man!");
+		exchange.setPeriod(returnDate);
+		exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
+		exchange.setUserApplierId(0);
+		exchangeService.update(exchange);			
+		
 	}
 	
 	@RequestMapping(value="/makeGameUserPrivate/{gameUserId}", method = RequestMethod.PUT)
