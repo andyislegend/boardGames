@@ -19,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PostUpdate;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -167,6 +168,9 @@ public class User implements Serializable {
 	@JoinTable(name = "users_tournaments",joinColumns = {@JoinColumn(name = "user_id")},
 	inverseJoinColumns = {@JoinColumn(name = "tournament_id")})
 	private Set<Tournament> tournaments;
+	
+	@OneToOne (mappedBy="user")
+	private VerificationToken verificationToken;
 
 	public User() {
 	}
@@ -297,6 +301,14 @@ public class User implements Serializable {
 
 	public void setTournaments(Set<Tournament> tournaments) {
 		this.tournaments = tournaments;
+	}
+	
+	public VerificationToken getVerificationToken() {
+		return verificationToken;
+	}
+
+	public void setVerificationToken(VerificationToken verificationToken) {
+		this.verificationToken = verificationToken;
 	}
 
 	@PostUpdate

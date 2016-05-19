@@ -47,21 +47,18 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 		if (principal.getUserSatus().equals(UserStatus.ACTIVE.name())) {
 			state = "ACTIVE";
-			logger.info("returned DATA: ACTIVE");
 			httpServletResponse.getWriter().print(state);
 			httpServletResponse.getWriter().flush();
 		}
 		
 		if (principal.getUserSatus().equals(UserStatus.UNDER_VERIFICATION.name())) {
 			state = "UNDER_VERIFICATION";
-			logger.info("returned DATA: UNDER_VERIFICATION");
 			httpServletResponse.getWriter().print(state);
 			httpServletResponse.getWriter().flush();
 		}
 		
 		if (principal.getUserSatus().equals(UserStatus.BANNED.name())) {
 			state = "BANNED";
-			logger.info("returned DATA: BANNED");
 			httpServletResponse.getWriter().print(state);
 			httpServletResponse.getWriter().flush();
 		}
