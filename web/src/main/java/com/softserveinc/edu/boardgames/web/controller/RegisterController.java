@@ -50,6 +50,8 @@ public class RegisterController {
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
 
+	public final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
+	
 	/**
 	 * @param VALID_EMAIL_ADDRESS_REGEX
 	 *            is used to validate the correctness of mail provided by new
@@ -149,7 +151,7 @@ public class RegisterController {
 			
 			return "userinfo";
 		}
-		if (result == "invalid") {
+		if (result.equals(INVALID_TOKEN_MAIL_CONFIRMATION)) {
 			message = "You already confirm your registration or your confirmation link was expired. "
 					+ "Please, try to register one more time with different username and email";
 			model.addAttribute("expired", true);
