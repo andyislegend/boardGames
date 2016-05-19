@@ -131,6 +131,12 @@ public class UserGameSharingController {
 		Date localDate = new Date();
 		exchange.setApplyingDate(localDate);
 		exchangeService.update(exchange);
+		
+		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
+			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
+			gameUser.setStatus("shared");
+			gameUserService.update(gameUser);
+		}
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -145,6 +151,8 @@ public class UserGameSharingController {
 		exchange.setUserApplierId(0);
 		exchange.setMessage("Hey you!");
 		exchangeService.update(exchange);
+		
+		gamePropoService.deleteForExchange(exchange.getId());
 	}
 	
 	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
