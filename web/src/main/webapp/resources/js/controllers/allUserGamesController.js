@@ -197,7 +197,8 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	
 	$scope.gamesToPropose = [];
 	$scope.addToProposes = function() {
-		$scope.gamesToPropose.push($scope.myGameSelect);
+		console.log($scope.myGamesModel.id);
+		$scope.gamesToPropose.push($scope.myGamesModel);
 	}
 	
 	$scope.$on('changingGameStatus', function(event, data) {
@@ -228,9 +229,15 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		});
 	}
 	$scope.askOwnerToShare = function(id, message, propositionsList) {
+		console.log(propositionsList);
+		var values = [];
+		angular.forEach(propositionsList, function(value, key) {
+			values.push(value.id);
+		}, values);
+		console.log(values);
 		$http({
 			method : "PUT",
-			url : 'askGameUserOwnerToShare/' + id + '/' + message + '/' + propositionsList
+			url : 'askGameUserOwnerToShare/' + id + '/' + message + '/' + values
 		}).then(function mySucces(response) {
 			$route.reload();
 		}, function myError(response) {

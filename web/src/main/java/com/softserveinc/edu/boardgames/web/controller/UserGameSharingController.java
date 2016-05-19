@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -97,7 +99,7 @@ public class UserGameSharingController {
 	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}/{propositions}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message,
-			@PathVariable List<String> propositions) {
+			@PathVariable List<Integer> propositions) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus("confirmation");
@@ -108,23 +110,9 @@ public class UserGameSharingController {
 		exchange.setMessage(message);
 		exchangeService.update(exchange);
 		
-		List<Integer> gameIdsToPerform = new ArrayList<Integer>();
-		boolean lock = false;
-		String name = "";
-		String edition = "";
-		for (String proposition: propositions) {
-			if (lock == false) {
-				name = proposition;
-			}
-			else {
-				edition = proposition;
-				gameIdsToPerform.addAll(gameUserService.getFromNameAndEdition(name, edition));
-			}
-			lock = !(lock);
-		}
-		for (Integer id : gameIdsToPerform) {
+		for (Integer proposition: propositions) {
 			GameProposition gamePropo = new GameProposition();
-			gamePropo.setGameUser(gameUserService.getUserGamesById(id));
+			gamePropo.setGameUser(gameUserService.getUserGamesById(proposition));
 			gamePropo.setExchange(exchange);
 			gamePropoService.update(gamePropo);
 		}
