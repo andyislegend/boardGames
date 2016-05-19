@@ -1,7 +1,10 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,24 +25,31 @@ public class VerificationToken implements Serializable{
 	 */
 	private static final long serialVersionUID = -4058412545610441245L;
 
+	private static final int EXPIRATION = 60;
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+	@Column
     private String token;
+    
+	@Column
+    private Date expiryDate;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
     public VerificationToken() {
-        super();
+    	
     }
 
     public VerificationToken(final String token) {
-        super();
-
+       
         this.token = token;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
+        
     }
 
     public VerificationToken(final String token, final User user) {
@@ -47,6 +57,8 @@ public class VerificationToken implements Serializable{
 
         this.token = token;
         this.user = user;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
+        
     }
  
     public int getId() {
@@ -72,12 +84,21 @@ public class VerificationToken implements Serializable{
     public void setUser(final User user) {
         this.user = user;
     }
+    
+    public Date getExpiryDate() {
+		return expiryDate;
+	}
 
-    @Override
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	@Override
 	public int hashCode() {
 		 return new HashCodeBuilder().append(getId())
 				 .append(getToken())
-				 .append(getUser())				 
+				 .append(getUser())
+				 .append(getExpiryDate())
                  .toHashCode();
 	}
 
@@ -93,6 +114,7 @@ public class VerificationToken implements Serializable{
 	    return new EqualsBuilder().append(getId(), other.getId())
 	                              .append(getToken(), other.getToken())
 	                              .append(getUser(), other.getUser())
+	                              .append(getExpiryDate(), other.getExpiryDate())
 	                              .isEquals();
 	}
     
@@ -102,7 +124,15 @@ public class VerificationToken implements Serializable{
         return new ToStringBuilder(this)
                 .append("id", getId())
                 .append("token", getToken())
+                .append("expire", getExpiryDate())
                 .toString();
+    }
+    
+    private Date calculateExpiryDate(final int expiryTimeInMinutes) {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(new Date().getTime());
+        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+        return new Date(cal.getTime().getTime());
     }
 
 }

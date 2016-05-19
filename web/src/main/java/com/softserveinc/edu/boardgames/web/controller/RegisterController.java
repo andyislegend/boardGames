@@ -150,8 +150,8 @@ public class RegisterController {
 			return "userinfo";
 		}
 		if (result == "invalid") {
-			message = "You already confirm your registration or your confirmation link was deleted. "
-					+ "Please, try to register one more time";
+			message = "You already confirm your registration or your confirmation link was expired. "
+					+ "Please, try to register one more time with different username and email";
 			model.addAttribute("expired", true);
 			model.addAttribute("message", message);
 		}

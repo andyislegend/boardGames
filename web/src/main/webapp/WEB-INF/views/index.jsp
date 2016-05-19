@@ -384,12 +384,13 @@
 					<p style="text-align: center;">Dear, User We have sent you a
 						message in order to verify Your email and confirm Your
 						registration.</p> 
+					<p style="text-align: center; color: red;"> Keep in mind, that Your confirmation link will expire after 1 hour</p>	
 					<p style="text-align: center;">After You confirm, You will be able to Sign in.</p>
 
 				</div>
 				
-				<a style="margin-bottom: 2%; margin-left: 55%;" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md">Cancel</a> 
+				<a style="margin-bottom: 5%; margin-left: 43%;" type="button" data-dismiss="modal"
+					class="btn btn-info btn-lg"> Close</a> 
 			</div>
 			<!-- End of Modal Content -->
 

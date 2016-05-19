@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -222,8 +223,13 @@ public class UserService {
         if (verificationToken == null) {
             return "invalid";
         }
-
+        
         final User user = verificationToken.getUser();
+        final Calendar cal = Calendar.getInstance();
+        
+        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+            return "invalid";
+        }
        
         user.setState(UserStatus.ACTIVE.name());;
         userRepository.save(user);
