@@ -32,9 +32,10 @@
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script src="resources/js/index.js"></script>
 <script type="text/javascript" src="resources/js/registration.js"></script>
+<script src="resources/bower_components/angular-translate/angular-translate.js"></script>
 
 </head>
-<body ng-app="indexModule">
+<body ng-app="indexModule" ng-controller="localizationController">
 	<header>
 		<nav class="navbar navbar-default">
 			<div class="container">
@@ -45,7 +46,7 @@
 				</div>
 
 				<p style="font-size: 14pt;" class="navbar-text">
-					<b>Board Games: Exchange</b>
+					<b translate="PROJECT_NAME"></b>
 				</p>
 				<!-- <ul class="nav navbar-nav navbar-center">
 					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -58,13 +59,13 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
-						data-target="#myModal"><spring:message code="label.comeIn" /></a></li>
+						data-target="#myModal" translate="LOGIN"></a></li>
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
-						data-target="#myReg"><spring:message code="label.registration" /></a></li>
-					<li><span class="btn btn-link"><a href="?locale=en">
-								<img id="flag" src="resources/images/gb.png" />
-						</a> <a href="?locale=ua"><img id="flag"
-								src="resources/images/ua.png" /></a></span></li>
+						data-target="#myReg" translate="REGISTRATION"></a></li>
+					<li><span class="btn btn-link">
+								<img id="flag" src="resources/images/gb.png" ng-click="changeLanguage('en')"/>
+						 <img id="flag"
+								src="resources/images/ua.png" ng-click="changeLanguage('ua')"/></span></li>
 				</ul>
 
 			</div>

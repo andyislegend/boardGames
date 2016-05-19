@@ -1,4 +1,5 @@
 angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, $filter, $q, $timeout, ngTableParams) {
+	$scope.message = "Enabledtitle"
 	$scope.users = [];
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;

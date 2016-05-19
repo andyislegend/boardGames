@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 'ng.q', 'file-model']);
+var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 'ng.q', 'file-model', 'pascalprecht.translate']);
 
 homeApp.config(function($routeProvider) {
 	$routeProvider
@@ -86,4 +86,26 @@ homeApp.controller("getAvatar", function($scope, $http) {
 });
 
 homeApp.controller('search', function($scope, $rootScope){
+});
+
+homeApp.config(function ($translateProvider) {
+	  $translateProvider.translations('en', {
+	    PROJECT_NAME:'Board Games: Exchange',
+		LOGIN: 'Login',
+	    REGISTRATION: 'Registration',
+	    COUNTRY:'Country'
+	  });
+	  $translateProvider.translations('ua', {
+		PROJECT_NAME:'Настільні ігри: Обмін',
+		LOGIN: 'Логін',
+		REGISTRATION: 'Реєстрація',
+		COUNTRY:'Країна'
+	  });
+	  $translateProvider.preferredLanguage('en');
+	  $translateProvider.useSanitizeValueStrategy('escape');
+});
+homeApp.controller('localizationController', function($scope, $translate) {
+	$scope.changeLanguage = function (key) {
+	    $translate.use(key);
+	};
 });

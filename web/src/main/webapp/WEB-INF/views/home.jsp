@@ -73,10 +73,11 @@
 	src="resources/bower_components/ng-q/q.module.js"></script>
 <script
 	src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
+<script src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <!-- End of Scripts -->
 
 </head>
-<body ng-app="homeApp">
+<body ng-app="homeApp" ng-controller="localizationController">
 	<!-- Top header -->
 	<header>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -128,9 +129,9 @@
 					</div>
 				</div>
 				<ul class="nav navbar-nav navbar-right" ng-controller='getAvatar'>
-					<li><span class="btn btn-link"><a href="?locale=en">
-						<img id="flag"src="resources/images/gb.png" /></a>
-						<a href="?locale=ua"><img id="flag"src="resources/images/ua.png" /></a></span>
+					<li><span class="btn btn-link">
+						<img id="flag"src="resources/images/gb.png" ng-click="changeLanguage('en')"/>
+						<img id="flag"src="resources/images/ua.png" ng-click="changeLanguage('ua')"/></span>
 					</li>
 					<li><a class="btn btn-secondary btn-lg disabled">Welcome
 							back, <em><b style="color: white; font-size: 12pt;">${user}</b></em>
