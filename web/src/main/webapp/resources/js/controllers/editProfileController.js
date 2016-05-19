@@ -44,10 +44,12 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 					if ($scope.userProfile.city!=null) {
 						for (i=0; i<$scope.cities.length; i++) {
 							if ($scope.cities[i].id==$scope.userProfile.city.id) {
-								$scope.editableCity = $scope.cities[i];
-								break;
-							}
+								$scope.editableCity = $scope.cities[i];								
+							} 
 						}
+					} else {
+						var starOfCitiesCollection = 0;
+						$scope.editableCity = $scope.cities[starOfCitiesCollection];
 					}
 				});
 			};
@@ -61,8 +63,6 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	});
 	
 	$scope.saveUser = function() {
-		var a = $scope.editableCountry.id;
-		var b = $scope.editableCity.id;
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,
