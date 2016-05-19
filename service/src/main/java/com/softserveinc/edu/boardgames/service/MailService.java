@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.service;
 
+import static org.springframework.ui.velocity.VelocityEngineUtils.mergeTemplateIntoString;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,7 +22,7 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import static org.springframework.ui.velocity.VelocityEngineUtils.mergeTemplateIntoString;
+import com.softserveinc.edu.boardgames.service.util.OnRegistrationCompleteEvent;
 
 @Service
 @PropertySource("classpath:properties/mail.properties")
@@ -39,9 +41,9 @@ public class MailService {
 
 	@Value("${mail.credentials.username}")
 	private String userName;
-
+	
 	@Async
-	public void sendMailAboutRegistration(final String to, final String userName, final String password) {
+	public void sendMailAboutRegistration(final OnRegistrationCompleteEvent event, final String to, final String userName, final String token) {
 
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -49,11 +51,12 @@ public class MailService {
 				message.setTo(to);
 				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
 
+				final String confirmationUrl = event.getAppUrl() + "/registrationConfirm?token=" + token;
 				SimpleDateFormat form = new SimpleDateFormat("dd-MM-yyyy");
 				String date = form.format(new Date());
 				Map<String, Object> templateVariables = new HashMap<>();
 				templateVariables.put("name", userName);
-				templateVariables.put("password", password);
+				templateVariables.put("confirm", confirmationUrl);
 				templateVariables.put("date", date);
 				String body = mergeTemplateIntoString(velocityEngine,
 						"/velocity/templates/registrationConfirmTemplate.vm", "UTF-8", templateVariables);
@@ -62,6 +65,7 @@ public class MailService {
 			}
 
 		};
+		
 		mailSender.send(preparator);
 		logger.info("----Message about registration to " + to + " send successful---");
 	}

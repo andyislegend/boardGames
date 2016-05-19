@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
@@ -97,7 +100,7 @@ public class UserGameSharingController {
 	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}/{propositions}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message,
-			@PathVariable List<String> propositions) {
+			@PathVariable List<Integer> propositions) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus("confirmation");
@@ -108,23 +111,9 @@ public class UserGameSharingController {
 		exchange.setMessage(message);
 		exchangeService.update(exchange);
 		
-		List<Integer> gameIdsToPerform = new ArrayList<Integer>();
-		boolean lock = false;
-		String name = "";
-		String edition = "";
-		for (String proposition: propositions) {
-			if (lock == false) {
-				name = proposition;
-			}
-			else {
-				edition = proposition;
-				gameIdsToPerform.addAll(gameUserService.getFromNameAndEdition(name, edition));
-			}
-			lock = !(lock);
-		}
-		for (Integer id : gameIdsToPerform) {
+		for (Integer proposition: propositions) {
 			GameProposition gamePropo = new GameProposition();
-			gamePropo.setGameUser(gameUserService.getUserGamesById(id));
+			gamePropo.setGameUser(gameUserService.getUserGamesById(proposition));
 			gamePropo.setExchange(exchange);
 			gamePropoService.update(gamePropo);
 		}
@@ -142,6 +131,12 @@ public class UserGameSharingController {
 		Date localDate = new Date();
 		exchange.setApplyingDate(localDate);
 		exchangeService.update(exchange);
+		
+		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
+			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
+			gameUser.setStatus("shared");
+			gameUserService.update(gameUser);
+		}
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -156,6 +151,8 @@ public class UserGameSharingController {
 		exchange.setUserApplierId(0);
 		exchange.setMessage("Hey you!");
 		exchangeService.update(exchange);
+		
+		gamePropoService.deleteForExchange(exchange.getId());
 	}
 	
 	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
@@ -166,7 +163,17 @@ public class UserGameSharingController {
 		gameUserToUpdate.setStatus("private");
 		gameUserService.update(gameUserToUpdate);
 		
-		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		
+		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
+			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
+			gameUser.setStatus("private");
+			gameUserService.update(gameUser);
+		}
+		
+		gamePropoService.deleteForExchange(exchange.getId());
+		
+		exchangeService.delete(exchange);
 	}
 	
 	@RequestMapping(value="/getHowManyDaysForExchange/{gameUserId}", method = RequestMethod.GET)
@@ -190,5 +197,12 @@ public class UserGameSharingController {
 		deadLine = calendar.getTime();
 		Long days = (deadLine.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
 		return days.intValue();
+	}
+	
+	@RequestMapping(value="/getPropositionsOfExchange/{gameUserId}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GameUserDTO> getPropositionsOfExchange(@PathVariable Integer gameUserId) {
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		return gamePropoService.getFromExchangeId(exchange.getId());
 	}
 }

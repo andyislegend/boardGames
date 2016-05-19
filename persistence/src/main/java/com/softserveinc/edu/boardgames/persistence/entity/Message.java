@@ -21,6 +21,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Table(name="message")
 public class Message implements Serializable{
 
+	private static final long serialVersionUID = -1457540770175665075L;
+
 	/**
 	 * Describes the friendship  id. Unique value. Primary Key
 	 */

@@ -1,27 +1,17 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 
@@ -37,6 +27,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "category")
 public class Category implements Serializable{
+	
+	private static final long serialVersionUID = 1362760535235604358L;
+
 	/**
 	 * Unique value, primary key to categories
 	 */

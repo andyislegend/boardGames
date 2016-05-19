@@ -88,7 +88,7 @@
 				</div>
 
 				<p style="font-size: 14pt;" class="navbar-text">
-					<b>Board Games Exchange</b>
+					<b>Board Games: Exchange</b>
 				</p>
 
 				<div ng-controller="getUser" ng-mouseenter="showIt()"
@@ -112,8 +112,8 @@
 				</div>
 
 				<div>
-					<div style="margin-left: 40%" ng-controller="search">
-						<form data-ng-submit=submit() style="margin-left: 12%;"
+					<div style="margin-left: 30%" ng-controller="search">
+						<form data-ng-submit=submit() style="margin-left: 3%;"
 							class="navbar-form navbar-left" role="search">
 							<form id="searchthis" style="display: inline;" method="get">
 								<input id="search-box" name="q" size="50" type="text"
@@ -133,7 +133,7 @@
 						<a href="?locale=ua"><img id="flag"src="resources/images/ua.png" /></a></span>
 					</li>
 					<li><a class="btn btn-secondary btn-lg disabled">Welcome
-							back, <em><b style="color: white">${user}</b></em>
+							back, <em><b style="color: white; font-size: 12pt;">${user}</b></em>
 					</a></li>
 					<li class="dropdown" style="background-color: transparent;"><a
 						href="" class="dropdown-toggle profile-image"

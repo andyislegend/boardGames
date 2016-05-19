@@ -120,9 +120,9 @@ indexModule.controller('registerCntrl', [ '$scope', '$http',
 					headers : {
 						'Content-Type' : 'application/x-www-form-urlencoded'
 					}
-				}).success(function(result, status) {
+				}).success(function(status) {
 					$scope.closeModal();
-					$scope.showAlert(result)
+					$scope.showModal();
 				}).error(function(result, status) {
 					$scope.regUserResp = result;
 				})
@@ -145,8 +145,8 @@ indexModule.controller('registerCntrl', [ '$scope', '$http',
 				$scope.eraseForm();
 			}
 
-			$scope.showAlert = function(result) {
-				alert(result);
+			$scope.showModal = function() {
+				$('#myRegSuccess').modal('show');
 			}
-
+			
 		} ]);

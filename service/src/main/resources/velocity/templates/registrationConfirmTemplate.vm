@@ -2,10 +2,12 @@
 	<body>
 			$date - successful registration, Congratulations!
 			<br> 
-			Welcome on board,<b> $name </b>. From now, You can log in on boarGames.com!  
+			Welcome on board,<b> $name </b>. 
+			<br>
+			To login into system, please confirm your registration by clicking on url below. 
 			<br>
             Your login/username: $name ,<br>
-            Your password: $password . <br>
+            Your confirmation link: $confirm . <br>
             
             Don't tell anyone your password or login!
             <br>
