@@ -34,9 +34,9 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
     });
     $http.get('getAllCurrentUserEvent').success(function(data){
         for(var i = 0 ; i < data.length; i++){
-            var emergency =  (data[i][2] - new Date().getTime()) <= 24*60*60*1000;
-            var tournamentNotification = new Notification('Tournament', emergency, data[i][4] + ", " + data[i][5], data[i][1], data[i][2]);
-            $scope.arrayOfNotification.push(tournamentNotification);
+            var emergency =  (data[i][4] - new Date().getTime()) <= 24*60*60*1000;
+            var eventNotification = new Notification('Event', emergency, data[i][3],data[i][2] +  ": " +  data[i][1], data[i][4]);
+            $scope.arrayOfNotification.push(eventNotification);
         }
     }).error(function(error){
         console.log(error);
