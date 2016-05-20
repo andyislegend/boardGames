@@ -48,6 +48,8 @@
 <script type="text/javascript"
 	src="resources/js/controllers/allUserGamesController.js"></script>
 <script type="text/javascript"
+	src="resources/js/controllers/gameNotifyController.js"></script>
+<script type="text/javascript"
 	src="resources/js/controllers/globalSearchController.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/createGameController.js"></script>
@@ -216,7 +218,7 @@
       												data-toggle="modal"
 													data-target="#myModalHorizontal"></span> 
     										</a>
-    										<a href="#" class="btn btn-info" >
+    										<a href="#gameNotifications/{{username}}" class="btn btn-info" >
       											<span class="glyphicon glyphicon-bell" ></span> 
     										</a>
 										</div>

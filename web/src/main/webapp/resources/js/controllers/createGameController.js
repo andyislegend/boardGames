@@ -8,6 +8,15 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		$scope.categories = result.data;
 	});
 	
+	$http({
+		method : "GET",
+		url : 'getPrincipalUsername'
+	}).then(function mySucces(response) {
+		$scope.username = response.data;
+	}, function myError(response) {
+		alert("getting principal username error");
+	});
+	
 	$scope.submit = function() {
 		var userGame = {
 			"name" : $scope.name,
