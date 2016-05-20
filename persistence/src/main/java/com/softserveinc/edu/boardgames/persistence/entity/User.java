@@ -175,6 +175,9 @@ public class User implements Serializable {
 	inverseJoinColumns = {@JoinColumn(name = "tournament_id")})
 	private Set<Tournament> tournaments;
 	
+	/**
+	 * Describes a connection to verification token entity
+	 */
 	@OneToOne (mappedBy="user")
 	private VerificationToken verificationToken;
 
