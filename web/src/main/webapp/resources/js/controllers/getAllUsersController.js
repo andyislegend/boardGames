@@ -87,4 +87,9 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		     }
 		 });
 	});
+	
+	$scope.banUser = function(username) {
+		$http.put('banUser?username='+ username).then(function(result) {
+		});
+	}
 });

@@ -20,6 +20,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
@@ -162,5 +163,13 @@ public class UsersController {
 	public User getOneUser() {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		return user;
+	}
+	
+	@RequestMapping(value = {"/banUser"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public void banUser(@RequestParam("username") String username) {
+		User user = userService.findOne(username);
+		user.setState(UserStatus.BANNED.name());
+		userService.updateUser(user);
 	}
 }
