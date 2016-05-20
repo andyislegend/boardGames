@@ -1,15 +1,13 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
-
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 
 /**
  * @author Volodymyr Krokhmalyuk
@@ -42,4 +40,14 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 //            "t.city, t.addition, t.dateOfTournament, t.requiredRating,t.maxParticipants) " +
 //            "from Tournament t where t.name like %:name%")
 //    public List<AllTournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
+    
+    /**
+     * @author Vayl Bervetskyy
+     */
+    @Query(value = "SELECT " +
+            "id, name, dateOfTournament, countOfParticipants, country, city"
+            + " FROM tournament WHERE id IN "
+            + "( SELECT tournament_id FROM tournament_users  WHERE users_id = "
+            + "( SELECT id FROM users WHERE username = 'root' ))", nativeQuery = true )
+    public List<Object[]> getAllTournamentByUserName();
 }

@@ -1,0 +1,26 @@
+#gameDetailTable {
+	width:100%;
+}
+.inlineDisplay {
+	display:inline;
+}
+label.inlineDisplay {
+	vertical-align: top;
+}
+input.inlineDisplay {
+	width:40%;
+}
+.centeredObjects {
+	margin:auto;
+	text-align: center;
+}
+.listCenterd {
+	margin-left:28%;
+	width:43%;
+}
+.boldText {
+	font-weight: bold;
+}
+select.inlineDisplay {
+	width:43%;
+}
