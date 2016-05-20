@@ -117,4 +117,31 @@ public class MailService {
 		logger.info("----Message remainding " + to + " to give " 
 				+ gameName + "to" + ownerUsername + "---");
 	}
+	
+	@Async
+	public void remindThatYouAreLate(final String to, final String username, final Integer days,
+			final String gameName, final String ownerUsername) {
+		
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(to);
+				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", username);
+				templateVariables.put("days", days);
+				templateVariables.put("game", gameName);
+				templateVariables.put("ownerUsername", ownerUsername);
+				String body = mergeTemplateIntoString(velocityEngine, 
+						"/velocity/templates/gameReturnIsLateReminder.vm", "UTF-8", templateVariables);
+				message.setText(body, true);
+				message.setSubject("Reminding about game return");
+			}
+		};
+		mailSender.send(preparator);
+		logger.info("----Message remainding " + to + " to give " 
+				+ gameName + " to " + ownerUsername + " is late for " + days + "---");
+	}
 }

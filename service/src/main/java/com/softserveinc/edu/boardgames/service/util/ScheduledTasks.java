@@ -25,7 +25,7 @@ public class ScheduledTasks {
 	UserService userService;
 
     @Scheduled(fixedRate = 86400000)
-    public void reportCurrentTime() {
+    public void checkIfOneDayRemains() {
     	for (Exchange exchange: exchangeService.findAllExchanges()) {
     		
     		Date localDate = new Date();
@@ -39,6 +39,27 @@ public class ScheduledTasks {
     			mailService.remindAboutGameReturnTomorrow(
     					userService.findById(exchange.getUserApplierId()).getEmail(), 
     					userService.findById(exchange.getUserApplierId()).getUsername(),
+    					exchange.getGameUser().getGame().getName(), 
+    					exchange.getUser().getUsername());
+    		}
+    	}
+    }
+    
+    @Scheduled(fixedRate = 604800000)
+    public void remindThatNeedsToGiveBack() {
+    	for (Exchange exchange: exchangeService.findAllExchanges()) {
+    		Date localDate = new Date();
+    		Date deadLine = exchange.getApplyingDate();
+    		Calendar calendar = Calendar.getInstance();
+    		calendar.setTime(deadLine);
+    		calendar.add(Calendar.DATE, exchange.getPeriod()); 
+    		deadLine = calendar.getTime();
+    		Long days = (deadLine.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
+    		if (days.intValue() < 1) {
+    			mailService.remindThatYouAreLate(
+    					userService.findById(exchange.getUserApplierId()).getEmail(), 
+    					userService.findById(exchange.getUserApplierId()).getUsername(),
+    					(-days.intValue()),
     					exchange.getGameUser().getGame().getName(), 
     					exchange.getUser().getUsername());
     		}

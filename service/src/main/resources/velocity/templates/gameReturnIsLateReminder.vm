@@ -1,0 +1,13 @@
+<html>
+	<body>
+			
+			Dear<b> $name </b>. 
+			<br>
+			We want to remind you that you are late to give "<b> $game <b/>" back to <b> $ownerUsername </b>
+			for <b>$days<b/>
+			<br>
+        	Please, contact the owner and give the game back.
+        	<br>
+            Best regards: BoardGamesExchange team. 
+	</body>
+</html>
