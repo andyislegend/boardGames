@@ -33,7 +33,14 @@ homeApp.config(function ($translateProvider) {
 	    OLD_PASSWORD:'Old password:',
 	    NEW_PASSWORD:'New password:',
 	    CONFIRM_PASSWORD:'Confirm password:',
-	    SAVE_PASSWORD_BUTTON:'Save password'
+	    SAVE_PASSWORD_BUTTON:'Save password',
+	    USERS:'Users',
+	    USER_LAST_NAME:'Last name: {{userLastName}}',
+	    USER_FIRST_NAME:'First name: {{userFirstName}}',
+	    USER_GENDER:'Gender: {{userGender}}',
+	    USER_AGE:'Age: {{userAge}}',
+	    USER_LEVEL:'Level: {{userLevel}}',
+	    USER_PHONE_NUMBER:'Phone number {{userPhoneNumber}}'
 	  });
 	  $translateProvider.translations('ua', {
 		PROJECT_NAME:'Настільні ігри: Обмін',
@@ -53,7 +60,7 @@ homeApp.config(function ($translateProvider) {
 	    TOURNAMENTS:'Турніри',
 	    STATISTICS:'Статистика',
 	    EDIT_PROFILE:'Редагувати профіль',
-	    USER_PROFILE:'Сторінка юзера',
+	    USER_PROFILE:'Сторінка користувача',
 	    UPLOAD_AVATAR:'завантажити аву',
 	    FIRST_NAME:'Ім`я:',
 	    LAST_NAME:'Прізвище:',
@@ -69,7 +76,14 @@ homeApp.config(function ($translateProvider) {
 	    OLD_PASSWORD:'Старий пароль:',
 	    NEW_PASSWORD:'Новий пароль:',
 	    CONFIRM_PASSWORD:'Підтвердити пароль:',
-	    SAVE_PASSWORD_BUTTON:'Зберегти пароль'
+	    SAVE_PASSWORD_BUTTON:'Зберегти пароль',
+	    USERS:'Користувачі',
+	    USER_LAST_NAME:'Прізвище: {{userLastName}}',
+	    USER_FIRST_NAME:'Ім`я: {{userFirstName}}',
+	    USER_GENDER:'Стать: {{userGender}}',
+	    USER_AGE:'Вік: {{userAge}}',
+	    USER_LEVEL:'Звання: {{userLevel}}',
+	    USER_PHONE_NUMBER:'Телефон: {{userPhoneNumber}}'
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');

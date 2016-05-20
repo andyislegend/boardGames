@@ -135,8 +135,8 @@
 						<img id="flag"src="resources/images/gb.png" ng-click="changeLanguage('en')"/>
 						<img id="flag"src="resources/images/ua.png" ng-click="changeLanguage('ua')"/></span>
 					</li>
-					<li><a class="btn btn-secondary btn-lg disabled">Welcome
-							back, <em><b style="color: white; font-size: 12pt;">${user}</b></em>
+					<li><a class="btn btn-secondary btn-lg disabled"><span translate="WELCOME_BACK"></span>
+							 <em><b style="color: white; font-size: 12pt;">${user}</b></em>
 					</a></li>
 					<li class="dropdown" style="background-color: transparent;"><a
 						href="" class="dropdown-toggle profile-image"
@@ -145,21 +145,20 @@
 							class="img-circle dropdown-toggle profile-image"
 							data-toggle="dropdown"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#/edit" translate="EDIT_PROFILE"><span
-									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									Edit profile</a></li>
-							<li><a ng-href="#/notification" translate="MESSAGES"><span
+							<li><a href="#/edit" ><span	class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									<span translate="EDIT_PROFILE"></span></a></li>
+							<li><a ng-href="#/notification" ><span
 									class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-									Messages <span class="badge">2</span></a></li>
+									<span translate="MESSAGES"></span></a></li>
 							<sec:authorize access="hasRole('ADMIN')">
-								<li><a href="#users" translate="USERS"><span
+								<li><a href="#users"><span
 										class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										Users </a></li>
+										<span translate="USERS"></span></a></li>
 							</sec:authorize>
 							<li class="divider"></li>
-							<li><a href="logout" translate="LOGOUT"><span
+							<li><a href="logout"><span
 									class="glyphicon glyphicon-off" aria-hidden="true"></span>
-									Logout </a></li>
+									<span translate="LOGOUT"></span></a></li>
 						</ul></li>
 				</ul>
 			</div>

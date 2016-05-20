@@ -1,6 +1,6 @@
 <script src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <div>
-    <h1 id="headerUsers"> Users </h1>
+    <h1 id="headerUsers" translate="USERS"> Users </h1>
                <div ng-controller="getAllUsersCtrl">
 		<table ng-table="usersTable" show-filter="true"
 			class="table table-striped" >
@@ -10,23 +10,29 @@
 					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
 				</td>
 				<td title="'Email'" sortable="'email'" class="col-sm-3">{{user.email}}</td>
-				<td title="'Country'" filter="{'countryName': 'select'}" filter-data="countries()" 
+				<td title="'Country'" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
 					class="col-sm-3" ng-model="country" ng-change="searchCities()">
 					{{user.country.name}}
                 </td>
-				<td title="'City'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
+				<td title="'City'" sortable="'cityName'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
 					 {{user.city.name}}
                 </td>
                 </tr>
 			<tr ng-show="showUser" ng-repeat-end>
 				<td class="col-sm-3">
 						<div id="backgroundForOneUser">
-							<p>Last Name:{{oneUser.lastName}}</p>
-							<p>First Name:{{oneUser.firstName}}</p>
-							<p>Sex:{{oneUser.gender}}</p>
-							<p>Age:{{oneUser.age}}</p>
-							<p>Rating:{{oneUser.rating}}</p>
-							<p>Phone number:{{oneUser.phoneNumber}}</p>
+							<p translate="USER_LAST_NAME" 
+								translate-values="{userLastName:'{{oneUser.lastName}}'}"></p>
+							<p translate="USER_FIRST_NAME" 
+								translate-values="{userFirstName:'{{oneUser.firstName}}'}"></p>
+							<p translate="USER_GENDER" 
+								translate-values="{userGender:'{{oneUser.gender}}'}"></p>
+							<p translate="USER_AGE" 
+								translate-values="{userAge:'{{oneUser.age}}'}"></p>
+							<p translate="USER_LEVEL" 
+								translate-values="{userLevel:'{{oneUser.rating}}'}"></p>
+							<p translate="USER_PHONE_NUMBER" 
+								translate-values="{userPhoneNumber:'{{oneUser.phoneNumber}}'}"></p>
 						</div>
 				</td>
 				<td class="col-sm-3">
