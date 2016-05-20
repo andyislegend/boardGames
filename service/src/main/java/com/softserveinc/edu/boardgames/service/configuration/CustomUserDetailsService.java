@@ -20,16 +20,17 @@ import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.UserService;
 
 /**
- * Used for provide UserDetailsService to SprinSecurityConfiguration
- * 
  * @author Andrii Petryk
+ * 
+ *         This class provides Customize UserDetailsService for
+ *         SprinSecurityConfiguration
  *
  */
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
 	private final Logger logger = Logger.getLogger(CustomUserDetailsService.class);
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -37,8 +38,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 * Load UserDetails into security
 	 * 
 	 * @param usernmae
-	 *            is used for searching a user and providing its password, role,
-	 *            state
+	 *            is used for searching a user and load its password, role,
+	 *            state into SpringSecurity authentification token.
 	 * 
 	 */
 	@Transactional
@@ -48,15 +49,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 			logger.error("Username not found");
 			throw new UsernameNotFoundException("Username not found");
 		}
-		// return new
-		// org.springframework.security.core.userdetails.User(user.getUsername(),
-		// user.getPassword(),
-		// isEnabled(user), true, true, true, getGrantedAuthorities(user));
 
 		return new CustomUserDetails(user.getUsername(), user.getPassword(), isEnabled(user), true, true, true,
 				getGrantedAuthorities(user), user.getState());
 	}
 
+	/**
+	 * 
+	 * @author Andrii Petryk
+	 * 
+	 *         Class extended from
+	 *         springframework.security.core.userdetails.User. Creates custom
+	 *         User Details for authentication
+	 *
+	 */
 	public static class CustomUserDetails extends org.springframework.security.core.userdetails.User {
 
 		/**
@@ -95,6 +101,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 		return authorities;
 	}
 
+	/**
+	 * 
+	 * @param user
+	 * @return true or false
+	 * 
+	 *         Checked whether User enabled or not
+	 */
 	private boolean isEnabled(User user) {
 
 		if (user.getState().equals(UserStatus.DELETED) || user.getState().equals(UserStatus.INACTIVE)) {

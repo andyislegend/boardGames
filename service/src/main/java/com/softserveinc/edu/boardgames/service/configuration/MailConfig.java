@@ -17,7 +17,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
 /**
- * This class configure mail sender and send different type of letters
+ * This class configure mail sender service. Create JavaMailSender Bean and
+ * VelocityEngine Bean
  * 
  * @author Andrii Petryk
  *
@@ -26,8 +27,8 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 @PropertySource("classpath:/properties/mail.properties")
 public class MailConfig {
 
-	 private final Logger logger = Logger.getLogger(MailConfig.class);
-	
+	private final Logger logger = Logger.getLogger(MailConfig.class);
+
 	@Autowired
 	private Environment env;
 
@@ -43,9 +44,9 @@ public class MailConfig {
 		mailSender.setUsername(env.getProperty(MailConstant.CREDENTIAL_USERNAME));
 		mailSender.setPassword(env.getProperty(MailConstant.CREDENTIAL_PASSWORD));
 		Properties properties = new Properties();
-		properties.put("mail.smtp.aut",Boolean.parseBoolean(env.getProperty("mail.config.smtp.auth")));
-		properties.put("mail.smtp.starttls.enable",Boolean.parseBoolean(
-				env.getProperty("mail.config.smtp.starttls.enable")));
+		properties.put("mail.smtp.aut", Boolean.parseBoolean(env.getProperty("mail.config.smtp.auth")));
+		properties.put("mail.smtp.starttls.enable",
+				Boolean.parseBoolean(env.getProperty("mail.config.smtp.starttls.enable")));
 		properties.put("mail.smtp.socketFactory.fallback", "true");
 		mailSender.setJavaMailProperties(properties);
 		logger.info("---Gmail auth success---");
