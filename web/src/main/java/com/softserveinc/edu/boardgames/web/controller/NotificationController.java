@@ -39,10 +39,6 @@ public class NotificationController {
 				listOfMessage.add(message);
 			}
 		}
-		
-		System.out.println("******************** " + tournamentService.getAllTournamentByUserName().size());
-		
-		
 		return listOfMessage;
 	}
 	
