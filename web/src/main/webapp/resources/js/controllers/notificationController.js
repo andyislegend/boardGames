@@ -46,6 +46,8 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
             return 'notreadmessage';
         }else if(emergency && type == 'Tournament'){
             return 'notification-line-tournament';
+        }else if(emergency && type == 'Event'){
+            return 'notification-line-event';
         };
     };
     $scope.specificClass = function(emergency, type){
@@ -53,7 +55,10 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
             return 'notreadmessage-body';
         }else if(emergency && type == 'Tournament'){
             return 'tournament-body';
-        }; 
+        }else if(emergency && type == 'Event'){
+            return 'event-body';
+        };
+        
     }
 	
 }]);
