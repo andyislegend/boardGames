@@ -1,25 +1,6 @@
-var indexModule = angular.module('indexModule', ['pascalprecht.translate']);
+var homeApp = angular.module('indexModule', ['pascalprecht.translate']);
 
-indexModule.config(function ($translateProvider) {
-	  $translateProvider.translations('en', {
-	    PROJECT_NAME:'Board Games: Exchange',
-		LOGIN: 'Login',
-	    REGISTRATION: 'Registration',
-	  });
-	  $translateProvider.translations('ua', {
-		PROJECT_NAME:'Настільні ігри: Обмін',
-		LOGIN: 'Логін',
-		REGISTRATION: 'Реєстрація',
-	  });
-	  $translateProvider.preferredLanguage('en');
-	  $translateProvider.useSanitizeValueStrategy('escape');
-});
-indexModule.controller('localizationController', function($scope, $translate) {
-	$scope.changeLanguage = function (key) {
-	    $translate.use(key);
-	};
-});
-indexModule.controller('loginCntrl', [
+homeApp.controller('loginCntrl', [
 		'$scope',
 		'$http',
 		'$timeout',
@@ -119,7 +100,7 @@ indexModule.controller('loginCntrl', [
 
 		} ]);
 
-indexModule.controller('registerCntrl', [ '$scope', '$http',
+homeApp.controller('registerCntrl', [ '$scope', '$http',
 		function($scope, $http) {
 
 			$scope.register = function() {

@@ -75,6 +75,7 @@
 <script
 	src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
 <script src="resources/bower_components/angular-translate/angular-translate.js"></script>
+<script type="text/javascript" src="resources/js/localization.js"></script>
 <!-- End of Scripts -->
 
 </head>
