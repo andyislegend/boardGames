@@ -91,5 +91,30 @@ public class MailService {
 		mailSender.send(preparator);
 		logger.info("----Message about ban to " + to + " send successful---");
 	}
+	
+	@Async
+	public void remindAboutGameReturnTomorrow(final String to, final String username, 
+			final String gameName, final String ownerUsername) {
+		
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(to);
+				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", username);
+				templateVariables.put("game", gameName);
+				templateVariables.put("ownerUsername", ownerUsername);
+				String body = mergeTemplateIntoString(velocityEngine, 
+						"/velocity/templates/gameReturnTomorrowReminder.vm", "UTF-8", templateVariables);
+				message.setText(body, true);
+				message.setSubject("Reminding about game return");
+			}
+		};
+		mailSender.send(preparator);
+		logger.info("----Message remainding " + to + " to give " 
+				+ gameName + "to" + ownerUsername + "---");
+	}
 }
