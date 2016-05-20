@@ -383,7 +383,7 @@
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">Dear, User We have sent you a
+					<p style="text-align: center;">Dear, User! We have sent you a
 						message in order to verify Your email and confirm Your
 						registration.</p> 
 					<p style="text-align: center; color: red;"> Keep in mind, that Your confirmation link will expire after 1 hour</p>	

@@ -18,12 +18,13 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
+ * This class is used to verify provided email by user during registration and
+ * to user's confirm registration
  * 
  * @author Andrii Petryk
  * 
- *         This class is used to verify provided email by user during
- *         registration and to user's confirm registration
  *
+ * 
  */
 @Entity
 public class VerificationToken implements Serializable {

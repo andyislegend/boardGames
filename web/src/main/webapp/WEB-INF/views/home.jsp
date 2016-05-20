@@ -123,7 +123,7 @@
 									 ng-model="search" translate translate-attr-placeholder="SEARCH"/> <a
 									ng-href="#search/{{search}}">
 									<button id="search-btn" ng-click="searchAll()" type="submit">
-										<span class="	glyphicon glyphicon-search"></span>
+										<span class="glyphicon glyphicon-search"></span>
 									</button>
 								</a>
 							</form>

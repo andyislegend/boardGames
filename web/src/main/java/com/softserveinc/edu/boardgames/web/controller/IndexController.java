@@ -13,6 +13,8 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 /**
  * 
  * @author Andrii Petryk
+ * 
+ *         Controller class that catches request to index page and home page
  *
  */
 @Controller
@@ -20,10 +22,10 @@ public class IndexController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	MessageSource messageSource;
-	
+
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public final String getIndexPage() {
 		return "index";
@@ -32,7 +34,7 @@ public class IndexController {
 	@RequestMapping(value = "/home**", method = RequestMethod.GET)
 	public final String getUserPage(Model model) {
 		model.addAttribute("user", WebUtil.getPrincipalUsername());
-		
+
 		return "home";
 	}
 
