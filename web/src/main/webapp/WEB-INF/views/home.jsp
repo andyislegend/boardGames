@@ -89,22 +89,22 @@
 				</div>
 
 				<p style="font-size: 14pt;" class="navbar-text">
-					<b>Board Games: Exchange</b>
+					<b translate="PROJECT_NAME"></b>
 				</p>
 
 				<div ng-controller="getUser" ng-mouseenter="showIt()"
 					ng-mouseleave="hideIt()">
 					<div class="navbar-form navbar-left">
 						<ul id="container">
-							<li id="userRating">Your level is {{user.rating}}</li>
+							<li id="userRating" translate="USER_LEVEL" 
+								translate-values="{level:'{{user.rating}}'}"></li>
 							<li><progress value="0" max="100" id=ratingBar></progress></li>
 							<li class="outerDiv" ng-show="hovering">
-								<p>
-									Your rating is <b id="insideRating">{{user.userRating}}</b>
+								<p translate="CUR_RATING" 
+								translate-values="{rating:'{{user.userRating}}'}" class="innerDiv">
 								</p>
-								<p class="innerDiv">
-									You need <b id="insideRating">{{neededRating}}</b> to achieve
-									new level
+								<p translate="NEEDED_RATING" 
+								translate-values="{neededRating:'{{neededRating}}'}" class="innerDiv">
 								</p>
 							</li>
 						</ul>
@@ -118,7 +118,7 @@
 							class="navbar-form navbar-left" role="search">
 							<form id="searchthis" style="display: inline;" method="get">
 								<input id="search-box" name="q" size="50" type="text"
-									placeholder="Search" ng-model="search" /> <a
+									 ng-model="search" translate translate-attr-placeholder="SEARCH"/> <a
 									ng-href="#search/{{search}}">
 									<button id="search-btn" ng-click="searchAll()" type="submit">
 										<span class="	glyphicon glyphicon-search"></span>
@@ -143,19 +143,19 @@
 							class="img-circle dropdown-toggle profile-image"
 							data-toggle="dropdown"> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#/edit"><span
+							<li><a href="#/edit" translate="EDIT_PROFILE"><span
 									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									Edit profile</a></li>
-							<li><a ng-href="#/notification"><span
+							<li><a ng-href="#/notification" translate="MESSAGES"><span
 									class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 									Messages <span class="badge">2</span></a></li>
 							<sec:authorize access="hasRole('ADMIN')">
-								<li><a href="#users"><span
+								<li><a href="#users" translate="USERS"><span
 										class="glyphicon glyphicon-user" aria-hidden="true"></span>
 										Users </a></li>
 							</sec:authorize>
 							<li class="divider"></li>
-							<li><a href="logout"><span
+							<li><a href="logout" translate="LOGOUT"><span
 									class="glyphicon glyphicon-off" aria-hidden="true"></span>
 									Logout </a></li>
 						</ul></li>
@@ -173,10 +173,10 @@
 		<nav id="main_menu">
 			<a id="menutoggle"></a>
 			<ul class="lvl1">
-				<li><a href="#allGames"> All Games</a></li>
-				<li><a href="#events"> Events</a></li>
-				<li><a href="#tournaments"> Tournaments</a></li>
-				<li class="isSelected" class="lvl1"><a href="#statistics">
+				<li><a href="#allGames" translate="ALL_GAMES"></a></li>
+				<li><a href="#events" translate="EVENTS"></a></li>
+				<li><a href="#tournaments" translate="TOURNAMENTS"></a></li>
+				<li class="isSelected" class="lvl1"><a href="#statistics" translate="STATISTICS">
 						Statistics</a></li>
 			</ul>
 		</nav>
