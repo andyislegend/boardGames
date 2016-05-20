@@ -2,7 +2,7 @@
 <div ng-controller="getGamesGlobalController">
     
     
-    <table ng-table="allNotification" class="table table-striped">
+    <table ng-table="allNotification" class="table">
 		<tr ng-repeat="notification in arrayOfNotification | orderBy:['-emergency', 'date']" class="table table-striped">
             <td title="" class="type-header" >
 					{{notification.type}}
@@ -13,94 +13,16 @@
             </td>
             <td class="notification-line" ng-class="specificClassLine(notification.emergency, notification.type)">
             </td>
-            <td ng-class="specificClass(notification.emergency, notification.type)">
+            <td class="notification-head" ng-class="specificClass(notification.emergency, notification.type)">
                 {{notification.head}}  
             </td>
-            <td ng-class="specificClass(notification.emergency, notification.type)">
+            <td class="notification-body" ng-class="specificClass(notification.emergency, notification.type)">
                 {{notification.body}}
             </td>
-             <td ng-class="specificClass(notification.emergency, notification.type)">
+             <td class="notification-date" ng-class="specificClass(notification.emergency, notification.type)">
                 {{notification.date | date : format : timezone}}
             </td>
         </tr>	
-        
-        
-        
-        
-        
-        
-        
-        <!--<tr ng-repeat="lastMessage in allLastMessages" class="table table-striped">
-				<td title="" class="type-header" >
-					message
-				</td>
-				<td title=""
-                     class="sign-header">
-                    <img class="notification-message" src="resources/ico/message.png"/>
-                </td>
-               <td class="notification-line" ng-class="{'notreadmessage': !lastMessage.statusOfReading && lastMessage.currentUser.username !== currentUserName}">
-                </td>
-        
-				<td title="" ng-class="{'notreadmessage-body': !lastMessage.statusOfReading && lastMessage.currentUser.username !== currentUserName}">
-                    <a type="submit" class="nitification-a">
-                        <div class="current-user-name">
-                            {{lastMessage.currentUser.firstName}} {{lastMessage.currentUser.lastName}}
-                        </div>
-                        <div class="notification-message-body">
-                            {{lastMessage.message}}
-                        </div>
-                        <div class="friend-user-name">
-                            {{lastMessage.friendUser.firstName}} {{lastMessage.friendUser.lastName}}
-                        </div>
-                        
-                    </a>
-                </td>
-                <td class="notification-data">
-                    <div ng-class="{'notreadmessage-body': !lastMessage.statusOfReading && lastMessage.currentUser.username !== currentUserName}">
-                            {{lastMessage.date | date : format : timezone}}
-                    </div>
-                </td>
-            
-			</tr>-->
-        
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <!--<tr ng-repeat="tournament in allCurrentUserTournament">
-                <td title="" class="type-header" >
-					message
-				</td>
-                
-				<td title=""
-                     class="sign-header">
-                    <img class="notification-message" src="resources/ico/message.png"/>
-                </td>
-                
-                <td class="notification-line-tournament" ng-class="{'notreadmessage': !lastMessage.statusOfReading && lastMessage.currentUser.username !== currentUserName}">
-                </td>
-                
-                <td class="" >
-                {{tournament[1]}}
-                </td>
-                
-                <td class="notification-data">
-                    {{tournament[2] | date : format : timezone}}
-                </td>
-                
-            </tr>-->
     </table>
 
 </div>
