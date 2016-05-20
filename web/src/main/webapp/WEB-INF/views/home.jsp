@@ -206,13 +206,12 @@
 					<!-- MyGames Widget -->
 					<div id="mygames_div">
 						<div ng-controller="allUsersGameCtrl">
-							<h1 style="text-align: center" class="text-primary">My
-								Games:{{allMyGames.length}}</h1>
+							<h1 style="text-align: center" class="text-primary">Games</h1>
 							<div>
 								<div>
 									<div ng-controller="CreateGameCtrl">
 										<div class="centeredObjects">
-											<a href="#" class="btn btn-success" >
+											<a class="btn btn-success" >
       											<span class="glyphicon glyphicon-plus" 
       												data-toggle="modal"
 													data-target="#myModalHorizontal"></span> 
