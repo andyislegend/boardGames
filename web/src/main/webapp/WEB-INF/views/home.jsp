@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="resources/css/users.css" />
 <link rel="stylesheet" href="resources/css/friend.css" />
 <link rel="stylesheet" href="resources/css/editPage.css" />
+<link rel="stylesheet" href="resources/css/gameUser.css" />
 <!-- End of CSS -->
 
 <!-- Scripts -->
