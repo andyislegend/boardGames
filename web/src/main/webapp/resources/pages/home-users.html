@@ -6,15 +6,15 @@
 			class="table table-striped" >
 			<tbody >
 			<tr ng-repeat-start="user in usersByParams">
-				<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
+				<td title="'USERNAME_TABLE' | translate" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
 					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
 				</td>
-				<td title="'Email'" sortable="'email'" class="col-sm-3">{{user.email}}</td>
-				<td title="'Country'" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
+				<td title="'EMAIL_TABLE' | translate" sortable="'email'" class="col-sm-3">{{user.email}}</td>
+				<td title="'COUNTRY_TABLE' | translate" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
 					class="col-sm-3" ng-model="country" ng-change="searchCities()">
 					{{user.country.name}}
                 </td>
-				<td title="'City'" sortable="'cityName'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
+				<td title="'CITY_TABLE' | translate" sortable="'cityName'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
 					 {{user.city.name}}
                 </td>
                 </tr>

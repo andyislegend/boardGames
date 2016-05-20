@@ -41,7 +41,11 @@ homeApp.config(function ($translateProvider) {
 	    USER_LEVEL:'Level: {{userLevel}}',
 	    USER_PHONE_NUMBER:'Phone number: {{userPhoneNumber}}',
 	    USER_GAMES:'Games user owns',
-	    USER_TOURNAMENTS:'Users tournaments'
+	    USER_TOURNAMENTS:'Users tournaments',
+	    USERNAME_TABLE:'Username',
+	    EMAIL_TABLE:'Email',
+	    COUNTRY_TABLE:'Country',
+	    CITY_TABLE:'City'
 	  });
 	  $translateProvider.translations('ua', {
 		PROJECT_NAME:'Настільні ігри: Обмін',
@@ -85,7 +89,11 @@ homeApp.config(function ($translateProvider) {
 	    USER_LEVEL:'Звання: {{userLevel}}',
 	    USER_PHONE_NUMBER:'Телефон: {{userPhoneNumber}}',
 	    USER_GAMES:'Ігри користувача',
-	    USER_TOURNAMENTS:'Турніри'
+	    USER_TOURNAMENTS:'Турніри',
+	    USERNAME_TABLE:'Логін',
+	    EMAIL_TABLE:'Електронна пошта',
+	    COUNTRY_TABLE:'Країна',
+	    CITY_TABLE:'Місто'
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');
