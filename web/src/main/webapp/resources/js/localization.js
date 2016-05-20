@@ -45,7 +45,13 @@ homeApp.config(function ($translateProvider) {
 	    USERNAME_TABLE:'Username',
 	    EMAIL_TABLE:'Email',
 	    COUNTRY_TABLE:'Country',
-	    CITY_TABLE:'City'
+	    CITY_TABLE:'City',
+	    LOGINFORM_HEADER: 'LOGIN WITH USERNMAE AND PASSWORD',
+	    LOGINFORM_USERNAME:'Enter Username',
+	    LOGINFORM_PASSWORD:'Enter Password',
+	    CANCEL: 'Cancel',
+	    DONT_HAVE_ACCOUNT: 'Don\'t have an account? Click here!'
+	    	
 	  });
 	  $translateProvider.translations('ua', {
 		PROJECT_NAME:'Настільні ігри: Обмін',
@@ -93,7 +99,12 @@ homeApp.config(function ($translateProvider) {
 	    USERNAME_TABLE:'Логін',
 	    EMAIL_TABLE:'Електронна пошта',
 	    COUNTRY_TABLE:'Країна',
-	    CITY_TABLE:'Місто'
+	    CITY_TABLE:'Місто',
+	    LOGINFORM_HEADER: 'ВХІД ЗА ІМЕНЕМ КОРИСТУВАЧА ТА ПАРОЛЕМ',
+	    LOGINFORM_USERNAME:'Введіть Ваше Ім\'я користувача',
+	    LOGINFORM_PASSWORD:'Введіть Ваш пароль',
+	    CANCEL: 'Відмінити',
+	    DONT_HAVE_ACCOUNT: 'Досі не зареєстровані? Вам сюди!'
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');
