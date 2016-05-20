@@ -99,7 +99,7 @@
 					<div class="navbar-form navbar-left">
 						<ul id="container">
 							<li id="userRating" translate="USER_LEVEL" 
-								translate-values="{level:'{{user.rating}}'}"></li>
+								translate-values="{userLevel:'{{user.rating}}'}"></li>
 							<li><progress value="0" max="100" id=ratingBar></progress></li>
 							<li class="outerDiv" ng-show="hovering">
 								<p translate="CUR_RATING" 
