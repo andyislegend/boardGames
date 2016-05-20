@@ -441,6 +441,9 @@ word-wrap: break-word;
 }
 .notification-line{
 }
+.notification-line-tournament{
+    background: #C356F9;
+}
 .nitification-a{
     display: inline-flex;
     text-decoration: none;
@@ -450,4 +453,7 @@ word-wrap: break-word;
     display: inline-flex;
     text-decoration: none;
     color: black;
+}
+.tournament-body{
+    background: #F2EAF7;
 }

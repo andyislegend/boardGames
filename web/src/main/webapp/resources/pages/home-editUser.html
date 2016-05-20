@@ -1,6 +1,6 @@
 <div ng-controller="editProfileCtrl" class="col-sm-10" id="editProfile">
-    <h1 id="headerUsers" ng-show="myProfile"> Edit Profile </h1>
-    <h1 id="headerUsers" ng-hide="myProfile"> Friend Profile </h1>
+    <h1 id="headerUsers" ng-show="myProfile" translate="EDIT_PROFILE"> Edit Profile </h1>
+    <h1 id="headerUsers" ng-hide="myProfile" translate="USER_PROFILE"> User Profile </h1>
     <div >
 		<div class="col-sm-12">
 
@@ -16,7 +16,7 @@
 
 								</label>
 								<button ng-click = "uploadAvatar()" id="uploadButton" ng-show="myProfile"
-									class="btn btn-primary btn-bg" >upload avatar</button>
+									class="btn btn-primary btn-bg" translate="UPLOAD_AVATAR">upload avatar</button>
 									
 						</div>
 						<span class="col-sm-3" ng-hide="editProfileMessage">
@@ -30,7 +30,7 @@
 
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">First Name:</label>
+						<label class="col-md-3 control-lable" translate="FIRST_NAME">First Name:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.firstName}}</p>
 							<input ng-model="editableFirstName" class="form-control input-sm" ng-show="myProfile">
@@ -40,7 +40,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">Last Name:</label>
+						<label class="col-md-3 control-lable" translate="LAST_NAME">Last Name:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.lastName}}</p>
 							<input ng-model="editableLastName" class="form-control input-sm" ng-show="myProfile">
@@ -50,7 +50,7 @@
 				
 				<div class="row" ng-hide="myProfile">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">Username:</label>
+						<label class="col-md-3 control-lable" translate="USERNAME">Username:</label>
 						<div class="col-md-5">
 							<p >{{userProfile.username}}</p>
 						</div>
@@ -59,7 +59,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">Email:</label>
+						<label class="col-md-3 control-lable" translate="EMAIL">Email:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.email}}</p>
 							<input type="email" ng-model="editableEmail" class="form-control input-sm" ng-show="myProfile">
@@ -69,7 +69,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">Country:</label>
+						<label class="col-md-3 control-lable" translate="COUNTRY">Country:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.country.name}}</p>
 							<select id="repeatSelectCountry" ng-change="getCitiesByCountry()"
@@ -82,7 +82,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">City:</label>
+						<label class="col-md-3 control-lable" translate="CITY">City:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.city.name}}</p>
 							<select id="repeatSelectCity" ng-show="myProfile" data-ng-init="getCitiesByCountry()"
@@ -94,7 +94,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">Gender:</label>
+						<label class="col-md-3 control-lable" translate="GENDER">Gender:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.gender}}</p>
 							<select id="gender" name="gender" ng-model="editableGender" class="form-control" 
@@ -108,7 +108,7 @@
 				
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">Age:</label>
+						<label class="col-md-3 control-lable" translate="AGE">Age:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.age}}</p>
 							<input ng-model="editableAge" class="form-control input-sm" ng-show="myProfile">
@@ -119,7 +119,7 @@
 				<div ng-show="myProfile">
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable">Phone Number:</label>
+						<label class="col-md-3 control-lable" translate="PHONE_NUMBER">Phone Number:</label>
 						<div class="col-md-5">
 							<input ng-model="editablePhoneNumber" class="form-control input-sm">
 						</div>
@@ -129,7 +129,7 @@
 				
 				<span class="col-sm-3"></span>
 				<div class="col-sm-4">
-					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg">
+					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg" translate="SAVE_BUTTON">
 						Save</button>
 				</div>
 				<span class="col-sm-3" ng-hide="editProfileMessage">
@@ -139,11 +139,12 @@
 				
 				</div>
 				<div class="col-sm-12" ng-show="myProfile" id="passwordChange">
-				<p class="form-group col-md-12"><a href="" ng-click="showPasswordChange = !showPasswordChange">Change password</a></p>
+				<p class="form-group col-md-12"><a href="" ng-click="showPassword()" 
+					translate="CHANGE_PASSWORD">Change password</a></p>
 				<div ng-show="showPasswordChange">
 					<div class="row">
 						<div class="form-group col-md-12" >
-							<label class="col-md-3 control-lable">Old password:</label>
+							<label class="col-md-3 control-lable" translate="OLD_PASSWORD">Old password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableOldPassword" 
 									class="form-control input-sm" id="passwordDiv">
@@ -152,7 +153,7 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12" >
-							<label class="col-md-3 control-lable">New password:</label>
+							<label class="col-md-3 control-lable" translate="NEW_PASSWORD">New password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableNewPassword" 
 									class="form-control input-sm" id="passwordDiv">
@@ -161,7 +162,7 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12" >
-							<label class="col-md-3 control-lable">Confirm password:</label>
+							<label class="col-md-3 control-lable" translate="CONFIRM_PASSWORD">Confirm password:</label>
 							<div class="col-md-5">
 								<input type="password" ng-model="editableConfirmPassword" 
 									class="form-control input-sm" id="passwordDiv">
@@ -171,7 +172,7 @@
 					<span class="col-sm-3"></span>
 						<div class="col-sm-4">
 						<button ng-click="saveNewUserPassword()" id="saveUserUpdate" 
-							class="btn btn-primary btn-bg">Save password
+							class="btn btn-primary btn-bg" translate="SAVE_PASSWORD_BUTTON">Save password
 						</button>
 						</div>
 					<span class="col-sm-3" ng-hide="editProfileMessage">

@@ -19,6 +19,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * This entity contains data model describing games of particular user Has
  * ManyToOne relationship to game ManyToMany relationship to user
