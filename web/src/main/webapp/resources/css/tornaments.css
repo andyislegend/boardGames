@@ -1,0 +1,12 @@
+.main-content {
+	
+}
+.btn-giveRate {
+	top:0; 
+    right:0;
+}
+#table-showParticipants {
+	width: 70%;
+	margin: auto auto;
+	 border: 1px solid;
+}
