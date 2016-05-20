@@ -45,12 +45,12 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 //    public List<AllTournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
     
     /**
-     * @author Vayl Bervetskyy
+     * @author Vasyl Bervetskyy
      */
     @Query(value = "SELECT " +
             "id, name, dateOfTournament, countOfParticipants, country, city"
             + " FROM tournament WHERE id IN "
             + "( SELECT tournament_id FROM tournament_users  WHERE users_id = "
-            + "( SELECT id FROM users WHERE username = 'root' ))", nativeQuery = true )
-    public List<Object[]> getAllTournamentByUserName();
+            + "( SELECT id FROM users WHERE username = ?1 ))", nativeQuery = true )
+    public List<Object[]> getAllTournamentByUserName(String currentUserName);
 }

@@ -30,5 +30,14 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
       List<AllEventsDto> getAllEvents();
 
 	List<Event> findAllEventsByName(String name);
+	
+	/**
+	 *@author Vasyl Bervetskyy
+	 **/
+	@Query(value = "SELECT "
+			+ "id, name, description, place, date "
+			+ "FROM events WHERE userId = "
+			+ "( SELECT id FROM users WHERE username = 'root')" , nativeQuery = true )
+	public List<Object[]> getAllEventByUserName();
 
 }
