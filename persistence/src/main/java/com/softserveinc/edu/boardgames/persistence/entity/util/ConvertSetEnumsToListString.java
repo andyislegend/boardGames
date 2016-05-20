@@ -6,7 +6,7 @@ import java.util.Set;
 
 /**
  * Convert List<Sting> to Set<UserRoles>
- *     and to the another side.
+ *     and in reverse.
  *     Use for conversion data, that we got from database
  *     using hql query
  */
@@ -29,18 +29,4 @@ public class ConvertSetEnumsToListString {
     	return list;
     }
 	
-    
-//    /**
-//     * Convert to Set<T> from List<String>
-//     * @param enumStringList
-//     * @param clazz type of Enum
-//     * @param <T> Enum
-//     * @return
-//     * @throws IllegalArgumentException
-//     */
-//    public static <T extends Enum<T>> Set<T> convertToSetUserRole(List<String> enumStringList, Class<T> clazz)
-//            throws IllegalArgumentException {
-//    	
-//        return enumStringList.stream().map(s -> T.valueOf(clazz, s)).collect(Collectors.toSet());
-//    }
 }
