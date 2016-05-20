@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.Message;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.service.EventService;
 import com.softserveinc.edu.boardgames.service.MessageService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -25,6 +26,9 @@ public class NotificationController {
 	
 	@Autowired
 	TournamentService tournamentService;
+	
+	@Autowired
+	EventService eventService;
 	
 	
 	@RequestMapping(value = "/getAllLastMessage", method = RequestMethod.GET)
@@ -49,7 +53,12 @@ public class NotificationController {
 	
 	@RequestMapping(value = "/getAllCurrentUserTournament", method = RequestMethod.GET)
 	public List<Object[]> getAllCurrentUserTournament(){
-		return tournamentService.getAllTournamentByUserName();
+		String currentUserName = WebUtil.getPrincipalUsername();
+		return tournamentService.getAllTournamentByUserName(currentUserName);
+	}
+	@RequestMapping(value = "/getAllCurrentUserEvent", method = RequestMethod.GET)
+	public List<Object[]> getAllCurrentUserEvent(){
+		return eventService.getAllEventByUserName();
 	}
 	
 	

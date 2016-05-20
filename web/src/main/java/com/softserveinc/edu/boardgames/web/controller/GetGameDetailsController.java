@@ -22,6 +22,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @RestController
 public class GetGameDetailsController {
 	
+	final int DEFAULT_RATING = 0;
 	@Autowired
 	private GameService gameService;
 	
@@ -54,7 +55,7 @@ public class GetGameDetailsController {
 		User user = userService.getUser(WebUtil.getPrincipalUsername());
 		Integer rating = gameRateNumService.getRatingforUser(gameId, user.getId());
 		if (rating == null)
-			rating = new Integer(0);
+			rating = new Integer(DEFAULT_RATING);
 		return rating;
 	}
 	

@@ -89,9 +89,9 @@ public class RegisterController {
 	 * @param request
 	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
 	 * 
-	 *         Controller that validate registration form and @return
+	 *         Controller that validate registration form and return
 	 *         HttpStatus.CONFLICT with error message if there is invalid data
-	 *         in fields provided by user or @return HttpStatus.OK if
+	 *         in fields provided by user or return HttpStatus.OK if
 	 *         registration was successful
 	 */
 	@RequestMapping(value = { "/addNewUser" }, method = RequestMethod.POST)

@@ -25,6 +25,9 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 //    		"from Tournament t where t.userCreator.username =:username")
 //	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
 //
+	@Query(value ="INSERT INTO tournament_users(Tournament_id, users_id) VALUES (?1,?2)", nativeQuery = true)
+	public void addParticipantToTournament(Integer tournament, Integer userId);
+	
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
             "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
             + ") from Tournament t")
@@ -42,12 +45,12 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 //    public List<AllTournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
     
     /**
-     * @author Vayl Bervetskyy
+     * @author Vasyl Bervetskyy
      */
     @Query(value = "SELECT " +
             "id, name, dateOfTournament, countOfParticipants, country, city"
             + " FROM tournament WHERE id IN "
             + "( SELECT tournament_id FROM tournament_users  WHERE users_id = "
-            + "( SELECT id FROM users WHERE username = 'root' ))", nativeQuery = true )
-    public List<Object[]> getAllTournamentByUserName();
+            + "( SELECT id FROM users WHERE username = ?1 ))", nativeQuery = true )
+    public List<Object[]> getAllTournamentByUserName(String currentUserName);
 }

@@ -15,10 +15,10 @@ public class GameUserMapper  {
 		gameUserDTO.setCategory(gameUser.getGame().getCategory().getName());
 		gameUserDTO.setYearOfProduction(gameUser.getYearOfProduction());
 		gameUserDTO.setEdition(gameUser.getEdition());
-		gameUserDTO.setDescription(gameUser.getGame().getDescription());
-		gameUserDTO.setRules(gameUser.getGame().getRules());
-		gameUserDTO.setMaxPlayers(gameUser.getGame().getMaxPlayers());
-		gameUserDTO.setMinPlayers(gameUser.getGame().getMinPlayers());
+		gameUserDTO.setDescription(gameUser.getDescription());
+		gameUserDTO.setRules(gameUser.getRules());
+		gameUserDTO.setMaxPlayers(gameUser.getMaxPlayers());
+		gameUserDTO.setMinPlayers(gameUser.getMinPlayers());
 		gameUserDTO.setStatus(gameUser.getStatus());
 		return gameUserDTO;
 	}
@@ -30,8 +30,11 @@ public class GameUserMapper  {
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
 		gameUser.setCountOfComments(0);
 		gameUser.setStatus("private");
+		gameUser.setDescription(gameUserDTO.getDescription());
+		gameUser.setMinPlayers(gameUserDTO.getMinPlayers());
+		gameUser.setMaxPlayers(gameUserDTO.getMaxPlayers());
 		Category category = new Category(gameUserDTO.getCategory());
-		gameUser.setGame(new Game(gameUserDTO.getName(), gameUserDTO.getDescription(), gameUserDTO.getMinPlayers(), gameUserDTO.getMaxPlayers(), category));
+		gameUser.setGame(new Game(gameUserDTO.getName(),category));
 		return gameUser;
 	}
 
