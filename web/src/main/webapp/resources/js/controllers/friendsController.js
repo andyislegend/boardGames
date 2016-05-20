@@ -161,7 +161,7 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             console.log(error);
         });
     }
-/*setInterval(function(){
+setInterval(function(){
         getUpdate();
         getAllNumberNotReadMessageByFriend();
         getCountOfOffering();
@@ -169,7 +169,7 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
         allfriends();
         allMyOffering();
         
-}, 1000)*/
+}, 1000)
 
     $scope.setString = function(newValue) {
     	friendsUsername.setObject(newValue);
