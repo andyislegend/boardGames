@@ -92,4 +92,9 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$http.put('banUser?username='+ username).then(function(result) {
 		});
 	}
+	
+	$scope.unbanUser = function(username) {
+		$http.put('unbanUser?username='+ username).then(function(result) {
+		});
+	}
 });
