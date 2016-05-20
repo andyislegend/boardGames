@@ -1,12 +1,47 @@
-<div ng-controller = "showAllTournamentsCtrl" >
-<button ng-click = "joinToTournament(tournament.tournamentId)">Join</button>
-<button ng-click = "leaveTournament(tournament.tournamentId)">Quit</button>
+<div ng-controller = "showAllTournamentsCtrl">
+<button ng-disabled = "joinStatus" ng-click = "joinToTournament(tournament.tournamentId)">Join</button>
+<button ng-disabled = "joinStatus" ng-click = "leaveTournament(tournament.tournamentId)">Quit</button>
+	<h2>{{status}}</h2>
 	<h1>{{tournament.tournamentName}}</h1>
 	<p>Count of participants: {{tournament.countOfParticipants}}</p>
 	<p>User creator: {{tournament.userCreatorName}}</p>
 	<p>date of tournament: {{tournament.dateOfTournament | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
 	<p>Participants :</p>
-	<div ng-repeat = "user in tournamentParticipants">
-		<p>{{user.username}}</p>
+	<table class = "table"id ="table-showParticipants">
+	<tr><th>Participants<th></tr>
+	<tr ng-repeat = "user in tournamentParticipants"><td>{{user.username}}<td></tr>
+	</table>
+	
+	<div ng-show = "isCreator">
+	<button ng-disabled ="!isOpenGiveRate"  type="button" class="btn btn-info btn-lg btn-giveRate" data-toggle="modal" data-target="#myModal">Give a rate</button>
 	</div>
+	
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+       <table class = "table">
+	<tr><th>User</th><th>Mark</th><th>Give Mark</th></tr>
+	<form >
+	<tr ng-repeat = "user in tournamentParticipants">
+		<td>{{user.username}}</td>
+		<td><input type="number" min="-2" max="3" ng-model = "rate"></td>
+		<td><button ng-click = "giveRate(user.id, rate)">Rate</button></td>
+	</tr>
+	</form>
+	</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+		
+  </div>
+</div>
+	
 </div>

@@ -25,6 +25,9 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 //    		"from Tournament t where t.userCreator.username =:username")
 //	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
 //
+	@Query(value ="INSERT INTO tournament_users(Tournament_id, users_id) VALUES (?1,?2)", nativeQuery = true)
+	public void addParticipantToTournament(Integer tournament, Integer userId);
+	
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
             "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
             + ") from Tournament t")

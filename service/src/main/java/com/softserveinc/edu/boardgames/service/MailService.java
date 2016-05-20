@@ -111,5 +111,26 @@ public class MailService {
 		mailSender.send(preparator);
 		logger.info("----Message about ban to " + to + " send successful---");
 	}
+	
+	@Async
+	public void sendMailAboutNeedCoutOfParticipants(final String to){
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(to);
+				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", userName);
+				String body = mergeTemplateIntoString(velocityEngine, "/velocity/templates/userBanTemplate.vm", "UTF-8",
+						templateVariables);
+				message.setText(body, true);
+				message.setSubject("Need count participants of tournament");
+			}
+
+		};
+		mailSender.send(preparator);
+		logger.info("----Message " + to + " send successful---");
+	}
 
 }
