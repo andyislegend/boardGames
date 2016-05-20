@@ -40,7 +40,9 @@ homeApp.config(function ($translateProvider) {
 	    USER_GENDER:'Gender: {{userGender}}',
 	    USER_AGE:'Age: {{userAge}}',
 	    USER_LEVEL:'Level: {{userLevel}}',
-	    USER_PHONE_NUMBER:'Phone number {{userPhoneNumber}}'
+	    USER_PHONE_NUMBER:'Phone number: {{userPhoneNumber}}',
+	    USER_GAMES:'Games user owns',
+	    USER_TOURNAMENTS:'Users tournaments'
 	  });
 	  $translateProvider.translations('ua', {
 		PROJECT_NAME:'Настільні ігри: Обмін',
@@ -83,7 +85,9 @@ homeApp.config(function ($translateProvider) {
 	    USER_GENDER:'Стать: {{userGender}}',
 	    USER_AGE:'Вік: {{userAge}}',
 	    USER_LEVEL:'Звання: {{userLevel}}',
-	    USER_PHONE_NUMBER:'Телефон: {{userPhoneNumber}}'
+	    USER_PHONE_NUMBER:'Телефон: {{userPhoneNumber}}',
+	    USER_GAMES:'Ігри користувача',
+	    USER_TOURNAMENTS:'Турніри'
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');

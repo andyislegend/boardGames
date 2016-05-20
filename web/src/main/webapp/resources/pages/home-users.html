@@ -37,7 +37,7 @@
 				</td>
 				<td class="col-sm-3">
 
-							<b id="gamesList">Games user owns:</b>
+							<b id="gamesList" translate="USER_GAMES"></b>
 							<ul ng-repeat="game in games" id="gamesList">
 								<li><a href="#gameUserDetails/{{game.id}}" ng-click="myFunc(game.id)">
 										{{game.name}}</a></li>
@@ -46,7 +46,7 @@
 				</td>
 				<td class="col-sm-3">
 						<div id="backgroundForOneUser">
-							<b id="tournamentsList">Users tournaments:</b>
+							<b id="tournamentsList" translate="USER_TOURNAMENTS"></b>
 							<ul ng-repeat="tournament in tournaments" id="tournamentsList">
 								<li><a href=""
 									ng-click="getInfoAboutTournament(tournament.tournamentId)"
