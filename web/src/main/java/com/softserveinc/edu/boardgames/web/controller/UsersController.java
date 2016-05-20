@@ -163,18 +163,4 @@ public class UsersController {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		return user;
 	}
-	
-	/**
-	 * Returns needed information about tournaments that user took part.
-	 *
-	 * @param userName
-	 *            username of user, who's tournaments we want to find
-	 */
-/*	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
-	@ResponseBody
-	public List<AllTournamentsDTO> showGames(@RequestParam("username") String username) {
-		List<AllTournamentsDTO> allGames = tournamentService.findTournamentsByUserName(username);
-		System.out.println(allGames);
-		return allGames;
-	}*/
 }

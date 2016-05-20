@@ -170,7 +170,8 @@ public class User implements Serializable {
 	@JsonBackReference
 	private Set<GameRating> gameRatingNumeric;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ElementCollection
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_tournaments",joinColumns = {@JoinColumn(name = "user_id")},
 	inverseJoinColumns = {@JoinColumn(name = "tournament_id")})
 	private Set<Tournament> tournaments;
