@@ -33,8 +33,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	public User findByFirstName(String firstName);
 
-	@Query("Select u FROM User u JOIN u.address address WHERE address.city.name =:cityName")
-	public List<User> findUserByCity(@Param("cityName") String cityName);
+	@Query("Select u FROM User u JOIN u.city city WHERE city.id =:cityId")
+	public List<User> findUserByCity(@Param("cityId") Integer cityId);
 	
 	@Query("Select u.username FROM User u WHERE u.userRating <=-5")
 	public List<String> findUsesrWithNegativeRating();

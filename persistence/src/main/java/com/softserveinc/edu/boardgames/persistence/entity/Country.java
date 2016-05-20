@@ -1,11 +1,16 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -43,6 +48,12 @@ public class Country implements Serializable {
 	 */
 	@Column(name = "name")
 	private String name;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "country", fetch = FetchType.LAZY)
+	private Set<User> usersCountry;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "country", fetch = FetchType.LAZY)
+	private Set<City> citiesCountry;
 	
 	public Country() {
 	}

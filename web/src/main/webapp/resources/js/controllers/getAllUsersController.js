@@ -49,8 +49,8 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		   var filterData = [];
 		   angular.forEach(result.data, function (country) {
 		    filterData.push({
-		         id: country,
-		         title: country
+		         id: country.name,
+		         title: country.name
 		        })
 		   });
 		   def.resolve(filterData);
@@ -59,48 +59,38 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		  return def;
 	};
 
-	$scope.$watch('params.filter()[countryName]', function(newVal, oldVal) {
-		$scope.cities = function () {
+		$scope.searchCities = function() {
 			var def = $q.defer();
-			var countryName = $('select[name=countryName]').val().split(/[: ]+/).pop();
-			$http.get('getAllCities?countryName=' + countryName).then(function (result) {
+			$http.get('getAllCities?countryName=' + $scope.country).then(function (result) {
 				var filterData = [];
 				angular.forEach(result.data, function (city) {
 					filterData.push({
-						id: city,
-						title: city
+						id: city.name,
+						title: city.name
 					})
 				});
 				def.resolve(filterData);
 			});
 			return def;
 		};
-	});
-	
-/*	$http.get('getAllCountries').then(function(result) {
-		$scope.countries = result.data;
-		$scope.getCitiesByCountry = function() {
-			var countryName = $('select[name=selectCountries]').val();
-			$http.get('getAllCities?countryName=' + countryName).then(function(result) {
-				$scope.cities = result.data;
-				$scope.$broadcast('sharingAddress', { countries:$scope.countries, cities:$scope.cities});
-			});
-		};
-	});*/
 
 	$scope.$on('sharingToUsersTable', function(event, data) {
 	$scope.usersTable = new ngTableParams({
 		page: 1,
+		total:7,
 		count: 7
 	}, {
+		defaultSort: "asc",
 		total: data.length,
 		getData: function ($defer, params) {
 				  for (var i = 0; i < data.length; i++) {
 					  data[i].countryName = "";
+					  if (data[i].country != null) {
+						  data[i].countryName = data[i].country.name;
+					  }	
 					  data[i].cityName = "";
-					  if (data[i].address != null) {
-						  data[i].countryName = data[i].address.country.name;
-						  data[i].cityName = data[i].address.city.name;
+					  if (data[i].city != null) {
+						  data[i].cityName = data[i].city.name;
 					  }	
 				  }
 		    	 $scope.usersByParams = params.sorting() ? 
@@ -109,6 +99,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		       	 $scope.usersByParams = params.filter() ? 
 		       			$filter('filter')($scope.usersByParams, params.filter()) 
 		       			: $scope.usersByParams;
+		       			params.total( $scope.usersByParams.length);
 		         $scope.usersByParams = $scope.usersByParams.slice((params.page() - 1) 
 		            	* params.count(), params.page() * params.count());
 		         $defer.resolve($scope.usersByParams);

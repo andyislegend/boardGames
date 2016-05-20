@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -52,6 +54,9 @@ public class City implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinColumn(name = "countryId", referencedColumnName = "id")
 	private Country country;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "city", fetch = FetchType.LAZY)
+	private Set<User> usersCity;
 	
 	public City() {
 	}

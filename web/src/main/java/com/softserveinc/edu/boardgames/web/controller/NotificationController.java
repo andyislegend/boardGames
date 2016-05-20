@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.softserveinc.edu.boardgames.persistence.entity.Message;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.MessageService;
+import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
@@ -22,6 +22,9 @@ public class NotificationController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	TournamentService tournamentService;
 	
 	
 	@RequestMapping(value = "/getAllLastMessage", method = RequestMethod.GET)
@@ -42,6 +45,11 @@ public class NotificationController {
 	@RequestMapping(value = "/getCurrentUserName", method = RequestMethod.GET)
 	public String getCurrentUserName(){
 		return WebUtil.getPrincipalUsername();
+	}
+	
+	@RequestMapping(value = "/getAllCurrentUserTournament", method = RequestMethod.GET)
+	public List<Object[]> getAllCurrentUserTournament(){
+		return tournamentService.getAllTournamentByUserName();
 	}
 	
 	

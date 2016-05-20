@@ -1,71 +1,117 @@
 <div ng-controller = "allUsersGameCtrl" class ="container-fluid">
-	
-	<div class = "title">
-		<a id = "EditButton" href = "#gameEdit/{{games.id}}" ng-show="isYourGame">
-			<button class="btn btn-default navbar-btn" >
-				<span class = "glyphicon glyphicon-edit"></span>
-			</button>
-		</a>
-		<h1 id = "titleHeader" >{{games.name}}</h1> 
-	</div>
-	
-	<div class = "mainContent">
-		<p>Year of production: {{games.yearOfProduction}}</p>
-		<p>Edition: {{games.edition}}</p>
-		<p>Description: {{games.description}}</p>
-		<p>Max players: {{games.maxPlayers}}</p>
-		<p>Min players: {{games.minPlayers}}</p>
-		<p>Availability: {{games.status}}</p>
-	</div>
-	
-	<div class="container-fluid" ng-show="isYourGame">
-		<p>Select limit date for your exchange</p>
-		<input type="date" class="form-control" name="returnDate" 
-			max="2020-12-31" min="2000-12-31" ng-model="returnDate"/>
+		
+	<div class = "container-fluid">
+		<table class="table table-reflow" id="gameDetailTable">
+			<tbody>
+				<tr>
+					<th scope="row">
+						<h1 id = "titleHeader" class="text-primary">{{games.name}}</h1>
+					</th>
+					<td>
+						<a id = "EditButton" href = "#gameEdit/{{games.id}}" ng-show="isYourGame">
+							<button class="btn btn-default navbar-btn" >
+								<span class = "glyphicon glyphicon-edit"></span>
+							</button>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">Year of production</th>
+					<td>{{games.yearOfProduction}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Edition</th>
+					<td>{{games.edition}}</td>
+				</tr>	
+				<tr>
+					<th scope="row">Description</th>
+					<td>{{games.description}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Rules</th>
+					<td>{{games.rules}}</td>
+				</tr>	
+				<tr>
+					<th scope="row">Max players</th>
+					<td>{{games.maxPlayers}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Min players</th>
+					<td>{{games.minPlayers}}</td>
+				</tr>	
+				<tr>
+					<th scope="row">Availability</th>
+					<td>{{games.status}}</td>
+				</tr>	
+			</tbody>
+		</table>
 		<br/>
-		<br/>
-		<button class="btn btn-primary" ng-click="makeGameUserAvailable(games.id)">Open for sharing</button>
-	</div>
+		<div class="container-fluid" ng-show="isYourGame">
+			<div class="centeredObjects">
+				<h3 class="text-primary">Make game available</h3>
+			</div>
+			<form name="availabilityForm">
+				<p class="inlineDisplay">Enter period of exchange:</p>
+				<input type="number" name="returnDate" 
+				class="form-control inlineDisplay" ng-model="returnDate" required/>
+				<button class="btn btn-primary inlineDisplay" ng-click="makeGameUserAvailable(games.id)" 
+				ng-disabled="availabilityForm.returnDate.$invalid">Open for sharing</button>
+			</form>
+		</div>
+	</div>	
 	
-	<div class="container-fluid" ng-show="isYourGamePrivate">
+	<div class="container-fluid centeredObjects" ng-show="isYourGamePrivate">
 		<button class="btn btn-primary" ng-click="keepGameUserPrivate(games.id)">Keep it for me</button>
 	</div>
 	
 	<div class="container-fluid" ng-show="isntYourGame">
-		<button class="btn btn-primary" ng-click="displayRequestBlockClick(games.id)">Let's make a deal!</button>
-		<br/>
-		
-		<div class="form-group" ng-show="doWantToApply">
-			<br/>
-			<p>Days: {{howManyDays}}</p>
-	  		
-	  		<label for="comment">Message for owner:</label>
-	  		<textarea class="form-control" rows="2" id="message" ng-model="messageToOwner"></textarea>
-	  		
-	  		<p>Select what you want to propose</p>
-	  		<select class="form-control" id="userGamesSelect" ng-model="myGameSelect"> 
-        		<option ng-repeat="x in myGames">{{x.name}}, {{x.edition}}</option>
-      		</select>
- 			<button class="btn btn-primary" ng-click="addToProposes()">Add proposition</button>  
-   	  		
-   	  		
-   	  		<ul class="list-group">
-    			<li class="list-group-item" ng-repeat="game in gamesToPropose">{{game}}</li>
+		<div class="centeredObjects">
+			<button class="btn btn-primary centeredObjects" 
+			ng-click="displayRequestBlockClick(games.id)">Let's make a deal!</button>
+		</div>		
+		<div class="container-fluid" ng-show="doWantToApply">
+			<p class="boldText">Days: {{howManyDays}}</p>
+	  		<br/>
+	  		<label class="inlineDisplay">Message for owner:  </label>
+	  		<textarea class="form-control inlineDisplay" rows="2" id="message" ng-model="messageToOwner"></textarea>
+	  		<br/>
+	  		<br/>
+	  		<p class="boldText inlineDisplay">Select what you want to propose:  </p>
+      		<select class="form-control inlineDisplay" ng-model="myGamesModel" 
+      			ng-options="option.name for option in myGames"></select>
+      		<button class="btn btn-primary inlineDisplay" ng-click="addToProposes()">
+      			Add proposition</button>  
+
+      		<br/>
+      		<ul class="list-group listCenterd" ng-model="propositionsList">
+    			<li class="list-group-item" ng-repeat="game in gamesToPropose">{{game.name}}, {{game.edition}}</li>
   			</ul>
-			
-			<button class="btn btn-primary" ng-click="askOwnerToShare(games.id, messageToOwner)">Ask owner</button>
+  			<br/>
+  			<div class="centeredObjects">
+  				<button class="btn btn-primary" 
+  					ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)">Ask owner</button>
+  			</div>
 		</div>
 	</div>
 	
 	<div class="container-fluid" ng-show="isThereConfiramtion">
-		<p class="text-important">{{applierUsername}} asks you to share this game</p>
-		<pre class="text text-important">{{messageFromApplier}}</pre>
-		<button class="btn btn-primary" ng-click="acceptGameConfirmation(games.id)">Accept</button>
-		<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
+		<p class="text-primary inlineDisplay">{{applierUsername}}</p>
+		<p class="inlineDisplay"> asks you to share this game</p>
+		<pre>{{messageFromApplier}}</pre>
+		<p class="text-primary inlineDisplay">{{applierUsername}}</p>
+		<p class="inlineDisplay"> offers: </p>
+		<ul class="list-group" ng-model="propositionsFromUser">
+    		<li class="list-group-item" ng-repeat="game in propositions">
+    			{{game.name}} - {{game.edition}}, {{game.yearOfProduction}}</li>
+  		</ul>
+  		<div class="centeredObjects">
+			<button class="btn btn-primary " ng-click="acceptGameConfirmation(games.id)">Accept</button>
+			<button class="btn btn-primary" ng-click="declineGameConfirmation(games.id)">Decline</button>
+	  	</div>
 	</div>
 	
 	<div class="container-fluid" ng-show="canGiveBack">
-		<p>Days remains: {{howManyDaysRemains}}</p>
+		<p class="boldText">Days remains: {{howManyDaysRemains}}</p>
 		<button class="btn btn-primary" ng-click="giveBackGame(games.id)">Give back to owner</button>
 	</div>
 

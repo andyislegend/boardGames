@@ -56,4 +56,8 @@ public class TournamentService {
     public AllTournamentsDTO getTournamentById(Integer id) {
     	return tournamentRepository.getTournamentsById(id);
     }
+    
+    public List<Object[]> getAllTournamentByUserName(){
+    	return tournamentRepository.getAllTournamentByUserName();
+    }
 }

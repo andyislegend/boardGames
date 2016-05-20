@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 'ng.q', 'file-model']);
+var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 'ng.q', 'file-model', 'pascalprecht.translate']);
 
 homeApp.config(function($routeProvider) {
 	$routeProvider

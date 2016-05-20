@@ -1,9 +1,10 @@
 angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+	$scope.userProfile;
 	$scope.showPasswordChange = false;
 	$scope.myProfile = false;
 	$scope.username = $routeParams.username;
 	if ($routeParams.username==null) {
-		$scope.username = "My profile";
+		$scope.username = "Logged in user";
 	}
 	$http.get('getProfile?username='+ $scope.username).then(function(result) {
 		$scope.userProfile = result.data;
@@ -16,7 +17,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 		$scope.editableGender = $scope.userProfile.gender;
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
-
+		$scope.editableCity = $scope.userProfile.city;
 		$http.get('getAvatar').then(function(result) {
 			$scope.avatar = result.data;
 		});
@@ -27,17 +28,50 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 			});
 		}
 		
+		$http.get('getAllCountries').then(function(result) {
+			$scope.countries = result.data;
+			if ($scope.userProfile.country!=null) {
+				for (i=0; i<$scope.countries.length; i++) {				
+					if ($scope.countries[i].id==$scope.userProfile.country.id) {
+						$scope.editableCountry = $scope.countries[i];
+						break;
+					}
+				}
+			}
+			$scope.getCitiesByCountry = function() {
+				$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
+					$scope.cities = result.data;
+					if ($scope.userProfile.city!=null) {
+						for (i=0; i<$scope.cities.length; i++) {
+							if ($scope.cities[i].id==$scope.userProfile.city.id) {
+								$scope.editableCity = $scope.cities[i];								
+							} 
+						}
+					} else {
+						var starOfCitiesCollection = 0;
+						$scope.editableCity = $scope.cities[starOfCitiesCollection];
+					}
+				});
+			};
+			angular.element(document).ready(function () {
+				$scope.getCitiesByCountry();
+			});
+		});
+		
+		
+		
 	});
 	
 	$scope.saveUser = function() {
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,
-		username : $scope.editableUsername,
 		email : $scope.editableEmail,
 		gender : $scope.editableGender,
 		age : $scope.editableAge,
-		phoneNumber : $scope.editablePhoneNumber
+		phoneNumber : $scope.editablePhoneNumber,
+		countryId:$scope.editableCountry.id,
+		cityId:$scope.editableCity.id
 		};
 		$http({
 			method : 'PUT',
@@ -64,17 +98,18 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	}
 
 	$scope.saveNewUserPassword = function() {
-		$http({
-			method : 'PUT',
-			url : 'updateUserPassword',
-			data : $.param({
+		var userPasswordDTO = {
 				oldPassword : $scope.editableOldPassword,
 				newPassword : $scope.editableNewPassword,
 				confirmPassword : $scope.editableConfirmPassword
-			}),
+				};
+		$http({
+			method : 'PUT',
+			url : 'updateUserPassword',
 			headers : {
-				'Content-Type' : 'application/x-www-form-urlencoded'
-			}
+				'Content-Type' : 'application/json'
+			},
+			data : userPasswordDTO
 		}).success(function(result, status) {
 			$scope.editPasswordAnswer = result;
 			$scope.editPasswordMessage = false;
@@ -103,6 +138,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
       }]);
 
 	$scope.uploadAvatar = function() {
+		if ($scope.myFile == null) {
+			return $scope.editAvatarAnswer = "You haven't choosed the file";			
+		}
 		var file = $scope.myFile;
 	    var fileUpload = new FormData();
 	    fileUpload.append("fileUpload", file);
@@ -113,20 +151,23 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	        withCredentials: true,
 	        headers: {'Content-Type': undefined },
 	        transformRequest: angular.identity
-	    }).success(function(){
-	    	console.log("good");
+	    }).success(function(result, status){
+	    	$scope.editAvatarAnswer = result;
         })
         
-        .error(function(){
-        	console.log("bad");
+        .error(function(result, status){
+        	$scope.editAvatarAnswer = result;
         });
 
 	};
 	
+	$scope.showPassword = function() {
+		$scope.showPasswordChange = !$scope.showPasswordChange;
+	}
+	
 }]);
 
-
 var loadFile = function(event) {
-    var output = document.getElementById('avatar');
-    output.src = URL.createObjectURL(event.target.files[0]);
-  };
+	var output = document.getElementById('avatar');
+	output.src = URL.createObjectURL(event.target.files[0]);
+};

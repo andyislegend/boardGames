@@ -12,7 +12,6 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
 		if(today>dateOfTournament){
 			$scope.isOpenGiveRate = true;
 		}
-		
 	});
      
     $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {

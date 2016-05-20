@@ -22,7 +22,7 @@ public interface GameRepository extends JpaRepository<Game, Integer>  {
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO"
 			+"(game.name, game.description, game.rules, avg(gRateNum.rating)) "
-			+ "from Game game, GameRatingNumeric gRateNum "
+			+ "from Game game, GameRating gRateNum "
 			+ "where game.id = :id "
 			+ "and gRateNum.game.id = game.id")
 	public GameDetailsDTO getGameDescription(@Param("id")Integer id);

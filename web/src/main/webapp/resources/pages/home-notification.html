@@ -32,6 +32,26 @@
                 </td>
             
 			</tr>
+        
+            <tr ng-repeat="tournament in allCurrentUserTournament">
+                <td title="" class="type-header" >
+					message
+				</td>
+                
+				<td title=""
+                     class="sign-header">
+                    <img class="notification-message" src="resources/ico/message.png"/>
+                </td>
+                
+                <td class="notification-line-tournament" ng-class="{'notreadmessage': !lastMessage.statusOfReading && lastMessage.currentUser.username !== currentUserName}">
+                </td>
+                
+                <td class="tournament-body">
+                {{tournament[1]}}
+                </td>
+                
+                
+            </tr>
     </table>
 
 </div>

@@ -17,10 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
-
 /**
  *  @author Kobevka Anna
  */
@@ -28,6 +24,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "events")
 public class Event implements Serializable{
 	
+	private static final long serialVersionUID = -8068483407568107770L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

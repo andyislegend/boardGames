@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,12 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * This entity contains data model describing games of particular user Has
@@ -56,6 +60,9 @@ public class GameUser implements Serializable {
 	@OneToOne(mappedBy="gameUser")
 	private Exchange exchange;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="gameUser", cascade={CascadeType.ALL})
+    private Set<GameProposition> gamePropositions;
+	
 	public GameUser() {
 		
 	}
@@ -77,6 +84,14 @@ public class GameUser implements Serializable {
 		this.countOfComments = countOfComments;
 		this.game = game;
 		this.user = user;
+	}
+
+	public Set<GameProposition> getGamePropositions() {
+		return gamePropositions;
+	}
+
+	public void setGamePropositions(Set<GameProposition> gamePropositions) {
+		this.gamePropositions = gamePropositions;
 	}
 
 	public Exchange getExchange() {
