@@ -1,11 +1,8 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +17,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
+import com.softserveinc.edu.boardgames.persistence.enumeration.GameUserStatus;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
@@ -69,7 +67,7 @@ public class UserGameSharingController {
 			@PathVariable Integer returnDate) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("available");
+		gameUserToUpdate.setStatus(GameUserStatus.AVAILABLE.name());
 		gameUserService.update(gameUserToUpdate);
 					
 		Exchange exchange = new Exchange();
@@ -87,7 +85,7 @@ public class UserGameSharingController {
 	public void makeGameUserPrivate(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setStatus(GameUserStatus.PRIVATE.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
@@ -99,7 +97,7 @@ public class UserGameSharingController {
 			@PathVariable List<Integer> propositions) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("confirmation");
+		gameUserToUpdate.setStatus(GameUserStatus.CONFIRMATION.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
@@ -120,7 +118,7 @@ public class UserGameSharingController {
 	public void acceptGameConfirmation(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserOfOwner = gameUserService.getUserGamesById(gameUserId);
-		gameUserOfOwner.setStatus("shared");
+		gameUserOfOwner.setStatus(GameUserStatus.SHARED.name());
 		gameUserService.update(gameUserOfOwner);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
@@ -130,7 +128,7 @@ public class UserGameSharingController {
 		
 		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
 			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
-			gameUser.setStatus("shared");
+			gameUser.setStatus(GameUserStatus.SHARED.name());
 			gameUserService.update(gameUser);
 		}
 	}
@@ -140,7 +138,7 @@ public class UserGameSharingController {
 	public void declineGameConfirmation(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("available");
+		gameUserToUpdate.setStatus(GameUserStatus.AVAILABLE.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
@@ -156,14 +154,14 @@ public class UserGameSharingController {
 	public void giveGameBack(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setStatus(GameUserStatus.PRIVATE.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		
 		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
 			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
-			gameUser.setStatus("private");
+			gameUser.setStatus(GameUserStatus.PRIVATE.name());
 			gameUserService.update(gameUser);
 		}
 		

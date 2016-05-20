@@ -86,28 +86,28 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 				url : 'checkIfGameBelongsToUser' + '/' + $scope.games.id
 			}).then(function mySucces(response) {
 			
-				if (response.data === true && $scope.games.status === 'private') {
+				if (response.data === true && $scope.games.status === 'PRIVATE') {
 					$scope.isYourGame = true;
 					$scope.isntYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
 					$scope.canGiveBack = false;
 				}
-				else if (response.data === false && $scope.games.status === 'available') {
+				else if (response.data === false && $scope.games.status === 'AVAILABLE') {
 					$scope.isntYourGame = true;
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = false;
 					$scope.canGiveBack = false;
 				}
-				else if (response.data === true && $scope.games.status === 'available'){
+				else if (response.data === true && $scope.games.status === 'AVAILABLE'){
 					$scope.isYourGame = false;
 					$scope.isntYourGame = false;
 					$scope.isThereConfiramtion = false;
 					$scope.isYourGamePrivate = true;
 					$scope.canGiveBack = false;
 				}
-				else if (response.data === true && $scope.games.status === 'confirmation') {
+				else if (response.data === true && $scope.games.status === 'CONFIRMATION') {
 					$scope.isntYourGame = false;
 					$scope.isYourGame = false;
 					$scope.isThereConfiramtion = true;
