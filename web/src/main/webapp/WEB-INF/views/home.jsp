@@ -206,16 +206,22 @@
 					<!-- MyGames Widget -->
 					<div id="mygames_div">
 						<div ng-controller="allUsersGameCtrl">
-							<h1 style="text-align: center">MY
-								GAMES:{{allMyGames.length}}</h1>
+							<h1 style="text-align: center" class="text-primary">My
+								Games:{{allMyGames.length}}</h1>
 							<div>
 								<div>
 									<div ng-controller="CreateGameCtrl">
-										<div>
-											<input type="submit" value="ADD GAME"
-												class="btn btn-primary btn-sm" data-toggle="modal"
-												data-target="#myModalHorizontal">
+										<div class="centeredObjects">
+											<a href="#" class="btn btn-success" >
+      											<span class="glyphicon glyphicon-plus" 
+      												data-toggle="modal"
+													data-target="#myModalHorizontal"></span> 
+    										</a>
+    										<a href="#" class="btn btn-info" >
+      											<span class="glyphicon glyphicon-bell" ></span> 
+    										</a>
 										</div>
+										<br/>
 										<div class="modal fade" id="myModalHorizontal" tabindex="-1"
 											role="dialog" aria-labelledby="myModalLabel"
 											aria-hidden="true">
