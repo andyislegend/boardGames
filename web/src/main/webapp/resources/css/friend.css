@@ -457,3 +457,6 @@ word-wrap: break-word;
 .tournament-body{
     background: #F2EAF7;
 }
+.notification-data{
+    padding-left: 0px;
+}
