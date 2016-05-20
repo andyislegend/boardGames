@@ -108,6 +108,7 @@ homeApp.config(function ($translateProvider) {
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');
+	  $translateProvider.useCookieStorage();
 });
 
 homeApp.controller('localizationController', function($scope, $translate) {
