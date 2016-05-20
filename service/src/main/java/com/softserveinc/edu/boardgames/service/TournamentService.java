@@ -4,6 +4,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,12 @@ public class TournamentService {
     @Transactional
     public void delete(Tournament tournament){
         tournamentRepository.delete(tournament);
+    }
+    
+    @Transactional
+    @Modifying
+    public void addParticipantToTournament(Integer tournamentId, Integer userId){
+    	tournamentRepository.addParticipantToTournament(tournamentId, userId);
     }
     
     public List<AllTournamentsDTO> getAllTornaments() {

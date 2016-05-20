@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="resources/css/users.css" />
 <link rel="stylesheet" href="resources/css/friend.css" />
 <link rel="stylesheet" href="resources/css/editPage.css" />
+<link rel="stylesheet" href="resources/css/tornaments.css" />
 <!-- End of CSS -->
 
 <!-- Scripts -->
@@ -76,7 +77,7 @@
 <!-- End of Scripts -->
 
 </head>
-<body ng-app="homeApp">
+<body ng-app="homeApp" >
 	<!-- Top header -->
 	<header>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
