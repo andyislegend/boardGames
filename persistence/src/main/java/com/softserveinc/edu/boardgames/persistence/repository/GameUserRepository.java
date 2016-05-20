@@ -43,7 +43,7 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "u.minPlayers) "
 			+ "from GameUser u "
 			+ "where u.user.username = :username "
-			+ "and u.status != 'shared'")   
+			+ "and u.status != 'SHARED'")   
 	public List<GameUserDTO> getAllMyGameUserByUsername(@Param("username") String username);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
@@ -53,7 +53,7 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "u.minPlayers, user.username) "
 			+ "from GameUser u, Exchange e, User user "
 			+ "where u.user.username = :username "
-			+ "and u.status = 'shared' "
+			+ "and u.status = 'SHARED' "
 			+ "and e.gameUser.id = u.id "
 			+ "and user.id = e.userApplierId")   
 	public List<GameUserDTO> getAllSharedGameUserByUsername(@Param("username") String username);

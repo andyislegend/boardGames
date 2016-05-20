@@ -447,13 +447,19 @@ word-wrap: break-word;
     background: #C356F9;
 }
 .notification-head{
-    width: 15%;
+    width: 17%;
 }
 .notification-body{
     width: 49%;
 }
 .tournament-body{
     background: #F2EAF7;
+}
+.notification-line-event{
+    background: #39DE55;
+}
+.event-body{
+    background: #BAFFC6;
 }
 .notification-date{
      width: 16%;

@@ -1,0 +1,14 @@
+<html>
+	<body>
+			
+			Dear<b> $name </b>. Your game exchange period is over.
+			<br>
+			You need to give back <b> $game <b/> to <b> $ownerUsername </b>  
+			<br>
+        	If you have some difficulties about giving it back,
+        	please contact owner
+        	<br>
+        	<br>
+            Best regards: BoardGamesExchange team. 
+	</body>
+</html>

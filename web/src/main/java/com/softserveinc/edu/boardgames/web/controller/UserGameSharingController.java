@@ -1,11 +1,8 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +17,8 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
+import com.softserveinc.edu.boardgames.persistence.enumeration.GameUserStatus;
+import com.softserveinc.edu.boardgames.persistence.enumeration.TimeEnum;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
@@ -28,6 +27,9 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController
 public class UserGameSharingController {
+	
+	final int NEUTRAL_ID = 0;
+	final String DEFAULT_MESSAGE = "No message";
 	
 	@Autowired
 	private GameUserService gameUserService;
@@ -69,15 +71,15 @@ public class UserGameSharingController {
 			@PathVariable Integer returnDate) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("available");
+		gameUserToUpdate.setStatus(GameUserStatus.AVAILABLE.name());
 		gameUserService.update(gameUserToUpdate);
 					
 		Exchange exchange = new Exchange();
 		exchange.setGameUser(gameUserToUpdate);
-		exchange.setMessage("Hey man!");
+		exchange.setMessage(DEFAULT_MESSAGE);
 		exchange.setPeriod(returnDate);
 		exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-		exchange.setUserApplierId(0);
+		exchange.setUserApplierId(NEUTRAL_ID);
 		exchangeService.update(exchange);			
 		
 	}
@@ -87,7 +89,7 @@ public class UserGameSharingController {
 	public void makeGameUserPrivate(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setStatus(GameUserStatus.PRIVATE.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
@@ -99,7 +101,7 @@ public class UserGameSharingController {
 			@PathVariable List<Integer> propositions) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("confirmation");
+		gameUserToUpdate.setStatus(GameUserStatus.CONFIRMATION.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
@@ -120,7 +122,7 @@ public class UserGameSharingController {
 	public void acceptGameConfirmation(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserOfOwner = gameUserService.getUserGamesById(gameUserId);
-		gameUserOfOwner.setStatus("shared");
+		gameUserOfOwner.setStatus(GameUserStatus.SHARED.name());
 		gameUserService.update(gameUserOfOwner);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
@@ -130,7 +132,7 @@ public class UserGameSharingController {
 		
 		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
 			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
-			gameUser.setStatus("shared");
+			gameUser.setStatus(GameUserStatus.SHARED.name());
 			gameUserService.update(gameUser);
 		}
 	}
@@ -140,12 +142,12 @@ public class UserGameSharingController {
 	public void declineGameConfirmation(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("available");
+		gameUserToUpdate.setStatus(GameUserStatus.AVAILABLE.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		exchange.setUserApplierId(0);
-		exchange.setMessage("Hey you!");
+		exchange.setUserApplierId(NEUTRAL_ID);
+		exchange.setMessage(DEFAULT_MESSAGE);
 		exchangeService.update(exchange);
 		
 		gamePropoService.deleteForExchange(exchange.getId());
@@ -156,14 +158,14 @@ public class UserGameSharingController {
 	public void giveGameBack(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
-		gameUserToUpdate.setStatus("private");
+		gameUserToUpdate.setStatus(GameUserStatus.PRIVATE.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
 		
 		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
 			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
-			gameUser.setStatus("private");
+			gameUser.setStatus(GameUserStatus.PRIVATE.name());
 			gameUserService.update(gameUser);
 		}
 		
@@ -191,7 +193,9 @@ public class UserGameSharingController {
 		calendar.setTime(deadLine);
 		calendar.add(Calendar.DATE, exchange.getPeriod()); 
 		deadLine = calendar.getTime();
-		Long days = (deadLine.getTime() - localDate.getTime())/ (24 * 60 * 60 * 1000);
+		Long days = (deadLine.getTime() - localDate.getTime())/ 
+				(TimeEnum.HOURS.getValue() * TimeEnum.MINUTES.getValue() 
+						* TimeEnum.SECONDS.getValue() * TimeEnum.MILISECONDS.getValue());
 		return days.intValue();
 	}
 	
