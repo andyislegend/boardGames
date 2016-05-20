@@ -189,7 +189,10 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '13
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '15', '1');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '16', '1');
 
-
+-- inserts to table tournaments
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '8', 'Ukraine', '2016-05-17 00:00:00', 'ChessTournament', '4', '8');
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-21 00:00:00', 'Scrable Tornament', '19', '5');
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly Tornament', '1', '1');
 
 
 --  inserts to table events
