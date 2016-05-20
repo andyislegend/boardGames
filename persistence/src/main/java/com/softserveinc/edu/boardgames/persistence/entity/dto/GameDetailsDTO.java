@@ -3,17 +3,13 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 public class GameDetailsDTO {
 	
 	String name;
-	String description;
-	String rules;
 	Double rating;
 	
 	public GameDetailsDTO() {}
 	
-	public GameDetailsDTO(String name, String description, String rules, Double rating) {
+	public GameDetailsDTO(String name, Double rating) {
 		super();
 		this.name = name;
-		this.description = description;
-		this.rules = rules;
 		this.rating = rating;
 	}
 	public Double getRating() {
@@ -27,17 +23,5 @@ public class GameDetailsDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getRules() {
-		return rules;
-	}
-	public void setRules(String rules) {
-		this.rules = rules;
 	}
 }

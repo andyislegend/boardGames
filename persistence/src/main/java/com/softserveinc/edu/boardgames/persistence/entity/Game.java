@@ -45,18 +45,6 @@ public class Game implements Serializable{
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "description")
-	private String description;
-	
-	@Column(name = "rules")
-	private String rules;
-	
-	@Column(name = "minPlayers")
-	private Integer minPlayers;
-	
-	@Column(name = "maxPlayers")
-	private Integer maxPlayers;
-	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private Category category;
@@ -72,33 +60,17 @@ public class Game implements Serializable{
 	
 	public Game(){}
 	
-	public Game(String name, String description, Integer minPlayers, 
-			Integer maxPlayers, Category category) {
+	public Game(String name,Category category) {
 		this.name = name;
-		this.description = description;
-		this.minPlayers = minPlayers;
-		this.maxPlayers = maxPlayers;
 		this.category = category;
-	}
-
-	public GameRating getGameRating() {
-		return gameRating;
-	}
-
-	public void setGameRating(GameRating gameRating) {
-		this.gameRating = gameRating;
-	}
-
-	public Set<GameUser> getUserGames() {
-		return userGames;
-	}
-
-	public void setUserGames(Set<GameUser> userGames) {
-		this.userGames = userGames;
 	}
 	
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -109,38 +81,6 @@ public class Game implements Serializable{
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public String getRules() {
-		return rules;
-	}
-
-	public void setRules(String rules) {
-		this.rules = rules;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Integer getMinPlayers() {
-		return minPlayers;
-	}
-
-	public void setMinPlayers(Integer minPlayers) {
-		this.minPlayers = minPlayers;
-	}
-
-	public Integer getMaxPlayers() {
-		return maxPlayers;
-	}
-
-	public void setMaxPlayers(Integer maxPlayers) {
-		this.maxPlayers = maxPlayers;
-	}
-
 	public Category getCategory() {
 		return category;
 	}
@@ -148,8 +88,8 @@ public class Game implements Serializable{
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-    
-    public Set<Event> getEvents() {
+
+	public Set<Event> getEvents() {
 		return events;
 	}
 
@@ -157,10 +97,22 @@ public class Game implements Serializable{
 		this.events = events;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public Set<GameUser> getUserGames() {
+		return userGames;
 	}
-	
+
+	public void setUserGames(Set<GameUser> userGames) {
+		this.userGames = userGames;
+	}
+
+	public GameRating getGameRating() {
+		return gameRating;
+	}
+
+	public void setGameRating(GameRating gameRating) {
+		this.gameRating = gameRating;
+	}
+
 	@Override
     public boolean equals(Object obj) {
         return EqualsBuilder.reflectionEquals(this, obj);

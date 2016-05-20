@@ -15,13 +15,11 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 public interface GameRepository extends JpaRepository<Game, Integer>  {
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto"
-				+"(game.id, game.name, game.category.name, "
-				+ "game.minPlayers, game.maxPlayers) " +
-		       "from Game game")
+				+"(game.id, game.name, game.category.name)from Game game ")
 	public List<AllGamesDto> getAllGames();
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO"
-			+"(game.name, game.description, game.rules, avg(gRateNum.rating)) "
+			+"(game.name, avg(gRateNum.rating)) "
 			+ "from Game game, GameRating gRateNum "
 			+ "where game.id = :id "
 			+ "and gRateNum.game.id = game.id")

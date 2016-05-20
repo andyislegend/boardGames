@@ -5,17 +5,13 @@ public class AllGamesDto {
 	private Integer id;
 	private String name;
 	private String categoryName;
-	private Integer minPlayers;
-	private Integer maxPlayers;
 	
 	public AllGamesDto() {}
-	public AllGamesDto(Integer id, String name, String categoryName, Integer minPlayers, Integer maxPlayers) {
+	public AllGamesDto(Integer id, String name, String categoryName) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.categoryName = categoryName;
-		this.minPlayers = minPlayers;
-		this.maxPlayers = maxPlayers;
 	}
 	public Integer getId() {
 		return id;
@@ -34,17 +30,5 @@ public class AllGamesDto {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
-	}
-	public Integer getMinPlayers() {
-		return minPlayers;
-	}
-	public void setMinPlayers(Integer minPlayers) {
-		this.minPlayers = minPlayers;
-	}
-	public Integer getMaxPlayers() {
-		return maxPlayers;
-	}
-	public void setMaxPlayers(Integer maxPlayers) {
-		this.maxPlayers = maxPlayers;
 	}
 }
