@@ -24,6 +24,13 @@ import org.springframework.stereotype.Service;
 
 import com.softserveinc.edu.boardgames.service.util.OnRegistrationCompleteEvent;
 
+/**
+ * 
+ * @author Andrii Petryk
+ * 
+ *         Class is used to create concrete mails and sends them to user
+ *
+ */
 @Service
 @PropertySource("classpath:properties/mail.properties")
 public class MailService {
@@ -41,9 +48,22 @@ public class MailService {
 
 	@Value("${mail.credentials.username}")
 	private String userName;
-	
+
+	/**
+	 * 
+	 * @param event
+	 * @param to
+	 * @param userName
+	 * @param token
+	 * 
+	 *            Used to create mail with registration confirmation link inside
+	 *            in order to confirm user's registration and verify users mail
+	 *            address
+	 * 
+	 */
 	@Async
-	public void sendMailAboutRegistration(final OnRegistrationCompleteEvent event, final String to, final String userName, final String token) {
+	public void sendMailAboutRegistration(final OnRegistrationCompleteEvent event, final String to,
+			final String userName, final String token) {
 
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -65,7 +85,7 @@ public class MailService {
 			}
 
 		};
-		
+
 		mailSender.send(preparator);
 		logger.info("----Message about registration to " + to + " send successful---");
 	}
