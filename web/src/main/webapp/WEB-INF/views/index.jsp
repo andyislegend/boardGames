@@ -33,6 +33,7 @@
 <script src="resources/js/index.js"></script>
 <script type="text/javascript" src="resources/js/registration.js"></script>
 <script src="resources/bower_components/angular-translate/angular-translate.js"></script>
+<script type="text/javascript" src="resources/js/localization.js"></script>
 
 </head>
 <body ng-app="indexModule" ng-controller="localizationController">

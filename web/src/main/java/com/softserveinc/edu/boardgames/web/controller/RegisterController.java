@@ -50,28 +50,50 @@ public class RegisterController {
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
 
-	public final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
-	
+	/**
+	 * @param INVALID_TOKEN_MAIL_CONFIRMATION
+	 *            is used to validate verification token
+	 * 
+	 */
+	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
+
 	/**
 	 * @param VALID_EMAIL_ADDRESS_REGEX
 	 *            is used to validate the correctness of mail provided by new
 	 *            user during registration
 	 */
-	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-			Pattern.CASE_INSENSITIVE);
+	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
+			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 	/**
 	 * @param VALID_PSASSWORD_REGEX
 	 *            is used to validate the safety of users password
 	 */
-	public static final Pattern VALID_PASSWORD_REGEX = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})");
+	private static final Pattern VALID_PASSWORD_REGEX = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})");
 
 	/**
 	 * @param VALID_USERNAME_REGEX
 	 *            is used to validate the safety of username
 	 */
-	public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,9}");
+	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,9}");
 
+	/**
+	 * 
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 * @param gender
+	 * @param username
+	 * @param password
+	 * @param confirmPassword
+	 * @param request
+	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
+	 * 
+	 *         Controller that validate registration form and return
+	 *         HttpStatus.CONFLICT with error message if there is invalid data
+	 *         in fields provided by user or return HttpStatus.OK if
+	 *         registration was successful
+	 */
 	@RequestMapping(value = { "/addNewUser" }, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> addNewUser(@RequestParam("firstName") String firstName,
@@ -136,10 +158,18 @@ public class RegisterController {
 		userService.createUser(newUser);
 
 		eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newUser, getAppUrl(request)));
-		
+
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	/**
+	 * 
+	 * @param model
+	 * @param token
+	 * @return userifo page
+	 * 
+	 *         Controller that is used to validate token from confirmation link
+	 */
 	@RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
 	public String confirmRegistration(Model model, @RequestParam("token") final String token) {
 		final String result = userService.validateVerificationToken(token);
@@ -148,7 +178,7 @@ public class RegisterController {
 			message = "Your email was successfully comfirmed. Now You can login.";
 			model.addAttribute("message", message);
 			model.addAttribute("success", true);
-			
+
 			return "userinfo";
 		}
 		if (result.equals(INVALID_TOKEN_MAIL_CONFIRMATION)) {

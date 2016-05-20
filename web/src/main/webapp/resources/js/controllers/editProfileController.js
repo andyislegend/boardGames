@@ -161,7 +161,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 
 	};
 	
-	
+	$scope.showPassword = function() {
+		$scope.showPasswordChange = !$scope.showPasswordChange;
+	}
 	
 }]);
 

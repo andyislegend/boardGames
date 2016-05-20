@@ -407,7 +407,8 @@ word-wrap: break-word;
 /***************************/
 
 .type-header{
-    width: 70px;
+    text-align: center;
+    width: 10%;
 }
 .sign-header{
     width: 70px;
@@ -440,14 +441,24 @@ word-wrap: break-word;
     height: 27px;
 }
 .notification-line{
+    width: 1%;
 }
-.nitification-a{
-    display: inline-flex;
-    text-decoration: none;
-    color: black;
+.notification-line-tournament{
+    background: #C356F9;
 }
-.nitification-a:hover{
-    display: inline-flex;
-    text-decoration: none;
-    color: black;
+.notification-head{
+    width: 15%;
+}
+.notification-body{
+    width: 49%;
+}
+.tournament-body{
+    background: #F2EAF7;
+}
+.notification-date{
+     width: 16%;
+    text-align:right ;
+}
+.notification-data{
+    padding-left: 0px;
 }

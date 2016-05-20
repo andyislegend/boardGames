@@ -43,6 +43,18 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "rules")
+	private String rules;
+	
+	@Column(name = "minPlayers")
+	private Integer minPlayers;
+	
+	@Column(name = "maxPlayers")
+	private Integer maxPlayers;
+	
 	@Column(name = "countOfComments")
 	private Integer countOfComments;
 	
@@ -83,45 +95,13 @@ public class GameUser implements Serializable {
 		this.game = game;
 		this.user = user;
 	}
-
-	public Set<GameProposition> getGamePropositions() {
-		return gamePropositions;
-	}
-
-	public void setGamePropositions(Set<GameProposition> gamePropositions) {
-		this.gamePropositions = gamePropositions;
-	}
-
-	public Exchange getExchange() {
-		return exchange;
-	}
-
-	public void setExchange(Exchange exchange) {
-		this.exchange = exchange;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+	
+	public Integer getId() {
+		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public String getEdition() {
@@ -139,7 +119,39 @@ public class GameUser implements Serializable {
 	public void setYearOfProduction(Integer yearOfProduction) {
 		this.yearOfProduction = yearOfProduction;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRules() {
+		return rules;
+	}
+
+	public void setRules(String rules) {
+		this.rules = rules;
+	}
+
+	public Integer getMinPlayers() {
+		return minPlayers;
+	}
+
+	public void setMinPlayers(Integer minPlayers) {
+		this.minPlayers = minPlayers;
+	}
+
+	public Integer getMaxPlayers() {
+		return maxPlayers;
+	}
+
+	public void setMaxPlayers(Integer maxPlayers) {
+		this.maxPlayers = maxPlayers;
+	}
+
 	public Integer getCountOfComments() {
 		return countOfComments;
 	}
@@ -148,12 +160,44 @@ public class GameUser implements Serializable {
 		this.countOfComments = countOfComments;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Game getGame() {
 		return game;
 	}
 
 	public void setGame(Game game) {
 		this.game = game;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Exchange getExchange() {
+		return exchange;
+	}
+
+	public void setExchange(Exchange exchange) {
+		this.exchange = exchange;
+	}
+
+	public Set<GameProposition> getGamePropositions() {
+		return gamePropositions;
+	}
+
+	public void setGamePropositions(Set<GameProposition> gamePropositions) {
+		this.gamePropositions = gamePropositions;
 	}
 
 	@Override
