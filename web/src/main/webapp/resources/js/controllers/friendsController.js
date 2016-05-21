@@ -1,13 +1,17 @@
-var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$http', '$interval', function($scope,$rootScope, $http, $interval) {
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$http', '$interval', 'friendService', function($scope,$rootScope, $http, $interval, friendService) {
     $scope.friends = [];
+    friendService.getAllFriends(function(friends){
+        $scope.friends = friends;
+    });
+    
     var allfriends = function(){
-           $http.get("allFriends").success(function(data) {
+          /* $http.get("allFriends").success(function(data) {
                if($scope.friends.length !== data.length){
                     $scope.friends = data;
                }
         }).error(function(error) {
             console.log(error);
-        });
+        });*/
    }
     $scope.userOffered = [];
     var allMyOffering = function(){

@@ -60,6 +60,8 @@
 <script type="text/javascript"
 	src="resources/js/controllers/friendsController.js"></script>
 <script type="text/javascript"
+	src="resources/js/service/friendsService.js"></script>    
+<script type="text/javascript"
 	src="resources/js/controllers/CreateNewTournamentCtrl.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/showAllTournamentsCtrl.js"></script>
