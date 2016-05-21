@@ -380,7 +380,20 @@
 
 					<div id="friends_div">
 						<div ng-controller="friendsCtrl">
-
+                               
+                            <div class="make-offer-to-take-part-in-tournament" ng-show="tournament">
+                                <div class="proba-message-header">
+                                    Make offer to take part in tournament
+                                    <a ng-click="tournament = false"><img class="close"
+										style="margin-top: -6px; margin-right: 0px;"
+										src="resources/ico/close2.png" /></a>
+                                </div>
+                                <div>{{myfriendTournament}}</div>
+                            </div>
+                            
+                            
+                            
+                            <!--Widget to find users-->
 							<div class="search-result" ng-show="click">
 								<div class="header-search">
 									<div class="find-friend-heder">Find your friends in our
@@ -410,7 +423,8 @@
 									</div>
 								</div>
 							</div>
-
+                             <!--End Widget to find users-->
+                            <!--Widget to write a message-->
 							<div class="proba-message" ng-show="jmessage">
 								<div class="proba-message-header">
 									{{myfriend}} <a ng-click="jmessage = false"><img
@@ -432,7 +446,7 @@
 										ng-model="newMessage" ng-enter="sendMessage(newMessage)"></textarea>
 								</div>
 							</div>
-
+                                 <!--End widget to write a message-->
 							<div class="users-offer" ng-show="showRequest">
 								<div class="tabs">
 
@@ -501,7 +515,7 @@
 										<div class="name-main-part">Friends {{friends.length}}</div>
 										<div class="overBell">
 											<a href="" type="button" data-toggle="modal"
-												ng-click="showRequest = !showRequest; click = false">
+												ng-click="showRequest = !showRequest; click = false; tournament = false">
 												<div class="count" ng-hide="count < 1">{{count}}</div> <img
 												class="bell" src="resources/ico/bell.png" />
 											</a>
@@ -510,7 +524,7 @@
 										<input class="form-control" type="text"
 											placeholder="Find new friends" ng-model="name"
 											ng-keyup="findAllUsers()"
-											ng-click="click = true; showRequest = false">
+											ng-click="click = true; showRequest = false; tournament = false">
 									</div>
 
 									<div class="persons">
@@ -536,8 +550,12 @@
 														</div>
 													</a>
 												</div>
-												<a href="" type="button"><img class="iconChampionship"
-													src="resources/ico/championship.png" /></a>
+												<a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
+                                                                           $parent.myfriendTournament=friend.firstName +' ' + friend.lastName; 
+                                                                           setFriendNameForTournament(friend.username)">
+                                                    <img class="iconChampionship"
+													src="resources/ico/championship.png" />
+                                                </a>
 											</div>
 										</div>
 									</div>
