@@ -168,10 +168,12 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = {"/banUser"}, method = RequestMethod.PUT)
-	public void banUser(@RequestParam("username") String username) {
+	@ResponseBody
+	public ResponseEntity<String> banUser(@RequestParam("username") String username) {
 		User user = userService.findOne(username);
 		user.setState(UserStatus.BANNED.name());
 		userService.updateUser(user);
+		return new ResponseEntity<String>("User with username " + username + " was banned", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
