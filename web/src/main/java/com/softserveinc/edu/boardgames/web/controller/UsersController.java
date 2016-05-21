@@ -177,7 +177,8 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
-	public void unbanUser(@RequestParam("username") String username) {
+	@ResponseBody
+	public ResponseEntity<String> unbanUser(@RequestParam("username") String username) {
 		
 		User user = userService.findOne(username);
 		user.setState(UserStatus.ACTIVE.name());
@@ -185,5 +186,6 @@ public class UsersController {
 			user.setUserRating(minimalRatingForActiveUser);
 		}
 		userService.updateUser(user);
+		return new ResponseEntity<String>("User with username " + username + " was unbanned", HttpStatus.OK);
 	}
 }
