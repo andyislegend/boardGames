@@ -52,7 +52,18 @@ homeApp.config(function ($translateProvider) {
 	    LOGINFORM_ENTER: 'START',
 	    CANCEL: 'Cancel',
 	    DONT_HAVE_ACCOUNT: 'Don\'t have an account? Click here!',
-	    INCORRECT_LOGIN_OR_PASS:'INCORRECT LOGIN OR PASSWORD'
+	    INCORRECT_LOGIN_OR_PASS:'INCORRECT LOGIN OR PASSWORD',
+	    REGFORM_HEADER: 'REGISTRATION OF NEW USER',
+	    REGFORM_USERNAME: 'Username',
+	    REGFORM_FIRSTNAME: 'First Name',
+	    REGFORM_LASTNAME: 'Last Name',
+	    REGFORM_EMAIL: 'Email',
+	    REGFORM_PASSWORD: 'Password',
+	    REGFORM_CONFIRMPASSWORD: 'Confirm Password',
+	    REGFORM_GENDER: 'Gender',
+	    REGFORM_GENDER_MALE: 'Male',
+	    REGFORM_GENDER_FEMALE: 'Female',
+	    REGFORM_SIGNUP: 'Sign up'
 	    	
 	  });
 	  $translateProvider.translations('ua', {
@@ -102,13 +113,24 @@ homeApp.config(function ($translateProvider) {
 	    EMAIL_TABLE:'Електронна пошта',
 	    COUNTRY_TABLE:'Країна',
 	    CITY_TABLE:'Місто',
-	    LOGINFORM_HEADER: 'ВХІД ЗА ІМЕНЕМ КОРИСТУВАЧА ТА ПАРОЛЕМ',
-	    LOGINFORM_USERNAME:'Введіть Ваше Ім\'я користувача',
+	    LOGINFORM_HEADER: 'ВХІД ЗА ЛОГІНОМ ТА ПАРОЛЕМ',
+	    LOGINFORM_USERNAME:'Введіть Ваш логін',
 	    LOGINFORM_PASSWORD:'Введіть Ваш пароль',
 	    LOGINFORM_ENTER: 'ВХІД',
 	    CANCEL: 'Скасувати',
 	    DONT_HAVE_ACCOUNT: 'Досі не зареєстровані? Вам сюди!',
-	    INCORRECT_LOGIN_OR_PASS:'НЕВІРНИЙ ЛОГІН АБО ПАРОЛЬ'
+	    INCORRECT_LOGIN_OR_PASS:'НЕВІРНИЙ ЛОГІН АБО ПАРОЛЬ',
+	    REGFORM_HEADER: 'РЕЄСТРАЦІЯ НОВГО КОРИСТУВАЧА',
+	    REGFORM_USERNAME: 'Логін',
+	    REGFORM_FIRSTNAME: 'Ваше ім\'я',
+	    REGFORM_LASTNAME: 'Ваше прізвище',
+	    REGFORM_EMAIL: 'Пошта',
+	    REGFORM_PASSWORD: 'Пароль',
+	    REGFORM_CONFIRMPASSWORD: 'Підтвердіть пароль',
+	    REGFORM_GENDER: 'Стать',
+	    REGFORM_GENDER_MALE: 'Чоловік',
+	    REGFORM_GENDER_FEMALE: 'Жінка',
+	    REGFORM_SIGNUP: 'Реєстрація'
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');
