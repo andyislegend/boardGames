@@ -86,7 +86,12 @@ homeApp
 								LOADING: 'Loading ...',
 								USERINFO_PROCEED: 'Proceed to login page',
 								USERINFO_SUCCESS: 'Your email was successfully comfirmed. Now You can login.',
-								USERINFO_FAILURE: 'You already confirm your registration or your confirmation link was expired. Please, try to register one more time with different username and email'
+								USERINFO_FAILURE: 'You already confirm your registration or your confirmation link was expired. Please, try to register one more time with different username and email',
+								BAN_MODAL_HEADER: 'YOU\'VE BEEN BANNED',
+								BAN_MODAL_FIRST: 'The access to your account was temporary disabled',
+								BAN_MODAL_SECOND: 'Your account have been banned due to Your inappropriate behavior',
+								BAN_MODAL_THIRD: 'If there is some mistake, please contact with the administration',
+								CONTACT_WITH_ADMINS: 'Contact admins'
 							});
 			$translateProvider
 					.translations(
@@ -174,7 +179,12 @@ homeApp
 								LOADING: 'Завантаження ...',
 								USERINFO_PROCEED: 'Перейти до головної сторінки',
 								USERINFO_SUCCESS: 'Ваша електронна адреса була успішно підтверджена. Тепер Ви можете увійти',
-								USERINFO_FAILURE: 'Ви вже підтвердили вашу електронну адресу або термін дії лінка підтвердження сплив. Якщо Ви не можете увійти, Вам слід повторно зареєструватись.'
+								USERINFO_FAILURE: 'Ви вже підтвердили вашу електронну адресу або термін дії лінка підтвердження сплив. Якщо Ви не можете увійти, Вам слід повторно зареєструватись.',
+								BAN_MODAL_HEADER: 'ВАС БУЛО ЗАБАНЕНО',
+								BAN_MODAL_FIRST: 'Досутп до Вашого акаунту було тимчасово заблоковано',
+								BAN_MODAL_SECOND: 'Вас було забанено через Вашу неприпустиму поведінку',
+								BAN_MODAL_THIRD: 'Якщо виникла якась помилка, будь ласка, зконтактуйтесь з адміністрацією',
+								CONTACT_WITH_ADMINS: 'Написати адміну'
 
 							});
 			$translateProvider.preferredLanguage('en');

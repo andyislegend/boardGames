@@ -340,25 +340,21 @@
 			<div class="modal-content">
 				<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title">YOU'VE
-						BEEN BANNED</h4>
+					<h4 style="text-align: center;" class="modal-title" translate="BAN_MODAL_HEADER"></h4>
 
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">The access to your account is
-						temporary disabled</p>
-					<p style="text-align: center;">Your account have been banned
-						due to Your inappropriate behavior</p>
-					<p style="text-align: center;">If there is some mistake, please
-						contact with the administration</p>
+					<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
+					<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
+					<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
 
 				</div>
 
 				<a style="margin-bottom: 5%" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md">Cancel</a> <a
+					class="btn btn-danger btn-md" translate="CLOSE"></a> <a
 					style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
-					class="btn btn-infj btn-md"> Contact with Admins</a>
+					class="btn btn-infj btn-md" translate="CONTACT_WITH_ADMINS"></a>
 			</div>
 			<!-- End of Modal Content -->
 
