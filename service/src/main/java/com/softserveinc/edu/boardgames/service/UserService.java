@@ -294,8 +294,19 @@ public class UserService {
 		return null;
 	}
 	
+	public void removeToken(VerificationToken token) {
+		tokenRepository.delete(token);
+	}
+	
 	public List<AllTournamentsDTO> getUserTournamentsByUserName(String username) {
 		return userRepository.getUserTournamentsByUserName(username);
 	}
 
+	public List<VerificationToken> findAllTokens() { 
+		return tokenRepository.findAll();
+	}
+	
+	public void deleteUser(User user) {
+		userRepository.delete(user);
+	}
 }

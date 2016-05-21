@@ -1,13 +1,13 @@
 package com.softserveinc.edu.boardgames.service.util;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.MailService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -65,4 +65,19 @@ public class ScheduledTasks {
 //    		}
 //    	}
 //    }
+	
+//	@Scheduled(fixedRate = 604800000)
+//	public void deleteExpiredTokensAndUsers() {
+//		for (VerificationToken token : userService.findAllTokens()) {
+//
+//			final Calendar calendar = Calendar.getInstance();
+//
+//			if ((token.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
+//				User userToDelete = userService.getUserByToken(token.getToken());
+//				userService.removeToken(token);
+//				userService.deleteUser(userToDelete);
+//			}
+//		}
+//	}
+
 }

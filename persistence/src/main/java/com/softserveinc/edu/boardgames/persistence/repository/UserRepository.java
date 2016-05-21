@@ -102,4 +102,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
 			"(t.id, t.name) from Tournament t Join t.users u where u.username =:username")
 	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
+	
 }
