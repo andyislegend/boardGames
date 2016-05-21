@@ -31,11 +31,13 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script src="resources/js/index.js"></script>
-<script type="text/javascript" src="resources/js/registration.js"></script>
-<script src="resources/bower_components/angular-translate/angular-translate.js"></script>
+<script
+	src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <script type="text/javascript" src="resources/js/localization.js"></script>
-<script src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-<script src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
+<script
+	src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script
+	src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
 
 </head>
 <body ng-app="indexModule" ng-controller="localizationController">
@@ -65,10 +67,10 @@
 						data-target="#myModal" translate="LOGIN"></a></li>
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#myReg" translate="REGISTRATION"></a></li>
-					<li><span class="btn btn-link">
-								<img id="flag" src="resources/images/gb.png" ng-click="changeLanguage('en')"/>
-						 <img id="flag"
-								src="resources/images/ua.png" ng-click="changeLanguage('ua')"/></span></li>
+					<li><span class="btn btn-link"> <img id="flag"
+							src="resources/images/gb.png" ng-click="changeLanguage('en')" />
+							<img id="flag" src="resources/images/ua.png"
+							ng-click="changeLanguage('ua')" /></span></li>
 				</ul>
 
 			</div>
@@ -146,9 +148,8 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 style="text-align: center;" class="modal-title">
-						<spring:message code="label.title"></spring:message>
-					</h4>
+					<h4 style="text-align: center;" class="modal-title"
+						translate="LOGINFORM_HEADER"></h4>
 				</div>
 				<div class="modal-body">
 					<spring:message code="label.enterUsername" var="enterUsername" />
@@ -161,36 +162,33 @@
 
 							<input style="margin-left: 25%; width: 50%" type="text"
 								name="username" id="username" class="form-control"
-								ng-model="loginForm.username" placeholder="${enterUsername}"
-								required />
+								ng-model="loginForm.username"
+								placeholder="{{'LOGINFORM_USERNAME' | translate}}" required />
 						</div>
 						<div class="form-group">
 							<input style="margin-left: 25%; width: 50%" type="password"
 								name="password" id="password" class="form-control"
-								ng-model="loginForm.password" placeholder="${enterPassword}"
-								required />
+								ng-model="loginForm.password"
+								placeholder="{{'LOGINFORM_PASSWORD' | translate}}" required />
 						</div>
 
 						<p style="color: red; font-size: 10pt; text-align: center;"
 							id="incorrectLoginMessage" ng-show="loginCorrect"
 							class="incortLebStyle">
-							<b>INCORRECT LOGIN OR PASSWORD!</b>
+							<b translate="INCORRECT_LOGIN_OR_PASS"></b>
 						</p>
 						<div class="form-actions">
 							<button type="submit" ng-disabled="form.$invalid"
 								class="btn btn-info btn-lg btn-block"
-								style="width: 50%; margin-left: 25%">
-								<spring:message code="label.comeIn" />
+								style="width: 50%; margin-left: 25%" translate="LOGINFORM_ENTER">
 							</button>
 							<br> <a style="margin-left: 1%;" type="button"
 								data-dismiss="modal" class="btn btn-link" data-toggle="modal"
-								data-target="#myReg"> <b> <spring:message
-										code="label.newAccountMessage" />
+								data-target="#myReg"> <b translate="DONT_HAVE_ACCOUNT">
 							</b>
 							</a> <a style="margin-left: 35%;" type="button"
-								ng-click="closeModal()" class="btn btn-link"> <b> <spring:message
-										code="label.cancel" />
-							</b></a>
+								ng-click="closeModal()" class="btn btn-link"> <b
+								translate="CANCEL"> </b></a>
 						</div>
 					</form>
 
@@ -210,9 +208,8 @@
 			<!-- Modal content-->
 			<div class="modal-content" ng-controller="registerCntrl">
 				<div class="modal-header">
-
-					<h4 style="text-align: center;" class="modal-title">REGISTARTION
-						OF NEW USER</h4>
+					<h4 style="text-align: center;" class="modal-title"
+						translate="REGFORM_HEADER"></h4>
 					<p style="color: red; font-size: 10pt; text-align: center;"
 						ng-hide="regUserMssg">{{regUserResp}}</p>
 				</div>
@@ -223,75 +220,78 @@
 
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon1"> Username <span style="color: red">*</span>
-							</span> <input ng-model="regusername" style="width: 400px;" type="text"
-								class="form-control" aria-describedby="basic-addon1"
-								required="required"
-								placeholder="Enter Your Username. From 3 to 15 symbols required">
+								id="basic-addon1"><span translate="REGFORM_USERNAME"></span><span
+								style="color: red">*</span> </span> <input ng-model="regusername"
+								style="width: 400px;" type="text" class="form-control"
+								aria-describedby="basic-addon1" required="required"
+								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon2"> First Name</span> <input
-								ng-model="regfirstName" style="width: 400px;" type="text"
+								id="basic-addon2"><span translate="REGFORM_FIRSTNAME"></span></span>
+							<input ng-model="regfirstName" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon2"
-								placeholder="Enter Your Name">
+								placeholder="{{'REGFORM_FIRSTNAME_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon3"> Last Name</span> <input
-								ng-model="reglastName" style="width: 400px;" type="text"
+								id="basic-addon3"> <span translate="REGFORM_LASTNAME"></span></span>
+							<input ng-model="reglastName" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon3"
-								placeholder="Enter Your Last Name">
+								placeholder="{{'REGFORM_LASTNAME_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon4"> Email <span style="color: red">*</span>
-							</span> <input ng-model="regemail" style="width: 400px;" type="email"
-								class="form-control" aria-describedby="basic-addon4"
-								required="required" placeholder="Enter Your email address">
+								id="basic-addon4"><span translate="REGFORM_EMAIL"></span><span
+								style="color: red">*</span> </span> <input ng-model="regemail"
+								style="width: 400px;" type="email" class="form-control"
+								aria-describedby="basic-addon4" required="required"
+								placeholder="{{'REGFORM_EMAIL_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon5"> Password <span style="color: red">*</span>
-							</span> <input ng-model="regpassword" style="width: 400px;"
-								type="password" class="form-control"
+								id="basic-addon5"><span translate="REGFORM_PASSWORD"></span><span
+								style="color: red">*</span> </span> <input ng-model="regpassword"
+								style="width: 400px;" type="password" class="form-control"
 								aria-describedby="basic-addon5" required="required"
-								placeholder="From 6 to 20 symbols. 1 Upper case and 1 number is required">
+								placeholder="{{'REGFORM_PASSWORD_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon6"> Confirm Password <span
-								style="color: red">*</span>
-							</span> <input ng-model="regconfirmPassword" style="width: 400px;"
+								id="basic-addon6"><span
+								translate="REGFORM_CONFIRMPASSWORD"></span><span
+								style="color: red">*</span> </span> <input
+								ng-model="regconfirmPassword" style="width: 400px;"
 								type="password" class="form-control"
 								aria-describedby="basic-addon6" required="required"
-								placeholder="Please, confirm Your password">
+								placeholder="{{'REGFORM_CONFIRMPASSWORD_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon7"> Gender <span style="color: red">*</span>
+								id="basic-addon7"> <span translate="REGFORM_GENDER"></span><span
+								style="color: red">*</span>
 							</span> <select ng-model="reggender" style="width: 400px;"
 								class="form-control" aria-describedby="basic-addon7" id="gender"
 								name="gender" required="required">
-								<option value="male">Male</option>
-								<option value="female">Female</option>
+								<option value="male" translate="REGFORM_GENDER_MALE"></option>
+								<option value="female" translate="REGFORM_GENDER_FEMALE">Female</option>
 							</select>
 						</div>
 						<br>
 
 					</form>
 
-					<button ng-click="register()" class="btn btn-info btn-md">Sign
-						up</button>
+					<button style="margin-left: 30%;" ng-click="register()" class="btn btn-info btn-md"
+						translate="REGFORM_SIGNUP"></button>
 
-					<button style="margin-left: 75%;" type="submit"
-						class="btn btn-danger btn-md" ng-click="closeModal()">Cancel</button>
+					<button style="margin-left: 15%;" type="submit"
+						class="btn btn-danger btn-md" ng-click="closeModal()" translate="CANCEL"></button>
 
 				</div>
 
@@ -311,23 +311,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title">UNDER
-						VERIFICATION</h4>
+					<h4 style="text-align: center;" class="modal-title" translate="UNDER_VERIFICATION_HEADER"></h4>
 
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">Your account is temporary
-						unavailable due to its verification.</p>
-					<p style="text-align: center;">We have sent You email with
-						confirmation link.</p>
-					<p style="text-align: center;">After You confirm Your
-						registration You will be able to log in</p>
+					<p style="text-align: center;" translate="UNDER_VERIFICATION_FIRST"></p>
+					<p style="text-align: center;" translate="UNDER_VERIFICATION_SECOND"></p>
+					<p style="text-align: center;" translate="UNDER_VERIFICATION_THIRD"></p>
 
 				</div>
 
 				<a style="margin-left: 45%; margin-bottom: 5%" type="button"
-					data-dismiss="modal" class="btn btn-danger btn-md">Cancel</a>
+					data-dismiss="modal" class="btn btn-danger btn-md" translate="CLOSE"></a>
 			</div>
 			<!-- End of Modal Content -->
 
@@ -344,25 +340,21 @@
 			<div class="modal-content">
 				<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title">YOU'VE
-						BEEN BANNED</h4>
+					<h4 style="text-align: center;" class="modal-title" translate="BAN_MODAL_HEADER"></h4>
 
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">The access to your account is
-						temporary disabled</p>
-					<p style="text-align: center;">Your account have been banned
-						due to Your inappropriate behavior</p>
-					<p style="text-align: center;">If there is some mistake, please
-						contact with the administration</p>
+					<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
+					<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
+					<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
 
 				</div>
 
 				<a style="margin-bottom: 5%" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md">Cancel</a> <a
+					class="btn btn-danger btn-md" translate="CLOSE"></a> <a
 					style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
-					class="btn btn-infj btn-md"> Contact with Admins</a>
+					class="btn btn-infj btn-md" translate="CONTACT_WITH_ADMINS"></a>
 			</div>
 			<!-- End of Modal Content -->
 
@@ -379,22 +371,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title">SUCCESS
-						REGISTRATION</h4>
+					<h4 style="text-align: center;" class="modal-title" translate="ON_REGISTRATION_HEADER"></h4>
 
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">Dear, User! We have sent you a
-						message in order to verify Your email and confirm Your
-						registration.</p> 
-					<p style="text-align: center; color: red;"> Keep in mind, that Your confirmation link will expire after 1 hour</p>	
-					<p style="text-align: center;">After You confirm, You will be able to Sign in.</p>
+					<p style="text-align: center;" translate="ON_REGISTRATION_FIRST"></p>
+					<p style="text-align: center; color: red;" translate="ON_REGISTRATION_SECOND"></p>
+					<p style="text-align: center;" translate="ON_REGISTRATION_THIRD"></p>
 
 				</div>
-				
-				<a style="margin-bottom: 5%; margin-left: 43%;" type="button" data-dismiss="modal"
-					class="btn btn-info btn-lg"> Close</a> 
+
+				<a style="margin-bottom: 5%; margin-left: 43%;" type="button"
+					data-dismiss="modal" class="btn btn-info btn-lg" translate="CLOSE"> </a>
 			</div>
 			<!-- End of Modal Content -->
 
@@ -422,7 +411,7 @@
 							<div class="small-ghost"></div>
 						</div>
 
-						<div class="loading-text">Loading...</div>
+						<div class="loading-text" translate="LOADING"></div>
 					</div>
 
 				</div>

@@ -51,28 +51,6 @@ ol, ul {
     border: groove;
 }
 
-/* #sidebar {
-
-    float: left;
-    width: 26%;
-    height: 100%;
-    margin-left: 2pt;
-    border: groove;
-    overflow-y: auto;
-} */
-
-
-/* #friends_div {
-
-    float: left;
-    width: 22%;
-    height: 100%;
-    margin-left: 0.2%;
-    margin-right: 0.2%;
-    overflow-y: auto;
-    border: groove;
-} */
-
 #friends_div h1 {
 	text-align: center;
 	font-size: 14pt;
@@ -84,16 +62,6 @@ ol, ul {
 	font-size: 12pt;
 	font-family: monospace;
 }
-
-/* #mygames_div {
-
-    float: left;
-    width: 22%;
-    height: 100%;
-    margin-left: 0.2%;
-    overflow-y: auto;
-    border: groove;
-} */
 
 span.label {
 	font-size: 15px;

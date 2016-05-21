@@ -89,18 +89,12 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 	});
 	
 	$scope.banUser = function(username) {
-		$http.put('banUser?username='+ username)
-		.success(function(result, status){
-			$("#bannedUsers").modal('show');
-	    	$scope.bannedUsers = result;
-        });
+		$http.put('banUser?username='+ username).then(function(result) {
+		});
 	}
 	
 	$scope.unbanUser = function(username) {
-		$http.put('unbanUser?username='+ username)
-		.success(function(result, status){
-			$("#bannedUsers").modal('show');
-	    	$scope.bannedUsers = result;
-        });
+		$http.put('unbanUser?username='+ username).then(function(result) {
+		});
 	}
 });

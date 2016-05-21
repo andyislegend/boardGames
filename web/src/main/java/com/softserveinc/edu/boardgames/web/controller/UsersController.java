@@ -168,17 +168,14 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = {"/banUser"}, method = RequestMethod.PUT)
-	@ResponseBody
-	public ResponseEntity<String> banUser(@RequestParam("username") String username) {
+	public void banUser(@RequestParam("username") String username) {
 		User user = userService.findOne(username);
 		user.setState(UserStatus.BANNED.name());
 		userService.updateUser(user);
-		return new ResponseEntity<String>("User with username " + username + " was banned", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
-	@ResponseBody
-	public ResponseEntity<String> unbanUser(@RequestParam("username") String username) {
+	public void unbanUser(@RequestParam("username") String username) {
 		
 		User user = userService.findOne(username);
 		user.setState(UserStatus.ACTIVE.name());
@@ -186,6 +183,5 @@ public class UsersController {
 			user.setUserRating(minimalRatingForActiveUser);
 		}
 		userService.updateUser(user);
-		return new ResponseEntity<String>("User with username " + username + " was unbanned", HttpStatus.OK);
 	}
 }

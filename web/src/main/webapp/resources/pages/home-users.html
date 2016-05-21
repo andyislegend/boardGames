@@ -2,23 +2,6 @@
 <div>
     <h1 id="headerUsers" translate="USERS"> Users </h1>
                <div ng-controller="getAllUsersCtrl">
-               <div class="modal fade" id="bannedUsers" tabindex="-1" role="dialog" 
-               		aria-labelledby="myModalLabel" aria-hidden="true" >
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                           <div class="modal-body">
-                              <p>{{bannedUsers}}</p>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-default"
-                              data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
 		<table ng-table="usersTable" show-filter="true"
 			class="table table-striped" >
 			<tbody >
@@ -71,8 +54,8 @@
 				<td class="col-sm-3">					
 							<img ng-src="{{userAvatar}}" id="userAvatar">
 							<p>Score: {{oneUser.userRating}}</p>
-							<p><a ng-click="banUser(user.username)" id="userStateChange">Ban user</a></p>
-							<p><a ng-click="unbanUser(user.username)" id="userStateChange">Unban user</a></p>
+							<p><a href="#" ng-click="banUser(user.username)">Ban user</a></p>
+							<p><a href="#" ng-click="unbanUser(user.username)">Unban user</a></p>
 				</td>
 			</tr>
 			</tbody>
