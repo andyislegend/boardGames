@@ -18,10 +18,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
+import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
@@ -33,6 +36,8 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  */
 @Controller
 public class UsersController {
+	
+	public static final Integer minimalRatingForActiveUser = -4;
 
 	@Autowired
 	ImageService imageService;
@@ -45,6 +50,9 @@ public class UsersController {
 	
 	@Autowired
 	CityService cityService;
+	
+	@Autowired
+	TournamentService tournamentService;
 	
 	@Autowired
 	ImageConfiguration imageConfiguration;
@@ -157,5 +165,23 @@ public class UsersController {
 	public User getOneUser() {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
 		return user;
+	}
+	
+	@RequestMapping(value = {"/banUser"}, method = RequestMethod.PUT)
+	public void banUser(@RequestParam("username") String username) {
+		User user = userService.findOne(username);
+		user.setState(UserStatus.BANNED.name());
+		userService.updateUser(user);
+	}
+	
+	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
+	public void unbanUser(@RequestParam("username") String username) {
+		
+		User user = userService.findOne(username);
+		user.setState(UserStatus.ACTIVE.name());
+		if (user.getUserRating() <= -5) {
+			user.setUserRating(minimalRatingForActiveUser);
+		}
+		userService.updateUser(user);
 	}
 }

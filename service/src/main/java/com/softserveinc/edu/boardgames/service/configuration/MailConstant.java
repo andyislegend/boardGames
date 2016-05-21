@@ -1,7 +1,7 @@
 package com.softserveinc.edu.boardgames.service.configuration;
 
 /**
- * This class configure mail constants which program use in MailConfig.class
+ * This class defines mail constants which program will use in MailConfig.class
  * 
  * @author Andrii Petryk.
  *

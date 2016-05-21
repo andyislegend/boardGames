@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -91,4 +92,18 @@ public class TournamentController {
     	user.setUserRating(user.getUserRating()+rate);
     	userService.updateUser(user);
     }
+    
+	
+	/**
+	 * Returns needed information about tournaments that user took part.
+	 *
+	 * @param userName
+	 *            username of user, who's tournaments we want to find
+	 */
+	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
+	@ResponseBody
+	public List<AllTournamentsDTO> findUserGames(@RequestParam("username") String username) {
+		List<AllTournamentsDTO> allGames = userService.getUserTournamentsByUserName(username);
+		return allGames;
+	}
 }

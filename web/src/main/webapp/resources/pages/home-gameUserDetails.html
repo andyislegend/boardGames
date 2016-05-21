@@ -95,10 +95,10 @@
 	</div>
 	
 	<div class="container-fluid" ng-show="isThereConfiramtion">
-		<p class="text-primary inlineDisplay">{{applierUsername}}</p>
+		<a class="text-primary inlineDisplay" href="#edit/{{applierUsername}}">{{applierUsername}}</a>
 		<p class="inlineDisplay"> asks you to share this game</p>
 		<pre>{{messageFromApplier}}</pre>
-		<p class="text-primary inlineDisplay">{{applierUsername}}</p>
+		<a class="text-primary inlineDisplay" href="#edit/{{applierUsername}}">{{applierUsername}}</a>
 		<p class="inlineDisplay"> offers: </p>
 		<ul class="list-group" ng-model="propositionsFromUser">
     		<li class="list-group-item" ng-repeat="game in propositions">

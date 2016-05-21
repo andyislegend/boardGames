@@ -28,14 +28,14 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer>{
 	        + "from Exchange exchange "
 	        + "inner join exchange.gameUser gameUser "
 	        + "where exchange.userApplierId = :userId "
-	        + "and gameUser.status = 'shared'")
+	        + "and gameUser.status = 'SHARED'")
 	public List<InfoFromApplierDTO> getAllBorrowedGames(@Param("userId")Integer userId);
 	
 	@Query("select e from Exchange e "
 			+ "inner join e.gameUser gu "
 			+ "where e.userApplierId = :userId "
 			+ "and gu.id = :gameUserId "
-			+ "and gu.status = 'shared'")
+			+ "and gu.status = 'SHARED'")
 	public Exchange getBorrowedGameUser(
 			@Param("gameUserId")Integer gameUserId, 
 			@Param("userId")Integer urserId);

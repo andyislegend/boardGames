@@ -75,6 +75,8 @@
 
 .innerDiv {
     background: #428BCA;
+    font-size:11px;
+    margin:0;
 }
 
 #container {

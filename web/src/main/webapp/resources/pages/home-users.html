@@ -6,15 +6,15 @@
 			class="table table-striped" >
 			<tbody >
 			<tr ng-repeat-start="user in usersByParams">
-				<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
+				<td title="'USERNAME_TABLE' | translate" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
 					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
 				</td>
-				<td title="'Email'" sortable="'email'" class="col-sm-3">{{user.email}}</td>
-				<td title="'Country'" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
+				<td title="'EMAIL_TABLE' | translate" sortable="'email'" class="col-sm-3">{{user.email}}</td>
+				<td title="'COUNTRY_TABLE' | translate" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
 					class="col-sm-3" ng-model="country" ng-change="searchCities()">
 					{{user.country.name}}
                 </td>
-				<td title="'City'" sortable="'cityName'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
+				<td title="'CITY_TABLE' | translate" sortable="'cityName'" filter="{'cityName': 'select'}" filter-data="cities()" class="col-sm-3">
 					 {{user.city.name}}
                 </td>
                 </tr>
@@ -39,8 +39,7 @@
 
 							<b id="gamesList" translate="USER_GAMES"></b>
 							<ul ng-repeat="game in games" id="gamesList">
-								<li><a href="#gameUserDetails/{{game.id}}" ng-click="myFunc(game.id)">
-										{{game.name}}</a></li>
+								<li><a href="#gameUserDetails/{{game.id}}">{{game.name}}</a></li>
 							</ul>
 
 				</td>
@@ -48,39 +47,15 @@
 						<div id="backgroundForOneUser">
 							<b id="tournamentsList" translate="USER_TOURNAMENTS"></b>
 							<ul ng-repeat="tournament in tournaments" id="tournamentsList">
-								<li><a href=""
-									ng-click="getInfoAboutTournament(tournament.tournamentId)"
-									data-toggle="modal" data-target="#myModalTournaments">{{tournament.tournamentName}}</a></li>
+								<li><a href="#tournament/{{tournament.tournamentId}}">{{tournament.tournamentName}}</a></li>
 							</ul>
-							<div class="modal fade" id="myModalTournaments" tabindex="-1"
-								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<!-- Modal Header -->
-										<div class="modal-header">
-											<h1>{{oneTournament.tournamentName}}</h1>
-										</div>
-										<div class="modal-body">
-											<p>User creator: {{oneTournament.username}}</p>
-											<p>Address: {{oneTournament.country}},
-												{{oneTournament.city}}</p>
-											<p>Date: {{oneTournament.dateUtil}}</p>
-											<p>Required rating: {{oneTournament.requiredRating}}</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
 				</td>
 				<td class="col-sm-3">					
 							<img ng-src="{{userAvatar}}" id="userAvatar">
 							<p>Score: {{oneUser.userRating}}</p>
-							<p><a ng-href="" ng-click="banUser()"></a>Ban user</p>
-							<p><a ng-href="" ng-click="unbanUser()"></a>Unban user</p>
+							<p><a href="#" ng-click="banUser(user.username)">Ban user</a></p>
+							<p><a href="#" ng-click="unbanUser(user.username)">Unban user</a></p>
 				</td>
 			</tr>
 			</tbody>

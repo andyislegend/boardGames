@@ -24,6 +24,13 @@ import org.springframework.stereotype.Service;
 
 import com.softserveinc.edu.boardgames.service.util.OnRegistrationCompleteEvent;
 
+/**
+ * 
+ * @author Andrii Petryk
+ * 
+ *         Class is used to create concrete mails and sends them to user
+ *
+ */
 @Service
 @PropertySource("classpath:properties/mail.properties")
 public class MailService {
@@ -41,9 +48,22 @@ public class MailService {
 
 	@Value("${mail.credentials.username}")
 	private String userName;
-	
+
+	/**
+	 * 
+	 * @param event
+	 * @param to
+	 * @param userName
+	 * @param token
+	 * 
+	 *            Used to create mail with registration confirmation link inside
+	 *            in order to confirm user's registration and verify users mail
+	 *            address
+	 * 
+	 */
 	@Async
-	public void sendMailAboutRegistration(final OnRegistrationCompleteEvent event, final String to, final String userName, final String token) {
+	public void sendMailAboutRegistration(final OnRegistrationCompleteEvent event, final String to,
+			final String userName, final String token) {
 
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
@@ -65,7 +85,7 @@ public class MailService {
 			}
 
 		};
-		
+
 		mailSender.send(preparator);
 		logger.info("----Message about registration to " + to + " send successful---");
 	}
@@ -112,5 +132,57 @@ public class MailService {
 		mailSender.send(preparator);
 		logger.info("----Message " + to + " send successful---");
 	}
+	
+	@Async
+	public void remindAboutGameReturnTomorrow(final String to, final String username, 
+			final String gameName, final String ownerUsername) {
+		
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(to);
+				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", username);
+				templateVariables.put("game", gameName);
+				templateVariables.put("ownerUsername", ownerUsername);
+				String body = mergeTemplateIntoString(velocityEngine, 
+						"/velocity/templates/gameReturnTomorrowReminder.vm", "UTF-8", templateVariables);
+				message.setText(body, true);
+				message.setSubject("Reminding about game return");
+			}
+		};
+		mailSender.send(preparator);
+//		logger.info("----Message remainding " + to + " to give " 
+//				+ gameName + "to" + ownerUsername + "---");
+	}
+	
+	@Async
+	public void remindThatYouAreLate(final String to, final String username, final Integer days,
+			final String gameName, final String ownerUsername) {
+		
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(to);
+				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", username);
+				templateVariables.put("days", days);
+				templateVariables.put("game", gameName);
+				templateVariables.put("ownerUsername", ownerUsername);
+				String body = mergeTemplateIntoString(velocityEngine, 
+						"/velocity/templates/gameReturnIsLateReminder.vm", "UTF-8", templateVariables);
+				message.setText(body, true);
+				message.setSubject("Reminding about game return");
+			}
+		};
+		mailSender.send(preparator);
+//		logger.info("----Message remainding " + to + " to give " 
+//				+ gameName + " to " + ownerUsername + " is late for " + days + "---");
+	}
 }

@@ -56,8 +56,10 @@ public class TournamentService {
     public AllTournamentsDTO getTournamentById(Integer id) {
     	return tournamentRepository.getTournamentsById(id);
     }
-    
-    public List<Object[]> getAllTournamentByUserName(){
-    	return tournamentRepository.getAllTournamentByUserName();
+    /**
+     *@author Vasyl Bervetskyy
+     **/
+    public List<Object[]> getAllTournamentByUserName(String currentUserName){
+    	return tournamentRepository.getAllTournamentByUserName(currentUserName);
     }
 }

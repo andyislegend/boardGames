@@ -76,6 +76,8 @@
 	src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
 <script src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <script type="text/javascript" src="resources/js/localization.js"></script>
+<script src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
 <!-- End of Scripts -->
 
 </head>
@@ -99,7 +101,7 @@
 					<div class="navbar-form navbar-left">
 						<ul id="container">
 							<li id="userRating" translate="USER_LEVEL" 
-								translate-values="{level:'{{user.rating}}'}"></li>
+								translate-values="{userLevel:'{{user.rating}}'}"></li>
 							<li><progress value="0" max="100" id=ratingBar></progress></li>
 							<li class="outerDiv" ng-show="hovering">
 								<p translate="CUR_RATING" 
@@ -123,7 +125,7 @@
 									 ng-model="search" translate translate-attr-placeholder="SEARCH"/> <a
 									ng-href="#search/{{search}}">
 									<button id="search-btn" ng-click="searchAll()" type="submit">
-										<span class="	glyphicon glyphicon-search"></span>
+										<span class="glyphicon glyphicon-search"></span>
 									</button>
 								</a>
 							</form>
@@ -206,16 +208,21 @@
 					<!-- MyGames Widget -->
 					<div id="mygames_div">
 						<div ng-controller="allUsersGameCtrl">
-							<h1 style="text-align: center">MY
-								GAMES:{{allMyGames.length}}</h1>
+							<h1 style="text-align: center" class="text-primary">Games</h1>
 							<div>
 								<div>
 									<div ng-controller="CreateGameCtrl">
-										<div>
-											<input type="submit" value="ADD GAME"
-												class="btn btn-primary btn-sm" data-toggle="modal"
-												data-target="#myModalHorizontal">
+										<div class="centeredObjects">
+											<a class="btn btn-success" >
+      											<span class="glyphicon glyphicon-plus" 
+      												data-toggle="modal"
+													data-target="#myModalHorizontal"></span> 
+    										</a>
+    										<a href="#" class="btn btn-info" >
+      											<span class="glyphicon glyphicon-bell" ></span> 
+    										</a>
 										</div>
+										<br/>
 										<div class="modal fade" id="myModalHorizontal" tabindex="-1"
 											role="dialog" aria-labelledby="myModalLabel"
 											aria-hidden="true">

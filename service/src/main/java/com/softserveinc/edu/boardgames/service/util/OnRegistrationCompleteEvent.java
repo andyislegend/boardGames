@@ -4,24 +4,34 @@ import org.springframework.context.ApplicationEvent;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 
+/**
+ * 
+ * @author Andrii Petryk
+ * 
+ *         Utility class which works in cooperation with
+ *         RegistrtionListener.class Is used to create instance of
+ *         RegistartionListener. Provides additional information for Listener,
+ *         such as current host of application and user, who has been register
+ *
+ */
 @SuppressWarnings("serial")
-public class OnRegistrationCompleteEvent extends ApplicationEvent{
+public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
 	private final String appUrl;
-    private final User user;
-	
+	private final User user;
+
 	public OnRegistrationCompleteEvent(final User user, final String appUrl) {
 		super(user);
 		this.user = user;
-        this.appUrl = appUrl;
+		this.appUrl = appUrl;
 	}
 
 	public String getAppUrl() {
-        return appUrl;
-    }
+		return appUrl;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
 }

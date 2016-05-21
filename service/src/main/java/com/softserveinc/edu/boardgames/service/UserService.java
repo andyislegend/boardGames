@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -27,10 +28,17 @@ import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenR
 @Service
 @Transactional
 public class UserService {
-	
+
+	/**
+	 * @param invalid
+	 *            is returned when verification token has expired
+	 * 
+	 */
+	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
+
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -39,9 +47,7 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	public final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
-	
+
 	public UserService() {
 	}
 
@@ -118,11 +124,24 @@ public class UserService {
 		return isChanged;
 	}
 
+	/**
+	 * Check if the username with {@code username} exists in database and return
+	 * it is true
+	 * 
+	 * @param username
+	 * @return User
+	 */
 	@Transactional
 	public User findOne(String username) {
 		return userRepository.findByUsername(username);
 	}
 
+	/**
+	 * Checks which roles user with {@code username} has
+	 * 
+	 * @param username
+	 * @return List
+	 */
 	@Transactional
 	public List<String> getRoles(String username) {
 		return ConvertSetEnumsToListString.convertToListString(userRepository.getRolesByUserName(username));
@@ -130,13 +149,18 @@ public class UserService {
 
 	@Transactional
 	public void updateUser(User user) {
-		userRepository.save(user);
-		if (user.getState().equals(UserStatus.BANNED.name())) {
+		userRepository.saveAndFlush(user);
+		if (user.getUserRating() <= -5 || user.getState().equals(UserStatus.BANNED.name())) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 			return;
 		}
 	}
 
+	/**
+	 * Add to User with {@code username} User Role {@code ADMIN}
+	 * 
+	 * @param username
+	 */
 	@Transactional
 	public void createAdmin(String username) {
 		User user = userRepository.findByUsername(username);
@@ -144,7 +168,7 @@ public class UserService {
 		UserRoles newRole = UserRoles.ADMIN;
 		roles.add(newRole);
 		user.setUserRoles(roles);
-		
+
 		userRepository.save(user);
 	}
 
@@ -176,9 +200,12 @@ public class UserService {
 	}
 
 	public List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName) {
-		String name = nameAndLastName.trim(); // At first we cut whitespace around word
+		String name = nameAndLastName.trim(); // At first we cut whitespace
+												// around word
 		String lastName = "";
-		if (nameAndLastName.indexOf(" ") != -1) { // If in middle of this word we have whitespace we  divide it on  2 parts
+		if (nameAndLastName.indexOf(" ") != -1) { // If in middle of this word
+													// we have whitespace we
+													// divide it on 2 parts
 			name = nameAndLastName.substring(0, nameAndLastName.indexOf(" ")).trim();
 			lastName = nameAndLastName.substring(nameAndLastName.indexOf(" "), nameAndLastName.length()).trim();
 		}
@@ -204,42 +231,82 @@ public class UserService {
 		return userRepository.findUsersGender(username);
 	}
 
+	/**
+	 * Creates verification token for registration confirmation for user with
+	 * {@code username}
+	 * 
+	 * @param user
+	 * @param token
+	 */
 	@Transactional
 	public void createVerificationTokenForUser(final User user, final String token) {
-        final VerificationToken myToken = new VerificationToken(token, user);
-        tokenRepository.save(myToken);
-    }
-	
+		final VerificationToken myToken = new VerificationToken(token, user);
+		tokenRepository.save(myToken);
+	}
+
+	/**
+	 * Finds User in database who is referred with {@code verificationToken}
+	 * 
+	 * @param verificationToken
+	 * @return User
+	 */
 	public User getUserByToken(final String verificationToken) {
-        final User user = tokenRepository.findByToken(verificationToken).getUser();
-        return user;
-    }
+		final User user = tokenRepository.findByToken(verificationToken).getUser();
+		return user;
+	}
+
+	/**
+	 * Finds token in database be it's name
+	 * 
+	 * @param VerificationToken
+	 * @return VerificationToken
+	 */
+	public VerificationToken getVerificationToken(final String VerificationToken) {
+		return tokenRepository.findByToken(VerificationToken);
+	}
+
+	/**
+	 * When token is triggered verificate whether it expired or not. If token
+	 * wasn't expired and was used set User status to {@code ACTIVE} and delete
+	 * token
+	 * 
+	 * @param token
+	 * @return null or INVALID_TOKEN_MAIL_CONFIRMATION
+	 */
+	@Transactional
+	public String validateVerificationToken(String token) {
+		final VerificationToken verificationToken = tokenRepository.findByToken(token);
+		if (verificationToken == null) {
+			return INVALID_TOKEN_MAIL_CONFIRMATION;
+		}
+
+		final User user = verificationToken.getUser();
+		final Calendar cal = Calendar.getInstance();
+
+		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+			return INVALID_TOKEN_MAIL_CONFIRMATION;
+		}
+
+		user.setState(UserStatus.ACTIVE.name());
+		;
+		userRepository.save(user);
+		tokenRepository.delete(verificationToken);
+		return null;
+	}
 	
-    public VerificationToken getVerificationToken(final String VerificationToken) {
-        return tokenRepository.findByToken(VerificationToken);
-    }
-    
-    @Transactional
-    public String validateVerificationToken(String token) {
-        final VerificationToken verificationToken = tokenRepository.findByToken(token);
-        if (verificationToken == null) {
-            return INVALID_TOKEN_MAIL_CONFIRMATION;
-        }
-        
-        final User user = verificationToken.getUser();
-        final Calendar cal = Calendar.getInstance();
-        
-        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-            return INVALID_TOKEN_MAIL_CONFIRMATION;
-        }
-       
-        user.setState(UserStatus.ACTIVE.name());;
-        userRepository.save(user);
-        tokenRepository.delete(verificationToken);
-        return null;
-    }
-    
-    
-    
+	public void removeToken(VerificationToken token) {
+		tokenRepository.delete(token);
+	}
 	
+	public List<AllTournamentsDTO> getUserTournamentsByUserName(String username) {
+		return userRepository.getUserTournamentsByUserName(username);
+	}
+
+	public List<VerificationToken> findAllTokens() { 
+		return tokenRepository.findAll();
+	}
+	
+	public void deleteUser(User user) {
+		userRepository.delete(user);
+	}
 }

@@ -14,29 +14,10 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 			$http.get('allUsersGames?username='+ username).then(function(result) {
 				$scope.games = result.data;
 			});
-			$scope.showModal = false;
-			$scope.getInfoAboutGame = function(id) {
-				$scope.showModal = !$scope.showModal;
-				for (var i = 0; i < $scope.games.length; i++) {
-					if ($scope.games[i].id === id) {
-						$scope.oneGame = $scope.games[i];
-						break;
-					};
-				};
-			};
+
 			$http.get('allUsersTournaments?username='+ username).then(function(result) {
 				$scope.tournaments = result.data;
 			});
-			$scope.showModal1 = false;
-			$scope.getInfoAboutTournament = function(tournamentId) {
-				$scope.showModal1 = !$scope.showModal1;
-				for (var i = 0; i < $scope.tournaments.length; i++) {
-					if ($scope.tournaments[i].tournamentId === tournamentId) {
-						$scope.oneTournament = $scope.tournaments[i];
-						break;
-					};
-				};
-			};
 			$http.get('getUsersAvatar?username=' + $scope.oneUser.username).then(function(result) {
 				$scope.userAvatar = result.data;
 			});
@@ -106,4 +87,14 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		     }
 		 });
 	});
+	
+	$scope.banUser = function(username) {
+		$http.put('banUser?username='+ username).then(function(result) {
+		});
+	}
+	
+	$scope.unbanUser = function(username) {
+		$http.put('unbanUser?username='+ username).then(function(result) {
+		});
+	}
 });

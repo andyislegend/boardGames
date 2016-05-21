@@ -47,5 +47,11 @@ public class EventService {
 	public List<AllEventsDto> getAllEventsByWord(String word) {
 		return eventRepository.getAllEventsByWord(word);
 	}
+	/**
+	 *@author Vasyl Bervetskyy
+	 **/
+	public List<Object[]> getAllEventByUserName(){
+		return eventRepository.getAllEventByUserName();
+	}
 	
 }
