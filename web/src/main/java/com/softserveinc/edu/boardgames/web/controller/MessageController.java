@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Message;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.MessageDTO;
 import com.softserveinc.edu.boardgames.service.MessageService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -35,15 +36,16 @@ public class MessageController {
 	public void readMessage(@PathVariable Long idMessage) {
 		messageService.changeStatusOfReadingOfMessage(idMessage);
 	}
-	
-	@RequestMapping(value = "/sendMessage/{friendUserName}/{bodyMessage}", method = RequestMethod.POST)
-	public void sendMessage(@PathVariable String friendUserName, @PathVariable String bodyMessage) {
+
+	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
+	public void sendMessage(@RequestBody MessageDTO messageDTO) {
+		System.out.println(messageDTO);	
 		User currentUser = userService.getUser(WebUtil.getPrincipalUsername());
-		User friendUser = userService.getUser(friendUserName);
+		User friendUser = userService.getUser(messageDTO.getFriendUsername());
 		Message message = new Message();
 		message.setCurrentUser(currentUser);
 		message.setFriendUser(friendUser);
-		message.setMessage(bodyMessage);
+		message.setMessage(messageDTO.getBody());
 		message.setDate(new Date());
 		messageService.saveMessage(message);
 	}
@@ -53,12 +55,5 @@ public class MessageController {
 		String currentUserName = WebUtil.getPrincipalUsername();
 		return messageService.findAllNotReadMessage(currentUserName);
 	}
-/*	
-	@RequestMapping(value = "/allFriend", method = RequestMethod.POST)
-	public void allFriend(@RequestBody User[] user) {
-		System.out.println("*********************************************************************");
-		System.out.println(user);
-		System.out.println("*********************************************************");
-	}*/
 }
 

@@ -7,7 +7,7 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
                }
         });
     };
-    
+        
     $scope.userOffered = [];
     var findAllMyOffering = function(){
         friendService.allMyOffering(function(data){
@@ -118,15 +118,20 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
         }
       return true;
     }
-
+    
     $scope.sendMessage = function(message){
-        $scope.currentFriend
-        $http.post('sendMessage/' + $scope.currentFriend + "/" + message, $scope.currentFriend, message).success(function(){
+        $scope.currentFriend;
+        var messagePOST = {
+            body: message,
+            friendUsername: $scope.currentFriend
+        };
+        $http.post('sendMessage/',messagePOST,{headers: {'Content-Type': 'application/json'}}).success(function(){
         	$scope.newMessage = '';
         }).error(function(error){
             console.log(error);
         });
     };
+    
     $scope.readMessage = function(message){
         if(!message.statusOfReading && message.currentUser.username == $scope.currentFriend){
             $http.post('readMessage/' + message.id, message.id).success(function(){
@@ -162,7 +167,7 @@ setInterval(function(){
         getAllOfferedUsers();
         findAllMyOffering();
         
-}, 1000)
+}, 1000);
 
     $scope.setString = function(newValue) {
     	friendsUsername.setObject(newValue);
