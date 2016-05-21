@@ -30,6 +30,10 @@ public class GameUserService {
 		return gameUserRepo.getGameUserDTOById(id);
 	}
 	
+	public List<GameUserDTO> getAllUsersGame(){
+		return gameUserRepo.getAllGameUsers();
+	}
+	
 	public List<GameUserDTO> getGameUsersByName(String name){
 		return gameUserRepo.getGameUserByName(name);
 	}
