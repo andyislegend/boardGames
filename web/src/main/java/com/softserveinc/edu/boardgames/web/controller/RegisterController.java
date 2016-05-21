@@ -173,22 +173,15 @@ public class RegisterController {
 	@RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
 	public String confirmRegistration(Model model, @RequestParam("token") final String token) {
 		final String result = userService.validateVerificationToken(token);
-		String message = null;
+
 		if (result == null) {
-			message = "Your email was successfully comfirmed. Now You can login.";
-			model.addAttribute("message", message);
 			model.addAttribute("success", true);
-
-			return "userinfo";
 		}
+
 		if (result.equals(INVALID_TOKEN_MAIL_CONFIRMATION)) {
-			message = "You already confirm your registration or your confirmation link was expired. "
-					+ "Please, try to register one more time with different username and email";
 			model.addAttribute("expired", true);
-			model.addAttribute("message", message);
 		}
 
-		model.addAttribute("message", message);
 		return "userinfo";
 	}
 

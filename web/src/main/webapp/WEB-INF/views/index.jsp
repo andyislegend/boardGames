@@ -31,7 +31,6 @@
 <script type="text/javascript"
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script src="resources/js/index.js"></script>
-<script type="text/javascript" src="resources/js/registration.js"></script>
 <script
 	src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <script type="text/javascript" src="resources/js/localization.js"></script>
@@ -312,23 +311,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title">UNDER
-						VERIFICATION</h4>
+					<h4 style="text-align: center;" class="modal-title" translate="UNDER_VERIFICATION_HEADER"></h4>
 
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">Your account is temporary
-						unavailable due to its verification.</p>
-					<p style="text-align: center;">We have sent You email with
-						confirmation link.</p>
-					<p style="text-align: center;">After You confirm Your
-						registration You will be able to log in</p>
+					<p style="text-align: center;" translate="UNDER_VERIFICATION_FIRST"></p>
+					<p style="text-align: center;" translate="UNDER_VERIFICATION_SECOND"></p>
+					<p style="text-align: center;" translate="UNDER_VERIFICATION_THIRD"></p>
 
 				</div>
 
 				<a style="margin-left: 45%; margin-bottom: 5%" type="button"
-					data-dismiss="modal" class="btn btn-danger btn-md">Cancel</a>
+					data-dismiss="modal" class="btn btn-danger btn-md" translate="CLOSE"></a>
 			</div>
 			<!-- End of Modal Content -->
 
@@ -380,24 +375,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title">SUCCESS
-						REGISTRATION</h4>
+					<h4 style="text-align: center;" class="modal-title" translate="ON_REGISTRATION_HEADER"></h4>
 
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;">Dear, User! We have sent you a
-						message in order to verify Your email and confirm Your
-						registration.</p>
-					<p style="text-align: center; color: red;">Keep in mind, that
-						Your confirmation link will expire after 1 hour</p>
-					<p style="text-align: center;">After You confirm, You will be
-						able to Sign in.</p>
+					<p style="text-align: center;" translate="ON_REGISTRATION_FIRST"></p>
+					<p style="text-align: center; color: red;" translate="ON_REGISTRATION_SECOND"></p>
+					<p style="text-align: center;" translate="ON_REGISTRATION_THIRD"></p>
 
 				</div>
 
 				<a style="margin-bottom: 5%; margin-left: 43%;" type="button"
-					data-dismiss="modal" class="btn btn-info btn-lg"> Close</a>
+					data-dismiss="modal" class="btn btn-info btn-lg" translate="CLOSE"> </a>
 			</div>
 			<!-- End of Modal Content -->
 
@@ -425,7 +415,7 @@
 							<div class="small-ghost"></div>
 						</div>
 
-						<div class="loading-text">Loading...</div>
+						<div class="loading-text" translate="LOADING"></div>
 					</div>
 
 				</div>
