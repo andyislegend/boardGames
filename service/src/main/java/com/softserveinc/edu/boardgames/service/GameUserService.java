@@ -11,7 +11,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.CommentsForGameRepository;
-import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 
 @Service
@@ -47,6 +46,10 @@ public class GameUserService {
 		return gameUserRepo.findAll();
 	}
 	
+	public Integer getCountOfTournamentByGame(Integer id) {
+		return gameUserRepo.getCountTournamentsByGame(id);
+	}
+	
 	@Transactional
 	public void update(GameUser gameUser) {
 		gameUserRepo.saveAndFlush(gameUser);
@@ -57,7 +60,9 @@ public class GameUserService {
 		Game game = null;
 	try{
 		game = gameService.findByName(gameUser.getGame().getName());
-	}catch(NullPointerException e){}
+	}catch(NullPointerException e){
+		
+	}
 		if(game == null) {
 			gameUserRepo.save(gameUser);
 		}else {
