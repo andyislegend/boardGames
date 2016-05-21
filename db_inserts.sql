@@ -181,16 +181,10 @@ INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`
 
 
 -- inserts to table tournaments
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '8', 'Ukraine', '2016-05-17 00:00:00', 'ChessTournament', '2', '8');
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly Tornament', '1', '1');
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '5', 'Ukraine', '2016-05-21 00:00:00', 'Skrabble Tournament', '3', '2');
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-21 00:00:00', 'Mafia Tornament', '4', '3');
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Monopoly', '2', '8', TRUE);
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly', '1', '1', TRUE);
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-26 00:00:00', 'Monopoly', '1', '3', TRUE);
 
-
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('1', '1');
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('2', '1');
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('3', '1');
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('4', '1');
 
 --  inserts to table events
 INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Everybody sleeps but mafia members wake up', 'Mafia event', 'resources/images/mafiaImg.jpg', '2016-05-21', 'Lviv', '1', '3');
