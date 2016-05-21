@@ -77,7 +77,6 @@ public class TournamentController {
     @ResponseBody
     public Set<User> getParticipantOfTournament(@PathVariable Integer tournamentId) {
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
-    	System.out.println(tournament.getUsers().size());
     	return tournament.getUsers();
     }
     
@@ -89,7 +88,6 @@ public class TournamentController {
     
     @RequestMapping(value = "/giveUser/{idUser}/rate/{rate}", method = RequestMethod.PUT)
     public void giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
-    	System.out.println(idUser+"==============================="+rate);
     	User user = userService.findById(idUser);
     	user.setUserRating(user.getUserRating()+rate);
     	userService.updateUser(user);
