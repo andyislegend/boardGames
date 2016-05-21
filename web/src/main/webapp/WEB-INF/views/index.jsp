@@ -152,8 +152,6 @@
 						translate="LOGINFORM_HEADER"></h4>
 				</div>
 				<div class="modal-body">
-					<spring:message code="label.enterUsername" var="enterUsername" />
-					<spring:message code="label.enterPassword" var="enterPassword" />
 					<form name="form" ng-submit="login()" AutoCompleteType="Disabled"
 						autocomplete="off">
 
