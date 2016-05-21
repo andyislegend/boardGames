@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
@@ -35,6 +36,8 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  */
 @Controller
 public class UsersController {
+	
+	public static final Integer minimalRatingForActiveUser = -4;
 
 	@Autowired
 	ImageService imageService;
@@ -53,6 +56,9 @@ public class UsersController {
 	
 	@Autowired
 	ImageConfiguration imageConfiguration;
+	
+	@Autowired
+	CommonsMultipartResolver resolver;
 	
 	
 
@@ -139,9 +145,7 @@ public class UsersController {
 	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
 			throws IOException {
 		try {
-		if (fileUpload.isEmpty()) {
-			return new ResponseEntity<String>("You haven't chosed the file", HttpStatus.CONFLICT);
-		}
+
 		User user = userService.findOne(WebUtil.getPrincipalUsername());		
 		Image image = new Image();
 		image.setUser(user);
@@ -150,7 +154,7 @@ public class UsersController {
 		imageService.create(image);
 		String saveDirectory = image.getImageLocation();
 		fileUpload.transferTo(new File(saveDirectory));
-		
+
 		} catch(IOException e) {
 			return new ResponseEntity<String>("Failed to upload image. Try one more time", HttpStatus.CONFLICT);
 		}
@@ -164,17 +168,21 @@ public class UsersController {
 		return user;
 	}
 	
-	/**
-	 * Returns needed information about tournaments that user took part.
-	 *
-	 * @param userName
-	 *            username of user, who's tournaments we want to find
-	 */
-/*	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
-	@ResponseBody
-	public List<AllTournamentsDTO> showGames(@RequestParam("username") String username) {
-		List<AllTournamentsDTO> allGames = tournamentService.findTournamentsByUserName(username);
-		System.out.println(allGames);
-		return allGames;
-	}*/
+	@RequestMapping(value = {"/banUser"}, method = RequestMethod.PUT)
+	public void banUser(@RequestParam("username") String username) {
+		User user = userService.findOne(username);
+		user.setState(UserStatus.BANNED.name());
+		userService.updateUser(user);
+	}
+	
+	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
+	public void unbanUser(@RequestParam("username") String username) {
+		
+		User user = userService.findOne(username);
+		user.setState(UserStatus.ACTIVE.name());
+		if (user.getUserRating() <= -5) {
+			user.setUserRating(minimalRatingForActiveUser);
+		}
+		userService.updateUser(user);
+	}
 }

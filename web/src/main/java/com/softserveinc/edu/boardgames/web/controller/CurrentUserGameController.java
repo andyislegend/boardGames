@@ -51,10 +51,14 @@ public class CurrentUserGameController {
 	 */
 	@RequestMapping(value = "/getAllMyGamesCurUser", method = RequestMethod.GET)
 	@ResponseBody
-	public List<GameUserDTO> showGames() {
-		List<GameUserDTO> allGames = gameUserService
-				.getMyGameUsersFromUsername(WebUtil.getPrincipalUsername());
-		return allGames;
+	public List<GameUserDTO> getUserGames() {		
+		return gameUserService.getMyGameUsersFromUsername(WebUtil.getPrincipalUsername());
+	}
+	
+	@RequestMapping(value = "/getAllUserGames")
+	@ResponseBody
+	public List<GameUserDTO> getAllUserGames() {
+		return gameUserService.getAllUsersGame();
 	}
 	
 	@RequestMapping(value = "/getAllSharedGamesCurUser", method = RequestMethod.GET)
@@ -83,23 +87,21 @@ public class CurrentUserGameController {
 	 * @return
 	 */
 	@RequestMapping(value = "NewGame", method = RequestMethod.POST)
-	public String addNewGame(@RequestBody GameUserDTO gameUserDTO){	
+	public void addNewGame(@RequestBody GameUserDTO gameUserDTO){	
 		GameUser gameUser = new GameUser();
 		gameUser = GameUserMapper.toEntity(gameUserDTO);
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.add(gameUser);
-		return "";
 	}
 	
 	@RequestMapping(value = "updateGameDetails", method = RequestMethod.PUT)
-	public String updateGame(@RequestBody GameUserDTO gameUserDTO){
+	public void updateGame(@RequestBody GameUserDTO gameUserDTO){
 		GameUser gameUser = gameUserService.getUserGamesById(gameUserDTO.getId());
 		gameUser.setEdition(gameUserDTO.getEdition());
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
 		gameUser.setStatus(gameUserDTO.getStatus());
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.update(gameUser);
-		return "";
 	}
 	
 	/**
@@ -115,9 +117,8 @@ public class CurrentUserGameController {
 	}
 	
 	@RequestMapping(value = "/deleteUserGame/{id}",method = RequestMethod.DELETE)
-	public String deleteGame(@PathVariable Integer id){
+	public void deleteGame(@PathVariable Integer id){
 		gameUserService.deleteById(id);
-		return"";
 	}
 	
 	@RequestMapping(value = "/gameUserDetail/{userGameId}", method = RequestMethod.GET)
@@ -128,10 +129,9 @@ public class CurrentUserGameController {
 	}
 	
 	@RequestMapping(value = "/updateCountOfComment/{idGame}/{countOfComment}",method = RequestMethod.PUT)
-	public String updateCounOfComments(@PathVariable Integer idGame, @PathVariable Integer countOfComment){
+	public void updateCounOfComments(@PathVariable Integer idGame, @PathVariable Integer countOfComment){
 		GameUser gameUser = gameUserService.getUserGamesById(idGame);
 		gameUser.setCountOfComments(countOfComment);
 		gameUserService.update(gameUser);
-		return "";
 	}
 }

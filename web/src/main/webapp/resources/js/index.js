@@ -1,4 +1,4 @@
-var homeApp = angular.module('indexModule', ['pascalprecht.translate']);
+var homeApp = angular.module('indexModule', ['pascalprecht.translate', 'ngCookies']);
 
 homeApp.controller('loginCntrl', [
 		'$scope',

@@ -16,12 +16,14 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
      
     $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
 		$scope.tournamentParticipants = result;
+		for(a in $scope.tournamentParticipants) {
+    		console.log(a.id+" ppppp");
+		}
+		
 	});
     
     $http.get("/getCurentUser").success(function(result) {
    		$scope.currentUser = result;
-   		console.log($scope.currentUser);
-   		console.log($scope.tournament.userCreatorName);
    		if($scope.currentUser.username === $scope.tournament.userCreatorName){
    			$scope.isCreator = true;
    		}else {
@@ -30,7 +32,6 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     });
     
     $scope.joinToTournament = function(id) { 
-    	console.log($scope.tournamentParticipants);
     	if($scope.isContains($scope.currentUser.username)) {
     		$scope.status = "You are joined";
     		
@@ -50,9 +51,9 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     }
     
     $scope.isContains = function(username){
-    	for(var i = 0; i<$scope.tournamentParticipants.length; i++) {
-    		console.log($scope.tournamentParticipants[i].username);
-    		if($scope.tournamentParticipants[i].username === username){return true;
+    	for(var i = 0; i<$scope.tournamentParticipants.length-1; i++) {
+    		if($scope.tournamentParticipants[i].username === username) {
+    			return true;
     		}else{
     			return false;
     		} 		

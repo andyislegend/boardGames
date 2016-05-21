@@ -6,8 +6,6 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -66,6 +64,9 @@ public class Tournament implements Serializable {
 
     @Column(nullable = false)
     private String city;
+    
+    @Column(name = "isCanRate")
+    private boolean isCanRate;
 
     public Tournament() {
 		
@@ -157,4 +158,12 @@ public class Tournament implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+	public boolean isCanRate() {
+		return isCanRate;
+	}
+
+	public void setCanRate(boolean isCanRate) {
+		this.isCanRate = isCanRate;
+	}
 }

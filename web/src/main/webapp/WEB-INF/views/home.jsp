@@ -78,6 +78,8 @@
 	src="resources/bower_components/angular-file-model/angular-file-model.js"></script>
 <script src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <script type="text/javascript" src="resources/js/localization.js"></script>
+<script src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
 <!-- End of Scripts -->
 
 </head>

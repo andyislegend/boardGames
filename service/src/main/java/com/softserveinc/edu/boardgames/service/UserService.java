@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -148,8 +149,8 @@ public class UserService {
 
 	@Transactional
 	public void updateUser(User user) {
-		userRepository.save(user);
-		if (user.getState().equals(UserStatus.BANNED.name())) {
+		userRepository.saveAndFlush(user);
+		if (user.getUserRating() <= -5 || user.getState().equals(UserStatus.BANNED.name())) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 			return;
 		}
@@ -292,5 +293,20 @@ public class UserService {
 		tokenRepository.delete(verificationToken);
 		return null;
 	}
+	
+	public void removeToken(VerificationToken token) {
+		tokenRepository.delete(token);
+	}
+	
+	public List<AllTournamentsDTO> getUserTournamentsByUserName(String username) {
+		return userRepository.getUserTournamentsByUserName(username);
+	}
 
+	public List<VerificationToken> findAllTokens() { 
+		return tokenRepository.findAll();
+	}
+	
+	public void deleteUser(User user) {
+		userRepository.delete(user);
+	}
 }

@@ -32,6 +32,11 @@ public class AllTournamentsDTO {
 		this.userCreatorName = userCreatorName;
 		this.dateOfTournament = date;
 	}
+    
+    public AllTournamentsDTO(Integer tournamentId, String tournamentName) {
+		this.tournamentId = tournamentId;
+		this.tournamentName = tournamentName;
+	}
 
 	public Integer getTournamentId() {
 		return tournamentId;
