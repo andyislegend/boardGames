@@ -49,8 +49,10 @@ homeApp.config(function ($translateProvider) {
 	    LOGINFORM_HEADER: 'LOGIN WITH USERNMAE AND PASSWORD',
 	    LOGINFORM_USERNAME:'Enter Username',
 	    LOGINFORM_PASSWORD:'Enter Password',
+	    LOGINFORM_ENTER: 'START',
 	    CANCEL: 'Cancel',
-	    DONT_HAVE_ACCOUNT: 'Don\'t have an account? Click here!'
+	    DONT_HAVE_ACCOUNT: 'Don\'t have an account? Click here!',
+	    INCORRECT_LOGIN_OR_PASS:'INCORRECT LOGIN OR PASSWORD'
 	    	
 	  });
 	  $translateProvider.translations('ua', {
@@ -103,8 +105,10 @@ homeApp.config(function ($translateProvider) {
 	    LOGINFORM_HEADER: 'ВХІД ЗА ІМЕНЕМ КОРИСТУВАЧА ТА ПАРОЛЕМ',
 	    LOGINFORM_USERNAME:'Введіть Ваше Ім\'я користувача',
 	    LOGINFORM_PASSWORD:'Введіть Ваш пароль',
-	    CANCEL: 'Відмінити',
-	    DONT_HAVE_ACCOUNT: 'Досі не зареєстровані? Вам сюди!'
+	    LOGINFORM_ENTER: 'ВХІД',
+	    CANCEL: 'Скасувати',
+	    DONT_HAVE_ACCOUNT: 'Досі не зареєстровані? Вам сюди!',
+	    INCORRECT_LOGIN_OR_PASS:'НЕВІРНИЙ ЛОГІН АБО ПАРОЛЬ'
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');
