@@ -225,7 +225,7 @@
 								style="color: red">*</span> </span> <input ng-model="regusername"
 								style="width: 400px;" type="text" class="form-control"
 								aria-describedby="basic-addon1" required="required"
-								placeholder="Enter Your Username. From 3 to 15 symbols required">
+								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
@@ -233,7 +233,7 @@
 								id="basic-addon2"><span translate="REGFORM_FIRSTNAME"></span></span>
 							<input ng-model="regfirstName" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon2"
-								placeholder="Enter Your Name">
+								placeholder="{{'REGFORM_FIRSTNAME_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
@@ -241,7 +241,7 @@
 								id="basic-addon3"> <span translate="REGFORM_LASTNAME"></span></span>
 							<input ng-model="reglastName" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon3"
-								placeholder="Enter Your Last Name">
+								placeholder="{{'REGFORM_LASTNAME_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
@@ -250,7 +250,7 @@
 								style="color: red">*</span> </span> <input ng-model="regemail"
 								style="width: 400px;" type="email" class="form-control"
 								aria-describedby="basic-addon4" required="required"
-								placeholder="Enter Your email address">
+								placeholder="{{'REGFORM_EMAIL_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
@@ -259,7 +259,7 @@
 								style="color: red">*</span> </span> <input ng-model="regpassword"
 								style="width: 400px;" type="password" class="form-control"
 								aria-describedby="basic-addon5" required="required"
-								placeholder="From 6 to 20 symbols. 1 Upper case and 1 number is required">
+								placeholder="{{'REGFORM_PASSWORD_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">
@@ -270,7 +270,7 @@
 								ng-model="regconfirmPassword" style="width: 400px;"
 								type="password" class="form-control"
 								aria-describedby="basic-addon6" required="required"
-								placeholder="Please, confirm Your password">
+								placeholder="{{'REGFORM_CONFIRMPASSWORD_PLACEHOLDER' | translate}}">
 						</div>
 						<br>
 						<div class="input-group">

@@ -63,8 +63,13 @@ homeApp.config(function ($translateProvider) {
 	    REGFORM_GENDER: 'Gender',
 	    REGFORM_GENDER_MALE: 'Male',
 	    REGFORM_GENDER_FEMALE: 'Female',
-	    REGFORM_SIGNUP: 'Sign up'
-	    	
+	    REGFORM_SIGNUP: 'Sign up',
+	    REGFORM_USERNAME_PLACEHOLDER: 'Enter Your Username. From 3 to 15 symbols required',
+	    REGFORM_FIRSTNAME_PLACEHOLDER: 'Enter Your Name',
+	    REGFORM_LASTNAME_PLACEHOLDER: 'Enter Your Last Name',	
+	    REGFORM_EMAIL_PLACEHOLDER: 'Enter Your email address',
+	    REGFORM_PASSWORD_PLACEHOLDER: 'From 6 to 20 symbols. 1 Upper case and 1 number is required',
+	    REGFORM_CONFIRMPASSWORD_PLACEHOLDER: 'Please, confirm Your password',
 	  });
 	  $translateProvider.translations('ua', {
 		PROJECT_NAME:'Настільні ігри: Обмін',
@@ -130,7 +135,13 @@ homeApp.config(function ($translateProvider) {
 	    REGFORM_GENDER: 'Стать',
 	    REGFORM_GENDER_MALE: 'Чоловік',
 	    REGFORM_GENDER_FEMALE: 'Жінка',
-	    REGFORM_SIGNUP: 'Реєстрація'
+	    REGFORM_SIGNUP: 'Реєстрація',
+	    REGFORM_USERNAME_PLACEHOLDER: 'Введіть Ваш логін. Повинен містити від 3 до 15 символів',
+	    REGFORM_FIRSTNAME_PLACEHOLDER: 'Введіть Ваше ім\'я',
+	    REGFORM_LASTNAME_PLACEHOLDER: 'Введіть ваше прізвище',	
+	    REGFORM_EMAIL_PLACEHOLDER: 'Введіть адресу вашої електронної скриньки',
+	    REGFORM_PASSWORD_PLACEHOLDER: 'Від 6 до 20 символів. Хоча б 1 велика літера і 1 цифра',
+	    REGFORM_CONFIRMPASSWORD_PLACEHOLDER: 'Підтрвердіть Ваш пароль, будь ласка',
 	  });
 	  $translateProvider.preferredLanguage('en');
 	  $translateProvider.useSanitizeValueStrategy('escape');
