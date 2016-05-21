@@ -159,6 +159,15 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             };
         });
     };
+    
+    $http.get('tournaments').success(function(data){
+        console.log(data);
+        $scope.allTournaments = data;
+    }).error(function(error){
+       console.log(error);
+    });
+    
+    
 setInterval(function(){
         findAllFriend();
         getUpdate();

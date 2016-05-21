@@ -391,6 +391,14 @@
 										src="resources/ico/close2.png" /></a>
                                 </div>
                                 <div>{{myfriendTournament}}</div>
+                                <div ng-repeat="tournament in allTournaments">
+                                    <div>tournamentName: {{tournament.tournamentName}}</div>
+                                    <div>countOfParticipants: {{tournament.countOfParticipants}}</div>
+                                    <div>userCreatorName: {{tournament.userCreatorName}}</div>
+                                    <div>dateOfTournament: {{tournament.dateOfTournament | date : format : timezone}}</div>
+                                    <div>country: {{tournament.country}}</div>
+                                     <div>city: {{tournament.city}}</div>
+                                </div>
                             </div>
                             
                             
