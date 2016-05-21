@@ -8,7 +8,7 @@ INSERT INTO country (name) VALUES ('Poland');
 INSERT INTO city (name, countryId) VALUES ('Cherkasy', 1);
 INSERT INTO city (name, countryId) VALUES ('Chernihiv', 1);
 INSERT INTO city (name, countryId) VALUES ('Chernivtsi', 1);
-INSERT INTO city (name, countryId) VALUES ('Dnipropetrovsk', 1);
+INSERT INTO city (name, countryId) VALUES ('Dnipro', 1);
 INSERT INTO city (name, countryId) VALUES ('Donetsk', 1);
 INSERT INTO city (name, countryId) VALUES ('Ivano-Frankivsk', 1);
 INSERT INTO city (name, countryId) VALUES ('Kharkiv', 1);
