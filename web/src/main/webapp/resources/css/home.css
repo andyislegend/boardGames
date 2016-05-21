@@ -1,54 +1,53 @@
 body {
-    padding-top: 70px;
-    overflow: hidden;
+	padding-top: 70px;
+	overflow: hidden;
 }
 
 h1, h2, h3, h4, h5 {
-font-family: monospace;	
+	font-family: monospace;
 }
 
 ol, ul {
-    list-style: none;
+	list-style: none;
 }
 
 #footer {
-    position:fixed;
-    left:0px;
-    bottom:0px;
-    height:25px;
-    width:100%;
-    background:#333333;
-    text-align: right;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 25px;
+	width: 100%;
+	background: #333333;
+	text-align: right;
 }
 
-
 #main_container {
-    
-    height: 100%;
-    margin-bottom: 2%;
-    margin-top: 2.5%;
+	height: 100%;
+	margin-bottom: 2%;
+	margin-top: 2.5%;
 }
 
 #main_div {
-
-    float: left;
-    width: 69%;
-    max-height: 545px;
-    margin-left: 0.2%;
-    border: none;
-    overflow-y: auto;
-
+	float: left;
+	width: 69%;
+	max-height: 545px;
+	margin-left: 0.2%;
+	border: none;
+	overflow-y: auto;
 }
 
 #widget_div {
+	float: left;
+	width: 30%;
+	height: 570px;
+	margin-left: 0.2%;
+	margin-right: 0.2%;
+	overflow-y: auto;
+	border: groove;
+}
 
-    float: left;
-    width: 30%;
-    height: 570px;
-    margin-left: 0.2%;
-    margin-right: 0.2%;
-    overflow-y: auto;
-    border: groove;
+#widget_div ul {
+	cursor: pointer;
 }
 
 #friends_div h1 {
@@ -58,7 +57,6 @@ ol, ul {
 }
 
 #mygames_div p {
-	
 	font-size: 12pt;
 	font-family: monospace;
 }
@@ -78,7 +76,6 @@ span.label {
 }
 
 #mygames_div p {
-	
 	font-size: 12pt;
 	font-family: monospace;
 }
