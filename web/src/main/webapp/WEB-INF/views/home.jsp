@@ -281,6 +281,7 @@
 																</div>
 																<div>
 																	<input type="submit" value="ADD"
+																	
 																		style="width: 30%; margin-bottom: 10px"> <input
 																		type="submit" value="Close" data-dismiss="modal"
 																		style="width: 30%; margin-bottom: 10px">
@@ -306,8 +307,8 @@
 												<table ng-table="" class="table table-condensed table-hover">
 													<tr ng-repeat="game in allGame">
 														<td title="'Name'"><a
-															href="#gameUserDetails/{{game.id}}"
-															ng-click="myFunc(game.id)"> {{game.name}}</a></td>
+															href="#gameUserDetails/{{game.id}}">
+															{{game.name}}</a></td>
 														<td title="'Category'">{{game.category}}</td>
 														<td title="'Comments'"><a href=""
 															ng-click="showComments(game.id)"> <span
@@ -315,11 +316,48 @@
 																class="glyphicon glyphicon-comment"></span>
 														</a></td>
 														<td title="'Delete'"><a href=""
-															ng-click="deleteGame(game.id)"> <span
-																class="glyphicon glyphicon-remove"></span>
+															ng-click="deleteGame(game.id)" data-toggle="modal" data-target="#myModal{{status}}"> 
+															   <span class="glyphicon glyphicon-remove"></span>
 														</a></td>
 													</tr>
 												</table>
+												<div ng-if = "isCanDelete">
+												<div class="modal fade" id="myModalConfirmation" role="dialog">
+    												<div class="modal-dialog modal-sm">
+      													<div class="modal-content">
+       														 <div class="modal-header">
+          														<button type="button" class="close" data-dismiss="modal">&times;</button>
+          															<h4 class="modal-title">Modal Header</h4>
+        													</div>
+        												<div class="modal-body">
+          													<p>Sorry, you can't delete this game, becouse this game use in tournaments</p>
+       													</div>
+        												<div class="modal-footer">
+          													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        												</div>
+      														</div>
+    												</div>
+  												</div>
+												</div>
+												<div>
+												<div modal = "confirmationToDelete" class="modal fade" id="myModalDelete" role="dialog">
+    												<div class="modal-dialog modal-sm">
+      													<div class="modal-content">
+       														 <div class="modal-header">
+          														<button type="button" class="close" data-dismiss="modal">&times;</button>
+        													</div>
+        												<div class="modal-body">
+          													<p>Are you really delete this Game?</p>
+       													</div>
+        												<div class="modal-footer">
+          													<button type="button" ng-click = "confirmationToDelete()" class="btn btn-default" data-dismiss="modal">Delete</button>
+          													<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        												</div>
+      														</div>
+    												</div>
+  												</div>
+												</div>
+												</div>
 											</div>
 											<div id="sharedGames" class="tab-pane fade">
 												<table ng-table="" class="table table-condensed table-hover">
