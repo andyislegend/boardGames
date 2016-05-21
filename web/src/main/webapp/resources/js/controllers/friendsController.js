@@ -1,49 +1,40 @@
 var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$http', '$interval', 'friendService', function($scope,$rootScope, $http, $interval, friendService) {
     $scope.friends = [];
-    friendService.getAllFriends(function(friends){
-        $scope.friends = friends;
-    });
-    
-    var allfriends = function(){
-          /* $http.get("allFriends").success(function(data) {
-               if($scope.friends.length !== data.length){
+    var findAllFriend = function(){
+        friendService.getAllFriends(function(data){
+           if($scope.friends.length !== data.length){
                     $scope.friends = data;
                }
-        }).error(function(error) {
-            console.log(error);
-        });*/
-   }
+        });
+    };
+    
     $scope.userOffered = [];
-    var allMyOffering = function(){
-            $http.get("allMyOffering").success(function(data) {
-            if( $scope.userOffered.length !== data.length){    
+    var findAllMyOffering = function(){
+        friendService.allMyOffering(function(data){
+            if ($scope.userOffered.length !== data.length){    
                 $scope.userOffered = data;
             }
-        }).error(function(error) {
-            console.log(error);
-        });
-    }
-    
+        })
+    };
+
+    $scope.count;
     var getCountOfOffering = function(){
-        $http.get('allOffering').success(function(data){
-            if($scope.count !== data){
-             $scope.count = data;
+         friendService.allOffering(function(data){
+             if ($scope.count !== data){
+                $scope.count = data;
             }
-         }).error(function(error){
-             console.log(error)
          });
-    }
+    };
+
     $scope.allOfferedUsers = [];
     var getAllOfferedUsers = function(){
-        $http.get("allOfferedUsers").success(function(data) {
-        if($scope.allOfferedUsers.length !== data.length){
-            $scope.allOfferedUsers = data;
-        }
-	}).error(function(error) {
-		console.log(error);
-	});
+         friendService.allOfferedUsers(function(data){
+            if ($scope.allOfferedUsers.length !== data.length){
+                $scope.allOfferedUsers = data;
+            } 
+         });
     }
-    
+
      $scope.add = function(id){
         var userId = id;
         if($scope.count == 1){
@@ -85,7 +76,6 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
    $scope.findAllUsers = function(){
        if($scope.name.length > 0){
                 $http.post('findAllUsers/' + $scope.name, $scope.name).success(function(data){
-                   /* $rootScope.$broadcast('message', data);*/
                     $scope.allUsers = data;
                 }).error(function(error){
             });
@@ -156,22 +146,21 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
             console.log(error);
     });
 };
+    $scope.allNotReadMessagesByFriend = [];
     var getAllNumberNotReadMessageByFriend = function(){
-        $http.get('allMessageByCurrentUserFriends').success(function(data){
+        friendService.allMessageByCurrentUserFriends(function(data){
             if($scope.allNotReadMessagesByFriend !== data){
                 $scope.allNotReadMessagesByFriend = data;
-            }
-        }).error(function(error){
-            console.log(error);
+            };
         });
-    }
+    };
 setInterval(function(){
+        findAllFriend();
         getUpdate();
         getAllNumberNotReadMessageByFriend();
         getCountOfOffering();
         getAllOfferedUsers();
-        allfriends();
-        allMyOffering();
+        findAllMyOffering();
         
 }, 1000)
 
