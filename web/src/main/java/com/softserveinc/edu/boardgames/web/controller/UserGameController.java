@@ -99,6 +99,10 @@ public class UserGameController {
 		GameUser gameUser = gameUserService.getUserGamesById(gameUserDTO.getId());
 		gameUser.setEdition(gameUserDTO.getEdition());
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
+		gameUser.setDescription(gameUserDTO.getDescription());
+		gameUser.setRules(gameUserDTO.getRules());
+		gameUser.setMinPlayers(gameUserDTO.getMinPlayers());
+		gameUser.setMaxPlayers(gameUserDTO.getMaxPlayers());
 		gameUser.setStatus(gameUserDTO.getStatus());
 		gameUserService.update(gameUser);
 	}

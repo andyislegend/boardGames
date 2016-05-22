@@ -223,11 +223,6 @@ homeApp.$inject = ['$modal'];
 			 }		
 	});
 	
-	$scope.gameDetailById = function(id) {
-		$scope.games = [];
-	}
-	
-	
 	$scope.displayRequestBlockClick = function(id) {
 		if ($scope.doWantToApply === true)
 			$scope.doWantToApply = false;
