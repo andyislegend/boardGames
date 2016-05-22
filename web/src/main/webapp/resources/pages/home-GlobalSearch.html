@@ -1,6 +1,7 @@
-<div >
+<div>
 <div ng-controller = "GlobalSearchCTRL" >
 <div ng-controller = "getGameDetailedInfoController" >
+<div ng-controller = "showAllTournamentsCtrl">
 <table ng-table="allFilesTable" class="table table-striped">
    <tr ng-repeat="g in games">
        <td data-title="'Name'" >
@@ -10,9 +11,9 @@
            game
        </td> 
    </tr>
-   <tr ng-repeat="t in tournaments">
+   <tr ng-repeat="t in tournament">
        <td data-title="'Name'" >
-           {{t.tournamentName}}
+          <a href = "#tournament/{{t.tournamentId}}">{{t.tournamentName}}</a>
        </td>
        <td data-title="'Type'" >
            tournaments
@@ -27,5 +28,6 @@
        </td> 
    </tr>
 </table>
+</div>
 </div>
 </div>

@@ -33,8 +33,8 @@ public class NotificationController {
 	@Autowired
 	TournamentService tournamentService;
 	
-	@Autowired
-	EventService eventService;
+//	@Autowired
+//	EventService eventService;
 	
 	@Autowired
 	NotificationService notificationService;
@@ -65,10 +65,11 @@ public class NotificationController {
 		String currentUserName = WebUtil.getPrincipalUsername();
 		return tournamentService.getAllTournamentByUserName(currentUserName);
 	}
-	@RequestMapping(value = "/getAllCurrentUserEvent", method = RequestMethod.GET)
-	public List<Object[]> getAllCurrentUserEvent(){
-		return eventService.getAllEventByUserName();
-	}
+	
+//	@RequestMapping(value = "/getAllCurrentUserEvent", method = RequestMethod.GET)
+//	public List<Object[]> getAllCurrentUserEvent(){
+//		return eventService.getAllEventByUserName();
+//	}
 	
 	@RequestMapping(value = "/getAllGameNotifications", method = RequestMethod.GET)
 	@ResponseBody

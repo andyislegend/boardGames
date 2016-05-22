@@ -31,12 +31,11 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
             "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
             + ") from Tournament t where t.id = :id")
     public TournamentsDTO getTournamentsById(@Param("id") Integer id);
-//    
-//    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
-//            "(t.id, t.name, t.userCreator.username, t.country, " +
-//            "t.city, t.addition, t.dateOfTournament, t.requiredRating,t.maxParticipants) " +
-//            "from Tournament t where t.name like %:name%")
-//    public List<AllTournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
+    
+    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
+            + ") from Tournament t where t.name like %:name%")
+    public List<TournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
     
     /**
      * @author Vasyl Bervetskyy

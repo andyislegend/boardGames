@@ -114,13 +114,12 @@
             </div>
           </div>
           <div>
-            <div style="margin-left: 30%" ng-controller="search">
+            <div style="margin-left: 30%" ng-controller="GlobalSearchCTRL">
               <form data-ng-submit=submit() style="margin-left: 3%;"
                 class="navbar-form navbar-left" role="search">
               <form id="searchthis" style="display: inline;" method="get">
-                <input id="search-box" name="q" size="50" type="text"
-                  ng-model="search" translate translate-attr-placeholder="SEARCH"/> <a
-                  ng-href="#search/{{search}}">
+                <input id="search-box" name="q" size="50" type="text" ng-model="search" />                
+                  <a ng-href= "#search/{{search}}">
                 <button id="search-btn" ng-click="searchAll()" type="submit">
                 <span class="glyphicon glyphicon-search"></span>
                 </button>
@@ -190,9 +189,11 @@
     </div>
     <!-- End of Menu slider -->
     <div id="main_container">
+     
       <!-- ng-route div -->
       <div id="main_div" ng-view></div>
       <!-- End of ng-route div -->
+      
       <!-- My Side Widget -->
       <div id="widget_div">
         <ul class="nav nav-tabs nav-justified">

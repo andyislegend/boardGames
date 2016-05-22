@@ -3,7 +3,7 @@ angular.module('homeApp').controller('GlobalSearchCTRL', function($scope, $http,
 	$scope.searchWord = $scope.searchWord
 		$http.get('searchBy/'+$routeParams.word).then(function(response) {			
 			$scope.searchResult = response;
-			$scope.tournaments = $scope.searchResult.data.tournaments;
+			$scope.tournament = $scope.searchResult.data.tournaments;
 			$scope.games = $scope.searchResult.data.gameUsers;
 			$scope.events = $scope.searchResult.data.events;	
 			$scope.searchResult = [{game:$scope.games},
