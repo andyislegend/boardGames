@@ -19,13 +19,11 @@ public interface GameRatingRepository extends JpaRepository<GameRating, Integer>
 			+ "and gameRateNum.user.id = :userId")
 	Integer getGameRated(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
 	
-//	@Query("update GameRating grn "
-//			+ "set grn.rating = :rating "
-//			+ "where grn.game.id = :gameId "
-//			+ "and grn.user.id = :userId")
-//	@Modifying
-//	void updateRating(@Param("gameId")Integer gameId, 
-//			@Param("userId")Integer userId, @Param("rating")Integer rating);
+	@Query("delete from GameRating grn "
+			+ "where grn.game.id = :gameId "
+			+ "and grn.user.id = :userId")
+	@Modifying
+	void deleteCustom(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
 	
 	@Query("select AVG(gr.rating) from GameRating gr "
 			+ "where gr.game.id = :gameId and gr.user.id = :userId")

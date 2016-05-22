@@ -71,12 +71,13 @@ public class GetGameDetailsController {
 	@ResponseBody
 	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
 		User curUser = userService.findOne(WebUtil.getPrincipalUsername());
-		if (!gameRateNumService.checkIfUserRated(gameId, curUser.getId())) {
-			GameRating gameRating = new GameRating();
-			gameRating.setRating(rating);
-			gameRating.setGame(gameService.findById(gameId));
-			gameRating.setUser(curUser);
-			gameRateNumService.update(gameRating);
+		if (gameRateNumService.checkIfUserRated(gameId, curUser.getId())) {
+			gameRateNumService.deleteCustom(gameId, curUser.getId());;
 		}
+		GameRating gameRating = new GameRating();
+		gameRating.setRating(rating);
+		gameRating.setGame(gameService.findById(gameId));
+		gameRating.setUser(curUser);
+		gameRateNumService.update(gameRating);
 	}
 }
