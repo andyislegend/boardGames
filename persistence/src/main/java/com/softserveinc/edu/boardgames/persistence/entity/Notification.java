@@ -41,7 +41,7 @@ public class Notification implements Serializable {
 	private User user;
 	
 	@Column(name="date")
-	private Date date;
+	private Date date = new Date();
 	
 	public Notification() {}
 

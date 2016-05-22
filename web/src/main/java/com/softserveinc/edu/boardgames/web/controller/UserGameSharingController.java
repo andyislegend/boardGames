@@ -124,6 +124,15 @@ public class UserGameSharingController {
 			gamePropo.setExchange(exchange);
 			gamePropoService.update(gamePropo);
 		}
+		
+		Notification notification = new Notification();
+		notification.setType(NOTIFICATION_TYPE);
+		notification.setMessage(userService.findById(exchange.getUserApplierId()).getUsername() 
+				+ " applies for the game " 
+				+ gameUserToUpdate.getGame().getName() 
+				+ ". Go to game manue and give your answer.");
+		notification.setUser(userService.findById(exchange.getUser().getId()));
+		notifyService.update(notification);
 	}
 	
 	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -147,11 +156,10 @@ public class UserGameSharingController {
 		
 		Notification notification = new Notification();
 		notification.setType(NOTIFICATION_TYPE);
-		notification.setDate(new Date());
-		notification.setStatus(NotificationStatus.UNCHECKED.name());
 		notification.setMessage(WebUtil.getPrincipalUsername() 
 				+ " confirmed your request for game " 
-				+ gameUserOfOwner.getGame().getName());
+				+ gameUserOfOwner.getGame().getName() 
+				+ ". Please contact the owner about further details");
 		notification.setUser(userService.findById(exchange.getUserApplierId()));
 		notifyService.update(notification);
 	}
@@ -170,6 +178,14 @@ public class UserGameSharingController {
 		exchangeService.update(exchange);
 		
 		gamePropoService.deleteForExchange(exchange.getId());
+		
+		Notification notification = new Notification();
+		notification.setType(NOTIFICATION_TYPE);
+		notification.setMessage("Unfortunately " + WebUtil.getPrincipalUsername() 
+				+ " declined your request for game " 
+				+ gameUserToUpdate.getGame().getName());
+		notification.setUser(userService.findById(exchange.getUserApplierId()));
+		notifyService.update(notification);
 	}
 	
 	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
@@ -187,6 +203,15 @@ public class UserGameSharingController {
 			gameUser.setStatus(GameUserStatus.PRIVATE.name());
 			gameUserService.update(gameUser);
 		}
+		
+		Notification notification = new Notification();
+		notification.setType(NOTIFICATION_TYPE);
+		notification.setMessage(userService.findById(exchange.getUserApplierId()).getUsername() 
+				+ " intends to give " 
+				+ gameUserToUpdate.getGame().getName() 
+				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.");
+		notification.setUser(userService.findById(exchange.getUser().getId()));
+		notifyService.update(notification);
 		
 		gamePropoService.deleteForExchange(exchange.getId());
 		
