@@ -1,0 +1,17 @@
+<div ng-controller="gameNotifyController">
+	<div class="centeredObjects">
+		<h2>Game news</h2>
+	</div>
+	<table class="table">
+		<tbody>
+			<tr ng-repeat="x in gameNotifications">
+				<td>sharing confirmation</td>
+				<td><span class="glyphicon glyphicon-knight" ></span></td>
+				<td>{{x.applierUsername}}</td>
+				<td>Sharing request confirmed: chat owner about details for 
+				{{x.name}}-{{x.edition}},{{x.yearOfProduction}}</td>
+				<td>{{date | date:'yyyy-MM-dd'}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

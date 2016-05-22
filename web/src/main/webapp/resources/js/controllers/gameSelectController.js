@@ -6,11 +6,13 @@ angular.module('homeApp').controller('gameSelectController', function($scope, $h
 	});
 
 	$scope.$on('refreshingGameDetails', function(event, data) {
+		console.log(data);
 		$http({
 			method : "GET",
 			url : 'getGameDetails' + '/' + data
 		}).then(function mySucces(response) {
 			$scope.gameDetail = response.data;
+			console.log($scope.gameDetail);
 		}, function myError(response) {
 			
 		});

@@ -24,3 +24,6 @@ input.inlineDisplay {
 select.inlineDisplay {
 	width:43%;
 }
+span.glyphicon-knight {
+    font-size: 2.0em;
+}

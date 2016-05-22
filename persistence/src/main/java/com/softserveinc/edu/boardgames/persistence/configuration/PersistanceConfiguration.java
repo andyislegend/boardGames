@@ -63,13 +63,6 @@ public class PersistanceConfiguration {
         transactionManager.setDataSource(dataSource);
         return transactionManager;
     }
-    
-    @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver createMultipartResolver() {
-        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("utf-8");
-        return resolver;
-    }
 
     private Map<String, String> jpaProperties() {
         Map<String, String> jpaProperties = new HashMap<>();

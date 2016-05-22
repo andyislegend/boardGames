@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 
 @Repository
@@ -36,7 +37,14 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer>{
 			+ "where e.userApplierId = :userId "
 			+ "and gu.id = :gameUserId "
 			+ "and gu.status = 'SHARED'")
-	public Exchange getBorrowedGameUser(
-			@Param("gameUserId")Integer gameUserId, 
-			@Param("userId")Integer urserId);
+	public Exchange getBorrowedGameUser(@Param("gameUserId")Integer gameUserId, @Param("userId")Integer urserId);
+
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
+			+ "e.id, gu.game.name, gu.edition, gu.yearOfProduction, u.username) "
+			+ "from Exchange e "
+			+ "inner join e.gameUser gu "
+			+ "inner join e.user u "
+			+ "where gu.status='SHARED' "
+			+ "and e.userApplierId=:userId")
+	public List<GameUserDTO> selectAllConfiramtionsForUser(@Param("userId")Integer id);
 }
