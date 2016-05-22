@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class GameNotificationDTO {
 
+	private Integer id;
 	private String type;
 	private String status;
 	private String message;
@@ -12,9 +13,10 @@ public class GameNotificationDTO {
 	private Integer gameUserId;
 	private String applierUsername;
 	
-	public GameNotificationDTO(String type, String status, String message, String username,
+	public GameNotificationDTO(Integer id, String type, String status, String message, String username,
 			Date date, Integer gameUserId, String applierUsername) {
 		super();
+		this.id = id;
 		this.type = type;
 		this.status = status;
 		this.message = message;
@@ -64,5 +66,11 @@ public class GameNotificationDTO {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

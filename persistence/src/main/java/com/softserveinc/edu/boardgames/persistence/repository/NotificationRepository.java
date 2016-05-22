@@ -14,7 +14,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDT
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO("
-			+ "n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, n.user.username) "
+			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, n.user.username) "
 			+ "from Notification n "
 			+ "where n.user.username = :username")
 	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
