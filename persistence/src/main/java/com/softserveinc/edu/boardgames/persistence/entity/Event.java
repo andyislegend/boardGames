@@ -17,6 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  *  @author Kobevka Anna
  */
@@ -125,47 +129,19 @@ public class Event implements Serializable{
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	
-	
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Event other = (Event) obj;
-		if (id != other.id) {
-			return false;
-		}
-		if (game != other.game) {
-			return false;
-		}
-		if (date != other.date) {
-			return false;
-		}
-		
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public String toString() {
-	DateFormat datef = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
-		return "User [id=" + id + ", name=" + name + ", date=" + datef.format(date) + ", description=" + description + ", author="
-				+ user + ", game=" + game +"]";
-	}
-	
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
+    
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

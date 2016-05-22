@@ -36,7 +36,7 @@ public class GameRating implements Serializable{
 	private Integer id;
 	
 	@Column(name = "rating")
-	private Integer rating = 0;
+	private Double rating = 0.0;
 	
 	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name="gameId", nullable=false)
@@ -48,7 +48,7 @@ public class GameRating implements Serializable{
 
 	public GameRating() {}
 	
-	public GameRating(Integer id, Integer rating, Game game, User user) {
+	public GameRating(Integer id, Double rating, Game game, User user) {
 		super();
 		this.id = id;
 		this.rating = rating;
@@ -64,11 +64,11 @@ public class GameRating implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 

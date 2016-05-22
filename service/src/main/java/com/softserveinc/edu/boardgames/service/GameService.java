@@ -39,23 +39,21 @@ public class GameService {
 	public List<AllGamesDto> getGamesDTO(){
 		return gameRepo.getAllGames();
 	}
-	
-	public GameDetailsDTO getGamesById(Integer id){
-		
-		GameDetailsDTO gameDetails = new GameDetailsDTO();
-		try{
-			gameDetails = gameRepo.getGameDescription(id);
-			if (gameDetails.getRating() == null)
-				gameDetails.setRating(new Double(0));
-		}
-		catch(NullPointerException ex) {
-			System.out.println("Getting gameDetails error");
-			ex.printStackTrace();
-		}
-		return gameDetails;
-	}
 
 	public Game findByName(String name){
         return gameRepo.findByName(name);
     }
+	
+	public GameDetailsDTO getGameDetails(Integer gameId) {
+		GameDetailsDTO gameDetails = new GameDetailsDTO();
+		Game game = this.findById(gameId);
+		gameDetails.setName(game.getName());
+		if (game.getGameRating() == null){
+			gameDetails.setRating(new Double(0));
+		}
+		else {
+			gameDetails.setRating(game.getGameRating().getRating());
+		}
+		return gameDetails;
+	}
 }

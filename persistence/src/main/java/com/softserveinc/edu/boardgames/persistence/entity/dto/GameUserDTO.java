@@ -25,6 +25,14 @@ public class GameUserDTO {
 		this.yearOfProduction = yearOfProduction;
 	}
 	
+	public GameUserDTO(int id, String name, String edition, int yearOfProduction, String applierUsername) {
+		this.id = id;
+		this.name = name;
+		this.edition = edition;
+		this.yearOfProduction = yearOfProduction;
+		this.applierUsername = applierUsername;
+	}
+	
 	public GameUserDTO(int id,int yearOfProduction, String edition, String status) {			 
 		this.id = id;
 		this.yearOfProduction = yearOfProduction;

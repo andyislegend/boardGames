@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.service.GameUserService;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 
 /**
@@ -35,5 +36,11 @@ public class GetAllUsersGames {
 	public List<GameUserDTO> showGames(@RequestParam("username") String username) {
 		List<GameUserDTO> allGames = gameUserService.getGameUsersFromUsername(username);
 		return allGames;
+	}
+	
+	@RequestMapping(value = {"/getPrincipalUsername"}, method = RequestMethod.GET)
+	@ResponseBody
+	public String getUsernameForNotifications() {
+		return WebUtil.getPrincipalUsername();
 	}
 }

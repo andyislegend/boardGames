@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.ExchangeRepository;
 
@@ -48,5 +49,9 @@ public class ExchangeService {
 	
 	public boolean checkIfBorrowed(Integer userId, Integer gameUserId) {
 		return (eRepo.getBorrowedGameUser(gameUserId, userId) != null);
+	}
+	
+	public List<GameUserDTO> selectAllConfirmationsForUser(Integer id) {
+		return eRepo.selectAllConfiramtionsForUser(id);
 	}
 }
