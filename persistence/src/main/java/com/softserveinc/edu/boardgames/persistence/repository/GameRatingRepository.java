@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,15 +19,21 @@ public interface GameRatingRepository extends JpaRepository<GameRating, Integer>
 			+ "and gameRateNum.user.id = :userId")
 	Integer getGameRated(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
 	
-	@Query("update GameRating grn "
-			+ "set grn.rating = :rating "
-			+ "where grn.game.id = :gameId "
-			+ "and grn.user.id = :userId")
-	@Modifying
-	void updateRating(@Param("gameId")Integer gameId, 
-			@Param("userId")Integer userId, @Param("rating")Integer rating);
+//	@Query("update GameRating grn "
+//			+ "set grn.rating = :rating "
+//			+ "where grn.game.id = :gameId "
+//			+ "and grn.user.id = :userId")
+//	@Modifying
+//	void updateRating(@Param("gameId")Integer gameId, 
+//			@Param("userId")Integer userId, @Param("rating")Integer rating);
 	
-	@Query("select grn from GameRating grn "
-			+ "where grn.game.id = :gameId")
-	GameRating getFromGame(@Param("gameId")Integer gameId);
+	@Query("select AVG(gr.rating) from GameRating gr "
+			+ "where gr.game.id = :gameId and gr.user.id = :userId")
+	public Double getForGameAndUser(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
+	
+	@Query("select AVG(gr.rating) from GameRating gr where gr.game.id = :id")
+	public Double getAverageRatingForGame(@Param("id")Integer gameId);
+	
+	@Query("select gr from GameRating gr where gr.game.id = :gameId and gr.user.id = :userId")
+	public List<GameRating> checkIfUserRated(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
 }

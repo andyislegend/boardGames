@@ -3,25 +3,42 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 public class GameDetailsDTO {
 	
 	String name;
-	Double rating;
+	Double userRating;
+	Double generalRating;
 	
 	public GameDetailsDTO() {}
 	
-	public GameDetailsDTO(String name, Double rating) {
+	public GameDetailsDTO(String name, Double userRating) {
 		super();
 		this.name = name;
-		this.rating = rating;
+		this.userRating = userRating;
 	}
-	public Double getRating() {
-		return rating;
-	}
-	public void setRating(Double rating) {
-		this.rating = rating;
+	public GameDetailsDTO(String name, Double userRating, Double generalRating) {
+		super();
+		this.name = name;
+		this.userRating = userRating;
+		this.generalRating = generalRating;
 	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Double getUserRating() {
+		return userRating;
+	}
+
+	public void setUserRating(Double userRating) {
+		this.userRating = userRating;
+	}
+
+	public Double getGeneralRating() {
+		return generalRating;
+	}
+
+	public void setGeneralRating(Double generalRating) {
+		this.generalRating = generalRating;
 	}
 }

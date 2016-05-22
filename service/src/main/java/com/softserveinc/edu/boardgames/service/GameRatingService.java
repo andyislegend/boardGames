@@ -25,15 +25,15 @@ public class GameRatingService {
 		return gameRatingNumericRepo.findAll();
 	}
 
-	@Transactional
-	@Modifying
-	public void updateManualy(Integer gameId, Integer userId, Integer rating) {
-		gameRatingNumericRepo.updateRating(gameId, userId, rating);
-	}
+//	@Transactional
+//	@Modifying
+//	public void updateManualy(Integer gameId, Integer userId, Integer rating) {
+//		gameRatingNumericRepo.updateRating(gameId, userId, rating);
+//	}
 	
 	@Transactional
 	public void update(GameRating gameRatingNumeric) {
-		gameRatingNumericRepo.save(gameRatingNumeric);
+		gameRatingNumericRepo.saveAndFlush(gameRatingNumeric);
 	}
 	
 	public Integer getRatingforUser(Integer gameId, Integer userId){
@@ -43,7 +43,15 @@ public class GameRatingService {
 		return rating;
 	}
 	
-	public GameRating getFromGame(Integer gameId){
-		return gameRatingNumericRepo.getFromGame(gameId);
+	public Double getForGameAndUser(Integer gameId, Integer userId){
+		return gameRatingNumericRepo.getForGameAndUser(gameId, userId);
+	}
+	
+	public Double getAverageRating(Integer gameId) {
+		return gameRatingNumericRepo.getAverageRatingForGame(gameId);
+	}
+	
+	public boolean checkIfUserRated(Integer gameId, Integer userId) {
+		return (gameRatingNumericRepo.checkIfUserRated(gameId, userId).size() > 1);
 	}
 }

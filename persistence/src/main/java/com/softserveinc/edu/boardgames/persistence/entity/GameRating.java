@@ -25,7 +25,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author TARAZIDZE
  */
 @Entity
-@Table(name = "gameRatingNumeric", uniqueConstraints=@UniqueConstraint(columnNames="gameId"))
+@Table(name = "gameRating")
 public class GameRating implements Serializable{
 	
 	private static final long serialVersionUID = 5911151982701538423L;
@@ -36,10 +36,10 @@ public class GameRating implements Serializable{
 	private Integer id;
 	
 	@Column(name = "rating")
-	private Double rating = 0.0;
+	private Integer rating = 0;
 	
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	@JoinColumn(name="gameId", nullable=false)
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Game.class, cascade=CascadeType.MERGE)
+	@JoinColumn(name = "gameId", referencedColumnName = "id")
 	private Game game;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, 
@@ -48,7 +48,7 @@ public class GameRating implements Serializable{
 
 	public GameRating() {}
 	
-	public GameRating(Integer id, Double rating, Game game, User user) {
+	public GameRating(Integer id, Integer rating, Game game, User user) {
 		super();
 		this.id = id;
 		this.rating = rating;
@@ -64,11 +64,11 @@ public class GameRating implements Serializable{
 		this.id = id;
 	}
 
-	public Double getRating() {
+	public Integer getRating() {
 		return rating;
 	}
 
-	public void setRating(Double rating) {
+	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
 
@@ -87,19 +87,4 @@ public class GameRating implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	@Override
-    public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
-    }
-
-	@Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-    
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
 }

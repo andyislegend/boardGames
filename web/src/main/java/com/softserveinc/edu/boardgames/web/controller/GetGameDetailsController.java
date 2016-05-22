@@ -39,9 +39,15 @@ public class GetGameDetailsController {
 	@RequestMapping(value="/getGameDetails/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
 	public GameDetailsDTO getGameDetails(@PathVariable Integer gameId){
-		GameDetailsDTO gameDetails = gameService.getGameDetails(gameId);
-		if (gameDetails.getRating() == null)
-			gameDetails.setRating(new Double(0));
+		GameDetailsDTO gameDetails = new GameDetailsDTO();
+		gameDetails.setName(gameService.findById(gameId).getName());
+		gameDetails.setUserRating(gameRateNumService.getForGameAndUser(gameId, 
+				userService.findOne(WebUtil.getPrincipalUsername()).getId()));
+		if (gameDetails.getUserRating() == null)
+			gameDetails.setUserRating(new Double(DEFAULT_RATING));
+		gameDetails.setGeneralRating(gameRateNumService.getAverageRating(gameId));
+		if (gameDetails.getGeneralRating() == null)
+			gameDetails.setGeneralRating(new Double(DEFAULT_RATING));
 		return gameDetails;
 	}
 	
@@ -51,29 +57,26 @@ public class GetGameDetailsController {
 		return gameUserService.getAllUserGamesOfGame(name);
 	}
 	
-	@RequestMapping(value="/getGameRatedByUser/{gameId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Integer getGameRatedByUser(@PathVariable Integer gameId) {
-		User user = userService.getUser(WebUtil.getPrincipalUsername());
-		Integer rating = gameRateNumService.getRatingforUser(gameId, user.getId());
-		if (rating == null)
-			rating = new Integer(DEFAULT_RATING);
-		return rating;
-	}
+//	@RequestMapping(value="/getGameRatedByUser/{gameId}", method = RequestMethod.GET)
+//	@ResponseBody
+//	public Integer getGameRatedByUser(@PathVariable Integer gameId) {
+//		User user = userService.getUser(WebUtil.getPrincipalUsername());
+//		Integer rating = gameRateNumService.getRatingforUser(gameId, user.getId());
+//		if (rating == null)
+//			rating = new Integer(DEFAULT_RATING);
+//		return rating;
+//	}
 	
 	@RequestMapping(value="/calculateRatings/{gameId}/{rating}", method = RequestMethod.POST)
 	@ResponseBody
 	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
-		GameRating existingRating = gameRateNumService.getFromGame(gameId);
-		if (existingRating != null) {
-			existingRating.setRating(new Double(rating));
-		}else {
-			existingRating = new GameRating();
-			User user = userService.getUser(WebUtil.getPrincipalUsername());
-			existingRating.setGame(gameService.findById(gameId));
-			existingRating.setRating(new Double(rating));
-			existingRating.setUser(user);
-		}		
-		gameRateNumService.update(existingRating);
+		User curUser = userService.findOne(WebUtil.getPrincipalUsername());
+		if (!gameRateNumService.checkIfUserRated(gameId, curUser.getId())) {
+			GameRating gameRating = new GameRating();
+			gameRating.setRating(rating);
+			gameRating.setGame(gameService.findById(gameId));
+			gameRating.setUser(curUser);
+			gameRateNumService.update(gameRating);
+		}
 	}
 }
