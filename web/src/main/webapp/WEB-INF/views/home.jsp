@@ -241,10 +241,11 @@
 													</div>
 													<div class="modal-body">
 														<div class="addGame">
-															<form role="form" data-ng-submit=submit()>
+															<form name = "addGame" role="form" data-ng-submit=submit()>
 																<div class="form-group">
-																	<label>Name: </label> <input class="form-control"
+																	<label>Name: *</label> <input class="form-control"
 																		data-ng-model="name">
+																	
 																</div>
 																<div class="form-group">
 																	<label>Select Category:</label> <select
@@ -262,18 +263,23 @@
 																	<label>Rules :</label> <input class="form-control"
 																		data-ng-model="rules">
 																</div>
-																<div class="form-group">
-																	<label>Max players: </label> <input
-																		class="form-control" data-ng-model="maxPlayers"
-																		type="number">
-
-																</div>
+																
 																<div class="form-group">
 																	<label>Min players: </label> <input
 																		class="form-control" ng-minlength="0"
-																		data-ng-model="minPlayers" type="number">
+																		data-ng-model="minPlayers" type="number"
+																		min = "0">
 
 																</div>
+																
+																<div class="form-group">
+																	<label>Max players: </label> <input
+																		class="form-control" data-ng-model="maxPlayers"
+																		type="number"  min = "{{minPlayers}}">
+																		
+
+																</div>
+																
 																<div class="form-group">
 																	<label>Edition</label> <input class="form-control"
 																		data-ng-model="edition">
@@ -281,10 +287,11 @@
 																<div class="form-group">
 																	<label>Year of Production: </label> <input
 																		class="form-control" data-ng-model="year"
-																		type="number">
+																		type="number" min = "1900" max = "2016">
 																</div>
 																<div>
 																	<input type="submit" value="ADD"
+																	ng-disabled = "name === undefined || name.length === 0"
 																		style="width: 30%; margin-bottom: 10px"> <input
 																		type="submit" value="Close" data-dismiss="modal"
 																		style="width: 30%; margin-bottom: 10px">
@@ -310,8 +317,8 @@
 												<table ng-table="" class="table table-condensed table-hover">
 													<tr ng-repeat="game in allGame">
 														<td title="'Name'"><a
-															href="#gameUserDetails/{{game.id}}"
-															ng-click="myFunc(game.id)"> {{game.name}}</a></td>
+															href="#gameUserDetails/{{game.id}}">
+															{{game.name}}</a></td>
 														<td title="'Category'">{{game.category}}</td>
 														<td title="'Comments'"><a href=""
 															ng-click="showComments(game.id)"> <span
@@ -319,12 +326,57 @@
 																class="glyphicon glyphicon-comment"></span>
 														</a></td>
 														<td title="'Delete'"><a href=""
-															ng-click="deleteGame(game.id)"> <span
-																class="glyphicon glyphicon-remove"></span>
+															ng-click="deleteGame(game.id)" > 
+															   <span class="glyphicon glyphicon-remove"></span>
 														</a></td>
 													</tr>
 												</table>
+			<div ng-show="isShowComment">
+											<table class="table">
+												<!-- <tr><th></th><th></th></tr> -->
+												<tr ng-repeat="x in commentForGame">
+													<td>{{x.username}}</td>
+													<td>{{x.commentText}}</td>
+													<td>{{x.date | date:dateFormat}}</td>
+												</tr>
+											</table>
+											<form data-ng-submit=submit()>
+												<input type="text" data-ng-model="comment"
+													style="width: 65%; margin-left: 2%; margin-bottom: 2%"><input
+													value="Comment" type="submit" ng-click="addComment"
+													style="width: 25%; margin-left: 2%; margin-bottom: 2%">
+											</form>
+										</div>
+											
+												<div class="modal fade" id="modalCantToDelete" role="dialog">
+    												<div class="modal-dialog modal-sm">
+      													<div class="modal-content">
+        													<div class="modal-body">
+          														<p>Sorry, but you can't delete this game, becouse this game use in tournaments</p>
+       														</div>
+        													<div class="modal-footer">
+          														<button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+        													</div>
+      													</div>
+    												</div>
+  												</div>
+  																														
+												<div class="modal fade" id="modalDelete" role="dialog">
+    												<div class="modal-dialog modal-sm">
+      													<div class="modal-content">
+        													<div class="modal-body">
+          														<p>Are you really want to delete this Game?</p>
+       														</div>
+        													<div class="modal-footer">
+          														<button type="button" ng-click = "confirmationToDelete()" class="btn btn-default" data-dismiss="modal">Delete</button>
+          														<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        													</div>
+      													</div>
+    												</div>
+  												</div>
+  																			
 											</div>
+											
 											<div id="sharedGames" class="tab-pane fade">
 												<table ng-table="" class="table table-condensed table-hover">
 													<tr ng-repeat="game in allSharedGames">
@@ -352,23 +404,9 @@
 													</tr>
 												</table>
 											</div>
+											</div>
 										</div>
-										<div ng-show="isShowComment">
-											<table class="table">
-												<!-- <tr><th></th><th></th></tr> -->
-												<tr ng-repeat="x in commentForGame">
-													<td>{{x.username}}</td>
-													<td>{{x.commentText}}</td>
-													<td>{{x.date | date:dateFormat}}</td>
-												</tr>
-											</table>
-											<form data-ng-submit=submit()>
-												<input type="text" data-ng-model="comment"
-													style="width: 65%; margin-left: 2%; margin-bottom: 2%"><input
-													value="Comment" type="submit" ng-click="addComment"
-													style="width: 25%; margin-left: 2%; margin-bottom: 2%">
-											</form>
-										</div>
+										
 									</div>
 								</div>
 							</div>
