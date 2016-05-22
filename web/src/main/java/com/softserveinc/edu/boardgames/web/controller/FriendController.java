@@ -130,6 +130,9 @@ public class FriendController {
 		return userId;
 	}
 	
+	/**
+	 * This method for show you all user who you sent offer to friendship 
+	 */
 	@RequestMapping(value = "/allMyOffering", method = RequestMethod.GET)
 	public List<Friend> allMyOffering(){
 		String userName = WebUtil.getPrincipalUsername();
@@ -137,6 +140,9 @@ public class FriendController {
 		return list;
 	}
 	
+	/**
+	 * This method for gives you possibility to cancel your offering to be friends 
+	 */
 	@RequestMapping(value = "/canselOffering/{otherUserName}",method = RequestMethod.POST)
 	public void canselOffering(@PathVariable String otherUserName){
 		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
@@ -144,6 +150,9 @@ public class FriendController {
 		friendService.cancelOffering(currentUser, otherUser);
 	}
 	
+	/**
+	 * This method return amout of not yet read message per your friends 
+	 */
 	@RequestMapping(value = "/allMessageByCurrentUserFriends", method = RequestMethod.GET)
 	public List<Integer> allFriend() {
 		String currentUserName = WebUtil.getPrincipalUsername();

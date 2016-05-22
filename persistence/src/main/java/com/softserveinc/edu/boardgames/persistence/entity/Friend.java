@@ -15,7 +15,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * 
- * This class is a reflection between 2 users
+ * This class is a reflection of friendship between 2 users
  * 
  * @author Vasyl Bervetskyy
  * 
