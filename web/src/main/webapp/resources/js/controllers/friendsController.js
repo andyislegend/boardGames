@@ -176,7 +176,7 @@ setInterval(function(){
         getAllOfferedUsers();
         findAllMyOffering();
         
-}, 1000);
+}, 910000);
 
     $scope.setString = function(newValue) {
     	friendsUsername.setObject(newValue);
