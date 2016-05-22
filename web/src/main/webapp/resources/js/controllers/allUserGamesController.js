@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http, $rootScope, $route, $routeParams,$timeout) {
+angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$timeout) {
 	
 	$rootScope.NN = 100;
 	$rootScope.allGame = [];
@@ -45,25 +45,41 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 	$rootScope.isNewComments = function(id) {
 		var countOfComments = 0;
 		$scope.userGame = [];
-		$http.get('getCountOfCommentsByGameId/' + id)
-			.then(function(result) {
-				countOfComments = result.data;
-				$http.get('gameUserDetail/' + id)
-					.success(function(result) {
-						$scope.userGame = result;
-						if (countOfComments > $scope.userGame.countOfComments) {
-							$rootScope.NN = countOfComments;
-							document.getElementById("UserGameNum" + 
-									$scope.userGame.id).className = "glyphicon glyphicon-envelope";
-						}
+		$http.get('getCountOfCommentsByGameId/' + id).then(function(result) {
+			countOfComments = result.data;
+			$http.get('gameUserDetail/' + id).success(function(result) {
+				$scope.userGame = result;
+				if (countOfComments > $scope.userGame.countOfComments) {
+					$rootScope.NN = countOfComments;
+					document.getElementById("UserGameNum" + 
+							$scope.userGame.id).className = "glyphicon glyphicon-envelope";
+				}					
 				});
 		});
 	}
 	
+	
+	
 	$scope.deleteGame = function(id) {
-		console.log($rootScope.allGame.indexOf(id));
-		delete $rootScope.allGame[$rootScope.allGame.indexOf(id)+2];
-		$http.delete('deleteUserGame/'+id).success(function(data) {					
+		$rootScope.gameDeleteId = id;
+		$http.get('/getCountOfTournamentsByGame/'+id).success(function(result) {
+			$scope.countOfTornaments = result;
+			if($scope.countOfTornaments>0){
+				$scope.status = "Confirmation";
+			}else {
+				$scope.status = "Delete";					
+				}			
+			});
+	}
+	
+	$scope.confirmationToDelete = function(){
+		for(var i = 0; i<$rootScope.allGame.length;i++){
+			//console.log($rootScope.allGame[i].id);
+			if($rootScope.allGame[i].id === $rootScope.gameDeleteId) {
+				$rootScope.allGame.splice(i,1);
+			}
+		} 
+		$http.delete('deleteUserGame/'+$rootScope.gameDeleteId).success(function(data) {			
 		});
 	}
 	
@@ -102,8 +118,7 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $http,
 		scope.$apply();
 	}
 
-	$http.get('gameUserDetail/' + $routeParams.id).then(
-		function(result) {
+	$http.get('gameUserDetail/' + $routeParams.id).then(function(result) {
 			
 			$scope.games = result.data;
 			
