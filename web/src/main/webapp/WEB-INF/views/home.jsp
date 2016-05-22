@@ -189,9 +189,11 @@
     </div>
     <!-- End of Menu slider -->
     <div id="main_container">
+     
       <!-- ng-route div -->
       <div id="main_div" ng-view></div>
       <!-- End of ng-route div -->
+      
       <!-- My Side Widget -->
       <div id="widget_div">
         <ul class="nav nav-tabs nav-justified">
