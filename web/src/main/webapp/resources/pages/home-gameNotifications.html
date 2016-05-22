@@ -4,7 +4,8 @@
 	</div>
 	<table class="table">
 		<tbody>
-			<tr ng-repeat="x in gameNotifications">
+			<tr ng-repeat="x in gameNotifications" 
+			ng-class="{'blue' : x.status == 'CHECKED', 'gray': x.status == 'UNCHECKED'}">
 				<td>{{x.type}}</td>
 				<td><span class="glyphicon glyphicon-knight"></span></td>
 				<td>{{x.username}}</td>

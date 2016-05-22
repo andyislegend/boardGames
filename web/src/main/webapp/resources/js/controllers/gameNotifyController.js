@@ -15,7 +15,6 @@ angular.module('homeApp').controller("gameNotifyController", function($scope, $h
 			method : "PUT",
 			url : 'markNotificationAsChecked/' + id
 		}).then(function mySucces(response) {
-			$route.reload();
 		}, function myError(response) {
 			alert("getting all confirmed actions error");
 		});
