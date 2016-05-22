@@ -329,6 +329,14 @@ public class User implements Serializable {
 		this.verificationToken = verificationToken;
 	}
 
+	public Set<GameUser> getUserGames() {
+		return userGames;
+	}
+
+	public void setUserGames(Set<GameUser> userGames) {
+		this.userGames = userGames;
+	}
+
 	@PostUpdate
 	@PreUpdate
 	public void changeUser() {

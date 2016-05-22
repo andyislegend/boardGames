@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -308,5 +309,9 @@ public class UserService {
 	
 	public void deleteUser(User user) {
 		userRepository.delete(user);
+	}
+	
+	public List<UserDTO> getAllUserDTO() {
+		return userRepository.getAllUserDTO();
 	}
 }
