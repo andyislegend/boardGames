@@ -30,10 +30,10 @@ public class GameService {
 	public void update(Game game) {
 		gameRepo.saveAndFlush(game);
 	}
-
+	
 	@Transactional
-	public void create(Game game) {
-		gameRepo.save(game);
+	public void delete(Game game) {
+		gameRepo.delete(game);;
 	}
 	
 	public List<AllGamesDto> getGamesDTO(){
@@ -43,21 +43,4 @@ public class GameService {
 	public Game findByName(String name){
         return gameRepo.findByName(name);
     }
-	
-	//public GameDetailsDTO getGameDetails(Integer gameId) {
-//		GameDetailsDTO gameDetails = new GameDetailsDTO();
-//		Game game = this.findById(gameId);
-//		gameDetails.setName(game.getName());
-//		if (game.getGameRating() == null){
-//			gameDetails.setRating(new Double(0));
-//		}
-//		else {
-//			gameDetails.setRating(game.getGameRating().getRating());
-//		}
-//		return gameDetails;
-	//}
-//	public GameDetailsDTO getGameDetails(Integer gameId, Integer userId) {
-//		
-//		GameDetailsDTO gameDetails = new GameDetailsDTO();
-//	}
 }

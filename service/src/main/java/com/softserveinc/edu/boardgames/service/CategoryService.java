@@ -33,4 +33,9 @@ public class CategoryService {
 	public void create(Category category) {
 		categoryRepo.save(category);
 	}
+	
+	@Transactional
+	public void delete(Category category) {
+		categoryRepo.delete(category);
+	}
 }
