@@ -413,7 +413,7 @@
 						</div>
 					</div>
 					<!-- End of MyGames Widget -->
-				</div>
+				
 
 				<div id="Friends" class="tab-pane fade">
 					<!-- Friends Widget -->
