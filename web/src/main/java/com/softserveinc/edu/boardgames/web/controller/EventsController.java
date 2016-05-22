@@ -24,36 +24,36 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @RestController
 public class EventsController {
 	
-	@Autowired
-	EventService eventService;
-	
-	@Autowired
-	GameService gameService;
-	
-	@Autowired
-	UserService userService;
-	
-	@RequestMapping(value="/eventspage", method = RequestMethod.GET)
-	@ResponseBody
-	public List<AllEventsDto> getAllEvents(){
-		return eventService.getEventsDto();
-	}	
-	
-	
-	@RequestMapping(value = "/addEvent", method = RequestMethod.POST)
-	@ResponseBody
-	public void addEvent(@RequestBody AllEventsDto allEventsDto){	
-		
-		Event event = new Event();
-		event.setName(allEventsDto.getName());
-		event.setDescription(allEventsDto.getDescription());
-		event.setPlace(allEventsDto.getPlace());
-		event.setImgsrc(allEventsDto.getImgsrc());
-		event.setGame(gameService.findByName(allEventsDto.getGame()));
-		event.setUser(userService.findOne(WebUtil.getPrincipalUsername()));
-		event.setDate(allEventsDto.getDate());
-		eventService.create(event);
-		
-	}
+//	@Autowired
+//	EventService eventService;
+//	
+//	@Autowired
+//	GameService gameService;
+//	
+//	@Autowired
+//	UserService userService;
+//	
+//	@RequestMapping(value="/eventspage", method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<AllEventsDto> getAllEvents(){
+//		return eventService.getEventsDto();
+//	}	
+//	
+//	
+//	@RequestMapping(value = "/addEvent", method = RequestMethod.POST)
+//	@ResponseBody
+//	public void addEvent(@RequestBody AllEventsDto allEventsDto){	
+//		
+//		Event event = new Event();
+//		event.setName(allEventsDto.getName());
+//		event.setDescription(allEventsDto.getDescription());
+//		event.setPlace(allEventsDto.getPlace());
+//		event.setImgsrc(allEventsDto.getImgsrc());
+//		event.setGame(gameService.findByName(allEventsDto.getGame()));
+//		event.setUser(userService.findOne(WebUtil.getPrincipalUsername()));
+//		event.setDate(allEventsDto.getDate());
+//		eventService.create(event);
+//		
+//	}
 
 }

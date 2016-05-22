@@ -3,7 +3,7 @@
 <button ng-disabled = "joinStatus" ng-click = "leaveTournament(tournament.tournamentId)">Quit</button>
 	<h2>{{status}}</h2>
 	<h1>{{tournament.tournamentName}}</h1>
-	<p>Count of participants: {{tournament.countOfParticipants}}</p>
+	<p>Count of participants: {{tournamentParticipants.length}} of {{tournament.countOfParticipants}}</p>
 	<p>User creator: {{tournament.userCreatorName}}</p>
 	<p>date of tournament: {{tournament.dateOfTournament | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
 	<p>Participants :</p>

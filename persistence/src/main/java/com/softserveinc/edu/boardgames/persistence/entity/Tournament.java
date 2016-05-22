@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * @author Volodymyr Krokhmalyuk
  * 
- * This entity is for storing information abot tournament which users want to hold
+ * This entity is for storing information about tournament which users want to hold
  */
 @Entity
 @Table(name = "tournament")
