@@ -36,6 +36,17 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "from GameUser u where u.user.username = :username")   
 	public List<GameUserDTO> getAllGameUserByUsername(@Param("username") String username);
 	
+	@Query("select count(t) from Tournament t where game.id = :id")
+	public Integer getCountTournamentsByGame(@Param("id") Integer id);
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
+			+ "u.id, u.game.name, u.game.category.name, "
+			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"
+			+ "u.description, u.rules, u.maxPlayers, "
+			+ "u.minPlayers) "
+			+ "from GameUser u")   
+	public List<GameUserDTO> getAllGameUsers();
+	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
 			+ "u.id, u.game.name, u.game.category.name, "
 			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"

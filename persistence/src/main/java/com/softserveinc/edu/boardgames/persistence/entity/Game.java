@@ -50,7 +50,7 @@ public class Game implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="game", cascade={CascadeType.ALL})
     private List<Event> events;
 		
-	@OneToMany(cascade={CascadeType.ALL},mappedBy="game", fetch=FetchType.LAZY)
+	@OneToMany(cascade={CascadeType.ALL}, mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
 
 	@OneToOne(mappedBy="game")

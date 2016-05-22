@@ -57,7 +57,12 @@ homeApp.config(function($routeProvider) {
 	})
 	.when('/gameUserDetails/:id', {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
-		controller : 'getGameDetailedInfoController'
+		controller : 'getGameDetailedInfoController', 
+		controller : 'gameNotifyController'
+	})
+	.when('/gameNotifications/:username', {
+		templateUrl : 'resources/pages/home-gameNotifications.html',
+		controller : 'allUsersGameCtrl'
 	})
 	.when('/gameEdit/:id', {
 		templateUrl : 'resources/pages/home-editGame.html',

@@ -3,7 +3,7 @@
     width: 300px;
     height: 306px;
     margin-left: -340px;
-    margin-top: 260px;
+    margin-top: 220px;
     position: absolute;
     border-radius: 5px;
 }
@@ -296,6 +296,18 @@ background: #F6F7FD;
 border-radius: 5px 5px 0px 0px;
 height: 200px;
 width: 300px;
+margin-top: -40px;
+margin-left: -340px;
+position: absolute;
+display: inline-table;
+border: 1px solid #FFF;
+}
+.make-offer-to-take-part-in-tournament{
+background: #F6F7FD;
+border-radius: 5px 5px 0px 0px;
+height: 200px;
+width: 300px;
+margin-top: -40px;
 margin-left: -340px;
 position: absolute;
 display: inline-table;
@@ -306,6 +318,7 @@ background: #F6F7FD;
 border-radius: 5px 5px 0px 0px;
 height: 200px;
 width: 300px;
+margin-top: -40px;
 margin-left: -340px;
 position: absolute;
 display: inline-table;

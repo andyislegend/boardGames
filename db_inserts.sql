@@ -8,7 +8,7 @@ INSERT INTO country (name) VALUES ('Poland');
 INSERT INTO city (name, countryId) VALUES ('Cherkasy', 1);
 INSERT INTO city (name, countryId) VALUES ('Chernihiv', 1);
 INSERT INTO city (name, countryId) VALUES ('Chernivtsi', 1);
-INSERT INTO city (name, countryId) VALUES ('Dnipropetrovsk', 1);
+INSERT INTO city (name, countryId) VALUES ('Dnipro', 1);
 INSERT INTO city (name, countryId) VALUES ('Donetsk', 1);
 INSERT INTO city (name, countryId) VALUES ('Ivano-Frankivsk', 1);
 INSERT INTO city (name, countryId) VALUES ('Kharkiv', 1);
@@ -181,23 +181,17 @@ INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`
 
 
 -- inserts to table tournaments
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '8', 'Ukraine', '2016-05-17 00:00:00', 'ChessTournament', '2', '8');
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly Tornament', '1', '1');
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '5', 'Ukraine', '2016-05-21 00:00:00', 'Skrabble Tournament', '3', '2');
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-21 00:00:00', 'Mafia Tornament', '4', '3');
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Monopoly', '2', '8', TRUE);
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly', '1', '1', TRUE);
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-26 00:00:00', 'Monopoly', '1', '3', TRUE);
 
 
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('1', '1');
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('2', '1');
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('3', '1');
-INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('4', '1');
-
----- inserts to table events
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Everybody sleeps but mafia members wake up', 'Mafia event', 'resources/images/mafiaImg.jpg', '2016-05-21', 'Lviv', '1', '3');
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Game of kings', 'Chess event', 'resources/images/chessImg.jpg', '2016-06-18', 'Lviv', '2', '4');
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('One of the best games of the Western world', 'Skrabble event', 'resources/images/skrabbleImg.jpg', '2016-06-20', 'Lviv', '3', '5');
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Come with your kids: fun for everybody', 'Tic Tac Toe event', 'resources/images/tic-tac-toeImg.jpg', '2016-05-22', 'Lviv', '1', '6');
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('If America was a game of Monopoly', 'Monopoly event', 'resources/images/monopolyImg.jpg', '2016-07-02', 'Lviv', '2', '1');
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Loving and Linkin', 'Dominos event', 'resources/images/dominosImg.jpg', '2016-07-13', 'Lviv', '3', '9');
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('When your body is the canvas', 'Pictionary event', 'resources/images/pictionaryImg.jpg', '2016-05-23', 'Lviv', '1', '7');
---INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('This is simply a wonderful visual feast', 'Utopia event', 'resources/images/utopiaImg.jpg', '2016-05-24', 'Lviv', '1', '8');
+--  inserts to table events
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Everybody sleeps but mafia members wake up', 'Mafia event', 'resources/images/mafiaImg.jpg', '2016-05-21', 'Lviv', '1', '3');
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Game of kings', 'Chess event', 'resources/images/chessImg.jpg', '2016-06-18', 'Lviv', '2', '4');
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('One of the best games of the Western world', 'Skrabble event', 'resources/images/skrabbleImg.jpg', '2016-06-20', 'Lviv', '3', '5');
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Come with your kids: fun for everybody', 'Tic Tac Toe event', 'resources/images/tic-tac-toeImg.jpg', '2016-05-22', 'Lviv', '1', '6');
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('If America was a game of Monopoly', 'Monopoly event', 'resources/images/monopolyImg.jpg', '2016-07-02', 'Lviv', '2', '1');
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Loving and Linkin', 'Dominos event', 'resources/images/dominosImg.jpg', '2016-07-13', 'Lviv', '3', '9');
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('When your body is the canvas', 'Pictionary event', 'resources/images/pictionaryImg.jpg', '2016-05-23', 'Lviv', '1', '7');
+INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('This is simply a wonderful visual feast', 'Utopia event', 'resources/images/utopiaImg.jpg', '2016-05-24', 'Lviv', '1', '8');

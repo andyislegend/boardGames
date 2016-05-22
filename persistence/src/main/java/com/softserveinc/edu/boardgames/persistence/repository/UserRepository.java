@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 
 @Repository
@@ -99,8 +99,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("Update User u Set u.userRating = userRating + :addUserRating where u.username = :username")
 	public void updateUserRating(@Param("addUserRating") Integer addUserRating, @Param("username") String username);
 	
-	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
 			"(t.id, t.name) from Tournament t Join t.users u where u.username =:username")
-	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
+	public List<TournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
 	
 }

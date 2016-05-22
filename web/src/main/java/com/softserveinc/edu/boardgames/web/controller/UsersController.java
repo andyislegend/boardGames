@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
@@ -56,6 +56,9 @@ public class UsersController {
 	
 	@Autowired
 	ImageConfiguration imageConfiguration;
+	
+	@Autowired
+	CommonsMultipartResolver resolver;
 	
 	
 
@@ -142,9 +145,7 @@ public class UsersController {
 	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
 			throws IOException {
 		try {
-		if (fileUpload.isEmpty()) {
-			return new ResponseEntity<String>("You haven't chosed the file", HttpStatus.CONFLICT);
-		}
+
 		User user = userService.findOne(WebUtil.getPrincipalUsername());		
 		Image image = new Image();
 		image.setUser(user);
@@ -153,7 +154,7 @@ public class UsersController {
 		imageService.create(image);
 		String saveDirectory = image.getImageLocation();
 		fileUpload.transferTo(new File(saveDirectory));
-		
+
 		} catch(IOException e) {
 			return new ResponseEntity<String>("Failed to upload image. Try one more time", HttpStatus.CONFLICT);
 		}

@@ -24,3 +24,12 @@ input.inlineDisplay {
 select.inlineDisplay {
 	width:43%;
 }
+span.glyphicon-knight {
+    font-size: 2.0em;
+}
+.blue {
+	background-color: #e6e6e6
+}
+.gray {
+	background-color: #ccddff
+}

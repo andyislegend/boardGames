@@ -108,8 +108,8 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 		}, function errorCallback(response) {
 		})
 		$timeout(function() {
-			for (var i = 0; i < $rootScope.allGame.length; i++) {
-				$rootScope.isNewComments($rootScope.allGame[i].id);
+			for (var i = 0; i < $rootScope.getAllUsersGame.length; i++) {
+				$rootScope.isNewComments($rootScope.getAllUsersGame[i].id);
 			}
     }, 200);
 		

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
@@ -20,6 +21,9 @@ public class GameUserService {
 	private GameUserRepository gameUserRepo;
 	
 	@Autowired
+	private GameService gameService;
+	
+	@Autowired
 	private CommentsForGameRepository commentsForGameRepository;
 
 	public GameUser getUserGamesById(Integer id) {
@@ -30,12 +34,20 @@ public class GameUserService {
 		return gameUserRepo.getGameUserDTOById(id);
 	}
 	
+	public List<GameUserDTO> getAllUsersGame(){
+		return gameUserRepo.getAllGameUsers();
+	}
+	
 	public List<GameUserDTO> getGameUsersByName(String name){
 		return gameUserRepo.getGameUserByName(name);
 	}
 
 	public List<GameUser> getAllUserGames() {
 		return gameUserRepo.findAll();
+	}
+	
+	public Integer getCountOfTournamentByGame(Integer id) {
+		return gameUserRepo.getCountTournamentsByGame(id);
 	}
 	
 	@Transactional
@@ -45,8 +57,20 @@ public class GameUserService {
 
 	@Transactional
 	public void add(GameUser gameUser) {
-		gameUserRepo.save(gameUser);
+		Game game = null;
+	try{
+		game = gameService.findByName(gameUser.getGame().getName());
+	}catch(NullPointerException e){
+		
 	}
+		if(game == null) {
+			gameUserRepo.save(gameUser);
+		}else {
+			gameUser.setGame(game);
+			gameUserRepo.save(gameUser);
+		}
+	}
+	
 	@Transactional
 	public void deleteById(Integer id) {
 		commentsForGameRepository.deleteByGameUser(id);

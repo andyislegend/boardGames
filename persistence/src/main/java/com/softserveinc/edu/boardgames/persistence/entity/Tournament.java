@@ -2,7 +2,9 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -62,6 +64,9 @@ public class Tournament implements Serializable {
 
     @Column(nullable = false)
     private String city;
+    
+    @Column(name = "isCanRate")
+    private boolean isCanRate;
 
     public Tournament() {
 		
@@ -137,5 +142,13 @@ public class Tournament implements Serializable {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public boolean isCanRate() {
+		return isCanRate;
+	}
+
+	public void setCanRate(boolean isCanRate) {
+		this.isCanRate = isCanRate;
 	}
 }
