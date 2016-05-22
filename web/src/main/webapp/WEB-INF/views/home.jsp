@@ -325,7 +325,22 @@
 														</a></td>
 													</tr>
 												</table>
-			
+			<div ng-show="isShowComment">
+											<table class="table">
+												<!-- <tr><th></th><th></th></tr> -->
+												<tr ng-repeat="x in commentForGame">
+													<td>{{x.username}}</td>
+													<td>{{x.commentText}}</td>
+													<td>{{x.date | date:dateFormat}}</td>
+												</tr>
+											</table>
+											<form data-ng-submit=submit()>
+												<input type="text" data-ng-model="comment"
+													style="width: 65%; margin-left: 2%; margin-bottom: 2%"><input
+													value="Comment" type="submit" ng-click="addComment"
+													style="width: 25%; margin-left: 2%; margin-bottom: 2%">
+											</form>
+										</div>
 											
 												<div class="modal fade" id="modalCantToDelete" role="dialog">
     												<div class="modal-dialog modal-sm">
@@ -355,7 +370,7 @@
   												</div>
   																			
 											</div>
-											</div>
+											
 											<div id="sharedGames" class="tab-pane fade">
 												<table ng-table="" class="table table-condensed table-hover">
 													<tr ng-repeat="game in allSharedGames">
@@ -383,23 +398,9 @@
 													</tr>
 												</table>
 											</div>
+											</div>
 										</div>
-										<div ng-show="isShowComment">
-											<table class="table">
-												<!-- <tr><th></th><th></th></tr> -->
-												<tr ng-repeat="x in commentForGame">
-													<td>{{x.username}}</td>
-													<td>{{x.commentText}}</td>
-													<td>{{x.date | date:dateFormat}}</td>
-												</tr>
-											</table>
-											<form data-ng-submit=submit()>
-												<input type="text" data-ng-model="comment"
-													style="width: 65%; margin-left: 2%; margin-bottom: 2%"><input
-													value="Comment" type="submit" ng-click="addComment"
-													style="width: 25%; margin-left: 2%; margin-bottom: 2%">
-											</form>
-										</div>
+										
 									</div>
 								</div>
 							</div>
