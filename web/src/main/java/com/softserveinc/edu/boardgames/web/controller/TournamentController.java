@@ -93,6 +93,13 @@ public class TournamentController {
     	userService.updateUser(user);
     }
     
+    @RequestMapping(value = "/setOpportunityForRate/{tournamentId}", method = RequestMethod.PUT)
+    public void updateOpportunityForRateTournamentParticipants(@PathVariable Integer tournamentId) {
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	tournament.setCanRate(false);
+    	tournamentService.update(tournament);
+    }
+    
 	
 	/**
 	 * Returns needed information about tournaments that user took part.
