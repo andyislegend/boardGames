@@ -4,13 +4,13 @@
 	</div>
 	<table class="table">
 		<tbody>
-			<tr ng-repeat="x in gameNotifications">
-				<td>sharing confirmation</td>
-				<td><span class="glyphicon glyphicon-knight" ></span></td>
-				<td>{{x.applierUsername}}</td>
-				<td>Sharing request confirmed: chat owner about details for 
-				{{x.name}}-{{x.edition}},{{x.yearOfProduction}}</td>
-				<td>{{date | date:'yyyy-MM-dd'}}</td>
+			<tr ng-repeat="x in gameNotifications" 
+			ng-class="{'blue' : x.status == 'CHECKED', 'gray': x.status == 'UNCHECKED'}">
+				<td>{{x.type}}</td>
+				<td><span class="glyphicon glyphicon-knight"></span></td>
+				<td>{{x.username}}</td>
+				<td><a href="#gameUserDetails/{{x.gameUserId}}" ng-click="markAsChecked(x.id)">{{x.message}}</a></td>
+				<td>{{x.date | date:'yyyy-MM-dd'}}</td>
 			</tr>
 		</tbody>
 	</table>

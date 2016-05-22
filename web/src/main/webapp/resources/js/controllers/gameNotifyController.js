@@ -1,14 +1,22 @@
 angular.module('homeApp').controller("gameNotifyController", function($scope, $http, $route, $routeParams) {
 		
-	$scope.date = new Date();
 	$http({
 		method : "GET",
-		url : 'getAllConfirmedActions'
+		url : 'getAllGameNotifications'
 	}).then(function mySucces(response) {
-		
 		$scope.gameNotifications = response.data;
-		console.log(response.data);
 	}, function myError(response) {
 		alert("getting all confirmed actions error");
 	});
+	
+	$scope.markAsChecked = function(id) {
+		
+		$http({
+			method : "PUT",
+			url : 'markNotificationAsChecked/' + id
+		}).then(function mySucces(response) {
+		}, function myError(response) {
+			alert("getting all confirmed actions error");
+		});
+	}
 });

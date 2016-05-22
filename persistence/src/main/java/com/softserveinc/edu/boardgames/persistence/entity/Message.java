@@ -16,7 +16,13 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
+/**
+ * 
+ * This class represent message that you write to your friend
+ * 
+ * @author Vasyl Bervetskyy
+ * 
+ */
 @Entity
 @Table(name="message")
 public class Message implements Serializable{

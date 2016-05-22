@@ -10,6 +10,11 @@ import com.softserveinc.edu.boardgames.persistence.entity.Message;
 import com.softserveinc.edu.boardgames.persistence.repository.MessageRepository;
 import com.softserveinc.edu.boardgames.service.MessageService;
 
+/**
+ * This class is realization of DB CRUD other operation wich are used for manipulation with message 
+ * 
+ * @author Vasyl Bervetskyy
+ */
 @Service
 @Transactional
 public class MessageServiceImpl implements MessageService{
