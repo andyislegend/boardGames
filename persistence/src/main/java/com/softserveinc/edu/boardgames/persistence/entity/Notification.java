@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
@@ -40,6 +41,10 @@ public class Notification implements Serializable {
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
 	
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional=true)
+	@JoinColumn(name="gameUserId", referencedColumnName = "id")
+	private GameUser gameUser;
+	
 	@Column(name="date")
 	private Date date = new Date();
 	
@@ -54,52 +59,46 @@ public class Notification implements Serializable {
 		this.user = user;
 		this.date = date;
 	}
-
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
 	public String getStatus() {
 		return status;
 	}
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 	public User getUser() {
 		return user;
 	}
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 	public Date getDate() {
 		return date;
 	}
-
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public GameUser getGameUser() {
+		return gameUser;
+	}
+	public void setGameUser(GameUser gameUser) {
+		this.gameUser = gameUser;
 	}
 }

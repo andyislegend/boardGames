@@ -9,14 +9,31 @@ public class GameNotificationDTO {
 	private String message;
 	private String username;
 	private Date date;
+	private Integer gameUserId;
+	private String applierUsername;
 	
-	public GameNotificationDTO(String type, String status, String message, String username, Date date) {
+	public GameNotificationDTO(String type, String status, String message, String username,
+			Date date, Integer gameUserId, String applierUsername) {
 		super();
 		this.type = type;
 		this.status = status;
 		this.message = message;
 		this.username = username;
 		this.date = date;
+		this.gameUserId = gameUserId;
+		this.applierUsername = applierUsername;
+	}
+	public Integer getGameUserId() {
+		return gameUserId;
+	}
+	public void setGameUserId(Integer gameUserId) {
+		this.gameUserId = gameUserId;
+	}
+	public String getApplierUsername() {
+		return applierUsername;
+	}
+	public void setApplierUsername(String applierUsername) {
+		this.applierUsername = applierUsername;
 	}
 	public String getType() {
 		return type;
