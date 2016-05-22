@@ -13,6 +13,12 @@
 	</table>
 	
 	<div ng-show = "isCreator">
+	<form>
+	<input type = "date" data-ng-model = "changeTournamentDate">
+	<input type = "submit" ng-click = "changeDataOfTournament()">
+	</form>
+	
+	
 	<button ng-disabled ="!isOpenGiveRate"  type="button" class="btn btn-info btn-lg btn-giveRate" data-toggle="modal" data-target="#myModal">Give a rate</button>
 	</div>
 	

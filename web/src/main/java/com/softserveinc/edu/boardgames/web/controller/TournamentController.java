@@ -7,6 +7,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -97,6 +98,13 @@ public class TournamentController {
     public void updateOpportunityForRateTournamentParticipants(@PathVariable Integer tournamentId) {
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setCanRate(false);
+    	tournamentService.update(tournament);
+    }
+    
+    @RequestMapping(value = "updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
+    public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	tournament.setDateOfTournament(date);
     	tournamentService.update(tournament);
     }
     
