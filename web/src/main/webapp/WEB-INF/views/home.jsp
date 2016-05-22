@@ -241,10 +241,11 @@
 													</div>
 													<div class="modal-body">
 														<div class="addGame">
-															<form role="form" data-ng-submit=submit()>
+															<form name = "addGame" role="form" data-ng-submit=submit()>
 																<div class="form-group">
-																	<label>Name: </label> <input class="form-control"
+																	<label>Name: *</label> <input class="form-control"
 																		data-ng-model="name">
+																	
 																</div>
 																<div class="form-group">
 																	<label>Select Category:</label> <select
@@ -262,18 +263,23 @@
 																	<label>Rules :</label> <input class="form-control"
 																		data-ng-model="rules">
 																</div>
-																<div class="form-group">
-																	<label>Max players: </label> <input
-																		class="form-control" data-ng-model="maxPlayers"
-																		type="number">
-
-																</div>
+																
 																<div class="form-group">
 																	<label>Min players: </label> <input
 																		class="form-control" ng-minlength="0"
-																		data-ng-model="minPlayers" type="number">
+																		data-ng-model="minPlayers" type="number"
+																		min = "0">
 
 																</div>
+																
+																<div class="form-group">
+																	<label>Max players: </label> <input
+																		class="form-control" data-ng-model="maxPlayers"
+																		type="number"  min = "{{minPlayers}}">
+																		
+
+																</div>
+																
 																<div class="form-group">
 																	<label>Edition</label> <input class="form-control"
 																		data-ng-model="edition">
@@ -281,11 +287,11 @@
 																<div class="form-group">
 																	<label>Year of Production: </label> <input
 																		class="form-control" data-ng-model="year"
-																		type="number">
+																		type="number" min = "1900" max = "2016">
 																</div>
 																<div>
 																	<input type="submit" value="ADD"
-																	
+																	ng-disabled = "name === undefined || name.length === 0"
 																		style="width: 30%; margin-bottom: 10px"> <input
 																		type="submit" value="Close" data-dismiss="modal"
 																		style="width: 30%; margin-bottom: 10px">
