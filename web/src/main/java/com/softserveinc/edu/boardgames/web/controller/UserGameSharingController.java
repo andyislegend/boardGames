@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameUserStatus;
+import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 import com.softserveinc.edu.boardgames.persistence.enumeration.TimeEnum;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
+import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
@@ -29,7 +32,10 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class UserGameSharingController {
 	
 	final int NEUTRAL_ID = 0;
+	
 	final String DEFAULT_MESSAGE = "No message";
+	
+	final String NOTIFICATION_TYPE = "exchange";
 	
 	@Autowired
 	private GameUserService gameUserService;
@@ -42,6 +48,9 @@ public class UserGameSharingController {
 	
 	@Autowired
 	private GamePropositionService gamePropoService;
+	
+	@Autowired
+	private NotificationService notifyService;
 	
 	@RequestMapping(value="/checkIfGameBelongsToUser/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
@@ -135,6 +144,16 @@ public class UserGameSharingController {
 			gameUser.setStatus(GameUserStatus.SHARED.name());
 			gameUserService.update(gameUser);
 		}
+		
+		Notification notification = new Notification();
+		notification.setType(NOTIFICATION_TYPE);
+		notification.setDate(new Date());
+		notification.setStatus(NotificationStatus.UNCHECKED.name());
+		notification.setMessage(WebUtil.getPrincipalUsername() 
+				+ " confirmed your request for game " 
+				+ gameUserOfOwner.getGame().getName());
+		notification.setUser(userService.findById(exchange.getUserApplierId()));
+		notifyService.update(notification);
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)

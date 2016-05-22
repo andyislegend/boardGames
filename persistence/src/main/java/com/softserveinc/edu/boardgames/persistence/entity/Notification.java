@@ -12,8 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 
 @Entity
 @Table(name = "notification")
@@ -30,9 +31,12 @@ public class Notification implements Serializable {
 	private String type;
 	
 	@Column(name = "status")
-	private String status = "UNCHECKED";
+	private String status = NotificationStatus.UNCHECKED.name();
 	
-	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, cascade={CascadeType.ALL})
+	@Column(name = "message")
+	private String message = "no message";
+	
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, cascade={CascadeType.MERGE})
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
 	
@@ -41,13 +45,22 @@ public class Notification implements Serializable {
 	
 	public Notification() {}
 
-	public Notification(Integer id, String type, String status, User user, Date date) {
+	public Notification(Integer id, String type, String status, String message, User user, Date date) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.status = status;
+		this.message = message;
 		this.user = user;
 		this.date = date;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Integer getId() {
