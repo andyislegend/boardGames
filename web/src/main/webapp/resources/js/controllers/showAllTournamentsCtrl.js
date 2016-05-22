@@ -1,7 +1,8 @@
-angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope, $rootScope, $http, $routeParams,ngTableParams) {
+angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope, $rootScope, $http, $filter, $routeParams, ngTableParams) {
  
  $http.get('/tournaments').success(function (result) {
         $scope.tournaments = result;
+        $scope.$broadcast('allTournament', $scope.tournaments);
     });
      
     $http.get('tournament/'+ $routeParams.id).success(function(result) {
@@ -14,11 +15,27 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
   }
  });
     
-    $scope.allTournaments = new ngTableParams({
-	    page: 1,
-	    count: 5
+    $scope.$on('allTournament',
+    		function(event, data) {
+    		$scope.allTournaments = new ngTableParams({
+    		    page: 1,
+    		    count: 5
+    		 },{
+	     total: data.length, 
+	     getData: function ($defer, params) {
+	    	 
+	    	 $scope.tournamentDisplay = params.sorting() ? 
+	      			$filter('orderBy')(data, params.orderBy()) 
+	       			: data;
+	       	 $scope.tournamentDisplay = params.filter() ? 
+	       			$filter('filter')($scope.tournamentDisplay, params.filter()) 
+	       			: $scope.tournamentDisplay;
+	         $scope.tournamentDisplay = $scope.tournamentDisplay.slice((params.page() - 1) 
+	            	* params.count(), params.page() * params.count());
+	         $defer.resolve($scope.tournamentDisplay);
+	     }
 	 });
-     
+  });
     $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
   $scope.tournamentParticipants = result;
   for(a in $scope.tournamentParticipants) {
