@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope, $rootScope, $http, $routeParams) {
+angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope, $rootScope, $http, $routeParams,ngTableParams) {
  
  $http.get('/tournaments').success(function (result) {
         $scope.tournaments = result;
@@ -13,6 +13,11 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
    $scope.isOpenGiveRate = true;
   }
  });
+    
+    $scope.allTournaments = new ngTableParams({
+	    page: 1,
+	    count: 5
+	 });
      
     $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
   $scope.tournamentParticipants = result;

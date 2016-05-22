@@ -3,12 +3,8 @@
       <h1 style="text-align: center"> Tournaments </h1>
       <div class="column-5">
          <div>
-            <table class="table">
-               <thead>
-                  <tr>
-                     <th>
-                        <a href="" data-toggle="modal" data-target="#myModalTournament">
-                        new</a>
+         <a href="" data-toggle="modal" data-target="#myModalTournament">
+                        ADD NEW TOURNAMENT</a>
                         <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
                            <div class="modal-dialog">
                               <!-- Modal content-->
@@ -61,20 +57,14 @@
                               </div>
                            </div>
                         </div>
-                     </th>
+            <table ng-table="allTournaments" class="table table-striped">
+                  <tr ng-repeat="tournament in tournaments">
+                     <td data-title = "'Tournament name'">
+                     	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
+                     </td>
+                     <td data-title = "'User creator'">{{ tournament.userCreatorName }}</td>         
                   </tr>
-                  <tr>
-                     <th/>Tournament name</th>
-                     <th/>User creator</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr ng-repeat="x in tournaments">
-                     <td><a href = "#tournament/{{x.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ x.tournamentName }}</a></td>
-                     <td>{{ x.userCreatorName }}</td>
-                  </tr>
-               </tbody>
-            </table>
+             </table>
          </div>
       </div>
    </div>
