@@ -57,7 +57,8 @@
                               </div>
                            </div>
                         </div>
-            <table ng-table="allTournaments" class="table table-striped">
+                        <div class="widget widget_top-posts"></div>
+            <table ng-table="allTournaments" show-filter="true" class="table table-striped">
                   <tr ng-repeat="tournament in tournamentDisplay">
                      <td data-title = "'Tournament name'" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
                      	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
