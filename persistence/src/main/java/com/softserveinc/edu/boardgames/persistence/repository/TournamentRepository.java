@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 
 /**
  * @author Volodymyr Krokhmalyuk
@@ -19,24 +19,18 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
     public Tournament findById(Integer id); 
 	public Tournament findByName(String name);
     
-//    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
-//			"(t.id, t.name, t.userCreator.username, t.country, " +
-//			"t.city, t.addition, t.dateOfTournament, t.requiredRating) " +
-//    		"from Tournament t where t.userCreator.username =:username")
-//	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
-//
 	@Query(value ="INSERT INTO tournament_users(Tournament_id, users_id) VALUES (?1,?2)", nativeQuery = true)
 	public void addParticipantToTournament(Integer tournament, Integer userId);
 	
-    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
+    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
             "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
             + ") from Tournament t")
-    public List<AllTournamentsDTO> getAllTournaments();
+    public List<TournamentsDTO> getAllTournaments();
     
-    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
+    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
             "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
             + ") from Tournament t where t.id = :id")
-    public AllTournamentsDTO getTournamentsById(@Param("id") Integer id);
+    public TournamentsDTO getTournamentsById(@Param("id") Integer id);
 //    
 //    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
 //            "(t.id, t.name, t.userCreator.username, t.country, " +

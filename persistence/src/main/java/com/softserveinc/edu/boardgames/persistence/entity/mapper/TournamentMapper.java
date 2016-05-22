@@ -1,22 +1,22 @@
 package com.softserveinc.edu.boardgames.persistence.entity.mapper;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentCreateDTO;
 
 /**
  * 
- * @author Krokhmalyuk
+ * @author Volodymyr Krokhmalyuk
  *
  */
 public class TournamentMapper {
 	
-	public static Tournament toEntity(AllTournamentsDTO dto) {
+	public static Tournament toEntity(TournamentCreateDTO dto) {
 		Tournament tournament = new Tournament();
-		tournament.setName(dto.getTournamentName());
+		tournament.setName(dto.getName());
 		tournament.setCountOfParticipants(dto.getCountOfParticipants());
 		tournament.setDateOfTournament(dto.getDateOfTournament());
 		tournament.setCountry(dto.getCountry());
-		tournament.setCity(dto.getCity());
+		tournament.setCity("fgd");
 		tournament.setCanRate(true);
 		
 		return tournament;

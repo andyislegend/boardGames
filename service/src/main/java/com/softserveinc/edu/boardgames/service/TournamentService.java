@@ -1,7 +1,7 @@
 package com.softserveinc.edu.boardgames.service;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -41,7 +41,7 @@ public class TournamentService {
     	tournamentRepository.addParticipantToTournament(tournamentId, userId);
     }
     
-    public List<AllTournamentsDTO> getAllTornaments() {
+    public List<TournamentsDTO> getAllTornaments() {
     	return  tournamentRepository.getAllTournaments();
     }
 
@@ -53,7 +53,7 @@ public class TournamentService {
         return tournamentRepository.findAll();
     }
     
-    public AllTournamentsDTO getTournamentById(Integer id) {
+    public TournamentsDTO getTournamentById(Integer id) {
     	return tournamentRepository.getTournamentsById(id);
     }
     /**

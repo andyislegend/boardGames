@@ -8,7 +8,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 /**
  * @author Volodymyr Krokhmaliuk
  */
-public class AllTournamentsDTO {
+public class TournamentsDTO {
 
     private Integer tournamentId;
     private String tournamentName;
@@ -20,10 +20,10 @@ public class AllTournamentsDTO {
     private String country;
     private String city;
 
-    public AllTournamentsDTO() {
+    public TournamentsDTO() {
     }
 
-    public AllTournamentsDTO(Integer tournamentId, String tournamentName, Integer countOfParticipants, Integer userCreatorId,
+    public TournamentsDTO(Integer tournamentId, String tournamentName, Integer countOfParticipants, Integer userCreatorId,
 			String userCreatorName, Date date) {
 		this.tournamentId = tournamentId;
 		this.tournamentName = tournamentName;
@@ -33,7 +33,7 @@ public class AllTournamentsDTO {
 		this.dateOfTournament = date;
 	}
     
-    public AllTournamentsDTO(Integer tournamentId, String tournamentName) {
+    public TournamentsDTO(Integer tournamentId, String tournamentName) {
 		this.tournamentId = tournamentId;
 		this.tournamentName = tournamentName;
 	}
