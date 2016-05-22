@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.NotificationRepository;
 
 @Service
@@ -32,5 +33,9 @@ public class NotificationService {
 	@Transactional
 	public void delete(Notification notification) {
 		notifyRepo.delete(notification);
+	}
+	
+	public List<GameNotificationDTO> getAllForUser(String username) {
+		return notifyRepo.getAllGamesNotifications(username);
 	}
 }
