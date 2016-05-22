@@ -1,4 +1,6 @@
-angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$timeout) {
+var homeApp = angular.module('homeApp');
+homeApp.controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$timeout) {
+homeApp.$inject = ['$modal'];
 	
 	$rootScope.NN = 100;
 	$rootScope.allGame = [];
@@ -58,23 +60,20 @@ angular.module('homeApp').controller("allUsersGameCtrl", function($scope, $uibMo
 		});
 	}
 	
-	
-	
 	$scope.deleteGame = function(id) {
 		$rootScope.gameDeleteId = id;
 		$http.get('/getCountOfTournamentsByGame/'+id).success(function(result) {
 			$scope.countOfTornaments = result;
-			if($scope.countOfTornaments>0){
-				$scope.status = "Confirmation";
-			}else {
-				$scope.status = "Delete";					
+			if($scope.countOfTornaments>0){		
+				$('#modalCantToDelete').modal('show');
+			}else {				
+				$('#modalDelete').modal('show');
 				}			
 			});
 	}
 	
 	$scope.confirmationToDelete = function(){
 		for(var i = 0; i<$rootScope.allGame.length;i++){
-			//console.log($rootScope.allGame[i].id);
 			if($rootScope.allGame[i].id === $rootScope.gameDeleteId) {
 				$rootScope.allGame.splice(i,1);
 			}
