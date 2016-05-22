@@ -15,22 +15,6 @@ angular.module('homeApp').controller('gameSelectController', function($scope, $h
 	});
 	$scope.$emit('refreshingGameDetails', id);
 
-//	$http({
-//		method : "GET",
-//		url : 'getGameRatedByUser' + '/' + id
-//	}).then(function mySucces(response) {
-//		$scope.gameRatingDisplay = response.data;
-//		$scope.currentGameId = id;
-//
-//		$scope.$broadcast('sharingIdToDetailsModal', {
-//			id : $scope.currentGameId,
-//			rating : $scope.gameRatingDisplay
-//		});
-//
-//	}, function myError(response) {
-//		alert("Getting isRated game error");
-//	});
-
 	$http({
 		method : "GET",
 		url : 'getUserGamesOfGame' + '/' + name

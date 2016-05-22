@@ -57,16 +57,6 @@ public class GetGameDetailsController {
 		return gameUserService.getAllUserGamesOfGame(name);
 	}
 	
-//	@RequestMapping(value="/getGameRatedByUser/{gameId}", method = RequestMethod.GET)
-//	@ResponseBody
-//	public Integer getGameRatedByUser(@PathVariable Integer gameId) {
-//		User user = userService.getUser(WebUtil.getPrincipalUsername());
-//		Integer rating = gameRateNumService.getRatingforUser(gameId, user.getId());
-//		if (rating == null)
-//			rating = new Integer(DEFAULT_RATING);
-//		return rating;
-//	}
-	
 	@RequestMapping(value="/calculateRatings/{gameId}/{rating}", method = RequestMethod.POST)
 	@ResponseBody
 	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
