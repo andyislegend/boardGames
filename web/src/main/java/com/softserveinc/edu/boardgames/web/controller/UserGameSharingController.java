@@ -52,6 +52,14 @@ public class UserGameSharingController {
 	@Autowired
 	private NotificationService notifyService;
 	
+	public Notification processNotification(String message, User forWhoom) {
+		Notification notification = new Notification();
+		notification.setType(NOTIFICATION_TYPE);
+		notification.setMessage(message);
+		notification.setUser(forWhoom);
+		return notification;
+	}
+	
 	@RequestMapping(value="/checkIfGameBelongsToUser/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
 	public boolean chechIfGameOwnerIsLoggedUser(@PathVariable Integer gameUserId) {
@@ -125,14 +133,11 @@ public class UserGameSharingController {
 			gamePropoService.update(gamePropo);
 		}
 		
-		Notification notification = new Notification();
-		notification.setType(NOTIFICATION_TYPE);
-		notification.setMessage(userService.findById(exchange.getUserApplierId()).getUsername() 
-				+ " applies for the game " 
-				+ gameUserToUpdate.getGame().getName() 
-				+ ". Go to game manue and give your answer.");
-		notification.setUser(userService.findById(exchange.getUser().getId()));
-		notifyService.update(notification);
+		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
+				+ " applies for the game " + gameUserToUpdate.getGame().getName() 
+				+ ". Go to game manue and give your answer.";
+		User userToNotify = userService.findById(exchange.getUser().getId());
+		notifyService.update(this.processNotification(messageForNotification, userToNotify));
 	}
 	
 	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -154,14 +159,11 @@ public class UserGameSharingController {
 			gameUserService.update(gameUser);
 		}
 		
-		Notification notification = new Notification();
-		notification.setType(NOTIFICATION_TYPE);
-		notification.setMessage(WebUtil.getPrincipalUsername() 
-				+ " confirmed your request for game " 
-				+ gameUserOfOwner.getGame().getName() 
-				+ ". Please contact the owner about further details");
-		notification.setUser(userService.findById(exchange.getUserApplierId()));
-		notifyService.update(notification);
+		String messageForNotification = WebUtil.getPrincipalUsername() 
+		+ " confirmed your request for game " + gameUserOfOwner.getGame().getName() 
+		+ ". Please contact the owner about further details";
+		User userToNotify = userService.findById(exchange.getUserApplierId());
+		notifyService.update(this.processNotification(messageForNotification, userToNotify));
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -179,13 +181,11 @@ public class UserGameSharingController {
 		
 		gamePropoService.deleteForExchange(exchange.getId());
 		
-		Notification notification = new Notification();
-		notification.setType(NOTIFICATION_TYPE);
-		notification.setMessage("Unfortunately " + WebUtil.getPrincipalUsername() 
+		String messageForNotification = "Unfortunately " + WebUtil.getPrincipalUsername() 
 				+ " declined your request for game " 
-				+ gameUserToUpdate.getGame().getName());
-		notification.setUser(userService.findById(exchange.getUserApplierId()));
-		notifyService.update(notification);
+				+ gameUserToUpdate.getGame().getName();
+		User userToNotify = userService.findById(exchange.getUserApplierId());
+		notifyService.update(this.processNotification(messageForNotification, userToNotify));
 	}
 	
 	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
@@ -204,14 +204,11 @@ public class UserGameSharingController {
 			gameUserService.update(gameUser);
 		}
 		
-		Notification notification = new Notification();
-		notification.setType(NOTIFICATION_TYPE);
-		notification.setMessage(userService.findById(exchange.getUserApplierId()).getUsername() 
-				+ " intends to give " 
-				+ gameUserToUpdate.getGame().getName() 
-				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.");
-		notification.setUser(userService.findById(exchange.getUser().getId()));
-		notifyService.update(notification);
+		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
+				+ " intends to give " + gameUserToUpdate.getGame().getName() 
+				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.";
+		User userToNotify = userService.findById(exchange.getUser().getId());
+		notifyService.update(this.processNotification(messageForNotification, userToNotify));
 		
 		gamePropoService.deleteForExchange(exchange.getId());
 		
