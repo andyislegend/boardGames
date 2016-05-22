@@ -30,7 +30,7 @@ public class GlobalSearchController {
 		AllFilesDTO allFilesDTO = new AllFilesDTO();
 		allFilesDTO.setGameUsers(gameUserService.getGameUsersByName(keyWord));
 		//allFilesDTO.setTournaments(tournamentService.getTournamentsByWord(keyWord));
-		allFilesDTO.setEvents(eventsService.getAllEventsByWord(keyWord));
+		//allFilesDTO.setEvents(eventsService.getAllEventsByWord(keyWord));
 		return allFilesDTO;
 	}
 }

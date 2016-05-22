@@ -53,7 +53,7 @@ homeApp.config(function($routeProvider) {
 	})
 	.when('/search/:word', {
 		templateUrl : 'resources/pages/home-GlobalSearch.html',
-		controller : 'search'
+		controller : 'GlobalSearchCTRL'
 	})
 	.when('/gameUserDetails/:id', {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
@@ -88,7 +88,4 @@ homeApp.controller("getAvatar", function($scope, $http) {
 	$http.get('getAvatar').then(function(result) {
 		$scope.avatar = result.data;
 	});
-});
-
-homeApp.controller('search', function($scope, $rootScope){
 });
