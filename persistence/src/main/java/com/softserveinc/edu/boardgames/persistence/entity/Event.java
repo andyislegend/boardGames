@@ -45,11 +45,11 @@ public class Event implements Serializable {
 	@Column
 	private String place;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
-	private Country country;
+	@Column
+	private String country;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
-	private City city;
+	@Column
+	private String city;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private User user;
@@ -100,19 +100,19 @@ public class Event implements Serializable {
 		this.place = place;
 	}
 
-	public Country getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
-	public City getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(City city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 

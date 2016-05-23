@@ -1,7 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -56,9 +55,6 @@ public class Country implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "country", fetch = FetchType.LAZY)
 	private Set<City> citiesCountry;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "country", fetch = FetchType.LAZY)
-	private List<Event> events;
-	
 	public Country() {
 	}
 
@@ -78,14 +74,6 @@ public class Country implements Serializable {
 		this.name = name;
 	}
 	
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 	    if (this == obj)
