@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $route, $timeout) {
+angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $route, $timeout, $rootScope) {
 	$scope.showText = false;
 	$scope.categories = [];
 	$scope.showForm = function() {
@@ -48,8 +48,8 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		}, function errorCallback(response) {
 		});
 		
-		$scope.$parent.allGame.push(userGame);	
-		$route.reload();
+		$rootScope.allGame.push(userGame);	
+		$('#myModalHorizontal').modal('hide');
 		$scope.name = '';
 		$scope.category = '';
 		$scope.year = '';
@@ -58,6 +58,7 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		$scope.rules = '';
 		$scope.maxPlayers = '';
 		$scope.minPlayers = '';
+		
 		
 	};
 });

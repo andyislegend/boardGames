@@ -102,10 +102,33 @@ public class TournamentController {
     	tournamentService.update(tournament);
     }
     
-    @RequestMapping(value = "updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
     public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setDateOfTournament(date);
     	tournamentService.update(tournament);
     }
+<<<<<<< HEAD
+=======
+    
+    @RequestMapping(value = "/getAllTournamentsByCreator", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TournamentsDTO> getAllTournamentsByCreator(){
+    	return tournamentService.getAllTournamentByUserCreator(userService.getUser(WebUtil.getPrincipalUsername()).getUsername());
+    }
+    
+	
+	/**
+	 * Returns needed information about tournaments that user took part.
+	 *
+	 * @param userName
+	 *            username of user, who's tournaments we want to find
+	 */
+	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
+	@ResponseBody
+	public List<TournamentsDTO> findUserGames(@RequestParam("username") String username) {
+		List<TournamentsDTO> allGames = userService.getUserTournamentsByUserName(username);
+		return allGames;
+	}
+>>>>>>> a2bc15697fe80629de976b4a914414e4bdb17a30
 }

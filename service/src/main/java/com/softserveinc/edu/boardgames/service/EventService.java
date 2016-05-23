@@ -21,6 +21,10 @@ public class EventService {
 
 	@Autowired
 	private EventRepository eventRepository;
+	
+	public List<Event> findAllEvents(){
+		return eventRepository.findAll();
+	}
 
 	@Transactional
 	public void createEvent(Event event) {

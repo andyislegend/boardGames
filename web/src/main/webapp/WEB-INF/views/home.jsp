@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="resources/css/friend.css" />
     <link rel="stylesheet" href="resources/css/editPage.css" />
     <link rel="stylesheet" href="resources/css/gameUser.css" />
+    <link rel="stylesheet" href="resources/css/tornaments.css" />
     <!-- End of CSS -->
     <!-- Scripts -->
     <script type="text/javascript"
@@ -64,7 +65,7 @@
     <script type="text/javascript"
       src="resources/js/controllers/showAllTournamentsCtrl.js"></script>
     <script type="text/javascript"
-      src="resources/js/controllers/eventListCtrl.js"></script>
+      src="resources/js/controllers/eventAdminCtrl.js"></script>
     <script type="text/javascript"
       src="resources/js/controllers/getOneUser.js"></script>
     <script type="text/javascript"
