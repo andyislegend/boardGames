@@ -1,10 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,57 +18,47 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- *  @author Kobevka Anna
+ * This entity is set for storing information about Events
+ * 
+ * @author Andrii Petryk
  */
 @Entity
 @Table(name = "events")
-public class Event implements Serializable{
-	
+public class Event implements Serializable {
+
 	private static final long serialVersionUID = -8068483407568107770L;
 
 	@Id
-	@Column(name = "id")
+	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "name")
+	@Column
 	private String name;
-	
-	@Column(name = "description")
+
+	@Column
 	private String description;
 
-	
-	@Column(name = "date")
+	@Column
 	private Date date;
-	
-	@Column(name = "place")
+
+	@Column
 	private String place;
-	
-	@Column(name = "imgsrc")
-	private String imgsrc;
-	
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
-	@JoinColumn(name = "userId", referencedColumnName = "id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	private Country country;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	private City city;
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private User user;
-	
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Game.class, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
-	@JoinColumn(name = "gameId", referencedColumnName = "id")
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private Game game;
 
-	public Event(){}
-	
-	
-	public String getImgsrc() {
-		return imgsrc;
+	public Event() {
 	}
-
-
-
-	public void setImgsrc(String imgsrc) {
-		this.imgsrc = imgsrc;
-	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -114,6 +100,22 @@ public class Event implements Serializable{
 		this.place = place;
 	}
 
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -131,17 +133,51 @@ public class Event implements Serializable{
 	}
 
 	@Override
-    public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
-    }
-    
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-    
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		return new EqualsBuilder()
+				.append(getId(), other.getId())
+				.append(getName(), other.getName())
+				.append(getDescription(), other.getDescription())
+				.append(getPlace(), other.getPlace())
+				.append(getDate(), other.getDate())
+				.append(getCity(), other.getCity())
+				.append(getUser(), other.getUser())
+				.append(getCountry(), other.getCountry())
+				.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(getId())
+				.append(getUser())
+				.append(getName())
+				.append(getDescription())
+				.append(getPlace())
+				.append(getDate())
+				.append(getCountry())
+				.append(getCity())
+				.toHashCode();
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", getId())
+				.append("name", getName())
+				.append("user", getUser())
+				.append("date", getDate())
+				.append("description", getDescription())
+				.append("place", getPlace())
+				.append("city", getCity())
+				.append("country", getCountry())
+				.toString();
+	}
 }

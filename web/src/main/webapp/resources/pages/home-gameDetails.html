@@ -4,10 +4,6 @@
 <div class="container-fluid" ng-controller="getGameDetailedInfoController">
 
 	<h4>Name: {{gameDetail.name}}</h4>
-	<!-- <h4>Description</h4>
-	<pre>{{gameDetail.description}}</pre>
-	<h4>Rules</h4>
-	<pre>{{gameDetail.rules}}</pre>-->
 	<h4>Rating</h4>
 	<table class="table">
 		<thead>
@@ -28,9 +24,9 @@
 				</td>
 				<td><p class="text text-success">{{hoverRatingText}}</p>
 				</td>
-				<td><span class="label label-primary">{{starRating}}/10</span>
+				<td><span class="label label-primary">{{gameDetail.userRating}}/10</span>
 				</td>
-				<td><span class="label label-primary">{{gameDetail.rating}}/10</span>
+				<td><span class="label label-primary">{{gameDetail.generalRating}}/10</span>
 				</td>
 			</tr>
 		</tbody>

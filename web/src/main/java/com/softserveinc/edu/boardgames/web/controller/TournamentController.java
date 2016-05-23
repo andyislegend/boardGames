@@ -1,12 +1,14 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentCreateDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.TournamentMapper;
 import com.softserveinc.edu.boardgames.service.*;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -37,13 +39,13 @@ public class TournamentController {
    
     @RequestMapping(value = "/tournaments")
     @ResponseBody
-    public List<AllTournamentsDTO> getAllTournaments() {
+    public List<TournamentsDTO> getAllTournaments() {
     	return tournamentService.getAllTornaments();
     }
     
     @RequestMapping(value = "/tournament/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public AllTournamentsDTO getTournamentById(@PathVariable Integer id){
+    public TournamentsDTO getTournamentById(@PathVariable Integer id){
     	return tournamentService.getTournamentById(id);
     }
     
@@ -66,10 +68,10 @@ public class TournamentController {
     }
     
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
-    public void addTournament(@RequestBody AllTournamentsDTO tournamentDTO) {
+    public void addTournament(@RequestBody TournamentCreateDTO tournamentDTO) {
         Tournament tournament = TournamentMapper.toEntity(tournamentDTO);
         tournament.setUserCreator(userService.getUser(WebUtil.getPrincipalUsername()));
-        tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getUserCreatorId()));
+        tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getGameId()));
         tournamentService.save(tournament);
     }
       
@@ -93,6 +95,20 @@ public class TournamentController {
     	userService.updateUser(user);
     }
     
+    @RequestMapping(value = "/setOpportunityForRate/{tournamentId}", method = RequestMethod.PUT)
+    public void updateOpportunityForRateTournamentParticipants(@PathVariable Integer tournamentId) {
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	tournament.setCanRate(false);
+    	tournamentService.update(tournament);
+    }
+    
+    @RequestMapping(value = "updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
+    public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	tournament.setDateOfTournament(date);
+    	tournamentService.update(tournament);
+    }
+    
 	
 	/**
 	 * Returns needed information about tournaments that user took part.
@@ -102,8 +118,8 @@ public class TournamentController {
 	 */
 	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<AllTournamentsDTO> findUserGames(@RequestParam("username") String username) {
-		List<AllTournamentsDTO> allGames = userService.getUserTournamentsByUserName(username);
+	public List<TournamentsDTO> findUserGames(@RequestParam("username") String username) {
+		List<TournamentsDTO> allGames = userService.getUserTournamentsByUserName(username);
 		return allGames;
 	}
 }

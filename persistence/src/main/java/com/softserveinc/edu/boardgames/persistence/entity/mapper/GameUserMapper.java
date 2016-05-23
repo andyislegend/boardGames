@@ -29,7 +29,8 @@ public class GameUserMapper  {
 		gameUser.setEdition(gameUserDTO.getEdition());
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
 		gameUser.setCountOfComments(0);
-		gameUser.setStatus("private");
+		gameUser.setStatus("PRIVATE");
+		gameUser.setRules(gameUserDTO.getRules());
 		gameUser.setDescription(gameUserDTO.getDescription());
 		gameUser.setMinPlayers(gameUserDTO.getMinPlayers());
 		gameUser.setMaxPlayers(gameUserDTO.getMaxPlayers());

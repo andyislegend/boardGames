@@ -1,6 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,9 +20,6 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 
 /**
  * This class represents data model to game entity
@@ -50,13 +48,10 @@ public class Game implements Serializable{
 	private Category category;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="game", cascade={CascadeType.ALL})
-    private Set<Event> events;
+    private List<Event> events;
 		
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
-
-	@OneToOne(mappedBy="game")
-	private GameRating gameRating;
 	
 	public Game(){}
 	
@@ -89,11 +84,11 @@ public class Game implements Serializable{
 		this.category = category;
 	}
 
-	public Set<Event> getEvents() {
+	public List<Event> getEvents() {
 		return events;
 	}
 
-	public void setEvents(Set<Event> events) {
+	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
 
@@ -104,27 +99,4 @@ public class Game implements Serializable{
 	public void setUserGames(Set<GameUser> userGames) {
 		this.userGames = userGames;
 	}
-
-	public GameRating getGameRating() {
-		return gameRating;
-	}
-
-	public void setGameRating(GameRating gameRating) {
-		this.gameRating = gameRating;
-	}
-
-	@Override
-    public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
-    }
-
-	@Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-    
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
 }

@@ -31,6 +31,7 @@ public class ExchangeService {
 		eRepo.saveAndFlush(exchange);
 	}
 	
+	@Transactional
 	public void delete(Exchange exchange) {
 		eRepo.delete(exchange);
 	}

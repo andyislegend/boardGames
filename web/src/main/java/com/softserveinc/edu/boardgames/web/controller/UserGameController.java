@@ -28,7 +28,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  *
  */
 @Controller
-public class CurrentUserGameController {
+public class UserGameController {
 	
 	@Autowired
 	private UserService userService;
@@ -99,8 +99,11 @@ public class CurrentUserGameController {
 		GameUser gameUser = gameUserService.getUserGamesById(gameUserDTO.getId());
 		gameUser.setEdition(gameUserDTO.getEdition());
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
+		gameUser.setDescription(gameUserDTO.getDescription());
+		gameUser.setRules(gameUserDTO.getRules());
+		gameUser.setMinPlayers(gameUserDTO.getMinPlayers());
+		gameUser.setMaxPlayers(gameUserDTO.getMaxPlayers());
 		gameUser.setStatus(gameUserDTO.getStatus());
-		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.update(gameUser);
 	}
 	
@@ -133,5 +136,11 @@ public class CurrentUserGameController {
 		GameUser gameUser = gameUserService.getUserGamesById(idGame);
 		gameUser.setCountOfComments(countOfComment);
 		gameUserService.update(gameUser);
+	}
+	
+	@RequestMapping(value = "/getCountOfTournamentsByGame/{gameId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getCountOfTournamentByGame(@PathVariable Integer gameId) {
+		return gameUserService.getCountOfTournamentByGame(gameId);
 	}
 }

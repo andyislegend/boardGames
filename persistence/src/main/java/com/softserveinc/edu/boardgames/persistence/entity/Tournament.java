@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * @author Volodymyr Krokhmalyuk
  * 
- * This entity is for storing information abot tournament which users want to hold
+ * This entity is for storing information about tournament which users want to hold
  */
 @Entity
 @Table(name = "tournament")
@@ -143,21 +143,6 @@ public class Tournament implements Serializable {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
-	@Override
-    public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
-    }
-    
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-    
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
 
 	public boolean isCanRate() {
 		return isCanRate;

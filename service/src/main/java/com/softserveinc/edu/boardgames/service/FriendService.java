@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Friend;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+
 /**
- * This class is realization of DB CRUD other operation wich are used for manipulation with friend 
+ * This interface is realization of DB CRUD other operation wich are used for manipulation with friends
  * 
  * @author Vasyl Bervetskyy
  */

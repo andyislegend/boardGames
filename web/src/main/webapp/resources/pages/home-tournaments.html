@@ -1,67 +1,72 @@
 <div ng-controller="showAllTournamentsCtrl">
-<div ng-controller="allUsersGameCtrl">
-    <h1 style="text-align: center"> Tournaments </h1>
-    
-    <!--------------------------------------- tournaments  -------------------------------------------------->
-               <div class="column-5">
-                  <div>
-                     <table class="table">
-                        <thead>
-                        <tr>
-                            <th/> <th/> <th/> <th/> <th/> <th/> <th/>
-                            <th><a href="" data-toggle="modal" data-target="#myModalTournament">
-                                new</a>
-                                <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h2>Create the best tournament ever</h2>
-                                                <p>P.S. ALL fields are necessarily </p>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <label>Select game for your tournament</label>
-                                                    <select required="required" class="field-form" data-ng-model="selectedGame">
-                                                        <option  ng-repeat="game in allGame" value="{{game.id}}">{{game.name}}</option>
-                                                    </select>
-                                                    <label>Name of your tournament</label>
-                                                    <input required="required" class="field-form" data-ng-model="tournamentName" placeholder="Name">
-                                                    <label>Count of players</label>
-                                                    <input type="number" class="field-form" data-ng-model="countOfParticipants" placeholder="2">
-                                                    <br/>
-                                                    <label>Choose date of your tournament</label>
-                                                    <input required="required" class="field-form" data-ng-model="date" type="date">
-                                                    <br/><br/>
-                                                    <label>Enter place where tournament will be</label>
-                                                    <input class="field-form" data-ng-model="countryTournament" placeholder="Country">
-                                                    <input class="field-form" data-ng-model="cityTournament" placeholder="City">
-
-                                                    <button type="button" class="btn btn-default" ng-click="createTournament()" value="Close" data-dismiss="modal"> Create</button>
-                                                    <button type="button" class="btn btn-default" ng-click="modalClose()"
-                                                            data-dismiss="modal">Close</button>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                            </div>
-                                        </div>
-                                    </div>
-                              </div></th>
-                        </tr>
-                           <tr>
-                              <th/>Tournament name</th>
-                              <th/>User creator</th>                      
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <tr ng-repeat="x in tournaments">
-                              <td><a href = "#tournament/{{x.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ x.tournamentName }}</a></td>
-                              <td>{{ x.userCreatorName }}</td>
-                           </tr>
-                        </tbody>
-                     </table>
-                  </div>
-               </div>
-               <!---------------------------------------- end of tournaments -------------------------------------------------->
-            </div>
-            </div>
+   <div ng-controller="allUsersGameCtrl">
+      <h1 style="text-align: center"> Tournaments </h1>
+      <div class="column-5">
+         <div>
+         <a href="" data-toggle="modal" data-target="#myModalTournament">
+                        ADD NEW TOURNAMENT</a>
+                        <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
+                           <div class="modal-dialog">
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h2>Create the best tournament ever</h2>
+                                    <p>P.S. ALL fields are necessarily </p>
+                                 </div>
+                                 <div class="modal-body">
+                                    <form name = "tournamentCreate" novalidate>
+                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament.$pristine }">
+                                          <label>Select game for your tournament</label>
+                                          <select required="required" name = "gameForTournament" class="field-form" data-ng-model="selectedGame" required>
+                                             <option  ng-repeat="game in allGame" value="{{game.id}}">{{game.name}}</option>
+                                          </select>
+                                          <p ng-show="tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament" class="help-block">Game for tournament is required.</p>
+                                       </div>
+                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.name.$invalid && !tournamentCreate.name.$pristine }">
+                                          <label>Name of your tournament</label>
+                                          <input name = "name" data-ng-model="tournamentName" required>
+                                          <p ng-show="tournamentCreate.name.$invalid && !tournamentCreate.name.$pristine" class="help-block">Tournament name is required.</p>
+                                       </div>
+                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.countOfParticipants.$invalid && !tournamentCreate.countOfParticipants.$pristine }">
+                                          <label>Count of players</label>
+                                          <input name = "countOfParticipants" type="number" min = "0" class="field-form" data-ng-model="countOfParticipants" required>
+                                          <p ng-show="tournamentCreate.countOfParticipants.$invalid && !tournamentCreate.countOfParticipants.$pristine" class="help-block">Count of participants is required.</p>
+                                       </div>
+                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.dateOfTournament.$invalid && !tournamentCreate.dateOfTournament.$pristine }">
+                                          <label>Choose date of your tournament</label>
+                                          <input name = "dateOfTournament" class="field-form" data-ng-model="date" type="date" required>
+                                          <p ng-show="tournamentCreate.dateOfTournament.$invalid && !tournamentCreate.dateOfTournament.$pristine" class="help-block">Date of tournament is required.</p>
+                                       </div>
+                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.Country.$invalid && !tournamentCreate.Country.$pristine }">
+                                          <label>Enter Country</label>
+                                          <input name = "Country" class="field-form" data-ng-model="countryTournament" required>
+                                          <p ng-show="tournamentCreate.Country.$invalid && !tournamentCreate.Country.$pristine" class="help-block">Country of tournament is required.</p>
+                                       </div>
+                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.city.$invalid && !tournamentCreate.city.$pristine }">
+                                          <label>Enter City</label>
+                                          <input name = "city" class="field-form" data-ng-model="cityTournament" required>
+                                          <p ng-show="tournamentCreate.city.$invalid && !tournamentCreate.city.$pristine" class="help-block">Country of tournament is required.</p>
+                                          <button type="button" class="btn btn-default" ng-click="createTournament()" ng-disabled="tournamentCreate.$invalid" value="Close" data-dismiss="modal"> Create</button>
+                                          <button type="button" class="btn btn-default" ng-click="modalClose()"
+                                             data-dismiss="modal">Close</button>
+                                       </div>
+                                    </form>
+                                 </div>
+                                 <div class="modal-footer">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                    
+            <table ng-table="allTournaments" show-filter="true" class="table table-striped">
+                  <tr ng-repeat="tournament in tournamentDisplay">
+                     <td data-title = "'Tournament name'" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
+                     	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
+                     </td>
+                     <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>         
+                  </tr>
+             </table>
+         </div>
+      </div>
+   </div>
+</div>

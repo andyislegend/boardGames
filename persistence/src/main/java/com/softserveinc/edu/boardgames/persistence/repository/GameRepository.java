@@ -20,4 +20,11 @@ public interface GameRepository extends JpaRepository<Game, Integer>  {
 	public List<AllGamesDto> getAllGames();
 	
 	public Game findByName(String name);
+	
+//	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO("
+//			+ "gr.game.name, gr.rating) "
+//			+ "from GameRating gr "
+//			+ "where gr.game.id = :gameId "
+//			+ "and gr.user.id = :userId")
+//	public List<GameDetailsDTO> getGameDetails(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
 }

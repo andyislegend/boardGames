@@ -13,8 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
+<<<<<<< HEAD
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+=======
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
+>>>>>>> 1d097a7002e985f9ee596e61bfa1cdee8d64243e
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -298,7 +302,7 @@ public class UserService {
 		tokenRepository.delete(token);
 	}
 	
-	public List<AllTournamentsDTO> getUserTournamentsByUserName(String username) {
+	public List<TournamentsDTO> getUserTournamentsByUserName(String username) {
 		return userRepository.getUserTournamentsByUserName(username);
 	}
 

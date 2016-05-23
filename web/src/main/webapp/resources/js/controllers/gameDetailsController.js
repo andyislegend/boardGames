@@ -1,9 +1,7 @@
-angular.module('homeApp').controller('getGameDetailedInfoController', function($scope, $http, $rootScope, $filter,$timeout, ngTableParams) {
+angular.module('homeApp').controller('getGameDetailedInfoController', function($scope, $route, $http, $rootScope, $filter, $timeout, ngTableParams) {
 	
-		$scope.$on('sharingIdToDetailsModal', function(event, data) {
-			$scope.currentGameId = data.id;
-			$scope.starRating = data.rating;
-			$scope.hoverRating = 0;
+		$scope.$on('broadcastingGameId', function(event, data) {
+			$scope.currentGameId = data;
 		});   
 		
 		$scope.$on('sharingUserGamesOfGame',
@@ -29,16 +27,11 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 
 		$scope.ratingClick = function(param) {
 			
-			console.log('mouseClick(' + param + ')');
 			$http({
 				method : "POST",
-				url : 'calculateRatings' + '/'
-					+ $scope.currentGameId + '/' + param,
+				url : 'calculateRatings/' + $scope.currentGameId + '/' + param,
 			}).then(function mySucces(response) {
-				$scope.$emit('settingRootRating',
-				$scope.starRating);
-				$scope.$emit('refreshingGameDetails',
-				$scope.currentGameId);
+				$scope.$emit('refreshingGameDetails', $scope.currentGameId);
 			}, function myError(response) {
 				
 			});

@@ -9,4 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface CountryRepository extends JpaRepository<Country, Integer> {
+	
+	Country findByName(String name);
+	
 }

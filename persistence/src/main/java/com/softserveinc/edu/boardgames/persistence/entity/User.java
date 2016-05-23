@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -177,6 +178,12 @@ public class User implements Serializable {
 	private Set<Tournament> tournaments;
 	
 	/**
+	 * Describes connection to events table.
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Event> events;
+	
+	/**
 	 * Describes a connection to verification token entity
 	 */
 	@OneToOne (mappedBy="user")
@@ -321,6 +328,14 @@ public class User implements Serializable {
 		this.tournaments = tournaments;
 	}
 	
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 	public VerificationToken getVerificationToken() {
 		return verificationToken;
 	}
