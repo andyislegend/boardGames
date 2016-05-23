@@ -38,4 +38,8 @@ public class NotificationService {
 	public List<GameNotificationDTO> getAllForUser(String username) {
 		return notifyRepo.getAllGamesNotifications(username);
 	}
+	
+	public Integer getCountOfGameNotifications(String username) {
+		return notifyRepo.countOfUncheckedNotifications(username);
+	}
 }

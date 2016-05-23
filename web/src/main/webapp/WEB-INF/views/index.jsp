@@ -222,7 +222,7 @@
 								style="color: red">*</span> </span> <input ng-model="regusername"
 								style="width: 400px;" type="text" class="form-control"
 								aria-describedby="basic-addon1" required="required"
-								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}">
+								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}" maxlength="15">
 						</div>
 						<br>
 						<div class="input-group">
@@ -230,7 +230,7 @@
 								id="basic-addon2"><span translate="REGFORM_FIRSTNAME"></span></span>
 							<input ng-model="regfirstName" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon2"
-								placeholder="{{'REGFORM_FIRSTNAME_PLACEHOLDER' | translate}}">
+								placeholder="{{'REGFORM_FIRSTNAME_PLACEHOLDER' | translate}}" maxlength="100">
 						</div>
 						<br>
 						<div class="input-group">
@@ -238,7 +238,7 @@
 								id="basic-addon3"> <span translate="REGFORM_LASTNAME"></span></span>
 							<input ng-model="reglastName" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon3"
-								placeholder="{{'REGFORM_LASTNAME_PLACEHOLDER' | translate}}">
+								placeholder="{{'REGFORM_LASTNAME_PLACEHOLDER' | translate}}" maxlength="100">
 						</div>
 						<br>
 						<div class="input-group">
@@ -247,7 +247,7 @@
 								style="color: red">*</span> </span> <input ng-model="regemail"
 								style="width: 400px;" type="email" class="form-control"
 								aria-describedby="basic-addon4" required="required"
-								placeholder="{{'REGFORM_EMAIL_PLACEHOLDER' | translate}}">
+								placeholder="{{'REGFORM_EMAIL_PLACEHOLDER' | translate}}" maxlength="150">
 						</div>
 						<br>
 						<div class="input-group">
@@ -256,7 +256,7 @@
 								style="color: red">*</span> </span> <input ng-model="regpassword"
 								style="width: 400px;" type="password" class="form-control"
 								aria-describedby="basic-addon5" required="required"
-								placeholder="{{'REGFORM_PASSWORD_PLACEHOLDER' | translate}}">
+								placeholder="{{'REGFORM_PASSWORD_PLACEHOLDER' | translate}}" maxlength="20">
 						</div>
 						<br>
 						<div class="input-group">
@@ -267,7 +267,7 @@
 								ng-model="regconfirmPassword" style="width: 400px;"
 								type="password" class="form-control"
 								aria-describedby="basic-addon6" required="required"
-								placeholder="{{'REGFORM_CONFIRMPASSWORD_PLACEHOLDER' | translate}}">
+								placeholder="{{'REGFORM_CONFIRMPASSWORD_PLACEHOLDER' | translate}}" maxlength="20">
 						</div>
 						<br>
 						<div class="input-group">
