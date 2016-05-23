@@ -23,7 +23,6 @@ homeApp.$inject = ['$modal'];
 		url : 'getAllUserGames'
 	}).then(function mySucces(result) {
 		$rootScope.getAllUsersGame = result.data;
-		console.log($rootScope.getAllUsersGame);
 	});
 	
 	$http({
