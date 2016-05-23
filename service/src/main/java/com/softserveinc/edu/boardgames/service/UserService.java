@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
+import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenRepository;
 
@@ -41,6 +44,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private GameUserRepository gameUserRepository;
 
 	@Autowired
 	private MailService mailService;
@@ -309,7 +315,10 @@ public class UserService {
 		userRepository.delete(user);
 	}
 	
-/*	public List<UserDTO> getAllUserDTO() {
-		return userRepository.getAllUserDTO();
-	}*/
+	public UserDTO getUserDTO(String username) {
+		UserDTO userDTO = userRepository.getUserDTO(username);
+		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
+		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
+		return userDTO;
+	}
 }

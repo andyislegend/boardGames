@@ -85,8 +85,3 @@ homeApp.controller("getCurrentUser",function($scope, $rootScope, $http){
 	});
 });
 
-homeApp.controller("getAvatar", function($scope, $http) {
-	$http.get('getAvatar').then(function(result) {
-		$scope.avatar = result.data;
-	});
-});

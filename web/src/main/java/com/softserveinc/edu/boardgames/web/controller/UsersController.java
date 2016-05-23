@@ -23,6 +23,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
@@ -41,6 +42,8 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class UsersController {
 	
 	public static final Integer minimalRatingForActiveUser = -4;
+	
+	public static final String checkingLoggedInUsername = "Logged in user";
 
 	@Autowired
 	ImageService imageService;
@@ -71,8 +74,16 @@ public class UsersController {
 	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> getAllUsers() {
-		List<User> userList = userService.findAll();
-		return userList;
+		return userService.findAll();
+	}
+	
+	/**
+	 * Returns all users.
+	 */
+	@RequestMapping(value = {"/getUserDTO"}, method = RequestMethod.GET)
+	@ResponseBody
+	public UserDTO getUserDTO(@RequestParam("username") String username) {
+		return userService.getUserDTO(username);
 	}
 	
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
@@ -106,27 +117,13 @@ public class UsersController {
 	@RequestMapping(value = {"/getUsersAvatar"}, method = RequestMethod.GET)
 	@ResponseBody
 	public String getUsersAvatar(@RequestParam("username") String username) {
-		String avatarUrl = checkGender(username);
-		return avatarUrl;
-	}
-	
-	/**
-	 * Returns needed url to avatar location.
-	 */
-	@RequestMapping(value = {"/getAvatar"}, method = RequestMethod.GET)
-	@ResponseBody
-	public String getLoggedUsersAvatar() {
-		String username = WebUtil.getPrincipalUsername();		
-		String avatarUrl = checkGender(username);
-		return avatarUrl;
-	}
-	
-	private String checkGender(String username) {
-		String maleGender = "male";
+		if (username.equals(checkingLoggedInUsername)) {
+			username = WebUtil.getPrincipalUsername();
+		}
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
 		String imageName = imageService.findImageNameByUsername(username);
 		if (imageName == null) {
-			if (userService.findUsersGender(username).equals(maleGender)) {
+			if (userService.findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
 				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
 			} else {
 				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();

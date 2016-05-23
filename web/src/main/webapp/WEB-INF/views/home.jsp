@@ -86,7 +86,7 @@
     <!-- Top header -->
     <header>
       <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container-fluid" ng-controller="getUser">
           <div class="navbar-header">
             <a class="navbar-brand"><img alt="logo"
               src="resources/images/logo.png"
@@ -95,7 +95,7 @@
           <p style="font-size: 14pt;" class="navbar-text">
             <b translate="PROJECT_NAME"></b>
           </p>
-          <div ng-controller="getUser" ng-mouseenter="showIt()"
+          <div ng-mouseenter="showIt()"
             ng-mouseleave="hideIt()">
             <div class="navbar-form navbar-left">
               <ul id="container">
@@ -128,7 +128,7 @@
               </form>
             </div>
           </div>
-          <ul class="nav navbar-nav navbar-right" ng-controller='getAvatar'>
+          <ul class="nav navbar-nav navbar-right">
             <li><span class="btn btn-link">
               <img id="flag"src="resources/images/gb.png" ng-click="changeLanguage('en')"/>
               <img id="flag"src="resources/images/ua.png" ng-click="changeLanguage('ua')"/></span>
