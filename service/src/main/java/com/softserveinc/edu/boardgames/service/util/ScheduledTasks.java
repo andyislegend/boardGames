@@ -57,7 +57,7 @@ public class ScheduledTasks {
     	logger.info("16:30 - Checking for users that have one day more to give the game back");
     }
     
-    @Scheduled(cron = "0 0 0 0 0 MON,FRI")
+    @Scheduled(cron = "0 0 12 ? * WED")
     public void remindThatNeedsToGiveBack() {
     	for (Exchange exchange: exchangeService.findAllExchanges()) {
     		Date localDate = new Date();
@@ -83,7 +83,7 @@ public class ScheduledTasks {
     	}
     }
 	
-	@Scheduled(cron = "0 0 0 0 0 MON,FRI")
+	@Scheduled(cron = "0 0 12 ? * WED")
 	public void deleteExpiredTokensAndUsers() {
 		for (VerificationToken token : userService.findAllTokens()) {
 
