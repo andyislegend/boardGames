@@ -1,61 +1,84 @@
-<div ng-controller = "showAllTournamentsCtrl">
+<div id="main_wrapper">
 
-<div id = "wrapper">
-<div id = "c1">
-	<h2>{{status}}</h2>
-	<h1>{{tournament.tournamentName}}</h1>
-	<p>Count of participants: {{tournamentParticipants.length}} of {{tournament.countOfParticipants}}</p>
-	<p>User creator: {{tournament.userCreatorName}}</p>
-	<p>date of tournament: {{tournament.dateOfTournament | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
-	<button ng-disabled = "!joinStatus" ng-click = "joinToTournament(tournament.tournamentId)" class="btn btn-info">Join</button>
-	<button ng-disabled = "!quitStatus" ng-click = "leaveTournament(tournament.tournamentId)" class="btn btn-info">Quit</button>
-	
-</div>
-<div id = "c2" >
-	<table class = "table" id ="table-showParticipants">
-	<tr><th>Participants<th></tr>
-	<tr ng-repeat = "user in tournamentParticipants"><td>{{user.username}}<td></tr>
-	</table>
-	
-	<div ng-show = "isCreator" id = "wrapper">
-		<form id = "c1">
-		<input type = "date" data-ng-model = "changeTournamentDate">
-		<input type = "submit" value="Change" ng-click = "changeDataOfTournament()">
-		</form>	
-		<button id = "c3" ng-disabled ="!isOpenGiveRate"  type="button" class="btn" data-toggle="modal" data-target="#myModal">Give a rate</button>
-	</div>
-</div>	
+    <div id="left_wrapper">
 
-<div id = "c1c">
-	<p>GHGJHGHGVhh</p>
-</div>
-</div>
+        <div id="up_wrapper">
+		<div style = "padding:2% 2%;">
+				<h2>{{status}}</h2>
+				<h1>{{tournament.tournamentName}}</h1>
+				<p>Count of participants: {{tournamentParticipants.length}} of {{tournament.countOfParticipants}}</p>
+				<p>User creator: {{tournament.userCreatorName}}</p>
+				<p>date of tournament: {{tournament.dateOfTournament | date:'yyyy-MM-dd'}}</p>
+				
+				<div style="margin: auto auto">
+				<button ng-disabled = "!joinStatus" ng-click = "joinToTournament(tournament.tournamentId)" class="btn btn-info">Join</button>
+				<button ng-disabled = "!quitStatus" ng-click = "leaveTournament(tournament.tournamentId)" class="btn btn-info">Quit</button>
+        		</div>
+        </div>
+        </div>
+
+        
+			<div id="down_wrapper">
+			<div ng-show = "isCreator" class="form-group">
+				<form>
+				<label style="margin: auto auto;">Change date of Tournaments</label>
+				<input type = "date" class="form-control" data-ng-model = "changeTournamentDate">
+				<input type = "submit" class="btn btn-info" value="Change" ng-click = "changeDataOfTournament()">
+				</form>	
+			<button ng-disabled ="!isOpenGiveRate"  type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Give a rate</button>
+		</div>
+        </div>
+    </div>
+
+    <div id="right_wrapper">
+		<table class = "table" id ="table-showParticipants" style="width: 100%">
+			<tr><th>Participants<th></tr>
+			<tr ng-repeat = "user in tournamentParticipants"><td>{{user.username}}<td></tr>
+		</table>
+    </div>
+
+    <div style="clear: both;"></div>
+
 <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    
+  <div class="modal-dialog"> 
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" ng-click = "changeStatusToRate()" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
        <table class = "table">
-	<tr><th>User</th><th>Mark</th><th>Give Mark</th></tr>
-	<form>
-	<tr ng-repeat = "user in tournamentParticipants">
-		<td>{{user.username}}</td>
-		<td><input type="number" min="-2" max="3" ng-model = "rate"></td>
-		<td><button ng-click = "giveRate(user.id, rate)">Rate</button></td>
-	</tr>
-	</form>
-	</table>
+		<tr><th>User</th><th>Mark</th><th>Give Mark</th></tr>
+		<form>
+			<tr ng-repeat = "user in tournamentParticipants">
+				<td>{{user.username}}</td>
+				<td><input type="number" min="-2" max="3" ng-model = "rate"></td>
+				<td><button ng-click = "giveRate(user.id, rate)">Rate</button></td>
+			</tr>
+		</form>
+		</table>
       </div>
       <div class="modal-footer">
         <button type="button" ng-click = "changeStatusToRate()" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-    </div>
-		
+    </div>		
   </div>
 </div>
-	
+
+<div id="attentionToChangeData" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Attention!</h4>
+      </div>
+      <div class="modal-body">
+        <p>You can not change on past data</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
