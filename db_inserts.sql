@@ -173,13 +173,6 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '13
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '15', '1');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '16', '1');
 
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('1', '2016-05-20 19:23:15', 'Привіт', '0', '2', '1');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('2', '2016-05-20 19:23:40', 'Good bay!', '0', '3', '1');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('3', '2016-05-20 19:23:46', 'Hi', '0', '7', '1');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('4', '2016-05-20 19:23:52', 'Hello))', '0', '1', '11');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('5', '2016-05-20 19:24:12', 'Soru I can\'t speak', '0', '5', '1');
-
-
 -- inserts to table tournaments
 INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Monopoly', '2', '8', TRUE);
 INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly', '1', '1', TRUE);
