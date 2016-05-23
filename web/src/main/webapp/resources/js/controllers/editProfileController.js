@@ -48,8 +48,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 							} 
 						}
 					} else {
-						var starOfCitiesCollection = 0;
-						$scope.editableCity = $scope.cities[starOfCitiesCollection];
+						var startOfCitiesCollection = 0;
+						$scope.editableCity = $scope.cities[startOfCitiesCollection];
 					}
 				});
 			};
@@ -63,6 +63,13 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	});
 	
 	$scope.saveUser = function() {
+		if ($scope.editableCountry == null) {
+			$scope.editableCountry.id = '';
+		}
+		
+		if ($scope.editableCity == null) {
+			$scope.editableCity.id = '';
+		}
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,

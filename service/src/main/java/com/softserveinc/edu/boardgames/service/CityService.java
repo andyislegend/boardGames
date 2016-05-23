@@ -25,4 +25,8 @@ public class CityService {
 	public List<City> findCitiesByCountryId(Integer countryId) {
 		return cityRepository.findCitiesByCountryId(countryId);
 	}
+	
+	public City findOneByName(String name) {
+		return cityRepository.findByName(name);
+	}
 }

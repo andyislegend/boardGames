@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
+import java.util.List;
+
 public class UserDTO {
 	private Integer id;
 	private String firstName;
@@ -10,7 +12,36 @@ public class UserDTO {
 	private String phoneNumber;
 	private Integer countryId;
 	private Integer cityId;
+	private String countryName;
+	private String cityName;
+	private List<GameUserDTO> userGames;
+	private List<TournamentsDTO> userTournaments;
 	
+	public String getCountryName() {
+		return countryName;
+	}
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	
+	public List<GameUserDTO> getUserGames() {
+		return userGames;
+	}
+	public void setUserGames(List<GameUserDTO> userGames) {
+		this.userGames = userGames;
+	}
+	public List<TournamentsDTO> getUserTournaments() {
+		return userTournaments;
+	}
+	public void setUserTournaments(List<TournamentsDTO> userTournaments) {
+		this.userTournaments = userTournaments;
+	}
 	public Integer getCountryId() {
 		return countryId;
 	}

@@ -91,7 +91,8 @@ homeApp
 								BAN_MODAL_FIRST: 'The access to your account was temporary disabled',
 								BAN_MODAL_SECOND: 'Your account have been banned due to Your inappropriate behavior',
 								BAN_MODAL_THIRD: 'If there is some mistake, please contact with the administration',
-								CONTACT_WITH_ADMINS: 'Contact admins'
+								CONTACT_WITH_ADMINS: 'Contact admins',
+								CHANGES_SAVED:'changes saved'
 							});
 			$translateProvider
 					.translations(
@@ -181,12 +182,13 @@ homeApp
 								USERINFO_SUCCESS: 'Ваша електронна адреса була успішно підтверджена. Тепер Ви можете увійти',
 								USERINFO_FAILURE: 'Ви вже підтвердили вашу електронну адресу або термін дії лінка підтвердження сплив. Якщо Ви не можете увійти, Вам слід повторно зареєструватись.',
 								BAN_MODAL_HEADER: 'ВАС БУЛО ЗАБАНЕНО',
-								BAN_MODAL_FIRST: 'Досутп до Вашого акаунту було тимчасово заблоковано',
+								BAN_MODAL_FIRST: 'Доступ до Вашого акаунту було тимчасово заблоковано',
 								BAN_MODAL_SECOND: 'Вас було забанено через Вашу неприпустиму поведінку',
 								BAN_MODAL_THIRD: 'Якщо виникла якась помилка, будь ласка, зконтактуйтесь з адміністрацією',
 								CONTACT_WITH_ADMINS: 'Написати адміну'
 
 							});
+			$translateProvider.useUrlLoader('/messageBundle');
 			$translateProvider.preferredLanguage('en');
 			$translateProvider.useSanitizeValueStrategy('escape');
 			$translateProvider.useCookieStorage();

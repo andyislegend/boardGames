@@ -152,7 +152,6 @@ public class UserService {
 		userRepository.saveAndFlush(user);
 		if (user.getUserRating() <= -5 || user.getState().equals(UserStatus.BANNED.name())) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
-			return;
 		}
 	}
 
@@ -309,4 +308,8 @@ public class UserService {
 	public void deleteUser(User user) {
 		userRepository.delete(user);
 	}
+	
+/*	public List<UserDTO> getAllUserDTO() {
+		return userRepository.getAllUserDTO();
+	}*/
 }

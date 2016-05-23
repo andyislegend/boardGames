@@ -115,3 +115,7 @@
 #passwordChange {
 	margin-bottom:40px;
 }
+
+#changeUserStatus {
+	cursor:pointer;
+}

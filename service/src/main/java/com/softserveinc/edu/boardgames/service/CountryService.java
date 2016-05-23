@@ -21,4 +21,8 @@ public class CountryService {
 	public Country findById(Integer id) {
 		return countryRepository.findOne(id);
 	}
+	
+	public Country findByName(String name) {
+		return countryRepository.findByName(name);
+	}
 }
