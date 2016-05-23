@@ -223,11 +223,7 @@ homeApp.$inject = ['$modal'];
 	});
 	
 	$scope.displayRequestBlockClick = function(id) {
-		if ($scope.doWantToApply === true)
-			$scope.doWantToApply = false;
-		else {
-			$scope.doWantToApply = true;
-			
+		
 			$http({
 				method : "GET",
 				url : 'getHowManyDaysForExchange/' + id
@@ -245,7 +241,6 @@ homeApp.$inject = ['$modal'];
 			}, function myError(response) {
 				alert("getting my games error");
 			});
-		}
 	}
 	
 	$scope.gamesToPropose = [];

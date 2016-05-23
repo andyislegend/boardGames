@@ -65,35 +65,43 @@
 	</div>
 	
 	<div class="container-fluid" ng-show="isntYourGame">
-		<div class="centeredObjects">
-			<button class="btn btn-primary centeredObjects" 
-			ng-click="displayRequestBlockClick(games.id)">Let's make a deal!</button>
-		</div>		
-		<div class="container-fluid" ng-show="doWantToApply" ng-init="messageToOwner='no message'">
-			<p class="boldText">Days: {{howManyDays}}</p>
-	  		<br/>
-	  		<label class="inlineDisplay">Message for owner:  </label>
-	  		<textarea class="form-control inlineDisplay" rows="2" id="message" ng-model="messageToOwner"></textarea>
-	  		<br/>
-	  		<br/>
-	  		<p class="boldText inlineDisplay">Select what you want to propose:  </p>
-	  		<form name="selectRequiredForm">
-      			<select class="form-control inlineDisplay" ng-model="myGamesModel" name="gamesSelect"
-      				ng-options="option.name for option in myGames" required></select>
-      			<button class="btn btn-primary inlineDisplay" ng-click="addToProposes()" 
-      				ng-disabled="selectRequiredForm.gamesSelect.$invalid">
-      				Add proposition</button>  
-      		</form>
-
-      		<br/>
-      		<ul class="list-group listCenterd" ng-model="propositionsList">
-    			<li class="list-group-item" ng-repeat="game in gamesToPropose">{{game.name}}, {{game.edition}}</li>
-  			</ul>
-  			<br/>
-  			<div class="centeredObjects">
-  				<button class="btn btn-primary" 
-  					ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)">Ask owner</button>
-  			</div>
+		<button class="btn btn-primary" 
+				ng-click="displayRequestBlockClick(games.id)" data-toggle="modal" 
+				data-target="#applyForGameModal">Let's make a deal!</button>
+		<div id="applyForGameModal" class="modal fade" role="dialog">
+	  		<div class="modal-dialog">
+	  		    <div class="modal-content">
+	  		    	<div class="modal-header">
+       	 				<button type="button" class="close" data-dismiss="modal">&times;</button>
+        				<h4 class="modal-title">Request</h4>
+      				</div>
+					<div class="modal-body">
+						<form name="selectRequiredForm">
+							<p class="boldText">Days: {{howManyDays}}</p>
+				  			<br/>
+				  			<label class="inlineDisplay">Message for owner:  </label>
+				  			<textarea class="form-control inlineDisplay" rows="2" id="message" ng-model="messageToOwner"></textarea>
+				  			<br/><br/>
+				  			<p class="boldText inlineDisplay">Select what you want to propose:  </p>
+			      			<select class="form-control inlineDisplay" ng-model="myGamesModel" name="gamesSelect"
+			      					ng-options="option.name for option in myGames" required></select>
+			      			<button class="btn btn-primary inlineDisplay" ng-click="addToProposes()" 
+			      					ng-disabled="selectRequiredForm.gamesSelect.$invalid">
+			      					Add proposition</button>  
+			      			<br/>
+			      			<ul class="list-group listCenterd" ng-model="propositionsList">
+			    				<li class="list-group-item" ng-repeat="game in gamesToPropose">{{game.name}}, {{game.edition}}</li>
+			  				</ul>
+			  				<br/>
+			  				<div class="centeredObjects">
+			  					<button class="btn btn-primary" 
+			  							ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)"
+			  							ng-disabled="selectRequiredForm.gamesSelect.$invalid">Ask owner</button>
+			  				</div>
+			  			</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	
