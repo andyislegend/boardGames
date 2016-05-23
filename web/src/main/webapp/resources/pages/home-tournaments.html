@@ -1,11 +1,13 @@
 <div ng-controller="showAllTournamentsCtrl">
    <div ng-controller="allUsersGameCtrl">
-      <h1 style="text-align: center"> Tournaments </h1>
+      <h1 style="text-align: center"> Tournaments 
+      <a href="" data-toggle="modal" data-target="#myModalTournament">
+      	<span class="glyphicon glyphicon-plus"></span>
+      </a>
+       </h1>
       <div class="column-5">
          <div>
-         <a href="" data-toggle="modal" data-target="#myModalTournament">
-                        ADD NEW TOURNAMENT</a>
-                        <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
+              <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
                            <div class="modal-dialog">
                               <!-- Modal content-->
                               <div class="modal-content">
