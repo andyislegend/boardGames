@@ -87,7 +87,7 @@
     <!-- Top header -->
     <header>
       <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container-fluid" ng-controller="getUser">
           <div class="navbar-header">
             <a class="navbar-brand"><img alt="logo"
               src="resources/images/logo.png"
@@ -96,7 +96,7 @@
           <p style="font-size: 14pt;" class="navbar-text">
             <b translate="PROJECT_NAME"></b>
           </p>
-          <div ng-controller="getUser" ng-mouseenter="showIt()"
+          <div ng-mouseenter="showIt()"
             ng-mouseleave="hideIt()">
             <div class="navbar-form navbar-left">
               <ul id="container">
@@ -129,7 +129,7 @@
               </form>
             </div>
           </div>
-          <ul class="nav navbar-nav navbar-right" ng-controller='getAvatar'>
+          <ul class="nav navbar-nav navbar-right">
             <li><span class="btn btn-link">
               <img id="flag"src="resources/images/gb.png" ng-click="changeLanguage('en')"/>
               <img id="flag"src="resources/images/ua.png" ng-click="changeLanguage('ua')"/></span>
@@ -157,6 +157,12 @@
                   <li><a href="#users"><span
                     class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     <span translate="USERS"></span></a>
+                  </li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ADMIN')">
+                  <li><a href="#moderateEvent"><span
+                    class="glyphicon glyphicon-scissors" aria-hidden="true"></span>
+                    <span translate="MODERATE_EVENT"></span></a>
                   </li>
                 </sec:authorize>
                 <li class="divider"></li>
@@ -212,16 +218,17 @@
                 <div>
                   <div>
                     <div ng-controller="CreateGameCtrl">
-                      <div class="centeredObjects">
-                        <a class="btn btn-success" >
-                        <span class="glyphicon glyphicon-plus" 
-                          data-toggle="modal"
-                          data-target="#myModalHorizontal"></span> 
-                        </a>
-                        <a href="#gameNotifications/{{username}}" class="btn btn-info" >
-                        <span class="glyphicon glyphicon-bell" ></span> 
-                        </a>
-                      </div>
+                    	<div class="centeredObjects">
+                        	<a class="btn btn-success" >
+                        		<span class="glyphicon glyphicon-plus" 
+                        			data-toggle="modal"
+                          			data-target="#myModalHorizontal"></span> 
+                        	</a>
+                        	<a href="#gameNotifications/{{username}}" class="btn btn-info" >
+                        		<span class="glyphicon glyphicon-bell" ></span> 
+                        	</a>
+                        	<span class="badge badge-notify">{{uncheckedNotifiCount}}</span>
+                      	</div>
                       <br/>
                       <div class="modal fade" id="myModalHorizontal" tabindex="-1"
                         role="dialog" aria-labelledby="myModalLabel"
@@ -461,11 +468,11 @@
                   </div>
                   <div class="proba-message-body" id="messages" jq-scroll>
                     <div class="message-state" ng-repeat="message in messages"
-                      ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}"
+                      ng-class="{myStyle: !message.statusOfReading && message.userSender.username == currentFriend}"
                       ng-mouseenter="readMessage(message)">
                       <div>
-                        <strong>{{message.currentUser.firstName}}
-                        {{message.currentUser.lastName}}:</strong>
+                        <strong>{{message.userSender.firstName}}
+                        {{message.userSender.lastName}}:</strong>
                       </div>
                       <div>{{message.message}}</div>
                     </div>

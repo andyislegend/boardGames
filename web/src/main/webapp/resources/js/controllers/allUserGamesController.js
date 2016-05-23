@@ -223,11 +223,7 @@ homeApp.$inject = ['$modal'];
 	});
 	
 	$scope.displayRequestBlockClick = function(id) {
-		if ($scope.doWantToApply === true)
-			$scope.doWantToApply = false;
-		else {
-			$scope.doWantToApply = true;
-			
+		
 			$http({
 				method : "GET",
 				url : 'getHowManyDaysForExchange/' + id
@@ -245,7 +241,6 @@ homeApp.$inject = ['$modal'];
 			}, function myError(response) {
 				alert("getting my games error");
 			});
-		}
 	}
 	
 	$scope.gamesToPropose = [];
@@ -282,15 +277,14 @@ homeApp.$inject = ['$modal'];
 		});
 	}
 	$scope.askOwnerToShare = function(id, message, propositionsList) {
-		console.log(propositionsList);
 		var values = [];
 		angular.forEach(propositionsList, function(value, key) {
 			values.push(value.id);
 		}, values);
-		console.log(values);
+		var outMessage = message || 'no message';
 		$http({
 			method : "PUT",
-			url : 'askGameUserOwnerToShare/' + id + '/' + message + '/' + values
+			url : 'askGameUserOwnerToShare/' + id + '/' + outMessage + '/' + values
 		}).then(function mySucces(response) {
 			$route.reload();
 		}, function myError(response) {

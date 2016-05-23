@@ -9,13 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.softserveinc.edu.boardgames.persistence.entity.Message;
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
-import com.softserveinc.edu.boardgames.service.EventService;
-import com.softserveinc.edu.boardgames.service.MessageService;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -24,9 +21,6 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @RestController
 public class NotificationController {
 
-	@Autowired
-	MessageService messageService;
-	
 	@Autowired
 	UserService userService;
 	
@@ -41,18 +35,18 @@ public class NotificationController {
 	
 	
 	@RequestMapping(value = "/getAllLastMessage", method = RequestMethod.GET)
-	public List<Message> getAllMessage() {
+	public List<Notification> getAllMessage() {
 		
 		String currentUserName = WebUtil.getPrincipalUsername();
 		List<User> listOfFriends = userService.findAllFriends(currentUserName);
-		List<Message> listOfMessage = new ArrayList<Message>();
+		List<Notification> list = new ArrayList<Notification>();
 		for(User friend: listOfFriends){
-			Message message = messageService.getLastMessage(currentUserName, friend.getUsername());
+			Notification message = notificationService.getLastMessage(currentUserName, friend.getUsername());
 			if(message != null){
-				listOfMessage.add(message);
+				list.add(message);
 			}
 		}
-		return listOfMessage;
+		return list;
 	}
 	
 	@RequestMapping(value = "/getCurrentUserName", method = RequestMethod.GET)
@@ -85,4 +79,9 @@ public class NotificationController {
 		notificationService.update(notify);
 	}
 	
+	@RequestMapping(value = "/getCountOfNotifications", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getCountOfNotifications() {
+		return notificationService.getCountOfGameNotifications(WebUtil.getPrincipalUsername());
+	}
 }

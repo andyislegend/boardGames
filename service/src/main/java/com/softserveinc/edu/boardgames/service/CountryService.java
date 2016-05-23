@@ -22,7 +22,4 @@ public class CountryService {
 		return countryRepository.findOne(id);
 	}
 	
-	public Country findByName(String name) {
-		return countryRepository.findByName(name);
-	}
 }

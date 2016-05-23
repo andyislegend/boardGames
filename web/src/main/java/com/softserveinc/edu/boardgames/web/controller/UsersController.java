@@ -23,6 +23,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
@@ -41,6 +42,8 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class UsersController {
 	
 	public static final Integer minimalRatingForActiveUser = -4;
+	
+	public static final String checkingLoggedInUsername = "Logged in user";
 
 	@Autowired
 	ImageService imageService;
@@ -71,13 +74,21 @@ public class UsersController {
 	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> getAllUsers() {
-		List<User> userList = userService.findAll();
-		return userList;
+		return userService.findAll();
+	}
+	
+	/**
+	 * Returns all users.
+	 */
+	@RequestMapping(value = {"/getUserDTO"}, method = RequestMethod.GET)
+	@ResponseBody
+	public UserDTO getUserDTO(@RequestParam("username") String username) {
+		return userService.getUserDTO(username);
 	}
 	
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
-	public User getUser(@RequestParam("username") String username) {
+	public User getUserProfile(@RequestParam("username") String username) {
 		if (!username.equals("Logged in user")) {
 			User user = userService.findOne(username);
 			return user;
@@ -89,12 +100,8 @@ public class UsersController {
 	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
-		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		Country country = countryService.findById(userDTO.getCountryId());
-		City city = cityService.findById(userDTO.getCityId());
-		UserMapper.toEntity(userDTO, user, country, city);
-		userService.updateUser(user);
-		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
+		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
+		return new ResponseEntity<String>("CHANGES_SAVED", HttpStatus.OK);
 	}
 	
 	/**
@@ -106,27 +113,13 @@ public class UsersController {
 	@RequestMapping(value = {"/getUsersAvatar"}, method = RequestMethod.GET)
 	@ResponseBody
 	public String getUsersAvatar(@RequestParam("username") String username) {
-		String avatarUrl = checkGender(username);
-		return avatarUrl;
-	}
-	
-	/**
-	 * Returns needed url to avatar location.
-	 */
-	@RequestMapping(value = {"/getAvatar"}, method = RequestMethod.GET)
-	@ResponseBody
-	public String getLoggedUsersAvatar() {
-		String username = WebUtil.getPrincipalUsername();		
-		String avatarUrl = checkGender(username);
-		return avatarUrl;
-	}
-	
-	private String checkGender(String username) {
-		String maleGender = "male";
+		if (username.equals(checkingLoggedInUsername)) {
+			username = WebUtil.getPrincipalUsername();
+		}
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
 		String imageName = imageService.findImageNameByUsername(username);
 		if (imageName == null) {
-			if (userService.findUsersGender(username).equals(maleGender)) {
+			if (userService.findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
 				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
 			} else {
 				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
@@ -156,9 +149,9 @@ public class UsersController {
 			fileUpload.transferTo(new File(savePath));
 		} catch(IOException e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("Failed to upload image. Try one more time", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("IMAGE_UPLOAD_FAILED", HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<String>("Avatar uploaded", HttpStatus.OK);
+		return new ResponseEntity<String>("IMAGE_UPLOAD", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/getUser"}, method = RequestMethod.GET)
@@ -173,8 +166,8 @@ public class UsersController {
 	public ResponseEntity<String> banUser(@RequestParam("username") String username) {
 		User user = userService.findOne(username);
 		user.setState(UserStatus.BANNED.name());
-		userService.updateUser(user);
-		return new ResponseEntity<String>("User with username " + username + " was banned", HttpStatus.OK);
+		userService.banUser(user);
+		return new ResponseEntity<String>("USER_BAN", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
@@ -186,6 +179,6 @@ public class UsersController {
 			user.setUserRating(minimalRatingForActiveUser);
 		}
 		userService.updateUser(user);
-		return new ResponseEntity<String>("User with username " + username + " was unbanned", HttpStatus.OK);
+		return new ResponseEntity<String>("USER_UNBAN", HttpStatus.OK);
 	}
 }

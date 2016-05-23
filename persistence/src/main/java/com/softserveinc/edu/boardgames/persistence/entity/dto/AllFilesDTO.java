@@ -6,7 +6,7 @@ public class AllFilesDTO {
 	
 	List<GameUserDTO> gameUsers;
 	List<TournamentsDTO> tournaments;
-	List<AllEventsDto> events;
+	List<EventsDTO> events;
 	
 	public AllFilesDTO() {
 		// TODO Auto-generated constructor stub
@@ -24,10 +24,10 @@ public class AllFilesDTO {
 	public void setTournaments(List<TournamentsDTO> tournaments) {
 		this.tournaments = tournaments;
 	}
-	public List<AllEventsDto> getEvents() {
+	public List<EventsDTO> getEvents() {
 		return events;
 	}
-	public void setEvents(List<AllEventsDto> events) {
+	public void setEvents(List<EventsDTO> events) {
 		this.events = events;
 	}
 

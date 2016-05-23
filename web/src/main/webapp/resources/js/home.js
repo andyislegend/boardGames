@@ -25,7 +25,12 @@ homeApp.config(function($routeProvider) {
 
 	.when('/events', {
 		templateUrl : 'resources/pages/home-events.html',
-		controller : 'eventListCtrl'
+//		controller : 'eventListCtrl'
+	})
+	
+	.when('/moderateEvent', {
+		templateUrl : 'resources/pages/home-editEventsByAdmin.html',
+//		controller : 'eventListCtrl'
 	})
 
 	.when('/edit/:username', {
@@ -58,7 +63,8 @@ homeApp.config(function($routeProvider) {
 	.when('/gameUserDetails/:id', {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
 		controller : 'getGameDetailedInfoController', 
-		controller : 'gameNotifyController'
+		controller : 'gameNotifyController',
+		controller : 'CreateGameCtrl'
 	})
 	.when('/gameNotifications/:username', {
 		templateUrl : 'resources/pages/home-gameNotifications.html',
@@ -84,8 +90,3 @@ homeApp.controller("getCurrentUser",function($scope, $rootScope, $http){
 	});
 });
 
-homeApp.controller("getAvatar", function($scope, $http) {
-	$http.get('getAvatar').then(function(result) {
-		$scope.avatar = result.data;
-	});
-});

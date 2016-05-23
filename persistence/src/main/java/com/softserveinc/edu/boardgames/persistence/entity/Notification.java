@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
@@ -37,9 +36,20 @@ public class Notification implements Serializable {
 	@Column(name = "message")
 	private String message = "no message";
 	
-	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, cascade={CascadeType.MERGE})
+	@Column(name = "userInvokerId")
+	private Integer userInvokerId = 0;
+	
+	@Column(name = "status_of_reading", columnDefinition="tinyint(1) default 0")
+	private boolean statusOfReading;
+	
+	@ManyToOne(fetch=FetchType.EAGER, targetEntity=User.class, cascade={CascadeType.MERGE})
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
+	
+	@ManyToOne(fetch=FetchType.EAGER, targetEntity=User.class)
+	@JoinColumn(name = "user_sender", referencedColumnName = "id")
+	private User userSender;
+	
 	
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional=true)
 	@JoinColumn(name="gameUserId", referencedColumnName = "id")
@@ -50,14 +60,38 @@ public class Notification implements Serializable {
 	
 	public Notification() {}
 
-	public Notification(Integer id, String type, String status, String message, User user, Date date) {
+	public Notification(Integer id, String type, String status, String message,
+			Integer userInvokerId, User user, Date date) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.status = status;
 		this.message = message;
+		this.userInvokerId = userInvokerId;
 		this.user = user;
 		this.date = date;
+	}
+	
+	
+	public Notification(Integer id, String type, String status, String message, Integer userInvokerId, User user,
+			User userSender, GameUser gameUser, Date date) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.status = status;
+		this.message = message;
+		this.userInvokerId = userInvokerId;
+		this.user = user;
+		this.userSender = userSender;
+		this.gameUser = gameUser;
+		this.date = date;
+	}
+
+	public Integer getUserInvokerId() {
+		return userInvokerId;
+	}
+	public void setUserInvokerId(Integer userInvokerId) {
+		this.userInvokerId = userInvokerId;
 	}
 	public String getMessage() {
 		return message;
@@ -101,4 +135,21 @@ public class Notification implements Serializable {
 	public void setGameUser(GameUser gameUser) {
 		this.gameUser = gameUser;
 	}
+
+	public User getUserSender() {
+		return userSender;
+	}
+
+	public void setUserSender(User userSender) {
+		this.userSender = userSender;
+	}
+
+	public boolean isStatusOfReading() {
+		return statusOfReading;
+	}
+
+	public void setStatusOfReading(boolean statusOfReading) {
+		this.statusOfReading = statusOfReading;
+	}
+	
 }

@@ -7,7 +7,7 @@
 #d1 {
     
     width: 49%;
-    height: 250px;
+    height: 250px !important;
     background: darkred;
     float: left;
     margin-left: 0.5%;
@@ -17,7 +17,7 @@
 #d2 {
 
     width: 49%;
-    height: 250px;
+    height: 250px !important;
     background: blueviolet;
     float: left;
     margin-left: 1%;
@@ -28,7 +28,7 @@
 #d3 {
 
     width: 49%;
-    height: 250px;
+    height: 250px !important;
     float: left;
     background: aquamarine;
     margin-left: 0.5%;
@@ -39,7 +39,7 @@
 #d4 {
 
     width: 49%;
-    height: 250px;
+    height: 250px !important;
     background: darkcyan;
     float: left;
     margin-left: 1%;

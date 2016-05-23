@@ -3,22 +3,12 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 	$http.get('users').then(function(result) {
 		$scope.users = result.data;
 		$scope.$broadcast('sharingToUsersTable', $scope.users);
-		$scope.showUser = false;
+		$scope.showUser = !$scope.showUser;
 		$scope.getInfoAboutUserFunc = function(username) {
-			for (var i = 0; i < $scope.users.length; i++) {
-				if ($scope.users[i].username == username) {
-					$scope.oneUser = $scope.users[i];
-					break;
-				};
-			};
-			$http.get('allUsersGames?username='+ username).then(function(result) {
-				$scope.games = result.data;
+			$http.get('getUserDTO?username='+ username).then(function(result) {
+				$scope.oneUser = result.data;
 			});
-
-			$http.get('allUsersTournaments?username='+ username).then(function(result) {
-				$scope.tournaments = result.data;
-			});
-			$http.get('getUsersAvatar?username=' + $scope.oneUser.username).then(function(result) {
+			$http.get('getUsersAvatar?username=' + username).then(function(result) {
 				$scope.userAvatar = result.data;
 			});
 		};
@@ -39,21 +29,6 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 
 		  return def;
 	};
-
-		$scope.searchCities = function() {
-			var def = $q.defer();
-			$http.get('getAllCities?countryName=' + $scope.country).then(function (result) {
-				var filterData = [];
-				angular.forEach(result.data, function (city) {
-					filterData.push({
-						id: city.name,
-						title: city.name
-					})
-				});
-				def.resolve(filterData);
-			});
-			return def;
-		};
 
 	$scope.$on('sharingToUsersTable', function(event, data) {
 	$scope.usersTable = new ngTableParams({
@@ -92,6 +67,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$http.put('banUser?username='+ username)
 		.success(function(result, status){
 			$("#bannedUsers").modal('show');
+			$scope.username = username;
 	    	$scope.bannedUsers = result;
         });
 	}
@@ -100,7 +76,8 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$http.put('unbanUser?username='+ username)
 		.success(function(result, status){
 			$("#bannedUsers").modal('show');
-	    	$scope.bannedUsers = result;
+			$scope.username = username;
+	    	$scope.bannedUsers = result;    	
         });
 	}
 });

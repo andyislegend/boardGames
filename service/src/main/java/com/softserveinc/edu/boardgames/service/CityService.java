@@ -26,7 +26,4 @@ public class CityService {
 		return cityRepository.findCitiesByCountryId(countryId);
 	}
 	
-	public City findOneByName(String name) {
-		return cityRepository.findByName(name);
-	}
 }

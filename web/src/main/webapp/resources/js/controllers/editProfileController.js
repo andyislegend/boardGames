@@ -18,15 +18,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
 		$scope.editableCity = $scope.userProfile.city;
-		$http.get('getAvatar').then(function(result) {
+		$http.get('getUsersAvatar?username=' + $scope.userProfile.username).then(function(result) {
 			$scope.avatar = result.data;
 		});
-		
-		if ($routeParams.username!=null) {
-			$http.get('getUsersAvatar?username=' + $scope.username).then(function(result) {
-				$scope.userAvatar = result.data;
-			});
-		}
 		
 		$http.get('getAllCountries').then(function(result) {
 			$scope.countries = result.data;
@@ -63,13 +57,6 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	});
 	
 	$scope.saveUser = function() {
-		if ($scope.editableCountry == null) {
-			$scope.editableCountry.id = '';
-		}
-		
-		if ($scope.editableCity == null) {
-			$scope.editableCity.id = '';
-		}
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,
@@ -99,7 +86,10 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 			$scope.userProfile.phoneNumber = $scope.editablePhoneNumber;
 			$scope.editProfileMessage = false;
 		}).error(function(result, status) {
-			$scope.editProfileAnswer = result;
+			$scope.editProfileAnswer = result.data;
+			if ($scope.editProfileAnswer == "") {
+				$scope.editProfileAnswer = "You have typed inappropriate data";
+			}
 		})
 
 	}
@@ -146,7 +136,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 
 	$scope.uploadAvatar = function() {
 		if ($scope.myFile == null) {
-			return $scope.editAvatarAnswer = "You haven't choosed the file";			
+			return $scope.editAvatarAnswer = "FOTO_ISNT_CHOOSED";			
 		}
 		if ($scope.myFile.size > 5242880) {
 			return $scope.editAvatarAnswer = "The file size must be less than 5MB";			

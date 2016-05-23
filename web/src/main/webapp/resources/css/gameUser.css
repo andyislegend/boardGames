@@ -33,3 +33,9 @@ span.glyphicon-knight {
 .gray {
 	background-color: #ccddff
 }
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -15px;
+}

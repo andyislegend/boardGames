@@ -13,10 +13,6 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-
-
-
-
 /**
  * Every game belongs to particular category
  * This entity represents game category data
