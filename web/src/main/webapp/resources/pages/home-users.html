@@ -1,82 +1,86 @@
-<script src="resources/bower_components/angular-translate/angular-translate.js"></script>
+<script
+	src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <div>
-    <h1 id="headerUsers" translate="USERS"> Users </h1>
-               <div ng-controller="getAllUsersCtrl">
-                <div class="modal fade" id="bannedUsers" tabindex="-1" role="dialog" 
-               		aria-labelledby="myModalLabel" aria-hidden="true" >
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                           <div class="modal-body">
-                              <p>{{bannedUsers}}</p>
-                           </div>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-default"
-                              data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+	<h1 id="headerUsers" translate="USERS">Users</h1>
+	<div ng-controller="getAllUsersCtrl">
+		<div class="modal fade" id="bannedUsers" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<div class="modal-body">
+							<p>{{bannedUsers}}</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<table ng-table="usersTable" show-filter="true"
-			class="table table-striped" >
-			<tbody >
-			<tr ng-repeat-start="user in usersByParams">
-				<td title="'USERNAME_TABLE' | translate" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
-					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
-				</td>
-				<td title="'EMAIL_TABLE' | translate" sortable="'email'" class="col-sm-3">{{user.email}}</td>
-				<td title="'COUNTRY_TABLE' | translate" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
-					class="col-sm-3" ng-model="country" ng-change="searchCities()">
-					{{user.country.name}}
-                </td>
-				<td title="'CITY_TABLE' | translate" sortable="'cityName'" filter="{'cityName': 'text'}" class="col-sm-3">
-					 {{user.city.name}}
-                </td>
-                </tr>
-			<tr ng-show="showUser" ng-repeat-end>
-				<td class="col-sm-3">
+			class="table table-striped">
+			<tbody>
+				<tr ng-repeat-start="user in usersByParams">
+					<td title="'USERNAME_TABLE' | translate" sortable="'username'"
+						filter="{ 'username': 'text' }" class="col-sm-3"><a href=""
+						ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
+					</td>
+					<td title="'EMAIL_TABLE' | translate" sortable="'email'"
+						class="col-sm-3">{{user.email}}</td>
+					<td title="'COUNTRY_TABLE' | translate" sortable="'countryName'"
+						filter="{'countryName': 'select'}" filter-data="countries()"
+						class="col-sm-3" ng-model="country" ng-change="searchCities()">
+						{{user.country.name}}</td>
+					<td title="'CITY_TABLE' | translate" sortable="'cityName'"
+						filter="{'cityName': 'text'}" class="col-sm-3">
+						{{user.city.name}}</td>
+				</tr>
+				<tr ng-show="showUser" ng-repeat-end>
+					<td class="col-sm-3">
 						<div id="backgroundForOneUser">
-							<p translate="USER_LAST_NAME" 
+							<p translate="USER_LAST_NAME"
 								translate-values="{userLastName:'{{oneUser.lastName}}'}"></p>
-							<p translate="USER_FIRST_NAME" 
+							<p translate="USER_FIRST_NAME"
 								translate-values="{userFirstName:'{{oneUser.firstName}}'}"></p>
-							<p translate="USER_GENDER" 
+							<p translate="USER_GENDER"
 								translate-values="{userGender:'{{oneUser.gender}}'}"></p>
-							<p translate="USER_AGE" 
+							<p translate="USER_AGE"
 								translate-values="{userAge:'{{oneUser.age}}'}"></p>
-							<p translate="USER_LEVEL" 
+							<p translate="USER_LEVEL"
 								translate-values="{userLevel:'{{oneUser.rating}}'}"></p>
-							<p translate="USER_PHONE_NUMBER" 
+							<p translate="USER_PHONE_NUMBER"
 								translate-values="{userPhoneNumber:'{{oneUser.phoneNumber}}'}"></p>
 						</div>
-				</td>
-				<td class="col-sm-3">
-
-							<b id="gamesList" translate="USER_GAMES"></b>
-							<ul ng-repeat="game in oneUser.userGames" id="gamesList">
-								<li><a href="#gameUserDetails/{{game.id}}">{{game.name}}</a></li>
-							</ul>
-
-				</td>
-				<td class="col-sm-3">
+					</td>
+					<td class="col-sm-3"><b id="gamesList" translate="USER_GAMES"></b>
+						<ul ng-repeat="game in oneUser.userGames" id="gamesList">
+							<li><a href="#gameUserDetails/{{game.id}}">{{game.name}}</a></li>
+						</ul></td>
+					<td class="col-sm-3">
 						<div id="backgroundForOneUser">
 							<b id="tournamentsList" translate="USER_TOURNAMENTS"></b>
-							<ul ng-repeat="tournament in oneUser.userTournaments" id="tournamentsList">
+							<ul ng-repeat="tournament in oneUser.userTournaments"
+								id="tournamentsList">
 								<li><a href="#tournament/{{tournament.tournamentId}}">{{tournament.tournamentName}}</a></li>
 							</ul>
 						</div>
-				</td>
-				<td class="col-sm-3">					
-							<img ng-src="{{userAvatar}}" id="userAvatar">
-							<p>Score: {{oneUser.userRating}}</p>
-							<p><a ng-click="banUser(user.username)" id="changeUserStatus">Ban user</a></p>
-							<p><a ng-click="unbanUser(user.username)" id="changeUserStatus">Unban user</a></p>
-				</td>
-			</tr>
+					</td>
+					<td class="col-sm-3"><img ng-src="{{userAvatar}}"
+						id="userAvatar">
+						<p>Score: {{oneUser.userRating}}</p>
+						<p>
+							<a ng-click="banUser(user.username)" id="changeUserStatus">Ban
+								user</a>
+						</p>
+						<p>
+							<a ng-click="unbanUser(user.username)" id="changeUserStatus">Unban
+								user</a>
+						</p></td>
+				</tr>
 			</tbody>
 		</table>
-                  
-               </div>
+
+	</div>
 </div>

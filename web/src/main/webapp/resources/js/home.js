@@ -30,7 +30,7 @@ homeApp.config(function($routeProvider) {
 	
 	.when('/moderateEvent', {
 		templateUrl : 'resources/pages/home-editEventsByAdmin.html',
-//		controller : 'eventListCtrl'
+		controller : 'eventAdminCtrl'
 	})
 
 	.when('/edit/:username', {

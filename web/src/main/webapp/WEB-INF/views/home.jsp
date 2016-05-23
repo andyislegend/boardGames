@@ -64,7 +64,7 @@
     <script type="text/javascript"
       src="resources/js/controllers/showAllTournamentsCtrl.js"></script>
     <script type="text/javascript"
-      src="resources/js/controllers/eventListCtrl.js"></script>
+      src="resources/js/controllers/eventAdminCtrl.js"></script>
     <script type="text/javascript"
       src="resources/js/controllers/getOneUser.js"></script>
     <script type="text/javascript"
