@@ -52,7 +52,7 @@
 			</div>
 			<form name="availabilityForm">
 				<p class="inlineDisplay">Enter period of exchange:</p>
-				<input type="number" name="returnDate" 
+				<input type="number" name="returnDate" max="360" min="1"
 				class="form-control inlineDisplay" ng-model="returnDate" required/>
 				<button class="btn btn-primary inlineDisplay" ng-click="makeGameUserAvailable(games.id)" 
 				ng-disabled="availabilityForm.returnDate.$invalid">Open for sharing</button>
@@ -69,7 +69,7 @@
 			<button class="btn btn-primary centeredObjects" 
 			ng-click="displayRequestBlockClick(games.id)">Let's make a deal!</button>
 		</div>		
-		<div class="container-fluid" ng-show="doWantToApply">
+		<div class="container-fluid" ng-show="doWantToApply" ng-init="messageToOwner='no message'">
 			<p class="boldText">Days: {{howManyDays}}</p>
 	  		<br/>
 	  		<label class="inlineDisplay">Message for owner:  </label>
@@ -77,10 +77,13 @@
 	  		<br/>
 	  		<br/>
 	  		<p class="boldText inlineDisplay">Select what you want to propose:  </p>
-      		<select class="form-control inlineDisplay" ng-model="myGamesModel" 
-      			ng-options="option.name for option in myGames"></select>
-      		<button class="btn btn-primary inlineDisplay" ng-click="addToProposes()">
-      			Add proposition</button>  
+	  		<form name="selectRequiredForm">
+      			<select class="form-control inlineDisplay" ng-model="myGamesModel" name="gamesSelect"
+      				ng-options="option.name for option in myGames" required></select>
+      			<button class="btn btn-primary inlineDisplay" ng-click="addToProposes()" 
+      				ng-disabled="selectRequiredForm.gamesSelect.$invalid">
+      				Add proposition</button>  
+      		</form>
 
       		<br/>
       		<ul class="list-group listCenterd" ng-model="propositionsList">

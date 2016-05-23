@@ -23,7 +23,6 @@ homeApp.$inject = ['$modal'];
 		url : 'getAllUserGames'
 	}).then(function mySucces(result) {
 		$rootScope.getAllUsersGame = result.data;
-		console.log($rootScope.getAllUsersGame);
 	});
 	
 	$http({
@@ -283,15 +282,14 @@ homeApp.$inject = ['$modal'];
 		});
 	}
 	$scope.askOwnerToShare = function(id, message, propositionsList) {
-		console.log(propositionsList);
 		var values = [];
 		angular.forEach(propositionsList, function(value, key) {
 			values.push(value.id);
 		}, values);
-		console.log(values);
+		var outMessage = message || 'no message';
 		$http({
 			method : "PUT",
-			url : 'askGameUserOwnerToShare/' + id + '/' + message + '/' + values
+			url : 'askGameUserOwnerToShare/' + id + '/' + outMessage + '/' + values
 		}).then(function mySucces(response) {
 			$route.reload();
 		}, function myError(response) {
