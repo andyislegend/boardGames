@@ -133,9 +133,12 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     };
     
     $scope.readMessage = function(message){
-        if(!message.statusOfReading && message.currentUser.username == $scope.currentFriend){
+        if(!message.statusOfReading && message.userSender.username == $scope.currentFriend){
+
             $http.post('readMessage/' + message.id, message.id).success(function(){
+
             }).error(function(error){
+
                 console.log(error);
             });
         }
@@ -161,7 +164,6 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
     };
     
     $http.get('tournaments').success(function(data){
-        console.log(data);
         $scope.allTournaments = data;
     }).error(function(error){
        console.log(error);

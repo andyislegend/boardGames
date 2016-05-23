@@ -1,21 +1,17 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.softserveinc.edu.boardgames.persistence.entity.Friend;
-import com.softserveinc.edu.boardgames.persistence.entity.Message;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.FriendService;
-import com.softserveinc.edu.boardgames.service.MessageService;
+import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
@@ -33,9 +29,9 @@ public class FriendController {
 	
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
-	MessageService messageService;
+	NotificationService notificationService;
 	
 	/**
 	 * This method for get all current user's friends from DB
@@ -158,9 +154,10 @@ public class FriendController {
 		String currentUserName = WebUtil.getPrincipalUsername();
 		List<User> listOfFriends = userService.findAllFriends(currentUserName);
 		List<Integer> allMessagesByFriends = new ArrayList<Integer>();
+		
 		for(int i = 0; i < listOfFriends.size(); i++){
-			allMessagesByFriends.add(messageService.
-					findAllNotReadMessageBySpecificFriend(currentUserName, listOfFriends.get(i).getUsername()));
+			allMessagesByFriends.add(notificationService.
+					findAllNotReadMessageBySpecificFriend(listOfFriends.get(i).getUsername(), currentUserName));
 		}
 		return allMessagesByFriends;
 		
