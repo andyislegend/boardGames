@@ -467,11 +467,11 @@
                   </div>
                   <div class="proba-message-body" id="messages" jq-scroll>
                     <div class="message-state" ng-repeat="message in messages"
-                      ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}"
+                      ng-class="{myStyle: !message.statusOfReading && message.userSender.username == currentFriend}"
                       ng-mouseenter="readMessage(message)">
                       <div>
-                        <strong>{{message.currentUser.firstName}}
-                        {{message.currentUser.lastName}}:</strong>
+                        <strong>{{message.userSender.firstName}}
+                        {{message.userSender.lastName}}:</strong>
                       </div>
                       <div>{{message.message}}</div>
                     </div>

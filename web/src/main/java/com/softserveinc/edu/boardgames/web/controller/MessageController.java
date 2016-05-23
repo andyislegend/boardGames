@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Message;
+import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.MessageDTO;
-import com.softserveinc.edu.boardgames.service.MessageService;
+import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
@@ -30,14 +29,15 @@ public class MessageController {
 	UserService userService;
 	
 	@Autowired
-	MessageService messageService;
+	NotificationService notificationService;
 	
 	/**
 	 * This method for get all current user's message from DB
 	 */
 	@RequestMapping(value = "/getAllMessage/{friendUserName}", method = RequestMethod.POST)
-	public List<Message> getAllMessage(@PathVariable String friendUserName) {
-		List<Message> listOfMessage =  messageService.getAllMessage(WebUtil.getPrincipalUsername(), friendUserName);
+	public List<Notification> getAllMessage(@PathVariable String friendUserName) {
+		
+		List<Notification> listOfMessage = notificationService.getAllMessage(WebUtil.getPrincipalUsername(), friendUserName);
 		return listOfMessage;
 	}
 	
@@ -45,8 +45,8 @@ public class MessageController {
 	 * This method for change status of reding message from not read yet to already read 
 	 */
 	@RequestMapping(value = "/readMessage/{idMessage}", method = RequestMethod.POST)
-	public void readMessage(@PathVariable Long idMessage) {
-		messageService.changeStatusOfReadingOfMessage(idMessage);
+	public void readMessage(@PathVariable Integer idMessage) {
+		notificationService.changeStatusOfReadingOfMessage(idMessage);
 	}
 	
 	/**
@@ -54,15 +54,15 @@ public class MessageController {
 	 */
 	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
 	public void sendMessage(@RequestBody MessageDTO messageDTO) {
-		System.out.println(messageDTO);	
 		User currentUser = userService.getUser(WebUtil.getPrincipalUsername());
 		User friendUser = userService.getUser(messageDTO.getFriendUsername());
-		Message message = new Message();
-		message.setCurrentUser(currentUser);
-		message.setFriendUser(friendUser);
-		message.setMessage(messageDTO.getBody());
-		message.setDate(new Date());
-		messageService.saveMessage(message);
+		
+		Notification notification = new Notification();
+		notification.setUserSender(currentUser);
+		notification.setUser(friendUser);
+		notification.setMessage(messageDTO.getBody());
+		notification.setType("MESSAGE");
+		notificationService.saveNotification(notification);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class MessageController {
 	@RequestMapping(value = "/findAllNotReadMessage", method = RequestMethod.GET)
 	public Integer findAllNotReadMessage(){
 		String currentUserName = WebUtil.getPrincipalUsername();
-		return messageService.findAllNotReadMessage(currentUserName);
+		return notificationService.findAllNotReadMessage(currentUserName);
 	}
 }
 
