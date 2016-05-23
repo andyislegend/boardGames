@@ -55,7 +55,7 @@
 				<td class="col-sm-3">
 
 							<b id="gamesList" translate="USER_GAMES"></b>
-							<ul ng-repeat="game in games" id="gamesList">
+							<ul ng-repeat="game in oneUser.userGames" id="gamesList">
 								<li><a href="#gameUserDetails/{{game.id}}">{{game.name}}</a></li>
 							</ul>
 
@@ -63,7 +63,7 @@
 				<td class="col-sm-3">
 						<div id="backgroundForOneUser">
 							<b id="tournamentsList" translate="USER_TOURNAMENTS"></b>
-							<ul ng-repeat="tournament in tournaments" id="tournamentsList">
+							<ul ng-repeat="tournament in oneUser.userTournaments" id="tournamentsList">
 								<li><a href="#tournament/{{tournament.tournamentId}}">{{tournament.tournamentName}}</a></li>
 							</ul>
 						</div>

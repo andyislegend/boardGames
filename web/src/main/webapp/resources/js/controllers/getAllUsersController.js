@@ -7,8 +7,6 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$scope.getInfoAboutUserFunc = function(username) {
 			$http.get('getUserDTO?username='+ username).then(function(result) {
 				$scope.oneUser = result.data;
-				$scope.games = result.data.userGames;
-				$scope.tournaments = result.data.userTournaments;
 			});
 			$http.get('getUsersAvatar?username=' + username).then(function(result) {
 				$scope.userAvatar = result.data;
