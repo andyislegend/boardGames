@@ -102,11 +102,17 @@ public class TournamentController {
     	tournamentService.update(tournament);
     }
     
-    @RequestMapping(value = "updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
     public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setDateOfTournament(date);
     	tournamentService.update(tournament);
+    }
+    
+    @RequestMapping(value = "/getAllTournamentsByCreator", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TournamentsDTO> getAllTournamentsByCreator(){
+    	return tournamentService.getAllTournamentByUserCreator(userService.getUser(WebUtil.getPrincipalUsername()).getUsername());
     }
     
 	
