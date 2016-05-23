@@ -158,6 +158,12 @@
                     <span translate="USERS"></span></a>
                   </li>
                 </sec:authorize>
+                <sec:authorize access="hasRole('ADMIN')">
+                  <li><a href="#moderateEvent"><span
+                    class="glyphicon glyphicon-scissors" aria-hidden="true"></span>
+                    <span translate="MODERATE_EVENT"></span></a>
+                  </li>
+                </sec:authorize>
                 <li class="divider"></li>
                 <li><a href="logout"><span
                   class="glyphicon glyphicon-off" aria-hidden="true"></span>

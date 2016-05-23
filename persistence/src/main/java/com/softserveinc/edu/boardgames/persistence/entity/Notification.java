@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
@@ -37,6 +36,9 @@ public class Notification implements Serializable {
 	@Column(name = "message")
 	private String message = "no message";
 	
+	@Column(name = "userInvokerId")
+	private Integer userInvokerId = 0;
+	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, cascade={CascadeType.MERGE})
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private User user;
@@ -50,14 +52,22 @@ public class Notification implements Serializable {
 	
 	public Notification() {}
 
-	public Notification(Integer id, String type, String status, String message, User user, Date date) {
+	public Notification(Integer id, String type, String status, String message,
+			Integer userInvokerId, User user, Date date) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.status = status;
 		this.message = message;
+		this.userInvokerId = userInvokerId;
 		this.user = user;
 		this.date = date;
+	}
+	public Integer getUserInvokerId() {
+		return userInvokerId;
+	}
+	public void setUserInvokerId(Integer userInvokerId) {
+		this.userInvokerId = userInvokerId;
 	}
 	public String getMessage() {
 		return message;

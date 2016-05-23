@@ -92,6 +92,7 @@ homeApp
 								BAN_MODAL_SECOND: 'Your account have been banned due to Your inappropriate behavior',
 								BAN_MODAL_THIRD: 'If there is some mistake, please contact with the administration',
 								CONTACT_WITH_ADMINS: 'Contact admins',
+<<<<<<< HEAD
 								CHANGES_SAVED:'Changes saved',
 								IMAGE_UPLOAD_FAILED:'Failed to upload image. Try one more time',
 								IMAGE_UPLOAD:'Avatar uploaded',
@@ -101,6 +102,10 @@ homeApp
 								NEW_PASSWORD: 'Sorry, but Your password must contain at least one lower case symbol, '
 									+ 'one Upper case symbol, one number and be from 6 to 20 chars long',
 								CONFIRM_PASSWORD: 'Sorry, but You must confirm Your password',
+=======
+								CHANGES_SAVED:'changes saved',
+								MODERATE_EVENT: 'Moderate Events'
+>>>>>>> 67d3cd66e6362f05a8c61ea3e2d24d8ddd5ab490
 							});
 			$translateProvider
 					.translations(
@@ -194,6 +199,7 @@ homeApp
 								BAN_MODAL_SECOND: 'Вас було забанено через Вашу неприпустиму поведінку',
 								BAN_MODAL_THIRD: 'Якщо виникла якась помилка, будь ласка, зконтактуйтесь з адміністрацією',
 								CONTACT_WITH_ADMINS: 'Написати адміну',
+<<<<<<< HEAD
 								CHANGES_SAVED:'Зміни збережено',
 								IMAGE_UPLOAD_FAILED:'Фотографію не завантажено. Спробуйте ще раз',
 								IMAGE_UPLOAD:'Фотографію завантажено',
@@ -203,6 +209,10 @@ homeApp
 								NEW_PASSWORD: 'Вибачте, але Ваш пароль повинен містити хоча б одну маленьку літеру,'
 									+ 'одну велику літеру, одну цифру та бути від 6 до 20 символів',
 								CONFIRM_PASSWORD: 'Вибачте, але ви маэте пыдтвердити Ваш пароль',
+=======
+								MODERATE_EVENT: 'Модерувати Події'
+
+>>>>>>> 67d3cd66e6362f05a8c61ea3e2d24d8ddd5ab490
 							});
 			$translateProvider.preferredLanguage('en');
 			$translateProvider.useSanitizeValueStrategy('escape');

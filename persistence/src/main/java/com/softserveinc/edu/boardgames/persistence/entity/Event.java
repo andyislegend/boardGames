@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -33,31 +34,26 @@ public class Event implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column
+	@Column(nullable = false)
 	private String name;
 
-	@Column
+	@Column(length = 500)
 	private String description;
 
 	@Column
 	private Date date;
 
 	@Column
-	private String place;
+	private String location;
 
 	@Column
-	private String country;
+	private boolean isNew = true;
 
-	@Column
-	private String city;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
-	private User user;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
-	private Game game;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE }, mappedBy = "events")
+	private Set<User> users;
 
 	public Event() {
+
 	}
 
 	public Integer getId() {
@@ -92,44 +88,28 @@ public class Event implements Serializable {
 		this.date = date;
 	}
 
-	public String getPlace() {
-		return place;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setPlace(String place) {
-		this.place = place;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
-	public String getCountry() {
-		return country;
+	public boolean isNew() {
+		return isNew;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setNew(boolean isNew) {
+		this.isNew = isNew;
 	}
 
-	public String getCity() {
-		return city;
+	public Set<User> getUser() {
+		return users;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
+	public void setUser(Set<User> user) {
+		this.users = user;
 	}
 
 	@Override
@@ -145,11 +125,9 @@ public class Event implements Serializable {
 				.append(getId(), other.getId())
 				.append(getName(), other.getName())
 				.append(getDescription(), other.getDescription())
-				.append(getPlace(), other.getPlace())
+				.append(getLocation(), other.getLocation())
 				.append(getDate(), other.getDate())
-				.append(getCity(), other.getCity())
-				.append(getUser(), other.getUser())
-				.append(getCountry(), other.getCountry())
+				.append(isNew(), other.isNew())
 				.isEquals();
 	}
 
@@ -157,13 +135,11 @@ public class Event implements Serializable {
 	public int hashCode() {
 		return new HashCodeBuilder()
 				.append(getId())
-				.append(getUser())
 				.append(getName())
 				.append(getDescription())
-				.append(getPlace())
+				.append(getLocation())
 				.append(getDate())
-				.append(getCountry())
-				.append(getCity())
+				.append(isNew())
 				.toHashCode();
 	}
 
@@ -172,12 +148,9 @@ public class Event implements Serializable {
 		return new ToStringBuilder(this)
 				.append("id", getId())
 				.append("name", getName())
-				.append("user", getUser())
 				.append("date", getDate())
 				.append("description", getDescription())
-				.append("place", getPlace())
-				.append("city", getCity())
-				.append("country", getCountry())
+				.append("location", getLocation())
 				.toString();
 	}
 }
