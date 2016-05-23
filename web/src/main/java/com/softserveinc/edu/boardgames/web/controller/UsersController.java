@@ -105,7 +105,7 @@ public class UsersController {
 		City city = cityService.findById(userDTO.getCityId());
 		UserMapper.toEntity(userDTO, user, country, city);
 		userService.updateUser(user);
-		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
+		return new ResponseEntity<String>("CHANGES_SAVED", HttpStatus.OK);
 	}
 	
 	/**
@@ -153,9 +153,9 @@ public class UsersController {
 			fileUpload.transferTo(new File(savePath));
 		} catch(IOException e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("Failed to upload image. Try one more time", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("IMAGE_UPLOAD_FAILED", HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<String>("Avatar uploaded", HttpStatus.OK);
+		return new ResponseEntity<String>("IMAGE_UPLOAD", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/getUser"}, method = RequestMethod.GET)
@@ -171,7 +171,7 @@ public class UsersController {
 		User user = userService.findOne(username);
 		user.setState(UserStatus.BANNED.name());
 		userService.updateUser(user);
-		return new ResponseEntity<String>("User with username " + username + " was banned", HttpStatus.OK);
+		return new ResponseEntity<String>("USER_BAN", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
@@ -183,6 +183,6 @@ public class UsersController {
 			user.setUserRating(minimalRatingForActiveUser);
 		}
 		userService.updateUser(user);
-		return new ResponseEntity<String>("User with username " + username + " was unbanned", HttpStatus.OK);
+		return new ResponseEntity<String>("USER_UNBAN", HttpStatus.OK);
 	}
 }

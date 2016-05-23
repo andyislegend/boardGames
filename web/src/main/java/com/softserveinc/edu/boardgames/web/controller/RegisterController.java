@@ -192,24 +192,21 @@ public class RegisterController {
 		String oldPassword = userPasswordDTO.getOldPassword();
 		String newPassword = userPasswordDTO.getNewPassword();
 		String confirmPassword = userPasswordDTO.getNewPassword();
-		if (oldPassword == null || newPassword == null || confirmPassword == null) {
-			return new ResponseEntity<String>("Some of your fields are empty", HttpStatus.CONFLICT);
-		}
+
 		if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-			return new ResponseEntity<String>("Sorry, but you typed wrong old password", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("OLD_PASSWORD", HttpStatus.CONFLICT);
 		}
 
 		if (!validatePassword(newPassword)) {
-			return new ResponseEntity<String>("Sorry, but Your password must contain at least one lower case symbol, "
-					+ "one Upper case symbol, one number and be from 6 to 20 chars long", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("NEW_PASSWORD", HttpStatus.CONFLICT);
 		}
 
 		if (!newPassword.equals(confirmPassword)) {
-			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>("CONFIRM_PASSWORD", HttpStatus.CONFLICT);
 		}
 		user.setPassword(passwordEncoder.encode(newPassword));
 		userService.updateUser(user);
-		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
+		return new ResponseEntity<String>("CHANGES_SAVED", HttpStatus.OK);
 	}
 
 	private static boolean validateMail(String emailStr) {

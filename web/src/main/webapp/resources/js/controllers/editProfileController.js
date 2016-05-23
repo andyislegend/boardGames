@@ -57,13 +57,6 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	});
 	
 	$scope.saveUser = function() {
-		if ($scope.editableCountry == null) {
-			$scope.editableCountry.id = '';
-		}
-		
-		if ($scope.editableCity == null) {
-			$scope.editableCity.id = '';
-		}
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,
@@ -93,7 +86,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 			$scope.userProfile.phoneNumber = $scope.editablePhoneNumber;
 			$scope.editProfileMessage = false;
 		}).error(function(result, status) {
-			$scope.editProfileAnswer = result;
+			$scope.editProfileAnswer = result.data;
 			if ($scope.editProfileAnswer == "") {
 				$scope.editProfileAnswer = "You have typed inappropriate data";
 			}
