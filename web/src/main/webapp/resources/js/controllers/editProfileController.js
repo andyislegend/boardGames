@@ -18,15 +18,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
 		$scope.editableCity = $scope.userProfile.city;
-		$http.get('getAvatar').then(function(result) {
+		$http.get('getUsersAvatar?username=' + $scope.userProfile.username).then(function(result) {
 			$scope.avatar = result.data;
 		});
-		
-		if ($routeParams.username!=null) {
-			$http.get('getUsersAvatar?username=' + $scope.username).then(function(result) {
-				$scope.userAvatar = result.data;
-			});
-		}
 		
 		$http.get('getAllCountries').then(function(result) {
 			$scope.countries = result.data;

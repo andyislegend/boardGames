@@ -4,7 +4,11 @@ angular.module('homeApp').controller("getUser", function($scope, $http) {
 		var ratingInterval = 11;
 		$scope.neededRating = ratingInterval - $scope.user.userRating % 10;
 		document.getElementById("ratingBar").value= $scope.user.userRating;
+		$http.get('getUsersAvatar?username=' + $scope.user.username).then(function(result) {
+			$scope.avatar = result.data;
+		});
 	});
+	
 	
 	$scope.hovering = false;
     $scope.showIt = function () {
