@@ -92,8 +92,18 @@ homeApp
 								BAN_MODAL_SECOND: 'Your account have been banned due to Your inappropriate behavior',
 								BAN_MODAL_THIRD: 'If there is some mistake, please contact with the administration',
 								CONTACT_WITH_ADMINS: 'Contact admins',
-								CHANGES_SAVED:'changes saved',
+								CHANGES_SAVED:'Changes saved',
+								IMAGE_UPLOAD_FAILED:'Failed to upload image. Try one more time',
+								IMAGE_UPLOAD:'Avatar uploaded',
+								FOTO_ISNT_CHOOSED:'You haven\'t choosed the file',
+								USER_BAN: 'User with {{username}} was banned',
+								USER_UNBAN: 'User with {{username}} was unbanned',
+								OLD_PASSWORD_ANSWER: 'Sorry, but you typed wrong old password',
+								NEW_PASSWORD_ANSWER: 'Sorry, but Your password must contain at least one lower case symbol, '
+									+ 'one Upper case symbol, one number and be from 6 to 20 chars long',
+								CONFIRM_PASSWORD_ANSWER: 'Sorry, but You must confirm Your password',
 								MODERATE_EVENT: 'Moderate Events'
+
 							});
 			$translateProvider
 					.translations(
@@ -187,10 +197,19 @@ homeApp
 								BAN_MODAL_SECOND: 'Вас було забанено через Вашу неприпустиму поведінку',
 								BAN_MODAL_THIRD: 'Якщо виникла якась помилка, будь ласка, зконтактуйтесь з адміністрацією',
 								CONTACT_WITH_ADMINS: 'Написати адміну',
+								CHANGES_SAVED:'Зміни збережено',
+								IMAGE_UPLOAD_FAILED:'Фотографію не завантажено. Спробуйте ще раз',
+								IMAGE_UPLOAD:'Фотографію завантажено',
+								FOTO_ISNT_CHOOSED:'Ви не вибрали файл',
+								USER_BAN : 'Користувача з логіном {{username}} було забанено',
+								USER_UNBAN : 'Користувача з логіном {{username}} було розбанено',
+								OLD_PASSWORD_ANSWER: 'Вибачте, але Ви ввели невірний старий пароль',
+								NEW_PASSWORD_ANSWER: 'Вибачте, але Ваш пароль повинен містити хоча б одну маленьку літеру,'
+									+ 'одну велику літеру, одну цифру та бути від 6 до 20 символів',
+								CONFIRM_PASSWORD_ANSWER: 'Вибачте, але ви маєте підтвердити Ваш пароль',
 								MODERATE_EVENT: 'Модерувати Події'
 
 							});
-			$translateProvider.useUrlLoader('/messageBundle');
 			$translateProvider.preferredLanguage('en');
 			$translateProvider.useSanitizeValueStrategy('escape');
 			$translateProvider.useCookieStorage();

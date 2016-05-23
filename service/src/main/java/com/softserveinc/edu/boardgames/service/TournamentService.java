@@ -61,6 +61,10 @@ public class TournamentService {
     	return tournamentRepository.findAllTournamentsByWord(name);
     }
     
+    public List<TournamentsDTO> getAllTournamentByUserCreator(String username) {
+    	return tournamentRepository.getAllTournamentsByUserCreator(username);
+    }
+    
     /**
      *@author Vasyl Bervetskyy
      **/

@@ -12,10 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.edu.boardgames.persistence.entity.City;
+import com.softserveinc.edu.boardgames.persistence.entity.Country;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -40,8 +43,15 @@ public class UserService {
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
 
 	@Autowired
-	private VerificationTokenRepository tokenRepository;
+	private CountryService countryService;
+	
 
+	@Autowired
+	private CityService cityService;
+	
+	@Autowired
+	private VerificationTokenRepository tokenRepository;
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -102,8 +112,11 @@ public class UserService {
 	public boolean isExistsWithEmail(String email) {
 		return userRepository.findByEmail(email) != null;
 	}
-
+	
 	/**
+	 * This method for getting user by username
+	 * 
+	 * @author Volodymyr Terlyha
 	 * 
 	 * @param username
 	 *            finding user by username
@@ -111,23 +124,6 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public User getUser(String username) {
 		return userRepository.findByUsername(username);
-	}
-
-	@Transactional
-	public boolean changePassword(String username, String oldPassword, String newPassword) {
-		boolean isChanged = false;
-		if (username != null && oldPassword != null && newPassword != null) {
-			User user = userRepository.findByUsername(username);
-			if (user != null) {
-				PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				isChanged = passwordEncoder.matches(oldPassword, user.getPassword());
-				if (isChanged) {
-					user.setPassword(passwordEncoder.encode(newPassword));
-					userRepository.save(user);
-				}
-			}
-		}
-		return isChanged;
 	}
 
 	/**
@@ -156,9 +152,40 @@ public class UserService {
 	@Transactional
 	public void updateUser(User user) {
 		userRepository.saveAndFlush(user);
-		if (user.getUserRating() <= -5 || user.getState().equals(UserStatus.BANNED.name())) {
+	}
+	
+	/**
+	 * This method for getting user by username
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param username
+	 *            finding user by username
+	 */
+	@Transactional
+	public void banUser(User user) {
+		userRepository.saveAndFlush(user);
+		if (user.getState().equals(UserStatus.BANNED.name())) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		}
+	}
+	
+	/**
+	 * This method for updating user information
+	 * when editing user Profile
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param UserDTO
+	 *            information passed by user
+	 */
+	@Transactional
+	public void updateUser(UserDTO userDTO, String username) {
+		User user = findOne(username);
+		Country country = countryService.findById(userDTO.getCountryId());
+		City city = cityService.findById(userDTO.getCityId());
+		UserMapper.toEntity(userDTO, user, country, city);
+		userRepository.saveAndFlush(user);
 	}
 
 	/**
