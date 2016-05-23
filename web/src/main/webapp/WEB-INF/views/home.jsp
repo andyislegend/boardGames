@@ -211,16 +211,17 @@
                 <div>
                   <div>
                     <div ng-controller="CreateGameCtrl">
-                      <div class="centeredObjects">
-                        <a class="btn btn-success" >
-                        <span class="glyphicon glyphicon-plus" 
-                          data-toggle="modal"
-                          data-target="#myModalHorizontal"></span> 
-                        </a>
-                        <a href="#gameNotifications/{{username}}" class="btn btn-info" >
-                        <span class="glyphicon glyphicon-bell" ></span> 
-                        </a>
-                      </div>
+                    	<div class="centeredObjects">
+                        	<a class="btn btn-success" >
+                        		<span class="glyphicon glyphicon-plus" 
+                        			data-toggle="modal"
+                          			data-target="#myModalHorizontal"></span> 
+                        	</a>
+                        	<a href="#gameNotifications/{{username}}" class="btn btn-info" >
+                        		<span class="glyphicon glyphicon-bell" ></span> 
+                        	</a>
+                        	<span class="badge badge-notify">{{uncheckedNotifiCount}}</span>
+                      	</div>
                       <br/>
                       <div class="modal fade" id="myModalHorizontal" tabindex="-1"
                         role="dialog" aria-labelledby="myModalLabel"
