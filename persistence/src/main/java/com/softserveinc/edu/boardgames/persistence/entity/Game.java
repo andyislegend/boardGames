@@ -46,9 +46,6 @@ public class Game implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Category.class, cascade={CascadeType.ALL})
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private Category category;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="game", cascade={CascadeType.ALL})
-    private List<Event> events;
 		
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
@@ -82,14 +79,6 @@ public class Game implements Serializable{
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
 	}
 
 	public Set<GameUser> getUserGames() {

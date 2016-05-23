@@ -92,7 +92,8 @@ homeApp
 								BAN_MODAL_SECOND: 'Your account have been banned due to Your inappropriate behavior',
 								BAN_MODAL_THIRD: 'If there is some mistake, please contact with the administration',
 								CONTACT_WITH_ADMINS: 'Contact admins',
-								CHANGES_SAVED:'changes saved'
+								CHANGES_SAVED:'changes saved',
+								MODERATE_EVENT: 'Moderate Events'
 							});
 			$translateProvider
 					.translations(
@@ -185,7 +186,8 @@ homeApp
 								BAN_MODAL_FIRST: 'Доступ до Вашого акаунту було тимчасово заблоковано',
 								BAN_MODAL_SECOND: 'Вас було забанено через Вашу неприпустиму поведінку',
 								BAN_MODAL_THIRD: 'Якщо виникла якась помилка, будь ласка, зконтактуйтесь з адміністрацією',
-								CONTACT_WITH_ADMINS: 'Написати адміну'
+								CONTACT_WITH_ADMINS: 'Написати адміну',
+								MODERATE_EVENT: 'Модерувати Події'
 
 							});
 			$translateProvider.useUrlLoader('/messageBundle');

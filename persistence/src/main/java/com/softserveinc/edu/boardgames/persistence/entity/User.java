@@ -180,13 +180,16 @@ public class User implements Serializable {
 	/**
 	 * Describes connection to events table.
 	 */
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Event> events;
+	@ElementCollection
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "subscribed_events",joinColumns = {@JoinColumn(name = "user_id")},
+	inverseJoinColumns = {@JoinColumn(name = "event_id")})
+	private Set<Event> events;
 	
 	/**
 	 * Describes a connection to verification token entity
 	 */
-	@OneToOne (mappedBy="user")
+	@OneToOne (mappedBy="user", cascade = CascadeType.ALL)
 	private VerificationToken verificationToken;
 
 	public User() {
@@ -328,11 +331,11 @@ public class User implements Serializable {
 		this.tournaments = tournaments;
 	}
 	
-	public List<Event> getEvents() {
+	public Set<Event> getEvents() {
 		return events;
 	}
 
-	public void setEvents(List<Event> events) {
+	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
 
