@@ -17,9 +17,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
+import com.softserveinc.edu.boardgames.persistence.entity.City;
+import com.softserveinc.edu.boardgames.persistence.entity.Country;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
@@ -87,14 +90,9 @@ public class UsersController {
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		user.setFirstName(userDTO.getFirstName());
-		user.setLastName(userDTO.getLastName());
-		user.setEmail(userDTO.getEmail());
-		user.setGender(userDTO.getGender());
-		user.setAge(userDTO.getAge());
-		user.setPhoneNumber(userDTO.getPhoneNumber());
-		user.setCountry(countryService.findById(userDTO.getCountryId()));
-		user.setCity(cityService.findById(userDTO.getCityId()));
+		Country country = countryService.findById(userDTO.getCountryId());
+		City city = cityService.findById(userDTO.getCityId());
+		UserMapper.toEntity(userDTO, user, country, city);
 		userService.updateUser(user);
 		return new ResponseEntity<String>("Changes saved", HttpStatus.OK);
 	}
@@ -142,20 +140,22 @@ public class UsersController {
 	 */
 	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload)
-			throws IOException {
-		try {
-
-		User user = userService.findOne(WebUtil.getPrincipalUsername());		
+	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload) {
+		
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		
+		String savePath = imageConfiguration.getAvatarPackage(user.getUsername());
+		
 		Image image = new Image();
 		image.setUser(user);
 		image.setImageName(user.getUsername());
-		image.setImageLocation(imageConfiguration.getAvatarPackage(user.getUsername()));
+		image.setImageLocation(savePath);
 		imageService.create(image);
-		String saveDirectory = image.getImageLocation();
-		fileUpload.transferTo(new File(saveDirectory));
-
+				
+		try {
+			fileUpload.transferTo(new File(savePath));
 		} catch(IOException e) {
+			e.printStackTrace();
 			return new ResponseEntity<String>("Failed to upload image. Try one more time", HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<String>("Avatar uploaded", HttpStatus.OK);

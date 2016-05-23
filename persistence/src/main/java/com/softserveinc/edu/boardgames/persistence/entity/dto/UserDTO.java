@@ -1,13 +1,9 @@
 package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
-import java.util.Set;
-
-import com.softserveinc.edu.boardgames.persistence.entity.Game;
-import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
+import java.util.List;
 
 public class UserDTO {
 	private Integer id;
-	private String username;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -18,36 +14,6 @@ public class UserDTO {
 	private Integer cityId;
 	private String countryName;
 	private String cityName;
-	private Set <Game> userGames;
-	private Set <Tournament> userTournaments;
-	
-	public UserDTO() {	
-	}
-	
-	public UserDTO(Integer id, String username, String firstName, String lastName, String email, String gender,
-			Integer age, String phoneNumber, String countryName, String cityName, Set<Game> userGames,
-			Set<Tournament> userTournaments) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.gender = gender;
-		this.age = age;
-		this.phoneNumber = phoneNumber;
-		this.countryName = countryName;
-		this.cityName = cityName;
-		this.userGames = userGames;
-		this.userTournaments = userTournaments;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 	public String getCountryName() {
 		return countryName;
 	}
@@ -60,16 +26,19 @@ public class UserDTO {
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
-	public Set<Game> getUserGames() {
+	private List<GameUserDTO> userGames;
+	private List<AllTournamentsDTO> userTournaments;
+	
+	public List<GameUserDTO> getUserGames() {
 		return userGames;
 	}
-	public void setUserGames(Set<Game> userGames) {
+	public void setUserGames(List<GameUserDTO> userGames) {
 		this.userGames = userGames;
 	}
-	public Set<Tournament> getUserTournaments() {
+	public List<AllTournamentsDTO> getUserTournaments() {
 		return userTournaments;
 	}
-	public void setUserTournaments(Set<Tournament> userTournaments) {
+	public void setUserTournaments(List<AllTournamentsDTO> userTournaments) {
 		this.userTournaments = userTournaments;
 	}
 	public Integer getCountryId() {

@@ -101,12 +101,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	public void updateUserRating(@Param("addUserRating") Integer addUserRating, @Param("username") String username);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllTournamentsDTO" +
-			"(t.id, t.name) from Tournament t Join t.users u where u.username =:username")
+			"(t.id, t.name, t.users.id) from Tournament t")
 	public List<AllTournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO" +
 			"(u.id, u.username, u.firstName, u.lastName, u.email, u.gender, u.age, u.phoneNumber, "
-			+ "u.country.name, u.city.name, u.userGames, u.tournaments) from User u")
+			+ "u.country.id, u.city.id, u.country.name, u.city.name) from User u")
 	public List<UserDTO> getAllUserDTO();
 	
 }

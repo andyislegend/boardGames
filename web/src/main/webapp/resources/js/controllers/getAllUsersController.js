@@ -6,7 +6,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$scope.showUser = false;
 		$scope.getInfoAboutUserFunc = function(username) {
 			for (var i = 0; i < $scope.users.length; i++) {
-				if ($scope.users[i].username === username) {
+				if ($scope.users[i].username == username) {
 					$scope.oneUser = $scope.users[i];
 					break;
 				};
