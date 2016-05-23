@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $route, $timeout) {
+angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $route, $timeout, $rootScope) {
 	$scope.showText = false;
 	$scope.categories = [];
 	$scope.showForm = function() {
@@ -41,7 +41,7 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		}, function errorCallback(response) {
 		});
 		
-		$scope.$parent.allGame.push(userGame);	
+		$rootScope.allGame.push(userGame);	
 		$route.reload();
 		$scope.name = '';
 		$scope.category = '';
