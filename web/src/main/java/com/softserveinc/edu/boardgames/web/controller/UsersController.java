@@ -74,8 +74,7 @@ public class UsersController {
 	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
 	@ResponseBody
 	public List<User> getAllUsers() {
-		List<User> userList = userService.findAll();
-		return userList;
+		return userService.findAll();
 	}
 	
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
