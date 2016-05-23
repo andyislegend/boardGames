@@ -185,6 +185,16 @@ public class RegisterController {
 		return "userinfo";
 	}
 
+	/**
+	 * 
+	 * @param UserPasswordDTO
+	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
+	 * 
+	 *         Method that update user password and return
+	 *         HttpStatus.CONFLICT with error message if there is invalid data
+	 *         in fields provided by user or return HttpStatus.OK if all data
+	 *         is correct
+	 */
 	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUserPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
