@@ -73,9 +73,9 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     }
     
     $scope.isContains = function(username){
-     for(var i = 0; i<$scope.tournamentParticipants.length-1; i++) {
+     for(var i = 0; i<$scope.tournamentParticipants.length; i++) {
       if($scope.tournamentParticipants[i].username === username) {
-       return true;
+    	  return true;
       }else{
        return false;
       }   
