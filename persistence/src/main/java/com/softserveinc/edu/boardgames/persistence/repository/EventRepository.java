@@ -42,6 +42,11 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country.name, event.city.name) "
 			+ "from Event event where event.user like %:user%")
 	List<AllEventsDto> getAllUsersEvents(@Param("user") User user);
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto"
+			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country.name, event.city.name) "
+			+ "from Event event where event.id like %:id%")
+	public AllEventsDto getEventDTOById(@Param("id") Integer id);
 
 //	/**
 //	 * @author Vasyl Bervetskyy

@@ -69,6 +69,10 @@ public class EventService {
 	public List<AllEventsDto> getAllEventsByEventsName(String name) {
 		return eventRepository.getAllEventsByEventName(name);
 	}
+	
+	public AllEventsDto getEventDTObyID(Integer id) {
+		return eventRepository.getEventDTOById(id);
+	}
 
 //	/**
 //	 * @author Vasyl Bervetskyy
