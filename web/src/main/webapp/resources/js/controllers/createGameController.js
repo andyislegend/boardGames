@@ -42,7 +42,7 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		});
 		
 		$rootScope.allGame.push(userGame);	
-		$route.reload();
+		$('#myModalHorizontal').modal('hide');
 		$scope.name = '';
 		$scope.category = '';
 		$scope.year = '';
@@ -51,6 +51,7 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		$scope.rules = '';
 		$scope.maxPlayers = '';
 		$scope.minPlayers = '';
+		
 		
 	};
 });

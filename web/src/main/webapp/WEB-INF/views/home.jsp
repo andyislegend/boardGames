@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="resources/css/friend.css" />
     <link rel="stylesheet" href="resources/css/editPage.css" />
     <link rel="stylesheet" href="resources/css/gameUser.css" />
+    <link rel="stylesheet" href="resources/css/tornaments.css" />
     <!-- End of CSS -->
     <!-- Scripts -->
     <script type="text/javascript"
