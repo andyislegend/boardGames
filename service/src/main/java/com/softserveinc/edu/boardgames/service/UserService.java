@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -11,20 +13,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.persistence.entity.City;
 import com.softserveinc.edu.boardgames.persistence.entity.Country;
+import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenRepository;
+import com.softserveinc.edu.boardgames.service.configuration.ImageConfiguration;
 
 /**
  * UserService.class responsible for realization of DB CRUD and other operation
@@ -41,13 +46,20 @@ public class UserService {
 	 * 
 	 */
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
+	
+	public static final String CHECK_LOGGED_IN_USERNAME = "Logged in user";
 
 	@Autowired
 	private CountryService countryService;
 	
-
 	@Autowired
 	private CityService cityService;
+	
+	@Autowired
+	private ImageConfiguration imageConfiguration;
+	
+	@Autowired
+	private ImageService imageService;
 	
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
@@ -68,6 +80,10 @@ public class UserService {
 	}
 
 	public UserService(UserRepository userRepository) {
+	}
+	
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 	/**
@@ -112,19 +128,6 @@ public class UserService {
 	public boolean isExistsWithEmail(String email) {
 		return userRepository.findByEmail(email) != null;
 	}
-	
-	/**
-	 * This method for getting user by username
-	 * 
-	 * @author Volodymyr Terlyha
-	 * 
-	 * @param username
-	 *            finding user by username
-	 */
-	@Transactional(readOnly = true)
-	public User getUser(String username) {
-		return userRepository.findByUsername(username);
-	}
 
 	/**
 	 * Check if the username with {@code username} exists in database and return
@@ -162,6 +165,19 @@ public class UserService {
 	 * @param username
 	 *            finding user by username
 	 */
+	@Transactional(readOnly = true)
+	public User getUser(String username) {
+		return userRepository.findByUsername(username);
+	}
+	
+	/**
+	 * This method for banning user
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param User
+	 *            finding user to ban
+	 */
 	@Transactional
 	public void banUser(User user) {
 		userRepository.saveAndFlush(user);
@@ -187,6 +203,45 @@ public class UserService {
 		UserMapper.toEntity(userDTO, user, country, city);
 		userRepository.saveAndFlush(user);
 	}
+	
+	/**
+	 * This method for getting user profile
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param User
+	 *            finding user to ban
+	 */
+	@Transactional
+	public User getUserProfile(String username, String loggedInUserUsername) {
+		if (!username.equals(CHECK_LOGGED_IN_USERNAME)) {
+			return findOne(username);
+		}
+		return findOne(loggedInUserUsername);
+	}
+	
+	public String getAvatarUrl(String username) {
+		String avatarUrl = imageConfiguration.getAvatarUrl(username);
+		if (imageService.findImageNameByUsername(username) == null) {
+			if (findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
+				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
+			} else {
+				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
+			}
+		}
+		return avatarUrl;
+	}
+	
+	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
+		User user = findOne(username);	
+		String savePath = imageConfiguration.getAvatarPackage(username);	
+		Image image = new Image();
+		image.setUser(user);
+		image.setImageName(user.getUsername());
+		image.setImageLocation(savePath);
+		imageService.create(image);		
+		fileUpload.transferTo(new File(savePath));
+	}
 
 	/**
 	 * Add to User with {@code username} User Role {@code ADMIN}
@@ -204,10 +259,7 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	@Transactional
-	public List<User> findAll() {
-		return userRepository.findAll();
-	}
+
 
 	/**
 	 * 
@@ -328,10 +380,6 @@ public class UserService {
 	
 	public void removeToken(VerificationToken token) {
 		tokenRepository.delete(token);
-	}
-	
-	public List<TournamentsDTO> getUserTournamentsByUserName(String username) {
-		return userRepository.getUserTournamentsByUserName(username);
 	}
 
 	public List<VerificationToken> findAllTokens() { 

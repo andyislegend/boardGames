@@ -108,18 +108,4 @@ public class TournamentController {
     	tournament.setDateOfTournament(date);
     	tournamentService.update(tournament);
     }
-    
-	
-	/**
-	 * Returns needed information about tournaments that user took part.
-	 *
-	 * @param userName
-	 *            username of user, who's tournaments we want to find
-	 */
-	@RequestMapping(value = {"/allUsersTournaments"}, method = RequestMethod.GET)
-	@ResponseBody
-	public List<TournamentsDTO> findUserGames(@RequestParam("username") String username) {
-		List<TournamentsDTO> allGames = userService.getUserTournamentsByUserName(username);
-		return allGames;
-	}
 }

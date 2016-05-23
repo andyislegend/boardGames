@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,14 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.softserveinc.edu.boardgames.configuration.ImageConfiguration;
-import com.softserveinc.edu.boardgames.persistence.entity.City;
-import com.softserveinc.edu.boardgames.persistence.entity.Country;
-import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
-import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
@@ -33,7 +26,7 @@ import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
- * Controller for receiving all users.
+ * Controller for receiving information about users.
  * 
  * @author Volodymyr Terlyha
  *
@@ -42,8 +35,6 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class UsersController {
 	
 	public static final Integer minimalRatingForActiveUser = -4;
-	
-	public static final String checkingLoggedInUsername = "Logged in user";
 
 	@Autowired
 	ImageService imageService;
@@ -61,13 +52,8 @@ public class UsersController {
 	TournamentService tournamentService;
 	
 	@Autowired
-	ImageConfiguration imageConfiguration;
-	
-	@Autowired
 	CommonsMultipartResolver resolver;
 	
-	
-
 	/**
 	 * Returns all users.
 	 */
@@ -78,7 +64,7 @@ public class UsersController {
 	}
 	
 	/**
-	 * Returns all users.
+	 * Returns information about one User
 	 */
 	@RequestMapping(value = {"/getUserDTO"}, method = RequestMethod.GET)
 	@ResponseBody
@@ -89,12 +75,7 @@ public class UsersController {
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
 	public User getUserProfile(@RequestParam("username") String username) {
-		if (!username.equals("Logged in user")) {
-			User user = userService.findOne(username);
-			return user;
-		}
-		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		return user;
+		return userService.getUserProfile(username, WebUtil.getPrincipalUsername());
 	}
 	
 	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
@@ -113,19 +94,7 @@ public class UsersController {
 	@RequestMapping(value = {"/getUsersAvatar"}, method = RequestMethod.GET)
 	@ResponseBody
 	public String getUsersAvatar(@RequestParam("username") String username) {
-		if (username.equals(checkingLoggedInUsername)) {
-			username = WebUtil.getPrincipalUsername();
-		}
-		String avatarUrl = imageConfiguration.getAvatarUrl(username);
-		String imageName = imageService.findImageNameByUsername(username);
-		if (imageName == null) {
-			if (userService.findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
-				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
-			} else {
-				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
-			}
-		}
-		return avatarUrl;
+		return userService.getAvatarUrl(username);
 	}
 	
 	/**
@@ -134,19 +103,8 @@ public class UsersController {
 	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> updateUsersAvatar(@RequestParam("fileUpload") CommonsMultipartFile fileUpload) {
-		
-		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		
-		String savePath = imageConfiguration.getAvatarPackage(user.getUsername());
-		
-		Image image = new Image();
-		image.setUser(user);
-		image.setImageName(user.getUsername());
-		image.setImageLocation(savePath);
-		imageService.create(image);
-				
 		try {
-			fileUpload.transferTo(new File(savePath));
+			userService.updateAvatar(fileUpload, WebUtil.getPrincipalUsername());
 		} catch(IOException e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("IMAGE_UPLOAD_FAILED", HttpStatus.CONFLICT);
