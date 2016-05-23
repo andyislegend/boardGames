@@ -1,31 +1,39 @@
 <div ng-controller = "showAllTournamentsCtrl">
-<button ng-disabled = "joinStatus" ng-click = "joinToTournament(tournament.tournamentId)">Join</button>
-<button ng-disabled = "joinStatus" ng-click = "leaveTournament(tournament.tournamentId)">Quit</button>
+
+<div id = "wrapper">
+<div id = "c1">
 	<h2>{{status}}</h2>
 	<h1>{{tournament.tournamentName}}</h1>
 	<p>Count of participants: {{tournamentParticipants.length}} of {{tournament.countOfParticipants}}</p>
 	<p>User creator: {{tournament.userCreatorName}}</p>
 	<p>date of tournament: {{tournament.dateOfTournament | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
-	<p>Participants :</p>
-	<table class = "table"id ="table-showParticipants">
+	<button ng-disabled = "!joinStatus" ng-click = "joinToTournament(tournament.tournamentId)" class="btn btn-info">Join</button>
+	<button ng-disabled = "!quitStatus" ng-click = "leaveTournament(tournament.tournamentId)" class="btn btn-info">Quit</button>
+	
+</div>
+<div id = "c2" >
+	<table class = "table" id ="table-showParticipants">
 	<tr><th>Participants<th></tr>
 	<tr ng-repeat = "user in tournamentParticipants"><td>{{user.username}}<td></tr>
 	</table>
 	
-	<div ng-show = "isCreator">
-	<form>
-	<input type = "date" data-ng-model = "changeTournamentDate">
-	<input type = "submit" value="Change" ng-click = "changeDataOfTournament()">
-	</form>
-	
-	
-	<button ng-disabled ="!isOpenGiveRate"  type="button" class="btn btn-info btn-lg btn-giveRate" data-toggle="modal" data-target="#myModal">Give a rate</button>
+	<div ng-show = "isCreator" id = "wrapper">
+		<form id = "c1">
+		<input type = "date" data-ng-model = "changeTournamentDate">
+		<input type = "submit" value="Change" ng-click = "changeDataOfTournament()">
+		</form>	
+		<button id = "c3" ng-disabled ="!isOpenGiveRate"  type="button" class="btn" data-toggle="modal" data-target="#myModal">Give a rate</button>
 	</div>
-	
+</div>	
+
+<div id = "c1c">
+	<p>GHGJHGHGVhh</p>
+</div>
+</div>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
+    
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" ng-click = "changeStatusToRate()" class="close" data-dismiss="modal">&times;</button>
@@ -33,7 +41,7 @@
       <div class="modal-body">
        <table class = "table">
 	<tr><th>User</th><th>Mark</th><th>Give Mark</th></tr>
-	<form >
+	<form>
 	<tr ng-repeat = "user in tournamentParticipants">
 		<td>{{user.username}}</td>
 		<td><input type="number" min="-2" max="3" ng-model = "rate"></td>
