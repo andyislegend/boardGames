@@ -4,6 +4,7 @@ import java.util.List;
 
 public class UserDTO {
 	private Integer id;
+	private String username;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -14,9 +15,44 @@ public class UserDTO {
 	private Integer cityId;
 	private String countryName;
 	private String cityName;
+	private Integer userRating;
 	private List<GameUserDTO> userGames;
 	private List<TournamentsDTO> userTournaments;
 	
+	public UserDTO() {	
+	}
+	
+	public UserDTO(Integer id, String username, String firstName, String lastName, String email, String gender, Integer age,
+					String phoneNumber, Integer countryId, Integer cityId, String countryName, String cityName, Integer userRating) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.gender = gender;
+		this.age = age;
+		this.phoneNumber = phoneNumber;
+		this.countryId = countryId;
+		this.cityId = cityId;
+		this.countryName = countryName;
+		this.cityName = cityName;
+		this.userRating = userRating;
+	}
+	
+	public Integer getUserRating() {
+		return userRating;
+	}
+
+	public void setUserRating(Integer userRating) {
+		this.userRating = userRating;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getCountryName() {
 		return countryName;
 	}

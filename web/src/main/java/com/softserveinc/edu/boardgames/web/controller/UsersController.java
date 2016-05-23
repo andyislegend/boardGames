@@ -77,6 +77,15 @@ public class UsersController {
 		return userService.findAll();
 	}
 	
+	/**
+	 * Returns all users.
+	 */
+	@RequestMapping(value = {"/getUserDTO"}, method = RequestMethod.GET)
+	@ResponseBody
+	public UserDTO getUserDTO(@RequestParam("username") String username) {
+		return userService.getUserDTO(username);
+	}
+	
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
 	public User getUser(@RequestParam("username") String username) {
