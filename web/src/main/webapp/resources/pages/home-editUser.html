@@ -63,7 +63,11 @@
 						<label class="col-md-3 control-lable" translate="EMAIL">Email:</label>
 						<div class="col-md-5">
 							<p ng-hide="myProfile">{{userProfile.email}}</p>
-							<input type="email" ng-model="editableEmail" class="form-control input-sm" ng-show="myProfile">
+								<input name="input" type="email" ng-model="editableEmail" class="form-control input-sm" 
+								ng-show="myProfile" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required>
+								<span class="error" ng-show="editProfile.email.$error.email">
+        							Not a valid email!
+      							</span>
 						</div>
 					</div>
 				</div>

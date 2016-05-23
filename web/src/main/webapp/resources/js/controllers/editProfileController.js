@@ -94,6 +94,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 			$scope.editProfileMessage = false;
 		}).error(function(result, status) {
 			$scope.editProfileAnswer = result;
+			if ($scope.editProfileAnswer == "") {
+				$scope.editProfileAnswer = "You have typed inappropriate data";
+			}
 		})
 
 	}
