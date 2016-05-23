@@ -9,10 +9,17 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 	});
 	
 	$http({
-		method : "GET",
-		url : 'getPrincipalUsername'
+		method : "GET", url : 'getPrincipalUsername'
 	}).then(function mySucces(response) {
 		$scope.username = response.data;
+	}, function myError(response) {
+		alert("getting unchecked notifications count error");
+	});
+	
+	$http({
+		method : "GET", url : 'getCountOfNotifications'
+	}).then(function mySucces(response) {
+		$scope.uncheckedNotifiCount = response.data;
 	}, function myError(response) {
 		alert("getting principal username error");
 	});

@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 
@@ -102,5 +103,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
 			"(t.id, t.name) from Tournament t Join t.users u where u.username =:username")
 	public List<TournamentsDTO> getUserTournamentsByUserName(@Param("username")String username);
+
+	
+/*	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO" +
+			"(u.id, u.username, u.firstName, u.lastName, u.email, u.gender, u.age, u.phoneNumber, "
+			+ "u.country.id, u.city.id, u.country.name, u.city.name) from User u")
+	public List<UserDTO> getAllUserDTO();*/
 	
 }

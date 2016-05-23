@@ -6,7 +6,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$scope.showUser = false;
 		$scope.getInfoAboutUserFunc = function(username) {
 			for (var i = 0; i < $scope.users.length; i++) {
-				if ($scope.users[i].username === username) {
+				if ($scope.users[i].username == username) {
 					$scope.oneUser = $scope.users[i];
 					break;
 				};
@@ -89,12 +89,18 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 	});
 	
 	$scope.banUser = function(username) {
-		$http.put('banUser?username='+ username).then(function(result) {
-		});
+		$http.put('banUser?username='+ username)
+		.success(function(result, status){
+			$("#bannedUsers").modal('show');
+	    	$scope.bannedUsers = result;
+        });
 	}
 	
 	$scope.unbanUser = function(username) {
-		$http.put('unbanUser?username='+ username).then(function(result) {
-		});
+		$http.put('unbanUser?username='+ username)
+		.success(function(result, status){
+			$("#bannedUsers").modal('show');
+	    	$scope.bannedUsers = result;
+        });
 	}
 });

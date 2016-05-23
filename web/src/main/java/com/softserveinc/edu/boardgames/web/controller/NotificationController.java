@@ -85,4 +85,9 @@ public class NotificationController {
 		notificationService.update(notify);
 	}
 	
+	@RequestMapping(value = "/getCountOfNotifications", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer getCountOfNotifications() {
+		return notificationService.getCountOfGameNotifications(WebUtil.getPrincipalUsername());
+	}
 }
