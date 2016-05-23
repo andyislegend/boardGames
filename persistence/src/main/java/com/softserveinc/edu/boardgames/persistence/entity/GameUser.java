@@ -64,7 +64,7 @@ public class GameUser implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.REMOVE})
 	private Game game;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	private User user;
 	
 	@OneToOne(mappedBy="gameUser")

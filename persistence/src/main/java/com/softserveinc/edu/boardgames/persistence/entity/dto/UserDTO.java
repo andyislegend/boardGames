@@ -14,6 +14,9 @@ public class UserDTO {
 	private Integer cityId;
 	private String countryName;
 	private String cityName;
+	private List<GameUserDTO> userGames;
+	private List<TournamentsDTO> userTournaments;
+	
 	public String getCountryName() {
 		return countryName;
 	}
@@ -26,8 +29,6 @@ public class UserDTO {
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
-	private List<GameUserDTO> userGames;
-	private List<AllTournamentsDTO> userTournaments;
 	
 	public List<GameUserDTO> getUserGames() {
 		return userGames;
@@ -35,10 +36,10 @@ public class UserDTO {
 	public void setUserGames(List<GameUserDTO> userGames) {
 		this.userGames = userGames;
 	}
-	public List<AllTournamentsDTO> getUserTournaments() {
+	public List<TournamentsDTO> getUserTournaments() {
 		return userTournaments;
 	}
-	public void setUserTournaments(List<AllTournamentsDTO> userTournaments) {
+	public void setUserTournaments(List<TournamentsDTO> userTournaments) {
 		this.userTournaments = userTournaments;
 	}
 	public Integer getCountryId() {

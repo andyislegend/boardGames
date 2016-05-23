@@ -135,8 +135,8 @@ public class User implements Serializable {
 	@Column(name = "state", nullable = false)
 	private String state = UserStatus.UNDER_VERIFICATION.name();
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-	private Set<GameUser> userGames;
+/*	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+	private Set<GameUser> userGames;*/
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Exchange> exchanges;
@@ -344,13 +344,13 @@ public class User implements Serializable {
 		this.verificationToken = verificationToken;
 	}
 
-	public Set<GameUser> getUserGames() {
+/*	public Set<GameUser> getUserGames() {
 		return userGames;
 	}
 
 	public void setUserGames(Set<GameUser> userGames) {
 		this.userGames = userGames;
-	}
+	}*/
 
 	@PostUpdate
 	@PreUpdate
