@@ -28,23 +28,23 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	void delete(Event event);
 
 	 @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto"
-	 + "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country.name, event.city.name) "
+	 + "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country, event.city) "
 	 + "from Event event where event.name like %:name%")
 	 public List<AllEventsDto> getAllEventsByEventName(@Param("name") String
 	 name);
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto"
-			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country.name, event.city.name) "
+			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country, event.city) "
 			+ "from Event event")
 	List<AllEventsDto> getAllEvents();
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto"
-			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country.name, event.city.name) "
+			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country, event.city) "
 			+ "from Event event where event.user like %:user%")
 	List<AllEventsDto> getAllUsersEvents(@Param("user") User user);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto"
-			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country.name, event.city.name) "
+			+ "(event.name, event.description, event.place, event.game.name, event.user.username, event.date, event.country, event.city) "
 			+ "from Event event where event.id like %:id%")
 	public AllEventsDto getEventDTOById(@Param("id") Integer id);
 
