@@ -189,22 +189,17 @@ public class RegisterController {
 	@ResponseBody
 	public ResponseEntity<String> updateUserPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		String oldPassword = userPasswordDTO.getOldPassword();
-		String newPassword = userPasswordDTO.getNewPassword();
-		String confirmPassword = userPasswordDTO.getNewPassword();
-
-		if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-			return new ResponseEntity<String>("OLD_PASSWORD", HttpStatus.CONFLICT);
-		}
-
-		if (!validatePassword(newPassword)) {
-			return new ResponseEntity<String>("NEW_PASSWORD", HttpStatus.CONFLICT);
-		}
-
-		if (!newPassword.equals(confirmPassword)) {
-			return new ResponseEntity<String>("CONFIRM_PASSWORD", HttpStatus.CONFLICT);
-		}
-		user.setPassword(passwordEncoder.encode(newPassword));
+		if (userPasswordDTO.getOldPassword() == null || userPasswordDTO.getNewPassword() == null 
+				|| userPasswordDTO.getConfirmPassword() == null) {
+				return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		} else if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
+			return new ResponseEntity<String>("OLD_PASSWORD_ANSWER", HttpStatus.CONFLICT);
+		} else if (!validatePassword(userPasswordDTO.getNewPassword())) {
+			return new ResponseEntity<String>("NEW_PASSWORD_ANSWER", HttpStatus.CONFLICT);
+		} else if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
+			return new ResponseEntity<String>("CONFIRM_PASSWORD_ANSWER", HttpStatus.CONFLICT);
+		}		
+		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
 		userService.updateUser(user);
 		return new ResponseEntity<String>("CHANGES_SAVED", HttpStatus.OK);
 	}

@@ -136,7 +136,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 
 	$scope.uploadAvatar = function() {
 		if ($scope.myFile == null) {
-			return $scope.editAvatarAnswer = "You haven't choosed the file";			
+			return $scope.editAvatarAnswer = "FOTO_ISNT_CHOOSED";			
 		}
 		if ($scope.myFile.size > 5242880) {
 			return $scope.editAvatarAnswer = "The file size must be less than 5MB";			
