@@ -54,22 +54,22 @@ INSERT INTO city (name, countryId) VALUES ('Bytom', 2);
 
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000',  0,'GODLIKE', 'female', 'ACTIVE', 'root', 1, 1,FALSE);
+(99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000',  63,'EXTRATERESTRIAL', 'female', 'ACTIVE', 'root', 1, 1,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
 (25, 'kravets@gmail.com', 'Artem', 'Kravets', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0,'NOOB', 'male', 'ACTIVE', 'kravets', 1, 2,FALSE);
 
 INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `gender`, `lastName`, `password`, `phoneNumber`, `rating`, `state`, `userRating`, `username`, `countryId`, `cityId`,tournamentRatingStatus) 
-VALUES (NULL, '45', 'prosinecki', 'vladislav', 'male', 'prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '2', '33',FALSE);
+VALUES (NULL, '45', 'prosinecki@pl.net', 'Vladislav', 'male', 'Prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '2', '33',FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(37, 'bondar@gmail.com', 'Ivan', 'Bondar', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0,'NOOB', 'male', 'ACTIVE', 'bondar', 1, 13,FALSE);
+(28, 'vterlyha@gmail.com', 'Volodymyr', 'Terlyha', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380935787496', 23,'PRO', 'male', 'ACTIVE', 'vterlyha', 1, 13,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(37, 'khariv@gmail.com', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0, 'NOOB', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE);
+(37, 'khariv@gmail.com', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 34, 'VETERAN', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  0,'NOOB', 'male', 'ACTIVE', 'winston', 2, 32,FALSE);
+(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  55,'WICKED_SICK', 'male', 'ACTIVE', 'winston', 2, 32,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
 (25, 'borodin@gmail.com', 'Vitalik', 'Borodin', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987454', 0,'NOOB', 'male', 'ACTIVE', 'borodin', 1, 13,FALSE);
@@ -172,6 +172,14 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '12
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '13', '1');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '15', '1');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '16', '1');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '2');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '3');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '4', '4');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '4', '5');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '2');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '3');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '4');
+INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '6');
 
 -- inserts to table tournaments
 INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id` ) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Monopoly', '2', '8');
