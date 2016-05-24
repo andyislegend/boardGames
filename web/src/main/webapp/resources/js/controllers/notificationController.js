@@ -10,5 +10,6 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
         $scope.allNotification = data;
     }).error(function(error){
         console.log(error);
-    });	
+    });
+    $scope.currentDate = new Date();
 }]);

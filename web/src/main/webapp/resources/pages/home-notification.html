@@ -3,22 +3,21 @@
     
     
     <table ng-table="allNotification" class="table">
-		<tr ng-repeat="notification in allNotification | orderBy: '-date'" class="table">
+		<tr ng-repeat="notification in allNotification | orderBy: ['-statusOfReading', '-date']" class="table">
             <td title="" class="type-header" >
 					{{notification.type}}
             </td>
             <td title="" class="sign-header">
                     <img class="notification-message" src="resources/ico/{{notification.type.toLowerCase()}}2.png"/>
             </td>
-            <td class="notification-line">
+            <td ng-class="{'notification-line': notification.statusOfReading}">
             </td>
-            <td class="notification-head">
-                {{notification.message}}  
+            <td ng-class="{ 'notification-head': notification.statusOfReading}">
+                {{notification.message}}
             </td>
-             <td class="notification-date">
+             <td ng-class="{'notification-data': notification.statusOfReading}">
                 {{notification.date | date : format : timezone}}
             </td>
         </tr>	
     </table>
-
 </div>

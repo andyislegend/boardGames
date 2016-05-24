@@ -442,12 +442,14 @@ word-wrap: break-word;
 }
 .notification-line{
     width: 1%;
-    background: #AAA;
+    background: #8084FF;
 }
 .notification-head{
-   width: 70%;
+    background: #E8E9FF;
+    width: 70%;
 }
 .notification-data{
+    background: #E8E9FF;
     width: 12%;
     padding-left: 0px;
 }
