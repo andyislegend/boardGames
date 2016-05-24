@@ -76,6 +76,24 @@ public class RegisterController {
 	 *            is used to validate the safety of username
 	 */
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,9}");
+	
+	/**
+	 * @param OLD_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String OLD_PASSWORD_ANSWER = "OLD_PASSWORD_ANSWER";
+	
+	/**
+	 * @param NEW_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String NEW_PASSWORD_ANSWER = "NEW_PASSWORD_ANSWER";
+	
+	/**
+	 * @param CONFIRM_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String CONFIRM_PASSWORD_ANSWER = "CONFIRM_PASSWORD_ANSWER";
 
 	/**
 	 * 
@@ -186,14 +204,17 @@ public class RegisterController {
 	}
 
 	/**
+	 * This method that update user password and return
+	 * HttpStatus.CONFLICT with error message if there is invalid data
+	 * in fields provided by user or return HttpStatus.OK if all data
+	 * is correct
+	 * 
+	 * @author Volodymyr Terlyha
 	 * 
 	 * @param UserPasswordDTO
 	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
 	 * 
-	 *         Method that update user password and return
-	 *         HttpStatus.CONFLICT with error message if there is invalid data
-	 *         in fields provided by user or return HttpStatus.OK if all data
-	 *         is correct
+	 *         
 	 */
 	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
 	@ResponseBody
@@ -203,15 +224,15 @@ public class RegisterController {
 				|| userPasswordDTO.getConfirmPassword() == null) {
 				return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		} else if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
-			return new ResponseEntity<String>("OLD_PASSWORD_ANSWER", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		} else if (!validatePassword(userPasswordDTO.getNewPassword())) {
-			return new ResponseEntity<String>("NEW_PASSWORD_ANSWER", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		} else if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
-			return new ResponseEntity<String>("CONFIRM_PASSWORD_ANSWER", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		}		
 		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
 		userService.updateUser(user);
-		return new ResponseEntity<String>("CHANGES_SAVED", HttpStatus.OK);
+		return new ResponseEntity<String>(UsersController.CHANGES_SAVED, HttpStatus.OK);
 	}
 
 	private static boolean validateMail(String emailStr) {
