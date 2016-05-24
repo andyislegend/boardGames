@@ -24,6 +24,7 @@
 #avatar {
 	 height: 35px; 
 	 width: 35px;
+	 cursor:pointer;
 }
 
 #userAvatar {
@@ -118,4 +119,10 @@
 
 #changeUserStatus {
 	cursor:pointer;
+}
+
+#getUploader {
+	background: #428BCA;
+    font-size:11px;
+    margin:0;
 }
