@@ -1,5 +1,6 @@
 <div>
-	<h1 style="text-align: center">Moderate Events</h1>
+	<h1 style="text-align: center">Moderate Events <a href="" data-toggle="modal" data-target="#myCreateEvent">
+      	<span class="glyphicon glyphicon-plus"></span></a></h1>
 	<!-- EVENTS ADMIN PAGE-->
 	<div>
 		<div class="widget widget_top-posts"></div>
@@ -22,5 +23,107 @@
 		</table>
 
 	</div>
+	
+	<!-- Modal Registration -->
+	<div id="myCreateEvent" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content" ng-controller="createNewEventCtrl">
+				<div class="modal-header">
+					<h4 style="text-align: center;" class="modal-title"> CREATE NEW EVENT</h4>
+					<h6 style="text-align: center;" class="modal-title"> all fields are required</h6>
+				</div>
+				<div class="modal-body">
+
+					<form class="form-horizontal" name="form" ng-submit="createEvent()"
+						role="form">
+
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"><span> Name </span></span> <input ng-model="newevent.name"
+								style="width: 400px;" type="text" class="form-control"
+								aria-describedby="basic-addon1" required="required"
+								placeholder="add Events title" maxlength="100">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon2"><span> DESCRIPTION</span></span>
+							<input ng-model="newevent.description" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon2"
+								placeholder="add description" maxlength="300">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon3"> <span translate="REGFORM_LASTNAME"></span></span>
+							<input ng-model="reglastName" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon3"
+								placeholder="{{'REGFORM_LASTNAME_PLACEHOLDER' | translate}}" maxlength="100">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"><span translate="REGFORM_EMAIL"></span><span
+								style="color: red">*</span> </span> <input ng-model="regemail"
+								style="width: 400px;" type="email" class="form-control"
+								aria-describedby="basic-addon4" required="required"
+								placeholder="{{'REGFORM_EMAIL_PLACEHOLDER' | translate}}" maxlength="150">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon5"><span translate="REGFORM_PASSWORD"></span><span
+								style="color: red">*</span> </span> <input ng-model="regpassword"
+								style="width: 400px;" type="password" class="form-control"
+								aria-describedby="basic-addon5" required="required"
+								placeholder="{{'REGFORM_PASSWORD_PLACEHOLDER' | translate}}" maxlength="20">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon6"><span
+								translate="REGFORM_CONFIRMPASSWORD"></span><span
+								style="color: red">*</span> </span> <input
+								ng-model="regconfirmPassword" style="width: 400px;"
+								type="password" class="form-control"
+								aria-describedby="basic-addon6" required="required"
+								placeholder="{{'REGFORM_CONFIRMPASSWORD_PLACEHOLDER' | translate}}" maxlength="20">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon7"> <span translate="REGFORM_GENDER"></span><span
+								style="color: red">*</span>
+							</span> <select ng-model="reggender" style="width: 400px;"
+								class="form-control" aria-describedby="basic-addon7" id="gender"
+								name="gender" required="required">
+								<option value="male" translate="REGFORM_GENDER_MALE"></option>
+								<option value="female" translate="REGFORM_GENDER_FEMALE">Female</option>
+							</select>
+						</div>
+						<br>
+
+					</form>
+
+					<button style="margin-left: 30%;" ng-click="register()" class="btn btn-info btn-md"
+						translate="REGFORM_SIGNUP"></button>
+
+					<button style="margin-left: 15%;" type="submit"
+						class="btn btn-danger btn-md" ng-click="closeModal()"> Cancel</button>
+
+				</div>
+
+			</div>
+			<!-- End of Modal Content -->
+
+		</div>
+	</div>
+	<!-- End of Registration Modal -->
+	
+	
+	
 	<!-- /EVENTS ADMIN PAGE -->
 </div>
