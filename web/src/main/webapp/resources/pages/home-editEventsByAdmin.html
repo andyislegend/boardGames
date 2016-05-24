@@ -24,13 +24,13 @@
 
 	</div>
 	
-	<!-- Modal Registration -->
+	<!-- Modal Add Event -->
 	<div id="myCreateEvent" class="modal fade  col-md-6 col-md-offset-3"
-		role="dialog">
+		role="dialog" ng-controller="newEventCtrl">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content" ng-controller="createNewEventCtrl">
+			<div class="modal-content" >
 				<div class="modal-header">
 					<h4 style="text-align: center;" class="modal-title"> CREATE NEW EVENT</h4>
 					<h6 style="text-align: center;" class="modal-title"> all fields are required</h6>
@@ -50,7 +50,7 @@
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon2"><span> DESCRIPTION</span></span>
+								id="basic-addon2"><span> Description</span></span>
 							<input ng-model="newevent.description" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon2"
 								placeholder="add description" maxlength="300" required>
@@ -66,7 +66,7 @@
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon4"><span>Date</span></span> <input ng-model="newevent.date"
+								id="basic-addon4"><span> Date</span></span> <input ng-model="newevent.date"
 								style="width: 400px;" type="date" class="form-control"
 								aria-describedby="basic-addon4" required>
 						</div>
@@ -86,7 +86,7 @@
 
 		</div>
 	</div>
-	<!-- End of Registration Modal -->
+	<!-- End Add Event -->
 	
 	
 	

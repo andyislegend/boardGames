@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("ctreateNewEventCtrl",function($scope,$http,$route){
+angular.module('homeApp').controller("newEventCtrl",function($scope, $http, $route){
 
     $scope.createTournament = function () {
     	
@@ -23,4 +23,18 @@ angular.module('homeApp').controller("ctreateNewEventCtrl",function($scope,$http
 		}, function errorCallback(response) {
 		});
     }
+    
+    $scope.closeModal = function() {
+		$('#myCreateEvent').modal('hide');
+		$scope.eraseForm();
+	}
+    
+    $scope.eraseForm = function() {
+
+    	$scope.newevent.name = ' ';
+		$scope.newevent.description = ' ';
+		$scope.newevent.location = ' ';
+		$scope.newevent.date = '';
+	}
+    
 });
