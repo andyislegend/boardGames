@@ -58,11 +58,9 @@ public class GameUserService {
 	@Transactional
 	public void add(GameUser gameUser) {
 		Game game = null;
-	try{
+	
 		game = gameService.findByName(gameUser.getGame().getName());
-	}catch(NullPointerException e){
-		
-	}
+	
 		if(game == null) {
 			gameUserRepo.save(gameUser);
 		}else {
