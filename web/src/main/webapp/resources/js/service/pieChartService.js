@@ -1,15 +1,13 @@
 google.load("visualization", "1", {packages:["corechart"]});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawPieChart);
 
-function drawChart(dataFrom) {
+function drawPieChart(dataFrom) {
 
-	var chartData = prepareChartData(dataFrom);
-	console.log(chartData);
+	var chartData = preparePieChartData(dataFrom);
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Game');
 	data.addColumn('number', 'Percentage');
 	data.addRows(chartData);
-	console.log(data);
 
 	var options = {
 		title : 'Instances of game statistics'
@@ -20,7 +18,7 @@ function drawChart(dataFrom) {
 	chart.draw(data, options);
 }
 
-function prepareChartData(dataToPrepare) {
+function preparePieChartData(dataToPrepare) {
 	
 	var chartData = [];
 	for (i = 0; i < dataToPrepare.length; i++) {

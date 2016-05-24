@@ -35,4 +35,10 @@ public class StatisticsController {
 		return gameService.groupGameUserByGame();
 	}
 	
+	@RequestMapping(value="/getGamesToRatings", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GamesChartDTO> getGamesToRatings() {
+		return gameService.getRatingsForGame();
+	}
+	
 }

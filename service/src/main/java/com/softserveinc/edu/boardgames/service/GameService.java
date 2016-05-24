@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
+import com.softserveinc.edu.boardgames.persistence.repository.GameRatingRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 
 @Service
@@ -18,6 +19,9 @@ public class GameService {
 	
 	@Autowired
 	private GameRepository gameRepo;
+	
+	@Autowired
+	private GameRatingRepository gameRatingRepo;
 
 	public Game findById(Integer id) {
 		return gameRepo.findOne(id);
@@ -54,5 +58,18 @@ public class GameService {
 			listOfCharts.add(chartDto);
 		}
 		return listOfCharts;
+	}
+	
+	public List<GamesChartDTO> getRatingsForGame() {
+//		List<GamesChartDTO> listOfCharts = new ArrayList<>();
+//		for (Game gu : this.getAll()) {
+//			GamesChartDTO chartDto = new GamesChartDTO();
+//			chartDto.setName(gu.getName());
+//			chartDto.setGeneralRating(
+//					gameRatingRepo.getAverageRatingForGame(gu.getId()).intValue());
+//			chartDto.setCountOfRates(gameRatingRepo.getCountOfRatingsForGame(gu.getId()));
+//			listOfCharts.add(chartDto);
+//		}
+		return gameRatingRepo.getAllRatings();
 	}
 }
