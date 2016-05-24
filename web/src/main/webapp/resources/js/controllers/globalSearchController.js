@@ -18,10 +18,10 @@ angular.module('homeApp').controller('GlobalSearchCTRL', function($scope, $http,
 			 }, {
 			     total: $scope.searchResult[0].length, 
 			     getData: function ($defer, params) {
-			    	// $scope.searchResult.games = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
+			    	 $scope.searchResult.games = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
 			    	 	$scope.searchResult = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
 	                    $defer.resolve($scope.searchResult);
-	                    //$defer.resolve($scope.searchResult.tournaments);
+	                    $defer.resolve($scope.searchResult.tournaments);
 	                }
 			 });
 		});

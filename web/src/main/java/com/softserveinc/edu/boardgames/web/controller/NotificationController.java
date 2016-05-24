@@ -44,7 +44,7 @@ public class NotificationController {
 	NotificationService notificationService;
 	
 	
-	@RequestMapping(value = "/getAllLastMessage", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/getAllLastMessage", method = RequestMethod.GET)
 	public List<Notification> getAllMessage() throws ParseException {
 		String currentUserName = WebUtil.getPrincipalUsername();
 		List<User> listOfFriends = userService.findAllFriends(currentUserName);
@@ -55,15 +55,15 @@ public class NotificationController {
 				list.add(message);
 			}
 		}
-		List<SubscribedUsers> listOfSub = subscribedUsersService.getAllNewUserSubscriber();
-		System.out.println("***************  " + listOfSub.size());
-		for(SubscribedUsers s: listOfSub){
-			System.out.println("******** EVENT = " + s.getEvent());
-			System.out.println("******** USER = " + s.getUser());
-		}
-
-		
 		return list;
+	}*/
+	
+	@RequestMapping(value = "/getAllNotification", method = RequestMethod.GET)
+	public List<Notification> getAllNotification(){
+		List<Notification> listOFNotification = notificationService.getAllNotificationByUserName(WebUtil.getPrincipalUsername());
+		System.out.println(" ***************  " + listOFNotification.size());
+		
+		return listOFNotification;
 	}
 	
 	@RequestMapping(value = "/getCurrentUserName", method = RequestMethod.GET)

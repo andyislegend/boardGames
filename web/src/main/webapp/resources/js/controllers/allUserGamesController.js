@@ -1,22 +1,21 @@
 var homeApp = angular.module('homeApp');
-homeApp.controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$timeout) {
+homeApp.controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$interval) {
 homeApp.$inject = ['$modal'];
 	
 	$rootScope.NN = 100;
 	$rootScope.allGame = [];
 	$rootScope.getAllUsersGame = [];
 		
-	$http({
-		method : "GET",
-		url : 'getAllMyGamesCurUser'
-	}).then(function mySucces(response) {
+	$http.get('getAllMyGamesCurUser').then(function mySucces(response) {
 		$rootScope.allGame = response.data;
+		});
+	
+	setInterval(function(){
 		for (var i = 0; i < $rootScope.allGame.length; i++) {
 			$rootScope.isNewComments($rootScope.allGame[i].id);
 		}
-	}, function myError(response) {
-		alert("getting my games error");
-	});
+		console.log('dhjfdh');
+}, 3000);
 	
 	$http({
 		method : "GET",

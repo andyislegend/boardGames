@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * 
  * @author Andrii Petryk
@@ -73,6 +77,37 @@ public class SubscribedUsers implements Serializable{
 		this.id = id;
 	}
 	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(getId()).append(getEvent()).append(getUser()).append(getIsNew())
+				.toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SubscribedUsers other = (SubscribedUsers) obj;
+		return new EqualsBuilder()
+				.append(getId(), other.getId())
+				.append(getUser(), other.getUser())
+				.append(getEvent(), other.getEvent())
+				.append(getIsNew(), other.getIsNew())
+				.isEquals();
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", getId())
+				.append("user", getUser())
+				.append("event", getEvent())
+				.toString();
+	}
 	
 	
 }

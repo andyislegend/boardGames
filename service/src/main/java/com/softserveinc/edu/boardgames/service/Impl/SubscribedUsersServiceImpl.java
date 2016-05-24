@@ -21,4 +21,12 @@ public class SubscribedUsersServiceImpl implements SubscribedUsersService{
 		return subscribedUsersRepositorya.getAllNewUserSubscriber();
 	}
 
+	@Override
+	public void changeStatusOfAllEventNotification(List<SubscribedUsers> listOfSubscribedUsers) {
+		
+		for(SubscribedUsers su: listOfSubscribedUsers){
+			subscribedUsersRepositorya.changeStatusOfState(su.getId());
+		}		
+	}
+
 }
