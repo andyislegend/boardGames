@@ -25,7 +25,7 @@ function prepareChartData(dataToPrepare) {
 	var chartData = [];
 	for (i = 0; i < dataToPrepare.length; i++) {
 		var temp = [dataToPrepare[i].name,
-		            parseInt(dataToPrepare[i].y)];
+		            parseInt(dataToPrepare[i].countOfGames)];
 		chartData.push(temp);
 	}
 	return chartData;

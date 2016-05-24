@@ -81,8 +81,6 @@
     <script type="text/javascript" src="resources/js/localization.js"></script>
     <script src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="resources/bower_components/angular-google-chart/ng-google-chart.js"></script>
-    <script src="resources/bower_components/angular-google-chart/ng-google-chart.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="resources/js/controllers/statisticsController.js"></script>

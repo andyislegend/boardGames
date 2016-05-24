@@ -9,14 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.ChartDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 
 @Service
 @Transactional
 public class GameService {
-
-	public final Integer PERCENT_ALL = 100;
 	
 	@Autowired
 	private GameRepository gameRepo;
@@ -47,17 +45,13 @@ public class GameService {
         return gameRepo.findByName(name);
     }
 	
-	public List<ChartDTO> groupGameUserByGame() {
-		List<ChartDTO> listOfCharts = new ArrayList<>();
-		Integer general = gameRepo.countAllUserGames();
+	public List<GamesChartDTO> groupGameUserByGame() {
+		List<GamesChartDTO> listOfCharts = new ArrayList<>();
 		for (Game gu : this.getAll()) {
-			ChartDTO chartDto = new ChartDTO();
+			GamesChartDTO chartDto = new GamesChartDTO();
 			chartDto.setName(gu.getName());
-			chartDto.setY(
-					(new Double(gameRepo.countGameUsersOfGame(gu.getId()))/new Double(general))*PERCENT_ALL);
-			if (chartDto.getY() != 0) {
-				listOfCharts.add(chartDto);
-			}
+			chartDto.setCountOfGames(gameRepo.countGameUsersOfGame(gu.getId()));
+			listOfCharts.add(chartDto);
 		}
 		return listOfCharts;
 	}

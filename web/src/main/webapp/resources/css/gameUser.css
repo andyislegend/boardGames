@@ -39,3 +39,7 @@ span.glyphicon-knight {
    top: -20px;
    left: -15px;
 }
+#piechart {
+	width: 1000px;
+	height: 600px;
+}

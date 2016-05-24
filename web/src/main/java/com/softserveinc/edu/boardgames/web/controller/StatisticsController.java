@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softserveinc.edu.boardgames.persistence.entity.dto.ChartDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GameService;
@@ -31,7 +31,7 @@ public class StatisticsController {
 	
 	@RequestMapping(value="/groupGamesByGameUsers", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ChartDTO> groupGamesByGameUsers() {
+	public List<GamesChartDTO> groupGamesByGameUsers() {
 		return gameService.groupGameUserByGame();
 	}
 	

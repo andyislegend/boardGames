@@ -19,9 +19,6 @@ public interface GameRepository extends JpaRepository<Game, Integer>  {
 	
 	public Game findByName(String name);
 	
-	@Query("select COUNT(gu) from GameUser gu")
-	public Integer countAllUserGames();
-	
 	@Query("select COUNT(gu) from GameUser gu "
 			+ "where gu.game.id = :id")
 	public Integer countGameUsersOfGame(@Param("id")Integer id);
