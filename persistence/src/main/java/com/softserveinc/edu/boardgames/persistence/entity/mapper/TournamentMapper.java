@@ -17,7 +17,6 @@ public class TournamentMapper {
 		tournament.setDateOfTournament(dto.getDateOfTournament());
 		tournament.setCountry(dto.getCountry());
 		tournament.setCity(dto.getCity());
-		tournament.setCanRate(true);
 		
 		return tournament;
 	}
