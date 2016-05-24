@@ -84,6 +84,7 @@ public class TournamentController {
     public void giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
     	User user = userService.findById(idUser);
     	user.setUserRating(user.getUserRating()+rate);
+    	user.setTournamentRatingStatus(true);
     	userService.updateUser(user);
     }
     
