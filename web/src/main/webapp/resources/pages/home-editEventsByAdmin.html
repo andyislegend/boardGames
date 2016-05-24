@@ -37,14 +37,14 @@
 				</div>
 				<div class="modal-body">
 
-					<form class="form-horizontal" name="form" ng-submit="createEvent()"
+					<form class="form-horizontal" name="CreateEvent" ng-submit="createEvent()"
 						role="form">
 
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon1"><span> Name </span></span> <input ng-model="newevent.name"
 								style="width: 400px;" type="text" class="form-control"
-								aria-describedby="basic-addon1" required="required"
+								aria-describedby="basic-addon1" required
 								placeholder="add Events title" maxlength="100">
 						</div>
 						<br>
@@ -53,63 +53,28 @@
 								id="basic-addon2"><span> DESCRIPTION</span></span>
 							<input ng-model="newevent.description" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon2"
-								placeholder="add description" maxlength="300">
+								placeholder="add description" maxlength="300" required>
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon3"> <span translate="REGFORM_LASTNAME"></span></span>
-							<input ng-model="reglastName" style="width: 400px;" type="text"
+								id="basic-addon3"> <span> Location</span></span>
+							<input ng-model="newevent.location" style="width: 400px;" type="text"
 								class="form-control" aria-describedby="basic-addon3"
-								placeholder="{{'REGFORM_LASTNAME_PLACEHOLDER' | translate}}" maxlength="100">
+								placeholder="add location" maxlength="100" required>
 						</div>
 						<br>
 						<div class="input-group">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon4"><span translate="REGFORM_EMAIL"></span><span
-								style="color: red">*</span> </span> <input ng-model="regemail"
-								style="width: 400px;" type="email" class="form-control"
-								aria-describedby="basic-addon4" required="required"
-								placeholder="{{'REGFORM_EMAIL_PLACEHOLDER' | translate}}" maxlength="150">
-						</div>
-						<br>
-						<div class="input-group">
-							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon5"><span translate="REGFORM_PASSWORD"></span><span
-								style="color: red">*</span> </span> <input ng-model="regpassword"
-								style="width: 400px;" type="password" class="form-control"
-								aria-describedby="basic-addon5" required="required"
-								placeholder="{{'REGFORM_PASSWORD_PLACEHOLDER' | translate}}" maxlength="20">
-						</div>
-						<br>
-						<div class="input-group">
-							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon6"><span
-								translate="REGFORM_CONFIRMPASSWORD"></span><span
-								style="color: red">*</span> </span> <input
-								ng-model="regconfirmPassword" style="width: 400px;"
-								type="password" class="form-control"
-								aria-describedby="basic-addon6" required="required"
-								placeholder="{{'REGFORM_CONFIRMPASSWORD_PLACEHOLDER' | translate}}" maxlength="20">
-						</div>
-						<br>
-						<div class="input-group">
-							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon7"> <span translate="REGFORM_GENDER"></span><span
-								style="color: red">*</span>
-							</span> <select ng-model="reggender" style="width: 400px;"
-								class="form-control" aria-describedby="basic-addon7" id="gender"
-								name="gender" required="required">
-								<option value="male" translate="REGFORM_GENDER_MALE"></option>
-								<option value="female" translate="REGFORM_GENDER_FEMALE">Female</option>
-							</select>
+								id="basic-addon4"><span>Date</span></span> <input ng-model="newevent.date"
+								style="width: 400px;" type="date" class="form-control"
+								aria-describedby="basic-addon4" required>
 						</div>
 						<br>
 
 					</form>
 
-					<button style="margin-left: 30%;" ng-click="register()" class="btn btn-info btn-md"
-						translate="REGFORM_SIGNUP"></button>
+					<button style="margin-left: 30%;" ng-disabled="CreateEvent.$invalid" ng-click="createNewEvent()" class="btn btn-info btn-md"> ADD NEW</button>
 
 					<button style="margin-left: 15%;" type="submit"
 						class="btn btn-danger btn-md" ng-click="closeModal()"> Cancel</button>

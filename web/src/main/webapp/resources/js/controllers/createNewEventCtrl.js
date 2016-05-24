@@ -2,25 +2,22 @@ angular.module('homeApp').controller("ctreateNewEventCtrl",function($scope,$http
 
     $scope.createTournament = function () {
     	
-    	var tournament = {
-    			gameId : $scope.selectedGame,
-    			name : $scope.tournamentName,
-    			countOfParticipants : $scope.countOfParticipants,
-    			dateOfTournament : $scope.date,
-    			country : $scope.countryTournament,
-    			city : $scope.cityTournament
+    	var newevent = {
+    			
+    			name : $scope.newevent.name,
+    			description : $scope.newevent.description,
+    			location : $scope.newevent.location,
+    			date : $scope.newevent.date
     	}
     	
-    	$scope.$on('addTournament',function(event, data) {
-    		 data.push(tournament);
-    	 });
+
         $http({
 			method : 'POST',
-			url : '/addTournament',
+			url : '/addEvent',
 			headers : {
 				'Content-Type' : 'application/json'
 			},
-			data : tournament
+			data : newevent
 		}).success(function(response) {
 			$route.reload;
 		}, function errorCallback(response) {
