@@ -12,7 +12,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 @Repository
 public interface SubscribedUsersRepository extends JpaRepository<SubscribedUsers, Integer>{
 	
-	@Query("SELECT s FROM SubscribedUsers s WHERE s.isNew = false")
+	@Query("SELECT s FROM SubscribedUsers s WHERE s.isNew = true")
 	public List<SubscribedUsers> getAllNewUserSubscriber();
 	
 }
