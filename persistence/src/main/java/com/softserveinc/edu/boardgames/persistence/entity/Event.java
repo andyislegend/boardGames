@@ -11,7 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -46,11 +46,8 @@ public class Event implements Serializable {
 	@Column
 	private String location;
 
-	@Column
-	private boolean isNew = true;
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE }, mappedBy = "events")
-	private Set<User> users;
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<SubscribedUsers> subscribedUsers;
 
 	public Event() {
 
@@ -96,20 +93,12 @@ public class Event implements Serializable {
 		this.location = location;
 	}
 
-	public boolean isNew() {
-		return isNew;
+	public Set<SubscribedUsers> getSubscribedUsers() {
+		return subscribedUsers;
 	}
 
-	public void setNew(boolean isNew) {
-		this.isNew = isNew;
-	}
-
-	public Set<User> getUser() {
-		return users;
-	}
-
-	public void setUser(Set<User> user) {
-		this.users = user;
+	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
+		this.subscribedUsers = subscribedUsers;
 	}
 
 	@Override
@@ -127,7 +116,6 @@ public class Event implements Serializable {
 				.append(getDescription(), other.getDescription())
 				.append(getLocation(), other.getLocation())
 				.append(getDate(), other.getDate())
-				.append(isNew(), other.isNew())
 				.isEquals();
 	}
 
@@ -139,7 +127,6 @@ public class Event implements Serializable {
 				.append(getDescription())
 				.append(getLocation())
 				.append(getDate())
-				.append(isNew())
 				.toHashCode();
 	}
 
