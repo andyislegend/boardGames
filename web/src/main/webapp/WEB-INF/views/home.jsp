@@ -81,6 +81,10 @@
     <script type="text/javascript" src="resources/js/localization.js"></script>
     <script src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="resources/js/controllers/statisticsController.js"></script>
+    <script src="resources/js/service/pieChartService.js"></script>
     <!-- End of Scripts -->
   </head>
   <body ng-app="homeApp" ng-controller="localizationController">

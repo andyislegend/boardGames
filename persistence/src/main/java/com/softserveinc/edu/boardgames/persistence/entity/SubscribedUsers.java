@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,13 +23,15 @@ public class SubscribedUsers implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2946754119029751023L;
-
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
     @ManyToOne
     @JoinColumn(name = "event_id")
 	private Event event;
-	
-	@Id
+
     @ManyToOne
     @JoinColumn(name = "user_id")
 	private User user;
@@ -62,39 +66,13 @@ public class SubscribedUsers implements Serializable{
 	public void setNew(boolean isNew) {
 		this.isNew = isNew;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SubscribedUsers other = (SubscribedUsers) obj;
-		return new EqualsBuilder()
-				.append(getUser(), other.getUser())
-				.append(getEvent(), other.getEvent())
-				.append(isNew(), other.isNew())
-				.isEquals();
+
+	public Integer getId() {
+		return id;
 	}
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder()
-				.append(getUser())
-				.append(getEvent())
-				.append(isNew())
-				.toHashCode();
-	}
-
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this)
-				.append("event", getEvent())
-				.append("user", getUser())
-				.append("new", isNew())
-				.toString();
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

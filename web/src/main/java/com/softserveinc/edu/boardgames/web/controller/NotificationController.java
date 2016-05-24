@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
+import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 import com.softserveinc.edu.boardgames.service.NotificationService;
+import com.softserveinc.edu.boardgames.service.SubscribedUsersService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.service.Impl.SubscribedUsersServiceImpl;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController
@@ -34,8 +37,8 @@ public class NotificationController {
 	@Autowired
 	TournamentService tournamentService;
 	
-//	@Autowired
-//	EventService eventService;
+	@Autowired
+	SubscribedUsersService subscribedUsersService;
 	
 	@Autowired
 	NotificationService notificationService;
@@ -52,6 +55,14 @@ public class NotificationController {
 				list.add(message);
 			}
 		}
+		List<SubscribedUsers> listOfSub = subscribedUsersService.getAllNewUserSubscriber();
+		for(SubscribedUsers s: listOfSub){
+			System.out.println("******** EVENT = " + s.getEvent());
+			System.out.println("******** USER = " + s.getUser());
+		}
+		
+		
+		
 		return list;
 	}
 	

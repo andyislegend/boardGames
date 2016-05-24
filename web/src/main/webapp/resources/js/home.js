@@ -5,12 +5,12 @@ homeApp.config(function($routeProvider) {
 
 	.when('/', {
 		templateUrl : 'resources/pages/home-statistics.html',
-	// controller : "...Ctrl"
+	    controller : 'localizationController'
 	})
 	
 	.when('/statistics', {
 		templateUrl : 'resources/pages/home-statistics.html',
-	// controller : "...Ctrl"
+		controller : 'localizationController'
 	})
 
 	.when('/allGames', {
