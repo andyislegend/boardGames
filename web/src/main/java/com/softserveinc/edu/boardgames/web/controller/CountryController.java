@@ -28,8 +28,7 @@ public class CountryController {
 	 */
 	@RequestMapping(value = {"/getAllCountries"}, method = RequestMethod.GET)
 	@ResponseBody
-	public List<Country> getAllCountries() {
-		List<Country> countryList = countrySevice.findAll();
-		return countryList;
+	public List<Country> getAllCountries() {		
+		return countrySevice.findAll();
 	}
 }

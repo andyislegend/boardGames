@@ -34,7 +34,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @Controller
 public class UsersController {
 	
-	public static final Integer minimalRatingForActiveUser = -4;
+	
 
 	@Autowired
 	ImageService imageService;
@@ -122,21 +122,13 @@ public class UsersController {
 	@RequestMapping(value = {"/banUser"}, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> banUser(@RequestParam("username") String username) {
-		User user = userService.findOne(username);
-		user.setState(UserStatus.BANNED.name());
-		userService.banUser(user);
+		userService.banUserByAdministrator(username);
 		return new ResponseEntity<String>("USER_BAN", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
 	public ResponseEntity<String> unbanUser(@RequestParam("username") String username) {
-		
-		User user = userService.findOne(username);
-		user.setState(UserStatus.ACTIVE.name());
-		if (user.getUserRating() <= -5) {
-			user.setUserRating(minimalRatingForActiveUser);
-		}
-		userService.updateUser(user);
+		userService.unbanUserByAdministrator(username);
 		return new ResponseEntity<String>("USER_UNBAN", HttpStatus.OK);
 	}
 }

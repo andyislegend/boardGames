@@ -48,6 +48,8 @@ public class UserService {
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
 	
 	public static final String CHECK_LOGGED_IN_USERNAME = "Logged in user";
+	
+	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
 
 	@Autowired
 	private CountryService countryService;
@@ -241,6 +243,39 @@ public class UserService {
 		image.setImageLocation(savePath);
 		imageService.create(image);		
 		fileUpload.transferTo(new File(savePath));
+	}
+	
+	/**
+	 * This method for banning user by administrator
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param User
+	 *            finding user to ban
+	 */
+	@Transactional
+	public void banUserByAdministrator(String username) {
+		User user = findOne(username);
+		user.setState(UserStatus.BANNED.name());
+		userRepository.saveAndFlush(user);
+	}
+	
+	/**
+	 * This method for unbanning user by administrator
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param User
+	 *            finding user to ban
+	 */
+	@Transactional
+	public void unbanUserByAdministrator(String username) {
+		User user = findOne(username);
+		user.setState(UserStatus.ACTIVE.name());
+		if (user.getUserRating() <= -5) {
+			user.setUserRating(MINIMAL_RATING_FOR_ACTIVE_USER);
+		}
+		userRepository.saveAndFlush(user);
 	}
 
 	/**
