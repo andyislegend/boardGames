@@ -28,4 +28,8 @@ angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $
 		     }
 		 });
 	});
+	
+	$scope.cancelEvent = function(id) {
+		$http.delete('cancelEvent?id='+ id);
+	}
 });
