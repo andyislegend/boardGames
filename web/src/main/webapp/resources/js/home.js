@@ -22,6 +22,11 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-gameDetails.html',
 		controller : 'gameSelectController'
 	})
+	
+	.when('/editEvent/:id', {
+		templateUrl : 'resources/pages/home-editEvent.html',
+		controller : 'editEventCtrl'
+	})
 
 	.when('/events', {
 		templateUrl : 'resources/pages/home-events.html',

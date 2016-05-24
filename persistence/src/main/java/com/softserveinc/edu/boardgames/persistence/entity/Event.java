@@ -46,9 +46,6 @@ public class Event implements Serializable {
 	@Column
 	private String location;
 
-	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<SubscribedUsers> subscribedUsers;
-
 	public Event() {
 
 	}
@@ -91,14 +88,6 @@ public class Event implements Serializable {
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public Set<SubscribedUsers> getSubscribedUsers() {
-		return subscribedUsers;
-	}
-
-	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
-		this.subscribedUsers = subscribedUsers;
 	}
 
 	@Override

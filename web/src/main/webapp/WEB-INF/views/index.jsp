@@ -222,7 +222,7 @@
 								style="color: red">*</span> </span> <input ng-model="regusername"
 								style="width: 400px;" type="text" class="form-control"
 								aria-describedby="basic-addon1" required="required"
-								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}" maxlength="15">
+								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}" maxlength="9">
 						</div>
 						<br>
 						<div class="input-group">

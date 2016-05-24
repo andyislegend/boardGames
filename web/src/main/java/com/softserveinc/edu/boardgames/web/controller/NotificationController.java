@@ -56,12 +56,12 @@ public class NotificationController {
 			}
 		}
 		List<SubscribedUsers> listOfSub = subscribedUsersService.getAllNewUserSubscriber();
+		System.out.println("***************  " + listOfSub.size());
 		for(SubscribedUsers s: listOfSub){
 			System.out.println("******** EVENT = " + s.getEvent());
 			System.out.println("******** USER = " + s.getUser());
 		}
-		
-		
+
 		
 		return list;
 	}

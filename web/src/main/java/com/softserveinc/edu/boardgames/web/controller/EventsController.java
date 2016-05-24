@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,5 +59,11 @@ public class EventsController {
 	@ResponseBody
 	public void deleteEvent(@RequestParam("id") Integer id){
 		eventService.deleteEvent(id);
+	}
+	
+	@RequestMapping(value = {"/updateEvent"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public void updateUser(@RequestBody EventsDTO event) {
+		eventService.updateEventDTO(event);
 	}
 }
