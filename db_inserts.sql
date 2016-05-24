@@ -53,68 +53,68 @@ INSERT INTO city (name, countryId) VALUES ('Bytom', 2);
 --  inserts to table user
 
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating, rating, gender, state, username, countryId, cityId) values
-(99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000',  0,'GODLIKE', 'female', 'ACTIVE', 'root', 1, 1);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(99, 'root@root.com', 'Super', 'Admin', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000000000',  0,'GODLIKE', 'female', 'ACTIVE', 'root', 1, 1,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(25, 'kravets@gmail.com', 'Artem', 'Kravets', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0,'NOOB', 'male', 'ACTIVE', 'kravets', 1, 2);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(25, 'kravets@gmail.com', 'Artem', 'Kravets', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0,'NOOB', 'male', 'ACTIVE', 'kravets', 1, 2,FALSE);
 
-INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `gender`, `lastName`, `password`, `phoneNumber`, `rating`, `state`, `userRating`, `username`, `countryId`, `cityId`) 
-VALUES (NULL, '45', 'prosinecki', 'vladislav', 'male', 'prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '2', '33');
+INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `gender`, `lastName`, `password`, `phoneNumber`, `rating`, `state`, `userRating`, `username`, `countryId`, `cityId`,tournamentRatingStatus) 
+VALUES (NULL, '45', 'prosinecki', 'vladislav', 'male', 'prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '2', '33',FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId) values
-(37, 'bondar@gmail.com', 'Ivan', 'Bondar', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0,'NOOB', 'male', 'ACTIVE', 'bondar', 1, 13);
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(37, 'bondar@gmail.com', 'Ivan', 'Bondar', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0,'NOOB', 'male', 'ACTIVE', 'bondar', 1, 13,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(37, 'khariv@gmail.com', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0, 'NOOB', 'male', 'ACTIVE', 'khariv', 2, 33);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(37, 'khariv@gmail.com', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0, 'NOOB', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  0,'NOOB', 'male', 'ACTIVE', 'winston', 2, 32);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  0,'NOOB', 'male', 'ACTIVE', 'winston', 2, 32,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(25, 'borodin@gmail.com', 'Vitalik', 'Borodin', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987454', 0,'NOOB', 'male', 'ACTIVE', 'borodin', 1, 13);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(25, 'borodin@gmail.com', 'Vitalik', 'Borodin', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987454', 0,'NOOB', 'male', 'ACTIVE', 'borodin', 1, 13,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId) values
-(38, 'nasty@gmail.com', 'Nasty', 'Ptashnyk', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987614', 0,'NOOB', 'female', 'ACTIVE', 'ptashnyk', 2, 34);
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(38, 'nasty@gmail.com', 'Nasty', 'Ptashnyk', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987614', 0,'NOOB', 'female', 'ACTIVE', 'ptashnyk', 2, 34,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(47, 'lida@gmail.com', 'Lida', 'Berkyt', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957957654', 0, 'NOOB', 'female', 'ACTIVE', 'berkyt', 1, 11);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(47, 'lida@gmail.com', 'Lida', 'Berkyt', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957957654', 0, 'NOOB', 'female', 'ACTIVE', 'berkyt', 1, 11,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(26, 'zencarych@gmail.com', 'Oleg', 'Zencarych', '$2a$10$e2qEa0wuno23cRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957937654', 0,'NOOB', 'male', 'ACTIVE', 'zencarych', 2, 35);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(26, 'zencarych@gmail.com', 'Oleg', 'Zencarych', '$2a$10$e2qEa0wuno23cRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957937654', 0,'NOOB', 'male', 'ACTIVE', 'zencarych', 2, 35,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId) values
-(47, 'lama@gmail.com', 'Roman', 'Lama', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TD0htrQ3FG3tkYsOpPmW', '+380907987654', 0,'NOOB', 'male', 'ACTIVE', 'lama', 1, 11);
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(47, 'lama@gmail.com', 'Roman', 'Lama', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TD0htrQ3FG3tkYsOpPmW', '+380907987654', 0,'NOOB', 'male', 'ACTIVE', 'lama', 1, 11,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(57, 'vytryk@gmail.com', 'Katy', 'Vytryk', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXb12y3TDMhtrQ3FG3tkYsOpPmW', '+380951987654', 0, 'NOOB', 'female', 'ACTIVE', 'vytryk', 2, 29);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(57, 'vytryk@gmail.com', 'Katy', 'Vytryk', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXb12y3TDMhtrQ3FG3tkYsOpPmW', '+380951987654', 0, 'NOOB', 'female', 'ACTIVE', 'vytryk', 2, 29,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(26, 'plotnikov@root.com', 'Volody', 'Plotnikov', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3F83tkYsOpPmW', '+380000780000',  0,'NOOB', 'male', 'ACTIVE', 'plotnikov', 1, 14);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(26, 'plotnikov@root.com', 'Volody', 'Plotnikov', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3F83tkYsOpPmW', '+380000780000',  0,'NOOB', 'male', 'ACTIVE', 'plotnikov', 1, 14,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(27, 'kaban@gmail.com', 'Sasha', 'Kaban', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMht673FG3tkYsOpPmW', '+380957917454', 0,'NOOB', 'male', 'ACTIVE', 'kaban', 1, 9);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(27, 'kaban@gmail.com', 'Sasha', 'Kaban', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMht673FG3tkYsOpPmW', '+380957917454', 0,'NOOB', 'male', 'ACTIVE', 'kaban', 1, 9,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId) values
-(39, 'konovalchyk@gmail.com', 'Valeriy', 'Konovalchyk', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOphjW', '+380957987604', 0,'NOOB', 'female', 'ACTIVE', 'konovalchyk', 2, 35);
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(39, 'konovalchyk@gmail.com', 'Valeriy', 'Konovalchyk', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOphjW', '+380957987604', 0,'NOOB', 'female', 'ACTIVE', 'konovalchyk', 2, 35,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(17, 'trysh@gmail.com', 'Khrustuna', 'Trysh', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YsdbUy3TDMhtrQ3FG3tkYsOpPmW', '+388957957654', 0, 'NOOB', 'female', 'ACTIVE', 'trysh', 1, 7);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(17, 'trysh@gmail.com', 'Khrustuna', 'Trysh', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YsdbUy3TDMhtrQ3FG3tkYsOpPmW', '+388957957654', 0, 'NOOB', 'female', 'ACTIVE', 'trysh', 1, 7,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(55, 'aslamov@gmail.com', 'Igor', 'Aslamov', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXb12y3TDMhtrQ34G3tkYsOpPmW', '+380941987654', 0, 'NOOB', 'male', 'ACTIVE', 'aslamov', 2, 31);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(55, 'aslamov@gmail.com', 'Igor', 'Aslamov', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXb12y3TDMhtrQ34G3tkYsOpPmW', '+380941987654', 0, 'NOOB', 'male', 'ACTIVE', 'aslamov', 2, 31,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(16, 'gorbach@root.com', 'Ivan', 'Gorbach', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3F83tkYsj5PmW', '+380000780600',  0,'NOOB', 'male', 'ACTIVE', 'gorbach', 1, 12);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
+(16, 'gorbach@root.com', 'Ivan', 'Gorbach', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3F83tkYsj5PmW', '+380000780600',  0,'NOOB', 'male', 'ACTIVE', 'gorbach', 1, 12,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(37, 'andreeva@gmail.com', 'Olya', 'Andreeva', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMht67b3G3tkYsOpPmW', '+380957927454', 0,'NOOB', 'female', 'ACTIVE', 'andreeva', 1, 12);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId, tournamentRatingStatus) values
+(37, 'andreeva@gmail.com', 'Olya', 'Andreeva', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMht67b3G3tkYsOpPmW', '+380957927454', 0,'NOOB', 'female', 'ACTIVE', 'andreeva', 1, 12,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId) values
-(19, 'konotopska@gmail.com', 'Ulia', 'Konotopska', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ334G3tkYsOphjW', '+380957487604', 0,'NOOB', 'female', 'ACTIVE', 'konotopska', 2, 36);
+insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId, tournamentRatingStatus) values
+(19, 'konotopska@gmail.com', 'Ulia', 'Konotopska', '$2a$10$e2qEadffwunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ334G3tkYsOphjW', '+380957487604', 0,'NOOB', 'female', 'ACTIVE', 'konotopska', 2, 36,FALSE);
 
-insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId) values
-(87, 'morison@gmail.com', 'Jim', 'Morison', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YsdbUy3T22htrQ3FG3tkYsOpPmW', '+388957227654', 0, 'NOOB', 'male', 'ACTIVE', 'morison', 1, 14);
+insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId, tournamentRatingStatus) values
+(87, 'morison@gmail.com', 'Jim', 'Morison', '$2a$10$e2qEa0rtoicRAGky9Kd7O..A5YsdbUy3T22htrQ3FG3tkYsOpPmW', '+388957227654', 0, 'NOOB', 'male', 'ACTIVE', 'morison', 1, 14,FALSE);
 
 -- inserts into user_role table
 insert into user_role (username, value) values
@@ -174,9 +174,9 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '15
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '16', '1');
 
 -- inserts to table tournaments
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Monopoly', '2', '8', TRUE);
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly', '1', '1', TRUE);
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-26 00:00:00', 'Monopoly', '1', '3', TRUE);
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id` ) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Monopoly', '2', '8');
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly', '1', '1');
+INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-26 00:00:00', 'Monopoly', '1', '3');
 
 
 --  inserts to table events
