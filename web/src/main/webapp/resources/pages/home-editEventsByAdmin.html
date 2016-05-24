@@ -1,35 +1,26 @@
 <div>
-	<h1 style="text-align: center"> Editing Events </h1>
+	<h1 style="text-align: center">Moderate Events</h1>
 	<!-- EVENTS ADMIN PAGE-->
 	<div>
-	<div class="widget widget_top-posts"></div>
-	<table ng-table="allEventsTable" show-filter="true" class="table table-striped">
-			<tr ng-repeat-start="x in allEventsDisplay">
-				<td title="'Date'" sortable="'date'" 
-					filter="{ 'date': 'text' }">{{ x.date | date:'yyyy-MM-dd' }}</td>
-				
+		<div class="widget widget_top-posts"></div>
+		<table ng-table="allEventsTable" show-filter="true"
+			class="table table-striped">
+			<tr ng-repeat="x in allEventsDisplay">
+				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">{{
+					x.date | date:'yyyy-MM-dd' }}</td>
+
 				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
-					<a href="" ng-click="showEvent = !showEvent">{{ x.name }}</a>
+					<a href="#editEvent/{{x.eventId}}"> {{ x.name }}</a>
 				</td>
-	
+
 				<td title="'Description'">{{ x.description }}</td>
-				
-				<td title="'Location'">{{ x.location }}</td>
-				
+
+				<td title="'Location'" sortable="'location'" filter="{ 'location': 'text' }">{{ x.location }}</td>
+
 			</tr>
-			
-			<tr ng-show="showEvent" ng-repeat-end>
-				
-				<td>					
-				<p><a ng-click="cancelEvent(event.id)"> Cancel Event</a></p>
-				</td>
-				
-				<td>					
-				<p><a ng-click="editEvent(event.id)"> Edit Event</a></p>
-				</td>
-			</tr>
+
 		</table>
-			
+
 	</div>
 	<!-- /EVENTS ADMIN PAGE -->
 </div>

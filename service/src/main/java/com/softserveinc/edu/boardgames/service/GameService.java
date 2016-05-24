@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 
 @Service
 @Transactional
 public class GameService {
-
+	
 	@Autowired
 	private GameRepository gameRepo;
 
@@ -43,4 +44,15 @@ public class GameService {
 	public Game findByName(String name){
         return gameRepo.findByName(name);
     }
+	
+	public List<GamesChartDTO> groupGameUserByGame() {
+		List<GamesChartDTO> listOfCharts = new ArrayList<>();
+		for (Game gu : this.getAll()) {
+			GamesChartDTO chartDto = new GamesChartDTO();
+			chartDto.setName(gu.getName());
+			chartDto.setCountOfGames(gameRepo.countGameUsersOfGame(gu.getId()));
+			listOfCharts.add(chartDto);
+		}
+		return listOfCharts;
+	}
 }

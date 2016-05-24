@@ -98,6 +98,5 @@ public class GameUserService {
 	
 	public List<Integer> getFromNameAndEdition(String name, String edition) {
 		return gameUserRepo.getGameUserFromNameAndEdition(name, edition);
-		
 	}
 }

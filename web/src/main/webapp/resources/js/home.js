@@ -5,12 +5,12 @@ homeApp.config(function($routeProvider) {
 
 	.when('/', {
 		templateUrl : 'resources/pages/home-statistics.html',
-	// controller : "...Ctrl"
+	    controller : 'localizationController'
 	})
 	
 	.when('/statistics', {
 		templateUrl : 'resources/pages/home-statistics.html',
-	// controller : "...Ctrl"
+		controller : 'localizationController'
 	})
 
 	.when('/allGames', {
@@ -21,6 +21,11 @@ homeApp.config(function($routeProvider) {
 	.when('/gameSelect/:id/:name', {
 		templateUrl : 'resources/pages/home-gameDetails.html',
 		controller : 'gameSelectController'
+	})
+	
+	.when('/editEvent/:id', {
+		templateUrl : 'resources/pages/home-editEvent.html',
+		controller : 'editEventCtrl'
 	})
 
 	.when('/events', {

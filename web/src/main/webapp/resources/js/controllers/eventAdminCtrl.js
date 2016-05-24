@@ -1,6 +1,5 @@
-angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $filter, ngTableParams) {
+angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $filter, $route, ngTableParams) {
 	
-	$scope.showEvent = false;
 	$scope.allEvents = [];
 	$http.get('allEventsDTO').then(function(result) {
 		$scope.allEvents = result.data;
@@ -30,6 +29,11 @@ angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $
 	});
 	
 	$scope.cancelEvent = function(id) {
-		$http.delete('cancelEvent?id='+ id);
+		$http.delete('cancelEvent?id='+ id).then(function mySucces(response) {
+			$route.reload();
+		}, function myError(response) {
+			alert("Failed to send your request");
+		});
 	}
+	
 });

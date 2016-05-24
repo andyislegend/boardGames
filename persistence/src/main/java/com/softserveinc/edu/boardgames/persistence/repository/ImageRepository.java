@@ -12,4 +12,6 @@ public interface ImageRepository extends JpaRepository<Image, Integer> {
 	
 	@Query("Select i.imageName FROM Image i WHERE i.user.username = :username")
 	public String findImageNameByUsername(@Param("username") String username);
+	
+	public Image findByImageLocation(String imageLocation);
 }

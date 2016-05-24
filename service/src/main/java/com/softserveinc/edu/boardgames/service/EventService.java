@@ -5,12 +5,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.mapper.EventMapper;
 import com.softserveinc.edu.boardgames.persistence.repository.EventRepository;
 
 /**
@@ -43,10 +43,17 @@ public class EventService {
 	}
 	
 	@Transactional
-    @Modifying
-    public void subscribeToEvent(Integer eventId, Integer userId){
-    	eventRepository.subscribeToEvent(eventId, userId);
-    }
+	public void updateEventDTO(EventsDTO dto) {
+		Event event = geteventById(dto.getEventId());
+		EventMapper.toEntity(dto, event);
+		eventRepository.saveAndFlush(event);
+	}
+	
+//	@Transactional
+//    @Modifying
+//    public void subscribeToEvent(Integer eventId, Integer userId){
+//    	eventRepository.subscribeToEvent(eventId, userId);
+//    }
 	
     public List<EventsDTO> getAllEvents() {
     	return  eventRepository.getAllEvents();
@@ -71,11 +78,7 @@ public class EventService {
     public List<EventsDTO> getEventByWord(String name){
     	return eventRepository.findAllEventsByWord(name);
     }
-    
-//    public List<EventsDTO> geUsersEventsByUserName(String username) {
-//		return eventRepository.getUserEventsByUserName(username);
-//	}
-    
+        
     public List<EventsDTO> getAllNotExpiredEvents() {
     
     	List<EventsDTO> allEvents = eventRepository.getAllEvents();

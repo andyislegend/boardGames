@@ -1,9 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
 import java.util.Date;
-import java.util.Set;
-
-import com.softserveinc.edu.boardgames.persistence.entity.User;
 
 public class EventsDTO {
 
@@ -12,8 +9,6 @@ public class EventsDTO {
 	private String description;
 	private String location;
 	private Date date;
-	private Set<User> users;
-	private boolean isNew;
 
 	public EventsDTO() {
 	}
@@ -41,17 +36,6 @@ public class EventsDTO {
 		this.description = description;
 		this.location = location;
 		this.date = date;
-
-	}
-	
-	public EventsDTO(Integer eventId, String name, String description, String location, Date date, boolean isNew) {
-
-		this.eventId = eventId;
-		this.name = name;
-		this.description = description;
-		this.location = location;
-		this.date = date;
-		this.isNew = isNew;
 
 	}
 	
@@ -93,22 +77,6 @@ public class EventsDTO {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-	public boolean isNew() {
-		return isNew;
-	}
-
-	public void setNew(boolean isNew) {
-		this.isNew = isNew;
 	}
 
 }

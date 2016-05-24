@@ -10,8 +10,8 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
  */
 public class EventMapper {
 	
-	public static Event toEntity(EventsDTO dto) {
-		Event event = new Event();
+	public static Event toEntity(EventsDTO dto, Event event) {
+		
 		event.setName(dto.getName());
 		event.setLocation(dto.getLocation());
 		event.setDescription(dto.getDescription());

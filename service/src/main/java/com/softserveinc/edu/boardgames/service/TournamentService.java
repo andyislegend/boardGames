@@ -5,9 +5,11 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -87,7 +89,7 @@ public class TournamentService {
     /**
      *@author Vasyl Bervetskyy
      **/
-    public List<Object[]> getAllTournamentByUserName(String currentUserName){
-    	return tournamentRepository.getAllTournamentByUserName(currentUserName);
+    public List<Tournament> getAllTommorowTournament(){
+    	return tournamentRepository.getAllTommorowTournament();
     }
 }

@@ -222,7 +222,7 @@
 								style="color: red">*</span> </span> <input ng-model="regusername"
 								style="width: 400px;" type="text" class="form-control"
 								aria-describedby="basic-addon1" required="required"
-								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}" maxlength="15">
+								placeholder="{{'REGFORM_USERNAME_PLACEHOLDER' | translate}}" maxlength="9">
 						</div>
 						<br>
 						<div class="input-group">
@@ -352,7 +352,7 @@
 				<a style="margin-bottom: 5%" type="button" data-dismiss="modal"
 					class="btn btn-danger btn-md" translate="CLOSE"></a> <a
 					style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
-					class="btn btn-infj btn-md" translate="CONTACT_WITH_ADMINS"></a>
+					class="btn btn-info btn-md" translate="CONTACT_WITH_ADMINS"></a>
 			</div>
 			<!-- End of Modal Content -->
 

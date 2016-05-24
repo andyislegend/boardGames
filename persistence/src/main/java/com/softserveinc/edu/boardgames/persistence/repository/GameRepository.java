@@ -8,9 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
-import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer>  {
@@ -21,10 +19,7 @@ public interface GameRepository extends JpaRepository<Game, Integer>  {
 	
 	public Game findByName(String name);
 	
-//	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO("
-//			+ "gr.game.name, gr.rating) "
-//			+ "from GameRating gr "
-//			+ "where gr.game.id = :gameId "
-//			+ "and gr.user.id = :userId")
-//	public List<GameDetailsDTO> getGameDetails(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
+	@Query("select COUNT(gu) from GameUser gu "
+			+ "where gu.game.id = :id")
+	public Integer countGameUsersOfGame(@Param("id")Integer id);
 }
