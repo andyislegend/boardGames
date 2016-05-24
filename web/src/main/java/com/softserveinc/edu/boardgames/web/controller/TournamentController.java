@@ -51,20 +51,12 @@ public class TournamentController {
     
     @RequestMapping(value = "/joinToTournament/{tournamentId}", method = RequestMethod.PUT)
     public void joinToTournament(@PathVariable Integer tournamentId){
-    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
-    	Set<User> users = tournament.getUsers();
-    	users.add(userService.getUser(WebUtil.getPrincipalUsername()));
-    	tournament.setUsers(users);
-    	tournamentService.update(tournament);
+    	tournamentService.addParticipantToTournament(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
     }
     
     @RequestMapping(value = "/leaveTournament/{tournamentId}", method = RequestMethod.PUT)
     public void leaveTournament(@PathVariable Integer tournamentId){
-    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
-    	Set<User> users = tournament.getUsers();
-    	users.remove(userService.getUser(WebUtil.getPrincipalUsername()));
-    	tournament.setUsers(users);
-    	tournamentService.update(tournament);
+    	tournamentService.deleteParticipantsFromTournamnet(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
     }
     
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)

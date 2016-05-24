@@ -19,9 +19,6 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
     public Tournament findById(Integer id); 
 	public Tournament findByName(String name);
     
-	@Query(value ="INSERT INTO tournament_users(Tournament_id, users_id) VALUES (?1,?2)", nativeQuery = true)
-	public void addParticipantToTournament(Integer tournament, Integer userId);
-	
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
             "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
             + ") from Tournament t")
