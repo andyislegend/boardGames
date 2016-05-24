@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +95,15 @@ public class EventService {
 	// public List<Object[]> getAllEventByUserName() {
 	// return eventRepository.getAllEventByUserName();
 	// }
+    
+    public List<Event> getAllDatesOfEvents() {
+    	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" + eventRepository.getAllEvents().size());
+    	return eventRepository.findAllByOrderByDateAsc();
+    }
+    
+    public Integer countEventsOnDate(Date date) {
+    	return eventRepository.countEventsForSpecificDate(date);
+    }
 
 }

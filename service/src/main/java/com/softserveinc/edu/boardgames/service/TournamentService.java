@@ -92,4 +92,14 @@ public class TournamentService {
     public List<Tournament> getAllTommorowTournament(){
     	return tournamentRepository.getAllTommorowTournament();
     }
+    
+    public List<Tournament> getAllTournamentsDates() {
+    	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" + tournamentRepository.findAllByOrderByDateOfTournamentAsc().size());
+    	return tournamentRepository.findAllByOrderByDateOfTournamentAsc();
+    }
+    
+    public Integer countTournamentsOnDate(Date date) {
+    	return tournamentRepository.countTournamentForSpecificDate(date);
+    }
 }

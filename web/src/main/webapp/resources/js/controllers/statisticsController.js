@@ -18,4 +18,13 @@ angular.module('homeApp').controller('statisticsController',function($scope, $ht
 		alert("getting ratings to games error");
 	});
 	
+	$http({
+		method : "GET",
+		url : 'getCountOfActions'
+	}).then(function mySucces(response) {
+		drawAreaChart(response.data);
+	}, function myError(response) {
+		alert("getting actions and dates error");
+	});
+	
 });

@@ -4,7 +4,6 @@ google.charts.setOnLoadCallback(drawColumnChart);
 function drawColumnChart(dataFrom) {
 	
 	var chartData = prepareColumnChartData(dataFrom);
-	console.log(chartData);
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Game');
 	data.addColumn('number', 'Rating');
