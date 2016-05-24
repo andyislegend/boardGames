@@ -1,4 +1,5 @@
-angular.module('homeApp').controller("getUser", function($scope, $http) {
+angular.module('homeApp').controller("getUser", ['$rootScope','$scope', '$http', function($rootScope, $scope, $http) {
+	$scope.user;
 	$http.get('getUser').then(function(result) {
 		$scope.user = result.data;
 		var ratingInterval = 11;
@@ -9,6 +10,11 @@ angular.module('homeApp').controller("getUser", function($scope, $http) {
 		});
 	});
 	
+	$rootScope.$on('changeAvatar', function(event) {
+		$http.get('getUsersAvatar?username=' + $scope.user.username).then(function(result) {
+			$scope.avatar = result.data;
+		});
+	});
 	
 	$scope.hovering = false;
     $scope.showIt = function () {
@@ -17,4 +23,4 @@ angular.module('homeApp').controller("getUser", function($scope, $http) {
     $scope.hideIt = function () {
         $scope.hovering = false;
     };
-});
+}]);

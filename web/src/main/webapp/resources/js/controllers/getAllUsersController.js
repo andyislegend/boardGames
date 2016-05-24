@@ -69,6 +69,9 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 			$("#bannedUsers").modal('show');
 			$scope.username = username;
 	    	$scope.bannedUsers = result;
+	    	$http.get('getUserDTO?username='+ username).then(function(result) {
+				$scope.oneUser = result.data;
+			});
         });
 	}
 	
@@ -77,7 +80,15 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		.success(function(result, status){
 			$("#bannedUsers").modal('show');
 			$scope.username = username;
-	    	$scope.bannedUsers = result;    	
+	    	$scope.bannedUsers = result;
+	    	$http.get('getUserDTO?username='+ username).then(function(result) {
+				$scope.oneUser = result.data;
+			});
         });
+	}
+	
+	$scope.getUser = function() {
+		$('#myReg').modal('hide');
+		$scope.eraseForm();
 	}
 });

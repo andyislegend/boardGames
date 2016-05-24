@@ -381,14 +381,18 @@ public class UserService {
 	 *            
 	 */
 	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
-		User user = findOne(username);	
-		String savePath = imageConfiguration.getAvatarPackage(username);	
+		String savePath = imageConfiguration.getAvatarPackage(username);
+		if (imageService.findImageNameByUsername(username)!=null) {
+			fileUpload.transferTo(new File(savePath));
+		} else {
+		User user = findOne(username);
 		Image image = new Image();
 		image.setUser(user);
 		image.setImageName(user.getUsername());
 		image.setImageLocation(savePath);
 		imageService.create(image);		
 		fileUpload.transferTo(new File(savePath));
+		}
 	}
 	
 	/**
