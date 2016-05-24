@@ -1,5 +1,5 @@
 var homeApp = angular.module('homeApp');
-homeApp.controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$timeout) {
+homeApp.controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$interval) {
 homeApp.$inject = ['$modal'];
 	
 	$rootScope.NN = 100;
@@ -8,12 +8,14 @@ homeApp.$inject = ['$modal'];
 		
 	$http.get('getAllMyGamesCurUser').then(function mySucces(response) {
 		$rootScope.allGame = response.data;
+		});
+	
+	setInterval(function(){
 		for (var i = 0; i < $rootScope.allGame.length; i++) {
 			$rootScope.isNewComments($rootScope.allGame[i].id);
 		}
-	}, function myError(response) {
-		
-	});
+		console.log('dhjfdh');
+}, 3000);
 	
 	$http({
 		method : "GET",
