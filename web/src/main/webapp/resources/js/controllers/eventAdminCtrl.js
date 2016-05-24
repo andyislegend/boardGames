@@ -1,35 +1,31 @@
-angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $filter, $q, $timeout, ngTableParams) {
+angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $filter, ngTableParams) {
 	
-	$http({
-		method : "GET",
-		url : 'allEventsDTO'
-	}).then(function mySucces(response) {
-		$scope.allEvents = response.data;
-		$scope.$broadcast('sharingToInitEventsTable', $scope.allEvents);	
-	}, function myError(response) {
-		alert("Getting events general data error");
+	$scope.showEvent = false;
+	$scope.allEvents = [];
+	$http.get('allEventsDTO').then(function(result) {
+		$scope.allEvents = result.data;
+		$scope.$broadcast('sharingToInitEventsTable', $scope.allEvents);
 	});
 	
 	$scope.$on('sharingToInitEventsTable',
 		function(event, data) {
 		$scope.allEventsTable = new ngTableParams({
 		    page: 1,
-		    count: 8
+		    count: 7
 		 }, {
 		     total: data.length, 
 		     getData: function ($defer, params) {
 		    	 
-		    	 $scope.allEvents = params.sorting() ? 
+		    	 $scope.allEventsDisplay = params.sorting() ? 
 		      			$filter('orderBy')(data, params.orderBy()) 
 		       			: data;
-		       	 $scope.allEvents = params.filter() ? 
-		       			$filter('filter')($scope.gamesGlobalDisplay, params.filter()) 
-		       			: $scope.allEvents;
-		         $scope.allEvents = $scope.allEvents.slice((params.page() - 1) 
+		       	 $scope.allEventsDisplay = params.filter() ? 
+		       			$filter('filter')($scope.allEventsDisplay, params.filter()) 
+		       			: $scope.allEventsDisplay;
+		         $scope.allEventsDisplay = $scope.allEventsDisplay.slice((params.page() - 1) 
 		            	* params.count(), params.page() * params.count());
-		         $defer.resolve($scope.allEvents);
+		         $defer.resolve($scope.allEventsDisplay);
 		     }
 		 });
 	});
-
 });
