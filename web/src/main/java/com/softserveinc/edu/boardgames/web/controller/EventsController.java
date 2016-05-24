@@ -37,7 +37,7 @@ public class EventsController {
 	GameService gameService;
 
 
-	@RequestMapping(value = "/allEventsDTO")
+	@RequestMapping(value = "/allEventsDTO",method = RequestMethod.GET)
     @ResponseBody
     public List<EventsDTO> getAllEvents() {
     	return eventService.getAllEvents();
@@ -59,5 +59,4 @@ public class EventsController {
 	public void deleteEvent(@PathVariable Integer id){
 		eventService.deleteEvent(id);
 	}
-	
 }

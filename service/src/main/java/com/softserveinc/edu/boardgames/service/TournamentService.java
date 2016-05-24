@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 /**
  * @author Volodymyr Krokhmalyuk
  * @since 12.04.2016
@@ -18,7 +21,10 @@ import java.util.List;
 public class TournamentService {
 
     @Autowired
-    TournamentRepository tournamentRepository;
+    private TournamentRepository tournamentRepository;
+    
+    @Autowired
+    private EntityManager entityManager;
 
     @Transactional
     public void save(Tournament tournament){
@@ -38,7 +44,20 @@ public class TournamentService {
     @Transactional
     @Modifying
     public void addParticipantToTournament(Integer tournamentId, Integer userId){
-    	tournamentRepository.addParticipantToTournament(tournamentId, userId);
+    	Query query = entityManager.createNativeQuery("INSERT INTO tournament_users(Tournament_id, users_id) VALUES (?,?)");
+    	query.setParameter(1, tournamentId);
+    	query.setParameter(2, userId);
+    	query.executeUpdate();
+    	
+    }
+    
+    @Transactional
+    @Modifying
+    public void deleteParticipantsFromTournamnet(Integer tournamentId, Integer userId){
+    	Query query = entityManager.createNativeQuery("DELETE FROM tournament_users WHERE `Tournament_id`=? and`users_id`=?");
+    	query.setParameter(1, tournamentId);
+    	query.setParameter(2, userId);
+        query.executeUpdate();
     }
     
     public List<TournamentsDTO> getAllTornaments() {
