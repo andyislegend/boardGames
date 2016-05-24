@@ -39,12 +39,4 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 			+ "(e.id, e.name,e.description, e.location,e.date" + ") from Event e where e.name like %:name%")
 	public List<EventsDTO> findAllEventsByWord(@Param("name") String name);	
 	
-	// /**
-	// * @author Vasyl Bervetskyy
-	// **/
-	// @Query(value = "SELECT " + "id, name, description, place, date " + "FROM
-	// events WHERE userId = "
-	// + "( SELECT id FROM users WHERE username = 'root')", nativeQuery = true)
-	// public List<Object[]> getAllEventByUserName();
-
 }
