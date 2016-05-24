@@ -43,12 +43,8 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 				'Content-Type' : 'application/json'
 			},
 			data : userGame
-		}).success(function(response) {
-			
-		}, function errorCallback(response) {
 		});
-		
-		$rootScope.allGame.push(userGame);	
+			
 		$('#myModalHorizontal').modal('hide');
 		$scope.name = '';
 		$scope.category = '';
@@ -59,6 +55,10 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		$scope.maxPlayers = '';
 		$scope.minPlayers = '';
 		
-		
+		$http.get('getAllMyGamesCurUser').then(function mySucces(response) {
+			$rootScope.allGame = response.data;	
+			$rootScope.allGame.push(userGame);
+		}		
+		);	
 	};
 });

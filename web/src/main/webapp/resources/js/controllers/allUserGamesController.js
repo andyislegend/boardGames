@@ -6,16 +6,13 @@ homeApp.$inject = ['$modal'];
 	$rootScope.allGame = [];
 	$rootScope.getAllUsersGame = [];
 		
-	$http({
-		method : "GET",
-		url : 'getAllMyGamesCurUser'
-	}).then(function mySucces(response) {
+	$http.get('getAllMyGamesCurUser').then(function mySucces(response) {
 		$rootScope.allGame = response.data;
 		for (var i = 0; i < $rootScope.allGame.length; i++) {
 			$rootScope.isNewComments($rootScope.allGame[i].id);
 		}
 	}, function myError(response) {
-		alert("getting my games error");
+		
 	});
 	
 	$http({
