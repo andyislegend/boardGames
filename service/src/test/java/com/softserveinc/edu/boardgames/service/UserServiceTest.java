@@ -43,12 +43,19 @@ public class UserServiceTest {
 
 	@Test
 	public void testFindUserWithNegativeRating() {
-		List<String> list = new ArrayList<String>();
-		list.add("vterlyha");
-		when(userRepository.findUsesrWithNegativeRating()).thenReturn(list);
-		List<String> result = userService.findUserWithNeagativeRating();
-		verify(userRepository).findUsesrWithNegativeRating();
-		assertEquals(list, result);
+		List<User> userList = new ArrayList<User>();
+		User user = new User();
+		user.setFirstName("Volodymyr");
+		user.setLastName("Terlyha");
+		user.setUsername("vterlyha");
+		user.setEmail("vterlyha@gmail.com");
+		user.setPassword("$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW");
+		user.setUserRating(0);
+		userList.add(user);
+		when(userRepository.findAll()).thenReturn(userList);
+		List<User> result = userService.findAll();
+		verify(userRepository).findAll();
+		assertEquals(userList, result);
 	}
 
 	@Test
