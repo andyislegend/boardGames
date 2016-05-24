@@ -2,7 +2,6 @@ package com.softserveinc.edu.boardgames.persistence.entity.mapper;
 
 import com.softserveinc.edu.boardgames.persistence.entity.City;
 import com.softserveinc.edu.boardgames.persistence.entity.Country;
-import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 
