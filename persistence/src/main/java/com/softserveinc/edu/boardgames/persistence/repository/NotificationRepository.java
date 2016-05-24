@@ -31,23 +31,55 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "and n.status = 'UNCHECKED'")
 	public Integer countOfUncheckedNotifications(@Param("username")String username);
 	
+	/**
+	 * This method for finding all message with your specific friend
+	 * 
+	 * @param currentUserName it's your username
+	 * @param friendUserName it's username of your friend
+	 * @return list of messages
+	 */
 	@Query("SELECT n FROM Notification n WHERE (n.userSender.username = ?1 AND n.user.username = ?2) "
-			+ "OR (n.userSender.username = ?2 AND n.user.username = ?1) ORDER BY n.date")
+			+ "OR (n.userSender.username = ?2 AND n.user.username = ?1) AND n.type = 'MESSAGE' ORDER BY n.date")
 	public List<Notification> getAllMessage(String currentUserName, String friendUserName);
 	
+	/**
+	 * This method change status of message from not read to read
+	 * 
+	 * @param messageId it's id of message that we want to change
+	 */
 	@Modifying
 	@Query("UPDATE Notification n SET n.statusOfReading = true WHERE "
 			+ "n.id = ?1")
 	public void changeStatusOfReadingOfMessage(Integer messageId);
 	
+	/**
+	 * This method for finding amount of all your not read message
+	 * 
+	 * @param currentUserName it's your username
+	 * @return amount of messages
+	 */
 	@Query("SELECT COUNT(n) FROM Notification n WHERE n.userSender.username = ?1 AND  n.statusOfReading = false AND n.type = 'MESSAGE'")
 	public Integer findAllNotReadMessage(String currentUserName);
 	
+	/**
+	 * This method for finding amount of your not read message with your specific friend
+	 * 
+	 * @param currentUserName it's your username
+	 * @param friendUserName it's username of your friend
+	 * @return amount of messages
+	 */
 	@Query("SELECT COUNT(n) FROM Notification n WHERE n.userSender.username = ?1 AND n.user.username = ?2 AND  n.statusOfReading = false AND n.type = 'MESSAGE'")
 	public Integer findAllNotReadMessageBySpecificFriend(String currentUserName, String friendUserName);
 	
+	/**
+	 * This method for finding last written message with your specific friend
+	 * 
+	 * @param currentUserName it's your username
+	 * @param friendUserName it's username of your friend
+	 * @return message
+	 */
 	@Query(value = "SELECT * FROM Notification n JOIN users u ON n.user_sender = u.id "
-			+ "JOIN users us ON n.userId = us.id WHERE u.username = ?1 AND us.username = ?2 OR u.username = ?2 AND us.username = ?1 "
+			+ "JOIN users us ON n.userId = us.id WHERE (u.username = ?1 AND us.username = ?2 OR u.username = ?2 AND us.username = ?1) AND n.type = 'MESSAGE' "
 			+ "ORDER BY n.date DESC LIMIT 1", nativeQuery = true)
 	public Notification getLastMessage(String currentUserName, String friendUserName);
 }
