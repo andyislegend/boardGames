@@ -153,7 +153,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	        transformRequest: angular.identity
 	    }).success(function(result, status){
 	    	$scope.editAvatarAnswer = result;
-	    	$rootScope.$emit('changeAvatar');
+	    	$scope.$emit('changeAvatar');
         })
         
         .error(function(result, status){
