@@ -12,10 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
+/**
+ * 
+ * @author Andrii Petryk
+ *
+ */
 @Entity
 @Table(name = "subscribed_users")
 public class SubscribedUsers implements Serializable{
