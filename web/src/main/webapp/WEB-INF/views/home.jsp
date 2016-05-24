@@ -67,6 +67,8 @@
     <script type="text/javascript"
       src="resources/js/controllers/eventAdminCtrl.js"></script>
     <script type="text/javascript"
+      src="resources/js/controllers/editEventCtrl.js"></script>  
+    <script type="text/javascript"
       src="resources/js/controllers/getOneUser.js"></script>
     <script type="text/javascript"
       src="resources/js/controllers/notificationController.js"></script>

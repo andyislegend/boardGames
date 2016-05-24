@@ -5,12 +5,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.mapper.EventMapper;
 import com.softserveinc.edu.boardgames.persistence.repository.EventRepository;
 
 /**
@@ -39,6 +39,13 @@ public class EventService {
 
 	@Transactional
 	public void update(Event event) {
+		eventRepository.saveAndFlush(event);
+	}
+	
+	@Transactional
+	public void updateEventDTO(EventsDTO dto) {
+		Event event = geteventById(dto.getEventId());
+		EventMapper.toEntity(dto, event);
 		eventRepository.saveAndFlush(event);
 	}
 	
