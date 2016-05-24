@@ -175,14 +175,17 @@ public class User implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "users")
 	private Set<Tournament> tournaments;
 	
-	/**
-	 * Describes connection to events table.
-	 */
-	@ElementCollection
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "subscribed_events",joinColumns = {@JoinColumn(name = "user_id")},
-	inverseJoinColumns = {@JoinColumn(name = "event_id")})
-	private Set<Event> events;
+//	/**
+//	 * Describes connection to events table.
+//	 */
+//	@ElementCollection
+//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinTable(name = "subscribed_events",joinColumns = {@JoinColumn(name = "user_id")},
+//	inverseJoinColumns = {@JoinColumn(name = "event_id")})
+//	private Set<Event> events;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<SubscribedUsers> subscribedUsers;
 	
 	/**
 	 * Describes a connection to verification token entity
@@ -329,12 +332,12 @@ public class User implements Serializable {
 		this.tournaments = tournaments;
 	}
 	
-	public Set<Event> getEvents() {
-		return events;
+	public Set<SubscribedUsers> getSubscribedUsers() {
+		return subscribedUsers;
 	}
 
-	public void setEvents(Set<Event> events) {
-		this.events = events;
+	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
+		this.subscribedUsers = subscribedUsers;
 	}
 
 	public VerificationToken getVerificationToken() {
