@@ -88,15 +88,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	public String findUsersGender(@Param("username") String username);
 	
 	@Modifying
-	@Query("Update User u Set u.firstName = :firstName, u.lastName = :lastName where u.username = :username")
-	public void updateUserFirstLastName(@Param("firstName") String firstName, 
-			@Param("lastName") String lastName, @Param("username") String username);
-	
-	@Modifying
-	@Query("Update User u Set u.username = :newUsername where u.username = :username")
-	public void updateUsername(@Param("newUsername") String newUsername, @Param("username") String username);
-	
-	@Modifying
 	@Query("Update User u Set u.userRating = userRating + :addUserRating where u.username = :username")
 	public void updateUserRating(@Param("addUserRating") Integer addUserRating, @Param("username") String username);
 	
