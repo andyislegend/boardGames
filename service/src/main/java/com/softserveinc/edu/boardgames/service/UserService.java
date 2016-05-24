@@ -350,6 +350,15 @@ public class UserService {
 		return findOne(loggedInUserUsername);
 	}
 	
+	/**
+	 * This method returns url of user avatar. 
+	 * If user doesn't have avatar method returns url
+	 * of avatar according to users gender 
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 *            
+	 */
 	public String getAvatarUrl(String username) {
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
 		if (imageService.findImageNameByUsername(username) == null) {
@@ -362,6 +371,15 @@ public class UserService {
 		return avatarUrl;
 	}
 	
+	/**
+	 * This method uploads user avatar image
+	 * and creates entity image for this image 
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param fileUpload
+	 * @param username
+	 *            
+	 */
 	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
 		User user = findOne(username);	
 		String savePath = imageConfiguration.getAvatarPackage(username);	
@@ -376,10 +394,9 @@ public class UserService {
 	/**
 	 * This method for banning user by administrator
 	 * 
-	 * @author Volodymyr Terlyha
+	 * @author Volodymyr Terlyha 
+	 * @param username
 	 * 
-	 * @param User
-	 *            finding user to ban
 	 */
 	@Transactional
 	public void banUserByAdministrator(String username) {
@@ -392,10 +409,9 @@ public class UserService {
 	/**
 	 * This method for unbanning user by administrator
 	 * 
-	 * @author Volodymyr Terlyha
+	 * @author Volodymyr Terlyha 
+	 * @param username
 	 * 
-	 * @param User
-	 *            finding user to ban
 	 */
 	@Transactional
 	public void unbanUserByAdministrator(String username) {
@@ -408,14 +424,24 @@ public class UserService {
 	}
 	
 	/**
+	 * This method for finding users gender 
+	 * by username
 	 * 
+	 * @author Volodymyr Terlyha
 	 * @param username
-	 *            finding users gender by username
+	 * 
 	 */
 	public String findUsersGender(String username) {
 		return userRepository.findUsersGender(username);
 	}
 	
+	/**
+	 * This method returns userDTO by username
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 * 
+	 */
 	public UserDTO getUserDTO(String username) {
 		UserDTO userDTO = userRepository.getUserDTO(username);
 		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
