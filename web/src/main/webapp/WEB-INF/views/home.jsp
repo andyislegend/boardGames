@@ -159,7 +159,7 @@
                 </li>
                 <li><a ng-href="#/notification" ><span
                   class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                  <span translate="MESSAGES"></span></a>
+                  <span translate="NOTIFICATION"></span></a>
                 </li>
                 <sec:authorize access="hasRole('ADMIN')">
                   <li><a href="#users"><span
@@ -579,7 +579,7 @@
                               ng-click="$parent.jmessage = true; 
                               $parent.myfriend=friend.firstName +' ' + friend.lastName; 
                               setFriendName(friend.username)">
-                              <img class="message" src="resources/ico/message.png" />
+                              <img class="message" src="resources/ico/message2.png" />
                               <div class="count-of-messages"
                                 ng-show="allNotReadMessagesByFriend[friends.indexOf(friend)] > 0 ">{{allNotReadMessagesByFriend[friends.indexOf(friend)]}}
                               </div>
