@@ -180,10 +180,10 @@ INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`,
 
 
 --  inserts to table events
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-27', 'Garage Party', 'We are happy to announce our first Garage party', 'Lviv, UA', TRUE);
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-30', 'New Deck for Magic!', 'Kravets just released a new Deck on full elemental monsters', 'Lviv, UA', TRUE);
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-17', 'Our first official Tournament', 'Find our First official tournament on Monoploy on our site', 'Lviv, UA', TRUE);
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-10', 'Release of new version of Hasbro Uno', 'Hasbro has announced a realese of New version of UNO', 'San-Jose, USA', TRUE);
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-06-01', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Stockholm, SWE', TRUE);
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-06-15', 'Release of Monopoly v.5', 'Hasbro has announced a realese of New Monopoly series of Version 5', 'Oakland, USA', TRUE);
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-06-28', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Frankfurt, GER', TRUE);
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-27', 'Garage Party', 'We are happy to announce our first Garage party', 'Lviv, UA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-30', 'New Deck for Magic!', 'Kravets just released a new Deck on full elemental monsters', 'Lviv, UA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-17', 'Our first official Tournament', 'Find our First official tournament on Monoploy on our site', 'Lviv, UA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-10', 'Release of new version of Hasbro Uno', 'Hasbro has announced a realese of New version of UNO', 'San-Jose, USA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-01', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Stockholm, SWE');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Release of Monopoly v.5', 'Hasbro has announced a realese of New Monopoly series of Version 5', 'Oakland, USA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-28', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Frankfurt, GER');
