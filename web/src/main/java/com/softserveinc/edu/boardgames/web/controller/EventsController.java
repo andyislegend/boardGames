@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.AllEventsDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.EventMapper;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
@@ -38,40 +39,17 @@ public class EventsController {
 	@Autowired
 	GameService gameService;
 
-	@RequestMapping(value = "/allEvents", method = RequestMethod.GET)
-	@ResponseBody
-	public List<AllEventsDto> getAllEvents() {
-		return eventService.getEventsDto();
-	}
 
-	@RequestMapping(value = "/allUserEvents")
-	@ResponseBody
-	public List<AllEventsDto> getAllUserEvents() {
-		return eventService.findAllUsersEvents(WebUtil.getPrincipalUsername());
-	}
-
-	@RequestMapping(value = "/allEvents/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public AllEventsDto getEventById(@PathVariable Integer id) {
-		return eventService.getEventDTObyID(id);
-	}
-
-	@RequestMapping(value = "/allUserEvents/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public AllEventsDto getUsersEventById(@PathVariable Integer id) {
-		return eventService.getEventDTObyID(id);
-	}
-
-	@RequestMapping(value = "/addEvent", method = RequestMethod.POST)
-	@ResponseBody
-	public void addEvent(@RequestBody AllEventsDto allEventsDto) {
-
-		Event event = EventMapper.toEntity(allEventsDto);
-		event.setGame(gameService.findByName(allEventsDto.getGame()));
-		event.setUser(userService.findOne(WebUtil.getPrincipalUsername()));
-		
-		eventService.create(event);
-
-	}
+	@RequestMapping(value = "/allEventsDTO")
+    @ResponseBody
+    public List<EventsDTO> getAllEvents() {
+    	return eventService.getAllEvents();
+    }
+	
+	@RequestMapping(value = "/allEvents")
+    @ResponseBody
+    public List<Event> findAllEvents() {
+    	return eventService.findAllEvents();
+    }
 
 }

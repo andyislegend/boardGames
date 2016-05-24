@@ -1,19 +1,73 @@
 angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope, $rootScope, $http, $filter, $routeParams, ngTableParams) {
  
- $http.get('/tournaments').success(function (result) {
-        $scope.tournaments = result;
-        $scope.$broadcast('allTournament', $scope.tournaments);
-    });
+	
+	$http.get('/tournaments').success(function (result) {
+      $scope.tournaments = result;
+      $scope.$broadcast('allTournament', $scope.tournaments);
+	});
      
-    $http.get('tournament/'+ $routeParams.id).success(function(result) {
-  $scope.tournament = result;
-  today = new Date();
-  $scope.isOpenGiveRate = false;
-  dateOfTournament = $scope.tournament.dateOfTournament;
-  if(today>dateOfTournament){
-   $scope.isOpenGiveRate = true;
-  }
- });
+    $http.get('/tournament/'+ $routeParams.id).success(function(result) {
+    	$scope.tournament = result;
+    	today = new Date();
+    	$scope.isOpenGiveRate = false;
+    	dateOfTournament = $scope.tournament.dateOfTournament;
+ 
+    	if(today>dateOfTournament){
+  			$scope.isOpenGiveRate = true;
+  		}
+    	
+    	   $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
+    	    	$scope.tournamentParticipants = result;
+    	    	
+    	    $http.get("/getCurentUser").success(function(result) {
+    	        $scope.currentUser = result;
+    	        if($scope.currentUser.username === $scope.tournament.userCreatorName){
+    	             $scope.isCreator = true;
+    	            }else {
+    	             $scope.isCreator = false;
+    	            }
+    	        for(var i = 0; i<$scope.tournamentParticipants.length; i++) {
+    	    		if(($scope.currentUser.username === $scope.tournamentParticipants[i].username)) {    	  
+    	    			$scope.joinStatus = false;
+    	    			$scope.quitStatus = true;
+    	    	    			
+    	    			break;
+    	    		}
+    	    		if(($scope.currentUser.username !== $scope.tournamentParticipants[i].username)) {
+    	    			$scope.joinStatus = true;
+    	    			$scope.quitStatus = false;
+    	    		}   
+    		     }       
+    	    
+    	    });
+    	    		
+    	    	if($scope.tournamentParticipants.length === 0) {
+    	    		$scope.joinStatus = true;
+    	    		$scope.quitStatus = false;
+    	    	}
+    	  
+    	    	if($scope.tournamentParticipants.length >= $scope.tournament.countOfParticipants) {
+    	    		$scope.joinStatus = true;
+    	    	}
+    	  
+    	    	
+    	    });
+    });
+    
+    $scope.getAllTournaments = function(){
+    	$http.get('/tournaments').success(function (result) {
+            $scope.tournaments = result;
+            $scope.$broadcast('allTournament', $scope.tournaments);
+        });
+    }
+    
+    $scope.getAllTournamentsSuchUserCreated = function(){
+    	$http.get('/getAllTournamentsByCreator').success(function(result){
+    	$scope.allTournamentsByCreator = result;
+    	$scope.$broadcast('allTournament', $scope.allTournamentsByCreator);
+    	});
+    }
+    
     
     $scope.$on('allTournament',
     		function(event, data) {
@@ -36,28 +90,9 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
 	     }
 	 });
   });
-    $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
-  $scope.tournamentParticipants = result;
-  for(a in $scope.tournamentParticipants) {
-      console.log(a.id+" ppppp");
-  }
-  
- });
-    
-    $http.get("/getCurentUser").success(function(result) {
-     $scope.currentUser = result;
-     if($scope.currentUser.username === $scope.tournament.userCreatorName){
-      $scope.isCreator = true;
-     }else {
-      $scope.isCreator = false;
-     }
-    });
     
     $scope.joinToTournament = function(id) { 
-     if($scope.isContains($scope.currentUser.username)) {
-      $scope.status = "You are joined";
-      
-     }if($scope.tournament.countOfParticipants<=$scope.tournamentParticipants.length){
+     if($scope.tournament.countOfParticipants<=$scope.tournamentParticipants.length){
       $scope.status = "There are no seats available";
       
      }else{
@@ -65,34 +100,24 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
        $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
         $scope.tournamentParticipants = result;
        });
-       $scope.status = "";
+       
        $scope.tournamentParticipants.push($scope.currentUser);
       });     
       location.reload();
      }
     }
     
-    $scope.isContains = function(username){
-     for(var i = 0; i<$scope.tournamentParticipants.length-1; i++) {
-      if($scope.tournamentParticipants[i].username === username) {
-       return true;
-      }else{
-       return false;
-      }   
-     }
-    }
-    
     $scope.leaveTournament = function(id) {  
-     if($scope.isContains($scope.currentUser.username)){
+    
      $http.put('/leaveTournament/'+id).success(function(result) {
-  });
-     $scope.status = "";
-     console.log($scope.tournamentParticipants.indexOf($scope.currentUser));
-     delete $scope.tournamentParticipants[$scope.tournamentParticipants.indexOf($scope.currentUser)+1];
-     location.reload();
-     }else{
-      $scope.status = "You are't not joined";
-     }     
+     });
+     
+     for(var i = 0; i<$scope.tournamentParticipants.length;i++){
+			if($scope.tournamentParticipants[i].id === $scope.currentUser.id) {
+				$scope.tournamentParticipants.splice(i,1);
+			}
+		} 
+     location.reload();     
     } 
     
     $scope.giveRate = function(idUser, rate) {
@@ -103,10 +128,13 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
      }
     
     $scope.changeDataOfTournament = function(){
+    	var curentDate = new Date();
+    	if($scope.changeTournamentDate<curentDate){ $('#attentionToChangeData').modal('show'); 
+    	}else{
     	$http.put("updateDateOfTournament/"+$scope.changeTournamentDate+"/"+$routeParams.id).success(function(result) {
-		
     	});
     	location.reload();
+    	} 	
     }
     
 });

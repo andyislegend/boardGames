@@ -173,13 +173,6 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '13
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '15', '1');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '16', '1');
 
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('1', '2016-05-20 19:23:15', 'Привіт', '0', '2', '1');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('2', '2016-05-20 19:23:40', 'Good bay!', '0', '3', '1');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('3', '2016-05-20 19:23:46', 'Hi', '0', '7', '1');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('4', '2016-05-20 19:23:52', 'Hello))', '0', '1', '11');
-INSERT INTO `boardgames`.`message` (`id`, `date`, `message`, `status_of_reading`, `current_user_id`, `friend_user_id`) VALUES ('5', '2016-05-20 19:24:12', 'Soru I can\'t speak', '0', '5', '1');
-
-
 -- inserts to table tournaments
 INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Monopoly', '2', '8', TRUE);
 INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isCanRate`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly', '1', '1', TRUE);
@@ -187,11 +180,10 @@ INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`,
 
 
 --  inserts to table events
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Everybody sleeps but mafia members wake up', 'Mafia event', 'resources/images/mafiaImg.jpg', '2016-05-21', 'Lviv', '1', '3');
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Game of kings', 'Chess event', 'resources/images/chessImg.jpg', '2016-06-18', 'Lviv', '2', '4');
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('One of the best games of the Western world', 'Skrabble event', 'resources/images/skrabbleImg.jpg', '2016-06-20', 'Lviv', '3', '5');
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Come with your kids: fun for everybody', 'Tic Tac Toe event', 'resources/images/tic-tac-toeImg.jpg', '2016-05-22', 'Lviv', '1', '6');
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('If America was a game of Monopoly', 'Monopoly event', 'resources/images/monopolyImg.jpg', '2016-07-02', 'Lviv', '2', '1');
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('Loving and Linkin', 'Dominos event', 'resources/images/dominosImg.jpg', '2016-07-13', 'Lviv', '3', '9');
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('When your body is the canvas', 'Pictionary event', 'resources/images/pictionaryImg.jpg', '2016-05-23', 'Lviv', '1', '7');
--- INSERT INTO `boardgames`.`events` (`name`, `description`, `imgSrc`, `date`, `place`, `userId`, `gameId`) VALUES ('This is simply a wonderful visual feast', 'Utopia event', 'resources/images/utopiaImg.jpg', '2016-05-24', 'Lviv', '1', '8');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-27', 'Garage Party', 'We are happy to announce our first Garage party', 'Lviv, UA', TRUE);
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-30', 'New Deck for Magic!', 'Kravets just released a new Deck on full elemental monsters', 'Lviv, UA', TRUE);
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-17', 'Our first official Tournament', 'Find our First official tournament on Monoploy on our site', 'Lviv, UA', TRUE);
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-05-10', 'Release of new version of Hasbro Uno', 'Hasbro has announced a realese of New version of UNO', 'San-Jose, USA', TRUE);
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-06-01', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Stockholm, SWE', TRUE);
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-06-15', 'Release of Monopoly v.5', 'Hasbro has announced a realese of New Monopoly series of Version 5', 'Oakland, USA', TRUE);
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`, `isNew`) VALUES ('2016-06-28', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Frankfurt, GER', TRUE);

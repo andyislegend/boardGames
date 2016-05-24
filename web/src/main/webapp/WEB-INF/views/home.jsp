@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="resources/css/friend.css" />
     <link rel="stylesheet" href="resources/css/editPage.css" />
     <link rel="stylesheet" href="resources/css/gameUser.css" />
+    <link rel="stylesheet" href="resources/css/tornaments.css" />
     <!-- End of CSS -->
     <!-- Scripts -->
     <script type="text/javascript"
@@ -64,7 +65,7 @@
     <script type="text/javascript"
       src="resources/js/controllers/showAllTournamentsCtrl.js"></script>
     <script type="text/javascript"
-      src="resources/js/controllers/eventListCtrl.js"></script>
+      src="resources/js/controllers/eventAdminCtrl.js"></script>
     <script type="text/javascript"
       src="resources/js/controllers/getOneUser.js"></script>
     <script type="text/javascript"
@@ -158,6 +159,12 @@
                   <li><a href="#users"><span
                     class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     <span translate="USERS"></span></a>
+                  </li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ADMIN')">
+                  <li><a href="#moderateEvent"><span
+                    class="glyphicon glyphicon-scissors" aria-hidden="true"></span>
+                    <span translate="MODERATE_EVENT"></span></a>
                   </li>
                 </sec:authorize>
                 <li class="divider"></li>
@@ -463,11 +470,11 @@
                   </div>
                   <div class="proba-message-body" id="messages" jq-scroll>
                     <div class="message-state" ng-repeat="message in messages"
-                      ng-class="{myStyle: !message.statusOfReading && message.currentUser.username == currentFriend}"
+                      ng-class="{myStyle: !message.statusOfReading && message.userSender.username == currentFriend}"
                       ng-mouseenter="readMessage(message)">
                       <div>
-                        <strong>{{message.currentUser.firstName}}
-                        {{message.currentUser.lastName}}:</strong>
+                        <strong>{{message.userSender.firstName}}
+                        {{message.userSender.lastName}}:</strong>
                       </div>
                       <div>{{message.message}}</div>
                     </div>
@@ -572,12 +579,13 @@
                               </div>
                             </a>
                           </div>
-                          <a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
+                            <a href="" type="submit"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
+                          <!--<a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
                             $parent.myfriendTournament=friend.firstName +' ' + friend.lastName; 
                             setFriendNameForTournament(friend.username)">
                           <img class="iconChampionship"
                             src="resources/ico/championship.png" />
-                          </a>
+                          </a>-->
                         </div>
                       </div>
                     </div>

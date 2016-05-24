@@ -42,4 +42,29 @@ public class NotificationService {
 	public Integer getCountOfGameNotifications(String username) {
 		return notifyRepo.countOfUncheckedNotifications(username);
 	}
+	
+	public void saveNotification(Notification notification){
+		notifyRepo.saveAndFlush(notification);
+	}
+	
+	public List<Notification> getAllMessage(String currentUserName, String friendUserName){
+		return notifyRepo.getAllMessage(currentUserName, friendUserName);
+	}
+	
+	public void changeStatusOfReadingOfMessage(Integer messageId){
+		notifyRepo.changeStatusOfReadingOfMessage(messageId);
+	}
+	
+	public Integer findAllNotReadMessage(String currentUserName){
+		return notifyRepo.findAllNotReadMessage(currentUserName);
+	}
+	
+	public Integer findAllNotReadMessageBySpecificFriend(String currentUserName, String friendUserName){
+		return notifyRepo.findAllNotReadMessageBySpecificFriend(currentUserName, friendUserName);
+	}
+	
+	public Notification getLastMessage(String currentUserName, String friendUserName){
+		return notifyRepo.getLastMessage(currentUserName, friendUserName);
+	}
+	
 }

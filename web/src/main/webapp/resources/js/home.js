@@ -25,7 +25,12 @@ homeApp.config(function($routeProvider) {
 
 	.when('/events', {
 		templateUrl : 'resources/pages/home-events.html',
-		controller : 'eventListCtrl'
+//		controller : 'eventListCtrl'
+	})
+	
+	.when('/moderateEvent', {
+		templateUrl : 'resources/pages/home-editEventsByAdmin.html',
+		controller : 'eventAdminCtrl'
 	})
 
 	.when('/edit/:username', {

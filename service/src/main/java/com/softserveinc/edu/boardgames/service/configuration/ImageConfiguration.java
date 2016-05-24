@@ -1,4 +1,4 @@
-package com.softserveinc.edu.boardgames.configuration;
+package com.softserveinc.edu.boardgames.service.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
