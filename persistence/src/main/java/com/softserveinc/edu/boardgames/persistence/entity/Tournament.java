@@ -65,9 +65,6 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private String city;
     
-    @Column(name = "isCanRate")
-    private boolean isCanRate;
-
     public Tournament() {
 		
 	}
@@ -142,13 +139,5 @@ public class Tournament implements Serializable {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public boolean isCanRate() {
-		return isCanRate;
-	}
-
-	public void setCanRate(boolean isCanRate) {
-		this.isCanRate = isCanRate;
 	}
 }

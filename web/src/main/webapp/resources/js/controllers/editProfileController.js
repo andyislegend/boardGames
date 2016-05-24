@@ -2,6 +2,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	$scope.userProfile;
 	$scope.showPasswordChange = false;
 	$scope.myProfile = false;
+	$scope.myAvatarUpload = false;
 	$scope.username = $routeParams.username;
 	if ($routeParams.username==null) {
 		$scope.username = "Logged in user";
@@ -38,12 +39,10 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 					if ($scope.userProfile.city!=null) {
 						for (i=0; i<$scope.cities.length; i++) {
 							if ($scope.cities[i].id==$scope.userProfile.city.id) {
-								$scope.editableCity = $scope.cities[i];								
+								$scope.editableCity = $scope.cities[i];
+								break;
 							} 
 						}
-					} else {
-						var startOfCitiesCollection = 0;
-						$scope.editableCity = $scope.cities[startOfCitiesCollection];
 					}
 				});
 			};

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
+import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
@@ -65,22 +66,35 @@ public class NotificationService {
 		return notifyRepo.findAllNotReadMessageBySpecificFriend(currentUserName, friendUserName);
 	}
 	
-	public Notification getLastMessage(String currentUserName, String friendUserName){
-		return notifyRepo.getLastMessage(currentUserName, friendUserName);
-	}
-	
 	public void addTournamentNotification(List<Tournament> listOfTournament){
 		for(Tournament tournament: listOfTournament){
 				for(User user: tournament.getUsers()){
 					Notification notification = new Notification();
 					notification.setDate(tournament.getDateOfTournament());
 					notification.setUser(user);
-					notification.setMessage("Dear user you have tournament tomorrow, pleas do not miss it. "
+					notification.setMessage("Dear user, you have tournament tomorrow, pleas do not miss it. "
 							+ "Name of tournament is \"" + tournament.getName() + "\" it will be "
 									+ "in " + tournament.getCity() + ", " + tournament.getCountry() + " in ");
 					notification.setType("NOTIFICATION");
 					notifyRepo.save(notification);
 				}
 			}
-	}	
+	}
+	
+	public void addEventNotification(List<SubscribedUsers> listOfSubsriders){
+		for(SubscribedUsers su: listOfSubsriders){
+			Notification notification = new Notification();
+			notification.setDate(su.getEvent().getDate());
+			notification.setUser(su.getUser());
+			notification.setMessage("Dear user, you have already sent request on \"" + su.getEvent().getName() + "\" event,"
+					+ " we hope you will spend time with pleasure. Feel free, enjoy the game and be happy! Event will "
+					+ "be in " + su.getEvent().getLocation() + " on ");
+			notification.setType("EVENT");
+			notifyRepo.save(notification);
+		}
+	}
+	
+	public List<Notification> getAllNotificationByUserName(String userName){
+		return notifyRepo.getAllNotificationByUserName(userName);
+	}
 }

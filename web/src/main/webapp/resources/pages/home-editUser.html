@@ -8,9 +8,9 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 					<div class="col-md-3">
-					<img ng-src="{{avatar}}" id="userAvatar" ng-hide="myProfile">
-							<img src="#" ng-src="{{avatar}}" id="avatar" ng-show="myProfile"/>
+							<img src="#" ng-src="{{avatar}}" id="avatar" ng-click="myAvatarUpload = !myAvatarUpload"/>
 								<br>
+								<div ng-show ="myAvatarUpload">
 								<label id="uploadButton" ng-show="myProfile">
 								<input type="file" file-model="myFile" name="fileUpload"
 									class="fileUpload" accept="image/*" onchange="loadFile(event)">
@@ -18,7 +18,7 @@
 								</label>
 								<button ng-click = "uploadAvatar()" id="uploadButton" ng-show="myProfile"
 									class="btn btn-primary btn-bg" translate="UPLOAD_AVATAR">upload avatar</button>
-									
+								</div>
 						</div>
 						<span class="col-sm-3" ng-hide="editProfileMessage" translate="{{editAvatarAnswer}}">
 									

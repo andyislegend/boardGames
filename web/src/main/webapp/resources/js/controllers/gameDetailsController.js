@@ -96,15 +96,8 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 			},
 			data : comment
 		}).then(function successCallback(response) {
-				$scope.list.push(response.data);	
-				
-		}, function errorCallback(response) {
-		})
-		$timeout(function() {
-			for (var i = 0; i < $rootScope.getAllUsersGame.length; i++) {
-				$rootScope.isNewComments($rootScope.getAllUsersGame[i].id);
-			}
-    }, 200);
+				$scope.list.push(response.data);		
+		});
 		
 		$scope.commentForGame.push(comment);
 		$scope.comment = '';
