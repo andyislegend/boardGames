@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
@@ -99,5 +100,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			"(u.id, u.username, u.firstName, u.lastName, u.email, u.gender, u.age, u.phoneNumber, "
 			+ "u.country.id, u.city.id, u.country.name, u.city.name, u.userRating, u.level) from User u Where u.username = :username")
 	public UserDTO getUserDTO(@Param("username")String username);
+	
+	@Query("Select i FROM Image i WHERE i.user.username = :username")
+	public Image findImageByUsername(@Param("username") String username);
 	
 }
