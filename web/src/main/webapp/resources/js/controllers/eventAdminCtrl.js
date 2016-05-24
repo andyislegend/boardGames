@@ -1,10 +1,15 @@
-angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $filter, ngTableParams) {
+angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $filter, $route, ngTableParams) {
 	
 	$scope.showEvent = false;
 	$scope.allEvents = [];
 	$http.get('allEventsDTO').then(function(result) {
 		$scope.allEvents = result.data;
 		$scope.$broadcast('sharingToInitEventsTable', $scope.allEvents);
+		$scope.getInfoAboutEventFunc = function(id) {
+			$http.get('getEventDTO?id='+ id).then(function(result) {
+				$scope.oneEvent = result.data;
+			});
+		};
 	});
 	
 	$scope.$on('sharingToInitEventsTable',
@@ -30,6 +35,10 @@ angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $
 	});
 	
 	$scope.cancelEvent = function(id) {
-		$http.delete('cancelEvent?id='+ id);
+		$http.delete('cancelEvent?id='+ id).then(function mySucces(response) {
+			$route.reload();
+		}, function myError(response) {
+			alert("Failed to send your request");
+		});
 	}
 });

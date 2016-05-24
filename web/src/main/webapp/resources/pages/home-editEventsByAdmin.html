@@ -9,7 +9,7 @@
 					filter="{ 'date': 'text' }">{{ x.date | date:'yyyy-MM-dd' }}</td>
 				
 				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
-					<a href="" ng-click="showEvent = !showEvent">{{ x.name }}</a>
+					<a href="" ng-click="getInfoAboutEventFunc(x.eventId); showEvent = !showEvent">{{ x.name }}</a>
 				</td>
 	
 				<td title="'Description'">{{ x.description }}</td>
@@ -21,11 +21,11 @@
 			<tr ng-show="showEvent" ng-repeat-end>
 				
 				<td>					
-				<p><a ng-click="cancelEvent(event.id)"> Cancel Event</a></p>
+				<p><a ng-click="cancelEvent(oneEvent.eventId)"> Cancel Event</a></p>
 				</td>
 				
 				<td>					
-				<p><a ng-click="editEvent(event.id)"> Edit Event</a></p>
+				<p><a ng-click="editEvent(oneEvent.eventId)"> Edit Event</a></p>
 				</td>
 			</tr>
 		</table>
