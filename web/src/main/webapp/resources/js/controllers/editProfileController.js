@@ -134,12 +134,12 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
          };
       }]);
 
-	$scope.uploadAvatar = function($rootScope) {
+	$scope.uploadAvatar = function() {
 		if ($scope.myFile == null) {
 			return $scope.editAvatarAnswer = "FOTO_ISNT_CHOOSED";			
 		}
 		if ($scope.myFile.size > 5242880) {
-			return $scope.editAvatarAnswer = "The file size must be less than 5MB";			
+			return $scope.editAvatarAnswer = "FOTO_SIZE";			
 		}
 		var file = $scope.myFile;
 	    var fileUpload = new FormData();
