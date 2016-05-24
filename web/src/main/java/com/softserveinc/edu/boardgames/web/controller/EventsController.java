@@ -55,7 +55,7 @@ public class EventsController {
 		return eventService.getEventDTOById(id);
 	}
 
-	@RequestMapping(value = "/deleteUserGame/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value = "/cancelEvent/{id}",method = RequestMethod.DELETE)
 	public void deleteEvent(@PathVariable Integer id){
 		eventService.deleteEvent(id);
 	}
