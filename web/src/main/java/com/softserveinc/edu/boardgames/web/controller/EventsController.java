@@ -5,21 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
-import com.softserveinc.edu.boardgames.persistence.entity.mapper.EventMapper;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.EventService;
 import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.UserService;
-import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @Controller
 public class EventsController {
@@ -51,4 +48,15 @@ public class EventsController {
     public List<Event> findAllEvents() {
     	return eventService.findAllEvents();
     }
+	
+	@RequestMapping(value = {"/getEventDTO"}, method = RequestMethod.GET)
+	@ResponseBody
+	public EventsDTO getEventDTO(@RequestParam("id") Integer id) {
+		return eventService.getEventDTOById(id);
+	}
+
+	@RequestMapping(value = "/cancelEvent/{id}",method = RequestMethod.DELETE)
+	public void deleteEvent(@PathVariable Integer id){
+		eventService.deleteEvent(id);
+	}
 }

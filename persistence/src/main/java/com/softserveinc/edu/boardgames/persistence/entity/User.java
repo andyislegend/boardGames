@@ -125,7 +125,7 @@ public class User implements Serializable {
 	 */
 	@NotEmpty
 	@Column(name = "rating", nullable = false)
-	private String rating = UserLevel.NOOB.name();
+	private String level = UserLevel.NOOB.name();
 
 	/**
 	 * Provides a description of User's current status. By default, after
@@ -273,12 +273,12 @@ public class User implements Serializable {
 		this.userRating = userRating;
 	}
 
-	public String getRating() {
-		return rating;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setRating(String rating) {
-		this.rating = rating;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public String getState() {
@@ -361,42 +361,42 @@ public class User implements Serializable {
 		}
 		
 		if (isBetween(this.getUserRating(), 0, 10)) {
-			this.setRating(UserLevel.NOOB.name());
+			this.setLevel(UserLevel.NOOB.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 11, 20)) {
-			this.setRating(UserLevel.SKILLED.name());
+			this.setLevel(UserLevel.SKILLED.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 21, 30)) {
-			this.setRating(UserLevel.PRO.name());
+			this.setLevel(UserLevel.PRO.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 31, 40)) {
-			this.setRating(UserLevel.VETERAN.name());
+			this.setLevel(UserLevel.VETERAN.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 41, 50)) {
-			this.setRating(UserLevel.MASTER.name());
+			this.setLevel(UserLevel.MASTER.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 51, 60)) {
-			this.setRating(UserLevel.WICKED_SICK.name());
+			this.setLevel(UserLevel.WICKED_SICK.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 61, 70)) {
-			this.setRating(UserLevel.EXTRATERESTRIAL.name());
+			this.setLevel(UserLevel.EXTRATERESTRIAL.name());
 			return;
 		}
 		
 		if (isBetween(this.getUserRating(), 71, 100)) {
-			this.setRating(UserLevel.GODLIKE.name());
+			this.setLevel(UserLevel.GODLIKE.name());
 			return;
 		}
 	}
@@ -424,7 +424,7 @@ public class User implements Serializable {
 	                              .append(getPhoneNumber(), other.getPhoneNumber())
 	                              .append(getPassword(), other.getPassword())
 	                              .append(getUserRating(), other.getUserRating())
-	                              .append(getRating(), other.getRating())
+	                              .append(getLevel(), other.getLevel())
 	                              .append(getState(), other.getState())
 	                              .append(getCountry(), other.getCountry())
 	                              .append(getCity(), other.getCity())
@@ -443,7 +443,7 @@ public class User implements Serializable {
 				 .append(getPhoneNumber())
 				 .append(getPassword())
 				 .append(getUserRating())
-				 .append(getRating())
+				 .append(getLevel())
 				 .append(getState())
 				 .append(getCountry())
 				 .append(getCity())
@@ -463,7 +463,7 @@ public class User implements Serializable {
                 .append("phoneNumber", getPhoneNumber())
                 .append("password", getPassword())
                 .append("userRating", getUserRating())
-                .append("rating", getRating())
+                .append("rating", getLevel())
                 .append("state", getState())
                 .append("country", getCountry())
                 .append("city", getCity())

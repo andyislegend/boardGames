@@ -257,6 +257,7 @@ public class UserService {
 	public void banUserByAdministrator(String username) {
 		User user = findOne(username);
 		user.setState(UserStatus.BANNED.name());
+		mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		userRepository.saveAndFlush(user);
 	}
 	
@@ -295,17 +296,6 @@ public class UserService {
 	}
 
 
-
-	/**
-	 * 
-	 * @param cityName
-	 *            finding users by cityName
-	 */
-	@Transactional
-	public List<User> findAllUsersByCity(Integer cityId) {
-		return userRepository.findUserByCity(cityId);
-	}
-
 	public User findById(int id) {
 		return userRepository.findOne(id);
 	}
@@ -331,23 +321,6 @@ public class UserService {
 		name = name.concat("%");
 		lastName = lastName.concat("%"); // Add symbol '%' for use LIKE in query
 		return userRepository.findAllUserByFirstNameAndLastName(userName, name, lastName);
-	}
-
-	/**
-	 * 
-	 * finding users with userRating lower than -5
-	 */
-	public List<String> findUserWithNeagativeRating() {
-		return userRepository.findUsesrWithNegativeRating();
-	}
-
-	/**
-	 * 
-	 * @param username
-	 *            finding users gender by username
-	 */
-	public String findUsersGender(String username) {
-		return userRepository.findUsersGender(username);
 	}
 
 	/**
@@ -423,6 +396,16 @@ public class UserService {
 	
 	public void deleteUser(User user) {
 		userRepository.delete(user);
+	}
+	
+	
+	/**
+	 * 
+	 * @param username
+	 *            finding users gender by username
+	 */
+	public String findUsersGender(String username) {
+		return userRepository.findUsersGender(username);
 	}
 	
 	public UserDTO getUserDTO(String username) {

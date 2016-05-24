@@ -56,6 +56,10 @@ public class EventService {
     	return eventRepository.findById(id);
     }
     
+    public EventsDTO getEventDTOById(Integer id){
+    	return eventRepository.getEventsById(id);
+    }
+    
     public List<Event> findAll(){
         return eventRepository.findAll();
     }

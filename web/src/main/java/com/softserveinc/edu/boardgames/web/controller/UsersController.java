@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
@@ -26,7 +24,7 @@ import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
- * Controller for receiving information about users.
+ * Controller for working with information about users.
  * 
  * @author Volodymyr Terlyha
  *
@@ -34,8 +32,36 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @Controller
 public class UsersController {
 	
+	/**
+	 * @param CHANGES_SAVED
+	 *            is used as a key to choose correct language
+	 */
+	public static final String CHANGES_SAVED = "CHANGES_SAVED";
 	
-
+	/**
+	 * @param IMAGE_UPLOAD_FAILED
+	 *            is used as a key to choose correct language
+	 */
+	public static final String IMAGE_UPLOAD_FAILED = "IMAGE_UPLOAD_FAILED";
+	
+	/**
+	 * @param IMAGE_UPLOAD_FAILED
+	 *            is used as a key to choose correct language
+	 */
+	public static final String IMAGE_UPLOAD = "IMAGE_UPLOAD";
+	
+	/**
+	 * @param IMAGE_UPLOAD_FAILED
+	 *            is used as a key to choose correct language
+	 */
+	public static final String USER_BAN = "USER_BAN";
+	
+	/**
+	 * @param IMAGE_UPLOAD_FAILED
+	 *            is used as a key to choose correct language
+	 */
+	public static final String USER_UNBAN = "USER_UNBAN";
+	
 	@Autowired
 	ImageService imageService;
 	
@@ -51,11 +77,11 @@ public class UsersController {
 	@Autowired
 	TournamentService tournamentService;
 	
-	@Autowired
-	CommonsMultipartResolver resolver;
-	
 	/**
-	 * Returns all users.
+	 * This method returns all users
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
 	 */
 	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
 	@ResponseBody
@@ -64,7 +90,11 @@ public class UsersController {
 	}
 	
 	/**
-	 * Returns information about one User
+	 * This method for finding user by username
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 *         
 	 */
 	@RequestMapping(value = {"/getUserDTO"}, method = RequestMethod.GET)
 	@ResponseBody
@@ -72,24 +102,40 @@ public class UsersController {
 		return userService.getUserDTO(username);
 	}
 	
+	/**
+	 * This method for finding users profile to edit or
+	 * finding friends profile page
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 *         
+	 */
 	@RequestMapping(value = {"/getProfile"}, method = RequestMethod.GET)
 	@ResponseBody
 	public User getUserProfile(@RequestParam("username") String username) {
 		return userService.getUserProfile(username, WebUtil.getPrincipalUsername());
 	}
 	
+	/**
+	 * This method for updating information about user
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param userDTO
+	 *         
+	 */
 	@RequestMapping(value = {"/updateUser"}, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
 		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
-		return new ResponseEntity<String>("CHANGES_SAVED", HttpStatus.OK);
+		return new ResponseEntity<String>(CHANGES_SAVED, HttpStatus.OK);
 	}
 	
 	/**
-	 * Returns needed url to users avatar location.
+	 * This method returns needed url to users avatar location.
 	 * 
+	 * @author Volodymyr Terlyha
 	 * @param userName
-	 *            username of user, who's avatar we want to find
+	 *
 	 */
 	@RequestMapping(value = {"/getUsersAvatar"}, method = RequestMethod.GET)
 	@ResponseBody
@@ -98,7 +144,11 @@ public class UsersController {
 	}
 	
 	/**
-	 * Updating users avatar
+	 * This method updating users avatar by uploading image.
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param fileUpload
+	 *
 	 */
 	@RequestMapping(value = {"/updateAvatar"}, consumes="multipart/form-data", method = RequestMethod.POST)
 	@ResponseBody
@@ -107,11 +157,17 @@ public class UsersController {
 			userService.updateAvatar(fileUpload, WebUtil.getPrincipalUsername());
 		} catch(IOException e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("IMAGE_UPLOAD_FAILED", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(IMAGE_UPLOAD_FAILED, HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<String>("IMAGE_UPLOAD", HttpStatus.OK);
+		return new ResponseEntity<String>(IMAGE_UPLOAD, HttpStatus.OK);
 	}
 	
+	/**
+	 * This method returns logged in user.
+	 * 
+	 * @author Volodymyr Terlyha
+	 *
+	 */
 	@RequestMapping(value = {"/getUser"}, method = RequestMethod.GET)
 	@ResponseBody
 	public User getOneUser() {
@@ -119,16 +175,30 @@ public class UsersController {
 		return user;
 	}
 	
+	/**
+	 * This method bans user by username.
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 *
+	 */
 	@RequestMapping(value = {"/banUser"}, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> banUser(@RequestParam("username") String username) {
 		userService.banUserByAdministrator(username);
-		return new ResponseEntity<String>("USER_BAN", HttpStatus.OK);
+		return new ResponseEntity<String>(USER_BAN, HttpStatus.OK);
 	}
 	
+	/**
+	 * This method unbans user by username.
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 *
+	 */
 	@RequestMapping(value = {"/unbanUser"}, method = RequestMethod.PUT)
 	public ResponseEntity<String> unbanUser(@RequestParam("username") String username) {
 		userService.unbanUserByAdministrator(username);
-		return new ResponseEntity<String>("USER_UNBAN", HttpStatus.OK);
+		return new ResponseEntity<String>(USER_UNBAN, HttpStatus.OK);
 	}
 }

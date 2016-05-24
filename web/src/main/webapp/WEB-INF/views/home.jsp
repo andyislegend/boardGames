@@ -101,7 +101,7 @@
             <div class="navbar-form navbar-left">
               <ul id="container">
                 <li id="userRating" translate="USER_LEVEL" 
-                  translate-values="{userLevel:'{{user.rating}}'}"></li>
+                  translate-values="{userLevel:'{{user.level}}'}"></li>
                 <li><progress value="0" max="100" id=ratingBar></progress></li>
                 <li class="outerDiv" ng-show="hovering">
                   <p translate="CUR_RATING" 
@@ -577,7 +577,9 @@
                               </div>
                             </a>
                           </div>
-                            <a href="" type="submit"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
+                            <!--<a href=""><img class="delete-user" src="resources/ico/delete_user.png"/></a>-->
+                            <a href="" type="submit" uib-popover="sdfffff" popover-title="Do you realy want to delete {{ friend.firstName }} {{
+                            friend.lastName}}"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
                           <!--<a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
                             $parent.myfriendTournament=friend.firstName +' ' + friend.lastName; 
                             setFriendNameForTournament(friend.username)">
