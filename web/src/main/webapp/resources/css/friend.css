@@ -363,6 +363,15 @@ word-wrap: break-word;
 .persons{
     overflow: auto;
 }
+.delete-user{
+    width: 30px;
+    height: 30px;
+    margin-top: 4px;
+    opacity: .7;
+}
+.delete-user:hover{
+    opacity: 1;
+}
 /*********************************/
 
 .tabs {

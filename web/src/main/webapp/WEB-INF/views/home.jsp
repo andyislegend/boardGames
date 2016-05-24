@@ -577,12 +577,15 @@
                               </div>
                             </a>
                           </div>
-                          <a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
+                            <!--<a href=""><img class="delete-user" src="resources/ico/delete_user.png"/></a>-->
+                            <a href="" type="submit" uib-popover="sdfffff" popover-title="Do you realy want to delete {{ friend.firstName }} {{
+                            friend.lastName}}"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
+                          <!--<a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
                             $parent.myfriendTournament=friend.firstName +' ' + friend.lastName; 
                             setFriendNameForTournament(friend.username)">
                           <img class="iconChampionship"
                             src="resources/ico/championship.png" />
-                          </a>
+                          </a>-->
                         </div>
                       </div>
                     </div>

@@ -257,6 +257,7 @@ public class UserService {
 	public void banUserByAdministrator(String username) {
 		User user = findOne(username);
 		user.setState(UserStatus.BANNED.name());
+		mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		userRepository.saveAndFlush(user);
 	}
 	
@@ -293,8 +294,6 @@ public class UserService {
 
 		userRepository.save(user);
 	}
-
-
 
 	/**
 	 * 
