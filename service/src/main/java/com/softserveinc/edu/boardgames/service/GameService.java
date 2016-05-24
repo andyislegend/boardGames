@@ -50,15 +50,11 @@ public class GameService {
 	public List<ChartDTO> groupGameUserByGame() {
 		List<ChartDTO> listOfCharts = new ArrayList<>();
 		Integer general = gameRepo.countAllUserGames();
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1  "
-				+ general);
 		for (Game gu : this.getAll()) {
 			ChartDTO chartDto = new ChartDTO();
 			chartDto.setName(gu.getName());
 			chartDto.setY(
 					(new Double(gameRepo.countGameUsersOfGame(gu.getId()))/new Double(general))*PERCENT_ALL);
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1  "
-					+ gameRepo.countGameUsersOfGame(gu.getId()) + "   " + chartDto.getY());
 			if (chartDto.getY() != 0) {
 				listOfCharts.add(chartDto);
 			}
