@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,10 +82,6 @@ public class UserService {
 	public UserService(UserRepository userRepository) {
 	}
 	
-	public List<User> findAll() {
-		return userRepository.findAll();
-	}
-
 	/**
 	 * 
 	 * @param user
@@ -154,130 +148,7 @@ public class UserService {
 		return ConvertSetEnumsToListString.convertToListString(userRepository.getRolesByUserName(username));
 	}
 
-	@Transactional
-	public void updateUser(User user) {
-		userRepository.saveAndFlush(user);
-	}
 	
-	/**
-	 * This method for getting user by username
-	 * 
-	 * @author Volodymyr Terlyha
-	 * 
-	 * @param username
-	 *            finding user by username
-	 */
-	@Transactional(readOnly = true)
-	public User getUser(String username) {
-		return userRepository.findByUsername(username);
-	}
-	
-	/**
-	 * This method for banning user
-	 * 
-	 * @author Volodymyr Terlyha
-	 * 
-	 * @param User
-	 *            finding user to ban
-	 */
-	@Transactional
-	public void banUser(User user) {
-		userRepository.saveAndFlush(user);
-		if (user.getState().equals(UserStatus.BANNED.name())) {
-			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
-		}
-	}
-	
-	/**
-	 * This method for updating user information
-	 * when editing user Profile
-	 * 
-	 * @author Volodymyr Terlyha
-	 * 
-	 * @param UserDTO
-	 *            information passed by user
-	 */
-	@Transactional
-	public void updateUser(UserDTO userDTO, String username) {
-		User user = findOne(username);
-		Country country = countryService.findById(userDTO.getCountryId());
-		City city = cityService.findById(userDTO.getCityId());
-		UserMapper.toEntity(userDTO, user, country, city);
-		userRepository.saveAndFlush(user);
-	}
-	
-	/**
-	 * This method for getting user profile
-	 * 
-	 * @author Volodymyr Terlyha
-	 * 
-	 * @param User
-	 *            finding user to ban
-	 */
-	@Transactional
-	public User getUserProfile(String username, String loggedInUserUsername) {
-		if (!username.equals(CHECK_LOGGED_IN_USERNAME)) {
-			return findOne(username);
-		}
-		return findOne(loggedInUserUsername);
-	}
-	
-	public String getAvatarUrl(String username) {
-		String avatarUrl = imageConfiguration.getAvatarUrl(username);
-		if (imageService.findImageNameByUsername(username) == null) {
-			if (findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
-				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
-			} else {
-				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
-			}
-		}
-		return avatarUrl;
-	}
-	
-	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
-		User user = findOne(username);	
-		String savePath = imageConfiguration.getAvatarPackage(username);	
-		Image image = new Image();
-		image.setUser(user);
-		image.setImageName(user.getUsername());
-		image.setImageLocation(savePath);
-		imageService.create(image);		
-		fileUpload.transferTo(new File(savePath));
-	}
-	
-	/**
-	 * This method for banning user by administrator
-	 * 
-	 * @author Volodymyr Terlyha
-	 * 
-	 * @param User
-	 *            finding user to ban
-	 */
-	@Transactional
-	public void banUserByAdministrator(String username) {
-		User user = findOne(username);
-		user.setState(UserStatus.BANNED.name());
-		mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
-		userRepository.saveAndFlush(user);
-	}
-	
-	/**
-	 * This method for unbanning user by administrator
-	 * 
-	 * @author Volodymyr Terlyha
-	 * 
-	 * @param User
-	 *            finding user to ban
-	 */
-	@Transactional
-	public void unbanUserByAdministrator(String username) {
-		User user = findOne(username);
-		user.setState(UserStatus.ACTIVE.name());
-		if (user.getUserRating() <= -5) {
-			user.setUserRating(MINIMAL_RATING_FOR_ACTIVE_USER);
-		}
-		userRepository.saveAndFlush(user);
-	}
 
 	/**
 	 * Add to User with {@code username} User Role {@code ADMIN}
@@ -398,6 +269,143 @@ public class UserService {
 		userRepository.delete(user);
 	}
 	
+	/**
+	 * This method for finding all users
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 */
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+	
+	/**
+	 * This method for updating information
+	 * about user
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param user
+	 * 
+	 */
+	@Transactional
+	public void updateUser(User user) {
+		userRepository.saveAndFlush(user);
+	}
+	
+	/**
+	 * This method for getting user by username
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 * 
+	 */
+	public User getUser(String username) {
+		return userRepository.findByUsername(username);
+	}
+	
+	/**
+	 * This method for automatically ban user
+	 * 
+	 * @author Volodymyr Terlyha 
+	 * @param User
+	 */
+	@Transactional
+	public void banUser(User user) {
+		userRepository.saveAndFlush(user);
+		if (user.getState().equals(UserStatus.BANNED.name())) {
+			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
+		}
+	}
+	
+	/**
+	 * This method for updating user information
+	 * when editing user Profile
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param UserDTO
+	 */
+	@Transactional
+	public void updateUser(UserDTO userDTO, String username) {
+		User user = findOne(username);
+		Country country = countryService.findById(userDTO.getCountryId());
+		City city = cityService.findById(userDTO.getCityId());
+		UserMapper.toEntity(userDTO, user, country, city);
+		userRepository.saveAndFlush(user);
+	}
+	
+	/**
+	 * This method for getting user profile or friends
+	 * profile page
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 * @param loggedInUserUsername
+	 *            
+	 */
+	@Transactional
+	public User getUserProfile(String username, String loggedInUserUsername) {
+		if (!username.equals(CHECK_LOGGED_IN_USERNAME)) {
+			return findOne(username);
+		}
+		return findOne(loggedInUserUsername);
+	}
+	
+	public String getAvatarUrl(String username) {
+		String avatarUrl = imageConfiguration.getAvatarUrl(username);
+		if (imageService.findImageNameByUsername(username) == null) {
+			if (findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
+				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
+			} else {
+				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
+			}
+		}
+		return avatarUrl;
+	}
+	
+	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
+		User user = findOne(username);	
+		String savePath = imageConfiguration.getAvatarPackage(username);	
+		Image image = new Image();
+		image.setUser(user);
+		image.setImageName(user.getUsername());
+		image.setImageLocation(savePath);
+		imageService.create(image);		
+		fileUpload.transferTo(new File(savePath));
+	}
+	
+	/**
+	 * This method for banning user by administrator
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param User
+	 *            finding user to ban
+	 */
+	@Transactional
+	public void banUserByAdministrator(String username) {
+		User user = findOne(username);
+		user.setState(UserStatus.BANNED.name());
+		mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
+		userRepository.saveAndFlush(user);
+	}
+	
+	/**
+	 * This method for unbanning user by administrator
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param User
+	 *            finding user to ban
+	 */
+	@Transactional
+	public void unbanUserByAdministrator(String username) {
+		User user = findOne(username);
+		user.setState(UserStatus.ACTIVE.name());
+		if (user.getUserRating() <= -5) {
+			user.setUserRating(MINIMAL_RATING_FOR_ACTIVE_USER);
+		}
+		userRepository.saveAndFlush(user);
+	}
 	
 	/**
 	 * 
