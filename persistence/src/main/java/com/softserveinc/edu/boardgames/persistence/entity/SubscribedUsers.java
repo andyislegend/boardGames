@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,20 +30,16 @@ public class SubscribedUsers implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-    @ManyToOne
-    @JoinColumn(name = "event_id")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Event.class)
+    @JoinColumn(name = "even_id", referencedColumnName = "id")
 	private Event event;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	
-	@Column
+	@Column(name = "isNew")
 	private boolean isNew = true;
-
-	public SubscribedUsers() {
-		
-	}
 
 	public Event getEvent() {
 		return event;
@@ -60,11 +57,11 @@ public class SubscribedUsers implements Serializable{
 		this.user = user;
 	}
 
-	public boolean isNew() {
+	public boolean getIsNew() {
 		return isNew;
 	}
 
-	public void setNew(boolean isNew) {
+	public void setIsNew(boolean isNew) {
 		this.isNew = isNew;
 	}
 
