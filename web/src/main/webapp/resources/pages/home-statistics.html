@@ -1,21 +1,9 @@
-<head>
-<link rel="stylesheet" href="resources/css/stats.css">
-</head>
-<body>
-	<div id="stats_main">
-
-		<div id="d1">
-		<!-- <img src="resources/images/stats/stat1.gif"> -->
-		</div>
-		<div id="d2">
-		<!-- <img src="resources/images/stats/stat2.png"> -->
-		</div>
-		<div id="d3">
-		</div>
-		<div id="d4">
-		<!-- <img src="resources/images/stats/stat4.png"> -->
-		</div>
-		<div style="clear: both;"></div>
-
+<div class="container-fluid" ng-controller="statisticsController">
+	<!-- <div id="chartContainer1">Placeholder for trial charts</div>-->
+	<div class="container">
+		<hc-pie-chart title="Game instances" data="pieData">Placeholder for pie chart</hc-pie-chart>
 	</div>
-</body>
+	<div class="container">
+		<hc-chart options="chartOptions">Placeholder for generic chart</hc-chart>
+	</div>
+</div>

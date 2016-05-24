@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.ChartDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.CommentsForGameRepository;
@@ -100,6 +101,5 @@ public class GameUserService {
 	
 	public List<Integer> getFromNameAndEdition(String name, String edition) {
 		return gameUserRepo.getGameUserFromNameAndEdition(name, edition);
-		
 	}
 }

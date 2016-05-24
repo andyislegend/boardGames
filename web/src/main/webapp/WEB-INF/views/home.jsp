@@ -80,6 +80,8 @@
     <script type="text/javascript" src="resources/js/localization.js"></script>
     <script src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="resources/bower_components/highcharts/highcharts.js"></script>
+    <script src="resources/js/controllers/statisticsController.js"></script>
     <!-- End of Scripts -->
   </head>
   <body ng-app="homeApp" ng-controller="localizationController">
