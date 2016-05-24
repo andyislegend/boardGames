@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
@@ -50,9 +48,6 @@ public class UsersController {
 	
 	@Autowired
 	TournamentService tournamentService;
-	
-	@Autowired
-	CommonsMultipartResolver resolver;
 	
 	/**
 	 * Returns all users.
