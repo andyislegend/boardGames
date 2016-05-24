@@ -30,6 +30,13 @@ public class EventService {
 	public void createEvent(Event event) {
 		eventRepository.save(event);
 	}
+	
+	@Transactional
+	public void createEventFromDTO(EventsDTO dto) {
+		Event event = new Event();
+		EventMapper.toEntity(dto, event);	
+		eventRepository.save(event);
+	}
 
 	@Transactional
 	public void deleteEvent(int id) {
