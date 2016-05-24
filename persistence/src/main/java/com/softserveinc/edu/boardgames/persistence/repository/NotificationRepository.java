@@ -78,8 +78,12 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 * @param friendUserName it's username of your friend
 	 * @return message
 	 */
+	/*
 	@Query(value = "SELECT * FROM Notification n JOIN users u ON n.user_sender = u.id "
 			+ "JOIN users us ON n.userId = us.id WHERE (u.username = ?1 AND us.username = ?2 OR u.username = ?2 AND us.username = ?1) AND n.type = 'MESSAGE' "
 			+ "ORDER BY n.date DESC LIMIT 1", nativeQuery = true)
-	public Notification getLastMessage(String currentUserName, String friendUserName);
+	public Notification getLastMessage(String currentUserName, String friendUserName);*/
+	
+	@Query("SELECT n FROM Notification n WHERE n.user.username = ?1 OR n.userSender.username = ?1")
+	public List<Notification> getAllNotificationByUserName(String userName);
 }
