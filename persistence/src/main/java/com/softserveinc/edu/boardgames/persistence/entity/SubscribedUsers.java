@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,11 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * 
+ * @author Andrii Petryk
+ *
+ */
 @Entity
 @Table(name = "subscribed_users")
 public class SubscribedUsers implements Serializable{
@@ -28,20 +34,16 @@ public class SubscribedUsers implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-    @ManyToOne
-    @JoinColumn(name = "event_id")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Event.class)
+    @JoinColumn(name = "even_id", referencedColumnName = "id")
 	private Event event;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	
-	@Column
+	@Column(name = "isNew")
 	private boolean isNew = true;
-
-	public SubscribedUsers() {
-		
-	}
 
 	public Event getEvent() {
 		return event;
@@ -59,11 +61,11 @@ public class SubscribedUsers implements Serializable{
 		this.user = user;
 	}
 
-	public boolean isNew() {
+	public boolean getIsNew() {
 		return isNew;
 	}
 
-	public void setNew(boolean isNew) {
+	public void setIsNew(boolean isNew) {
 		this.isNew = isNew;
 	}
 
@@ -75,6 +77,37 @@ public class SubscribedUsers implements Serializable{
 		this.id = id;
 	}
 	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(getId()).append(getEvent()).append(getUser()).append(getIsNew())
+				.toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SubscribedUsers other = (SubscribedUsers) obj;
+		return new EqualsBuilder()
+				.append(getId(), other.getId())
+				.append(getUser(), other.getUser())
+				.append(getEvent(), other.getEvent())
+				.append(getIsNew(), other.getIsNew())
+				.isEquals();
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", getId())
+				.append("user", getUser())
+				.append("event", getEvent())
+				.toString();
+	}
 	
 	
 }

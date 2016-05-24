@@ -185,10 +185,7 @@ public class User implements Serializable {
 //	@JoinTable(name = "subscribed_events",joinColumns = {@JoinColumn(name = "user_id")},
 //	inverseJoinColumns = {@JoinColumn(name = "event_id")})
 //	private Set<Event> events;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<SubscribedUsers> subscribedUsers;
-	
+
 	/**
 	 * Describes a connection to verification token entity
 	 */
@@ -340,14 +337,6 @@ public class User implements Serializable {
 
 	public void setTournaments(Set<Tournament> tournaments) {
 		this.tournaments = tournaments;
-	}
-	
-	public Set<SubscribedUsers> getSubscribedUsers() {
-		return subscribedUsers;
-	}
-
-	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
-		this.subscribedUsers = subscribedUsers;
 	}
 
 	public VerificationToken getVerificationToken() {

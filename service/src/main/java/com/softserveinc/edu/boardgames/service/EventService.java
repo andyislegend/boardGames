@@ -30,6 +30,13 @@ public class EventService {
 	public void createEvent(Event event) {
 		eventRepository.save(event);
 	}
+	
+	@Transactional
+	public void createEventFromDTO(EventsDTO dto) {
+		Event event = new Event();
+		EventMapper.toEntity(dto, event);	
+		eventRepository.save(event);
+	}
 
 	@Transactional
 	public void deleteEvent(int id) {
@@ -48,12 +55,7 @@ public class EventService {
 		EventMapper.toEntity(dto, event);
 		eventRepository.saveAndFlush(event);
 	}
-	
-//	@Transactional
-//    @Modifying
-//    public void subscribeToEvent(Integer eventId, Integer userId){
-//    	eventRepository.subscribeToEvent(eventId, userId);
-//    }
+
 	
     public List<EventsDTO> getAllEvents() {
     	return  eventRepository.getAllEvents();
