@@ -48,12 +48,7 @@ public class EventService {
 		EventMapper.toEntity(dto, event);
 		eventRepository.saveAndFlush(event);
 	}
-	
-//	@Transactional
-//    @Modifying
-//    public void subscribeToEvent(Integer eventId, Integer userId){
-//    	eventRepository.subscribeToEvent(eventId, userId);
-//    }
+
 	
     public List<EventsDTO> getAllEvents() {
     	return  eventRepository.getAllEvents();
