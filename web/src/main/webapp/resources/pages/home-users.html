@@ -48,7 +48,7 @@
 							<p translate="USER_AGE" 
 								translate-values="{userAge:'{{oneUser.age}}'}"></p>
 							<p translate="USER_LEVEL" 
-								translate-values="{userLevel:'{{oneUser.rating}}'}"></p>
+								translate-values="{userLevel:'{{oneUser.level}}'}"></p>
 							<p translate="USER_PHONE_NUMBER" 
 								translate-values="{userPhoneNumber:'{{oneUser.phoneNumber}}'}"></p>
 						</div>
@@ -72,8 +72,10 @@
 				<td class="col-sm-3">					
 							<img ng-src="{{userAvatar}}" id="userAvatar">
 							<p>Score: {{oneUser.userRating}}</p>
-							<p><a ng-click="banUser(user.username)" id="changeUserStatus">Ban user</a></p>
-							<p><a ng-click="unbanUser(user.username)" id="changeUserStatus">Unban user</a></p>
+							<p><a ng-click="banUser(user.username)" id="changeUserStatus" 
+								ng-if="oneUser.state=='ACTIVE'">Ban user</a></p>
+							<p><a ng-click="unbanUser(user.username)" id="changeUserStatus" 
+								ng-if="oneUser.state=='BANNED'">Unban user</a></p>
 				</td>
 			</tr>
 			</tbody>

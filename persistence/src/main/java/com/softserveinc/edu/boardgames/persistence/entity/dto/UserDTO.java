@@ -16,6 +16,8 @@ public class UserDTO {
 	private String countryName;
 	private String cityName;
 	private Integer userRating;
+	private String level;
+	private String state;
 	private List<GameUserDTO> userGames;
 	private List<TournamentsDTO> userTournaments;
 	
@@ -23,7 +25,8 @@ public class UserDTO {
 	}
 	
 	public UserDTO(Integer id, String username, String firstName, String lastName, String email, String gender, Integer age,
-					String phoneNumber, Integer countryId, Integer cityId, String countryName, String cityName, Integer userRating) {
+					String phoneNumber, Integer countryId, Integer cityId, String countryName, String cityName, Integer userRating,
+					String level, String state) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -38,6 +41,8 @@ public class UserDTO {
 		this.countryName = countryName;
 		this.cityName = cityName;
 		this.userRating = userRating;
+		this.level = level;
+		this.state = state;
 	}
 	
 	public Integer getUserRating() {
@@ -131,5 +136,17 @@ public class UserDTO {
 	}
 	public void setAge(Integer age) {
 		this.age = age;
-	}	
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 }

@@ -42,11 +42,11 @@ public class EventService {
 		eventRepository.saveAndFlush(event);
 	}
 	
-	@Transactional
-    @Modifying
-    public void subscribeToEvent(Integer eventId, Integer userId){
-    	eventRepository.subscribeToEvent(eventId, userId);
-    }
+//	@Transactional
+//    @Modifying
+//    public void subscribeToEvent(Integer eventId, Integer userId){
+//    	eventRepository.subscribeToEvent(eventId, userId);
+//    }
 	
     public List<EventsDTO> getAllEvents() {
     	return  eventRepository.getAllEvents();
@@ -54,6 +54,10 @@ public class EventService {
 
     public Event geteventById(Integer id){
     	return eventRepository.findById(id);
+    }
+    
+    public EventsDTO getEventDTOById(Integer id){
+    	return eventRepository.getEventsById(id);
     }
     
     public List<Event> findAll(){
@@ -67,11 +71,7 @@ public class EventService {
     public List<EventsDTO> getEventByWord(String name){
     	return eventRepository.findAllEventsByWord(name);
     }
-    
-//    public List<EventsDTO> geUsersEventsByUserName(String username) {
-//		return eventRepository.getUserEventsByUserName(username);
-//	}
-    
+        
     public List<EventsDTO> getAllNotExpiredEvents() {
     
     	List<EventsDTO> allEvents = eventRepository.getAllEvents();

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Image;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
@@ -26,7 +27,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("Select u.state" + " FROM User u" + " WHERE u.username =:username")
 	String getUsersState(String username); 
 
-	@Query("Select u.rating" + " FROM User u" + " WHERE u.username =:username")
+	@Query("Select u.level" + " FROM User u" + " WHERE u.username =:username")
 	String getUsersRating(String username); 
 
 	User findByEmail(String email);
@@ -88,15 +89,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	public String findUsersGender(@Param("username") String username);
 	
 	@Modifying
-	@Query("Update User u Set u.firstName = :firstName, u.lastName = :lastName where u.username = :username")
-	public void updateUserFirstLastName(@Param("firstName") String firstName, 
-			@Param("lastName") String lastName, @Param("username") String username);
-	
-	@Modifying
-	@Query("Update User u Set u.username = :newUsername where u.username = :username")
-	public void updateUsername(@Param("newUsername") String newUsername, @Param("username") String username);
-	
-	@Modifying
 	@Query("Update User u Set u.userRating = userRating + :addUserRating where u.username = :username")
 	public void updateUserRating(@Param("addUserRating") Integer addUserRating, @Param("username") String username);
 	
@@ -106,7 +98,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO" +
 			"(u.id, u.username, u.firstName, u.lastName, u.email, u.gender, u.age, u.phoneNumber, "
-			+ "u.country.id, u.city.id, u.country.name, u.city.name, u.userRating) from User u Where u.username = :username")
-	public UserDTO getUserDTO(@Param("username")String username);
-	
+			+ "u.country.id, u.city.id, u.country.name, u.city.name, u.userRating, u.level, u.state) from User u Where u.username = :username")
+	public UserDTO getUserDTO(@Param("username")String username);	
 }

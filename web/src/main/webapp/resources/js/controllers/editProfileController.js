@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', '$http', '$routeParams', function($rootScope, $scope, $http, $routeParams) {
 	$scope.userProfile;
 	$scope.showPasswordChange = false;
 	$scope.myProfile = false;
@@ -134,7 +134,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
          };
       }]);
 
-	$scope.uploadAvatar = function() {
+	$scope.uploadAvatar = function($rootScope) {
 		if ($scope.myFile == null) {
 			return $scope.editAvatarAnswer = "FOTO_ISNT_CHOOSED";			
 		}
@@ -153,6 +153,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$scope', '$http', '$ro
 	        transformRequest: angular.identity
 	    }).success(function(result, status){
 	    	$scope.editAvatarAnswer = result;
+	    	$rootScope.$emit('changeAvatar');
         })
         
         .error(function(result, status){

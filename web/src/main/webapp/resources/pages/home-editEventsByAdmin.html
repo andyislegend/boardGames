@@ -2,14 +2,14 @@
 	<h1 style="text-align: center"> Editing Events </h1>
 	<!-- EVENTS ADMIN PAGE-->
 	<div>
-	
-	<table ng-table="allGamesTable" show-filter="true" class="table table-striped">
-			<tr ng-repeat="x in allEvents">
+	<div class="widget widget_top-posts"></div>
+	<table ng-table="allEventsTable" show-filter="true" class="table table-striped">
+			<tr ng-repeat-start="x in allEventsDisplay">
 				<td title="'Date'" sortable="'date'" 
 					filter="{ 'date': 'text' }">{{ x.date | date:'yyyy-MM-dd' }}</td>
 				
 				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
-					<a href="">{{ x.name }}</a>
+					<a href="" ng-click="getInfoAboutEventFunc(x.eventId); showEvent = !showEvent">{{ x.name }}</a>
 				</td>
 	
 				<td title="'Description'">{{ x.description }}</td>
@@ -17,7 +17,50 @@
 				<td title="'Location'">{{ x.location }}</td>
 				
 			</tr>
+			
+			<tr ng-show="showEvent" ng-repeat-end>
+				
+				<td>					
+				<p><a type="button" class="btn btn-danger btn-md" ng-click="cancelEvent(oneEvent.eventId)"> Cancel Event</a></p>
+				</td>
+				
+				<td>					
+				<p><a type="button" class="btn btn-info btn-md" ng-click="editEvent(oneEvent.eventId)"> Edit Event</a></p>
+				</td>
+			</tr>
 		</table>
+		
+		
+		<!-- Modal EDIT EVENT -->
+	<div id="myEditEvent" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<h4 style="text-align: center;" class="modal-title"> EDIT EVENT </h4>
+
+				</div>
+				<div class="modal-body">
+
+					<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
+					<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
+					<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
+
+				</div>
+
+				<a style="margin-bottom: 5%" type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md" translate="CLOSE"></a> <a
+					style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
+					class="btn btn-infj btn-md" translate="CONTACT_WITH_ADMINS"></a>
+			</div>
+			<!-- End of Modal Content -->
+
+		</div>
+	</div>
+	<!-- End of BANNED Modal -->
 			
 	</div>
 	<!-- /EVENTS ADMIN PAGE -->

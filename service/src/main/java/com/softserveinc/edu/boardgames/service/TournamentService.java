@@ -5,10 +5,15 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  * @author Volodymyr Krokhmalyuk
@@ -18,7 +23,10 @@ import java.util.List;
 public class TournamentService {
 
     @Autowired
-    TournamentRepository tournamentRepository;
+    private TournamentRepository tournamentRepository;
+    
+    @Autowired
+    private EntityManager entityManager;
 
     @Transactional
     public void save(Tournament tournament){
@@ -38,7 +46,20 @@ public class TournamentService {
     @Transactional
     @Modifying
     public void addParticipantToTournament(Integer tournamentId, Integer userId){
-    	tournamentRepository.addParticipantToTournament(tournamentId, userId);
+    	Query query = entityManager.createNativeQuery("INSERT INTO tournament_users(Tournament_id, users_id) VALUES (?,?)");
+    	query.setParameter(1, tournamentId);
+    	query.setParameter(2, userId);
+    	query.executeUpdate();
+    	
+    }
+    
+    @Transactional
+    @Modifying
+    public void deleteParticipantsFromTournamnet(Integer tournamentId, Integer userId){
+    	Query query = entityManager.createNativeQuery("DELETE FROM tournament_users WHERE `Tournament_id`=? and`users_id`=?");
+    	query.setParameter(1, tournamentId);
+    	query.setParameter(2, userId);
+        query.executeUpdate();
     }
     
     public List<TournamentsDTO> getAllTornaments() {
@@ -68,7 +89,7 @@ public class TournamentService {
     /**
      *@author Vasyl Bervetskyy
      **/
-    public List<Object[]> getAllTournamentByUserName(String currentUserName){
-    	return tournamentRepository.getAllTournamentByUserName(currentUserName);
+    public List<Tournament> getAllTommorowTournament(){
+    	return tournamentRepository.getAllTommorowTournament();
     }
 }
