@@ -100,4 +100,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			+ "u.country.id, u.city.id, u.country.name, u.city.name, u.userRating, u.level) from User u Where u.username = :username")
 	public UserDTO getUserDTO(@Param("username")String username);
 	
+	
+	
 }
