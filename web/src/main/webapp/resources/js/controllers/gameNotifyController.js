@@ -5,6 +5,7 @@ angular.module('homeApp').controller("gameNotifyController", function($scope, $h
 		url : 'getAllGameNotifications'
 	}).then(function mySucces(response) {
 		$scope.gameNotifications = response.data;
+		console.log($scope.gameNotifications);
 		$scope.$broadcast('performingNotifications', $scope.gameNotifications);	
 	}, function myError(response) {
 		alert("getting all confirmed actions error");
@@ -14,7 +15,8 @@ angular.module('homeApp').controller("gameNotifyController", function($scope, $h
 		function(event, data) {
 			$scope.gameNotifyTable = new ngTableParams({
 			    page: 1,
-			    count: 7
+			    count: 7,
+			    sorting: { date: 'asc' }
 			 }, {
 			     total: data.length, 
 			     getData: function ($defer, params) {

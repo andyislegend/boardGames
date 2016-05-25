@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 
 @Entity
@@ -47,7 +48,7 @@ public class Notification implements Serializable {
 	@JoinColumn(name = "user_sender", referencedColumnName = "id")
 	private User userSender;
 	
-	
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional=true)
 	@JoinColumn(name="gameUserId", referencedColumnName = "id")
 	private GameUser gameUser;

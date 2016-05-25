@@ -52,13 +52,14 @@ public class UserGameSharingController {
 	private NotificationService notifyService;
 	
 	public Notification processNotification(String message, User forWhoom, 
-			User fromWhoom) {
+			User fromWhoom, GameUser gameUser) {
 		
 		Notification notification = new Notification();
 		notification.setType(NOTIFICATION_TYPE);
 		notification.setMessage(message);
 		notification.setUserSender(fromWhoom);
 		notification.setUser(forWhoom);
+		notification.setGameUser(gameUser);
 		return notification;
 	}
 	
@@ -140,7 +141,7 @@ public class UserGameSharingController {
 				+ ". Go to game manue and give your answer.";
 		User userToNotify = userService.findById(exchange.getUser().getId());
 		User userInvoker = userService.findById(exchange.getUserApplierId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker));
+		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 	}
 	
 	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -167,7 +168,7 @@ public class UserGameSharingController {
 		+ ". Please contact the owner about further details";
 		User userToNotify = userService.findById(exchange.getUserApplierId());
 		User userInvoker = userService.findById(exchange.getUser().getId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker));
+		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserOfOwner));
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
@@ -190,7 +191,7 @@ public class UserGameSharingController {
 				+ gameUserToUpdate.getGame().getName();
 		User userToNotify = userService.findById(exchange.getUserApplierId());
 		User userInvoker = userService.findById(exchange.getUser().getId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker));
+		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 	}
 	
 	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
@@ -214,7 +215,7 @@ public class UserGameSharingController {
 				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.";
 		User userToNotify = userService.findById(exchange.getUser().getId());
 		User userInvoker = userService.findById(exchange.getUserApplierId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker));
+		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 		
 		gamePropoService.deleteForExchange(exchange.getId());
 		

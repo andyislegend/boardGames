@@ -20,11 +20,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "where n.user.username = :username ")
 	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
 	
-	@Query("select u.username from Exchange e, User u "
-			+ "where e.gameUser.id = :gameId "
-			+ "and e.userApplierId = u.id")
-	public String getInvokerUsername(@Param("gameId")Integer gameId);
-	
 	@Query("select COUNT(n) from Notification n "
 			+ "where n.user.username = :username "
 			+ "and n.status = 'UNCHECKED'"
