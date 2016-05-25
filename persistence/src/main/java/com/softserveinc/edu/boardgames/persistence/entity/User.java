@@ -136,7 +136,10 @@ public class User implements Serializable {
 
 /*	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<GameUser> userGames;*/
-
+	
+	@Column(name = "tournamentRatingStatus")
+	private boolean tournamentRatingStatus;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Exchange> exchanges;
 	
@@ -182,10 +185,7 @@ public class User implements Serializable {
 //	@JoinTable(name = "subscribed_events",joinColumns = {@JoinColumn(name = "user_id")},
 //	inverseJoinColumns = {@JoinColumn(name = "event_id")})
 //	private Set<Event> events;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<SubscribedUsers> subscribedUsers;
-	
+
 	/**
 	 * Describes a connection to verification token entity
 	 */
@@ -306,6 +306,14 @@ public class User implements Serializable {
 	public void setCity(City city) {
 		this.city = city;
 	}
+	
+	public boolean isTournamentRatingStatus() {
+		return tournamentRatingStatus;
+	}
+
+	public void setTournamentRatingStatus(boolean tournamentRatingStatus) {
+		this.tournamentRatingStatus = tournamentRatingStatus;
+	}
 
 	public Set<UserRoles> getUserRoles() {
 		return userRoles;
@@ -329,14 +337,6 @@ public class User implements Serializable {
 
 	public void setTournaments(Set<Tournament> tournaments) {
 		this.tournaments = tournaments;
-	}
-	
-	public Set<SubscribedUsers> getSubscribedUsers() {
-		return subscribedUsers;
-	}
-
-	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
-		this.subscribedUsers = subscribedUsers;
 	}
 
 	public VerificationToken getVerificationToken() {

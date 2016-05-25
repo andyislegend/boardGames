@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.mapper.EventMapper;
 import com.softserveinc.edu.boardgames.persistence.repository.EventRepository;
 
 /**
@@ -30,6 +31,13 @@ public class EventService {
 	public void createEvent(Event event) {
 		eventRepository.save(event);
 	}
+	
+	@Transactional
+	public void createEventFromDTO(EventsDTO dto) {
+		Event event = new Event();
+		EventMapper.toEntity(dto, event);	
+		eventRepository.save(event);
+	}
 
 	@Transactional
 	public void deleteEvent(int id) {
@@ -42,11 +50,13 @@ public class EventService {
 		eventRepository.saveAndFlush(event);
 	}
 	
-//	@Transactional
-//    @Modifying
-//    public void subscribeToEvent(Integer eventId, Integer userId){
-//    	eventRepository.subscribeToEvent(eventId, userId);
-//    }
+	@Transactional
+	public void updateEventDTO(EventsDTO dto) {
+		Event event = geteventById(dto.getEventId());
+		EventMapper.toEntity(dto, event);
+		eventRepository.saveAndFlush(event);
+	}
+
 	
     public List<EventsDTO> getAllEvents() {
     	return  eventRepository.getAllEvents();

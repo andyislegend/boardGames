@@ -3,26 +3,21 @@
     
     
     <table ng-table="allNotification" class="table">
-		<tr ng-repeat="notification in arrayOfNotification | orderBy:['-emergency', 'date']" class="table table-striped">
+		<tr ng-repeat="notification in allNotification | orderBy: ['-statusOfReading', '-date']" class="table">
             <td title="" class="type-header" >
 					{{notification.type}}
             </td>
-            <td title=""
-                     class="sign-header">
-                    <img class="notification-message" ng-src="resources/ico/{{notification.type}}.png"/>
+            <td title="" class="sign-header">
+                    <img class="notification-message" src="resources/ico/{{notification.type.toLowerCase()}}2.png"/>
             </td>
-            <td class="notification-line" ng-class="specificClassLine(notification.emergency, notification.type)">
+            <td ng-class="{'notification-line': notification.statusOfReading}">
             </td>
-            <td class="notification-head" ng-class="specificClass(notification.emergency, notification.type)">
-                {{notification.head}}  
+            <td ng-class="{ 'notification-head': notification.statusOfReading}">
+                {{notification.message}}
             </td>
-            <td class="notification-body" ng-class="specificClass(notification.emergency, notification.type)">
-                {{notification.body}}
-            </td>
-             <td class="notification-date" ng-class="specificClass(notification.emergency, notification.type)">
+             <td ng-class="{'notification-data': notification.statusOfReading}">
                 {{notification.date | date : format : timezone}}
             </td>
         </tr>	
     </table>
-
 </div>

@@ -2,6 +2,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	$scope.userProfile;
 	$scope.showPasswordChange = false;
 	$scope.myProfile = false;
+	$scope.myAvatarUpload = false;
 	$scope.username = $routeParams.username;
 	if ($routeParams.username==null) {
 		$scope.username = "Logged in user";
@@ -38,12 +39,10 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 					if ($scope.userProfile.city!=null) {
 						for (i=0; i<$scope.cities.length; i++) {
 							if ($scope.cities[i].id==$scope.userProfile.city.id) {
-								$scope.editableCity = $scope.cities[i];								
+								$scope.editableCity = $scope.cities[i];
+								break;
 							} 
 						}
-					} else {
-						var startOfCitiesCollection = 0;
-						$scope.editableCity = $scope.cities[startOfCitiesCollection];
 					}
 				});
 			};
@@ -134,12 +133,12 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
          };
       }]);
 
-	$scope.uploadAvatar = function($rootScope) {
+	$scope.uploadAvatar = function() {
 		if ($scope.myFile == null) {
 			return $scope.editAvatarAnswer = "FOTO_ISNT_CHOOSED";			
 		}
 		if ($scope.myFile.size > 5242880) {
-			return $scope.editAvatarAnswer = "The file size must be less than 5MB";			
+			return $scope.editAvatarAnswer = "FOTO_SIZE";			
 		}
 		var file = $scope.myFile;
 	    var fileUpload = new FormData();
@@ -153,7 +152,7 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	        transformRequest: angular.identity
 	    }).success(function(result, status){
 	    	$scope.editAvatarAnswer = result;
-	    	$rootScope.$emit('changeAvatar');
+	    	$scope.$emit('changeAvatar');
         })
         
         .error(function(result, status){

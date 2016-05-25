@@ -83,7 +83,7 @@ public class UserService {
 	}
 	
 	/**
-	 * 
+	 * @author Andrii Petryk
 	 * @param user
 	 *            receive a user-object from controller in order to add it to DB
 	 *            as a new user
@@ -102,6 +102,7 @@ public class UserService {
 	/**
 	 * Check if user with {@code username} exist in database
 	 *
+	 * @author Andrii Petryk
 	 * @param username
 	 *            must not be non {@literal null}
 	 * @return {@literal true} if user with {@code username} does exist in
@@ -114,7 +115,7 @@ public class UserService {
 
 	/**
 	 * Check if user with {@code email} exist in database
-	 *
+	 * @author Andrii Petryk
 	 * @param email
 	 *            must not be non {@literal null}
 	 * @return {@literal true} if user with {@code email} does exist in
@@ -139,7 +140,7 @@ public class UserService {
 
 	/**
 	 * Checks which roles user with {@code username} has
-	 * 
+	 * @author Andrii Petryk
 	 * @param username
 	 * @return List
 	 */
@@ -152,7 +153,7 @@ public class UserService {
 
 	/**
 	 * Add to User with {@code username} User Role {@code ADMIN}
-	 * 
+	 * @author Andrii Petryk
 	 * @param username
 	 */
 	@Transactional
@@ -197,7 +198,7 @@ public class UserService {
 	/**
 	 * Creates verification token for registration confirmation for user with
 	 * {@code username}
-	 * 
+	 * @author Andrii Petryk
 	 * @param user
 	 * @param token
 	 */
@@ -209,7 +210,7 @@ public class UserService {
 
 	/**
 	 * Finds User in database who is referred with {@code verificationToken}
-	 * 
+	 * @author Andrii Petryk
 	 * @param verificationToken
 	 * @return User
 	 */
@@ -220,7 +221,7 @@ public class UserService {
 
 	/**
 	 * Finds token in database be it's name
-	 * 
+	 * @author Andrii Petryk
 	 * @param VerificationToken
 	 * @return VerificationToken
 	 */
@@ -232,7 +233,7 @@ public class UserService {
 	 * When token is triggered verificate whether it expired or not. If token
 	 * wasn't expired and was used set User status to {@code ACTIVE} and delete
 	 * token
-	 * 
+	 * @author Andrii Petryk
 	 * @param token
 	 * @return null or INVALID_TOKEN_MAIL_CONFIRMATION
 	 */

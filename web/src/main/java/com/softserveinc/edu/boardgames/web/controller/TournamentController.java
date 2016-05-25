@@ -84,14 +84,8 @@ public class TournamentController {
     public void giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
     	User user = userService.findById(idUser);
     	user.setUserRating(user.getUserRating()+rate);
+    	user.setTournamentRatingStatus(true);
     	userService.updateUser(user);
-    }
-    
-    @RequestMapping(value = "/setOpportunityForRate/{tournamentId}", method = RequestMethod.PUT)
-    public void updateOpportunityForRateTournamentParticipants(@PathVariable Integer tournamentId) {
-    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
-    	tournament.setCanRate(false);
-    	tournamentService.update(tournament);
     }
     
     @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)

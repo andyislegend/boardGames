@@ -7,4 +7,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 public interface SubscribedUsersService {
 	
 	public List<SubscribedUsers> getAllNewUserSubscriber();
+	
+	public void changeStatusOfAllEventNotification(List<SubscribedUsers> listOfSubscribedUsers);
 }

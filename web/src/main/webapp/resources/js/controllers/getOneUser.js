@@ -10,7 +10,7 @@ angular.module('homeApp').controller("getUser", ['$rootScope','$scope', '$http',
 		});
 	});
 	
-	$rootScope.$on('changeAvatar', function() {
+	$rootScope.$on('changeAvatar', function(event) {
 		$http.get('getUsersAvatar?username=' + $scope.user.username).then(function(result) {
 			$scope.avatar = result.data;
 		});

@@ -43,27 +43,10 @@ public class NotificationController {
 	@Autowired
 	NotificationService notificationService;
 	
-	
-	@RequestMapping(value = "/getAllLastMessage", method = RequestMethod.GET)
-	public List<Notification> getAllMessage() throws ParseException {
-		String currentUserName = WebUtil.getPrincipalUsername();
-		List<User> listOfFriends = userService.findAllFriends(currentUserName);
-		List<Notification> list = new ArrayList<Notification>();
-		for(User friend: listOfFriends){
-			Notification message = notificationService.getLastMessage(currentUserName, friend.getUsername());
-			if(message != null){
-				list.add(message);
-			}
-		}
-		List<SubscribedUsers> listOfSub = subscribedUsersService.getAllNewUserSubscriber();
-		for(SubscribedUsers s: listOfSub){
-			System.out.println("******** EVENT = " + s.getEvent());
-			System.out.println("******** USER = " + s.getUser());
-		}
-		
-		
-		
-		return list;
+	@RequestMapping(value = "/getAllNotification", method = RequestMethod.GET)
+	public List<Notification> getAllNotification(){
+		List<Notification> listOFNotification = notificationService.getAllNotificationByUserName(WebUtil.getPrincipalUsername());
+		return listOFNotification;
 	}
 	
 	@RequestMapping(value = "/getCurrentUserName", method = RequestMethod.GET)

@@ -72,14 +72,13 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	public Integer findAllNotReadMessageBySpecificFriend(String currentUserName, String friendUserName);
 	
 	/**
-	 * This method for finding last written message with your specific friend
+	 * This method for finding all notification of user
 	 * 
-	 * @param currentUserName it's your username
-	 * @param friendUserName it's username of your friend
-	 * @return message
+	 * @param userName it's your username
+	 * @return list of Notification
 	 */
-	@Query(value = "SELECT * FROM Notification n JOIN users u ON n.user_sender = u.id "
-			+ "JOIN users us ON n.userId = us.id WHERE (u.username = ?1 AND us.username = ?2 OR u.username = ?2 AND us.username = ?1) AND n.type = 'MESSAGE' "
-			+ "ORDER BY n.date DESC LIMIT 1", nativeQuery = true)
-	public Notification getLastMessage(String currentUserName, String friendUserName);
+	
+	@Query(value = "SELECT * FROM notification WHERE userId =(SELECT id FROM users WHERE username = ?1) "
+			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1)", nativeQuery = true)
+	public List<Notification> getAllNotificationByUserName(String userName);
 }

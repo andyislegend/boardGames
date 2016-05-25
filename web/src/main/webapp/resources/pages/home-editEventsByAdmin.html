@@ -1,67 +1,94 @@
 <div>
-	<h1 style="text-align: center"> Editing Events </h1>
+	<h1 style="text-align: center">Moderate Events <a href="" data-toggle="modal" data-target="#myCreateEvent">
+      	<span class="glyphicon glyphicon-plus"></span></a></h1>
 	<!-- EVENTS ADMIN PAGE-->
 	<div>
-	<div class="widget widget_top-posts"></div>
-	<table ng-table="allEventsTable" show-filter="true" class="table table-striped">
-			<tr ng-repeat-start="x in allEventsDisplay">
-				<td title="'Date'" sortable="'date'" 
-					filter="{ 'date': 'text' }">{{ x.date | date:'yyyy-MM-dd' }}</td>
-				
+		<div class="widget widget_top-posts"></div>
+		<table ng-table="allEventsTable" show-filter="true"
+			class="table table-striped">
+			<tr ng-repeat="x in allEventsDisplay">
+				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">{{
+					x.date | date:'yyyy-MM-dd' }}</td>
+
 				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
-					<a href="" ng-click="getInfoAboutEventFunc(x.eventId); showEvent = !showEvent">{{ x.name }}</a>
+					<a href="#editEvent/{{x.eventId}}"> {{ x.name }}</a>
 				</td>
-	
+
 				<td title="'Description'">{{ x.description }}</td>
-				
-				<td title="'Location'">{{ x.location }}</td>
-				
+
+				<td title="'Location'" sortable="'location'" filter="{ 'location': 'text' }">{{ x.location }}</td>
+
 			</tr>
-			
-			<tr ng-show="showEvent" ng-repeat-end>
-				
-				<td>					
-				<p><a type="button" class="btn btn-danger btn-md" ng-click="cancelEvent(oneEvent.eventId)"> Cancel Event</a></p>
-				</td>
-				
-				<td>					
-				<p><a type="button" class="btn btn-info btn-md" ng-click="editEvent(oneEvent.eventId)"> Edit Event</a></p>
-				</td>
-			</tr>
+
 		</table>
-		
-		
-		<!-- Modal EDIT EVENT -->
-	<div id="myEditEvent" class="modal fade  col-md-6 col-md-offset-3"
-		role="dialog">
+
+	</div>
+	
+	<!-- Modal Add Event -->
+	<div id="myCreateEvent" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog" ng-controller="newEventCtrl">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content" >
 				<div class="modal-header">
-
-					<h4 style="text-align: center;" class="modal-title"> EDIT EVENT </h4>
-
+					<h4 style="text-align: center;" class="modal-title"> CREATE NEW EVENT</h4>
+					<h6 style="text-align: center;" class="modal-title"> all fields are required</h6>
 				</div>
 				<div class="modal-body">
 
-					<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
-					<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
-					<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
+					<form class="form-horizontal" name="CreateEvent" ng-submit="createEvent()"
+						role="form">
+
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"><span> Name </span></span> <input ng-model="newevent.name"
+								style="width: 400px;" type="text" class="form-control"
+								aria-describedby="basic-addon1" required
+								placeholder="add Events title" maxlength="100">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon2"><span> Description</span></span>
+							<input ng-model="newevent.description" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon2"
+								placeholder="add description" maxlength="300" required>
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon3"> <span> Location</span></span>
+							<input ng-model="newevent.location" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon3"
+								placeholder="add location" maxlength="100" required>
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"><span> Date</span></span> <input ng-model="newevent.date"
+								style="width: 400px;" type="date" class="form-control"
+								aria-describedby="basic-addon4" required>
+						</div>
+						<br>
+
+					</form>
+
+					<button style="margin-left: 30%;" ng-disabled="CreateEvent.$invalid" ng-click="createNewEvent()" class="btn btn-info btn-md"> ADD NEW</button>
+
+					<button style="margin-left: 15%;" type="submit"
+						class="btn btn-danger btn-md" ng-click="closeModal()"> Cancel</button>
 
 				</div>
 
-				<a style="margin-bottom: 5%" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md" translate="CLOSE"></a> <a
-					style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
-					class="btn btn-infj btn-md" translate="CONTACT_WITH_ADMINS"></a>
 			</div>
 			<!-- End of Modal Content -->
 
 		</div>
 	</div>
-	<!-- End of BANNED Modal -->
-			
-	</div>
+	<!-- End Add Event -->
+	
+	
+	
 	<!-- /EVENTS ADMIN PAGE -->
 </div>

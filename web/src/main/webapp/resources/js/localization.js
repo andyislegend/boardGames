@@ -69,7 +69,7 @@ homeApp
 								REGFORM_GENDER_MALE : 'Male',
 								REGFORM_GENDER_FEMALE : 'Female',
 								REGFORM_SIGNUP : 'Sign up',
-								REGFORM_USERNAME_PLACEHOLDER : 'Enter Your Username. From 3 to 15 symbols required',
+								REGFORM_USERNAME_PLACEHOLDER : 'Enter Your Username. From 3 to 9 symbols required',
 								REGFORM_FIRSTNAME_PLACEHOLDER : 'Enter Your Name',
 								REGFORM_LASTNAME_PLACEHOLDER : 'Enter Your Last Name',
 								REGFORM_EMAIL_PLACEHOLDER : 'Enter Your email address',
@@ -102,7 +102,8 @@ homeApp
 								NEW_PASSWORD_ANSWER: 'Sorry, but Your password must contain at least one lower case symbol, '
 									+ 'one Upper case symbol, one number and be from 6 to 20 chars long',
 								CONFIRM_PASSWORD_ANSWER: 'Sorry, but You must confirm Your password',
-								MODERATE_EVENT: 'Moderate Events'
+								MODERATE_EVENT: 'Moderate Events',
+								FOTO_SIZE: 'The file size must be less than 5MB'
 
 							});
 			$translateProvider
@@ -174,7 +175,7 @@ homeApp
 								REGFORM_GENDER_MALE : 'Чоловік',
 								REGFORM_GENDER_FEMALE : 'Жінка',
 								REGFORM_SIGNUP : 'Реєстрація',
-								REGFORM_USERNAME_PLACEHOLDER : 'Введіть Ваш логін. Повинен містити від 3 до 15 символів',
+								REGFORM_USERNAME_PLACEHOLDER : 'Введіть Ваш логін. Повинен містити від 3 до 9 символів',
 								REGFORM_FIRSTNAME_PLACEHOLDER : 'Введіть Ваше ім\'я',
 								REGFORM_LASTNAME_PLACEHOLDER : 'Введіть ваше прізвище',
 								REGFORM_EMAIL_PLACEHOLDER : 'Введіть адресу вашої електронної скриньки',
@@ -207,7 +208,8 @@ homeApp
 								NEW_PASSWORD_ANSWER: 'Вибачте, але Ваш пароль повинен містити хоча б одну маленьку літеру,'
 									+ 'одну велику літеру, одну цифру та бути від 6 до 20 символів',
 								CONFIRM_PASSWORD_ANSWER: 'Вибачте, але ви маєте підтвердити Ваш пароль',
-								MODERATE_EVENT: 'Модерувати Події'
+								MODERATE_EVENT: 'Модерувати Події',
+								FOTO_SIZE: 'Розмір файла повинен становити не більше 5MБ'
 
 							});
 			$translateProvider.preferredLanguage('en');
