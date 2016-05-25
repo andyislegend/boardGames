@@ -175,7 +175,10 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
         $scope.deleteFriendUserName = username;
     };
     $scope.deleteFriend = function(){
-        console.log($scope.deleteFriendUserName)
+        $http.post('deleteFriend/' +  $scope.deleteFriendUserName ,  $scope.deleteFriendUserName).success(function(data){
+        }).error(function(error){
+            console.log(error);
+        });
     }
     
 setInterval(function(){
