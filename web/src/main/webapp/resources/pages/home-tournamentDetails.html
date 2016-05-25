@@ -26,6 +26,7 @@
 				<input type = "submit" class="btn btn-info" value="Change" ng-click = "changeDataOfTournament()">
 				</form>	
 			<button  type="button" class="btn btn-info" data-toggle="modal" data-target="#giveRateModal">Give a rate</button>
+			<button type ="button" class="btn btn-default" data-toggle="modal" data-target = "#deleteTournament">Delete this tournament</button>
 		</div>
         </div>
     </div>
@@ -60,6 +61,23 @@
       <div class="modal-footer">
       	<button type="button" class="btn btn-default"  ng-click = "saveRating()">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>		
+  </div>
+</div>
+
+<div id="deleteTournament" class="modal fade" role="dialog">
+  <div class="modal-dialog"> 
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" ng-click = "changeStatusToRate()" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+       <h2>Are you really want to delete this tournamet?</h2>
+      </div>
+      <div class="modal-footer">
+      	<a href = "#tournaments"><button ng-click = "deleteTournament(tournament.tournamentId)" type="button" class="btn btn-default">Yes</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
       </div>
     </div>		
   </div>
