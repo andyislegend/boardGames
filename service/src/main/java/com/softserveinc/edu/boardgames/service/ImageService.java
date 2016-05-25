@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
-import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 import com.softserveinc.edu.boardgames.persistence.repository.ImageRepository;
 
 @Service
@@ -20,12 +18,12 @@ public class ImageService {
 	public void create(Image image) {
 		imageRepository.save(image);
 	}
-	
+
 	@Transactional
 	public void updateImage(Image image) {
 		imageRepository.saveAndFlush(image);
 	}
-	
+
 	public String findImageNameByUsername(String username) {
 		return imageRepository.findImageNameByUsername(username);
 	}
