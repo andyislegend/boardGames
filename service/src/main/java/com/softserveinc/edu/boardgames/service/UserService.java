@@ -45,8 +45,18 @@ public class UserService {
 	 */
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
 	
+	/**
+	 * @param CHECK_LOGGED_IN_USERNAME
+	 *            is used to verify whether we want to get user profile to edit
+	 *            or get friends profile
+	 */
 	public static final String CHECK_LOGGED_IN_USERNAME = "Logged in user";
 	
+	/**
+	 * @param CHECK_LOGGED_IN_USERNAME
+	 *            is used to set unbanned user rating to minimal with which
+	 *            he can access the website a not be automatically banned again
+	 */
 	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
 
 	@Autowired
@@ -271,7 +281,7 @@ public class UserService {
 	}
 	
 	/**
-	 * This method for finding all users
+	 * This method gets all users
 	 * 
 	 * @author Volodymyr Terlyha
 	 * 
@@ -279,10 +289,9 @@ public class UserService {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
-	
+
 	/**
-	 * This method for updating information
-	 * about user
+	 * This method updates information about user
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param user
@@ -292,9 +301,9 @@ public class UserService {
 	public void updateUser(User user) {
 		userRepository.saveAndFlush(user);
 	}
-	
+
 	/**
-	 * This method for getting user by username
+	 * This method gets user by username
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
@@ -303,11 +312,11 @@ public class UserService {
 	public User getUser(String username) {
 		return userRepository.findByUsername(username);
 	}
-	
+
 	/**
-	 * This method for automatically ban user
+	 * This method automatically bans user
 	 * 
-	 * @author Volodymyr Terlyha 
+	 * @author Volodymyr Terlyha
 	 * @param User
 	 */
 	@Transactional
@@ -317,10 +326,9 @@ public class UserService {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		}
 	}
-	
+
 	/**
-	 * This method for updating user information
-	 * when editing user Profile
+	 * This method updates user information when editing user Profile
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param UserDTO
@@ -339,15 +347,14 @@ public class UserService {
 		UserMapper.toEntity(userDTO, user, country, city);
 		userRepository.saveAndFlush(user);
 	}
-	
+
 	/**
-	 * This method for getting user profile or friends
-	 * profile page
+	 * This method for gets user profile or friends profile page
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
 	 * @param loggedInUserUsername
-	 *            
+	 * 
 	 */
 	@Transactional
 	public User getUserProfile(String username, String loggedInUserUsername) {
@@ -356,15 +363,14 @@ public class UserService {
 		}
 		return findOne(loggedInUserUsername);
 	}
-	
+
 	/**
-	 * This method returns url of user avatar. 
-	 * If user doesn't have avatar method returns url
-	 * of avatar according to users gender 
+	 * This method returns url of user avatar. If user doesn't have avatar
+	 * method returns url of avatar according to users gender
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
-	 *            
+	 * 
 	 */
 	public String getAvatarUrl(String username) {
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
@@ -377,35 +383,35 @@ public class UserService {
 		}
 		return avatarUrl;
 	}
-	
+
 	/**
-	 * This method uploads user avatar image
-	 * and creates entity image for this image 
+	 * This method uploads user avatar image and creates entity image for this
+	 * file
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param fileUpload
 	 * @param username
-	 *            
+	 * 
 	 */
 	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
 		String savePath = imageConfiguration.getAvatarPackage(username);
-		if (imageService.findImageNameByUsername(username)!=null) {
+		if (imageService.findImageNameByUsername(username) != null) {
 			fileUpload.transferTo(new File(savePath));
 		} else {
-		User user = findOne(username);
-		Image image = new Image();
-		image.setUser(user);
-		image.setImageName(user.getUsername());
-		image.setImageLocation(savePath);
-		imageService.create(image);		
-		fileUpload.transferTo(new File(savePath));
+			User user = findOne(username);
+			Image image = new Image();
+			image.setUser(user);
+			image.setImageName(user.getUsername());
+			image.setImageLocation(savePath);
+			imageService.create(image);
+			fileUpload.transferTo(new File(savePath));
 		}
 	}
-	
+
 	/**
-	 * This method for banning user by administrator
+	 * This method bans user by administrator
 	 * 
-	 * @author Volodymyr Terlyha 
+	 * @author Volodymyr Terlyha
 	 * @param username
 	 * 
 	 */
@@ -416,11 +422,11 @@ public class UserService {
 		mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		userRepository.saveAndFlush(user);
 	}
-	
+
 	/**
-	 * This method for unbanning user by administrator
+	 * This method for bans user by administrator
 	 * 
-	 * @author Volodymyr Terlyha 
+	 * @author Volodymyr Terlyha
 	 * @param username
 	 * 
 	 */
@@ -433,10 +439,9 @@ public class UserService {
 		}
 		userRepository.saveAndFlush(user);
 	}
-	
+
 	/**
-	 * This method for finding users gender 
-	 * by username
+	 * This method for gets user gender by username
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
@@ -445,7 +450,7 @@ public class UserService {
 	public String findUsersGender(String username) {
 		return userRepository.findUsersGender(username);
 	}
-	
+
 	/**
 	 * This method returns userDTO by username
 	 * 
