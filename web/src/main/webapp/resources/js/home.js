@@ -40,7 +40,8 @@ homeApp.config(function($routeProvider) {
 
 	.when('/edit/:username', {
 		templateUrl : 'resources/pages/home-editUser.html',
-		controller : 'editProfileCtrl'
+		controller : 'editProfileCtrl',
+		controller : 'getGameDetailedInfoController'
 	})
 	
 	.when('/edit/', {

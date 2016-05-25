@@ -398,7 +398,7 @@
                                 class="glyphicon glyphicon-comment"></span>
                                 </a>
                               </td>
-                              <td title="'Applier'"><a href="#">{{game.applierUsername}}</a></td>
+                              <td title="'Applier'"><a href="#/edit/{{game.applierUsername}}">{{game.applierUsername}}</a></td>
                             </tr>
                           </table>
                         </div>
@@ -409,7 +409,7 @@
                                 href="#gameUserDetails/{{game.gameId}}"
                                 ng-click="myFunc(game.gameId)"> {{game.gameUserName}}</a></td>
                               <td title="'Category'">{{game.gameUserCategory}}</td>
-                              <td title="'Owner'"><a href="#">{{game.username}}</a></td>
+                              <td title="'Owner'"><a href="#edit/{{game.username}}">{{game.username}}</a></td>
                             </tr>
                           </table>
                         </div>
