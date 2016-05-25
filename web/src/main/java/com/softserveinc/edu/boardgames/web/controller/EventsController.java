@@ -43,6 +43,12 @@ public class EventsController {
     	return eventService.getAllEvents();
     }
 	
+	@RequestMapping(value = "/allUsersEventsDTO",method = RequestMethod.GET)
+    @ResponseBody
+    public List<EventsDTO> getAllUsersEvents() {
+    	return eventService.getAllNotExpiredEvents();
+    }
+	
 	@RequestMapping(value = "/allEvents")
     @ResponseBody
     public List<Event> findAllEvents() {
