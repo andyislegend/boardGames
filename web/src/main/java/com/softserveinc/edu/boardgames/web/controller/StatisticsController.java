@@ -63,9 +63,14 @@ public class StatisticsController {
 		dates.addAll(exchangeService.getAllExchangeDates());
 		dates.addAll(tournamentService.getAllTournamentsDates());
 		dates.addAll(eventService.getAllDatesOfEvents());
-//		for (Date date : dates) {
-//			ActionsDTO actionsDto = new ActionsDTO(date, tournaments, events, exchanges)
-//		}
+		for (Date date : dates) {
+			ActionsDTO actionsDto = new ActionsDTO();
+			actionsDto.setDate(date);
+			actionsDto.setEvents(eventService.countEventsOnDate(date));
+			actionsDto.setExchanges(exchangeService.countExchangesOnDate(date));
+			actionsDto.setTournaments(tournamentService.countTournamentsOnDate(date));
+			actionsSet.add(actionsDto);
+		}
 		return actionsSet;
 	}
 	
