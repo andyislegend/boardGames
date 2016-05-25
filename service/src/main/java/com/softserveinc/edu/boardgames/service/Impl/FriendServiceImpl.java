@@ -65,5 +65,11 @@ public class FriendServiceImpl implements FriendService{
 	public void cancelOffering(User currentUser, User otherUser){
 		friendRepository.cancelOffering(currentUser, otherUser);
 	}
+
+	@Override
+	public void deleteFriend(User currentUser, User otherUser) {
+		friendRepository.deleteFriend(currentUser, otherUser);
+		friendRepository.deleteFriend(otherUser, currentUser);
+	}
 	
 }

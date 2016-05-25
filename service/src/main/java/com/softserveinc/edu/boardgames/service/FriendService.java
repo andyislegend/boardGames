@@ -24,4 +24,6 @@ public interface FriendService {
 	
 	public void cancelOffering(User currentUser, User otherUser);
 	
+	public void deleteFriend(User currentUser, User otherUser);
+	
 }

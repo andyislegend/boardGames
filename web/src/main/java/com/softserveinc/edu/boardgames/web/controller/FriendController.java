@@ -146,6 +146,14 @@ public class FriendController {
 		friendService.cancelOffering(currentUser, otherUser);
 	}
 	
+	@RequestMapping(value = "/deleteFriend/{deleteUserName}",method = RequestMethod.POST)
+	public void deleteFriend(@PathVariable String deleteUserName){
+		System.out.println(deleteUserName);
+		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
+		User otherUser = userService.findOne(deleteUserName);
+		friendService.deleteFriend(currentUser, otherUser);
+	}
+	
 	/**
 	 * This method return amout of not yet read message per your friends 
 	 */
@@ -160,7 +168,6 @@ public class FriendController {
 					findAllNotReadMessageBySpecificFriend(listOfFriends.get(i).getUsername(), currentUserName));
 		}
 		return allMessagesByFriends;
-		
 	}
 	
 }
