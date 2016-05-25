@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,15 +59,13 @@ public class StatisticsController {
 	@ResponseBody
 	public List<ActionsDTO> getCountOfActions() {
 		List<ActionsDTO> actionsSet = new ArrayList<>();
-		Set<Date> dates = new HashSet<>();
-//		dates.addAll(exchangeService.getAllExchangeDates());
-//		dates.addAll(tournamentService.getAllTournamentsDates());
-//		dates.addAll(eventService.getAllDatesOfEvents());
-		exchangeService.getAllExchangeDates();
-		tournamentService.getAllTournamentsDates();
-		eventService.getAllDatesOfEvents();
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" + dates);
+		Set<Date> dates = new TreeSet<>();
+		dates.addAll(exchangeService.getAllExchangeDates());
+		dates.addAll(tournamentService.getAllTournamentsDates());
+		dates.addAll(eventService.getAllDatesOfEvents());
+//		for (Date date : dates) {
+//			ActionsDTO actionsDto = new ActionsDTO(date, tournaments, events, exchanges)
+//		}
 		return actionsSet;
 	}
 	

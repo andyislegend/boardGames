@@ -8,6 +8,7 @@ public class ActionsDTO {
 	private Integer tournaments;
 	private Integer events;
 	private Integer exchanges;
+	public ActionsDTO() {}
 	public ActionsDTO(Date date, Integer tournaments, Integer events, Integer exchanges) {
 		super();
 		this.date = date;

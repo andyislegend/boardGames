@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.ExchangeRepository;
@@ -57,10 +59,14 @@ public class ExchangeService {
 		return eRepo.selectAllConfiramtionsForUser(id);
 	}
 	
-	public List<Exchange> getAllExchangeDates() {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" + eRepo.findAllByOrderByApplyingDateAsc().size());
-		return eRepo.findAllByOrderByApplyingDateAsc();
+	public List<Date> getAllExchangeDates() {
+		List<Date> dates = new ArrayList<>();
+    	for (Exchange e: this.findAllExchanges()) {
+    		Date date = e.getApplyingDate();
+    		if (date != null)
+    			dates.add(date);
+    	}
+    	return dates;
 	}
 	
 	public Integer countExchangesOnDate(Date date) {

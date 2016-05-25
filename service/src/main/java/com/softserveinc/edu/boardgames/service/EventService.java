@@ -96,10 +96,12 @@ public class EventService {
 	// return eventRepository.getAllEventByUserName();
 	// }
     
-    public List<Event> getAllDatesOfEvents() {
-    	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" + eventRepository.getAllEvents().size());
-    	return eventRepository.findAllByOrderByDateAsc();
+    public List<Date> getAllDatesOfEvents() {
+    	List<Date> dates = new ArrayList<>();
+    	for (EventsDTO e: this.getAllEvents()) {
+    		dates.add(e.getDate());
+    	}
+    	return dates;
     }
     
     public Integer countEventsOnDate(Date date) {

@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.service;
 
+import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -93,10 +95,12 @@ public class TournamentService {
     	return tournamentRepository.getAllTommorowTournament();
     }
     
-    public List<Tournament> getAllTournamentsDates() {
-    	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-				+ "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" + tournamentRepository.findAllByOrderByDateOfTournamentAsc().size());
-    	return tournamentRepository.findAllByOrderByDateOfTournamentAsc();
+    public List<Date> getAllTournamentsDates() {
+    	List<Date> dates = new ArrayList<>();
+    	for (TournamentsDTO t: this.getAllTornaments()) {
+    		dates.add(t.getDateOfTournament());
+    	}
+    	return dates;
     }
     
     public Integer countTournamentsOnDate(Date date) {

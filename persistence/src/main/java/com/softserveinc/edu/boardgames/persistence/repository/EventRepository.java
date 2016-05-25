@@ -41,10 +41,10 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 			+ "(e.id, e.name,e.description, e.location,e.date" + ") from Event e where e.name like %:name%")
 	public List<EventsDTO> findAllEventsByWord(@Param("name") String name);	
 	
-	//@Query("select e.date from Event e order by e.date")
-	//public List<Date> getAllDateOfEvents();
+//	@Query(value="select date from events", nativeQuery=true)
+//	public List<Date> getAllDateOfEvents();
 	
-	public List<Event> findAllByOrderByDateAsc();
+//	public List<Date> findAllDate();
 	
 	@Query("select COUNT(e) from Event e where e.date = :date")
 	public Integer countEventsForSpecificDate(@Param("date")Date date);

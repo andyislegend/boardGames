@@ -47,10 +47,10 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
     @Query(value = "SELECT * FROM tournament where dateOfTournament between (CURDATE() + INTERVAL 1 DAY) and (CURDATE() + INTERVAL 2 DAY)", nativeQuery = true)
     public List<Tournament> getAllTommorowTournament();
     
-//    @Query("select t.dateOfTournament from Tournament t order by t.dateOfTournament")
+//    @Query(value="select dateOfTournament from tournament", nativeQuery=true)
 //	public List<Date> getAllDatesOfTournaments();
     
-    public List<Tournament> findAllByOrderByDateOfTournamentAsc();
+    //public List<Date> findAllDateOfTournament();
     
     @Query("select COUNT(t) from Tournament t where t.dateOfTournament = :date")
 	public Integer countTournamentForSpecificDate(@Param("date")Date date);

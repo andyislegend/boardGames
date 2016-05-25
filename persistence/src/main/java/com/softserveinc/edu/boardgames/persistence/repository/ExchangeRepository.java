@@ -50,9 +50,9 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer>{
 			+ "and e.userApplierId=:userId")
 	public List<GameUserDTO> selectAllConfiramtionsForUser(@Param("userId")Integer id);
 	
-//	@Query("select e.applyingDate from Exchange e order by e.applyingDate")
+//	@Query(value="select applyingDate from exchange", nativeQuery=true)
 //	public List<Date> getAllDatesOfExchanges();
-	public List<Exchange> findAllByOrderByApplyingDateAsc();
+////	public List<Date> findAllApplyingDate();
 	
 	@Query("select COUNT(e) from Exchange e where e.applyingDate = :date")
 	public Integer countExchangesForSpecificDate(@Param("date")Date date);
