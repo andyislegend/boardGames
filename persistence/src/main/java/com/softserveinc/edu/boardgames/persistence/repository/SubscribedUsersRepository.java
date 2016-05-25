@@ -23,4 +23,8 @@ public interface SubscribedUsersRepository extends JpaRepository<SubscribedUsers
 	
 	@Query("SELECT s FROM SubscribedUsers s WHERE s.event =?1 AND s.user =?2")
 	public List<SubscribedUsers> getAllUSersSubscribedToEvent(Integer eventId, Integer useruserId);
+	
+	@Query("SELECT COUNT(s) FROM SubscribedUsers s WHERE s.event.id =?1 AND s.user.id =?2")
+	public Integer getCountOfSubscribedUsers(Integer eventId, Integer useruserId);
+	
 }

@@ -57,10 +57,21 @@ public class SubscribedUsersServiceImpl implements SubscribedUsersService{
 		
 	}
 
+//	@Override
+//	public boolean isUserSubscribed(Integer eventId, String username) {
+//		User user = userRepository.findByUsername(username);
+//		if (subscribedUsersRepository.getAllUSersSubscribedToEvent(eventId, user.getId()).size() > 0) {
+//			return true;
+//		} else {
+//			return false;	
+//		}
+//		
+//	}
+	
 	@Override
 	public boolean isUserSubscribed(Integer eventId, String username) {
 		User user = userRepository.findByUsername(username);
-		if (subscribedUsersRepository.getAllUSersSubscribedToEvent(eventId, user.getId()).size() > 0) {
+		if (subscribedUsersRepository.getCountOfSubscribedUsers(eventId, user.getId()) > 0) {
 			return true;
 		} else {
 			return false;	
