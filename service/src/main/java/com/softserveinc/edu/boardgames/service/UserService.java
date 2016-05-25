@@ -24,7 +24,10 @@ import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsTo
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
+import com.softserveinc.edu.boardgames.persistence.repository.CityRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.CountryRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.ImageRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenRepository;
 import com.softserveinc.edu.boardgames.service.configuration.ImageConfiguration;
@@ -58,18 +61,25 @@ public class UserService {
 	 *            he can access the website a not be automatically banned again
 	 */
 	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
+	
+	/**
+	 * @param NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER
+	 *            is used to set Country and City entities for user if
+	 *            no city or country is choosed
+	 */
+	public static final Integer NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER = 0;
 
 	@Autowired
-	private CountryService countryService;
+	private CountryRepository countryRepository;
 	
 	@Autowired
-	private CityService cityService;
+	private CityRepository cityRepository;
 	
 	@Autowired
 	private ImageConfiguration imageConfiguration;
 	
 	@Autowired
-	private ImageService imageService;
+	private ImageRepository imageRepository;
 	
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
@@ -82,6 +92,9 @@ public class UserService {
 
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private ImageService imageService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -320,9 +333,9 @@ public class UserService {
 	 * @param User
 	 */
 	@Transactional
-	public void banUser(User user) {
+	public void updateUserWithBan(User user) {
 		userRepository.saveAndFlush(user);
-		if (user.getState().equals(UserStatus.BANNED.name())) {
+		if (user.getUserRating() < -5) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		}
 	}
@@ -335,14 +348,10 @@ public class UserService {
 	 */
 	@Transactional
 	public void updateUser(UserDTO userDTO, String username) {
-		Country country = null;
-		City city = null;
-		if (userDTO.getCountryId() != 0) {
-			country = countryService.findById(userDTO.getCountryId());
-		}
-		if (userDTO.getCountryId() != 0) {
-			city = cityService.findById(userDTO.getCityId());
-		}
+		Country country = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)
+				? countryRepository.findOne(userDTO.getCountryId()) : null;
+		City city = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)
+				? cityRepository.findOne(userDTO.getCityId()) : null;
 		User user = findOne(username);
 		UserMapper.toEntity(userDTO, user, country, city);
 		userRepository.saveAndFlush(user);
@@ -359,9 +368,9 @@ public class UserService {
 	@Transactional
 	public User getUserProfile(String username, String loggedInUserUsername) {
 		if (!username.equals(CHECK_LOGGED_IN_USERNAME)) {
-			return findOne(username);
+			return userRepository.findByUsername(username);
 		}
-		return findOne(loggedInUserUsername);
+		return userRepository.findByUsername(loggedInUserUsername);
 	}
 
 	/**
@@ -374,7 +383,7 @@ public class UserService {
 	 */
 	public String getAvatarUrl(String username) {
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
-		if (imageService.findImageNameByUsername(username) == null) {
+		if (imageRepository.findImageNameByUsername(username) == null) {
 			if (findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
 				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
 			} else {
@@ -395,7 +404,7 @@ public class UserService {
 	 */
 	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
 		String savePath = imageConfiguration.getAvatarPackage(username);
-		if (imageService.findImageNameByUsername(username) != null) {
+		if (imageRepository.findImageNameByUsername(username) != null) {
 			fileUpload.transferTo(new File(savePath));
 		} else {
 			User user = findOne(username);
@@ -441,7 +450,7 @@ public class UserService {
 	}
 
 	/**
-	 * This method for gets user gender by username
+	 * This method gets user gender by username
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
