@@ -66,10 +66,10 @@ insert into users (age, email, firstName, lastName, password, phoneNumber,userRa
 (28, 'vterlyha@gmail.com', 'Volodymyr', 'Terlyha', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380935787496', 23,'PRO', 'male', 'ACTIVE', 'vterlyha', 1, 13,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(37, 'khariv@gmail.com', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 34, 'VETERAN', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE);
+(37, 'volodymyr_terlyha@ukr.net', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', -4, 'NOOB', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  55,'WICKED_SICK', 'male', 'ACTIVE', 'winston', 2, 32,FALSE);
+(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  55,'WICKED_SICK', 'male', 'BANNED', 'winston', 2, 32,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
 (25, 'borodin@gmail.com', 'Vitalik', 'Borodin', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987454', 0,'NOOB', 'male', 'ACTIVE', 'borodin', 1, 13,FALSE);
@@ -159,6 +159,15 @@ INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '3', '3');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '4', '4');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '5', '5');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '5', '6', '2', 'some rule', 'PRIVATE', '2010', '6', '1');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '6', '8', '2', 'some rule', 'PRIVATE', '2010', '7', '2');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '7', '8', '4', 'some rule', 'PRIVATE', '2010', '8', '3');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '3', '6', '4', 'some rule', 'PRIVATE', '2010', '9', '4');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '8', '8', '4', 'some rule', 'PRIVATE', '2010', '1', '1');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '6', '2', 'no', 'PRIVATE', '2010', '2', '2');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '3', '4', '2', 'no', 'PRIVATE', '2012', '3', '3');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '4', '8', '2', 'no', 'PRIVATE', '2012', '4', '4');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '5', '3', '2', 'no', 'PRIVATE', '2012', '5', '5');
 
 
 --  inserts to table status
@@ -205,4 +214,18 @@ INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VA
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Auction', 'Legendary edition of Monopoly will be put at auction', 'Boston, USA');
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-30', 'Party in da club', 'Selebrating Maria Muzychuk win in world chess series', 'Lviv, UA');
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Opening', 'Opening great board games mall', 'Kyiv, UA');
+
+
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`, `user_sender`) VALUES ('1', '2016-05-25 01:12:35', 'неро', 'UNCHECKED', '1', 'MESSAGE', '0', '2', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`, `user_sender`) VALUES ('2', '2016-05-25 01:12:37', '?', 'UNCHECKED', '0', 'MESSAGE', '0', '2', '3');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('3', '2016-05-27 00:00:00', 'Dear user, you have tournament tomorrow, pleas do not miss it. Name of tournament is \"Monopoly\" it will be in Lviv, Ukraine in ', 'UNCHECKED', '0', 'NOTIFICATION', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('4', '2016-05-27 00:00:00', 'Dear user, you have already sent request on \"Garage Party\" event, we hope you will spend time with pleasure. Feel free, enjoy the game and be happy! Event will be in Lviv, UA on ', 'UNCHECKED', '0', 'EVENT', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('5', '2016-05-30 00:00:00', 'Dear user, you have already sent request on \"New Deck for Magic!\" event, we hope you will spend time with pleasure. Feel free, enjoy the game and be happy! Event will be in Lviv, UA on ', 'UNCHECKED', '0', 'EVENT', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('6', '2016-05-27 00:00:00', 'Dear user, you have tournament tomorrow, pleas do not miss it. Name of tournament is \"Monopoly\" it will be in Lviv, Ukraine in ', 'UNCHECKED', '0', 'NOTIFICATION', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('7', '2016-05-27 00:00:00', 'Dear user, you have tournament tomorrow, pleas do not miss it. Name of tournament is \"Monopoly\" it will be in Lviv, Ukraine in ', 'UNCHECKED', '0', 'NOTIFICATION', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('8', '2016-05-27 00:00:00', 'Dear user, you have tournament tomorrow, pleas do not miss it. Name of tournament is \"Monopoly\" it will be in Lviv, Ukraine in ', 'UNCHECKED', '0', 'NOTIFICATION', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('9', '2016-05-27 00:00:00', 'Dear user, you have tournament tomorrow, pleas do not miss it. Name of tournament is \"Monopoly\" it will be in Lviv, Ukraine in ', 'UNCHECKED', '0', 'NOTIFICATION', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`) VALUES ('10', '2016-05-27 00:00:00', 'Dear user, you have tournament tomorrow, pleas do not miss it. Name of tournament is \"Monopoly\" it will be in Lviv, Ukraine in ', 'UNCHECKED', '0', 'NOTIFICATION', '0', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`, `user_sender`) VALUES ('11', '2016-05-25 01:43:27', '&', 'UNCHECKED', '0', 'MESSAGE', '0', '2', '1');
+INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userInvokerId`, `userId`, `user_sender`) VALUES ('12', '2016-05-25 01:43:30', ',', 'UNCHECKED', '0', 'MESSAGE', '0', '2', '1');
 

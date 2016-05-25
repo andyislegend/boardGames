@@ -268,6 +268,7 @@ homeApp.$inject = ['$modal'];
 			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate 
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');
+			$('#makeGameAvailable').modal('hide');
 		}, function myError(response) {
 			alert("Changing game status error");
 		});
@@ -279,11 +280,15 @@ homeApp.$inject = ['$modal'];
 		});
 	}
 	$scope.askOwnerToShare = function(id, message, propositionsList) {
+		console.log(propositionsList);
 		var values = [];
-		angular.forEach(propositionsList, function(value, key) {
-			values.push(value.id);
-		}, values);
+		if (propositionsList.length > 0) {
+			angular.forEach(propositionsList, function(value, key) {
+				values.push(value.id);
+			}, values);
+		}
 		var outMessage = message || 'no message';
+		console.log(values);
 		$http({
 			method : "PUT",
 			url : 'askGameUserOwnerToShare/' + id + '/' + outMessage + '/' + values

@@ -47,16 +47,29 @@
 		</table>
 		<br/>
 		<div class="container-fluid" ng-show="isYourGame">
-			<div class="centeredObjects">
-				<h3 class="text-primary">Make game available</h3>
+			<button class="btn btn-primary" data-toggle="modal"
+				data-target="#makeGameAvailable">Make game available</button>
+			<div id="makeGameAvailable" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="text-primary">Open your game for sharing</h4>
+						</div>
+						<div class="modal-body">
+							<form name="availabilityForm">
+								<p class="inlineDisplay">Enter period of exchange:</p>
+								<input type="number" name="returnDate" max="360" min="1"
+									class="form-control inlineDisplay" ng-model="returnDate"
+									required />
+								<button class="btn btn-primary inlineDisplay"
+									ng-click="makeGameUserAvailable(games.id)"
+									ng-disabled="availabilityForm.returnDate.$invalid">Make available</button>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-			<form name="availabilityForm">
-				<p class="inlineDisplay">Enter period of exchange:</p>
-				<input type="number" name="returnDate" max="360" min="1"
-				class="form-control inlineDisplay" ng-model="returnDate" required/>
-				<button class="btn btn-primary inlineDisplay" ng-click="makeGameUserAvailable(games.id)" 
-				ng-disabled="availabilityForm.returnDate.$invalid">Open for sharing</button>
-			</form>
 		</div>
 	</div>	
 	
@@ -95,13 +108,10 @@
 			  				<br/>
 			  				<div class="centeredObjects">
 			  					<button class="btn btn-primary" 
-			  							ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)"
-			  							ng-disabled="selectRequiredForm.gamesSelect.$invalid">Ask owner</button>
+			  							ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)">
+			  							Ask owner</button>
 			  				</div>
 			  			</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
