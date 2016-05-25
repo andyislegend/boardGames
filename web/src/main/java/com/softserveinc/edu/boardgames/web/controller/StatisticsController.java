@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -60,12 +62,13 @@ public class StatisticsController {
 	public List<ActionsDTO> getCountOfActions() {
 		List<ActionsDTO> actionsSet = new ArrayList<>();
 		Set<Date> dates = new TreeSet<>();
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		dates.addAll(exchangeService.getAllExchangeDates());
 		dates.addAll(tournamentService.getAllTournamentsDates());
 		dates.addAll(eventService.getAllDatesOfEvents());
 		for (Date date : dates) {
 			ActionsDTO actionsDto = new ActionsDTO();
-			actionsDto.setDate(date);
+			actionsDto.setDate(formatter.format(date).toString());
 			actionsDto.setEvents(eventService.countEventsOnDate(date));
 			actionsDto.setExchanges(exchangeService.countExchangesOnDate(date));
 			actionsDto.setTournaments(tournamentService.countTournamentsOnDate(date));

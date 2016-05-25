@@ -4,22 +4,22 @@ import java.util.Date;
 
 public class ActionsDTO {
 
-	private Date date;
+	private String date;
 	private Integer tournaments;
 	private Integer events;
 	private Integer exchanges;
 	public ActionsDTO() {}
-	public ActionsDTO(Date date, Integer tournaments, Integer events, Integer exchanges) {
+	public ActionsDTO(String date, Integer tournaments, Integer events, Integer exchanges) {
 		super();
 		this.date = date;
 		this.tournaments = tournaments;
 		this.events = events;
 		this.exchanges = exchanges;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public Integer getTournaments() {
