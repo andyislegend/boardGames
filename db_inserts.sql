@@ -159,6 +159,15 @@ INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '3', '3');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '4', '4');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '5', '5');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '5', '6', '2', 'some rule', 'PRIVATE', '2010', '6', '1');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '6', '8', '2', 'some rule', 'PRIVATE', '2010', '7', '2');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '7', '8', '4', 'some rule', 'PRIVATE', '2010', '8', '3');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '3', '6', '4', 'some rule', 'PRIVATE', '2010', '9', '4');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'some desc', '8', '8', '4', 'some rule', 'PRIVATE', '2010', '1', '1');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '6', '2', 'no', 'PRIVATE', '2010', '2', '2');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '3', '4', '2', 'no', 'PRIVATE', '2012', '3', '3');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '4', '8', '2', 'no', 'PRIVATE', '2012', '4', '4');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '5', '3', '2', 'no', 'PRIVATE', '2012', '5', '5');
 
 
 --  inserts to table status
