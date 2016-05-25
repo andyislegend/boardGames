@@ -27,4 +27,8 @@ public interface SubscribedUsersRepository extends JpaRepository<SubscribedUsers
 	@Query("SELECT COUNT(s) FROM SubscribedUsers s WHERE s.event.id =?1 AND s.user.id =?2")
 	public Integer getCountOfSubscribedUsers(Integer eventId, Integer useruserId);
 	
+	@Modifying
+	@Query("DELETE FROM SubscribedUsers s WHERE s.event.id =?1 AND s.user.id =?2")
+	public void unsubscribeFromEvent(Integer eventId, Integer useruserId);
+	
 }

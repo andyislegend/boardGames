@@ -115,7 +115,22 @@ homeApp
 								CONFIRM_YES : 'Yes',
 								CONFIRM_CANCEL : 'Cancel',
 								CONFIRM_CLOSE : 'Close',
-								NOTE_TO_WRITE_MESSAGE : 'Write a message'
+								NOTE_TO_WRITE_MESSAGE : 'Write a message',
+								NAME_OF_GAME : 'Name',
+								CATEGORY : 'Category',
+								DESCRIPTION : 'Description',
+								RULES : 'Rules',
+								MIN_PLAYERS : 'Min players',
+								MAX_PLAYERS : 'Max players',
+								EDITION : 'Edition',
+								YEAR_OF_PRODUCTION : 'Year of production',
+								MY_GAMES : 'My games',
+								COMMENTS : 'Comments',
+								DELETE : 'Delete',
+								SHARED : 'Open',
+								BORROWED : 'Borrowed',
+								MYGAMES : 'My games',
+								GAMES : 'Games'
 							});
 			$translateProvider
 					.translations(
@@ -232,7 +247,22 @@ homeApp
 								CONFIRM_YES : 'Так',
 								CONFIRM_CANCEL : 'Ні',
 								CONFIRM_CLOSE : 'Закрити',
-								NOTE_TO_WRITE_MESSAGE : 'Напишіть повідомлення'
+								NOTE_TO_WRITE_MESSAGE : 'Напишіть повідомлення',
+								NAME_OF_GAME :'Назва гри',
+								CATEGORY : 'Категорія',
+								DESCRIPTION : 'Опис',
+								RULES : 'Правила',
+								MIN_PLAYERS : 'Мін. кількість гравців',
+								MAX_PLAYERS : 'Макс. кількість гравців',
+								EDITION : 'Випуск',
+								YEAR_OF_PRODUCTION : 'Рік випуску',
+								MY_GAMES : 'Мої Ігри',
+								COMMENTS : 'Коментарі',
+								DELETE : 'Видалити',
+								SHARED : 'Відкриті',
+								BORROWED : 'Позичені',
+								MYGAMES : 'Мої ігри',
+								GAMES : 'Ігри'
 
 							});
 			$translateProvider.preferredLanguage('en');

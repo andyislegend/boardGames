@@ -1,6 +1,6 @@
 <div ng-controller="showAllTournamentsCtrl">
    <div ng-controller="allUsersGameCtrl">
-      <h1 style="text-align: center"> Tournaments 
+      <h1 style="text-align: center"><span translate="USER_TOURNAMENTS"></span>
       <a href="" data-toggle="modal" data-target="#myModalTournament">
       	<span class="glyphicon glyphicon-plus"></span>
       </a>
@@ -22,8 +22,8 @@
 								id="basic-addon7"> <span>Select game</span><span
 								style="color: red">*</span>
 							</span><select ng-model="selectedGame" style="width: 400px;"
-								class="form-control" aria-describedby="basic-addon7" id="gender"
-								name="gender" required="required">
+								class="form-control" aria-describedby="basic-addon7" 
+								 required="required">
 								<option  ng-repeat="game in allGame" value="{{game.id}}">{{game.name}}</option>
 							</select>
 						</div>

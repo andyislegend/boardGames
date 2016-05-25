@@ -11,12 +11,14 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	$scope.isOpenGiveRate = false;
     	dateOfTournament = $scope.tournament.dateOfTournament;
  
-    	if(today>dateOfTournament){
-  			$scope.isOpenGiveRate = true;
-  		}
+    	
     	
     	   $http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
     	    	$scope.tournamentParticipants = result;
+    	    	
+    	    	if(today>dateOfTournament){
+    	  			$scope.isOpenGiveRate = true;
+    	  		}
     	    	
     	    $http.get("/getCurentUser").success(function(result) {
     	        $scope.currentUser = result;
@@ -44,6 +46,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    			
     	    			if($scope.tournament.tableGenerated = true){
             	        	$scope.quitStatus = false;
+            	        	$scope.joinStatus = false;
             	        }
     	    			break;
     	    		}
@@ -51,6 +54,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    		if(($scope.currentUser.username !== $scope.tournamentParticipants[i].username)) {
     	    			$scope.joinStatus = true;
     	    			$scope.quitStatus = false;
+    	    			
     	    		}
     	    		
     	    		if($scope.tournament.tableGenerated = true){

@@ -87,23 +87,20 @@ public class EventService {
     	List<EventsDTO> allEvents = eventRepository.getAllEvents();
     	List<EventsDTO> notExpired = new ArrayList<>();
     	Calendar calendar = Calendar.getInstance();
+    	calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
     	
     	for (EventsDTO event : allEvents) {
 			
-    		if (event.getDate().compareTo(calendar.getTime()) >= 0) {
+    		if (!(event.getDate().compareTo(calendar.getTime()) < 0)) {
 				notExpired.add(event);
 			}
 		}	
     	
     	return notExpired;
     }
-
-	// /**
-	// * @author Vasyl Bervetskyy
-	// **/
-	// public List<Object[]> getAllEventByUserName() {
-	// return eventRepository.getAllEventByUserName();
-	// }
     
     public List<Date> getAllDatesOfEvents() {
     	List<Date> dates = new ArrayList<>();
