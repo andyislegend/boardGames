@@ -61,16 +61,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	
 	$scope.saveUser = function() {
 		var noCountryOrCitySelected = 0;
-		if ($scope.editableCountry == null) {
-			$scope.countryId = noCountryOrCitySelected;
-		} else {
-			$scope.countryId = $scope.editableCountry.id;
-		}
-		if ($scope.editableCity == null) {
-			$scope.cityId = noCountryOrCitySelected;
-		} else {
-			$scope.cityId = $scope.editableCity.id;
-		}
+		$scope.countryId = ($scope.editableCountry == null)?noCountryOrCitySelected:$scope.editableCountry.id;
+		$scope.cityId = ($scope.editableCity == null)?noCountryOrCitySelected:$scope.editableCity.id;
 		
 	var userDTO = {
 		firstName : $scope.editableFirstName,
