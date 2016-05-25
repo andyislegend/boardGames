@@ -3,6 +3,25 @@
 	<!-- EVENTS -->
 	<div>
 	
+	<div>
+		<div class="widget widget_top-posts"></div>
+		<table ng-table="allEventsUserTable" show-filter="true"
+			class="table table-striped">
+			<tr ng-repeat="x in allEventsDisplay">
+			
+				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">{{ x.date | date:'MM/dd/yyyy' }}</td>
+
+				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }"> {{ x.name }} </td>
+
+				<td title="'Description'">{{ x.description }}</td>
+
+				<td title="'Location'" sortable="'location'" filter="{ 'location': 'text' }">{{ x.location }}</td>
+
+			</tr>
+
+		</table>
+
+	</div>
 			
 	</div>
 	<!-- /EVENTS -->

@@ -66,10 +66,6 @@ public class NotificationService {
 		return notifyRepo.findAllNotReadMessageBySpecificFriend(currentUserName, friendUserName);
 	}
 	
-	/*public Notification getLastMessage(String currentUserName, String friendUserName){
-		return notifyRepo.getLastMessage(currentUserName, friendUserName);
-	}*/
-	
 	public void addTournamentNotification(List<Tournament> listOfTournament){
 		for(Tournament tournament: listOfTournament){
 				for(User user: tournament.getUsers()){

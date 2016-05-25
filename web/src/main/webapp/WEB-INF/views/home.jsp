@@ -37,6 +37,8 @@
       src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript"
       src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript"
+      src="resources/bower_components/angular-utils-pagination/dirPagination.js"></script>
     <script type="text/javascript" src="resources/js/home.js"></script>
     <script type="text/javascript"
       src="resources/js/controllers/gamesGlobalController.js"></script>
@@ -67,7 +69,11 @@
     <script type="text/javascript"
       src="resources/js/controllers/eventAdminCtrl.js"></script>
     <script type="text/javascript"
-      src="resources/js/controllers/editEventCtrl.js"></script>  
+      src="resources/js/controllers/eventUserCtrl.js"></script>  
+    <script type="text/javascript"
+      src="resources/js/controllers/editEventCtrl.js"></script>
+    <script type="text/javascript"
+      src="resources/js/controllers/createNewEventCtrl.js"></script>      
     <script type="text/javascript"
       src="resources/js/controllers/getOneUser.js"></script>
     <script type="text/javascript"
@@ -87,6 +93,8 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="resources/js/controllers/statisticsController.js"></script>
     <script src="resources/js/service/pieChartService.js"></script>
+    <script src="resources/js/service/columnChartService.js"></script>
+    <script src="resources/js/service/areaChartService.js"></script>
     <!-- End of Scripts -->
   </head>
   <body ng-app="homeApp" ng-controller="localizationController">
@@ -157,7 +165,7 @@
                 </li>
                 <li><a ng-href="#/notification" ><span
                   class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                  <span translate="MESSAGES"></span></a>
+                  <span translate="NOTIFICATION"></span></a>
                 </li>
                 <sec:authorize access="hasRole('ADMIN')">
                   <li><a href="#users"><span
@@ -577,21 +585,31 @@
                               ng-click="$parent.jmessage = true; 
                               $parent.myfriend=friend.firstName +' ' + friend.lastName; 
                               setFriendName(friend.username)">
-                              <img class="message" src="resources/ico/message.png" />
+                              <img class="message" src="resources/ico/message2.png" />
                               <div class="count-of-messages"
                                 ng-show="allNotReadMessagesByFriend[friends.indexOf(friend)] > 0 ">{{allNotReadMessagesByFriend[friends.indexOf(friend)]}}
                               </div>
                             </a>
                           </div>
-                            <!--<a href=""><img class="delete-user" src="resources/ico/delete_user.png"/></a>-->
-                            <a href="" type="submit" uib-popover="sdfffff" popover-title="Do you realy want to delete {{ friend.firstName }} {{
-                            friend.lastName}}"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
-                          <!--<a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
-                            $parent.myfriendTournament=friend.firstName +' ' + friend.lastName; 
-                            setFriendNameForTournament(friend.username)">
-                          <img class="iconChampionship"
-                            src="resources/ico/championship.png" />
-                          </a>-->
+                            <a href="" data-toggle="modal" data-target="#myModal" ng-click = "deleteFriemd(friend.firstName, friend.lastName, friend.username)"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
+                            
+                            <div id="myModal" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-body">
+                                      <div class="delete-message">Do you realy want to dalete {{deleteFriendName}} {{deleteFriendLastName}}</div>
+                                  </div>
+                                    <div class="delete-cancel-button"><button class="btn btn-danger" ng-click="deleteFriend()" data-dismiss="modal">Yes</button>  <button class="btn btn-primary" data-dismiss="modal">Cancel</button></div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                            
                         </div>
                       </div>
                     </div>

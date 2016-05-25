@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer>  {

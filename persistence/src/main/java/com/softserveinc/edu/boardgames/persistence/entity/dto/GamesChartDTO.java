@@ -4,11 +4,19 @@ public class GamesChartDTO {
 
 	private String name;
 	private Integer countOfGames;
+	private Double generalRating;
+	private Integer countOfRates;
 	public GamesChartDTO() {}
-	public GamesChartDTO(String name, Integer y) {
+	public GamesChartDTO(String name, Double generalRating, Long countOfRates) {
 		super();
 		this.name = name;
-		this.countOfGames = y;
+		this.generalRating = generalRating;
+		this.countOfRates = countOfRates.intValue();
+	}
+	public GamesChartDTO(String name, Integer countOfGames) {
+		super();
+		this.name = name;
+		this.countOfGames = countOfGames;
 	}
 	public String getName() {
 		return name;
@@ -22,5 +30,16 @@ public class GamesChartDTO {
 	public void setCountOfGames(Integer countOfGames) {
 		this.countOfGames = countOfGames;
 	}
-	
+	public Double getGeneralRating() {
+		return generalRating;
+	}
+	public void setGeneralRating(Double generalRating) {
+		this.generalRating = generalRating;
+	}
+	public Integer getCountOfRates() {
+		return countOfRates;
+	}
+	public void setCountOfRates(Integer countOfRates) {
+		this.countOfRates = countOfRates;
+	}
 }

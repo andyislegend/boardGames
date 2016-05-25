@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 
 @Repository
 public interface GameRatingRepository extends JpaRepository<GameRating, Integer>{
@@ -34,4 +36,13 @@ public interface GameRatingRepository extends JpaRepository<GameRating, Integer>
 	
 	@Query("select gr from GameRating gr where gr.game.id = :gameId and gr.user.id = :userId")
 	public List<GameRating> checkIfUserRated(@Param("gameId")Integer gameId, @Param("userId")Integer userId);
+
+	@Query("select COUNT(gr) from GameRating gr where gr.game.id = :id")
+	public Integer getCountOfRatingsForGame(@Param("id") Integer id);
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO"
+			+"(gr.game.name, AVG(gr.rating), COUNT(gr)) "
+			+ "from GameRating gr "
+			+ "group by gr.game.name")
+	public List<GamesChartDTO> getAllRatings();
 }

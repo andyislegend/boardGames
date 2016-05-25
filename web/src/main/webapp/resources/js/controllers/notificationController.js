@@ -7,7 +7,9 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
     });
 	$http.get('getAllNotification').success(function(data){
         console.log(data);
+        $scope.allNotification = data;
     }).error(function(error){
         console.log(error);
-    });	
+    });
+    $scope.currentDate = new Date();
 }]);

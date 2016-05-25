@@ -1,14 +1,14 @@
-angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $filter, $route, ngTableParams) {
+angular.module('homeApp').controller("eventUserCtrl", function($scope, $http, $filter, ngTableParams) {
 	
 	$scope.allEvents = [];
-	$http.get('allEventsDTO').then(function(result) {
+	$http.get('allUsersEventsDTO').then(function(result) {
 		$scope.allEvents = result.data;
-		$scope.$broadcast('sharingToInitEventsTable', $scope.allEvents);
+		$scope.$broadcast('sharingToInitEventsUserTable', $scope.allEvents);
 	});
 	
-	$scope.$on('sharingToInitEventsTable',
+	$scope.$on('sharingToInitEventsUserTable',
 		function(event, data) {
-		$scope.allEventsTable = new ngTableParams({
+		$scope.allEventsUserTable = new ngTableParams({
 		    page: 1,
 		    count: 6,
 		    sorting: { date: 'asc' }
@@ -28,13 +28,5 @@ angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $
 		     }
 		 });
 	});
-	
-	$scope.cancelEvent = function(id) {
-		$http.delete('cancelEvent?id='+ id).then(function mySucces(response) {
-			$route.reload();
-		}, function myError(response) {
-			alert("Failed to send your request");
-		});
-	}
 	
 });

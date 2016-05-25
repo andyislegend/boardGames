@@ -433,60 +433,35 @@ word-wrap: break-word;
     width: 10%;
 }
 .sign-header{
-    width: 70px;
+    width: 1%;
     text-align: center;
 }
-.current-user-name{
-    width: 150px;
-    text-align: center;
-}
-.notification-message-body{
-    width: 370px;
-    word-wrap: break-word;
-    text-align: center;
-}
-.friend-user-name{
-    width: 150px;
-    text-align: center;
-}
-.notreadmessage{
-    transition: .15s ease-in-out;
-    border-radius: 0px;
-    background: #F43939;
-}
-.notreadmessage-body{
-    background: #F8EBEB;
-    height: 45px;
-}
-.notification-message{
-    width: 27px;
-    height: 27px;
+.sign-header img{
+    height: 30px;
+    width: 30px;
 }
 .notification-line{
     width: 1%;
-}
-.notification-line-tournament{
-    background: #C356F9;
+    background: #8084FF;
 }
 .notification-head{
-    width: 17%;
-}
-.notification-body{
-    width: 49%;
-}
-.tournament-body{
-    background: #F2EAF7;
-}
-.notification-line-event{
-    background: #39DE55;
-}
-.event-body{
-    background: #BAFFC6;
-}
-.notification-date{
-     width: 16%;
-    text-align:right ;
+    background: #E8E9FF;
+    width: 70%;
 }
 .notification-data{
+    background: #E8E9FF;
+    width: 12%;
     padding-left: 0px;
+}
+/************************************/
+.delete-message{
+    font-size: 27px;
+    text-align: center;
+}
+.delete-cancel-button{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.delete-cancel-button button{
+    width: 100px;
 }
