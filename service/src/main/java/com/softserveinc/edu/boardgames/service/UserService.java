@@ -24,7 +24,10 @@ import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsTo
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
+import com.softserveinc.edu.boardgames.persistence.repository.CityRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.CountryRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.ImageRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenRepository;
 import com.softserveinc.edu.boardgames.service.configuration.ImageConfiguration;
@@ -67,16 +70,16 @@ public class UserService {
 	public static final Integer NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER = 0;
 
 	@Autowired
-	private CountryService countryService;
+	private CountryRepository countryRepository;
 	
 	@Autowired
-	private CityService cityService;
+	private CityRepository cityRepository;
 	
 	@Autowired
 	private ImageConfiguration imageConfiguration;
 	
 	@Autowired
-	private ImageService imageService;
+	private ImageRepository imageRepository;
 	
 	@Autowired
 	private VerificationTokenRepository tokenRepository;
@@ -89,6 +92,9 @@ public class UserService {
 
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private ImageService imageService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -329,7 +335,7 @@ public class UserService {
 	@Transactional
 	public void updateUserWithBan(User user) {
 		userRepository.saveAndFlush(user);
-		if (user.getUserRating()<-5) {
+		if (user.getUserRating() < -5) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		}
 	}
@@ -342,8 +348,10 @@ public class UserService {
 	 */
 	@Transactional
 	public void updateUser(UserDTO userDTO, String username) {
-		Country country = (userDTO.getCountryId()!=NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)?countryService.findById(userDTO.getCountryId()):null;
-		City city = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)?cityService.findById(userDTO.getCityId()):null;
+		Country country = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)
+				? countryRepository.findOne(userDTO.getCountryId()) : null;
+		City city = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)
+				? cityRepository.findOne(userDTO.getCityId()) : null;
 		User user = findOne(username);
 		UserMapper.toEntity(userDTO, user, country, city);
 		userRepository.saveAndFlush(user);
@@ -375,7 +383,7 @@ public class UserService {
 	 */
 	public String getAvatarUrl(String username) {
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
-		if (imageService.findImageNameByUsername(username) == null) {
+		if (imageRepository.findImageNameByUsername(username) == null) {
 			if (findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
 				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
 			} else {
@@ -396,7 +404,7 @@ public class UserService {
 	 */
 	public void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException {
 		String savePath = imageConfiguration.getAvatarPackage(username);
-		if (imageService.findImageNameByUsername(username) != null) {
+		if (imageRepository.findImageNameByUsername(username) != null) {
 			fileUpload.transferTo(new File(savePath));
 		} else {
 			User user = findOne(username);
@@ -464,9 +472,5 @@ public class UserService {
 		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
 		return userDTO;
-	}
-	
-	private void checkUserStatus() {
-		
 	}
 }

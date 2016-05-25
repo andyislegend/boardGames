@@ -61,16 +61,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	
 	$scope.saveUser = function() {
 		var noCountryOrCitySelected = 0;
-		if ($scope.editableCountry == null) {
-			$scope.countryId = noCountryOrCitySelected;
-		} else {
-			$scope.countryId = $scope.editableCountry.id;
-		}
-		if ($scope.editableCity == null) {
-			$scope.cityId = noCountryOrCitySelected;
-		} else {
-			$scope.cityId = $scope.editableCity.id;
-		}
+		$scope.countryId = ($scope.editableCountry == null)?noCountryOrCitySelected:$scope.editableCountry.id;
+		$scope.cityId = ($scope.editableCity == null)?noCountryOrCitySelected:$scope.editableCity.id;
 		
 	var userDTO = {
 		firstName : $scope.editableFirstName,
@@ -150,10 +142,11 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
       }]);
 
 	$scope.uploadAvatar = function() {
+		var maxFileSize = 5242880;
 		if ($scope.myFile == null) {
 			return $scope.editAvatarAnswer = "FOTO_ISNT_CHOOSED";			
 		}
-		if ($scope.myFile.size > 5242880) {
+		if ($scope.myFile.size > maxFileSize) {
 			return $scope.editAvatarAnswer = "FOTO_SIZE";			
 		}
 		var file = $scope.myFile;
