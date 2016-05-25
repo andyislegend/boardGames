@@ -356,15 +356,10 @@ public class User implements Serializable {
 	}*/
 
 	@PreUpdate
-	public void banUser() {
+	public void changeUserLevelOrStatus() {
 		if(getUserRating() < -5) {
 			setState(UserStatus.BANNED.name());
-		}
-	}
-	
-	@PreUpdate
-	public void changeUserLevel() {
-		if (isBetween(this.getUserRating(), 0, 10)) {
+		} else if (isBetween(this.getUserRating(), 0, 10)) {
 			setLevel(UserLevel.NOOB.name());
 		} else if (isBetween(this.getUserRating(), 11, 20)) {
 			setLevel(UserLevel.SKILLED.name());
