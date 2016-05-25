@@ -173,11 +173,11 @@ public class User implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "users")
 	private Set<Tournament> tournaments;
 
-	/**
-	 * Describes a connection to verification token entity
-	 */
-	@OneToOne (mappedBy="user", cascade = CascadeType.ALL)
-	private VerificationToken verificationToken;
+//	/**
+//	 * Describes a connection to verification token entity
+//	 */
+//	@OneToOne (mappedBy="user", cascade = CascadeType.MERGE)
+//	private VerificationToken verificationToken;
 
 	public User() {
 	}
@@ -326,13 +326,13 @@ public class User implements Serializable {
 		this.tournaments = tournaments;
 	}
 
-	public VerificationToken getVerificationToken() {
-		return verificationToken;
-	}
-
-	public void setVerificationToken(VerificationToken verificationToken) {
-		this.verificationToken = verificationToken;
-	}
+//	public VerificationToken getVerificationToken() {
+//		return verificationToken;
+//	}
+//
+//	public void setVerificationToken(VerificationToken verificationToken) {
+//		this.verificationToken = verificationToken;
+//	}
 
 	@PreUpdate
 	public void changeUserLevelOrStatus() {

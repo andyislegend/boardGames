@@ -56,6 +56,8 @@ public class RegisterController {
 	 * 
 	 */
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
+	
+	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
 
 	/**
 	 * @param VALID_EMAIL_ADDRESS_REGEX
@@ -184,7 +186,7 @@ public class RegisterController {
 	 * 
 	 * @param model
 	 * @param token
-	 * @return userifo page
+	 * @return userinfo page
 	 * 
 	 *         Controller that is used to validate token from confirmation link
 	 */
@@ -192,7 +194,7 @@ public class RegisterController {
 	public String confirmRegistration(Model model, @RequestParam("token") final String token) {
 		final String result = userService.validateVerificationToken(token);
 
-		if (result == null) {
+		if (result.equals(VALID_TOKEN_MAIL_CONFIRMATION)) {
 			model.addAttribute("success", true);
 		}
 
