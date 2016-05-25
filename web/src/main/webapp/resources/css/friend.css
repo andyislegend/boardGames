@@ -446,11 +446,9 @@ word-wrap: break-word;
     background: #8084FF;
 }
 .notification-head{
-    background: #E8E9FF;
     width: 70%;
 }
 .notification-data{
-    background: #E8E9FF;
     width: 12%;
     padding-left: 0px;
 }
@@ -469,4 +467,9 @@ word-wrap: break-word;
 }
 .delete-cancel-button button{
     width: 100px;
+}
+.figna{
+    width:  98%;
+    margin-left: 10px;
+    
 }
