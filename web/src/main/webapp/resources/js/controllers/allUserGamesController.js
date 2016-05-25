@@ -14,7 +14,6 @@ homeApp.$inject = ['$modal'];
 		for (var i = 0; i < $rootScope.allGame.length; i++) {
 			$rootScope.isNewComments($rootScope.allGame[i].id);
 		}
-		console.log('dhjfdh');
 }, 3000);
 	
 	$http({
