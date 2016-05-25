@@ -70,17 +70,16 @@ public class UserServiceTest {
 	}
 	
 	@Test
-    public void testSendMailToBannedUser() {
+	public void testSendMailToBannedUser() {
 		final VelocityEngine velocityEngine = new VelocityEngine();
-        final String username = "vterlyha";
-        final String to = "vterlyha@gmail.com";
+		final String username = "vterlyha";
+		final String to = "vterlyha@gmail.com";
 
-        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 				message.setTo(to);
 				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
-
 				Map<String, Object> templateVariables = new HashMap<>();
 				templateVariables.put("name", username);
 				String body = mergeTemplateIntoString(velocityEngine, "/velocity/templates/userBanTemplate.vm", "UTF-8",
@@ -88,12 +87,10 @@ public class UserServiceTest {
 				message.setText(body, true);
 				message.setSubject("Banning because of negative feedbacks");
 			}
-
 		};
-
-        mailSender.send(preparator);
-        Mockito.verify(mailSender).send(preparator);
-    }
+		mailSender.send(preparator);
+		Mockito.verify(mailSender).send(preparator);
+	}
 	
 	private List<User> createListWithCustomUser() {
 		List<User> userList = new ArrayList<User>();
