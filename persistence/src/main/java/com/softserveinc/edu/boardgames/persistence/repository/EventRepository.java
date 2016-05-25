@@ -2,7 +2,6 @@ package com.softserveinc.edu.boardgames.persistence.repository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -40,11 +39,6 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO"
 			+ "(e.id, e.name,e.description, e.location,e.date" + ") from Event e where e.name like %:name%")
 	public List<EventsDTO> findAllEventsByWord(@Param("name") String name);	
-	
-//	@Query(value="select date from events", nativeQuery=true)
-//	public List<Date> getAllDateOfEvents();
-	
-//	public List<Date> findAllDate();
 	
 	@Query("select COUNT(e) from Event e where e.date = :date")
 	public Integer countEventsForSpecificDate(@Param("date")Date date);

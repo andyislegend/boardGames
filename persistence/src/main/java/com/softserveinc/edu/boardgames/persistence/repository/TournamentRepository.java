@@ -2,12 +2,12 @@ package com.softserveinc.edu.boardgames.persistence.repository;
 
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 
@@ -46,11 +46,6 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
      */
     @Query(value = "SELECT * FROM tournament where dateOfTournament between (CURDATE() + INTERVAL 1 DAY) and (CURDATE() + INTERVAL 2 DAY)", nativeQuery = true)
     public List<Tournament> getAllTommorowTournament();
-    
-//    @Query(value="select dateOfTournament from tournament", nativeQuery=true)
-//	public List<Date> getAllDatesOfTournaments();
-    
-    //public List<Date> findAllDateOfTournament();
     
     @Query("select COUNT(t) from Tournament t where t.dateOfTournament = :date")
 	public Integer countTournamentForSpecificDate(@Param("date")Date date);

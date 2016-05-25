@@ -1,21 +1,20 @@
 package com.softserveinc.edu.boardgames.service;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
-import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
-import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
+import com.softserveinc.edu.boardgames.persistence.repository.TournamentRepository;
 
 /**
  * @author Volodymyr Krokhmalyuk
