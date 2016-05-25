@@ -1,5 +1,7 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,5 +98,19 @@ public class NotificationService {
 	
 	public List<Notification> getAllNotificationByUserName(String userName){
 		return notifyRepo.getAllNotificationByUserName(userName);
+	}
+	
+	public List<Date> getAllNotificationDates() {
+		List<Date> dates = new ArrayList<>();
+		for (Notification n: this.findAllNotifications()) {
+			Date date = n.getDate();
+			if (date != null)
+				dates.add(date);
+		}
+		return dates;
+	}
+	
+	public Integer countNotificationsForSpecificDate(Date date) {
+		return notifyRepo.countNotificationForSpecificDate(date);
 	}
 }

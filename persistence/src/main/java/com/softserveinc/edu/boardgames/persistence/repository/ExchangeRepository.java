@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -48,7 +47,4 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer>{
 			+ "where gu.status='SHARED' "
 			+ "and e.userApplierId=:userId")
 	public List<GameUserDTO> selectAllConfiramtionsForUser(@Param("userId")Integer id);
-	
-	@Query("select COUNT(e) from Exchange e where e.applyingDate = :date")
-	public Integer countExchangesForSpecificDate(@Param("date")Date date);
 }

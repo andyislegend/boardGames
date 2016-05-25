@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +18,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO("
 			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, n.userSender.username) "
 			+ "from Notification n "
-			+ "where n.user.username = :username ")
+			+ "where n.user.username = :username "
+			+ "and n.type = 'exchange'")
 	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
 	
 	@Query("select COUNT(n) from Notification n "
@@ -75,4 +77,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	@Query(value = "SELECT * FROM notification WHERE userId =(SELECT id FROM users WHERE username = ?1) "
 			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1)", nativeQuery = true)
 	public List<Notification> getAllNotificationByUserName(String userName);
+	
+	@Query("select COUNT(n) from Notification n where n.date = :date and n.type='exchange'")
+	public Integer countNotificationForSpecificDate(@Param("date")Date date);
 }

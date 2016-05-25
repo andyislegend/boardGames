@@ -1,7 +1,5 @@
 package com.softserveinc.edu.boardgames.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,19 +54,5 @@ public class ExchangeService {
 	
 	public List<GameUserDTO> selectAllConfirmationsForUser(Integer id) {
 		return eRepo.selectAllConfiramtionsForUser(id);
-	}
-	
-	public List<Date> getAllExchangeDates() {
-		List<Date> dates = new ArrayList<>();
-    	for (Exchange e: this.findAllExchanges()) {
-    		Date date = e.getApplyingDate();
-    		if (date != null)
-    			dates.add(date);
-    	}
-    	return dates;
-	}
-	
-	public Integer countExchangesOnDate(Date date) {
-		return eRepo.countExchangesForSpecificDate(date);
 	}
 }
