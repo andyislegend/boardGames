@@ -174,7 +174,7 @@ public class User implements Serializable {
 	private Set<GameRating> gameRatingNumeric;
 
 	@ElementCollection
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "users")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "users")
 	private Set<Tournament> tournaments;
 	
 //	/**
