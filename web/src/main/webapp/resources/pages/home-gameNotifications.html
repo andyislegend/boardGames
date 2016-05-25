@@ -4,19 +4,20 @@
 	</div>
 	<table class="table" ng-table="gameNotifyTable" show-filter="true">
 		<tbody>
-			<tr ng-repeat="x in gameNotificationsDisplay" 
-			ng-class="{'blue' : x.status == 'CHECKED', 'gray': x.status == 'UNCHECKED'}">
-				<td title="'Type'" sortable="'type'" filter="{ 'type': 'text' }">
+			<tr ng-repeat="x in gameNotificationsDisplay">
+				<!--<td title="'Type'" sortable="'type'" filter="{ 'type': 'text' }">
 					{{x.type}}
-				</td>
+				</td>-->
 				<td title="'Icon'">
-					<span class="glyphicon glyphicon-knight"></span>
+                    <img style="width: 30px; height: 30px;" src="resources/ico/{{x.type.toLowerCase()}}2.png"/>
+					<!--<span class="glyphicon glyphicon-knight"></span>-->
 				</td>
-				<td title="'Invoker'" sortable="'username'" filter="{ 'username': 'text' }">
+				<!--<td title="'Invoker'" sortable="'username'" filter="{ 'username': 'text' }">
 					{{x.username}}
-				</td>
+				</td>-->
 				<td title="'Message'" filter="{ 'message': 'text' }">
-					<a href="#gameUserDetails/{{x.gameUserId}}" ng-click="markAsChecked(x.id)">{{x.message}}</a>
+                    {{x.message}}
+					<!--<a href="#gameUserDetails/{{x.gameUserId}}" ng-click="markAsChecked(x.id)">--><!--</a>-->
 				</td>
 				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">
 					{{x.date | date:'yyyy-MM-dd'}}

@@ -79,6 +79,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 */
 	
 	@Query(value = "SELECT * FROM notification WHERE userId =(SELECT id FROM users WHERE username = ?1) "
-			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1)", nativeQuery = true)
+			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1) AND type != 'exchange'", nativeQuery = true)
 	public List<Notification> getAllNotificationByUserName(String userName);
 }
