@@ -48,7 +48,7 @@ homeApp.config(function($routeProvider) {
 		controller : 'editProfileCtrl'
 	})
 	.when('/notification', {
-		templateUrl : 'resources/pages/home-gameNotifications.html',
+		templateUrl : 'resources/pages/home-notification.html',
 		controller : 'notificationCtrl'
 	})
 

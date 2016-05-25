@@ -1,31 +1,21 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
-import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
-import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
-import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.SubscribedUsersService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
-import com.softserveinc.edu.boardgames.service.Impl.SubscribedUsersServiceImpl;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController

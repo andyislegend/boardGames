@@ -104,8 +104,18 @@ homeApp
 								CONFIRM_PASSWORD_ANSWER : 'Sorry, but You must confirm Your password',
 								MODERATE_EVENT : 'Moderate Events',
 								FOTO_SIZE : 'The file size must be less than 5MB',
-								NOTIFICATION : 'Notification'
-
+								NOTIFICATION : 'Notification',
+								FRIEND : 'Friends',
+								MY_FRIEND : 'My Friends',
+								FRIEND_REQUES : 'Friend request',
+								FRIEND_RESPONCE : 'Friend responce',
+								FRIEND_MESSAGE : 'Find your friends in our Application',
+								FRIEND_NOTE : 'Fiend new friends',
+								DELETE_FRIEND_MESSAGE : 'Do you realy want to dalete from your friends list ',
+								CONFIRM_YES : 'Yes',
+								CONFIRM_CANCEL : 'Cancel',
+								CONFIRM_CLOSE : 'Close',
+								NOTE_TO_WRITE_MESSAGE : 'Write a message'
 							});
 			$translateProvider
 					.translations(
@@ -211,7 +221,18 @@ homeApp
 								CONFIRM_PASSWORD_ANSWER : 'Вибачте, але ви маєте підтвердити Ваш пароль',
 								MODERATE_EVENT : 'Модерувати Події',
 								FOTO_SIZE : 'Розмір файла повинен становити не більше 5MБ',
-								NOTIFICATION : 'Сповіщення'
+								NOTIFICATION : 'Сповіщення',
+								FRIEND : 'Друзі',
+								MY_FRIEND : 'Мої друзі',
+								FRIEND_REQUES : 'Підписники',
+								FRIEND_RESPONCE : 'Заявки у друзі',
+								FRIEND_MESSAGE : 'Знайди друзів! Буде весело!',
+								FRIEND_NOTE : 'Знайди нових друзів',
+								DELETE_FRIEND_MESSAGE : 'Чи дійсно Ви хочете видалити із списку друзів ',
+								CONFIRM_YES : 'Так',
+								CONFIRM_CANCEL : 'Ні',
+								CONFIRM_CLOSE : 'Закрити',
+								NOTE_TO_WRITE_MESSAGE : 'Напишіть повідомлення'
 
 							});
 			$translateProvider.preferredLanguage('en');
