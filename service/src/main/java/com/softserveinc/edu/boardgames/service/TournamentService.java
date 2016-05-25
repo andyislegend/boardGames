@@ -63,6 +63,11 @@ public class TournamentService {
         query.executeUpdate();
     }
     
+    @Transactional
+    public void deleteTournament(Integer id){
+    	 tournamentRepository.deleteTournament(id);
+    }
+    
     public List<TournamentsDTO> getAllTornaments() {
     	return  tournamentRepository.getAllTournaments();
     }
