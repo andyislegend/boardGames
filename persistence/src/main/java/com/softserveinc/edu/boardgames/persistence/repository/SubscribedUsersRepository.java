@@ -21,4 +21,6 @@ public interface SubscribedUsersRepository extends JpaRepository<SubscribedUsers
 			+ "s.id = ?1")
 	public void changeStatusOfState(Integer id);
 	
+	@Query("SELECT s FROM SubscribedUsers s WHERE s.event =?1 AND s.user =?2")
+	public List<SubscribedUsers> getAllUSersSubscribedToEvent(Integer eventId, Integer useruserId);
 }
