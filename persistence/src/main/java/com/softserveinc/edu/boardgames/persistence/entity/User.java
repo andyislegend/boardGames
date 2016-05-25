@@ -355,51 +355,26 @@ public class User implements Serializable {
 		this.userGames = userGames;
 	}*/
 
-	@PostUpdate
 	@PreUpdate
-	public void changeUser() {
-		if(this.getUserRating() < -5) {
-			this.setState(UserStatus.BANNED.name());
-		}
-		
-		if (isBetween(this.getUserRating(), 0, 10)) {
-			this.setLevel(UserLevel.NOOB.name());
-			return;
-		}
-		
-		if (isBetween(this.getUserRating(), 11, 20)) {
-			this.setLevel(UserLevel.SKILLED.name());
-			return;
-		}
-		
-		if (isBetween(this.getUserRating(), 21, 30)) {
+	public void changeUserLevelOrStatus() {
+		if(getUserRating() < -5) {
+			setState(UserStatus.BANNED.name());
+		} else if (isBetween(this.getUserRating(), 0, 10)) {
+			setLevel(UserLevel.NOOB.name());
+		} else if (isBetween(this.getUserRating(), 11, 20)) {
+			setLevel(UserLevel.SKILLED.name());
+		} else if (isBetween(this.getUserRating(), 21, 30)) {
 			this.setLevel(UserLevel.PRO.name());
-			return;
-		}
-		
-		if (isBetween(this.getUserRating(), 31, 40)) {
+		} else if (isBetween(this.getUserRating(), 31, 40)) {
 			this.setLevel(UserLevel.VETERAN.name());
-			return;
-		}
-		
-		if (isBetween(this.getUserRating(), 41, 50)) {
+		} else if (isBetween(this.getUserRating(), 41, 50)) {
 			this.setLevel(UserLevel.MASTER.name());
-			return;
-		}
-		
-		if (isBetween(this.getUserRating(), 51, 60)) {
+		} else if (isBetween(this.getUserRating(), 51, 60)) {
 			this.setLevel(UserLevel.WICKED_SICK.name());
-			return;
-		}
-		
-		if (isBetween(this.getUserRating(), 61, 70)) {
+		} else if (isBetween(this.getUserRating(), 61, 70)) {
 			this.setLevel(UserLevel.EXTRATERESTRIAL.name());
-			return;
-		}
-		
-		if (isBetween(this.getUserRating(), 71, 100)) {
+		} else if (isBetween(this.getUserRating(), 71, 100)) {
 			this.setLevel(UserLevel.GODLIKE.name());
-			return;
 		}
 	}
 	

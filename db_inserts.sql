@@ -143,6 +143,16 @@ insert into game (name,categoryId) values ('Uno',4);
 insert into game (name,categoryId) values ('Bridge',4);
 insert into game (name,categoryId) values ('Poker',4);
 
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('10', '1', '2');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('9', '2', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('8', '3', '2');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('7', '4', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('6', '5', '3');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('7', '6', '4');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('8', '7', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('9', '1', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('10', '2', '2');
+
 -- inserts to table of users
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '1', '1');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '2', '2');
@@ -187,8 +197,12 @@ INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`,
 --  inserts to table events
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-27', 'Garage Party', 'We are happy to announce our first Garage party', 'Lviv, UA');
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-30', 'New Deck for Magic!', 'Kravets just released a new Deck on full elemental monsters', 'Lviv, UA');
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-17', 'Our first official Tournament', 'Find our First official tournament on Monoploy on our site', 'Lviv, UA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-30', 'Our first official Tournament', 'Find our First official tournament on Monoploy on our site', 'Lviv, UA');
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-10', 'Release of new version of Hasbro Uno', 'Hasbro has announced a realese of New version of UNO', 'San-Jose, USA');
-INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-01', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Stockholm, SWE');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Stockholm, SWE');
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Release of Monopoly v.5', 'Hasbro has announced a realese of New Monopoly series of Version 5', 'Oakland, USA');
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-28', 'Server shutdown planned', 'Site would be unavialble from 12 CET till 15 CET', 'Frankfurt, GER');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Auction', 'Legendary edition of Monopoly will be put at auction', 'Boston, USA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-05-30', 'Party in da club', 'Selebrating Maria Muzychuk win in world chess series', 'Lviv, UA');
+INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Opening', 'Opening great board games mall', 'Kyiv, UA');
+
