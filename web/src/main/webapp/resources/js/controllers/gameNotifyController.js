@@ -40,6 +40,10 @@ angular.module('homeApp').controller("gameNotifyController", function($scope, $h
 			$http({
 				method : "GET", url : 'getCountOfNotifications'
 			}).then(function mySucces(response) {
+				if (response.data > 0) {
+					$rootScope.areNotifications = true;
+				}
+				else $rootScope.areNotifications = false;
 				$rootScope.uncheckedNotifiCount = response.data;
 			}, function myError(response) {
 				alert("getting principal username error");

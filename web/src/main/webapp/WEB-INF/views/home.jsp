@@ -241,7 +241,7 @@
                         	<a href="#gameNotifications/{{username}}" class="btn btn-info" >
                         		<span class="glyphicon glyphicon-bell" ></span> 
                         	</a>
-                        	<span class="badge badge-notify">{{uncheckedNotifiCount}}</span>
+                        	<span class="badge badge-notify" ng-show="areNotifications">{{uncheckedNotifiCount}}</span>
                       	</div>
                       <br/>
                       <div class="modal fade" id="myModalHorizontal" tabindex="-1"
