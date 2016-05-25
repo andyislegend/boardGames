@@ -13,10 +13,7 @@ function drawAreaChart(dataFrom) {
 	var options = {
 		title : 'Activity',
 		hAxis : {
-			title : 'Intensity',
-			titleTextStyle : {
-				color : '#333'
-			}
+			title : 'Intensity'
 		},
 		vAxis : {
 			minValue : 0
