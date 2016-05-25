@@ -469,7 +469,11 @@ word-wrap: break-word;
     width: 100px;
 }
 .figna{
-    width:  98%;
-    margin-left: 10px;
+    width:  97%;
+    margin-left: 20px;
     
+}
+.option-chosen{
+    margin-left: 20px;
+    width: 200px;
 }
