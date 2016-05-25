@@ -221,7 +221,7 @@
           <li class="active"><a data-toggle="tab" data-target="#Games"> My
             Games</a>
           </li>
-          <li><a data-toggle="tab" data-target="#Friends"> My Friends </a></li>
+            <li><a data-toggle="tab" data-target="#Friends"> <span translate="MY_FRIEND"></span> </a></li>
         </ul>
         <div class="tab-content">
           <div id="Games" class="tab-pane fade in active">
@@ -445,9 +445,7 @@
                 <!--Widget to find users-->
                 <div class="search-result" ng-show="click">
                   <div class="header-search">
-                    <div class="find-friend-heder">Find your friends in our
-                      Application
-                    </div>
+                    <div class="find-friend-heder"><span translate="FRIEND_MESSAGE">                    </div>
                     <a ng-click="click = false"><img class="close"
                       style="margin-top: -55px; margin-right: 0px;"
                       src="resources/ico/close2.png" /></a>
@@ -492,7 +490,15 @@
                     </div>
                   </div>
                   <div class="proba-message-bootom">
-                    <textarea name="text" placeholder="write a message"
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    <textarea name="text" placeholder="{{'NOTE_TO_WRITE_MESSAGE' | translate}}"
                       ng-model="newMessage" ng-enter="sendMessage(newMessage)"></textarea>
                   </div>
                 </div>
@@ -500,8 +506,8 @@
                 <div class="users-offer" ng-show="showRequest">
                   <div class="tabs">
                     <ul class="tab-links">
-                      <li class="active"><a href="#tab1">Fiend request</a></li>
-                      <li><a href="#tab2">Fiend responce</a></li>
+                        <li class="active"><a href="#tab1"><span translate="FRIEND_REQUES"></span></a></li>
+                      <li><a href="#tab2"><span translate="FRIEND_RESPONCE"></a></li>
                     </ul>
                     <div class="my-tab-content">
                       <div id="tab1" class="tab active">
@@ -555,7 +561,12 @@
                 <div class="global">
                   <div class="main">
                     <div id="header">
-                      <div class="name-main-part">Friends {{friends.length}}</div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="name-main-part"><span translate="FRIEND"></span> {{friends.length}}</div>
                       <div class="overBell">
                         <a href="" type="button" data-toggle="modal"
                           ng-click="showRequest = !showRequest; click = false; tournament = false">
@@ -566,7 +577,7 @@
                       </div>
                       <!--<img class="search" src="resources/ico/search.png" />-->
                       <input class="form-control" type="text"
-                        placeholder="Find new friends" ng-model="name"
+                        placeholder="{{'FRIEND_NOTE' | translate}}" ng-model="name"
                         ng-keyup="findAllUsers()"
                         ng-click="click = true; showRequest = false; tournament = false">
                     </div>
@@ -599,11 +610,11 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                   <div class="modal-body">
-                                      <div class="delete-message">Do you realy want to dalete {{deleteFriendName}} {{deleteFriendLastName}}</div>
+                                      <div class="delete-message"><span translate="DELETE_FRIEND_MESSAGE"></span> {{deleteFriendName}} {{deleteFriendLastName}}</div>
                                   </div>
-                                    <div class="delete-cancel-button"><button class="btn btn-danger" ng-click="deleteFriend()" data-dismiss="modal">Yes</button>  <button class="btn btn-primary" data-dismiss="modal">Cancel</button></div>
+                                    <div class="delete-cancel-button"><button class="btn btn-danger" ng-click="deleteFriend()" data-dismiss="modal"><span translate="CONFIRM_YES"></span></button>  <button class="btn btn-primary" data-dismiss="modal"><span translate="CONFIRM_CANCEL"></span></button></div>
                                   <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="CONFIRM_CLOSE"></span></button>
                                   </div>
                                 </div>
 

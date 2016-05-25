@@ -27,6 +27,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	            }else {
     	             $scope.isCreator = false;
     	            }
+    	        
     	        for(var i = 0; i<$scope.tournamentParticipants.length; i++) {
     	        	if(($scope.currentUser.username === $scope.tournamentParticipants[i].username)) {
   	        		continue;
@@ -39,14 +40,22 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	        	
     	    		if(($scope.currentUser.username === $scope.tournamentParticipants[i].username)) {    	  
     	    			$scope.joinStatus = false;
-    	    			$scope.quitStatus = true;	    	    			
+    	    			$scope.quitStatus = true;
+    	    			
+    	    			if($scope.tournament.tableGenerated = true){
+            	        	$scope.quitStatus = false;
+            	        }
     	    			break;
     	    		}
     	    		
     	    		if(($scope.currentUser.username !== $scope.tournamentParticipants[i].username)) {
     	    			$scope.joinStatus = true;
     	    			$scope.quitStatus = false;
-    	    		}           	
+    	    		}
+    	    		
+    	    		if($scope.tournament.tableGenerated = true){
+        	        	$scope.quitStatus = false;
+        	        }
     		     }          	    
     	    });
     	    		
