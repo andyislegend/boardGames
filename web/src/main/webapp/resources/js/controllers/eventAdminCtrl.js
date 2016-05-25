@@ -10,7 +10,8 @@ angular.module('homeApp').controller("eventAdminCtrl", function($scope, $http, $
 		function(event, data) {
 		$scope.allEventsTable = new ngTableParams({
 		    page: 1,
-		    count: 7
+		    count: 5,
+		    sorting: { date: 'asc' }
 		 }, {
 		     total: data.length, 
 		     getData: function ($defer, params) {

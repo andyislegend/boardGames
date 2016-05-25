@@ -11,7 +11,7 @@
 			class="table table-striped">
 			<tr ng-repeat="x in allEventsDisplay">
 				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">{{
-					x.date | date:'yyyy-MM-dd' }}</td>
+					x.date | date:'MM/dd/yyyy' }}</td>
 
 				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
 					<a href="#editEvent/{{x.eventId}}"> {{ x.name }}</a>
