@@ -114,7 +114,9 @@ homeApp.$inject = ['$modal'];
 		scope.$apply();
 	}
 
-	$http.get('gameUserDetail/' + $routeParams.id).then(function(result) {
+	$scope.$on('refreshingPage', function(event, data) {
+		
+		$http.get('gameUserDetail/' + $routeParams.id).then(function(result) {
 			
 			$scope.games = result.data;
 			
@@ -218,7 +220,9 @@ homeApp.$inject = ['$modal'];
 					maxPlayers : $scope.games.maxPlayers,
 					minPlayers : $scope.games.minPlayers
 			 }		
+		});
 	});
+	$scope.$emit('refreshingPage');
 	
 	$scope.displayRequestBlockClick = function(id) {
 		
@@ -252,7 +256,7 @@ homeApp.$inject = ['$modal'];
 			method : "PUT",
 			url : data.url + data.userGameId
 		}).then(function mySucces(response) {
-			$route.reload();
+			$scope.$emit('refreshingPage');
 		}, function myError(response) {
 			alert("Changing game status error");
 		});
@@ -263,7 +267,7 @@ homeApp.$inject = ['$modal'];
 			method : "PUT",
 			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate 
 		}).then(function mySucces(response) {
-			$route.reload();
+			$scope.$emit('refreshingPage');
 		}, function myError(response) {
 			alert("Changing game status error");
 		});
@@ -284,7 +288,8 @@ homeApp.$inject = ['$modal'];
 			method : "PUT",
 			url : 'askGameUserOwnerToShare/' + id + '/' + outMessage + '/' + values
 		}).then(function mySucces(response) {
-			$route.reload();
+			$scope.$emit('refreshingPage');
+			$('#applyForGameModal').modal('hide');
 		}, function myError(response) {
 			alert("Failed to send your request");
 		});

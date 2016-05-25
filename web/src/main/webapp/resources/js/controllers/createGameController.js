@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $route, $timeout, $rootScope) {
+angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $route, $rootScope, $timeout, $rootScope) {
 	$scope.showText = false;
 	$scope.categories = [];
 	$scope.showForm = function() {
@@ -19,7 +19,7 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 	$http({
 		method : "GET", url : 'getCountOfNotifications'
 	}).then(function mySucces(response) {
-		$scope.uncheckedNotifiCount = response.data;
+		$rootScope.uncheckedNotifiCount = response.data;
 	}, function myError(response) {
 		alert("getting principal username error");
 	});

@@ -43,7 +43,7 @@ public class NotificationService {
 	}
 	
 	public Integer getCountOfGameNotifications(String username) {
-		return notifyRepo.countOfUncheckedNotifications(username);
+		return notifyRepo.countOfUncheckedGameNotifications(username);
 	}
 	
 	public void saveNotification(Notification notification){

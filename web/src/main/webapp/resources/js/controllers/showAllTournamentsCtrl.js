@@ -39,9 +39,9 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    			$scope.joinStatus = true;
     	    			$scope.quitStatus = false;
     	    		}   
-    	    		if(($scope.currentUser.username === $scope.tournamentParticipants[i].username)) {
-    	        		continue;
-    	        	}
+//    	    		if(($scope.currentUser.username === $scope.tournamentParticipants[i].username)) {
+//    	        		continue;
+//    	        	}
     	        	$scope.participantsForRate.push($scope.tournamentParticipants[i]);
     		     }          	    
     	    });
@@ -126,7 +126,12 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
      } 
      $http.get('/tournament/'+ $routeParams.id).success(function(result) {
      	$scope.tournament = result;});     
-    } 
+    }
+    
+    $scope.deleteTournament = function(tournamentId){
+    	$http.delete("/deleteTournament/"+tournamentId);
+    	$('#deleteTournament').modal('hide');
+    }
     
     $scope.giveRate = function(idUser, rate) {
     	if(idUser === $scope.currentUser.id){
