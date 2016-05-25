@@ -453,6 +453,10 @@ word-wrap: break-word;
     width: 12%;
     padding-left: 0px;
 }
+.notification-icon{
+    width: 30px;
+    height: 30px;
+}
 /************************************/
 .delete-message{
     font-size: 27px;
