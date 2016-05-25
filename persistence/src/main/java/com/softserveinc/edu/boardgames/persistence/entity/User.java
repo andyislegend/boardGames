@@ -363,7 +363,7 @@ public class User implements Serializable {
 	}
 	
 	@PreUpdate
-	public void cahngeUserLevel() {
+	public void changeUserLevel() {
 		if (isBetween(this.getUserRating(), 0, 10)) {
 			setLevel(UserLevel.NOOB.name());
 		} else if (isBetween(this.getUserRating(), 11, 20)) {
