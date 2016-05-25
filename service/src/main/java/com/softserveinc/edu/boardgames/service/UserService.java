@@ -327,9 +327,9 @@ public class UserService {
 	 * @param User
 	 */
 	@Transactional
-	public void banUser(User user) {
+	public void updateUserWithBan(User user) {
 		userRepository.saveAndFlush(user);
-		if (user.getState().equals(UserStatus.BANNED.name())) {
+		if (user.getUserRating()<-5) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		}
 	}
@@ -464,5 +464,9 @@ public class UserService {
 		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
 		return userDTO;
+	}
+	
+	private void checkUserStatus() {
+		
 	}
 }

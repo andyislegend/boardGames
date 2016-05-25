@@ -89,7 +89,7 @@ public class TournamentController {
     	User user = userService.findById(idUser);
     	user.setUserRating(user.getUserRating()+rate);
     	user.setTournamentRatingStatus(true);
-    	userService.updateUser(user);
+    	userService.updateUserWithBan(user);
     }
     
     @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
