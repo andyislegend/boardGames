@@ -268,6 +268,7 @@ homeApp.$inject = ['$modal'];
 			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate 
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');
+			$('#makeGameAvailable').modal('hide');
 		}, function myError(response) {
 			alert("Changing game status error");
 		});
