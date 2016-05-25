@@ -84,6 +84,13 @@ public class TournamentController {
     	return userService.getUser(WebUtil.getPrincipalUsername());
     }
     
+    @RequestMapping(value = "giveRate/{mark}", method = RequestMethod.PUT)
+    public void giveRateForAddToSystem(@PathVariable Integer mark) {
+    	User user = userService.findById(userService.getUser(WebUtil.getPrincipalUsername()).getId());
+    	user.setUserRating(user.getUserRating()+mark);
+    	userService.updateUser(user);
+    }
+    
     @RequestMapping(value = "/giveUser/{idUser}/rate/{rate}", method = RequestMethod.PUT)
     public void giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
     	User user = userService.findById(idUser);
@@ -91,6 +98,14 @@ public class TournamentController {
     	user.setTournamentRatingStatus(true);
     	userService.updateUserWithBan(user);
     }
+    
+    @RequestMapping(value = "/generateTournamentTable/{tournamentId}",method = RequestMethod.PUT)
+    public void generateTournamentTable(@PathVariable Integer tournamentId){
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	tournament.setTableGenerated(true);
+    	tournamentService.update(tournament);
+    } 
+    
     
     @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
     public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){

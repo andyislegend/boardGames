@@ -21,11 +21,19 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    $http.get("/getCurentUser").success(function(result) {
     	        $scope.currentUser = result;
     	        $scope.participantsForRate = [];
+    	        
     	        if($scope.currentUser.username === $scope.tournament.userCreatorName){
     	             $scope.isCreator = true;
     	            }else {
     	             $scope.isCreator = false;
     	            }
+    	        for(var i = 0; i<$scope.tournamentParticipants.length; i++) {
+    	        	if(($scope.currentUser.username === $scope.tournamentParticipants[i].username)) {
+  	        		continue;
+    	        	}else{
+    	        	$scope.participantsForRate.push($scope.tournamentParticipants[i]);
+    	        	}
+    	        }
     	        
     	        for(var i = 0; i<$scope.tournamentParticipants.length; i++) {
     	        	
@@ -38,11 +46,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    		if(($scope.currentUser.username !== $scope.tournamentParticipants[i].username)) {
     	    			$scope.joinStatus = true;
     	    			$scope.quitStatus = false;
-    	    		}   
-//    	    		if(($scope.currentUser.username === $scope.tournamentParticipants[i].username)) {
-//    	        		continue;
-//    	        	}
-    	        	$scope.participantsForRate.push($scope.tournamentParticipants[i]);
+    	    		}           	
     		     }          	    
     	    });
     	    		
@@ -134,17 +138,18 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     }
     
     $scope.giveRate = function(idUser, rate) {
-    	if(idUser === $scope.currentUser.id){
-    	$http.put('/giveUser/'+idUser+"/rate/"+2);	
-    	}else{
     	$http.put('/giveUser/'+idUser+"/rate/"+rate);      
     	}
+    
+    
+    $scope.updateTournamentParticipantsInfo = function(){
+    	$http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
+    		  $scope.tournamentParticipants = result; });  
     }
     
-    $scope.saveRating = function() {
-    	$('#giveRateModal').modal('hide');
-    	$http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
-  		  $scope.tournamentParticipants = result; });    	
+    $scope.generateTournamentTable = function(){
+    	$scope.tournament.tableGenerated = true;
+    	$http.put('/generateTournamentTable/'+$routeParams.id);
     }
     	    
     $scope.changeDataOfTournament = function(){
