@@ -142,10 +142,11 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
       }]);
 
 	$scope.uploadAvatar = function() {
+		var maxFileSize = 5242880;
 		if ($scope.myFile == null) {
 			return $scope.editAvatarAnswer = "FOTO_ISNT_CHOOSED";			
 		}
-		if ($scope.myFile.size > 5242880) {
+		if ($scope.myFile.size > maxFileSize) {
 			return $scope.editAvatarAnswer = "FOTO_SIZE";			
 		}
 		var file = $scope.myFile;
