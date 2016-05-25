@@ -1,4 +1,4 @@
-angular.module('homeApp').controller("gameNotifyController", function($scope, $http, $route, $routeParams, $filter, ngTableParams) {
+angular.module('homeApp').controller("gameNotifyController", function($scope, $http, $route, $rootScope, $routeParams, $filter, ngTableParams) {
 		
 	$http({
 		method : "GET",
@@ -33,11 +33,17 @@ angular.module('homeApp').controller("gameNotifyController", function($scope, $h
 		});
 	
 	$scope.markAsChecked = function(id) {
-		
 		$http({
 			method : "PUT",
 			url : 'markNotificationAsChecked/' + id
 		}).then(function mySucces(response) {
+			$http({
+				method : "GET", url : 'getCountOfNotifications'
+			}).then(function mySucces(response) {
+				$rootScope.uncheckedNotifiCount = response.data;
+			}, function myError(response) {
+				alert("getting principal username error");
+			});
 		}, function myError(response) {
 			alert("getting all confirmed actions error");
 		});

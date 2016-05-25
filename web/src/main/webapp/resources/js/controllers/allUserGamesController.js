@@ -10,12 +10,12 @@ homeApp.$inject = ['$modal'];
 		$rootScope.allGame = response.data;
 		});
 	
-	setInterval(function(){
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
-		console.log('dhjfdh');
-}, 3000);
+//	setInterval(function(){
+//		for (var i = 0; i < $rootScope.allGame.length; i++) {
+//			$rootScope.isNewComments($rootScope.allGame[i].id);
+//		}
+//		console.log('dhjfdh');
+//}, 3000);
 	
 	$http({
 		method : "GET",

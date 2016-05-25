@@ -26,11 +26,16 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "and e.userApplierId = u.id")
 	public String getInvokerUsername(@Param("gameId")Integer gameId);
 	
+//	@Query("select COUNT(n) from Notification n "
+//			+ "where n.user.username = :username "
+//			+ "and n.status = 'UNCHECKED'")
+//	public Integer countOfUncheckedNotifications(@Param("username")String username);
+	
 	@Query("select COUNT(n) from Notification n "
 			+ "where n.user.username = :username "
-			+ "and n.status = 'UNCHECKED'")
-	public Integer countOfUncheckedNotifications(@Param("username")String username);
-	
+			+ "and n.status = 'UNCHECKED'"
+			+ "and n.type = 'exchange'")
+	public Integer countOfUncheckedGameNotifications(@Param("username")String username);
 	/**
 	 * This method for finding all message with your specific friend
 	 * 
