@@ -1,7 +1,7 @@
 #main_wrapper {
     height: 508px;
     width: 99%;
-    border: solid;
+    border: groove;
     margin: 1px 1px;
 
 }
@@ -11,7 +11,7 @@
     float: left;
     height: 97%;
     width:47%;
-    border: solid;
+    border: groove;
     margin: 0.5% 0.5%;
     background-color: WhiteSmoke;
     border-color: LightSteelBlue;
@@ -22,7 +22,7 @@
     float: left;
     height: 97%;
     width: 25%;
-    border: solid;
+    border: groove;
     border-color: LightSteelBlue;
     background-color: WhiteSmoke;
     margin: 0.5% 0.5%;
@@ -54,7 +54,7 @@
     float: left;
     height: 97%;
     width: 25%;
-    border: solid;
+    border: groove;
     border-color: LightSteelBlue;
     background-color: WhiteSmoke;
     margin: 0.5% 0.5%;

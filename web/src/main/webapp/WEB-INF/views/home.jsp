@@ -221,8 +221,8 @@
       <!-- My Side Widget -->
       <div id="widget_div">
         <ul class="nav nav-tabs nav-justified">
-          <li class="active"><a data-toggle="tab" data-target="#Games"> My
-            Games</a>
+          <li class="active"><a data-toggle="tab" data-target="#Games">
+            <span translate="MYGAMES"></span></a>
           </li>
             <li><a data-toggle="tab" data-target="#Friends"> <span translate="MY_FRIEND"></span> </a></li>
         </ul>
@@ -231,7 +231,7 @@
             <!-- MyGames Widget -->
             <div id="mygames_div">
               <div ng-controller="allUsersGameCtrl">
-                <h1 style="text-align: center" class="text-primary">Games</h1>
+                <h1 style="text-align: center" class="text-primary"><span translate="GAMES"></span></h1>
                 <div>
                   <div>
                     <div ng-controller="CreateGameCtrl">
@@ -259,56 +259,94 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                              <div class="addGame">
-                                <form name = "addGame" role="form" data-ng-submit=submit() novalidate>
-                                  <div class="form-group" ng-class="{ 'has-error' : addGame.name.$invalid && !addGame.name.$pristine }">
-                                    <label>Name: </label>
-                                     <input name = "name" class="form-control" 
+                              <div >
+                                <form class="form-horizontal" name = "addGame"  data-ng-submit=submit() novalidate>
+                                  <div name="name" class="input-group" ng-class="{ 'has-error' : addGame.name.$invalid && !addGame.name.$pristine }">
+                                    <span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1">
+                                    <span translate = 'NAME_OF_GAME'></span>
+                                    <span
+								style="color: red">*</span>
+                                    </span>
+                                     <input name = "name" class="form-control" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1"
+								maxlength="100" 
                                       data-ng-model="name" required>
                                   		<p ng-show="addGame.name.$invalid && !addGame.name.$pristine" class="help-block">Name for game is required.</p>
                                   </div>
-                                  <div class="form-group">
-                                    <label>Select Category:</label> 
+                                  <br>
+                                  <div class="input-group">
+                                    <span style="width: 200px;" class="input-group-addon"
+								id="basic-addon7"> <span translate = 'CATEGORY'></span>
+								</span> 
                                     <select
                                       class="form-control" id="exampleSelect1"
-                                      data-ng-model="category">
+                                      data-ng-model="category" style="width: 400px;"
+								class="form-control" aria-describedby="basic-addon7">
                                       <option ng-repeat="category in categories"
                                         value="{{category.name}}">{{category.name}}</option>
                                     </select>
                                   </div>
-                                  <div class="form-group">
-                                    <label>Description: </label> <input
-                                      class="form-control" data-ng-model="description">
+                                  <br>
+                                  <div class="input-group">
+                                    <span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1">
+                                    <span translate = 'DESCRIPTION'></span> 
+                                    </span>
+                                      <input class="form-control" data-ng-model="description" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1"
+								maxlength="254">
                                   </div>
-                                  <div>
-                                    <label>Rules :</label> <input class="form-control"
-                                      data-ng-model="rules">
+                                  <br>
+                                  <div class="input-group">
+                                    <span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1">
+                                    <span translate = 'RULES'></span>
+                                    </span> <input class="form-control"
+                                      data-ng-model="rules" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1"
+								maxlength="254">
                                   </div>
-                                  <div class="form-group">
-                                    <label>Min players: </label> <input
+                                  <br>
+                                  <div class="input-group">
+                                    <span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"><span translate = 'MIN_PLAYERS'></span></span> <input
                                       class="form-control" ng-minlength="0"
                                       data-ng-model="minPlayers" type="number"
-                                      min = "0">
+                                      min = "0" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1">
                                   </div>
-                                  <div class="form-group">
-                                    <label>Max players: </label> <input
+                                  <br>
+                                  <div class="input-group">
+                                    <span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"> <span translate="MAX_PLAYERS"></span></span> <input
                                       class="form-control" data-ng-model="maxPlayers"
-                                      type="number"  min = "{{minPlayers}}">
+                                      type="number"  min = "{{minPlayers}}" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1">
                                   </div>
-                                  <div class="form-group">
-                                    <label>Edition</label> <input class="form-control"
-                                      data-ng-model="edition">
+                                  <br>
+                                  
+                                  <div class="input-group">
+                                    <span style="width: 200px;" class="input-group-addon" id="basic-addon1">
+								 <span translate = "EDITION"></span></span> <input class="form-control"
+                                      data-ng-model="edition" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1">
                                   </div>
-                                  <div class="form-group">
-                                    <label>Year of Production: </label> <input
+                                  
+                                  <br>
+                                  <div class="input-group">
+                                    <span style="width: 200px;" class="input-group-addon"
+								id="basic-addon3"> <span translate="yes">:</span></span><input
                                       class="form-control" data-ng-model="year"
-                                      type="number" min = "1900" max = "2016">
+                                      type="number" min = "1900" max = "2016" style="width: 400px;" type="number"
+								class="form-control" aria-describedby="basic-addon3">
                                   </div>
+                                  <br>
                                   <div>
                                     <input type="submit" value="ADD"
-                                      ng-disabled="addGame.$invalid"
+                                      ng-disabled="addGame.$invalid" class="btn btn-info btn-md"
                                       style="width: 30%; margin-bottom: 10px"> <input
-                                      type="submit" value="Close" data-dismiss="modal"
+                                      type="submit" value="Close" class="btn btn-danger btn-md data-dismiss="modal"
                                       style="width: 30%; margin-bottom: 10px">
                                   </div>
                                 </form>
@@ -320,26 +358,26 @@
                     </div>
                     <div ng-controller="getGameDetailedInfoController">
                       <ul class="nav nav-tabs nav-justified">
-                        <li class="active"><a data-toggle="tab" data-target="#ownGames">My</a></li>
-                        <li><a data-toggle="tab" data-target="#sharedGames">Shared</a></li>
-                        <li><a data-toggle="tab" data-target="#borrowedGames">Borrowed</a></li>
+                        <li class="active"><a data-toggle="tab" data-target="#ownGames"><span translate="MYGAMES"></span></a></li>
+                        <li><a data-toggle="tab" data-target="#sharedGames"><span translate="SHARED"></span></a></li>
+                        <li><a data-toggle="tab" data-target="#borrowedGames"><span translate="BORROWED"></span></a></li>
                       </ul>
                       <div class="tab-content">
                         <div id="ownGames" class="tab-pane fade in active">
                           <table ng-table="" class="table table-condensed table-hover">
                             <tr ng-repeat="game in allGame">
-                              <td title="'Name'"><a
+                              <td title="'NAME_OF_GAME' | translate"><a
                                 href="#gameUserDetails/{{game.id}}">
                                 {{game.name}}</a>
                               </td>
-                              <td title="'Category'">{{game.category}}</td>
+                              <td title=" 'CATEGORY' | translate">{{game.category}}</td>
                               <td title="'Comments'"><a href=""
                                 ng-click="showComments(game.id)"> <span
                                 id="UserGameNum{{game.id}}"
                                 class="glyphicon glyphicon-comment"></span>
                                 </a>
                               </td>
-                              <td title="'Delete'"><a href=""
+                              <td title="'DELETE'| translate"><a href=""
                                 ng-click="deleteGame(game.id)" > 
                                 <span class="glyphicon glyphicon-remove"></span>
                                 </a>
@@ -401,7 +439,7 @@
                                 class="glyphicon glyphicon-comment"></span>
                                 </a>
                               </td>
-                              <td title="'Applier'"><a href="#">{{game.applierUsername}}</a></td>
+                              <td title="'Applier'"><a href="#/edit/{{game.applierUsername}}">{{game.applierUsername}}</a></td>
                             </tr>
                           </table>
                         </div>
@@ -412,7 +450,7 @@
                                 href="#gameUserDetails/{{game.gameId}}"
                                 ng-click="myFunc(game.gameId)"> {{game.gameUserName}}</a></td>
                               <td title="'Category'">{{game.gameUserCategory}}</td>
-                              <td title="'Owner'"><a href="#">{{game.username}}</a></td>
+                              <td title="'Owner'"><a href="#edit/{{game.username}}">{{game.username}}</a></td>
                             </tr>
                           </table>
                         </div>

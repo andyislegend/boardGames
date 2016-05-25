@@ -65,7 +65,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 	
 	$scope.banUser = function(username) {
 		$http.put('banUser?username='+ username)
-		.success(function(result, status){
+		.success(function(result, status) {
 			$("#bannedUsers").modal('show');
 			$scope.username = username;
 	    	$scope.bannedUsers = result;
@@ -77,7 +77,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 	
 	$scope.unbanUser = function(username) {
 		$http.put('unbanUser?username='+ username)
-		.success(function(result, status){
+		.success(function(result, status) {
 			$("#bannedUsers").modal('show');
 			$scope.username = username;
 	    	$scope.bannedUsers = result;

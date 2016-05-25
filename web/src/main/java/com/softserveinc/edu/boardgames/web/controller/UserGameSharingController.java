@@ -144,6 +144,27 @@ public class UserGameSharingController {
 		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 	}
 	
+	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}", method = RequestMethod.PUT)
+	@ResponseBody
+	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message) {
+		
+		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
+		gameUserToUpdate.setStatus(GameUserStatus.CONFIRMATION.name());
+		gameUserService.update(gameUserToUpdate);
+		
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		exchange.setUserApplierId(userService.getUser(WebUtil.getPrincipalUsername()).getId());
+		exchange.setMessage(message);
+		exchangeService.update(exchange);
+		
+		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
+				+ " applies for the game " + gameUserToUpdate.getGame().getName() 
+				+ ". Go to game manue and give your answer.";
+		User userToNotify = userService.findById(exchange.getUser().getId());
+		User userInvoker = userService.findById(exchange.getUserApplierId());
+		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+	}
+	
 	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
 	@ResponseBody
 	public void acceptGameConfirmation(@PathVariable Integer gameUserId) {
