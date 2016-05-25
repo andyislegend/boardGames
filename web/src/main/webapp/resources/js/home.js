@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 'ng.q', 'file-model', 'pascalprecht.translate', 'ngCookies']);
+var homeApp = angular.module('homeApp', [ 'ngRoute', 'ui.bootstrap', 'ngTable', 'ng.q', 'file-model', 'pascalprecht.translate', 'ngCookies', 'angularUtils.directives.dirPagination']);
 
 homeApp.config(function($routeProvider) {
 	$routeProvider

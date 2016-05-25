@@ -3,7 +3,7 @@
     
     
     <table ng-table="allNotification" class="table">
-		<tr ng-repeat="notification in allNotification | orderBy: ['-statusOfReading', '-date']" class="table">
+		<tr dir-paginate="notification in allNotification| itemsPerPage:6 | orderBy: ['-statusOfReading', '-date']" class="table">
             <td title="" class="type-header" >
 					{{notification.type}}
             </td>
@@ -18,6 +18,10 @@
              <td ng-class="{'notification-data': notification.statusOfReading}">
                 {{notification.date | date : format : timezone}}
             </td>
-        </tr>	
+        </tr>
+        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" >
+
+        </dir-pagination-controls>
     </table>
+    
 </div>
