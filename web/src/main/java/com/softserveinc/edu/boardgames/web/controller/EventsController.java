@@ -63,7 +63,13 @@ public class EventsController {
 	
 	@RequestMapping(value = {"/updateEvent"}, method = RequestMethod.PUT)
 	@ResponseBody
-	public void updateUser(@RequestBody EventsDTO event) {
+	public void updateEvent(@RequestBody EventsDTO event) {
 		eventService.updateEventDTO(event);
+	}
+	
+	@RequestMapping(value = {"/addEvent"}, method = RequestMethod.POST)
+	@ResponseBody
+	public void addEvent(@RequestBody EventsDTO event) {
+		eventService.createEventFromDTO(event);
 	}
 }

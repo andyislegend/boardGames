@@ -1,6 +1,6 @@
 angular.module('homeApp').controller("newEventCtrl",function($scope, $http, $route){
 
-    $scope.createTournament = function () {
+    $scope.createNewEvent = function () {
     	
     	var newevent = {
     			
@@ -19,7 +19,8 @@ angular.module('homeApp').controller("newEventCtrl",function($scope, $http, $rou
 			},
 			data : newevent
 		}).success(function(response) {
-			$route.reload;
+			$scope.closeModal();
+			$route.reload();
 		}, function errorCallback(response) {
 		});
     }
@@ -31,9 +32,9 @@ angular.module('homeApp').controller("newEventCtrl",function($scope, $http, $rou
     
     $scope.eraseForm = function() {
 
-    	$scope.newevent.name = ' ';
-		$scope.newevent.description = ' ';
-		$scope.newevent.location = ' ';
+    	$scope.newevent.name = '';
+		$scope.newevent.description = '';
+		$scope.newevent.location = '';
 		$scope.newevent.date = '';
 	}
     
