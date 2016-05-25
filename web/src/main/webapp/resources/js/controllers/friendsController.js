@@ -169,6 +169,17 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
        console.log(error);
     });
     
+    $scope.deleteFriemd = function(name, lastName, username){
+        $scope.deleteFriendName = name;
+        $scope.deleteFriendLastName = lastName;
+        $scope.deleteFriendUserName = username;
+    };
+    $scope.deleteFriend = function(){
+        $http.post('deleteFriend/' +  $scope.deleteFriendUserName ,  $scope.deleteFriendUserName).success(function(data){
+        }).error(function(error){
+            console.log(error);
+        });
+    }
     
 setInterval(function(){
         findAllFriend();

@@ -453,3 +453,15 @@ word-wrap: break-word;
     width: 12%;
     padding-left: 0px;
 }
+/************************************/
+.delete-message{
+    font-size: 27px;
+    text-align: center;
+}
+.delete-cancel-button{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.delete-cancel-button button{
+    width: 100px;
+}

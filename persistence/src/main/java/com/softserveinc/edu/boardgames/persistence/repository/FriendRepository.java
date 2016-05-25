@@ -57,4 +57,10 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
 		@Modifying
 		@Query("DELETE FROM Friend f WHERE f.user = ?1 AND f.userId = ?2")
 		public void cancelOffering(User currentUser, User otherUser);
+		
+		@Modifying
+		@Query("DELETE FROM Friend f WHERE f.user = ?1 AND f.userId = ?2 AND f.status.id = 2")
+		public void deleteFriend(User currentUser, User otherUser);
+		
+		
 }

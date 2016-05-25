@@ -186,9 +186,6 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4'
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '3');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '4', '4');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('1', '4', '5');
-INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '2');
-INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '3');
-INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '4');
 INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4', '6');
 
 -- inserts to table tournaments
