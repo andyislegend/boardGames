@@ -58,6 +58,13 @@ public class UserService {
 	 *            he can access the website a not be automatically banned again
 	 */
 	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
+	
+	/**
+	 * @param NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER
+	 *            is used to set Country and City entities for user if
+	 *            no city or country is choosed
+	 */
+	public static final Integer NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER = 0;
 
 	@Autowired
 	private CountryService countryService;
@@ -337,10 +344,10 @@ public class UserService {
 	public void updateUser(UserDTO userDTO, String username) {
 		Country country = null;
 		City city = null;
-		if (userDTO.getCountryId() != 0) {
+		if (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER) {
 			country = countryService.findById(userDTO.getCountryId());
 		}
-		if (userDTO.getCountryId() != 0) {
+		if (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER) {
 			city = cityService.findById(userDTO.getCityId());
 		}
 		User user = findOne(username);
@@ -441,7 +448,7 @@ public class UserService {
 	}
 
 	/**
-	 * This method for gets user gender by username
+	 * This method gets user gender by username
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
