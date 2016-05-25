@@ -30,9 +30,9 @@
 				
 				</form>	
 			<div class="btn-group" style="margin-top: 5px; margin-left: 5px;">
-			<button  type="button" class="btn btn-primary" data-toggle="modal" ng-click = "updateTournamentParticipantsInfo()" data-target="#giveRateModal">Give a rate</button>
-			<button type ="button" class="btn btn-primary" data-toggle="modal" data-target = "#deleteTournament">Delete this tournament</button>
-			<button type ="button" class="btn btn-primary" ng-disabled = "tournament.tableGenerated" ng-click = "generateTournamentTable()">Generete this tournament</button>
+			<button  type="button" class="btn btn-primary" data-toggle="modal" ng-click = "updateTournamentParticipantsInfo()" data-target="#giveRateModal">Estimate participants</button>
+			<button type ="button" class="btn btn-primary" data-toggle="modal" data-target = "#deleteTournament">Delete tournament</button>
+			<button type ="button" class="btn btn-primary" ng-disabled = "tournament.tableGenerated" ng-click = "generateTournamentTable()">Do a lot</button>
 			</div>
 		</div>
         </div>
@@ -50,7 +50,7 @@
 			<tr ng-repeat = "user in tournamentParticipants"><td ng-if="$odd">{{user.username}}<td></tr>
 		</table>
 		</div>
-		<div ng-if = "!tournament.tableGenerated"><h4>Table not generated yet</h4></div>
+		<div ng-if = "!tournament.tableGenerated"><h4>Tournament table not generated yet</h4></div>
     </div>
     
     <div id="right_wrapper">
