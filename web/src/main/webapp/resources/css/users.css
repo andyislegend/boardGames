@@ -37,6 +37,16 @@
 	 width: 90px;
 }
 
+#userAvatar {
+	 height: 90px; 
+	 width: 90px;
+}
+
+#avatar:hover {
+    opacity: 0.5;
+    filter:alpha(opacity=40);
+}
+
 
 #tournamentsList {
 	  text-align: left;
