@@ -290,6 +290,7 @@ homeApp.$inject = ['$modal'];
 			url : 'askGameUserOwnerToShare/' + id + '/' + outMessage + '/' + values
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');
+			$('#applyForGameModal').modal('hide');
 		}, function myError(response) {
 			alert("Failed to send your request");
 		});
