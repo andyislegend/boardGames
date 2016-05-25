@@ -56,17 +56,6 @@ public class SubscribedUsersServiceImpl implements SubscribedUsersService{
 		subscribedUsersRepository.save(subUser);
 		
 	}
-
-//	@Override
-//	public boolean isUserSubscribed(Integer eventId, String username) {
-//		User user = userRepository.findByUsername(username);
-//		if (subscribedUsersRepository.getAllUSersSubscribedToEvent(eventId, user.getId()).size() > 0) {
-//			return true;
-//		} else {
-//			return false;	
-//		}
-//		
-//	}
 	
 	@Override
 	public boolean isUserSubscribed(Integer eventId, String username) {
@@ -79,4 +68,15 @@ public class SubscribedUsersServiceImpl implements SubscribedUsersService{
 		
 	}
 
+	@Override
+	public Integer getCountOfEventsByUser(Integer eventId, String username) {
+		User user = userRepository.findByUsername(username);
+		return subscribedUsersRepository.getCountOfSubscribedUsers(eventId, user.getId());
+	}
+
+	@Override
+	public void unsubscribeFromEvent(Integer eventId, String username) {
+		User user = userRepository.findByUsername(username);
+		subscribedUsersRepository.unsubscribeFromEvent(eventId, user.getId());
+	}
 }

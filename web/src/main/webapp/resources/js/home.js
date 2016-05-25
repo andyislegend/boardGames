@@ -28,6 +28,11 @@ homeApp.config(function($routeProvider) {
 		controller : 'editEventCtrl'
 	})
 
+	.when('/eventInfo/:id', {
+		templateUrl : 'resources/pages/home-eventInfo.html',
+	    controller : 'eventInfoCtrl'
+	})
+	
 	.when('/events', {
 		templateUrl : 'resources/pages/home-events.html',
 		controller : 'eventUserCtrl'
@@ -61,10 +66,12 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-users.html',
 		controller : 'getAllUsersCtrl'
 	})
+	
 	.when('/search/:word', {
 		templateUrl : 'resources/pages/home-GlobalSearch.html',
 		controller : 'GlobalSearchCTRL'
 	})
+	
 	.when('/gameUserDetails/:id', {
 		templateUrl : 'resources/pages/home-gameUserDetails.html',
 		controller : 'getGameDetailedInfoController', 
@@ -75,14 +82,17 @@ homeApp.config(function($routeProvider) {
 		templateUrl : 'resources/pages/home-gameNotifications.html',
 		controller : 'allUsersGameCtrl'
 	})
+	
 	.when('/gameEdit/:id', {
 		templateUrl : 'resources/pages/home-editGame.html',
 		controller : 'allUsersGameCtrl'
 	})
+	
 	.when('/tournament/:id', {
 		templateUrl : 'resources/pages/home-tournamentDetails.html',
 	    controller : 'showAllTournamentsCtrl'
 	})
+	
 	.otherwise({
 		redirectTo : '/statistics'
 	})

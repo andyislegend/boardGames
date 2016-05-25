@@ -64,4 +64,5 @@ public class NotificationController {
 	public Integer getCountOfNotifications() {
 		return notificationService.getCountOfGameNotifications(WebUtil.getPrincipalUsername());
 	}
+
 }

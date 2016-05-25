@@ -16,4 +16,8 @@ public interface SubscribedUsersService {
 	
 	public boolean isUserSubscribed(Integer eventId, String username);
 	
+	public Integer getCountOfEventsByUser(Integer eventId, String username);
+	
+	public void unsubscribeFromEvent(Integer eventId, String username);
+	
 }
