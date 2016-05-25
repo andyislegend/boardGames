@@ -34,17 +34,21 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 				}
 			}
 			$scope.getCitiesByCountry = function() {
-				$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
-					$scope.cities = result.data;
-					if ($scope.userProfile.city!=null) {
-						for (i=0; i<$scope.cities.length; i++) {
-							if ($scope.cities[i].id==$scope.userProfile.city.id) {
-								$scope.editableCity = $scope.cities[i];
-								break;
-							} 
+				if ($scope.editableCountry==null) {
+					$scope.cities =[];
+				} else {
+					$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
+						$scope.cities = result.data;
+						if ($scope.userProfile.city!=null) {
+							for (i=0; i<$scope.cities.length; i++) {
+								if ($scope.cities[i].id==$scope.userProfile.city.id) {
+									$scope.editableCity = $scope.cities[i];
+									break;
+								} 
+							}
 						}
-					}
-				});
+					});
+				}
 			};
 			angular.element(document).ready(function () {
 				$scope.getCitiesByCountry();
@@ -56,6 +60,17 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	});
 	
 	$scope.saveUser = function() {
+		if ($scope.editableCountry == null) {
+			$scope.countryId = 0;
+		} else {
+			$scope.countryId = $scope.editableCountry.id;
+		}
+		if ($scope.editableCity == null) {
+			$scope.cityId = 0;
+		} else {
+			$scope.cityId = $scope.editableCity.id;
+		}
+		
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,
@@ -63,8 +78,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 		gender : $scope.editableGender,
 		age : $scope.editableAge,
 		phoneNumber : $scope.editablePhoneNumber,
-		countryId:$scope.editableCountry.id,
-		cityId:$scope.editableCity.id
+		countryId:$scope.countryId,
+		cityId:$scope.cityId
 		};
 		$http({
 			method : 'PUT',

@@ -327,9 +327,15 @@ public class UserService {
 	 */
 	@Transactional
 	public void updateUser(UserDTO userDTO, String username) {
+		Country country = null;
+		City city = null;
+		if (userDTO.getCountryId() != 0) {
+			country = countryService.findById(userDTO.getCountryId());
+		}
+		if (userDTO.getCountryId() != 0) {
+			city = cityService.findById(userDTO.getCityId());
+		}
 		User user = findOne(username);
-		Country country = countryService.findById(userDTO.getCountryId());
-		City city = cityService.findById(userDTO.getCityId());
 		UserMapper.toEntity(userDTO, user, country, city);
 		userRepository.saveAndFlush(user);
 	}
