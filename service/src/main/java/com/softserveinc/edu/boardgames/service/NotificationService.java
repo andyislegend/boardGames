@@ -10,6 +10,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.NotificationRepository;
 
 @Service
@@ -37,9 +38,9 @@ public class NotificationService {
 		notifyRepo.delete(notification);
 	}
 	
-//	public List<GameNotificationDTO> getAllForUser(String username) {
-//		return notifyRepo.getAllGamesNotifications(username);
-//	}
+	public List<GameNotificationDTO> getAllForUser(String username) {
+		return notifyRepo.getAllGamesNotifications(username);
+	}
 	
 	public Integer getCountOfGameNotifications(String username) {
 		return notifyRepo.countOfUncheckedGameNotifications(username);

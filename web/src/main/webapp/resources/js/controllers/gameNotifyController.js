@@ -1,22 +1,14 @@
 angular.module('homeApp').controller("gameNotifyController", function($scope, $http, $route, $rootScope, $routeParams, $filter, ngTableParams) {
-//	$scope.gameNotifications = [];	
-//	$http({
-//		method : "GET",
-//		url : 'getAllGameNotifications'
-//	}).then(function mySucces(response) {
-//		$scope.gameNotifications = response.data;
-//	}, function myError(response) {
-//		alert("getting all confirmed actions error");
-//	});
-    
-	$scope.gameNotifications = [];
-    $http.get('getAllNotification').success(function(data){
-        $scope.gameNotifications = data;
-        $scope.$broadcast('performingNotifications', $scope.gameNotifications);	
-    }).error(function(error){
-        console.log(error);
-    });
-    
+	
+	$http({
+		method : "GET",
+		url : 'getAllGameNotifications'
+	}).then(function mySucces(response) {
+		$scope.gameNotifications = response.data;
+		$scope.$broadcast('performingNotifications', $scope.gameNotifications);	
+	}, function myError(response) {
+		alert("getting all confirmed actions error");
+	});
 	
 	$scope.$on('performingNotifications',
 		function(event, data) {

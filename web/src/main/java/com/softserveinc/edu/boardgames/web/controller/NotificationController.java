@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.SubscribedUsersService;
@@ -44,11 +45,11 @@ public class NotificationController {
 	}
 	
 		
-//	@RequestMapping(value = "/getAllGameNotifications", method = RequestMethod.GET)
-//	@ResponseBody
-//	public List<GameNotificationDTO> getAllGameNotification() {
-//		return notificationService.getAllForUser(WebUtil.getPrincipalUsername());
-//	}
+	@RequestMapping(value = "/getAllGameNotifications", method = RequestMethod.GET)
+	@ResponseBody
+	public List<GameNotificationDTO> getAllGameNotification() {
+		return notificationService.getAllForUser(WebUtil.getPrincipalUsername());
+	}
 	
 	@RequestMapping(value = "/markNotificationAsChecked/{notificationId}", method = RequestMethod.PUT)
 	@ResponseBody

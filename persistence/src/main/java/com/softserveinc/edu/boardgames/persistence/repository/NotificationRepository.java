@@ -9,16 +9,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 
-//	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO("
-//			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, u.username) "
-//			+ "from Notification n, User u "
-//			+ "where n.user.username = :username "
-//			+ "and u.id = n.userInvokerId")
-//	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO("
+			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, n.userSender.username) "
+			+ "from Notification n "
+			+ "where n.user.username = :username ")
+	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
 	
 	@Query("select u.username from Exchange e, User u "
 			+ "where e.gameUser.id = :gameId "
