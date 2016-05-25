@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="resources/css/editPage.css" />
     <link rel="stylesheet" href="resources/css/gameUser.css" />
     <link rel="stylesheet" href="resources/css/tornaments.css" />
+    <link rel="stylesheet" href="resources/css/eventInfo.css" />
     <!-- End of CSS -->
     <!-- Scripts -->
     <script type="text/javascript"
@@ -72,6 +73,8 @@
       src="resources/js/controllers/eventUserCtrl.js"></script>  
     <script type="text/javascript"
       src="resources/js/controllers/editEventCtrl.js"></script>
+    <script type="text/javascript"
+      src="resources/js/controllers/eventInfoCtrl.js"></script>  
     <script type="text/javascript"
       src="resources/js/controllers/createNewEventCtrl.js"></script>      
     <script type="text/javascript"

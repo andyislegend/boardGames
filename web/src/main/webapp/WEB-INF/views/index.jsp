@@ -53,15 +53,7 @@
 				<p style="font-size: 14pt;" class="navbar-text">
 					<b translate="PROJECT_NAME"></b>
 				</p>
-				<!-- <ul class="nav navbar-nav navbar-center">
-					<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-					<li><a href="#allGames"><i class="fa fa-home"></i> All
-							Games</a></li>
-					<li><a href="#about"><i class="fa fa-shield"></i> Events</a></li>
-					<li><a href="#tournaments"><i class="fa fa-comment"></i>
-							Tournaments</a></li>
-				</ul> -->
-
+				
 				<ul class="nav navbar-nav navbar-right">
 					<li><a type="button" class="btn btn-link" data-toggle="modal"
 						data-target="#myModal" translate="LOGIN"></a></li>
@@ -349,10 +341,8 @@
 
 				</div>
 
-				<a style="margin-bottom: 5%" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md" translate="CLOSE"></a> <a
-					style="margin-left: 75%; margin-bottom: 5%" type="button" href=''
-					class="btn btn-info btn-md" translate="CONTACT_WITH_ADMINS"></a>
+				<a style="margin-left: 45%; margin-bottom: 5%" type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md" translate="CLOSE"></a>
 			</div>
 			<!-- End of Modal Content -->
 
