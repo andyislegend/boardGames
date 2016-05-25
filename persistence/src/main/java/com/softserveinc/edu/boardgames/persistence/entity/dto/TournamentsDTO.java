@@ -35,6 +35,10 @@ public class TournamentsDTO {
 		this.isTableGenerated = isTableGenerated;
 	}
     
+    public TournamentsDTO(Date date) {
+		this.dateOfTournament = date;
+	}
+    
     public TournamentsDTO(Integer tournamentId, String tournamentName) {
 		this.tournamentId = tournamentId;
 		this.tournamentName = tournamentName;
