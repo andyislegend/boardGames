@@ -342,14 +342,8 @@ public class UserService {
 	 */
 	@Transactional
 	public void updateUser(UserDTO userDTO, String username) {
-		Country country = null;
-		City city = null;
-		if (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER) {
-			country = countryService.findById(userDTO.getCountryId());
-		}
-		if (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER) {
-			city = cityService.findById(userDTO.getCityId());
-		}
+		Country country = (userDTO.getCountryId()!=NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)?countryService.findById(userDTO.getCountryId()):null;
+		City city = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)?cityService.findById(userDTO.getCityId()):null;
 		User user = findOne(username);
 		UserMapper.toEntity(userDTO, user, country, city);
 		userRepository.saveAndFlush(user);
@@ -366,9 +360,9 @@ public class UserService {
 	@Transactional
 	public User getUserProfile(String username, String loggedInUserUsername) {
 		if (!username.equals(CHECK_LOGGED_IN_USERNAME)) {
-			return findOne(username);
+			return userRepository.findByUsername(username);
 		}
-		return findOne(loggedInUserUsername);
+		return userRepository.findByUsername(loggedInUserUsername);
 	}
 
 	/**

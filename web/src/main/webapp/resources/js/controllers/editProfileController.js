@@ -60,13 +60,14 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	});
 	
 	$scope.saveUser = function() {
+		var noCountryOrCitySelected = 0;
 		if ($scope.editableCountry == null) {
-			$scope.countryId = 0;
+			$scope.countryId = noCountryOrCitySelected;
 		} else {
 			$scope.countryId = $scope.editableCountry.id;
 		}
 		if ($scope.editableCity == null) {
-			$scope.cityId = 0;
+			$scope.cityId = noCountryOrCitySelected;
 		} else {
 			$scope.cityId = $scope.editableCity.id;
 		}
