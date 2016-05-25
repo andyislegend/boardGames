@@ -66,10 +66,10 @@ insert into users (age, email, firstName, lastName, password, phoneNumber,userRa
 (28, 'vterlyha@gmail.com', 'Volodymyr', 'Terlyha', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380935787496', 23,'PRO', 'male', 'ACTIVE', 'vterlyha', 1, 13,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(37, 'khariv@gmail.com', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 34, 'VETERAN', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE);
+(37, 'volodymyr_terlyha@ukr.net', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', -4, 'NOOB', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
-(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wernoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  55,'WICKED_SICK', 'male', 'ACTIVE', 'winston', 2, 32,FALSE);
+(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  55,'WICKED_SICK', 'male', 'BANNED', 'winston', 2, 32,FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus) values
 (25, 'borodin@gmail.com', 'Vitalik', 'Borodin', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987454', 0,'NOOB', 'male', 'ACTIVE', 'borodin', 1, 13,FALSE);
