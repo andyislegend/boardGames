@@ -591,15 +591,25 @@
                               </div>
                             </a>
                           </div>
-                            <!--<a href=""><img class="delete-user" src="resources/ico/delete_user.png"/></a>-->
-                            <a href="" type="submit" uib-popover="sdfffff" popover-title="Do you realy want to delete {{ friend.firstName }} {{
-                            friend.lastName}}"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
-                          <!--<a href="" type="button" ng-click="$parent.tournament = true; click = false; showRequest = false;  
-                            $parent.myfriendTournament=friend.firstName +' ' + friend.lastName; 
-                            setFriendNameForTournament(friend.username)">
-                          <img class="iconChampionship"
-                            src="resources/ico/championship.png" />
-                          </a>-->
+                            <a href="" data-toggle="modal" data-target="#myModal" ng-click = "deleteFriemd(friend.firstName, friend.lastName, friend.username)"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
+                            
+                            <div id="myModal" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-body">
+                                      <div class="delete-message">Do you realy want to dalete {{deleteFriendName}} {{deleteFriendLastName}}</div>
+                                  </div>
+                                    <div class="delete-cancel-button"><button class="btn btn-danger" ng-click="deleteFriend()" data-dismiss="modal">Yes</button>  <button class="btn btn-primary" data-dismiss="modal">Cancel</button></div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                            
                         </div>
                       </div>
                     </div>
