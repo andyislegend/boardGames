@@ -4,12 +4,12 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	$scope.myProfile = false;
 	$scope.myAvatarUpload = false;
 	$scope.username = $routeParams.username;
-	if ($routeParams.username==null) {
+	if ($routeParams.username == null) {
 		$scope.username = "Logged in user";
 	}
 	$http.get('getProfile?username='+ $scope.username).then(function(result) {
 		$scope.userProfile = result.data;
-		if ($routeParams.username==null) {
+		if ($routeParams.username == null) {
 			$scope.myProfile = true;
 		}
 		$scope.editableFirstName = $scope.userProfile.firstName;
@@ -25,23 +25,23 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 		
 		$http.get('getAllCountries').then(function(result) {
 			$scope.countries = result.data;
-			if ($scope.userProfile.country!=null) {
-				for (i=0; i<$scope.countries.length; i++) {				
-					if ($scope.countries[i].id==$scope.userProfile.country.id) {
+			if ($scope.userProfile.country != null) {
+				for (i = 0; i < $scope.countries.length; i++) {				
+					if ($scope.countries[i].id == $scope.userProfile.country.id) {
 						$scope.editableCountry = $scope.countries[i];
 						break;
 					}
 				}
 			}
 			$scope.getCitiesByCountry = function() {
-				if ($scope.editableCountry==null) {
-					$scope.cities =[];
+				if ($scope.editableCountry == null) {
+					$scope.cities = [];
 				} else {
 					$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
 						$scope.cities = result.data;
-						if ($scope.userProfile.city!=null) {
-							for (i=0; i<$scope.cities.length; i++) {
-								if ($scope.cities[i].id==$scope.userProfile.city.id) {
+						if ($scope.userProfile.city != null) {
+							for (i = 0; i < $scope.cities.length; i++) {
+								if ($scope.cities[i].id == $scope.userProfile.city.id) {
 									$scope.editableCity = $scope.cities[i];
 									break;
 								} 
@@ -61,8 +61,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	
 	$scope.saveUser = function() {
 		var noCountryOrCitySelected = 0;
-		$scope.countryId = ($scope.editableCountry == null)?noCountryOrCitySelected:$scope.editableCountry.id;
-		$scope.cityId = ($scope.editableCity == null)?noCountryOrCitySelected:$scope.editableCity.id;
+		$scope.countryId = ($scope.editableCountry == null) ? noCountryOrCitySelected : $scope.editableCountry.id;
+		$scope.cityId = ($scope.editableCity == null) ? noCountryOrCitySelected : $scope.editableCity.id;
 		
 	var userDTO = {
 		firstName : $scope.editableFirstName,
@@ -94,9 +94,6 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 			$scope.editProfileMessage = false;
 		}).error(function(result, status) {
 			$scope.editProfileAnswer = result.data;
-			if ($scope.editProfileAnswer == "") {
-				$scope.editProfileAnswer = "You have typed inappropriate data";
-			}
 		})
 
 	}
@@ -132,8 +129,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
                var model = $parse(attrs.fileModel);
                var modelSetter = model.assign;
                
-               element.bind('change', function(){
-                  scope.$apply(function(){
+               element.bind('change', function() {
+                  scope.$apply(function() {
                      modelSetter(scope, element[0].files[0]);
                   });
                });
@@ -159,15 +156,12 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	        withCredentials: true,
 	        headers: {'Content-Type': undefined },
 	        transformRequest: angular.identity
-	    }).success(function(result, status){
+	    }).success(function(result, status) {
 	    	$scope.editAvatarAnswer = result;
 	    	$scope.$emit('changeAvatar');
-        })
-        
-        .error(function(result, status){
+        }).error(function(result, status) {
         	$scope.editAvatarAnswer = result;
         });
-
 	};
 	
 	$scope.showPassword = function() {

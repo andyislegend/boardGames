@@ -101,7 +101,7 @@ public class TournamentService {
     
     public List<Date> getAllTournamentsDates() {
     	List<Date> dates = new ArrayList<>();
-    	for (TournamentsDTO t: this.getAllTornaments()) {
+    	for (TournamentsDTO t: tournamentRepository.getTournamentDate()) {
     		dates.add(t.getDateOfTournament());
     	}
     	return dates;
