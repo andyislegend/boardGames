@@ -445,7 +445,7 @@
                 <!--Widget to find users-->
                 <div class="search-result" ng-show="click">
                   <div class="header-search">
-                    <div class="find-friend-heder"><span translate="FRIEND_MESSAGE">                    </div>
+                    <div class="find-friend-heder"><span translate="FRIEND_MESSAGE"></div>
                     <a ng-click="click = false"><img class="close"
                       style="margin-top: -55px; margin-right: 0px;"
                       src="resources/ico/close2.png" /></a>
@@ -490,14 +490,6 @@
                     </div>
                   </div>
                   <div class="proba-message-bootom">
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
                     <textarea name="text" placeholder="{{'NOTE_TO_WRITE_MESSAGE' | translate}}"
                       ng-model="newMessage" ng-enter="sendMessage(newMessage)"></textarea>
                   </div>
@@ -561,11 +553,6 @@
                 <div class="global">
                   <div class="main">
                     <div id="header">
-                        
-                        
-                        
-                        
-                        
                         <div class="name-main-part"><span translate="FRIEND"></span> {{friends.length}}</div>
                       <div class="overBell">
                         <a href="" type="button" data-toggle="modal"
