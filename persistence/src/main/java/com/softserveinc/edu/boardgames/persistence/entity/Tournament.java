@@ -65,6 +65,9 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private String city;
     
+    @Column(name = "isTableGenerated")
+    private boolean isTableGenerated;
+    
     public Tournament() {
 		
 	}
@@ -140,4 +143,12 @@ public class Tournament implements Serializable {
 	public void setCity(String city) {
 		this.city = city;
 	}
+
+	public boolean isTableGenerated() {
+		return isTableGenerated;
+	}
+
+	public void setTableGenerated(boolean isTableGenerated) {
+		this.isTableGenerated = isTableGenerated;
+	}	
 }

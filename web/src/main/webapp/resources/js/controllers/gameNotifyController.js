@@ -1,10 +1,11 @@
 angular.module('homeApp').controller("gameNotifyController", function($scope, $http, $route, $rootScope, $routeParams, $filter, ngTableParams) {
-		
+	
 	$http({
 		method : "GET",
 		url : 'getAllGameNotifications'
 	}).then(function mySucces(response) {
 		$scope.gameNotifications = response.data;
+		console.log($scope.gameNotifications);
 		$scope.$broadcast('performingNotifications', $scope.gameNotifications);	
 	}, function myError(response) {
 		alert("getting all confirmed actions error");
@@ -14,7 +15,8 @@ angular.module('homeApp').controller("gameNotifyController", function($scope, $h
 		function(event, data) {
 			$scope.gameNotifyTable = new ngTableParams({
 			    page: 1,
-			    count: 10
+			    count: 7,
+			    sorting: { date: 'asc' }
 			 }, {
 			     total: data.length, 
 			     getData: function ($defer, params) {
@@ -40,6 +42,10 @@ angular.module('homeApp').controller("gameNotifyController", function($scope, $h
 			$http({
 				method : "GET", url : 'getCountOfNotifications'
 			}).then(function mySucces(response) {
+				if (response.data > 0) {
+					$rootScope.areNotifications = true;
+				}
+				else $rootScope.areNotifications = false;
 				$rootScope.uncheckedNotifiCount = response.data;
 			}, function myError(response) {
 				alert("getting principal username error");

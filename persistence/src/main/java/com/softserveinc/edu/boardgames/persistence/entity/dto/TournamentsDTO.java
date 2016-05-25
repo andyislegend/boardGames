@@ -19,17 +19,23 @@ public class TournamentsDTO {
     private Set<User> users;
     private String country;
     private String city;
+    private boolean isTableGenerated;
 
     public TournamentsDTO() {
     }
 
     public TournamentsDTO(Integer tournamentId, String tournamentName, Integer countOfParticipants, Integer userCreatorId,
-			String userCreatorName, Date date) {
+			String userCreatorName, Date date, boolean isTableGenerated) {
 		this.tournamentId = tournamentId;
 		this.tournamentName = tournamentName;
 		this.countOfParticipants = countOfParticipants;
 		this.userCreatorId = userCreatorId;
 		this.userCreatorName = userCreatorName;
+		this.dateOfTournament = date;
+		this.isTableGenerated = isTableGenerated;
+	}
+    
+    public TournamentsDTO(Date date) {
 		this.dateOfTournament = date;
 	}
     
@@ -108,5 +114,14 @@ public class TournamentsDTO {
 
 	public void setCity(String city) {
 		this.city = city;
-	}    
+	}
+
+	public boolean isTableGenerated() {
+		return isTableGenerated;
+	}
+
+	public void setTableGenerated(boolean isTableGenerated) {
+		this.isTableGenerated = isTableGenerated;
+	}   
+	
 }

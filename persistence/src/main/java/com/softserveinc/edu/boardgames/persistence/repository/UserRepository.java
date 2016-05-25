@@ -103,7 +103,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO"
 			+ "(u.id, u.username, u.firstName, u.lastName, u.email, u.gender, u.age, u.phoneNumber, "
-			+ "u.country.id, u.city.id, u.country.name, u.city.name, u.userRating, u.level, u.state) "
+			+ " u.userRating, u.level, u.state) "
 			+ "from User u Where u.username = :username")
 	public UserDTO getUserDTO(@Param("username") String username);
 }

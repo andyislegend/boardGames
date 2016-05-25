@@ -1,27 +1,21 @@
 <h3 style="text-align: center">Notification</h3>
 <div ng-controller="getGamesGlobalController">
     
-    
-    <table ng-table="allNotification" class="table">
-		<tr dir-paginate="notification in allNotification| itemsPerPage:6 | orderBy: ['-statusOfReading', '-date']" class="table">
-            <td title="" class="type-header" >
-					{{notification.type}}
-            </td>
-            <td title="" class="sign-header">
+    <div class="figna">
+    <table ng-table="allNotificationTable" class="table" show-filter="true">
+		<tr ng-repeat="notification in allNotificationDisplay | orderBy: '-date'" class="table">
+            <td title="'Type'" class="sign-header" filter="{ 'type': 'text' }">
                     <img class="notification-message" src="resources/ico/{{notification.type.toLowerCase()}}2.png"/>
             </td>
-            <td ng-class="{'notification-line': notification.statusOfReading}">
+            <td class="notification-line">
             </td>
-            <td ng-class="{ 'notification-head': notification.statusOfReading}">
+            <td title="'message'" filter="{ 'message': 'text' }" class="notification-head">
                 {{notification.message}}
             </td>
-             <td ng-class="{'notification-data': notification.statusOfReading}">
+             <td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }" class="notification-data">
                 {{notification.date | date : format : timezone}}
             </td>
         </tr>
-        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" >
-
-        </dir-pagination-controls>
     </table>
-    
+    </div>
 </div>

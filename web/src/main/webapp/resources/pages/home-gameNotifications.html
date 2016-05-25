@@ -6,17 +6,16 @@
 		<tbody>
 			<tr ng-repeat="x in gameNotificationsDisplay" 
 			ng-class="{'blue' : x.status == 'CHECKED', 'gray': x.status == 'UNCHECKED'}">
-				<td title="'Type'" sortable="'type'" filter="{ 'type': 'text' }">
-					{{x.type}}
-				</td>
 				<td title="'Icon'">
 					<span class="glyphicon glyphicon-knight"></span>
 				</td>
-				<td title="'Invoker'" sortable="'username'" filter="{ 'username': 'text' }">
-					{{x.username}}
+				<td title="'Applier'" sortable="'username'" filter="{ 'username': 'text' }">
+					{{x.applierUsername}}
 				</td>
 				<td title="'Message'" filter="{ 'message': 'text' }">
-					<a href="#gameUserDetails/{{x.gameUserId}}" ng-click="markAsChecked(x.id)">{{x.message}}</a>
+					<a href="#gameUserDetails/{{x.gameUserId}}" ng-click="markAsChecked(x.id)">
+						{{x.message}}
+					</a>
 				</td>
 				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">
 					{{x.date | date:'yyyy-MM-dd'}}

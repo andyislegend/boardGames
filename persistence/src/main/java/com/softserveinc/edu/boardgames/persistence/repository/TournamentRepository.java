@@ -21,24 +21,29 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 
     public Tournament findById(Integer id); 
 	public Tournament findByName(String name);
-    
+
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username,t.dateOfTournament, t.isTableGenerated"
             + ") from Tournament t")
     public List<TournamentsDTO> getAllTournaments();
     
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
+            "(t.dateOfTournament"
+            + ") from Tournament t")
+    public List<TournamentsDTO> getTournamentDate();
+    
+    @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament, t.isTableGenerated"
             + ") from Tournament t where t.id = :id")
     public TournamentsDTO getTournamentsById(@Param("id") Integer id);
     
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament, t.isTableGenerated"
             + ") from Tournament t where t.name like %:name%")
     public List<TournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
     
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament"
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament, t.isTableGenerated"
             + ") from Tournament t where t.userCreator.username = :username")
     public List<TournamentsDTO> getAllTournamentsByUserCreator(@Param("username")String username);
     

@@ -15,16 +15,10 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDT
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO("
-			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, u.username) "
-			+ "from Notification n, User u "
-			+ "where n.user.username = :username "
-			+ "and u.id = n.userInvokerId")
+			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, n.userSender.username) "
+			+ "from Notification n "
+			+ "where n.user.username = :username ")
 	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
-	
-	@Query("select u.username from Exchange e, User u "
-			+ "where e.gameUser.id = :gameId "
-			+ "and e.userApplierId = u.id")
-	public String getInvokerUsername(@Param("gameId")Integer gameId);
 	
 	@Query("select COUNT(n) from Notification n "
 			+ "where n.user.username = :username "
@@ -78,7 +72,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 * @return list of Notification
 	 */
 	
-	@Query(value = "SELECT * FROM notification WHERE userId =(SELECT id FROM users WHERE username = ?1) "
-			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM notification WHERE (userId =(SELECT id FROM users WHERE username = ?1) "
+			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1)) AND (type = 'MESSAGE' OR type = 'NOTIFICATION' OR type = 'EVENT')", nativeQuery = true)
 	public List<Notification> getAllNotificationByUserName(String userName);
 }
