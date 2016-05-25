@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.service.CityService;
 import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
+import com.softserveinc.edu.boardgames.service.MailService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
@@ -61,6 +63,8 @@ public class UsersController {
 	 *            is used as a key to choose correct language
 	 */
 	public static final String USER_UNBAN = "USER_UNBAN";
+	
+	private final Logger logger = Logger.getLogger(UsersController.class);
 
 	@Autowired
 	ImageService imageService;
@@ -156,7 +160,7 @@ public class UsersController {
 		try {
 			userService.updateAvatar(fileUpload, WebUtil.getPrincipalUsername());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(IMAGE_UPLOAD_FAILED, e);
 			return new ResponseEntity<String>(IMAGE_UPLOAD_FAILED, HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<String>(IMAGE_UPLOAD, HttpStatus.OK);

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -66,6 +65,11 @@ public class TournamentController {
         tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getGameId()));
         tournamentService.save(tournament);
     }
+    
+    @RequestMapping(value = "/deleteTournament/{tournamentId}", method = RequestMethod.DELETE)
+    public void deleteTournament(@PathVariable Integer tournamentId) {
+    	tournamentService.deleteTournament(tournamentId);
+    }
       
     @RequestMapping(value = "/getAllParticipants/{tournamentId}", method = RequestMethod.GET)
     @ResponseBody
@@ -80,13 +84,28 @@ public class TournamentController {
     	return userService.getUser(WebUtil.getPrincipalUsername());
     }
     
+    @RequestMapping(value = "giveRate/{mark}", method = RequestMethod.PUT)
+    public void giveRateForAddToSystem(@PathVariable Integer mark) {
+    	User user = userService.findById(userService.getUser(WebUtil.getPrincipalUsername()).getId());
+    	user.setUserRating(user.getUserRating()+mark);
+    	userService.updateUser(user);
+    }
+    
     @RequestMapping(value = "/giveUser/{idUser}/rate/{rate}", method = RequestMethod.PUT)
     public void giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
     	User user = userService.findById(idUser);
     	user.setUserRating(user.getUserRating()+rate);
     	user.setTournamentRatingStatus(true);
-    	userService.updateUser(user);
+    	userService.updateUserWithBan(user);
     }
+    
+    @RequestMapping(value = "/generateTournamentTable/{tournamentId}",method = RequestMethod.PUT)
+    public void generateTournamentTable(@PathVariable Integer tournamentId){
+    	Tournament tournament = tournamentService.getTournamenById(tournamentId);
+    	tournament.setTableGenerated(true);
+    	tournamentService.update(tournament);
+    } 
+    
     
     @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
     public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){

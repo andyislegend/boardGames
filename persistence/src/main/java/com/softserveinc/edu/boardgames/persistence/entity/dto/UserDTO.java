@@ -25,8 +25,7 @@ public class UserDTO {
 	}
 
 	public UserDTO(Integer id, String username, String firstName, String lastName, String email, String gender,
-			Integer age, String phoneNumber, Integer countryId, Integer cityId, String countryName, String cityName,
-			Integer userRating, String level, String state) {
+			Integer age, String phoneNumber, Integer userRating, String level, String state) {
 		this.id = id;
 		this.username = username;
 		this.firstName = firstName;
@@ -35,10 +34,6 @@ public class UserDTO {
 		this.gender = gender;
 		this.age = age;
 		this.phoneNumber = phoneNumber;
-		this.countryId = countryId;
-		this.cityId = cityId;
-		this.countryName = countryName;
-		this.cityName = cityName;
 		this.userRating = userRating;
 		this.level = level;
 		this.state = state;

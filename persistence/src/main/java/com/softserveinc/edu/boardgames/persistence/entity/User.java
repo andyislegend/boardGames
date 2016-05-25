@@ -20,7 +20,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PostUpdate;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -133,9 +132,6 @@ public class User implements Serializable {
 	@NotEmpty
 	@Column(name = "state", nullable = false)
 	private String state = UserStatus.UNDER_VERIFICATION.name();
-
-/*	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-	private Set<GameUser> userGames;*/
 	
 	@Column(name = "tournamentRatingStatus")
 	private boolean tournamentRatingStatus;
@@ -176,15 +172,6 @@ public class User implements Serializable {
 	@ElementCollection
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "users")
 	private Set<Tournament> tournaments;
-	
-//	/**
-//	 * Describes connection to events table.
-//	 */
-//	@ElementCollection
-//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@JoinTable(name = "subscribed_events",joinColumns = {@JoinColumn(name = "user_id")},
-//	inverseJoinColumns = {@JoinColumn(name = "event_id")})
-//	private Set<Event> events;
 
 	/**
 	 * Describes a connection to verification token entity
@@ -346,14 +333,6 @@ public class User implements Serializable {
 	public void setVerificationToken(VerificationToken verificationToken) {
 		this.verificationToken = verificationToken;
 	}
-
-/*	public Set<GameUser> getUserGames() {
-		return userGames;
-	}
-
-	public void setUserGames(Set<GameUser> userGames) {
-		this.userGames = userGames;
-	}*/
 
 	@PreUpdate
 	public void changeUserLevelOrStatus() {

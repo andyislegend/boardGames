@@ -14,72 +14,78 @@
                                  <div class="modal-header">
                                     <h2>Create the best tournament ever</h2>
                                  </div>
-                                 <div class="modal-body">
-                                 
-                       				<form class="form-horizontal" role="form" name = "tournamentCreate" novalidate>
-                                    
-                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament.$pristine }">
-                                          <label>Select game for your tournament</label>
-                                          <span style="color: red">*</span>								
-                                          <select required="required" name = "gameForTournament" class="form-control" data-ng-model="selectedGame" required>
-                                             <option  ng-repeat="game in allGame" value="{{game.id}}">{{game.name}}</option>
-                                          </select>
-                                          <p ng-show="tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament" class="help-block">Game for tournament is required.</p>
-                                       </div>
-                                       
-                                       <div class="input-group" ng-class="{ 'has-error' : tournamentCreate.name.$invalid && !tournamentCreate.name.$pristine }">
-                                          <span style="width: 100px;" class="input-group-addon"
-											id="basic-addon2">	
-                                          <span>Name of your tournament</span>
-                                          </span>
-                                          <span style="color: red">*</span>
-                                          <input name = "name" class="form-control"
-								aria-describedby="basic-addon1" style="width: 400px;"
-                                           id="inputdefault" data-ng-model="tournamentName" required>
-                                          <p ng-show="tournamentCreate.name.$invalid && !tournamentCreate.name.$pristine" class="help-block">Tournament name is required.</p>
-                                       </div>
-                                       
-                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.countOfParticipants.$invalid && !tournamentCreate.countOfParticipants.$pristine }">
-                                          
-                                          <label>Count of players</label>
-                                          <span style="color: red">*</span>	
-                                          <input name = "countOfParticipants" type="number" min = "0" class="form-control" id="inputdefault"
-                                           data-ng-model="countOfParticipants" required>
-                                          <p ng-show="tournamentCreate.countOfParticipants.$invalid && !tournamentCreate.countOfParticipants.$pristine" class="help-block">Count of participants is required.</p>
-                                       </div>
-                                       
-                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.dateOfTournament.$invalid && !tournamentCreate.dateOfTournament.$pristine }">
-                                          
-                                          <label>Choose date of your tournament</label>
-                                          <span style="color: red">*</span>	
-                                          <input name = "dateOfTournament" class="form-control" id="inputdefault"
-                                           data-ng-model="date" type="date" required>
-                                          <p ng-show="tournamentCreate.dateOfTournament.$invalid && !tournamentCreate.dateOfTournament.$pristine" class="help-block">Date of tournament is required.</p>
-                                       </div>
-                                       
-                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.Country.$invalid && !tournamentCreate.Country.$pristine }">       	
-                                         <label>Enter Country</label>
-                                         <span style="color: red">*</span>
-                                          <input name = "Country" class="form-control" id="inputdefault" data-ng-model="countryTournament" required>	
-                                          <p ng-show="tournamentCreate.Country.$invalid && !tournamentCreate.Country.$pristine" class="help-block">Country of tournament is required.</p>
-                                       </div>
-                                      
-                                       <div class="form-group" ng-class="{ 'has-error' : tournamentCreate.city.$invalid && !tournamentCreate.city.$pristine }">                                                                	
-                                          <label>Enter City</label>
-                                          <span style="color: red">*</span>
-                                          <input name = "city" class="form-control" id="inputdefault" data-ng-model="cityTournament" required>
-                                          <p ng-show="tournamentCreate.city.$invalid && !tournamentCreate.city.$pristine" class="help-block">Country of tournament is required.</p>
-                                      </div>
-                                  	 <b><p><span style="color: red">*</span> - required fields</p></b>	
-                                      <div>
-                                          <button type="button" class="btn btn-default" ng-click="createTournament()" ng-disabled="tournamentCreate.$invalid" value="Close" data-dismiss="modal"> Create</button>
-                                          <button type="button" class="btn btn-default" ng-click="modalClose()"
-                                             data-dismiss="modal">Close</button>
-                                       </div>
+                                 <div class="modal-body">                               
+                       				<form class="form-horizontal" role="form" name = "tournamentCreate" novalidate>                  				
+                        
+                        <div class="input-group" ng-class="{ 'has-error' : tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon7"> <span>Select game</span><span
+								style="color: red">*</span>
+							</span><select ng-model="selectedGame" style="width: 400px;"
+								class="form-control" aria-describedby="basic-addon7" id="gender"
+								name="gender" required="required">
+								<option  ng-repeat="game in allGame" value="{{game.id}}">{{game.name}}</option>
+							</select>
+						</div>
+                        <br>
+                  
+                        
+                        <div name = "name" class="input-group" ng-class="{ 'has-error' : tournamentCreate.name.$invalid && !tournamentCreate.name.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"><span> Name you tournament </span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="tournamentName"  style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1"
+								maxlength="100" required>
+								
+						</div>
+						<br>
+						<div class="input-group" ng-class="{ 'has-error' : tournamentCreate.countOfParticipants.$invalid && !tournamentCreate.countOfParticipants.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon2"><span>Count of players</span>
+								<span style="color: red">*</span>	</span> <input
+								name = "countOfParticipants" min = "0" data-ng-model="countOfParticipants" style="width: 400px;"
+								type="number" class="form-control" aria-describedby="basic-addon2" required>
+						</div>
+						<br>
+						
+						<div class="input-group" ng-class="{ 'has-error' : tournamentCreate.dateOfTournament.$invalid && !tournamentCreate.dateOfTournament.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon3"> <span> Date of tournament</span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="date" name = "dateOfTournament" style="width: 400px;" type="date"
+								class="form-control" aria-describedby="basic-addon3" required>      
+						</div>
+						<br>
+						<div class="input-group"  ng-class="{ 'has-error' : tournamentCreate.Country.$invalid && !tournamentCreate.Country.$pristine }">       	
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"><span> Enter Country</span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="countryTournament" name = "Country" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon4" required>
+						</div>
+						<br>
+						
+						<div class="input-group"  ng-class="{ 'has-error' : tournamentCreate.city.$invalid && !tournamentCreate.Country.$pristine }">       	
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"><span> Enter City</span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="cityTournament" name = "city" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon4" required>
+						</div>
+						<br>
+						<span><span style="color: red">*</span>-required fields</span>
+						<button style="margin-left: 30%;"
+							ng-click="createTournament()" ng-disabled="tournamentCreate.$invalid" value="Close" data-dismiss="modal"
+							class="btn btn-info btn-md">ADD NEW</button>
+
+						<button style="margin-left: 15%;" type="submit"
+							class="btn btn-danger btn-md" class="btn btn-default" ng-click="modalClose()"
+                                             data-dismiss="modal">
+							Cancel</button>
                                     </form>                                                
                                  </div>
-                                 <div class="modal-footer">
-                                 </div>
+                             
                               </div>
                            </div>
                         </div>

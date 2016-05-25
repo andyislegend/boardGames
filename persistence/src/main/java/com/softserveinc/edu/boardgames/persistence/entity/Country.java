@@ -21,9 +21,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * This class describes country where user of boardGames website live and where
  * tournaments and events are held.
  * 
- * This Country entity has a one to many relationship with the Address entity
- * and one to many relationship with City entity.
- * 
  * @author Volodymyr Terlyha
  */
 @Entity

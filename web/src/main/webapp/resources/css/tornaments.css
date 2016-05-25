@@ -3,14 +3,14 @@
     width: 99%;
     border: solid;
     margin: 1px 1px;
-    
+
 }
 
 #left_wrapper {
 
     float: left;
     height: 97%;
-    width:67%;
+    width:47%;
     border: solid;
     margin: 0.5% 0.5%;
     background-color: WhiteSmoke;
@@ -21,7 +21,7 @@
 
     float: left;
     height: 97%;
-    width: 30%;
+    width: 25%;
     border: solid;
     border-color: LightSteelBlue;
     background-color: WhiteSmoke;
@@ -44,3 +44,25 @@
     border-color: LightSteelBlue;
     background-color: WhiteSmoke;
 }
+
+.input-group-addon {
+
+	border: none;
+	background: none;
+}
+#main_table{
+    float: left;
+    height: 97%;
+    width: 25%;
+    border: solid;
+    border-color: LightSteelBlue;
+    background-color: WhiteSmoke;
+    margin: 0.5% 0.5%;
+}
+
+#right_table{
+	float: left;
+	width: 12%;
+	height: 97%;
+}
+	
