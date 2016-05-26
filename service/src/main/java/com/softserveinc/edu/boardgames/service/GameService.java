@@ -13,6 +13,9 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRatingRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 
+/**
+ * @author Taras Varvariuk
+ */
 @Service
 @Transactional
 public class GameService {

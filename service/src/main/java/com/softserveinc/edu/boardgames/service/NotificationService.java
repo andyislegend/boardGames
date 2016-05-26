@@ -15,6 +15,9 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.NotificationRepository;
 
+/**
+ * @author Taras Varvariuk, Vasul Berveckyi
+ */
 @Service
 @Transactional
 public class NotificationService {

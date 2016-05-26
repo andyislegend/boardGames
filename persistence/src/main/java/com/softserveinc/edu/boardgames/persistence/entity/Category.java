@@ -99,16 +99,27 @@ public class Category implements Serializable{
 	
 	@Override
     public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Category other = (Category) obj;
+	    return new EqualsBuilder().append(this.getId(), other.getId())
+	    						.append(this.getName(), other.getName())
+	    						.isEquals();
     }
     
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder().append(this.getId())
+        							.append(this.getName()).toHashCode();
     }
     
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return new ToStringBuilder(this).append("id", this.getId())
+        							.append("name", this.getName()).toString();
     }
 }

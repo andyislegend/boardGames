@@ -11,6 +11,9 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.ExchangeRepository;
 
+/**
+ * @author Taras Varvariuk
+ */
 @Service
 @Transactional
 public class ExchangeService {

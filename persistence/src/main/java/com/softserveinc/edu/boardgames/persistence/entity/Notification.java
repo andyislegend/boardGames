@@ -14,9 +14,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 
+/**
+ * Notification is any action that informs user
+ * about any kinds of activities: events, tournaments, exchanges
+ * has relationships with User and GameUser(unrequired)
+ * @author Taras Varvariuk, Vasyl Berveckyi
+ */
 @Entity
 @Table(name = "notification")
 public class Notification implements Serializable {
@@ -141,5 +151,50 @@ public class Notification implements Serializable {
 	public void setStatusOfReading(boolean statusOfReading) {
 		this.statusOfReading = statusOfReading;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Notification other = (Notification) obj;
+		return new EqualsBuilder().append(this.getId(), other.getId())
+								.append(this.getGameUser(), other.getGameUser())
+								.append(this.getDate(), other.getDate())
+								.append(this.getMessage(), other.getMessage())
+								.append(this.getStatus(), other.getStatus())
+								.append(this.getType(), other.getType())
+								.append(this.getUser(), other.getUser())
+								.append(this.getUserSender(), other.getGameUser())
+								.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.getId())
+									.append(this.getGameUser())
+									.append(this.getDate())
+									.append(this.getMessage())
+									.append(this.getStatus())
+									.append(this.getType())
+									.append(this.getUser())
+									.append(this.getUserSender())
+									.toHashCode();
+	}
 	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("id", this.getId())
+				.append("gameUser", this.getGameUser())
+				.append("date", this.getDate())
+				.append("message", this.getMessage())
+				.append("status", this.getStatus())
+				.append("type", this.getType())
+				.append("user", this.getUser())
+				.append("userSender", this.getUserSender())
+				.toString();
+	}
 }

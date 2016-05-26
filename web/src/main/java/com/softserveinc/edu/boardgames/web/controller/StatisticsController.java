@@ -24,6 +24,11 @@ import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 
+/**
+ * @author Taras Varvariuk
+ * Controller responsible for getting data 
+ * to be displayed in charts
+ */
 @RestController
 public class StatisticsController {
 
