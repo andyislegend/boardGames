@@ -162,45 +162,4 @@ public class Exchange implements Serializable{
 	public void setGamePropositions(Set<GameProposition> gamePropositions) {
 		this.gamePropositions = gamePropositions;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-	        return true;
-	    if (obj == null)
-	        return false;
-	    if (getClass() != obj.getClass())
-	        return false;
-	    Exchange other = (Exchange) obj;
-		return new EqualsBuilder().append(this.getId(), other.getId())
-								.append(this.getPeriod(), other.getPeriod())
-								.append(this.getUserApplierId(), other.getUserApplierId())
-								.append(this.getMessage(), other.getMessage())
-								.append(this.getGamePropositions(), other.getGamePropositions())
-								.append(this.getUser(), other.getUser())
-								.append(this.getGameUser(), other.getGameUser()).isEquals();
-	}
-
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(this.getId())
-									.append(this.getMessage())
-									.append(this.getPeriod())
-									.append(this.getUser())
-									.append(this.getGamePropositions())
-									.append(this.getGameUser())
-									.append(this.getUserApplierId()).toHashCode();
-	}
-	
-
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this).append("id", this.getId())
-				.append("message", this.getMessage())
-				.append("period", this.getPeriod())
-				.append("user", this.getUser())
-				.append("propositions", this.getGamePropositions())
-				.append("gameUser", this.getGameUser())
-				.append("userApplier", this.getUserApplierId()).toString();
-	}
 }
