@@ -36,28 +36,54 @@ public class TournamentController {
     @Autowired
     private GameUserService gameUserService;
    
+    /**
+     * This method return all tournaments
+     * 
+     * @return list of tournaments
+     */
     @RequestMapping(value = "/tournaments")
     @ResponseBody
     public List<TournamentsDTO> getAllTournaments() {
     	return tournamentService.getAllTornaments();
     }
     
+    /**
+     *This method get tournaments by id
+     * 
+     * @param id
+     * 
+     */
     @RequestMapping(value = "/tournament/{id}", method = RequestMethod.GET)
     @ResponseBody
     public TournamentsDTO getTournamentById(@PathVariable Integer id){
     	return tournamentService.getTournamentById(id);
     }
     
+    /**
+     * This method add user to tournament
+     * 
+     * @param tournamentId
+     */
     @RequestMapping(value = "/joinToTournament/{tournamentId}", method = RequestMethod.PUT)
     public void joinToTournament(@PathVariable Integer tournamentId){
     	tournamentService.addParticipantToTournament(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
     }
     
+    /**
+     * This method delete user from tournament
+     * 
+     * @param tournamentId
+     */
     @RequestMapping(value = "/leaveTournament/{tournamentId}", method = RequestMethod.PUT)
     public void leaveTournament(@PathVariable Integer tournamentId){
     	tournamentService.deleteParticipantsFromTournamnet(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
     }
     
+    /**
+     * This method add new tournament
+     * 
+     * @param tournamentDTO
+     */
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
     public void addTournament(@RequestBody TournamentCreateDTO tournamentDTO) {
         Tournament tournament = TournamentMapper.toEntity(tournamentDTO);
@@ -66,11 +92,22 @@ public class TournamentController {
         tournamentService.save(tournament);
     }
     
+    /**
+     * This method delete tournament
+     * 
+     * @param tournamentId
+     */
     @RequestMapping(value = "/deleteTournament/{tournamentId}", method = RequestMethod.DELETE)
     public void deleteTournament(@PathVariable Integer tournamentId) {
     	tournamentService.deleteTournament(tournamentId);
     }
-      
+     
+    /**
+     * This method get all participants
+     * 
+     * @param tournamentId
+     * @return
+     */
     @RequestMapping(value = "/getAllParticipants/{tournamentId}", method = RequestMethod.GET)
     @ResponseBody
     public Set<User> getParticipantOfTournament(@PathVariable Integer tournamentId) {
@@ -78,12 +115,22 @@ public class TournamentController {
     	return tournament.getUsers();
     }
     
+    /**
+     * This method get Current user
+     * 
+     * @return
+     */
     @RequestMapping(value = "/getCurentUser", method = RequestMethod.GET)
     @ResponseBody
     public User getCurrentUser(){
     	return userService.getUser(WebUtil.getPrincipalUsername());
     }
     
+    /**
+     * This method give a mark to user
+     * 
+     * @param mark
+     */
     @RequestMapping(value = "giveRate/{mark}", method = RequestMethod.PUT)
     public void giveRateForAddToSystem(@PathVariable Integer mark) {
     	User user = userService.findById(userService.getUser(WebUtil.getPrincipalUsername()).getId());
@@ -91,6 +138,12 @@ public class TournamentController {
     	userService.updateUser(user);
     }
     
+    /**
+     * This method give rate to user
+     * 
+     * @param idUser
+     * @param rate
+     */
     @RequestMapping(value = "/giveUser/{idUser}/rate/{rate}", method = RequestMethod.PUT)
     public void giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
     	User user = userService.findById(idUser);
@@ -99,6 +152,11 @@ public class TournamentController {
     	userService.updateUserWithBan(user);
     }
     
+    /**
+     * This method change status of table
+     * 
+     * @param tournamentId
+     */
     @RequestMapping(value = "/generateTournamentTable/{tournamentId}",method = RequestMethod.PUT)
     public void generateTournamentTable(@PathVariable Integer tournamentId){
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
@@ -106,14 +164,22 @@ public class TournamentController {
     	tournamentService.update(tournament);
     } 
     
-    
+    /**
+     * This method update date of tournament
+     * @param date
+     * @param tournamentId
+     */
     @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
     public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setDateOfTournament(date);
     	tournamentService.update(tournament);
     }
-
+    
+    /**
+     * This method get all tournamnets by creator
+     * @return
+     */
     @RequestMapping(value = "/getAllTournamentsByCreator", method = RequestMethod.GET)
     @ResponseBody
     public List<TournamentsDTO> getAllTournamentsByCreator(){

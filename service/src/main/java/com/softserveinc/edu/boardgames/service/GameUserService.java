@@ -29,35 +29,81 @@ public class GameUserService {
 	@Autowired
 	private CommentsForGameRepository commentsForGameRepository;
 
+	/**
+	 * This method get game by id
+	 * 
+	 * @param id
+	 * @return game
+	 */
 	public GameUser getUserGamesById(Integer id) {
 		return gameUserRepo.getGameUserById(id);
 	}
 	
+	/**
+	 * This method get game dto by id
+	 * 
+	 * @param id
+	 * @return game
+	 */
 	public GameUserDTO getUserGamesDTOById(Integer id) {
 		return gameUserRepo.getGameUserDTOById(id);
 	}
 	
+	/**
+	 * This method list of game 
+	 * 
+	 * @param id
+	 * @return  list of games
+	 */
 	public List<GameUserDTO> getAllUsersGame(){
 		return gameUserRepo.getAllGameUsers();
 	}
 	
+	/**
+	 * This method list of gamedto 
+	 * 
+	 * @param id
+	 * @return  list of gamesdto
+	 */
 	public List<GameUserDTO> getGameUsersByName(String name){
 		return gameUserRepo.getGameUserByName(name);
 	}
 
+	/**
+	 * This method list of game 
+	 * 
+	 * @param id
+	 * @return  list of games
+	 */
 	public List<GameUser> getAllUserGames() {
 		return gameUserRepo.findAll();
 	}
 	
+	/**
+	 * This method get count of comment by game
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Integer getCountOfTournamentByGame(Integer id) {
 		return gameUserRepo.getCountTournamentsByGame(id);
 	}
 	
+	/**
+	 * This method update user
+	 * 
+	 * @param gameUser
+	 */
 	@Transactional
 	public void update(GameUser gameUser) {
 		gameUserRepo.saveAndFlush(gameUser);
 	}
 
+	/**
+	 * This method add new game
+	 * 
+	 * @param gameUser
+	 */
 	@Transactional
 	public void add(GameUser gameUser) {
 		Game game = null;
@@ -72,21 +118,43 @@ public class GameUserService {
 		}
 	}
 	
+	/**
+	 * This method delete game by id
+	 * 
+	 * @param id
+	 */
 	@Transactional
 	public void deleteById(Integer id) {
 		commentsForGameRepository.deleteByGameUser(id);
 		gameUserRepo.deleteById(id);
 	}
 	
+	/**
+	 * This method delete game by id
+	 * 
+	 * @param id
+	 */
 	@Transactional
 	public void delete(Integer id) {
 		gameUserRepo.delete(id);
 	}
 
+	/**
+	 * This method get game by username
+	 * 
+	 * @param username
+	 * @return
+	 */
 	public List<GameUserDTO> getGameUsersFromUsername(String username) {
 		return gameUserRepo.getAllGameUserByUsername(username);
 	}
 	
+	/**
+	 * This method get games by username
+	 * 
+	 * @param username
+	 * @return
+	 */
 	public List<GameUserDTO> getMyGameUsersFromUsername(String username) {
 		return gameUserRepo.getAllMyGameUserByUsername(username);
 	}

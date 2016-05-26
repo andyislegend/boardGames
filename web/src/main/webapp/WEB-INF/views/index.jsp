@@ -237,7 +237,7 @@
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon4"><span translate="REGFORM_EMAIL"></span><span
 								style="color: red">*</span> </span> <input ng-model="regemail"
-								style="width: 400px;" type="email" class="form-control"
+								style="width: 400px;" type="text" class="form-control"
 								aria-describedby="basic-addon4" required="required"
 								placeholder="{{'REGFORM_EMAIL_PLACEHOLDER' | translate}}" maxlength="150">
 						</div>
@@ -278,7 +278,7 @@
 					</form>
 
 					<button style="margin-left: 30%;" ng-click="register()" class="btn btn-info btn-md"
-						translate="REGFORM_SIGNUP"></button>
+						translate="REGFORM_SIGNUP" ng-disabled="form.$invalid"></button>
 
 					<button style="margin-left: 15%;" type="submit"
 						class="btn btn-danger btn-md" ng-click="closeModal()" translate="CANCEL"></button>

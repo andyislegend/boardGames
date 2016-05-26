@@ -55,6 +55,11 @@ public class UserGameController {
 		return gameUserService.getMyGameUsersFromUsername(WebUtil.getPrincipalUsername());
 	}
 	
+	/**
+	 * This method get all games for user
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/getAllUserGames")
 	@ResponseBody
 	public List<GameUserDTO> getAllUserGames() {
@@ -94,6 +99,11 @@ public class UserGameController {
 		gameUserService.add(gameUser);
 	}
 	
+	/**
+	 * This method update game info
+	 * 
+	 * @param gameUserDTO
+	 */
 	@RequestMapping(value = "updateGameDetails", method = RequestMethod.PUT)
 	public void updateGame(@RequestBody GameUserDTO gameUserDTO){
 		GameUser gameUser = gameUserService.getUserGamesById(gameUserDTO.getId());
@@ -119,6 +129,11 @@ public class UserGameController {
 		return categories;
 	}
 	
+	/**
+	 * This method delete game by id
+	 * 
+	 * @param id
+	 */
 	@RequestMapping(value = "/deleteUserGame/{id}",method = RequestMethod.DELETE)
 	public void deleteGame(@PathVariable Integer id){
 		gameUserService.deleteById(id);
@@ -131,6 +146,12 @@ public class UserGameController {
 		return dto;
 	}
 	
+	/**
+	 * This method update count of comment
+	 * 
+	 * @param idGame
+	 * @param countOfComment
+	 */
 	@RequestMapping(value = "/updateCountOfComment/{idGame}/{countOfComment}",method = RequestMethod.PUT)
 	public void updateCounOfComments(@PathVariable Integer idGame, @PathVariable Integer countOfComment){
 		GameUser gameUser = gameUserService.getUserGamesById(idGame);
