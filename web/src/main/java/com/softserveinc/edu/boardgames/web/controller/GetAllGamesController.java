@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
 import com.softserveinc.edu.boardgames.service.GameService;
 
+/**
+ * @author Taras Varvariuk
+ * Simple controller performs getting all games
+ *
+ */
 @RestController
 public class GetAllGamesController {
 	

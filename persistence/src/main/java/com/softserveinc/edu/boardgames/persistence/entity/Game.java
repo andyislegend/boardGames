@@ -1,7 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -24,9 +22,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 /**
  * This class represents data model to game entity
  * Contains data about all kind of games available in system
- * Has ManyToOne relationship to Category,
- * OneToMany relationship to GameUser,
- * OneToOne relationship to GameRating
+ * Has relationships with entities Category, GameUser, GameRating
  * @author Taras Varvariuk
  */
 @Entity
@@ -87,5 +83,39 @@ public class Game implements Serializable{
 
 	public void setUserGames(Set<GameUser> userGames) {
 		this.userGames = userGames;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Game other = (Game) obj;
+		return new EqualsBuilder().append(this.getId(), other.getId())
+								.append(this.getName(), other.getName())
+								.append(this.getCategory(), other.getCategory())
+								.append(this.getUserGames(), other.getUserGames()).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.getId())
+									.append(this.getName())
+									.append(this.getCategory())
+									.append(this.getUserGames())
+									.toHashCode();
+	}
+	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("id", this.getId())
+				.append("name", this.getName())
+				.append("category", this.getCategory())
+				.append("userGames", this.getUserGames())
+				.toString();
 	}
 }

@@ -26,7 +26,13 @@ import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
-
+/**
+ * @author Taras Varvariuk
+ * Large controller performing operations 
+ * with sharing and exchanging games
+ * calucalating appropriate dates
+ * creating and editing exchanges 
+ */
 @RestController
 public class UserGameSharingController {
 	

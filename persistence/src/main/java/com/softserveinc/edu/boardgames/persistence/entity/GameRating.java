@@ -11,18 +11,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 /**
  * This entity represents info about global games ratings
- * Contains Many-To-One relationship with Game
- * And Many-To-One relationship with User
- * @author TARAZIDZE
+ * has relationships with Game and User,
+ * User can rate multiple games
+ * and Game can be rated by multiple users
+ * @author Taras Vrvariuk
  */
 @Entity
 @Table(name = "gameRating")
@@ -86,5 +85,39 @@ public class GameRating implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    GameRating other = (GameRating) obj;
+		return new EqualsBuilder().append(this.getId(), other.getId())
+								.append(this.getRating(), other.getRating())
+								.append(this.getGame(), other.getGame())
+								.append(this.getUser(), other.getUser())
+								.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.getId())
+									.append(this.getRating())
+									.append(this.getGame())
+									.append(this.getUser())
+									.toHashCode();
+	}
+	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("id", this.getId())
+				.append("rating", this.getRating())
+				.append("game", this.getGame())
+				.append("user", this.getUser())
+				.toString();
 	}
 }

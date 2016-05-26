@@ -13,6 +13,9 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO
 import com.softserveinc.edu.boardgames.persistence.repository.CommentsForGameRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 
+/**
+ * @author Taras Varvariuk, Volodymyr Krokhmaliuk
+ */
 @Service
 @Transactional
 public class GameUserService {

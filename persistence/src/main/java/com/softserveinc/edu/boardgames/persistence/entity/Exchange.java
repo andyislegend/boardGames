@@ -22,36 +22,67 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * Represents every exchange operation in system
+ * has unique constraint on field gameUserId
+ * also has relationships with user and set of game propositions
+ * @author Varvariuk Taras
+ *
+ */
 @Entity
 @Table(name = "exchnge", uniqueConstraints=@UniqueConstraint(columnNames="gameUserId"))
 public class Exchange implements Serializable{
 
 	private static final long serialVersionUID = -4102098517901377047L;
 	
+	/**
+	 * Unique value, primary key
+	 */
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	/**
+	 * contains identifier for user who applies for game
+	 */
 	@Column(name = "userApplierId", columnDefinition="int(11) default '0'")
 	private Integer userApplierId;
 	
+	/**
+	 * period of sharing, default value {14}
+	 */
 	@Column(name = "period")
     private Integer period = 14;
 	
+	/**
+	 * message, applier attaches to request
+	 */
 	@Column(name = "message")
 	private String message = "no message";
 	
+	/**
+	 * when owner confirms request applyingDate is set, can be null
+	 */
 	@Column(name = "applyingDate")
 	private Date applyingDate;
 	
+	/**
+	 * game owner
+	 */
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private User user;
 	
+	/**
+	 * represents instance of game, only one game can be available at a time
+	 */
 	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name="gameUserId", nullable=false)
 	private GameUser gameUser;
 	
+	/**
+	 * represents data about userApplier and games he want to propose for this exchange
+	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="exchange", cascade={CascadeType.ALL})
     private Set<GameProposition> gamePropositions;
 
@@ -133,18 +164,43 @@ public class Exchange implements Serializable{
 	}
 
 	@Override
-	public boolean equals(Object obj) {	
-		return EqualsBuilder.reflectionEquals(this, obj);
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Exchange other = (Exchange) obj;
+		return new EqualsBuilder().append(this.getId(), other.getId())
+								.append(this.getPeriod(), other.getPeriod())
+								.append(this.getUserApplierId(), other.getUserApplierId())
+								.append(this.getMessage(), other.getMessage())
+								.append(this.getGamePropositions(), other.getGamePropositions())
+								.append(this.getUser(), other.getUser())
+								.append(this.getGameUser(), other.getGameUser()).isEquals();
 	}
 
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		return new HashCodeBuilder().append(this.getId())
+									.append(this.getMessage())
+									.append(this.getPeriod())
+									.append(this.getUser())
+									.append(this.getGamePropositions())
+									.append(this.getGameUser())
+									.append(this.getUserApplierId()).toHashCode();
 	}
+	
 
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+		return new ToStringBuilder(this).append("id", this.getId())
+				.append("message", this.getMessage())
+				.append("period", this.getPeriod())
+				.append("user", this.getUser())
+				.append("propositions", this.getGamePropositions())
+				.append("gameUser", this.getGameUser())
+				.append("userApplier", this.getUserApplierId()).toString();
 	}
-
 }

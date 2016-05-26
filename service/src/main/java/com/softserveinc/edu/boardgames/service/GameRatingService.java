@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRatingRepository;
 
+/**
+ * @author Taras Varvariuk
+ */
 @Service
 @Transactional
 public class GameRatingService {

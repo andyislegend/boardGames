@@ -16,6 +16,11 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * This class represents connection between exhcange
+ * and gameUsers applier offer to game owner
+ * @author Taras Varvariuk
+ */
 @Entity
 @Table(name = "proposition")
 public class GameProposition implements Serializable{
@@ -64,5 +69,36 @@ public class GameProposition implements Serializable{
 
 	public void setExchange(Exchange exchange) {
 		this.exchange = exchange;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    GameProposition other = (GameProposition) obj;
+		return new EqualsBuilder().append(this.getId(), other.getId())
+								.append(this.getGameUser(), other.getGameUser())
+								.append(this.getExchange(), other.getExchange())
+								.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.getId())
+									.append(this.getGameUser())
+									.append(this.getExchange())
+									.toHashCode();
+	}
+	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("id", this.getId())
+				.append("gameUser", this.getGameUser())
+				.append("exchange", this.getExchange())
+				.toString();
 	}
 }

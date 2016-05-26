@@ -19,6 +19,12 @@ import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
+/**
+ * @author Taras Varvariuk
+ * Controller getting game of instance
+ * getting and displaying rating
+ * calculating averege rating
+ */
 @RestController
 public class GetGameDetailsController {
 	

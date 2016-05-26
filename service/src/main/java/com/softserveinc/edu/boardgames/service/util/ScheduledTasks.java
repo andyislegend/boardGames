@@ -16,6 +16,10 @@ import com.softserveinc.edu.boardgames.service.MailService;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 
+/**
+ * @author Taras Varvariuk
+ * Java util component class performing scheduled tasks
+ */
 @Component
 public class ScheduledTasks {
 	
