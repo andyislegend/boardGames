@@ -132,7 +132,7 @@
             </div>
           </div>
           <div>
-            <div style="margin-left: 15%" ng-controller="GlobalSearchCTRL">
+            <div style="margin-left: 30%" ng-controller="GlobalSearchCTRL">
               <form data-ng-submit=submit() style="margin-left: 3%;"
                 class="navbar-form navbar-left" role="search">
               <form id="searchthis" style="display: inline;" method="get">
@@ -336,7 +336,7 @@
                                   <br>
                                   <div class="input-group">
                                     <span style="width: 200px;" class="input-group-addon"
-								id="basic-addon3"> <span translate="yes">:</span></span><input
+								id="basic-addon3"> <span translate="YEAR_OF_PRODUCTION">:</span></span><input
                                       class="form-control" data-ng-model="year"
                                       type="number" min = "1900" max = "2016" style="width: 400px;" type="number"
 								class="form-control" aria-describedby="basic-addon3">

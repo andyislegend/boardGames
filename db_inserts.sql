@@ -234,11 +234,11 @@ INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VA
 INSERT INTO `boardgames`.`events` (`date`, `name`, `description`, `location`) VALUES ('2016-06-15', 'Opening', 'Opening great board games mall', 'Kyiv, UA');
 
 
-INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `even_id`, `user_id`) VALUES (TRUE, '1', '1');
-INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `even_id`, `user_id`) VALUES (TRUE, '3', '1');
-INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `even_id`, `user_id`) VALUES (TRUE, '2', '1');
-INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `even_id`, `user_id`) VALUES (TRUE, '1', '2');
-INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `even_id`, `user_id`) VALUES (TRUE, '4', '1');
+INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `event_id`, `user_id`) VALUES (TRUE, '1', '1');
+INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `event_id`, `user_id`) VALUES (TRUE, '3', '1');
+INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `event_id`, `user_id`) VALUES (TRUE, '2', '1');
+INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `event_id`, `user_id`) VALUES (TRUE, '1', '2');
+INSERT INTO `boardgames`.`subscribed_users` (`isNew`, `event_id`, `user_id`) VALUES (TRUE, '4', '1');
 
 INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userId`, `user_sender`) VALUES ('1', '2016-05-25 01:12:35', 'Hello', 'UNCHECKED', '1', 'MESSAGE', '2', '1');
 INSERT INTO `boardgames`.`notification` (`id`, `date`, `message`, `status`, `status_of_reading`, `type`, `userId`, `user_sender`) VALUES ('2', '2016-05-25 01:12:37', 'привіт', 'UNCHECKED', '0', 'MESSAGE', '2', '3');
