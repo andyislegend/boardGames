@@ -15,10 +15,21 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO
 @Repository
 public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 	
+	/**
+	 * This method delete tournament by id
+	 * 
+	 * @param id
+	 */
 	@Modifying
 	@Query("delete from GameUser g where g.id = :id")
 	public void deleteById(@Param("id")Integer id);
 	
+	/**
+	 * This method get GameUser List by username
+	 * 
+	 * @param name
+	 * @return game user list
+	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
 			+ "u.id, u.game.name, "
 			+ "u.game.category.name, u.yearOfProduction,"
@@ -28,6 +39,12 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "from GameUser u where u.game.name like %:name% ")
 	public List<GameUserDTO> getGameUserByName(@Param("name")String name);
 	
+	/**
+	 * This method get GameUser list by name
+	 * 
+	 * @param username
+	 * @return game user list
+	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
 			+ "u.id, u.game.name, u.game.category.name, "
 			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"
@@ -36,9 +53,20 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "from GameUser u where u.user.username = :username")   
 	public List<GameUserDTO> getAllGameUserByUsername(@Param("username") String username);
 	
+	/**
+	 * Return count of tournamnet by Game
+	 * 
+	 * @param id
+	 * @return count of tournament
+	 */
 	@Query("select count(t) from Tournament t where game.id = :id")
 	public Integer getCountTournamentsByGame(@Param("id") Integer id);
 	
+	/**
+	 * This method get all game users
+	 * 
+	 * @return list game users
+	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
 			+ "u.id, u.game.name, u.game.category.name, "
 			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"
@@ -47,6 +75,12 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "from GameUser u")   
 	public List<GameUserDTO> getAllGameUsers();
 	
+	/**
+	 * This method get all games for user
+	 * 
+	 * @param username
+	 * @return list of games
+	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
 			+ "u.id, u.game.name, u.game.category.name, "
 			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"
@@ -69,9 +103,21 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "and user.id = e.userApplierId")   
 	public List<GameUserDTO> getAllSharedGameUserByUsername(@Param("username") String username);
 	
+	/**
+	 * This method get game by id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Query("select u from GameUser u where u.id = :id")
 	public GameUser getGameUserById(@Param("id") Integer id);
 	
+	/**
+	 * This method get GameUSerDto by id
+	 * 
+	 * @param id
+	 * @return gameUserDto
+	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
 			+ "u.id, u.game.name, "
 			+ "u.game.category.name, u.yearOfProduction,"
@@ -80,6 +126,12 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "from GameUser u where u.id = :id")
 	public GameUserDTO getGameUserDTOById(@Param("id") Integer id);
 	
+	/**
+	 * This method get GameUser list by name
+	 * 
+	 * @param name
+	 * @return game user list
+	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO"
 			+"(gu.id, gu.user.username, gu.edition, gu.yearOfProduction, gu.status) " +
 	       "from GameUser gu where gu.game.name = :name")
