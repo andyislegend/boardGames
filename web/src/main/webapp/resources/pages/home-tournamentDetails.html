@@ -43,7 +43,7 @@
 		<h3 style="margin-right: 2px;">Tournament Table</h3>
 		<table class = "table" id ="right-table" style="width: 100%">
 			<tr><th>Group 1<th></tr>
-			<tr ng-repeat = "user in tournamentParticipants"><td ng-if="$even">{{user.username}}<td></tr>
+			<tr ng-repeat = "!user in tournamentParticipants"><td ng-if="$even">{{user.username}}<td></tr>
 		</table>
 		<table class = "table" id ="right-table" style="width: 100%">
 			<tr><th>Group 2<th></tr>

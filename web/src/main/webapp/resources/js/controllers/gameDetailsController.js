@@ -73,7 +73,7 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 			if (document.getElementById("UserGameNum" + id).className === "glyphicon glyphicon-envelope") {
 				$http.put(
 						"updateCountOfComment/" + id + "/"
-								+ $rootScope.comment).then(
+								+ $rootScope.commentss).then(
 						function(result) {
 						});
 				document.getElementById("UserGameNum" + id).className = "glyphicon glyphicon-comment";

@@ -53,9 +53,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    			$scope.quitStatus = false;
     	    		}
     	    		
-    	    		if($scope.tournament.tableGenerated = true){
-        	        	$scope.quitStatus = false;
-        	        }
+    	    		
     		     }          	    
     	    });
     	    		
