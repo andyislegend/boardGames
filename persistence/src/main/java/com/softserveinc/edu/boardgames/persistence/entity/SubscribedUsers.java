@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,12 +35,12 @@ public class SubscribedUsers implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Event.class)
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "event_id")
 	private Event event;
 
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@Column(name = "isNew")
