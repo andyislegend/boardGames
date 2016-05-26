@@ -124,7 +124,7 @@ public class RegisterController {
 
 		if (username.isEmpty() || gender.isEmpty() || email.isEmpty() || password.isEmpty()) {
 
-			return new ResponseEntity<String>("Fields marked with \"*\" are required. Please enter valid data.",
+			return new ResponseEntity<String>("Fields marked with \"*\" are required. Please enter valid data (only English is allowed).",
 					HttpStatus.CONFLICT);
 
 		}
