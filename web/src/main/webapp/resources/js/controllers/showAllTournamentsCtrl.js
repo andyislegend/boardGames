@@ -42,7 +42,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    			$scope.joinStatus = false;
     	    			$scope.quitStatus = true;
     	    			
-    	    			if($scope.tournament.tableGenerated = true){
+    	    			if($scope.tournament.tableGenerated === true){
             	        	$scope.quitStatus = false;
             	        }
     	    			break;
@@ -53,7 +53,9 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    			$scope.quitStatus = false;
     	    		}
     	    		
-    	    		
+    	    		if($scope.tournament.tableGenerated === true){
+        	        	$scope.quitStatus = false;
+        	        }
     		     }          	    
     	    });
     	    		

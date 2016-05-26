@@ -22,18 +22,12 @@
 			<div ng-show = "isCreator" class="form-group">
 				<form>
 				<span style="margin: auto auto; width: 40px">Change date of Tournaments</span>
-				
-				<input type = "date" class="form-control" data-ng-model = "changeTournamentDate" style="margin-top: 5px; margin-left: 5px;">
-				<span>
-				<input type = "submit" class="btn btn-info" value="Change date" ng-click = "changeDataOfTournament()" style = "margin-top: 5px; margin-left: 5px">				
-				</span>
-				
+				<input type = "date" class="form-control" data-ng-model = "changeTournamentDate">
+				<input type = "submit" class="btn btn-info" value="Change" ng-click = "changeDataOfTournament()">
 				</form>	
-			<div class="btn-group" style="margin-top: 5px; margin-left: 5px;">
-			<button  type="button" class="btn btn-primary" data-toggle="modal" ng-click = "updateTournamentParticipantsInfo()" data-target="#giveRateModal">Estimate participants</button>
-			<button type ="button" class="btn btn-primary" data-toggle="modal" data-target = "#deleteTournament">Delete tournament</button>
-			<button type ="button" class="btn btn-primary" ng-disabled = "tournament.tableGenerated" ng-click = "generateTournamentTable()">Do a lot</button>
-			</div>
+			<button  type="button" class="btn btn-info" data-toggle="modal" ng-click = "updateTournamentParticipantsInfo()" data-target="#giveRateModal">Give a rate</button>
+			<button type ="button" class="btn btn-default" data-toggle="modal" data-target = "#deleteTournament">Delete this tournament</button>
+			<button type ="button" class="btn btn-default" ng-disabled = "tournament.tableGenerated" ng-click = "generateTournamentTable()">Generete this tournament</button>
 		</div>
         </div>
     </div>
@@ -42,15 +36,15 @@
 		<div ng-if = "tournament.tableGenerated">
 		<h3 style="margin-right: 2px;">Tournament Table</h3>
 		<table class = "table" id ="right-table" style="width: 100%">
-			<tr><th>Group 1<th></tr>
-			<tr ng-repeat = "!user in tournamentParticipants"><td ng-if="$even">{{user.username}}<td></tr>
+			<tr><th>User1<th></tr>
+			<tr ng-repeat = "user in tournamentParticipants"><td ng-if="$even">{{user.username}}<td></tr>
 		</table>
 		<table class = "table" id ="right-table" style="width: 100%">
-			<tr><th>Group 2<th></tr>
+			<tr><th>User2<th></tr>
 			<tr ng-repeat = "user in tournamentParticipants"><td ng-if="$odd">{{user.username}}<td></tr>
 		</table>
 		</div>
-		<div ng-if = "!tournament.tableGenerated"><h4>Tournament table not generated yet</h4></div>
+		<div ng-if = "!tournament.tableGenerated"><h4>Table not generated yet</h4></div>
     </div>
     
     <div id="right_wrapper">
