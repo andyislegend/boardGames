@@ -15,10 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 /**
  * This entity contains data model describing games of particular user Has
  * ManyToOne relationship to game ManyToMany relationship to user
@@ -198,67 +194,5 @@ public class GameUser implements Serializable {
 
 	public void setGamePropositions(Set<GameProposition> gamePropositions) {
 		this.gamePropositions = gamePropositions;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-	        return true;
-	    if (obj == null)
-	        return false;
-	    if (getClass() != obj.getClass())
-	        return false;
-	    GameUser other = (GameUser) obj;
-		return new EqualsBuilder().append(this.getId(), other.getId())
-								.append(this.getCountOfComments(), other.getCountOfComments())
-								.append(this.getDescription(), other.getDescription())
-								.append(this.getEdition(), other.getEdition())
-								.append(this.getExchange(), other.getExchange())
-								.append(this.getGame(), other.getGame())
-								.append(this.getGamePropositions(), other.getGamePropositions())
-								.append(this.getMaxPlayers(), other.getMaxPlayers())
-								.append(this.getMinPlayers(), other.getMinPlayers())
-								.append(this.getRules(), other.getRules())
-								.append(this.getStatus(), other.getStatus())
-								.append(this.getUser(), other.getUser())
-								.append(this.getYearOfProduction(), other.getYearOfProduction())
-								.isEquals();
-	}
-
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(this.getId())
-									.append(this.getCountOfComments())
-									.append(this.getExchange())
-									.append(this.getDescription())
-									.append(this.getEdition())
-									.append(this.getGame())
-									.append(this.getGamePropositions())
-									.append(this.getMaxPlayers())
-									.append(this.getMinPlayers())
-									.append(this.getRules())
-									.append(this.getStatus())
-									.append(this.getUser())
-									.append(this.getYearOfProduction())
-									.toHashCode();
-	}
-	
-
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this).append("id", this.getId())
-				.append("commentsr", this.getCountOfComments())
-				.append("exchange", this.getExchange())
-				.append("description", this.getDescription())
-				.append("edition", this.getEdition())
-				.append("game", this.getGame())
-				.append("gameProposition", this.getGamePropositions())
-				.append("maxP", this.getMaxPlayers())
-				.append("minP", this.getMinPlayers())
-				.append("rules", this.getRules())
-				.append("status", this.getStatus())
-				.append("user", this.getUser())
-				.append("yearOfProd", this.getYearOfProduction())
-				.toString();
 	}
 }

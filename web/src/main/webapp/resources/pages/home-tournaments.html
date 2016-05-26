@@ -13,6 +13,7 @@
                               <div class="modal-content">
                                  <div class="modal-header">
                                     <h2>Create the best tournament ever</h2>
+                                    <h6>Fields marked with * are required</h6>
                                  </div>
                                  <div class="modal-body">                               
                        				<form class="form-horizontal" role="form" name = "tournamentCreate" novalidate>                  				
@@ -74,7 +75,6 @@
 								class="form-control" aria-describedby="basic-addon4" required>
 						</div>
 						<br>
-						<span><span style="color: red">*</span>-required fields</span>
 						<button style="margin-left: 30%;"
 							ng-click="createTournament()" ng-disabled="tournamentCreate.$invalid" value="Close" data-dismiss="modal"
 							class="btn btn-info btn-md">ADD NEW</button>
@@ -94,7 +94,7 @@
           	<a data-toggle="tab" ng-click = "getAllTournaments()"  data-target="#Alltournaments">All tournaments</a>         
           </li>
           <li>
-          	<a data-toggle="tab" ng-click = "getAllTournamentsSuchUserCreated()" data-target="#Mycreated"> My created </a>
+          	<a data-toggle="tab" ng-click = "getAllTournamentsSuchUserCreated()" data-target="#Mycreated"> My tournaments </a>
           </li>
         </ul> 
           <div class="tab-content">      
