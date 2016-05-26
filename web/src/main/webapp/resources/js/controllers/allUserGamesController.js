@@ -2,7 +2,7 @@ var homeApp = angular.module('homeApp');
 homeApp.controller("allUsersGameCtrl", function($scope, $uibModal, $http, $rootScope, $route, $routeParams,$interval) {
 homeApp.$inject = ['$modal'];
 	
-	$rootScope.NN = 100;
+	$rootScope.comment = 100;
 	$rootScope.allGame = [];
 	$rootScope.getAllUsersGame = [];
 		
@@ -49,7 +49,7 @@ homeApp.$inject = ['$modal'];
 			$http.get('gameUserDetail/' + id).success(function(result) {
 				$scope.userGame = result;
 				if (countOfComments > $scope.userGame.countOfComments) {
-					$rootScope.NN = countOfComments;
+					$rootScope.comment = countOfComments;
 					document.getElementById("UserGameNum" + 
 							$scope.userGame.id).className = "glyphicon glyphicon-envelope";
 				}					

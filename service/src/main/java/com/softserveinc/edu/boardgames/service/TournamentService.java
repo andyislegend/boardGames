@@ -44,6 +44,12 @@ public class TournamentService {
         tournamentRepository.delete(tournament);
     }
     
+    /**
+     * This method add user for tournament
+     * 
+     * @param tournamentId
+     * @param userId
+     */
     @Transactional
     @Modifying
     public void addParticipantToTournament(Integer tournamentId, Integer userId){
@@ -54,6 +60,12 @@ public class TournamentService {
     	
     }
     
+    /**
+     * This method delete user from tournament
+     * 
+     * @param tournamentId
+     * @param userId
+     */
     @Transactional
     @Modifying
     public void deleteParticipantsFromTournamnet(Integer tournamentId, Integer userId){
@@ -63,31 +75,68 @@ public class TournamentService {
         query.executeUpdate();
     }
     
+    /**
+     * This method delete tournament by id
+     * 
+     * @param id
+     */
     @Transactional
     public void deleteTournament(Integer id){
     	 tournamentRepository.deleteTournament(id);
     }
     
+    /**
+     * This method get List of tournaments
+     * @return
+     */
     public List<TournamentsDTO> getAllTornaments() {
     	return  tournamentRepository.getAllTournaments();
     }
-
+    
+    /**
+     * This method get tournament by od
+     * 
+     * @param id
+     * @return
+     */
     public Tournament getTournamenById(Integer id){
     	return tournamentRepository.findById(id);
     }
     
+    /**
+     * This method get all tournaments
+     * 
+     * @return tournaments
+     */
     public List<Tournament> findAll(){
         return tournamentRepository.findAll();
     }
     
+    /**
+     * This method get tournament by id
+     * 
+     * @param id
+     * @return
+     */
     public TournamentsDTO getTournamentById(Integer id) {
     	return tournamentRepository.getTournamentsById(id);
     }
-    
+    /**
+     * This methiod get all by Word
+     * 
+     * @param name
+     * @return
+     */
     public List<TournamentsDTO> getTournamentsByWord(String name){
     	return tournamentRepository.findAllTournamentsByWord(name);
     }
     
+    /**
+     * This method get all tournaments by creator
+     * 
+     * @param username
+     * @return
+     */
     public List<TournamentsDTO> getAllTournamentByUserCreator(String username) {
     	return tournamentRepository.getAllTournamentsByUserCreator(username);
     }

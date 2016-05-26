@@ -15,14 +15,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface CommentsForGameRepository extends JpaRepository<CommentsForGame, Integer> {
-	
+	/**
+	 * This method get all comments for game
+	 * 
+	 * @param id
+	 * @return list of comments
+	 */
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.CommentsForGameDTO(c.gameUser.id, c.text, c.user.username, c.date) from CommentsForGame c where c.gameUser.id = :id")
 	public List<CommentsForGameDTO> getAllCommentsForGame(@Param("id") Integer id);
 	
+	/**
+	 * This method get list of comments
+	 * 
+	 * @param id
+	 */
 	@Modifying
 	@Query("delete from CommentsForGame c where c.gameUser.id = :id")
 	public void deleteByGameUser(@Param("id")Integer id);
 	
+	/**
+	 * This method get count of comments for game
+	 * 
+	 * @param id
+	 * @return count of comments
+	 */
 	@Query("select count (c) from CommentsForGame c where c.gameUser.id = :id")
 	public Integer countsOfComment(@Param("id") Integer id);
 	
