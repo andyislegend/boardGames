@@ -30,4 +30,10 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
 			 });
 		});
     
+    /*$scope.options =
+        ['EVENT',
+        'NOTIFICATION',
+        'MESSAGE',
+         ''
+        ]*/
 }]);

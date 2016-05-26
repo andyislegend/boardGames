@@ -35,7 +35,7 @@ public class SubscribedUsers implements Serializable{
 	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Event.class)
-    @JoinColumn(name = "even_id", referencedColumnName = "id")
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
 	private Event event;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)

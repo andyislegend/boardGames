@@ -132,7 +132,7 @@
             </div>
           </div>
           <div>
-            <div style="margin-left: 30%" ng-controller="GlobalSearchCTRL">
+            <div style="margin-left: 15%" ng-controller="GlobalSearchCTRL">
               <form data-ng-submit=submit() style="margin-left: 3%;"
                 class="navbar-form navbar-left" role="search">
               <form id="searchthis" style="display: inline;" method="get">
@@ -439,7 +439,7 @@
                                 class="glyphicon glyphicon-comment"></span>
                                 </a>
                               </td>
-                              <td title="'Applier'"><a href="#">{{game.applierUsername}}</a></td>
+                              <td title="'Applier'"><a href="#/edit/{{game.applierUsername}}">{{game.applierUsername}}</a></td>
                             </tr>
                           </table>
                         </div>
@@ -450,7 +450,7 @@
                                 href="#gameUserDetails/{{game.gameId}}"
                                 ng-click="myFunc(game.gameId)"> {{game.gameUserName}}</a></td>
                               <td title="'Category'">{{game.gameUserCategory}}</td>
-                              <td title="'Owner'"><a href="#">{{game.username}}</a></td>
+                              <td title="'Owner'"><a href="#edit/{{game.username}}">{{game.username}}</a></td>
                             </tr>
                           </table>
                         </div>

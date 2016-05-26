@@ -48,6 +48,8 @@ public class UserService {
 	 */
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
 	
+	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
+	
 	/**
 	 * @param CHECK_LOGGED_IN_USERNAME
 	 *            is used to verify whether we want to get user profile to edit
@@ -263,6 +265,7 @@ public class UserService {
 	@Transactional
 	public String validateVerificationToken(String token) {
 		final VerificationToken verificationToken = tokenRepository.findByToken(token);
+		
 		if (verificationToken == null) {
 			return INVALID_TOKEN_MAIL_CONFIRMATION;
 		}
@@ -275,12 +278,12 @@ public class UserService {
 		}
 
 		user.setState(UserStatus.ACTIVE.name());
-		;
 		userRepository.save(user);
 		tokenRepository.delete(verificationToken);
-		return null;
+		return VALID_TOKEN_MAIL_CONFIRMATION;
 	}
 	
+	@Transactional
 	public void removeToken(VerificationToken token) {
 		tokenRepository.delete(token);
 	}
@@ -289,6 +292,7 @@ public class UserService {
 		return tokenRepository.findAll();
 	}
 	
+	@Transactional
 	public void deleteUser(User user) {
 		userRepository.delete(user);
 	}

@@ -10,11 +10,11 @@ homeApp.$inject = ['$modal'];
 		$rootScope.allGame = response.data;
 		});
 	
-	setInterval(function(){
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
-}, 3000);
+//	setInterval(function(){
+//		for (var i = 0; i < $rootScope.allGame.length; i++) {
+//			$rootScope.isNewComments($rootScope.allGame[i].id);
+//		}
+//}, 3000);
 	
 	$http({
 		method : "GET",
@@ -280,24 +280,36 @@ homeApp.$inject = ['$modal'];
 		});
 	}
 	$scope.askOwnerToShare = function(id, message, propositionsList) {
-		console.log(propositionsList);
+		
+		var outMessage = message || 'no message';
 		var values = [];
+		
 		if (propositionsList.length > 0) {
 			angular.forEach(propositionsList, function(value, key) {
 				values.push(value.id);
 			}, values);
+			$http({
+				method : "PUT",
+				url : 'askGameUserOwnerToShare/' + id + '/' + outMessage + '/' + values
+			}).then(function mySucces(response) {
+				$scope.$emit('refreshingPage');
+				$('#applyForGameModal').modal('hide');
+			}, function myError(response) {
+				alert("Failed to send your request");
+			});
 		}
-		var outMessage = message || 'no message';
-		console.log(values);
-		$http({
-			method : "PUT",
-			url : 'askGameUserOwnerToShare/' + id + '/' + outMessage + '/' + values
-		}).then(function mySucces(response) {
-			$scope.$emit('refreshingPage');
-			$('#applyForGameModal').modal('hide');
-		}, function myError(response) {
-			alert("Failed to send your request");
-		});
+		else {
+			$http({
+				method : "PUT",
+				url : 'askGameUserOwnerToShare/' + id + '/' + outMessage 
+			}).then(function mySucces(response) {
+				$scope.$emit('refreshingPage');
+				$('#applyForGameModal').modal('hide');
+			}, function myError(response) {
+				alert("Failed to send your request");
+			});
+		}
+		
 	}
 	$scope.acceptGameConfirmation = function(id) {
 		$scope.$emit('changingGameStatus', {
