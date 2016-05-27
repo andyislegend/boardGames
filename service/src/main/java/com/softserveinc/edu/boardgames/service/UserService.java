@@ -339,7 +339,7 @@ public class UserService {
 	@Transactional
 	public void updateUserWithBan(User user) {
 		userRepository.saveAndFlush(user);
-		if (user.getUserRating() < -5) {
+		if (user.getUserRating() < MINIMAL_RATING_FOR_ACTIVE_USER) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		}
 	}

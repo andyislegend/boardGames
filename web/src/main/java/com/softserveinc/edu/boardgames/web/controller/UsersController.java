@@ -22,6 +22,7 @@ import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.ImageService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.localization.LanguageKeys;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -32,36 +33,6 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  */
 @Controller
 public class UsersController {
-
-	/**
-	 * @param CHANGES_SAVED
-	 *            is used as a key to choose correct language
-	 */
-	public static final String CHANGES_SAVED = "CHANGES_SAVED";
-
-	/**
-	 * @param IMAGE_UPLOAD_FAILED
-	 *            is used as a key to choose correct language
-	 */
-	public static final String IMAGE_UPLOAD_FAILED = "IMAGE_UPLOAD_FAILED";
-
-	/**
-	 * @param IMAGE_UPLOAD
-	 *            is used as a key to choose correct language
-	 */
-	public static final String IMAGE_UPLOAD = "IMAGE_UPLOAD";
-
-	/**
-	 * @param USER_BAN
-	 *            is used as a key to choose correct language
-	 */
-	public static final String USER_BAN = "USER_BAN";
-
-	/**
-	 * @param USER_UNBAN
-	 *            is used as a key to choose correct language
-	 */
-	public static final String USER_UNBAN = "USER_UNBAN";
 	
 	private final Logger logger = Logger.getLogger(UsersController.class);
 
@@ -130,7 +101,7 @@ public class UsersController {
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
 		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
-		return new ResponseEntity<String>(CHANGES_SAVED, HttpStatus.OK);
+		return new ResponseEntity<String>(LanguageKeys.CHANGES_SAVED, HttpStatus.OK);
 	}
 
 	/**
@@ -159,10 +130,10 @@ public class UsersController {
 		try {
 			userService.updateAvatar(fileUpload, WebUtil.getPrincipalUsername());
 		} catch (IOException e) {
-			logger.error(IMAGE_UPLOAD_FAILED, e);
-			return new ResponseEntity<String>(IMAGE_UPLOAD_FAILED, HttpStatus.CONFLICT);
+			logger.error(LanguageKeys.IMAGE_UPLOAD_FAILED, e);
+			return new ResponseEntity<String>(LanguageKeys.IMAGE_UPLOAD_FAILED, HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<String>(IMAGE_UPLOAD, HttpStatus.OK);
+		return new ResponseEntity<String>(LanguageKeys.IMAGE_UPLOAD, HttpStatus.OK);
 	}
 
 	/**
@@ -188,7 +159,7 @@ public class UsersController {
 	@ResponseBody
 	public ResponseEntity<String> banUser(@RequestParam("username") String username) {
 		userService.banUserByAdministrator(username);
-		return new ResponseEntity<String>(USER_BAN, HttpStatus.OK);
+		return new ResponseEntity<String>(LanguageKeys.USER_BAN, HttpStatus.OK);
 	}
 
 	/**
@@ -201,6 +172,6 @@ public class UsersController {
 	@RequestMapping(value = { "/unbanUser" }, method = RequestMethod.PUT)
 	public ResponseEntity<String> unbanUser(@RequestParam("username") String username) {
 		userService.unbanUserByAdministrator(username);
-		return new ResponseEntity<String>(USER_UNBAN, HttpStatus.OK);
+		return new ResponseEntity<String>(LanguageKeys.USER_UNBAN, HttpStatus.OK);
 	}
 }
