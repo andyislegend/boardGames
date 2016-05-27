@@ -18,7 +18,12 @@
 
 	 position:relative;
 	 float:right;
-	 right:1%;
+	 left:21%;
+}
+
+#saveUserAnswer {
+
+	 left:10%;
 }
 
 #userAvatar {

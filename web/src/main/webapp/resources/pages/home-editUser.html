@@ -15,7 +15,7 @@
 								<div ng-show ="myAvatarUpload">
 								<label id="uploadButton" ng-show="myProfile">
 								<input type="file" file-model="myFile" name="fileUpload"
-									class="fileUpload" accept="image/*" onchange="loadFile(event)">
+									class="fileUpload" accept="image/*" onchange="loadFile(event)" ng-click = "chooseAvatar()">
 
 								</label>
 								<button ng-click = "uploadAvatar()" id="uploadButton" ng-show="myProfile"
@@ -140,12 +140,12 @@
 				
 				
 				<span class="col-sm-3"></span>
-				<div class="col-sm-6">
+				<div class="col-sm-5">
 					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg" 
 						translate="SAVE_BUTTON" ng-disabled="!editProfile.$dirty">
 						Save</button>
 				</div>
-				<span class="col-sm-5" ng-hide="editProfileMessage" translate="{{editProfileAnswer}}" style="color:red">
+				<span class="col-sm-3" ng-hide="editProfileMessage" translate="{{editProfileAnswer}}" style="color:red">
 				</span> 
 				</div>
 				</form>
@@ -186,13 +186,14 @@
 						</div>
 					</div>
 					<span class="col-sm-3"></span>
-						<div class="col-sm-6">
+						<div class="col-sm-5">
 						<button ng-click="saveNewUserPassword()" id="saveUserUpdate" 
 							class="btn btn-primary btn-bg" translate="SAVE_PASSWORD_BUTTON" 
 							ng-disabled="!passwordChange.$dirty">Save password
 						</button>
 						</div>
-					<span class="col-sm-3" ng-hide="editProfileMessage" translate="{{editPasswordAnswer}}" style="color:red">
+					<span class="col-sm-4" ng-hide="editProfileMessage" translate="{{editPasswordAnswer}}" style="color:red"
+						id="saveUserAnswer">
 					</span>
 						
 						</div>
