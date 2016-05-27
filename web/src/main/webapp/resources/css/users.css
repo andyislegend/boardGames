@@ -18,13 +18,7 @@
 
 	 position:relative;
 	 float:right;
-	 right:5%;
-}
-
-#avatar {
-	 height: 35px; 
-	 width: 35px;
-	 cursor:pointer;
+	 right:1%;
 }
 
 #userAvatar {
@@ -33,13 +27,15 @@
 }
 
 #avatar {
-	 height: 90px; 
-	 width: 90px;
+	 margin-left: -7%;
+	 height: 95px; 
+	 width: 95px;
+	 cursor:pointer;
 }
 
 #userAvatar {
-	 height: 90px; 
-	 width: 90px;
+	 height: 95px; 
+	 width: 95px;
 }
 
 #avatar:hover {
@@ -68,7 +64,7 @@
 
 #uploadButton {
     font-size:10px;
-
+    margin-left: -7%;
 }
 
 #userRating {
@@ -119,11 +115,8 @@
 	margin-top:-19px;
 }
 
-#passwordDiv {
-	margin-left: 4%;
-}
-
 #passwordChange {
+	margin-left: 2%;
 	margin-bottom:40px;
 }
 
@@ -135,4 +128,12 @@
 	background: #428BCA;
     font-size:11px;
     margin:0;
+}
+
+#inputEdit {
+	font-size:14px;
+}
+
+#ps {
+	margin-bottom:30px;
 }
