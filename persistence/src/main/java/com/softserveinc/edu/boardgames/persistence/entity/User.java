@@ -48,6 +48,13 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2966070992511907457L;
+	
+	/**
+	 * @param CHECK_LOGGED_IN_USERNAME
+	 *            is used to set unbanned user rating to minimal with which
+	 *            he can access the website a not be automatically banned again
+	 */
+	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
 
 	/**
 	 * Describes the user id. Unique value.
@@ -336,7 +343,7 @@ public class User implements Serializable {
 
 	@PreUpdate
 	public void changeUserLevelOrStatus() {
-		if(getUserRating() < -5) {
+		if(getUserRating() < MINIMAL_RATING_FOR_ACTIVE_USER) {
 			setState(UserStatus.BANNED.name());
 		} else if (isBetween(this.getUserRating(), 0, 10)) {
 			setLevel(UserLevel.NOOB.name());

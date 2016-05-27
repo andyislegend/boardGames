@@ -10,6 +10,21 @@ import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 
 public interface UserService {
+	
+	/**
+	 * @param CHECK_LOGGED_IN_USERNAME
+	 *            is used to verify whether we want to get user profile to edit
+	 *            or get friends profile
+	 */
+	public static final String CHECK_LOGGED_IN_USERNAME = "Logged in user";
+	
+	/**
+	 * @param NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER
+	 *            is used to set Country and City entities for user if
+	 *            no city or country is choosed
+	 */
+	public static final Integer NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER = 0;
+	
 	void createUser(User user);
 	boolean isExistsWithUsername(String username);
 	boolean isExistsWithEmail(String email);

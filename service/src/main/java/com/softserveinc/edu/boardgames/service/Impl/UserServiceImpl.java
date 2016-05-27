@@ -53,26 +53,7 @@ public class UserServiceImpl implements UserService {
 	
 	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
 	
-	/**
-	 * @param CHECK_LOGGED_IN_USERNAME
-	 *            is used to verify whether we want to get user profile to edit
-	 *            or get friends profile
-	 */
-	public static final String CHECK_LOGGED_IN_USERNAME = "Logged in user";
 	
-	/**
-	 * @param CHECK_LOGGED_IN_USERNAME
-	 *            is used to set unbanned user rating to minimal with which
-	 *            he can access the website a not be automatically banned again
-	 */
-	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
-	
-	/**
-	 * @param NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER
-	 *            is used to set Country and City entities for user if
-	 *            no city or country is choosed
-	 */
-	public static final Integer NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER = 0;
 
 	@Autowired
 	private CountryRepository countryRepository;
@@ -362,7 +343,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void updateUserWithBan(User user) {
 		userRepository.saveAndFlush(user);
-		if (user.getUserRating() < MINIMAL_RATING_FOR_ACTIVE_USER) {
+		if (user.getUserRating() < User.MINIMAL_RATING_FOR_ACTIVE_USER) {
 			mailService.sendMailToBannedUser(user.getEmail(), user.getUsername());
 		}
 	}
@@ -477,7 +458,7 @@ public class UserServiceImpl implements UserService {
 		User user = findOne(username);
 		user.setState(UserStatus.ACTIVE.name());
 		if (user.getUserRating() <= -5) {
-			user.setUserRating(MINIMAL_RATING_FOR_ACTIVE_USER);
+			user.setUserRating(User.MINIMAL_RATING_FOR_ACTIVE_USER);
 		}
 		userRepository.saveAndFlush(user);
 	}
