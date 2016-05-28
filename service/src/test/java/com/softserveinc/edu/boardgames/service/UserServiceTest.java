@@ -1,30 +1,25 @@
 package com.softserveinc.edu.boardgames.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import org.apache.velocity.app.VelocityEngine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
+import com.softserveinc.edu.boardgames.service.Impl.MailServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -39,10 +34,7 @@ public class UserServiceTest {
 	UserService userService = new UserService();
 	
 	@InjectMocks
-    MailService mailService;
-
-
-	
+    MailServiceImpl mailService;
 
 	@Test
 	public void testFindUser() {

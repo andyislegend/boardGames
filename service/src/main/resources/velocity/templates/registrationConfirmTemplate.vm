@@ -2,12 +2,12 @@
 	<body>
 			$date - successful registration, Congratulations!
 			<br> 
-			Welcome on board,<b> $name </b>. 
+			Welcome on board, <b>$name</b>. 
 			<br>
 			To login into system, please confirm your registration by clicking on url below. 
 			<br>
-            Your login/username: $name ,<br>
-            Your confirmation link: $confirm . <br>
+            Your login/username: $name,<br>
+            Your confirmation link: $confirm<br>
             
             Don't tell anyone your password or login!
             <br>
