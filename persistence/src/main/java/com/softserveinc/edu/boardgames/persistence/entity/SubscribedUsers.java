@@ -17,6 +17,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * 
  * @author Andrii Petryk
@@ -37,10 +39,12 @@ public class SubscribedUsers implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "event_id")
+	@JsonBackReference
 	private Event event;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonBackReference
 	private User user;
 	
 	@Column(name = "isNew")

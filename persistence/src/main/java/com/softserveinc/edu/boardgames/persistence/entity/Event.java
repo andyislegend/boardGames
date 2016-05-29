@@ -18,6 +18,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * This entity is set for storing information about Events
  * 
@@ -47,6 +49,7 @@ public class Event implements Serializable {
 	private String location;
 	
 	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 @JsonManagedReference
 	private Set<SubscribedUsers> subscribedUsers;
 
 	public Event() {
