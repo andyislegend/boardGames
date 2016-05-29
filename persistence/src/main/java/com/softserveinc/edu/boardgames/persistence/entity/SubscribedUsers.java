@@ -2,6 +2,7 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * 
@@ -34,12 +37,14 @@ public class SubscribedUsers implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Event.class)
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "event_id")
+	@JsonBackReference
 	private Event event;
 
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonBackReference
 	private User user;
 	
 	@Column(name = "isNew")

@@ -385,9 +385,6 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content">
-
-				<div class="modal-body">
 
 					<div class="loading">
 						<div class="intro-stars"></div>
@@ -402,10 +399,6 @@
 						<div class="loading-text" translate="LOADING"></div>
 					</div>
 
-				</div>
-
-
-			</div>
 			<!-- End of Modal Content -->
 
 		</div>

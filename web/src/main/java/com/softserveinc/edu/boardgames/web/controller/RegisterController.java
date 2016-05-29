@@ -58,6 +58,11 @@ public class RegisterController {
 	 */
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
 	
+	/**
+	 * @param VALID_TOKEN_MAIL_CONFIRMATION
+	 *            is used as response after successful verification token validation
+	 * 
+	 */
 	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
 
 	/**
@@ -66,7 +71,7 @@ public class RegisterController {
 	 *            user during registration
 	 */
 	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
-			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+			.compile("^[A-Z0-9.'_-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 	/**
 	 * @param VALID_PSASSWORD_REGEX
@@ -78,7 +83,29 @@ public class RegisterController {
 	 * @param VALID_USERNAME_REGEX
 	 *            is used to validate the safety of username
 	 */
+<<<<<<< HEAD
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,9}");
+=======
+	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
+	
+	/**
+	 * @param OLD_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String OLD_PASSWORD_ANSWER = "OLD_PASSWORD_ANSWER";
+	
+	/**
+	 * @param NEW_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String NEW_PASSWORD_ANSWER = "NEW_PASSWORD_ANSWER";
+	
+	/**
+	 * @param CONFIRM_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String CONFIRM_PASSWORD_ANSWER = "CONFIRM_PASSWORD_ANSWER";
+>>>>>>> 4b5c698c094d93e0170a3facaec15bee2a7d9dbd
 
 	/**
 	 * 
@@ -114,7 +141,7 @@ public class RegisterController {
 
 		if (!validateUsername(username)) {
 
-			return new ResponseEntity<String>("Sorry, but Username must contain from 3 to 9 symbols.",
+			return new ResponseEntity<String>("Sorry, but Username must contain from 3 to 9 symbol and don't have special symbols in it.",
 					HttpStatus.CONFLICT);
 		}
 
@@ -152,10 +179,10 @@ public class RegisterController {
 		}
 
 		User newUser = new User();
-		newUser.setEmail(email);
+		newUser.setEmail(email.trim());
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
-		newUser.setUsername(username);
+		newUser.setUsername(username.trim());
 		newUser.setPassword(password);
 		newUser.setGender(gender);
 		userService.createUser(newUser);

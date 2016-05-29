@@ -30,6 +30,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserLevel;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -179,12 +180,10 @@ public class User implements Serializable {
 	@ElementCollection
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "users")
 	private Set<Tournament> tournaments;
-
-//	/**
-//	 * Describes a connection to verification token entity
-//	 */
-//	@OneToOne (mappedBy="user", cascade = CascadeType.MERGE)
-//	private VerificationToken verificationToken;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 @JsonManagedReference
+	private Set<SubscribedUsers> subscribedUsers;
 
 	public User() {
 	}
@@ -333,13 +332,13 @@ public class User implements Serializable {
 		this.tournaments = tournaments;
 	}
 
-//	public VerificationToken getVerificationToken() {
-//		return verificationToken;
-//	}
-//
-//	public void setVerificationToken(VerificationToken verificationToken) {
-//		this.verificationToken = verificationToken;
-//	}
+	public Set<SubscribedUsers> getSubscribedUsers() {
+	return subscribedUsers;
+	}
+
+	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
+		this.subscribedUsers = subscribedUsers;
+	}
 
 	@PreUpdate
 	public void changeUserLevelOrStatus() {
