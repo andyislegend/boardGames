@@ -63,7 +63,6 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 		var noCountryOrCitySelected = 0;
 		$scope.countryId = ($scope.editableCountry == null) ? noCountryOrCitySelected : $scope.editableCountry.id;
 		$scope.cityId = ($scope.editableCity == null) ? noCountryOrCitySelected : $scope.editableCity.id;
-		
 	var userDTO = {
 		firstName : $scope.editableFirstName,
 		lastName : $scope.editableLastName,
@@ -94,6 +93,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 			$scope.editProfileMessage = false;
 		}).error(function(result, status) {
 			$scope.editProfileAnswer = result.data;
+			if (result == "") {
+				$scope.editProfileAnswer = "You have typed inappropriate data in email field";
+			}
 		})
 
 	}
@@ -167,6 +169,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	$scope.showPassword = function() {
 		$scope.showPasswordChange = !$scope.showPasswordChange;
 	}
+	
+	
 	
 }]);
 

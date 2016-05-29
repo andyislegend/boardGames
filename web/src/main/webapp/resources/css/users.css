@@ -118,6 +118,7 @@
 
 #editProfile {
 	margin-top:-19px;
+	margin-left: 50px;
 }
 
 #passwordChange {
@@ -141,4 +142,9 @@
 
 #ps {
 	margin-bottom:30px;
+}
+
+#friendProfile {
+	font-size:16px;
+	margin-left: 20px;
 }
