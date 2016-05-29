@@ -83,9 +83,7 @@ public class RegisterController {
 	 * @param VALID_USERNAME_REGEX
 	 *            is used to validate the safety of username
 	 */
-<<<<<<< HEAD
-	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9_-]{3,9}");
-=======
+
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
 	
 	/**
@@ -105,7 +103,6 @@ public class RegisterController {
 	 *            is used as a key to choose correct language
 	 */
 	public static final String CONFIRM_PASSWORD_ANSWER = "CONFIRM_PASSWORD_ANSWER";
->>>>>>> 4b5c698c094d93e0170a3facaec15bee2a7d9dbd
 
 	/**
 	 * 

@@ -19,11 +19,9 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
-<<<<<<< HEAD
 import com.softserveinc.edu.boardgames.service.Impl.UserServiceImpl;
-=======
 import com.softserveinc.edu.boardgames.service.Impl.MailServiceImpl;
->>>>>>> 4b5c698c094d93e0170a3facaec15bee2a7d9dbd
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
