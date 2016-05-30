@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.dto.ActionsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.EventService;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
@@ -85,4 +86,9 @@ public class StatisticsController {
 		return actionsSet;
 	}
 	
+	@RequestMapping(value="/getUsersAvgAge", method = RequestMethod.GET)
+	@ResponseBody
+	public List<UsersAgeChartDTO> countOfUsersOfAge() {
+		return gameService.countOfUsersOfAge();
+	}
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRatingRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
 
@@ -64,15 +65,10 @@ public class GameService {
 	}
 	
 	public List<GamesChartDTO> getRatingsForGame() {
-//		List<GamesChartDTO> listOfCharts = new ArrayList<>();
-//		for (Game gu : this.getAll()) {
-//			GamesChartDTO chartDto = new GamesChartDTO();
-//			chartDto.setName(gu.getName());
-//			chartDto.setGeneralRating(
-//					gameRatingRepo.getAverageRatingForGame(gu.getId()).intValue());
-//			chartDto.setCountOfRates(gameRatingRepo.getCountOfRatingsForGame(gu.getId()));
-//			listOfCharts.add(chartDto);
-//		}
 		return gameRatingRepo.getAllRatings();
+	}
+	
+	public List<UsersAgeChartDTO> countOfUsersOfAge(){
+		return gameRepo.countOfUsersOfAge();
 	}
 }

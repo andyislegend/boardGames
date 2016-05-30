@@ -30,4 +30,15 @@ angular.module('homeApp').controller('statisticsController',function($scope, $ht
 			alert("getting actions and dates error");
 		});
 	};
+	
+	$scope.initColumnAge = function() {
+		$http({
+			method : "GET",
+			url : 'getUsersAvgAge'
+		}).then(function mySucces(response) {
+			drawColumnAgeChart(response.data);
+		}, function myError(response) {
+			alert("Drawing columnage chart error");
+		});
+	};
 });

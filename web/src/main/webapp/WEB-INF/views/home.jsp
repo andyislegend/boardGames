@@ -98,6 +98,7 @@
     <script src="resources/js/service/pieChartService.js"></script>
     <script src="resources/js/service/columnChartService.js"></script>
     <script src="resources/js/service/areaChartService.js"></script>
+    <script src="resources/js/service/columnChartAgeService.js"></script>
     <!-- End of Scripts -->
   </head>
   <body ng-app="homeApp" ng-controller="localizationController">
