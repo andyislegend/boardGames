@@ -156,8 +156,8 @@ public class MailServiceImpl implements MailService{
 			}
 		};
 		mailSender.send(preparator);
-//		logger.info("----Message remainding " + to + " to give " 
-//				+ gameName + "to" + ownerUsername + "---");
+		logger.info("----Message remainding " + to + " to give " 
+				+ gameName + "to" + ownerUsername + "---");
 	}
 	
 	@Async
@@ -183,7 +183,7 @@ public class MailServiceImpl implements MailService{
 			}
 		};
 		mailSender.send(preparator);
-//		logger.info("----Message remainding " + to + " to give " 
-//				+ gameName + " to " + ownerUsername + " is late for " + days + "---");
+		logger.info("----Message remainding " + to + " to give " 
+				+ gameName + " to " + ownerUsername + " is late for " + days + "---");
 	}
 }

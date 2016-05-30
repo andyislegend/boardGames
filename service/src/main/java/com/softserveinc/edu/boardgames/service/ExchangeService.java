@@ -2,60 +2,31 @@ package com.softserveinc.edu.boardgames.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
-import com.softserveinc.edu.boardgames.persistence.repository.ExchangeRepository;
 
-/**
- * @author Taras Varvariuk
- */
-@Service
-@Transactional
-public class ExchangeService {
+public interface ExchangeService {
 
-	@Autowired
-	private ExchangeRepository eRepo;
+	Exchange findById(Integer id);
 	
-	public Exchange findById(Integer id) {
-		return eRepo.findOne(id);
-	}
-	
-	public List<Exchange> findAllExchanges() {
-		return eRepo.findAll();
-	}
+	List<Exchange> findAllExchanges();
 	
 	@Transactional
-	public void update(Exchange exchange) {
-		eRepo.saveAndFlush(exchange);
-	}
+	void update(Exchange exchange);
 	
 	@Transactional
-	public void delete(Exchange exchange) {
-		eRepo.delete(exchange);
-	}
+	void delete(Exchange exchange);
 	
-	public Exchange getByGameUserId(Integer id) {
-		return eRepo.findByGameUserId(id);
-	}
+	Exchange getByGameUserId(Integer id);
 	
-	public InfoFromApplierDTO getExchangeDTO(Integer id) {
-		return eRepo.getInfoFromAppliersDTO(id);
-	}
+	InfoFromApplierDTO getExchangeDTO(Integer id);
 	
-	public List<InfoFromApplierDTO> getAllBorrowedGames(Integer userId) {
-		return eRepo.getAllBorrowedGames(userId);
-	}
+	List<InfoFromApplierDTO> getAllBorrowedGames(Integer userId);
 	
-	public boolean checkIfBorrowed(Integer userId, Integer gameUserId) {
-		return (eRepo.getBorrowedGameUser(gameUserId, userId) != null);
-	}
+	boolean checkIfBorrowed(Integer userId, Integer gameUserId);
 	
-	public List<GameUserDTO> selectAllConfirmationsForUser(Integer id) {
-		return eRepo.selectAllConfiramtionsForUser(id);
-	}
+	List<GameUserDTO> selectAllConfirmationsForUser(Integer id);
 }
