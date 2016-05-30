@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(drawColumnAgeChart);
 
 function drawColumnAgeChart(dataFrom) {
 	
-	var chartData = prepareColumnChartData(dataFrom);
+	var chartData = prepareColumnAgeChartData(dataFrom);
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Game');
 	data.addColumn('number', 'Age');
@@ -20,7 +20,7 @@ function drawColumnAgeChart(dataFrom) {
 	chart.draw(data, options);
 }
 
-function prepareColumnChartData(dataToPrepare) {
+function prepareColumnAgeChartData(dataToPrepare) {
 	
 	var chartData = [];
 	for (i = 0; i < dataToPrepare.length; i++) {
