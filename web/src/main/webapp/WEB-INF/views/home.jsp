@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="resources/css/gameUser.css" />
     <link rel="stylesheet" href="resources/css/tornaments.css" />
     <link rel="stylesheet" href="resources/css/eventInfo.css" />
+    <link rel="stylesheet" href="resources/css/notification.css" />
     <!-- End of CSS -->
     <!-- Scripts -->
     <script type="text/javascript"
