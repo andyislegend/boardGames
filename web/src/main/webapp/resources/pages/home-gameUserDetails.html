@@ -146,7 +146,13 @@
 						<h4 class="text-primary">Return of the game</h4>
 					</div>
 					<div class="modal-body">
-						<button class="btn btn-primary" ng-click="giveBackGame(games.id)">Give back to owner</button>
+						<br/>
+						<p>Your feedback</p>
+						<textarea class="form-control inlineDisplay" rows="2" 
+							id="message" ng-model="feedbackForGame"></textarea>
+						<br/>
+						<button class="btn btn-primary" ng-click="giveBackGame(games.id, feedbackForGame)">
+							Give back to owner</button>
 					</div>
 				</div>
 			</div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softserveinc.edu.boardgames.persistence.entity.CommentsForGame;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
@@ -20,6 +21,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameUserStatus;
 import com.softserveinc.edu.boardgames.persistence.enumeration.TimeEnum;
+import com.softserveinc.edu.boardgames.service.CommentForGameService;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
@@ -42,6 +44,8 @@ public class UserGameSharingController {
 	
 	final String NOTIFICATION_TYPE = "exchange";
 	
+	final String DEFAULT_COMMENT = "no comment";
+	
 	@Autowired
 	private GameUserService gameUserService;
 	
@@ -56,6 +60,9 @@ public class UserGameSharingController {
 	
 	@Autowired
 	private NotificationService notifyService;
+	
+	@Autowired
+	private CommentForGameService commentService;
 	
 	public Notification processNotification(String message, User forWhoom, 
 			User fromWhoom, GameUser gameUser) {
@@ -221,15 +228,17 @@ public class UserGameSharingController {
 		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 	}
 	
-	@RequestMapping(value="/giveGameBack/{gameUserId}", method = RequestMethod.PUT)
+	@RequestMapping(value="/giveGameBack/{gameUserId}/{comment}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void giveGameBack(@PathVariable Integer gameUserId) {
+	public void giveGameBack(@PathVariable Integer gameUserId, @PathVariable String comment) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus(GameUserStatus.PRIVATE.name());
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		User userToNotify = userService.findById(exchange.getUser().getId());
+		User userInvoker = userService.findById(exchange.getUserApplierId());
 		
 		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
 			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
@@ -237,11 +246,15 @@ public class UserGameSharingController {
 			gameUserService.update(gameUser);
 		}
 		
+		if (comment != this.DEFAULT_COMMENT) {
+			CommentsForGame commentToSend = new CommentsForGame(
+					gameUserToUpdate,userInvoker,comment,new Date());
+			commentService.addComment(commentToSend);
+		}
+		
 		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
 				+ " intends to give " + gameUserToUpdate.getGame().getName() 
 				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.";
-		User userToNotify = userService.findById(exchange.getUser().getId());
-		User userInvoker = userService.findById(exchange.getUserApplierId());
 		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 		
 		gamePropoService.deleteForExchange(exchange.getId());

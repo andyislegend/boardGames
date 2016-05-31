@@ -257,7 +257,6 @@ homeApp.$inject = ['$modal'];
 			url : data.url + data.userGameId
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');
-			$('#giveBackModal').modal('hide');
 		}, function myError(response) {
 			alert("Changing game status error");
 		});
@@ -324,10 +323,18 @@ homeApp.$inject = ['$modal'];
 			userGameId: id
 		});
 	}
-	$scope.giveBackGame = function(id) {
-		$scope.$emit('changingGameStatus', {
-			url:'giveGameBack/',
-			userGameId: id
+	$scope.giveBackGame = function(id, comment) {
+		
+		var outComment = comment || 'no comment';
+
+		$http({
+			method : "PUT",
+			url : 'giveGameBack/' + id + '/' + outComment
+		}).then(function mySucces(response) {
+			$scope.$emit('refreshingPage');
+			$('#giveBackModal').modal('hide');
+		}, function myError(response) {
+			alert("Changing game status error");
 		});
 	}
 });
