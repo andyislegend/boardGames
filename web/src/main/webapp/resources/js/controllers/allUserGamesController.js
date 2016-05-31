@@ -10,11 +10,11 @@ homeApp.$inject = ['$modal'];
 		$rootScope.allGame = response.data;
 		});
 	
-	setInterval(function(){
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
-}, 3000);
+//	setInterval(function(){
+//		for (var i = 0; i < $rootScope.allGame.length; i++) {
+//			$rootScope.isNewComments($rootScope.allGame[i].id);
+//		}
+//}, 3000);
 	
 	$http({
 		method : "GET",
@@ -257,6 +257,7 @@ homeApp.$inject = ['$modal'];
 			url : data.url + data.userGameId
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');
+			$('#giveBackModal').modal('hide');
 		}, function myError(response) {
 			alert("Changing game status error");
 		});
