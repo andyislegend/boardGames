@@ -1,0 +1,10 @@
+<html>
+	<body>
+			
+			Dear<b> $name </b>. Your behavior on our website was inappropriate.<br>
+			So from now you can't use our website.  
+			<br>
+        	If you believe this is a mistake, please contact us.
+             
+	</body>
+</html>

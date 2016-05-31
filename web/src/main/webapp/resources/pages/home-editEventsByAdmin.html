@@ -1,0 +1,104 @@
+<div>
+	<h1 style="text-align: center">
+		Moderate Events <a href="" data-toggle="modal"
+			data-target="#myCreateEvent"> <span
+			class="glyphicon glyphicon-plus"></span></a>
+	</h1>
+	<!-- EVENTS ADMIN PAGE-->
+	<div>
+		<div class="widget widget_top-posts"></div>
+		<table ng-table="allEventsTable" show-filter="true"
+			class="table table-striped">
+			<tr ng-repeat="x in allEventsDisplay">
+				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">{{
+					x.date | date:'MM/dd/yyyy' }}</td>
+
+				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+					<a href="#editEvent/{{x.eventId}}"> {{ x.name }}</a>
+				</td>
+
+				<td title="'Description'">{{ x.description }}</td>
+
+				<td title="'Location'" sortable="'location'"
+					filter="{ 'location': 'text' }">{{ x.location }}</td>
+
+			</tr>
+
+		</table>
+
+	</div>
+
+	<!-- Modal Add Event -->
+	<div id="myCreateEvent" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog" ng-controller="newEventCtrl">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 style="text-align: center;" class="modal-title">CREATE NEW
+						EVENT</h4>
+					<h6 style="text-align: center;" class="modal-title">all fields
+						are required</h6>
+				</div>
+				<div class="modal-body">
+
+					<form class="form-horizontal" name="CreateEvent"
+						ng-submit="createEvent()" role="form">
+
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"><span> Name </span></span> <input
+								ng-model="newevent.name" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1" required
+								placeholder="add Events title" maxlength="100">
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon2"><span> Description</span></span> <input
+								ng-model="newevent.description" style="width: 400px;"
+								type="text" class="form-control" aria-describedby="basic-addon2"
+								placeholder="add description" maxlength="300" required>
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon3"> <span> Location</span></span> <input
+								ng-model="newevent.location" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon3"
+								placeholder="add location" maxlength="100" required>
+						</div>
+						<br>
+						<div class="input-group">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"><span> Date</span></span> <input
+								ng-model="newevent.date" style="width: 400px;" type="date"
+								class="form-control" aria-describedby="basic-addon4" required>
+						</div>
+						<br>
+
+
+
+						<button style="margin-left: 30%;"
+							ng-disabled="CreateEvent.$invalid" ng-click="createNewEvent()"
+							class="btn btn-info btn-md">ADD NEW</button>
+
+						<button style="margin-left: 15%;" type="submit"
+							class="btn btn-danger btn-md" ng-click="closeModal()">
+							Cancel</button>
+
+					</form>
+				</div>
+
+			</div>
+			<!-- End of Modal Content -->
+
+		</div>
+	</div>
+	<!-- End Add Event -->
+
+
+
+	<!-- /EVENTS ADMIN PAGE -->
+</div>

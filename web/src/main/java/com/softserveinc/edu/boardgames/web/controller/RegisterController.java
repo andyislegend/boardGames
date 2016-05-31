@@ -1,58 +1,266 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.softserveinc.edu.boardgames.persistence.entity.Address;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserPasswordDTO;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.service.util.OnRegistrationCompleteEvent;
+import com.softserveinc.edu.boardgames.web.localization.LanguageKeys;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
+/**
+ * This conrollers is responsible for add new user and validating field in
+ * registration process.
+ * 
+ * @param username
+ *            must be unique.
+ * @param email
+ *            must be unique and be a valid mail address.
+ * @param password
+ *            must be equals to @param confirm password
+ * 
+ * @author Andrii Petryk
+ *
+ */
 @Controller
 public class RegisterController {
 
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
-	public String newUser(ModelMap model) {
-		User user = new User();
-		Address address = new Address();
-		model.addAttribute("user", user);
-		model.addAttribute("address", address);
-		return "registration";
-	}
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
 
-		if (result.hasErrors()) {
-			return "registration";
+	/**
+	 * @param INVALID_TOKEN_MAIL_CONFIRMATION
+	 *            is used to validate verification token
+	 * 
+	 */
+	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
+	
+	/**
+	 * @param VALID_TOKEN_MAIL_CONFIRMATION
+	 *            is used as response after successful verification token validation
+	 * 
+	 */
+	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
+
+	/**
+	 * @param VALID_EMAIL_ADDRESS_REGEX
+	 *            is used to validate the correctness of mail provided by new
+	 *            user during registration
+	 */
+	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
+			.compile("^[A-Z0-9.'_-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+	/**
+	 * @param VALID_PSASSWORD_REGEX
+	 *            is used to validate the safety of users password
+	 */
+	private static final Pattern VALID_PASSWORD_REGEX = Pattern.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})");
+
+	/**
+	 * @param VALID_USERNAME_REGEX
+	 *            is used to validate the safety of username
+	 */
+
+	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
+	
+	/**
+	 * @param OLD_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String OLD_PASSWORD_ANSWER = "OLD_PASSWORD_ANSWER";
+	
+	/**
+	 * @param NEW_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String NEW_PASSWORD_ANSWER = "NEW_PASSWORD_ANSWER";
+	
+	/**
+	 * @param CONFIRM_PASSWORD_ANSWER
+	 *            is used as a key to choose correct language
+	 */
+	public static final String CONFIRM_PASSWORD_ANSWER = "CONFIRM_PASSWORD_ANSWER";
+
+	/**
+	 * 
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 * @param gender
+	 * @param username
+	 * @param password
+	 * @param confirmPassword
+	 * @param request
+	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
+	 * 
+	 *         Controller that validate registration form and return
+	 *         HttpStatus.CONFLICT with error message if there is invalid data
+	 *         in fields provided by user or return HttpStatus.OK if
+	 *         registration was successful
+	 */
+	@RequestMapping(value = { "/addNewUser" }, method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> addNewUser(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
+			@RequestParam("gender") String gender, @RequestParam("username") String username,
+			@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
+			final HttpServletRequest request) {
+
+		if (username.isEmpty() || gender.isEmpty() || email.isEmpty() || password.isEmpty()) {
+
+			return new ResponseEntity<String>("Fields marked with \"*\" are required. Please enter valid data (only English is allowed).",
+					HttpStatus.CONFLICT);
+
 		}
 
-		if (userService.isExistsWithUsername(user.getUsername())) {
-			
-			FieldError usernameError = new FieldError("user", "username", "Sorry, but this usernmae is already taken. Choose another one");
-			result.addError(usernameError);
-			return "registration";
+		if (!validateUsername(username)) {
+
+			return new ResponseEntity<String>("Sorry, but Username must contain from 3 to 9 symbol and don't have special symbols in it.",
+					HttpStatus.CONFLICT);
 		}
 
-		userService.createUser(user);;
+		if (userService.isExistsWithUsername(username)) {
 
-		model.addAttribute("success",
-				"User ---" + user.getUsername()+ "--- registered successfully");
-		return "login";
+			return new ResponseEntity<String>("Sorry, but this Usernmae is already taken. Choose another one!",
+					HttpStatus.CONFLICT);
+
+		}
+
+		if (!validateMail(email)) {
+
+			return new ResponseEntity<String>("Please enter a valid email address", HttpStatus.CONFLICT);
+
+		}
+
+		if (userService.isExistsWithEmail(email)) {
+
+			return new ResponseEntity<String>("Sorry, but this email is already in use!", HttpStatus.CONFLICT);
+
+		}
+
+		if (!validatePassword(password)) {
+
+			return new ResponseEntity<String>(
+					"Password must contain from 6 to 20 symbols with at least 1 upper case symbol and 1 number",
+					HttpStatus.CONFLICT);
+
+		}
+
+		if (!password.equals(confirmPassword)) {
+
+			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
+
+		}
+
+		User newUser = new User();
+		newUser.setEmail(email.trim());
+		newUser.setFirstName(firstName);
+		newUser.setLastName(lastName);
+		newUser.setUsername(username.trim());
+		newUser.setPassword(password);
+		newUser.setGender(gender);
+		userService.createUser(newUser);
+
+		eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newUser, getAppUrl(request)));
+
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	/**
+	 * 
+	 * @param model
+	 * @param token
+	 * @return userinfo page
+	 * 
+	 *         Controller that is used to validate token from confirmation link
+	 */
+	@RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
+	public String confirmRegistration(Model model, @RequestParam("token") final String token) {
+		final String result = userService.validateVerificationToken(token);
+
+		if (result.equals(VALID_TOKEN_MAIL_CONFIRMATION)) {
+			model.addAttribute("success", true);
+		}
+
+		if (result.equals(INVALID_TOKEN_MAIL_CONFIRMATION)) {
+			model.addAttribute("expired", true);
+		}
+
+		return "userinfo";
+	}
+
+	/**
+	 * This method that update user password and return
+	 * HttpStatus.CONFLICT with error message if there is invalid data
+	 * in fields provided by user or return HttpStatus.OK if all data
+	 * is correct
+	 * 
+	 * @author Volodymyr Terlyha
+	 * 
+	 * @param UserPasswordDTO
+	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
+	 * 
+	 *         
+	 */
+	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<String> updateUserPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
+		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		if (userPasswordDTO.getOldPassword() == null || userPasswordDTO.getNewPassword() == null 
+				|| userPasswordDTO.getConfirmPassword() == null) {
+				return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		} else if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
+			return new ResponseEntity<String>(LanguageKeys.OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+		} else if (!validatePassword(userPasswordDTO.getNewPassword())) {
+			return new ResponseEntity<String>(LanguageKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+		} else if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
+			return new ResponseEntity<String>(LanguageKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+		}		
+		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
+		userService.updateUser(user);
+		return new ResponseEntity<String>(LanguageKeys.CHANGES_SAVED, HttpStatus.OK);
+	}
+
+	private static boolean validateMail(String emailStr) {
+		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+		return matcher.find();
+	}
+
+	private static boolean validatePassword(String password) {
+		Matcher matcher = VALID_PASSWORD_REGEX.matcher(password);
+		return matcher.find();
+	}
+
+	private static boolean validateUsername(String username) {
+		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
+		return matcher.find();
+	}
+
+	private String getAppUrl(HttpServletRequest request) {
+		return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+	}
 
 }

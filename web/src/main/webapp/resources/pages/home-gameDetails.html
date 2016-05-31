@@ -1,0 +1,78 @@
+<div class="container-fluid">
+	<h2 class="text-primary" id="allGamesHeader">Games</h2>
+</div>
+<div class="container-fluid" ng-controller="getGameDetailedInfoController">
+
+	<h4>Name: {{gameDetail.name}}</h4>
+	<h4>Rating</h4>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Rate this game</th>
+				<th></th>
+				<th>Your rate</th>
+				<th>General</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<div star-rating rating="starRating" read-only="false"
+						max-rating="10" click="ratingClick(param)"
+						mouse-hover="ratingHover(param)" mouse-leave="ratingLeave(param)"></div>
+					<div></div>
+				</td>
+				<td><p class="text text-success">{{hoverRatingText}}</p>
+				</td>
+				<td><span class="label label-primary">{{gameDetail.userRating}}/10</span>
+				</td>
+				<td><span class="label label-primary">{{gameDetail.generalRating}}/10</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr />
+	<h4>Owners</h4>
+	<table ng-table="userGamesOfGameTable" show-filter="true" class="table table-striped">
+		<tr ng-repeat="x in userGamesOfGameDisplay">
+			<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }">
+				{{ x.username }}
+			</td>
+			<td title="'Edition'" sortable="'edition'" filter="{ 'edition': 'text' }">
+				{{ x.edition }}
+			</td>
+			<td title="'Year of production'" sortable="'yearOfProduction'" 
+				filter="{ 'yearOfProduction': 'number' }">
+				{{ x.yearOfProduction }}
+			</td>
+			<td title="'Availability'" sortable="'status'" filter="{ 'status': 'text' }">
+				<a href="#gameUserDetails/{{x.id}}">{{x.status}}</a>
+			</td>
+			<td title="'Action'">
+				<button ng-click="showComments(x.id)">Comment</button>
+			</td>
+		</tr>
+	</table>
+
+	<div>
+		<div ng-show="isShowComment">
+			<table class="table">
+				<tr>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr ng-repeat="x in commentForGame">
+					<td>{{x.username}}</td>
+					<td>{{x.commentText}}</td>
+					<td>{{x.date | date:dateFormat}}</td>
+				</tr>
+			</table>
+			<div>
+				<form data-ng-submit=submit()>
+					<input type="text" data-ng-model="comment" style="width: 80%"><input
+						type="submit" ng-click="addComment" style="width: 20%">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,79 +10,94 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
 /**
- * This entity contains data model describing games of particular user
- * Has ManyToOne relationship to game
- * ManyToMany relationship to user
- * @author Taras Varvariuk
+ * This entity contains data model describing games of particular user Has
+ * ManyToOne relationship to game ManyToMany relationship to user
+ * 
+ * @authors Taras Varvariuk,Volodymyr Krokhmaliuk
  *
  */
 @Entity
 @Table(name = "gameUser")
-public class GameUser {
+public class GameUser implements Serializable {
 
-	/**
-	 * unique value, primary key
-	 */
+	private static final long serialVersionUID = 9107019551046622111L;
+
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)       
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	/**
-	 * edition - one game can have different editions with
-	 * a little difference 
-	 */
+
 	@Column(name = "edition")
 	private String edition;
-	
-	/**
-	 * year of production - when game was made
-	 */
+
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 	
-	/**
-	 * foreign key
-	 * ManyToOne relationship to Game
-	 * global game to the type of which current game belongs 
-	 */
-	@ManyToOne(fetch=FetchType.LAZY, optional=false, targetEntity=Game.class, cascade={CascadeType.ALL})
-	@JoinColumn(name="gameId")
-	private Game game;
+	@Column(name = "description")
+	private String description;
 	
-	/**
-	 * foreign key
-	 * ManyTomany relationship to users
-	 * several users can actualy have several games  
-	 */
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "user", joinColumns = { 
-			@JoinColumn(name = "userId", nullable = false, updatable = false) }, 
-			inverseJoinColumns = { @JoinColumn(name = "userGames", 
-					nullable = false, updatable = false) })
-	private Set<User> users;
+	@Column(name = "rules")
+	private String rules;
+	
+	@Column(name = "minPlayers")
+	private Integer minPlayers;
+	
+	@Column(name = "maxPlayers")
+	private Integer maxPlayers;
+	
+	@Column(name = "countOfComments")
+	private Integer countOfComments;
+	
+	@Column(name = "status", columnDefinition="varchar(20) default 'PRIVATE'")
+	private String status;
 
-	public GameUser(){};
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL, CascadeType.REMOVE})
+	private Game game;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+	private User user;
 	
-	public GameUser(String edition, Integer yearOfProduction, Game game, User user) {
+	@OneToOne(mappedBy="gameUser")
+	private Exchange exchange;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="gameUser", cascade={CascadeType.ALL})
+    private Set<GameProposition> gamePropositions;
+	
+	public GameUser() {
+		
+	}
+	
+	public GameUser(String edition, Integer yearOfProduction, Game game, User user, String status) {
 		super();
 		this.edition = edition;
 		this.yearOfProduction = yearOfProduction;
+		this.countOfComments = 0;
 		this.game = game;
+		this.user = user;
+		this.status = status;
 	}
-
+	
+	public GameUser(String edition, Integer yearOfProduction,Integer countOfComments, Game game, User user) {
+		super();
+		this.edition = edition;
+		this.yearOfProduction = yearOfProduction;
+		this.countOfComments = countOfComments;
+		this.game = game;
+		this.user = user;
+	}
+	
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getEdition() {
@@ -100,6 +116,54 @@ public class GameUser {
 		this.yearOfProduction = yearOfProduction;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRules() {
+		return rules;
+	}
+
+	public void setRules(String rules) {
+		this.rules = rules;
+	}
+
+	public Integer getMinPlayers() {
+		return minPlayers;
+	}
+
+	public void setMinPlayers(Integer minPlayers) {
+		this.minPlayers = minPlayers;
+	}
+
+	public Integer getMaxPlayers() {
+		return maxPlayers;
+	}
+
+	public void setMaxPlayers(Integer maxPlayers) {
+		this.maxPlayers = maxPlayers;
+	}
+
+	public Integer getCountOfComments() {
+		return countOfComments;
+	}
+
+	public void setCountOfComments(Integer countOfComments) {
+		this.countOfComments = countOfComments;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Game getGame() {
 		return game;
 	}
@@ -107,52 +171,28 @@ public class GameUser {
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	
-	public Set<User> getUsers(){
-		return users;
+
+	public User getUser() {
+		return user;
 	}
-	
-	@Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        GameUser other = (GameUser) obj;
-        if (id != other.id) {
-            return false;
-        }       
-        if (yearOfProduction != other.yearOfProduction) {
-            return false;
-        }
-        if (edition != other.edition) {
-            return false;
-        }
-        if (game != other.game) {
-            return false;
-        }
-        if (users != other.users) {
-            return false;
-        }
-        return true;
-    }
-    
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        return result;
-    }
-    
-    @Override
-    public String toString() {
-        return "GameUser [id=" + id + ", game=" + game + ", yearOfProduction=" + yearOfProduction +
-        		", edition=" + edition + "]";
-    }
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Exchange getExchange() {
+		return exchange;
+	}
+
+	public void setExchange(Exchange exchange) {
+		this.exchange = exchange;
+	}
+
+	public Set<GameProposition> getGamePropositions() {
+		return gamePropositions;
+	}
+
+	public void setGamePropositions(Set<GameProposition> gamePropositions) {
+		this.gamePropositions = gamePropositions;
+	}
 }

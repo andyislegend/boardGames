@@ -1,23 +1,17 @@
 package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-
-
-
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * Every game belongs to particular category
@@ -30,6 +24,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "category")
 public class Category implements Serializable{
 	
+	private static final long serialVersionUID = 1362760535235604358L;
+
 	/**
 	 * Unique value, primary key to categories
 	 */
@@ -41,15 +37,13 @@ public class Category implements Serializable{
 	/**
 	 * Game category name
 	 */
-	@Column(name = "name")
+	@Column(name = "name" )
 	private String name;
 	
 	/**
 	 * A set of games that belongs to current category
 	 * Mapped from Game entity - OneToMany relationship
 	 */
-	@OneToMany(cascade={CascadeType.ALL},mappedBy="category", fetch=FetchType.LAZY)
-	private Set<Game> games;
 
 	/**
 	 * Default constructor
@@ -58,10 +52,18 @@ public class Category implements Serializable{
 	
 	/**
 	 * Aditional constructor
+	 * @param id - id number
+	 */
+	public Category(Integer id) {
+		this.id = id;
+	}
+	
+	/**
+	 * Aditional constructor
 	 * @param name - category name
 	 */
 	public Category(String name) {
-		super();
+		
 		this.name = name;
 	}
 	
@@ -70,6 +72,10 @@ public class Category implements Serializable{
 	 */
 	public Integer getId() {
 		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	/**
@@ -89,41 +95,31 @@ public class Category implements Serializable{
 	/**
 	 * @return games return the list of games
 	 */
-	public Set<Game> getGames() {
-		return games;
-	}
+	
 	
 	@Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Category other = (Category) obj;
-        if (id != other.id) {
-            return false;
-        }       
-        if (name != other.name) {
-            return false;
-        }
-        return true;
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Category other = (Category) obj;
+	    return new EqualsBuilder().append(this.getId(), other.getId())
+	    						.append(this.getName(), other.getName())
+	    						.isEquals();
     }
     
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        return result;
+        return new HashCodeBuilder().append(this.getId())
+        							.append(this.getName()).toHashCode();
     }
     
     @Override
     public String toString() {
-        return "Category [id=" + id + ", name=" + name + "]";
+        return new ToStringBuilder(this).append("id", this.getId())
+        							.append("name", this.getName()).toString();
     }
 }

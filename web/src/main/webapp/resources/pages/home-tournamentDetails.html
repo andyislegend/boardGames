@@ -1,0 +1,118 @@
+<div id="main_wrapper">
+
+    <div id="left_wrapper">
+
+        <div id="up_wrapper">
+		<div style = "padding:2% 2%;">
+				<h2>{{status}}</h2>
+				<h1>{{tournament.tournamentName}}</h1>
+				<p>Count of participants: {{tournamentParticipants.length}} of {{tournament.countOfParticipants}}</p>
+				<p>User creator: {{tournament.userCreatorName}}</p>
+				<p>date of tournament: {{tournament.dateOfTournament | date:'yyyy-MM-dd'}}</p>
+				
+				<div style="margin: auto auto">
+				<button ng-disabled = "!joinStatus" ng-click = "joinToTournament(tournament.tournamentId)" class="btn btn-info">Join</button>
+				<button ng-disabled = "!quitStatus" ng-click = "leaveTournament(tournament.tournamentId)" class="btn btn-info">Quit</button>
+        		</div>
+        </div>
+        </div>
+
+        
+			<div id="down_wrapper">
+			<div ng-show = "isCreator" class="form-group">
+				<form>
+				<span style="margin: auto auto; width: 40px">Change date of Tournaments</span>
+				<input type = "date" class="form-control" data-ng-model = "changeTournamentDate">
+				<input type = "submit" class="btn btn-default" value="Change" ng-click = "changeDataOfTournament()">
+				</form>	
+			<button  type="button" class="btn btn-default" data-toggle="modal" ng-click = "updateTournamentParticipantsInfo()" data-target="#giveRateModal">Give a rate</button>
+			<button type ="button" class="btn btn-default" data-toggle="modal" data-target = "#deleteTournament">Delete this tournament</button>
+			<button type ="button" class="btn btn-default" ng-disabled = "tournament.tableGenerated" ng-click = "generateTournamentTable()">Generete this tournament</button>
+		</div>
+        </div>
+    </div>
+
+    <div id="right_wrapper">
+		<div ng-if = "tournament.tableGenerated">
+		<h3 style="margin-right: 2px;">Tournament Table</h3>
+		<table class = "table" id ="right-table" style="width: 100%">
+			<tr><th> Group 1 <th></tr>
+			<tr ng-repeat = "user in tournamentParticipants"><td ng-if="$even">{{user.username}}<td></tr>
+		</table>
+		<table class = "table" id ="right-table" style="width: 100%">
+			<tr><th> Group 2 <th></tr>
+			<tr ng-repeat = "user in tournamentParticipants"><td ng-if="$odd">{{user.username}}<td></tr>
+		</table>
+		</div>
+		<div ng-if = "!tournament.tableGenerated"><h4>Table not generated yet</h4></div>
+    </div>
+    
+    <div id="right_wrapper">
+		<table class = "table" id ="table-showParticipants" style="width: 100%">
+			<tr><th>Participants<th></tr>
+			<tr ng-repeat = "user in tournamentParticipants"><td>{{user.username}}<td></tr>
+		</table>
+    </div>
+
+    <div style="clear: both;"></div>
+
+<div id="giveRateModal" class="modal fade" role="dialog">
+  <div class="modal-dialog"> 
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" ng-click = "changeStatusToRate()" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+       <table class = "table">
+		<tr><th>User</th><th>Mark</th><th>Give Mark</th></tr>
+		<form>
+			<tr ng-repeat = "user in participantsForRate">
+				<td>{{user.username}}</td>
+				<td><input type="number" min="-2" max="3" ng-model = "rate"></td>
+				<td><button ng-click = "giveRate(user.id, rate)" ng-disabled = "user.tournamentRatingStatus">Rate</button></td>
+			</tr>
+		</form>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>		
+  </div>
+</div>
+
+<div id="deleteTournament" class="modal fade" role="dialog">
+  <div class="modal-dialog"> 
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" ng-click = "changeStatusToRate()" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+       <h2>Are you really want to delete this tournamet?</h2>
+      </div>
+      <div class="modal-footer">
+      	<a href = "#tournaments"><button ng-click = "deleteTournament(tournament.tournamentId)" type="button" class="btn btn-default">Yes</button></a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>		
+  </div>
+</div>
+
+<div id="attentionToChangeData" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Attention!</h4>
+      </div>
+      <div class="modal-body">
+        <p>You can not change on past data</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

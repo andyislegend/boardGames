@@ -1,0 +1,150 @@
+#blackBut {
+	background-color: black;
+	color: white;
+	border-color:black;
+}
+
+#blackBut:hover {
+    background-color: grey;
+	color: black;
+	border-color:grey;
+}
+
+#userProfile {
+	margin: 0 0 6px 0;
+}
+
+#saveUserUpdate {
+
+	 position:relative;
+	 float:right;
+	 left:21%;
+}
+
+#saveUserAnswer {
+
+	 left:10%;
+}
+
+#userAvatar {
+	 height: 92px; 
+	 width: 92px;
+}
+
+#avatar {
+	 margin-left: -7%;
+	 height: 95px; 
+	 width: 95px;
+	 cursor:pointer;
+}
+
+#userAvatar {
+	 height: 95px; 
+	 width: 95px;
+}
+
+#avatar:hover {
+    opacity: 0.5;
+    filter:alpha(opacity=40);
+}
+
+
+#tournamentsList {
+	  text-align: left;
+      list-style-type: none;
+      padding: 0px;
+}
+
+#gamesList {
+	  text-align: left;
+      list-style-type: none;
+      padding: 0px;
+}
+
+#phoneNumber {
+	  text-align: center;
+      list-style-type: none;
+      padding: 0px;
+}
+
+#uploadButton {
+    font-size:10px;
+    margin-left: -7%;
+}
+
+#userRating {
+	color : white;
+	width: 220px;
+}
+
+.outerDiv {
+    width: 93%;
+    height: 100%;
+    text-align:center;
+    background: #428BCA;
+    color:white;
+}
+
+.innerDiv {
+    background: #428BCA;
+    font-size:11px;
+    margin:0;
+}
+
+#container {
+  width: 190px;
+  height: 30px;
+  position: relative;
+  cursor:pointer;
+}
+
+#insideRating {
+	color:black;
+}
+
+#headerUsers {
+	text-align:center;
+}
+
+#profileDiv {
+	margin-left: 2%;
+}
+
+#flag {
+	width: 30px;
+  	height: 20px;
+  	margin-top:9px;
+}
+
+#editProfile {
+	margin-top:-19px;
+	margin-left: 50px;
+}
+
+#passwordChange {
+	margin-left: 2%;
+	margin-bottom:40px;
+}
+
+#changeUserStatus {
+	cursor:pointer;
+}
+
+#getUploader {
+	background: #428BCA;
+    font-size:11px;
+    margin:0;
+}
+
+#inputEdit {
+	font-size:14px;
+}
+
+#ps {
+	margin-bottom:30px;
+}
+
+#friendProfile {
+	font-size:16px;
+	margin-left: 20px;
+}

@@ -1,0 +1,57 @@
+#gameDetailTable {
+	width:100%;
+}
+.inlineDisplay {
+	display:inline;
+}
+label.inlineDisplay {
+	vertical-align: top;
+}
+input.inlineDisplay {
+	width:40%;
+}
+.centeredObjects {
+	margin:auto;
+	text-align: center;
+}
+.listCenterd {
+	margin-left:28%;
+	width:43%;
+}
+.boldText {
+	font-weight: bold;
+}
+select.inlineDisplay {
+	width:43%;
+}
+span.glyphicon-knight {
+    font-size: 2.0em;
+}
+.blue {
+	background-color: #e6e6e6
+}
+.gray {
+	background-color: #ccddff
+}
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -15px;
+}
+#piechart {
+	width: 440px;
+	height: 200px;
+}
+#areachart {
+	width: 440px;
+	height: 200px;
+}
+#columnchart {
+	width: 440px;
+	height: 200px;
+}
+#columnagechart {
+	width: 440px;
+	height: 200px;
+}

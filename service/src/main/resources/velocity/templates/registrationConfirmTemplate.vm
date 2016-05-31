@@ -1,0 +1,17 @@
+<html>
+	<body>
+			$date - successful registration, Congratulations!
+			<br> 
+			Welcome on board, <b>$name</b>. 
+			<br>
+			To login into system, please confirm your registration by clicking on url below. 
+			<br>
+            Your login/username: $name,<br>
+            Your confirmation link: $confirm<br>
+            
+            Don't tell anyone your password or login!
+            <br>
+            ----- DONT REPLAY TO THIS MESSAGE! IT'S GENERATED AUTOMATICALLY -----
+             
+	</body>
+</html>

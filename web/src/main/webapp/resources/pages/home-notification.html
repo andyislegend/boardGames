@@ -1,0 +1,21 @@
+<h3 style="text-align: center">Notification</h3>
+<div ng-controller="getGamesGlobalController">
+    <!--<div class="option-chosen"><select class="form-control" ng-model="option" ng-options="option for option in options"></select></div>-->
+    <div class="figna">
+    <table ng-table="allNotificationTable" class="table" show-filter="true">
+		<tr ng-repeat="notification in allNotificationDisplay | orderBy: '-date'" class="table">
+            <td title="'Type'" class="sign-header" filter="{'type': 'select'}" filter-data="typeOfNotification()">
+                    <img class="notification-message" uib-tooltip="{{notification.type}}" tooltip-placement="right" src="resources/ico/{{notification.type.toLowerCase()}}2.png"/>
+            </td>
+<!--            <td class="notification-line">
+            </td>-->
+            <td title="'message'" filter="{ 'message': 'text' }" class="notification-head">
+                {{notification.message}}
+            </td>
+             <td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }" class="notification-data">
+                {{notification.date | date : format : timezone}}
+            </td>
+        </tr>
+    </table>
+    </div>
+</div>

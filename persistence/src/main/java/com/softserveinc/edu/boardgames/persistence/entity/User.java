@@ -2,7 +2,6 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,25 +19,28 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserRating;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserLevel;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
+import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
 
 /**
  * This class describes users of boardGames website.
  * 
- * 
  * @author Volodymyr Terlyha
  */
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -47,6 +49,13 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2966070992511907457L;
+	
+	/**
+	 * @param CHECK_LOGGED_IN_USERNAME
+	 *            is used to set unbanned user rating to minimal with which
+	 *            he can access the website a not be automatically banned again
+	 */
+	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
 
 	/**
 	 * Describes the user id. Unique value.
@@ -57,7 +66,7 @@ public class User implements Serializable {
 	private Integer id;
 
 	/**
-	 * Describes users first name.
+	 * Describes users username(login).
 	 */
 	@NotEmpty
 	@Column(name = "username", nullable = false, unique = true)
@@ -78,8 +87,8 @@ public class User implements Serializable {
 	/**
 	 * Describes users sex.
 	 */
-	@Column(name = "sex")
-	private String sex;
+	@Column(name = "gender")
+	private String gender;
 
 	/**
 	 * Describes users age.
@@ -88,7 +97,7 @@ public class User implements Serializable {
 	private Integer age;
 
 	/**
-	 * Describes users email. Also is used as a login.
+	 * Describes users email.
 	 * 
 	 */
 	@NotEmpty
@@ -109,12 +118,20 @@ public class User implements Serializable {
 	private String password;
 
 	/**
+	 * Provides a description of User's current rating as a number. By default,
+	 * after registration User obtain 0 rating
+	 */
+	@NotNull
+	@Column(name = "userRating", nullable = false)
+	private Integer userRating = 0;
+
+	/**
 	 * Provides a description of User's current rating. By default, after
 	 * registration User obtain a 'NOOB' rating
 	 */
 	@NotEmpty
 	@Column(name = "rating", nullable = false)
-	private String rating = UserRating.NOOB.name();
+	private String level = UserLevel.NOOB.name();
 
 	/**
 	 * Provides a description of User's current status. By default, after
@@ -122,88 +139,63 @@ public class User implements Serializable {
 	 */
 	@NotEmpty
 	@Column(name = "state", nullable = false)
-	private String state = UserStatus.ACTIVE.name();
+	private String state = UserStatus.UNDER_VERIFICATION.name();
+	
+	@Column(name = "tournamentRatingStatus")
+	private boolean tournamentRatingStatus;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	private Set<Exchange> exchanges;
+	
+	/**
+	 * Describes the country where user lives.
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "countryId", referencedColumnName = "id")
+	private Country country;
 
 	/**
-	 * Describes address where user lives. Has a many to one relationship to
-	 * address table.
+	 * Describes the city where user lives.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "addressId", referencedColumnName = "id")
-	private Address address;
-
-	/*
-	 * by Anna for Events in case you need to change smth, please let me know
-	 */
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
-	@JsonManagedReference
-    private Set<Event> events;
-
-
-	 /**
-	 * Describes address where user lives. Has a many to one relationship to
-	 * address table.
-	 */
-	 /*@OneToMany(fetch = FetchType.LAZY, targetEntity = Friend.class, cascade =
-	 { CascadeType.ALL })
-	 @JoinColumn(name = "friendId", referencedColumnName = "id")
-	 @JsonManagedReference
-	 private Set <Friend> friends;*/
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cityId", referencedColumnName = "id")
+	private City city;
 
 	/**
 	 * Describes users role. Has a one to many relationship to roles table.
 	 */
 	@ElementCollection
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "username"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "value", length = 30)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "username"))
+	@Enumerated(EnumType.STRING)
+	@Column(name = "value", length = 30)
 	private Set<UserRoles> userRoles = new HashSet<>();
-
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-	@JsonBackReference
-	private Set<GameUser> gameUsers;
 
 	/**
 	 * List of tounaments that were organized by user
 	 */
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
-			CascadeType.REFRESH }, mappedBy = "userCreator")
-	private List<Tournament> createdTounaments;
+	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, mappedBy = "user")
+	@JsonBackReference
+	private Set<GameRating> gameRatingNumeric;
 
-	/**
-	 * List if tounaments which user take part in
-	 */
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,
-			CascadeType.REFRESH }, mappedBy = "userGuest")
-	private List<TournamentComposition> takenpartTounaments;
+	@ElementCollection
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "users")
+	private Set<Tournament> tournaments;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 @JsonManagedReference
+	private Set<SubscribedUsers> subscribedUsers;
 
-
-	/**
-	 * Constructor without parameters.
-	 */
 	public User() {
 	}
 
-	/**
-	 * Get value of column id.
-	 * 
-	 * @return value of column id.
-	 */
 	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Set value of column id.
-	 * 
-	 * @param id
-	 *            value of column id.
-	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -212,145 +204,76 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	/**
-	 * Get value of column firstName.
-	 * 
-	 * @return value of column firstName.
-	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * Set value of column firstName.
-	 * 
-	 * @param firstName
-	 *            value of column firstName.
-	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	/**
-	 * Get value of column lastName.
-	 * 
-	 * @return value of column lastName.
-	 */
 	public String getLastName() {
 		return lastName;
 	}
 
-	/**
-	 * Set value of column lastName.
-	 * 
-	 * @param lastName
-	 *            value of column lastName.
-	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	/**
-	 * Get value of column sex.
-	 * 
-	 * @return value of column sex.
-	 */
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	/**
-	 * Set value of column sex.
-	 * 
-	 * @param sex
-	 *            value of column sex.
-	 */
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	/**
-	 * Get value of column age.
-	 * 
-	 * @return value of column age.
-	 */
 	public Integer getAge() {
 		return age;
 	}
 
-	/**
-	 * Set value of column age.
-	 * 
-	 * @param age
-	 *            value of column age.
-	 */
 	public void setAge(Integer age) {
 		this.age = age;
 	}
 
-	/**
-	 * Get value of column email.
-	 * 
-	 * @return value of column email.
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * Set value of column email.
-	 * 
-	 * @param email
-	 *            value of column email.
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * Get value of column phoneNumber.
-	 * 
-	 * @return value of column phoneNumber.
-	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	/**
-	 * Set value of column phoneNumber.
-	 * 
-	 * @param phoneNumber
-	 *            value of column phoneNumber.
-	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	/**
-	 * Get value of column password.
-	 * 
-	 * @return value of column password.
-	 */
 	public String getPassword() {
 		return password;
 	}
 
-	/**
-	 * Set value of column password.
-	 * 
-	 * @param password
-	 *            value of column password.
-	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getRating() {
-		return rating;
+	public Integer getUserRating() {
+		return userRating;
 	}
 
-	public void setRating(String rating) {
-		this.rating = rating;
+	public void setUserRating(Integer userRating) {
+		this.userRating = userRating;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public String getState() {
@@ -360,41 +283,30 @@ public class User implements Serializable {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	/**
-	 * Get value of column address.
-	 * 
-	 * @return value of column address.
-	 */
-	public Address getAddress() {
-		return address;
+
+	public Country getCountry() {
+		return country;
 	}
 
-	/**
-	 * Set value of column address.
-	 * 
-	 * @param address
-	 *            value of column address.
-	 */
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
-	public Set<Event> getEvents() {
-		return events;
+	public City getCity() {
+		return city;
 	}
 
-	public void setEvents(Set<Event> events) {
-		this.events = events;
+	public void setCity(City city) {
+		this.city = city;
 	}
 	
-	/*public Set<Friend> getFriends() {
-		return friends;
+	public boolean isTournamentRatingStatus() {
+		return tournamentRatingStatus;
 	}
-	
-	public void setFriends(Set<Friend> friends) {
-		this.friends = friends;
-	}*/
+
+	public void setTournamentRatingStatus(boolean tournamentRatingStatus) {
+		this.tournamentRatingStatus = tournamentRatingStatus;
+	}
 
 	public Set<UserRoles> getUserRoles() {
 		return userRoles;
@@ -404,147 +316,119 @@ public class User implements Serializable {
 		this.userRoles = userRoles;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((age == null) ? 0 : age.hashCode());
-		result = prime * result + ((createdTounaments == null) ? 0 : createdTounaments.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((events == null) ? 0 : events.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((gameUsers == null) ? 0 : gameUsers.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
-		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + ((takenpartTounaments == null) ? 0 : takenpartTounaments.hashCode());
-		result = prime * result + ((userRoles == null) ? 0 : userRoles.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+	public Set<GameRating> getGameRatingNumeric() {
+		return gameRatingNumeric;
+	}
+
+	public void setGameRatingNumeric(Set<GameRating> gameRatingNumeric) {
+		this.gameRatingNumeric = gameRatingNumeric;
+	}
+	
+	public Set<Tournament> getTournaments() {
+		return tournaments;
+	}
+
+	public void setTournaments(Set<Tournament> tournaments) {
+		this.tournaments = tournaments;
+	}
+
+	public Set<SubscribedUsers> getSubscribedUsers() {
+	return subscribedUsers;
+	}
+
+	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
+		this.subscribedUsers = subscribedUsers;
+	}
+
+	@PreUpdate
+	public void changeUserLevelOrStatus() {
+		if(getUserRating() < MINIMAL_RATING_FOR_ACTIVE_USER) {
+			setState(UserStatus.BANNED.name());
+		} else if (isBetween(this.getUserRating(), 0, 10)) {
+			setLevel(UserLevel.NOOB.name());
+		} else if (isBetween(this.getUserRating(), 11, 20)) {
+			setLevel(UserLevel.SKILLED.name());
+		} else if (isBetween(this.getUserRating(), 21, 30)) {
+			this.setLevel(UserLevel.PRO.name());
+		} else if (isBetween(this.getUserRating(), 31, 40)) {
+			this.setLevel(UserLevel.VETERAN.name());
+		} else if (isBetween(this.getUserRating(), 41, 50)) {
+			this.setLevel(UserLevel.MASTER.name());
+		} else if (isBetween(this.getUserRating(), 51, 60)) {
+			this.setLevel(UserLevel.WICKED_SICK.name());
+		} else if (isBetween(this.getUserRating(), 61, 70)) {
+			this.setLevel(UserLevel.EXTRATERESTRIAL.name());
+		} else if (isBetween(this.getUserRating(), 71, 100)) {
+			this.setLevel(UserLevel.GODLIKE.name());
+		}
+	}
+	
+	private boolean isBetween(int usersRating, int lower, int upper) {
+		  return lower <= usersRating && usersRating <= upper;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		System.out.println("**********000*********");
-		if (obj == null)
-			return false;
-		System.out.println("**********00000000*********");
-		/*if (getClass() != obj.getClass())
-			return false;*/
-		User other = (User) obj;
-		System.out.println("**********1*********");
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		System.out.println("**********2*********");
-		if (age == null) {
-			if (other.age != null)
-				return false;
-		} else if (!age.equals(other.age))
-			return false;
-		System.out.println("**********3*********");
-		if (createdTounaments == null) {
-			if (other.createdTounaments != null)
-				return false;
-		} else if (!createdTounaments.equals(other.createdTounaments))
-			return false;
-		System.out.println("**********4*********");
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		System.out.println("**********5*********");
-		if (events == null) {
-			if (other.events != null)
-				return false;
-		} else if (!events.equals(other.events))
-			return false;
-		System.out.println("**********6*********");
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		System.out.println("**********7*********");
-		if (gameUsers == null) {
-			if (other.gameUsers != null)
-				return false;
-		} else if (!gameUsers.equals(other.gameUsers))
-			return false;
-		System.out.println("**********8*********");
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		System.out.println("**********9*********");
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		System.out.println("**********10*********");
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		System.out.println("**********11*********");
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		System.out.println("**********12*********");
-		if (rating != other.rating)
-			return false;
-		System.out.println("**********13*********");
-		if (sex == null) {
-			if (other.sex != null)
-				return false;
-		} else if (!sex.equals(other.sex))
-			return false;
-		System.out.println("**********14*********");
-		if (state != other.state)
-			return false;
-		System.out.println("**********15*********");
-		if (takenpartTounaments == null) {
-			if (other.takenpartTounaments != null)
-				return false;
-		} else if (!takenpartTounaments.equals(other.takenpartTounaments))
-			return false;
-		System.out.println("**********16*********");
-		if (userRoles == null) {
-			if (other.userRoles != null)
-				return false;
-		} else if (!userRoles.equals(other.userRoles))
-			return false;
-		System.out.println("**********17*********");
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    User other = (User) obj;
+	    return new EqualsBuilder().append(getId(), other.getId())
+	                              .append(getUsername(), other.getUsername())
+	                              .append(getFirstName(), other.getFirstName())
+	                              .append(getLastName(), other.getLastName())
+	                              .append(getGender(), other.getGender())
+	                              .append(getAge(), other.getAge())
+	                              .append(getEmail(), other.getEmail())
+	                              .append(getPhoneNumber(), other.getPhoneNumber())
+	                              .append(getPassword(), other.getPassword())
+	                              .append(getUserRating(), other.getUserRating())
+	                              .append(getLevel(), other.getLevel())
+	                              .append(getState(), other.getState())
+	                              .append(getCountry(), other.getCountry())
+	                              .append(getCity(), other.getCity())
+	                              .isEquals();
+	}
+	
+	@Override
+	public int hashCode() {
+		 return new HashCodeBuilder().append(getId())
+				 .append(getUsername())
+				 .append(getFirstName())
+				 .append(getLastName())
+				 .append(getGender())
+				 .append(getAge())
+				 .append(getEmail())
+				 .append(getPhoneNumber())
+				 .append(getPassword())
+				 .append(getUserRating())
+				 .append(getLevel())
+				 .append(getState())
+				 .append(getCountry())
+				 .append(getCity())
+                 .toHashCode();
 	}
 
 	@Override
-	public String toString() {
-
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", age="
-				+ age + ", email=" + email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", address="
-				+ address + "]";
-	}
-
-	
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", getId())
+                .append("username", getUsername())
+                .append("firstName", getFirstName())
+                .append("lastName", getLastName())
+                .append("gender", getGender())
+                .append("age", getAge())
+                .append("email", getEmail())
+                .append("phoneNumber", getPhoneNumber())
+                .append("password", getPassword())
+                .append("userRating", getUserRating())
+                .append("rating", getLevel())
+                .append("state", getState())
+                .append("country", getCountry())
+                .append("city", getCity())
+                .toString();
+    }
 }

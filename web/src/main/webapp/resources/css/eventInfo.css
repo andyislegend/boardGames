@@ -1,0 +1,59 @@
+#eventInfoMain {
+    height: 450px;
+    width: 100%;
+    margin: 1px 1px;
+    
+}
+
+#eventInfoImage {
+
+    float: left;
+    height: 25%;
+    width:25%;
+    margin: 0.5% 0.5%;
+    background-color: WhiteSmoke;
+
+}
+
+#eventInfoName {
+
+    float: left;
+    height: 25%;
+    width:70%;
+    margin: 0.5% 0.5% 0.5% 3%;
+    background-color: WhiteSmoke;
+}
+
+#eventInfoDetails {
+
+    float: left;
+    height: 45%;
+    width: 98.5%;
+    background-color: WhiteSmoke;
+    margin: 0.5% 0.5%;
+    
+    
+}
+
+#eventInfoDetailsLeft {
+
+	float: left;
+    width: 50%;
+    height: 100%;
+    
+}
+
+#eventInfoDetailsRight {
+
+	margin-left: 5%;
+	float: left;
+    width: 44%;
+    height: 100%;
+}
+
+#eventInfoButtons {
+	margin-top: 20%;
+	margin-left: 0.5%;
+	width: 99%;
+	height: 25%;
+}

@@ -14,7 +14,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
 
+import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
+
+/**
+ * 
+ * @author Andrii Petryk
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -36,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -47,25 +56,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/index").
-		permitAll().antMatchers("/newuser").permitAll()
-		.antMatchers("/home/**").access("hasRole('USER')").
-		and().
-		formLogin().loginPage("/login").
-		and()
-		.formLogin().failureUrl("/login?error").
-		loginProcessingUrl("/j_spring_security_check")
-		.defaultSuccessUrl("/home", true).
-		usernameParameter("username").passwordParameter("password").
-		and()
-		.exceptionHandling().accessDeniedPage("/403").
-		and().
-		csrf().disable().
-		logout()
-		.invalidateHttpSession(true).
-		logoutSuccessUrl("/").
-		logoutUrl("/logout").
-		permitAll();
+		
+		CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
+        http.addFilterAfter(csrfTokenFilter, CsrfFilter.class);
+        
+        
+		http
+			
+			
+			.authorizeRequests()
+			.antMatchers("/", "/index").permitAll()
+			.antMatchers("/home/**").fullyAuthenticated()
+			.and()
+			.formLogin()
+			.loginProcessingUrl("/authenticate")
+			.usernameParameter("username")
+			.passwordParameter("password")
+			.successHandler(new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
+			.loginPage("/index")
+			.and()
+            .csrf().disable()
+            .httpBasic()
+            .and()
+            .logout()
+    		.invalidateHttpSession(true)
+    		.logoutSuccessUrl("/")
+    		.logoutUrl("/logout")
+    		.permitAll();
 
 	}
 }

@@ -88,10 +88,55 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.allanditzel</groupId>
+			<artifactId>spring-security-csrf-token-filter</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
+		<!-- apache http server -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>3.1.3.RELEASE</version>
+			<type>jar</type>
+    		<scope>compile</scope>
+		</dependency>
+		
 
 
 
-    </dependencies>
+
+	</dependencies>
+
+
 
 
 

@@ -1,0 +1,126 @@
+<div ng-controller="showAllTournamentsCtrl">
+   <div ng-controller="allUsersGameCtrl">
+      <h1 style="text-align: center"><span translate="USER_TOURNAMENTS"></span>
+      <a href="" data-toggle="modal" data-target="#myModalTournament">
+      	<span class="glyphicon glyphicon-plus"></span>
+      </a>
+       </h1>
+      <div class="column-5">
+         <div>
+              <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
+                           <div class="modal-dialog">
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h2>Create the best tournament ever</h2>
+                                    <h6>Fields marked with * are required</h6>
+                                 </div>
+                                 <div class="modal-body">                               
+                       				<form class="form-horizontal" role="form" name = "tournamentCreate" novalidate>                  				
+                        
+                        <div class="input-group" ng-class="{ 'has-error' : tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon7"> <span>Select game</span><span
+								style="color: red">*</span>
+							</span><select ng-model="selectedGame" style="width: 400px;"
+								class="form-control" aria-describedby="basic-addon7" 
+								 required="required">
+								<option  ng-repeat="game in allGame" value="{{game.id}}">{{game.name}}</option>
+							</select>
+						</div>
+                        <br>
+                  
+                        
+                        <div name = "name" class="input-group" ng-class="{ 'has-error' : tournamentCreate.name.$invalid && !tournamentCreate.name.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon1"><span> Name you tournament </span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="tournamentName"  style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon1"
+								maxlength="100" required>
+								
+						</div>
+						<br>
+						<div class="input-group" ng-class="{ 'has-error' : tournamentCreate.countOfParticipants.$invalid && !tournamentCreate.countOfParticipants.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon2"><span>Count of players</span>
+								<span style="color: red">*</span>	</span> <input
+								name = "countOfParticipants" min = "0" data-ng-model="countOfParticipants" style="width: 400px;"
+								type="number" class="form-control" aria-describedby="basic-addon2" required>
+						</div>
+						<br>
+						
+						<div class="input-group" ng-class="{ 'has-error' : tournamentCreate.dateOfTournament.$invalid && !tournamentCreate.dateOfTournament.$pristine }">
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon3"> <span> Date of tournament</span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="date" name = "dateOfTournament" style="width: 400px;" type="date"
+								class="form-control" aria-describedby="basic-addon3" required>      
+						</div>
+						<br>
+						<div class="input-group"  ng-class="{ 'has-error' : tournamentCreate.Country.$invalid && !tournamentCreate.Country.$pristine }">       	
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"><span> Enter Country</span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="countryTournament" name = "Country" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon4" required>
+						</div>
+						<br>
+						
+						<div class="input-group"  ng-class="{ 'has-error' : tournamentCreate.city.$invalid && !tournamentCreate.Country.$pristine }">       	
+							<span style="width: 200px;" class="input-group-addon"
+								id="basic-addon4"><span> Enter City</span>
+								<span style="color: red">*</span></span> <input
+								data-ng-model="cityTournament" name = "city" style="width: 400px;" type="text"
+								class="form-control" aria-describedby="basic-addon4" required>
+						</div>
+						<br>
+						<button style="margin-left: 30%;"
+							ng-click="createTournament()" ng-disabled="tournamentCreate.$invalid" value="Close" data-dismiss="modal"
+							class="btn btn-info btn-md">ADD NEW</button>
+
+						<button style="margin-left: 15%;" type="submit"
+							class="btn btn-danger btn-md" class="btn btn-default" ng-click="modalClose()"
+                                             data-dismiss="modal">
+							Cancel</button>
+                                    </form>                                                
+                                 </div>
+                             
+                              </div>
+                           </div>
+                        </div>
+        <ul class="nav nav-tabs nav-justified">
+          <li class="active">
+          	<a data-toggle="tab" ng-click = "getAllTournaments()"  data-target="#Alltournaments">All tournaments</a>         
+          </li>
+          <li>
+          	<a data-toggle="tab" ng-click = "getAllTournamentsSuchUserCreated()" data-target="#Mycreated"> My tournaments </a>
+          </li>
+        </ul> 
+          <div class="tab-content">      
+            <div id = "Alltournaments" class="tab-pane fade in active">
+            <table ng-table="allTournaments" show-filter="true" class="table table-striped">
+                  <tr ng-repeat="tournament in tournamentDisplay">
+                     <td data-title = "'Tournament name'" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
+                     	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
+                     </td>
+                     <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>         
+                  </tr>
+             </table>
+             </div>
+             
+             <div id = "Mycreated" class="tab-pane fade">
+            <table ng-table="allTournaments" show-filter="true" class="table table-striped">
+                  <tr ng-repeat="tournament in tournamentDisplay">
+                     <td data-title = "'Tournament name'" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
+                     	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
+                     </td>
+                     <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>         
+                  </tr>
+             </table>
+             </div>
+           </div>
+         </div>
+      </div>
+   </div>
+</div>

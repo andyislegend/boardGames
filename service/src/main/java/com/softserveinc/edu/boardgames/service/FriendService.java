@@ -2,31 +2,28 @@ package com.softserveinc.edu.boardgames.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.softserveinc.edu.boardgames.persistence.entity.Friend;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.repository.FriendRepository;
 
-@Service
-@Transactional
-public class FriendService {
+/**
+ * This interface is realization of DB CRUD other operation wich are used for manipulation with friends
+ * 
+ * @author Vasyl Bervetskyy
+ */
+public interface FriendService {
 	
-	@Autowired
-	private FriendRepository friendRepository;
+	public Integer findCountNoConsiderFrinds(String username);
 	
-	public List<Friend> getAllFriends(User user){
-		return friendRepository.findAllFriendByUser(user);
-	}
+	public Friend addOfferToFriendship(User user, User userId);
 	
-	public Integer findCountNoConsiderFrinds(User user){
-		return friendRepository.findCountNoConsiderFrinds(user);
-	}
+	public void acceptFrienship(User currentUser, User userId);
 	
-	public List<Friend> getAllNoConsiderFriendByUser(User user){
-		return friendRepository.getAllNoConsiderFriendByUser(user);
-	}
+	public void rejectedFrienship(User currentUser, User userId);
+	
+	public List<Friend> getAllMyOffering(String userName);
+	
+	public void cancelOffering(User currentUser, User otherUser);
+	
+	public void deleteFriend(User currentUser, User otherUser);
 	
 }

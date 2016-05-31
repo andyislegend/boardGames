@@ -1,146 +1,58 @@
 package com.softserveinc.edu.boardgames.service;
 
-import java.util.HashSet;
+import java.io.IOException;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
-import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
-import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
-import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
+import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 
-@Service
-@Transactional
-public class UserService {
-
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Transactional
-	public void createUser(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		UserRoles role = UserRoles.USER;
-		Set<UserRoles> roles = new HashSet<>();
-		roles.add(role);
-		user.setUserRoles(roles);
-		userRepository.save(user);
-	}
-
-	/**
-	 * Check if user with {@code username} exist in database
-	 *
-	 * @param username
-	 *            must not be non {@literal null}
-	 * @return {@literal true} if user with {@code username} does exist in
-	 *         database, else {@literal false}
-	 */
-	@Transactional
-	public boolean isExistsWithUsername(String username) {
-		return userRepository.findByUsername(username) != null;
-	}
-
-	@Transactional(readOnly = true)
-	public User getUser(String username) {
-		return userRepository.findByUsername(username);
-	}
-
-	@Transactional
-	public boolean changePassword(String username, String oldPassword, String newPassword) {
-		boolean isChanged = false;
-		if (username != null && oldPassword != null && newPassword != null) {
-			User user = userRepository.findByUsername(username);
-			if (user != null) {
-				PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				isChanged = passwordEncoder.matches(oldPassword, user.getPassword());
-				if (isChanged) {
-					user.setPassword(passwordEncoder.encode(newPassword));
-					userRepository.save(user);
-				}
-			}
-		}
-		return isChanged;
-	}
-
-	@Transactional
-	public List<User> findByRole(String role) {
-		return userRepository.findByUserRoleAllIgnoreCase(UserRoles.valueOf(role)).stream()
-				.collect(Collectors.toList());
-	}
-
-	@Transactional
-	public User findOne(String username) {
-		return userRepository.findByUsername(username);
-	}
-
-	@Transactional
-	public List<String> getRoles(String username) {
-		return ConvertSetEnumsToListString.convertToListString(userRepository.getRolesByUserName(username));
-	}
-
-	@Transactional
-	public void updateUser(User user) {
-		userRepository.save(user);
-	}
-
-	@Transactional
-	public void createSuperAdminIfNotExists(User user) {
-		if (isExistsWithUsername(user.getUsername()) && findByRole("SUPER_ADMIN").isEmpty()) {
-			userRepository.save(user);
-		}
-	}
-
-	@Transactional
-	public void createAdmin(String username, String role) {
-		User user = userRepository.findByUsername(username);
-		List<String> roles = getRoles(username);
-		roles.add(role);
-		if (role.equals(UserRoles.ADMIN.toString())) {
-			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-		}
-		userRepository.save(user);
-	}
-
-	@Transactional
-	public void createModerator(String username, String role) {
-		User user = userRepository.findByUsername(username);
-		List<String> roles = getRoles(username);
-		roles.add(role);
-		if (role.equals(UserRoles.MODERATOR.toString())) {
-			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-		}
-		userRepository.save(user);
-
-	}
-
-	@Transactional
-	public void createDBA(String username, String role) {
-		User user = userRepository.findByUsername(username);
-		List<String> roles = getRoles(username);
-		roles.add(role);
-		if (role.equals(UserRoles.DBA.toString())) {
-			user.setUserRoles(ConvertSetEnumsToListString.convertToSetUserRole(roles, UserRoles.class));
-		}
-		userRepository.save(user);
-
-	}
-
-	@Transactional
-	public List<User> findAll() {
-		return userRepository.findAll();
-	}
+public interface UserService {
 	
-	@Transactional
-	public List<User> findAllUsersByCity(String cityName) {
-		return userRepository.findUserByCity(cityName);
-	}
+	/**
+	 * @param CHECK_LOGGED_IN_USERNAME
+	 *            is used to verify whether we want to get user profile to edit
+	 *            or get friends profile
+	 */
+	public static final String CHECK_LOGGED_IN_USERNAME = "Logged in user";
+	
+	/**
+	 * @param NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER
+	 *            is used to set Country and City entities for user if
+	 *            no city or country is choosed
+	 */
+	public static final Integer NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER = 0;
+	
+	void createUser(User user);
+	boolean isExistsWithUsername(String username);
+	boolean isExistsWithEmail(String email);
+	User findOne(String username);
+	List<String> getRoles(String username);
+	void createAdmin(String username);
+	User findById(int id);
+	List<User> findAllFriends(String userName);
+	List<User> getAllNoConsiderFriendByUser(String userName);
+	List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName);
+	void createVerificationTokenForUser(final User user, final String token);
+	User getUserByToken(final String verificationToken);
+	VerificationToken getVerificationToken(final String VerificationToken);
+	String validateVerificationToken(String token);
+	void removeToken(VerificationToken token);
+	List<VerificationToken> findAllTokens();
+	void deleteUser(User user);
+	List<User> findAll();
+	void updateUser(User user);
+	User getUser(String username);
+	void updateUserWithBan(User user);
+	void updateUser(UserDTO userDTO, String username);
+	User getUserProfile(String username, String loggedInUserUsername);
+	String getAvatarUrl(String username);
+	void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException;
+	void banUserByAdministrator(String username);
+	void unbanUserByAdministrator(String username);
+	String findUsersGender(String username);
+	UserDTO getUserDTO(String username);
+
 }

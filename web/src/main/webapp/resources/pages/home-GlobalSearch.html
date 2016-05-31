@@ -1,0 +1,33 @@
+<div>
+<div ng-controller = "GlobalSearchCTRL" >
+<div ng-controller = "getGameDetailedInfoController" >
+<div ng-controller = "showAllTournamentsCtrl">
+<table ng-table="allFilesTable" class="table table-striped">
+   <tr ng-repeat="g in games">
+       <td data-title="'Name'" >
+           <a href = #gameUserDetails/{{g.id}}>{{g.name}}</a>
+       </td>
+       <td data-title="'Type'" >
+           game
+       </td> 
+   </tr>
+   <tr ng-repeat="t in tournament">
+       <td data-title="'Name'" >
+          <a href = "#tournament/{{t.tournamentId}}">{{t.tournamentName}}</a>
+       </td>
+       <td data-title="'Type'" >
+           tournaments
+       </td> 
+   </tr>
+   <tr ng-repeat="e in events">
+       <td data-title="'Name'" >
+           {{e.name}}
+       </td>
+       <td data-title="'Type'" >
+           event
+       </td> 
+   </tr>
+</table>
+</div>
+</div>
+</div>

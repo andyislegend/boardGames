@@ -1,19 +1,28 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Friend;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.service.FriendService;
+import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
+/**
+ * 
+ * This class is controller for manipulation with friends
+ * 
+ * @author Vasyl Bervetskyy
+ */
 @RestController
 public class FriendController {
 	
@@ -21,30 +30,146 @@ public class FriendController {
 	FriendService friendService;
 	
 	@Autowired
-	UserService userService; 
+	UserService userService;
+
+	@Autowired
+	NotificationService notificationService;
 	
-	@RequestMapping("/allFriends")
-	public List<User> getAllFriends(){
-		System.out.println("****in controller*****");
-		User user = userService.findOne("root");
-		List<Friend> listOfFriends = friendService.getAllFriends(user);
-		
-		Set<User> setOfUser = new HashSet<User>();
+	/**
+	 * This method for get all current user's friends from DB
+	 * 
+	 */
+	@RequestMapping(value = "/allFriends", method = RequestMethod.GET)
+	public List<User> getAllFriends() {
+		String userName = WebUtil.getPrincipalUsername();
+		List<User> list = userService.findAllFriends(userName);
+		return list;
+	}
+	
+	/**
+	 * This method for get number of offering to be your friend
+	 * 
+	 */
+	@RequestMapping(value = "/allOffering", method = RequestMethod.GET)
+	public int getAllOffering() {
+		String userName = WebUtil.getPrincipalUsername();
+		int countOfOffering = friendService.findCountNoConsiderFrinds(userName);
+		return countOfOffering;
+	}
+	
+	/**
+	 * 
+	 * This method for get all current user's not consider friends from DB 
+	 * 
+	 */
+	@RequestMapping(value = "/allOfferedUsers", method = RequestMethod.GET)
+	public List<User> allOfferedUsers() {
+		String userName = WebUtil.getPrincipalUsername();
+		List<User> listOfUsers = userService.getAllNoConsiderFriendByUser(userName);
+		return listOfUsers;
+	}
+	
+	/**
+	 * 
+	 * This method for add users to the list of friends of current user
+	 * 
+	 */
+	@RequestMapping(value = "/addUserToFriend",method = RequestMethod.POST)
+	public User addUserToFriend(@RequestBody Integer id) {
+		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
+		User userId = userService.findById(id);
+		if(userId == null) {
+			return null;
+		}
+		friendService.acceptFrienship(currentUser, userId);
+		return userId;
+	}
+	
+	/**
+	 * 
+	 * This method for rejected relationships between current user and another user
+	 * 
+	 */
+	@RequestMapping(value = "/rejectedUserToFriend",method = RequestMethod.POST)
+	public User rejectedUserToFriend(@RequestBody Integer id) {
+		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
+		User userId = userService.findById(id);
+		if(userId == null) {
+			return null;
+		}
+		friendService.rejectedFrienship(currentUser, userId);
+		return userId;
+	}
+	
+	/**
+	 * 
+	 * This method for finding all user in application except you, your friends, and offered users
+	 * 
+	 */
+	@RequestMapping(value = "/findAllUsers/{NameAndLastName}", method = RequestMethod.POST)
+	public List<User> findAllUsers(@PathVariable String NameAndLastName) {
+		List<User> listOfUsers = userService.findAllUserByFirstNameAndLastName(NameAndLastName, WebUtil.getPrincipalUsername());
+		return listOfUsers;
+	}
+	
+	/**
+	 * 
+	 * This method for offer an user to be your friend
+	 * 
+	 */
+	@RequestMapping(value = "/addOfferToFriendship",method = RequestMethod.POST)
+	public User addOfferToFriendship(@RequestBody Integer id) {
+		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
+		User userId = userService.findById(id);
+		if(userId == null) {
+			return null;
+		}
+		friendService.addOfferToFriendship(currentUser, userId);
+		return userId;
+	}
+	
+	/**
+	 * This method for show you all user who you sent offer to friendship 
+	 */
+	@RequestMapping(value = "/allMyOffering", method = RequestMethod.GET)
+	public List<Friend> allMyOffering(){
+		String userName = WebUtil.getPrincipalUsername();
+		List<Friend> list = friendService.getAllMyOffering(userName);
+		return list;
+	}
+	
+	/**
+	 * This method for gives you possibility to cancel your offering to be friends 
+	 */
+	@RequestMapping(value = "/canselOffering/{otherUserName}",method = RequestMethod.POST)
+	public void canselOffering(@PathVariable String otherUserName){
+		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
+		User otherUser = userService.findOne(otherUserName);
+		friendService.cancelOffering(currentUser, otherUser);
+	}
+	
+	@RequestMapping(value = "/deleteFriend/{deleteUserName}",method = RequestMethod.POST)
+	public void deleteFriend(@PathVariable String deleteUserName){
+		System.out.println(deleteUserName);
+		User currentUser = userService.findOne(WebUtil.getPrincipalUsername());
+		User otherUser = userService.findOne(deleteUserName);
+		friendService.deleteFriend(currentUser, otherUser);
+	}
+	
+	/**
+	 * This method return amout of not yet read message per your friends 
+	 */
+	@RequestMapping(value = "/allMessageByCurrentUserFriends", method = RequestMethod.GET)
+	public List<Integer> allFriend() {
+		String currentUserName = WebUtil.getPrincipalUsername();
+		List<User> listOfFriends = userService.findAllFriends(currentUserName);
+		List<Integer> allMessagesByFriends = new ArrayList<Integer>();
 		
 		for(int i = 0; i < listOfFriends.size(); i++){
-			setOfUser.add(listOfFriends.get(i).getUserOne());
-			setOfUser.add(listOfFriends.get(i).getUserTwo());
+			allMessagesByFriends.add(notificationService.
+					findAllNotReadMessageBySpecificFriend(listOfFriends.get(i).getUsername(), currentUserName));
 		}
-		setOfUser.remove(user);
-		System.out.println(setOfUser);
-		System.out.println(user);
-		List<User> list = new ArrayList<>(setOfUser);
-		for(int i = 0; i < list.size(); i++){
-			System.out.println(list.get(i).equals(user));
-		}
-		
-		return list;
-		
+		return allMessagesByFriends;
 	}
-
+	
 }

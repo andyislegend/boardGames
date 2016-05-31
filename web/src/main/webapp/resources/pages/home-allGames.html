@@ -1,0 +1,15 @@
+<div>
+	<h3 style="text-align: center">All Games</h3>
+	<div ng-controller="getGamesGlobalController">
+		<div class="widget widget_top-posts"></div>
+		<table ng-table="allGamesTable" show-filter="true" class="table table-striped">
+			<tr ng-repeat="x in gamesGlobalDisplay">
+				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+					<a href="#gameSelect/{{x.id}}/{{x.name}}">{{ x.name }}</a>
+				</td>
+				<td title="'Category'" sortable="'categoryName'" 
+					filter="{ 'categoryName': 'text' }">{{ x.categoryName }}</td>
+			</tr>
+		</table>
+	</div>
+</div>

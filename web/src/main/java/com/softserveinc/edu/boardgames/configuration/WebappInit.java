@@ -1,14 +1,17 @@
 package com.softserveinc.edu.boardgames.configuration;
 
 import javax.servlet.Filter;
-
-import org.springframework.security.access.SecurityConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.softserveinc.edu.boardgames.persistence.configuration.PersistanceConfiguration;
 import com.softserveinc.edu.boardgames.service.configuration.ServiceConfiguaration;
 
+/**
+ * 
+ * @author Andrii Petryk, Taras Varvariuk
+ *
+ */
 public class WebappInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

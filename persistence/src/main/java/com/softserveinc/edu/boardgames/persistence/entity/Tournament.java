@@ -2,101 +2,149 @@ package com.softserveinc.edu.boardgames.persistence.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
+import java.util.Set;
 
 /**
- * @author Daria Bondar
- * @since 12.04.2016
- *
- * This entity is for storing information abot tournament which users want to hold
+ * @author Volodymyr Krokhmalyuk
+ * 
+ * This entity is for storing information about tournament which users want to hold
  */
 @Entity
 @Table(name = "tournament")
 public class Tournament implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+
+	private static final long serialVersionUID = -4938895533945763751L;
+	/**
+	 * 
+	 */
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     /**
      * Discribes tournament's name
      */
-    @Column
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * User that created this tournament
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "idUserCreator", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User userCreator;
-
-    /**
-     * List of tournament compositions (users) that take part in this tounament
-     */
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "tournament")
-    private List<TournamentComposition> tournamentComposition;
 
     /**
      * Kind of game which is tournament organized on
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Game.class)
-    @JoinColumn(name = "gameId", referencedColumnName = "id")
-    private Game game;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+    private GameUser game;
 
+    @Column(nullable = false)
+    private Integer countOfParticipants;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<User> users;
+    
+    @Column(nullable = false)
+    private Date dateOfTournament;
+
+    @Column(nullable = false)
+    private String country;
+
+    @Column(nullable = false)
+    private String city;
+    
+    @Column(name = "isTableGenerated")
+    private boolean isTableGenerated;
+    
     public Tournament() {
-    }
+		
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public User getUserCreator() {
-        return userCreator;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public User getUserCreator() {
+		return userCreator;
+	}
 
-    public void setUserCreator(User userCreator) {
-        this.userCreator = userCreator;
-    }
+	public void setUserCreator(User userCreator) {
+		this.userCreator = userCreator;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public GameUser getGame() {
+		return game;
+	}
 
-        Tournament that = (Tournament) o;
+	public void setGame(GameUser game) {
+		this.game = game;
+	}
 
-        if (!name.equals(that.name)) return false;
-        if (!userCreator.equals(that.userCreator)) return false;
-        if (tournamentComposition != null ? !tournamentComposition.equals(that.tournamentComposition) : that.tournamentComposition != null)
-            return false;
-        if (game != null ? !game.equals(that.game) : that.game != null) return false;
+	public Integer getCountOfParticipants() {
+		return countOfParticipants;
+	}
 
-        return true;
-    }
+	public void setCountOfParticipants(Integer countOfParticipants) {
+		this.countOfParticipants = countOfParticipants;
+	}
 
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + userCreator.hashCode();
-        result = 31 * result + (tournamentComposition != null ? tournamentComposition.hashCode() : 0);
-        result = 31 * result + (game != null ? game.hashCode() : 0);
-        return result;
-    }
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
+	public Date getDateOfTournament() {
+		return dateOfTournament;
+	}
+
+	public void setDateOfTournament(Date dateOfTournament) {
+		this.dateOfTournament = dateOfTournament;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public boolean isTableGenerated() {
+		return isTableGenerated;
+	}
+
+	public void setTableGenerated(boolean isTableGenerated) {
+		this.isTableGenerated = isTableGenerated;
+	}	
 }

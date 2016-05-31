@@ -2,35 +2,32 @@ package com.softserveinc.edu.boardgames.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
-import com.softserveinc.edu.boardgames.persistence.repository.GameRepository;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 
-@Service
-@Transactional
-public class GameService {
+public interface GameService {
 
-	@Autowired
-	private GameRepository gameRepo;
-
-	public Game findById(Integer id) {
-		return gameRepo.findOne(id);
-	}
-
-	public List<Game> getAll() {
-		return gameRepo.findAll();
-	}
-
+	Game findById(Integer id);
+	
+	List<Game> getAll();
+	
 	@Transactional
-	public void update(Game game) {
-		gameRepo.saveAndFlush(game);
-	}
-
+	void update(Game game);
+	
 	@Transactional
-	public void create(Game game) {
-		gameRepo.save(game);
-	}
+	void delete(Game game);
+	
+	List<AllGamesDto> getGamesDTO();
+	
+	Game findByName(String name);
+	
+	List<GamesChartDTO> groupGameUserByGame();
+	
+	List<GamesChartDTO> getRatingsForGame();
+	
+	List<UsersAgeChartDTO> countOfUsersOfAge();
 }

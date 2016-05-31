@@ -1,0 +1,26 @@
+<div ng-controller="gameNotifyController">
+	<div class="centeredObjects">
+		<h2>Game news</h2>
+	</div>
+	<table class="table" ng-table="gameNotifyTable" show-filter="true">
+		<tbody>
+			<tr ng-repeat="x in gameNotificationsDisplay" 
+			ng-class="{'blue' : x.status == 'CHECKED', 'gray': x.status == 'UNCHECKED'}">
+				<td title="'Icon'">
+					<span class="glyphicon glyphicon-knight"></span>
+				</td>
+				<td title="'Applier'" sortable="'username'" filter="{ 'username': 'text' }">
+					{{x.applierUsername}}
+				</td>
+				<td title="'Message'" filter="{ 'message': 'text' }">
+					<a href="#gameUserDetails/{{x.gameUserId}}" ng-click="markAsChecked(x.id)">
+						{{x.message}}
+					</a>
+				</td>
+				<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">
+					{{x.date | date:'yyyy-MM-dd'}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

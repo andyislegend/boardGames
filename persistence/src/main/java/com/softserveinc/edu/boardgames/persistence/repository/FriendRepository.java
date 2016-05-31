@@ -1,27 +1,66 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.NamedNativeQuery;
-import javax.persistence.NamedQuery;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import com.softserveinc.edu.boardgames.persistence.entity.Friend;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+
+/**
+ * This interface has methods for work with friends
+ * 
+ * @author Vasyl Bervetskyy
+ * 
+ */
 
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Long> {
 		
-		@Query("SELECT f FROM Friend f WHERE (f.userOne = ?1 OR f.userTwo = ?1) AND f.status.id = 2")
-		public List<Friend> findAllFriendByUser(User user);
+		/**
+		 * This method for finding all friend request
+		 * 
+		 * @param userName it's your name
+		 * @return list of users
+		 */
+		@Query("SELECT COUNT(f) FROM Friend f WHERE f.userId.username = ?1 AND f.status.id = 1")
+		public Integer findCountNoConsiderFrinds(String userName);
 		
-		@Query("SELECT COUNT(f) FROM Friend f WHERE (f.userOne = ?1 OR f.userTwo = ?1) AND f.status.id = 1")
-		public Integer findCountNoConsiderFrinds(User user);
+		/**
+		 * This method for changing status of friendship to accepted
+		 * 
+		 * @param currentUser this is you
+		 * @param userId this is user who you want to add to your list of friends
+		 * 
+		 */	
+		@Modifying
+		@Query("UPDATE Friend f SET f.status.id = 2 WHERE f.user = ?1 AND f.userId = ?2")
+		public void changeStatusOfFriendshipToAccepted(User currentUser, User userId);
 		
-		@Query("SELECT f FROM Friend f WHERE (f.userOne = ?1 OR f.userTwo = ?1) AND f.status.id = 1")
-		public List<Friend> getAllNoConsiderFriendByUser(User user);
+		/**
+		 * This method for changing status of friendship to rejected
+		 * 
+		 * @param currentUser this is you
+		 * @param userId this is user who you want to add to your list of friends
+		 */	
+		@Modifying
+		@Query("UPDATE Friend f SET f.status.id = 3 WHERE f.user = ?1 AND f.userId = ?2")
+		public void changeStatusOfFriendshipToRejected(User currentUser, User userId);
+		
+		@Query("SELECT f FROM Friend f WHERE f.user.username = ?1 AND (f.status.id = 1 OR f.status.id = 3)")
+		public List<Friend> getAllMyOffering(String userName);
+		
+		@Modifying
+		@Query("DELETE FROM Friend f WHERE f.user = ?1 AND f.userId = ?2")
+		public void cancelOffering(User currentUser, User otherUser);
+		
+		@Modifying
+		@Query("DELETE FROM Friend f WHERE f.user = ?1 AND f.userId = ?2 AND f.status.id = 2")
+		public void deleteFriend(User currentUser, User otherUser);
+		
+		
 }
