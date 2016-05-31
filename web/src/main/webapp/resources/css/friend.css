@@ -427,36 +427,7 @@ word-wrap: break-word;
     .tab.active {
         display:block;
     }
-/***************************/
-
-.type-header{
-    text-align: center;
-    width: 10%;
-}
-.sign-header{
-    width: 1%;
-    text-align: center;
-}
-.sign-header img{
-    height: 30px;
-    width: 30px;
-}
-.notification-line{
-    width: 1%;
-    background: #8084FF;
-}
-.notification-head{
-    width: 70%;
-}
-.notification-data{
-    width: 12%;
-    padding-left: 0px;
-}
-.notification-icon{
-    width: 30px;
-    height: 30px;
-}
-/************************************/
+/* ******************** */
 .delete-message{
     font-size: 27px;
     text-align: center;
