@@ -54,4 +54,10 @@ public class GamePropositionServiceImpl implements GamePropositionService {
 	public List<InfoFromApplierDTO> getAllGamePropositionsForUser(Integer userId) {
 		return gamePropositionRepo.getBorrowedGamesFromPropositions(userId);
 	}
+
+	@Modifying
+	@Transactional
+	public void updateForExchange(Integer id, String status) {
+		gamePropositionRepo.updateForExchange(id, status);
+	}
 }

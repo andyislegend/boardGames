@@ -191,11 +191,7 @@ public class UserGameSharingController {
 		exchange.setApplyingDate(localDate);
 		exchangeService.update(exchange);
 		
-		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
-			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
-			gameUser.setStatus(GameUserStatus.SHARED.name());
-			gameUserService.update(gameUser);
-		}
+		gamePropoService.updateForExchange(exchange.getId(), GameUserStatus.SHARED.name());
 		
 		String messageForNotification = WebUtil.getPrincipalUsername() 
 		+ " confirmed your request for game " + gameUserOfOwner.getGame().getName() 
@@ -240,11 +236,8 @@ public class UserGameSharingController {
 		User userToNotify = userService.findById(exchange.getUser().getId());
 		User userInvoker = userService.findById(exchange.getUserApplierId());
 		
-		for (GameUserDTO propo: gamePropoService.getFromExchangeId(exchange.getId())) {
-			GameUser gameUser = gameUserService.getUserGamesById(propo.getId());
-			gameUser.setStatus(GameUserStatus.PRIVATE.name());
-			gameUserService.update(gameUser);
-		}
+		gamePropoService.updateForExchange(exchange.getId(), GameUserStatus.PRIVATE.name());
+		gamePropoService.deleteForExchange(exchange.getId());
 		
 		if (comment != this.DEFAULT_COMMENT) {
 			CommentsForGame commentToSend = new CommentsForGame(
@@ -256,9 +249,7 @@ public class UserGameSharingController {
 				+ " intends to give " + gameUserToUpdate.getGame().getName() 
 				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.";
 		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
-		
-		gamePropoService.deleteForExchange(exchange.getId());
-		
+				
 		exchangeService.delete(exchange);
 	}
 	

@@ -27,5 +27,9 @@ public interface GamePropositionService {
 	@Transactional
 	void deleteForExchange(Integer exchangeID);
 	
+	@Modifying
+	@Transactional
+	public void updateForExchange(Integer id, String status);
+	
 	List<InfoFromApplierDTO> getAllGamePropositionsForUser(Integer userId);
 }
