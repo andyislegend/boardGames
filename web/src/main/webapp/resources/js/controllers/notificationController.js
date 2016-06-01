@@ -58,5 +58,11 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
             console.log(error);
         });
 	}
+    
+   $http.get('getStatusOfNotification').success(function(option){
+       $scope.checkboxModel = option;
+   }).error(function(error){
+       console.log(error);
+   });
         
 }]);

@@ -56,5 +56,7 @@ public interface UserService {
 	UserDTO getUserDTO(String username);
 	
 	public void setNotification(String userName, boolean option);
+	
+	public boolean getStatusOfNotification(String userName);
 
 }

@@ -494,4 +494,9 @@ public class UserServiceImpl implements UserService {
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
 		return userDTO;
 	}
+
+	@Override
+	public boolean getStatusOfNotification(String userName) {
+		return userRepository.getStatusOfNotification(userName);
+	}
 }

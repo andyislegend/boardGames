@@ -181,4 +181,11 @@ public class UsersController {
 		String userName = WebUtil.getPrincipalUsername();
 		userService.setNotification(userName, option);
 	}
+	
+	@RequestMapping(value = "/getStatusOfNotification", method = RequestMethod.GET)
+	public boolean getStatusOfNotification() {
+		String userName = WebUtil.getPrincipalUsername();
+		boolean option = userService.getStatusOfNotification(userName);
+		return option;
+	}
 }
