@@ -6,14 +6,16 @@ public class AllGamesDto {
 	private String name;
 	private String categoryName;
 	private Integer instancesCount;
+	private Integer availableCount;
 	
 	public AllGamesDto() {}
-	public AllGamesDto(Integer id, String name, String categoryName, Long instancesCount) {
+	public AllGamesDto(Integer id, String name, String categoryName, Long instancesCount, Long availableCount) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.categoryName = categoryName;
 		this.instancesCount = instancesCount.intValue();
+		this.availableCount = availableCount.intValue();
 	}
 	public Integer getId() {
 		return id;
@@ -38,5 +40,11 @@ public class AllGamesDto {
 	}
 	public void setInstancesCount(Integer instancesCount) {
 		this.instancesCount = instancesCount;
+	}
+	public Integer getAvailableCount() {
+		return availableCount;
+	}
+	public void setAvailableCount(Integer availableCount) {
+		this.availableCount = availableCount;
 	}
 }
