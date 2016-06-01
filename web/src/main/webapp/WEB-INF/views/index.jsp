@@ -341,7 +341,7 @@
 
 				</div>
 
-				<a style="margin-bottom: 1%; margin-left: 10px; type="button" data-dismiss="modal"
+				<a style="margin-bottom: 1%; margin-left: 10px;" type="button" data-dismiss="modal"
 					class="btn btn-danger btn-md" translate="CLOSE"></a>
 				<a style="margin-bottom: 1%; margin-left: 390px;" type="button" data-toggle="modal" 
 					class="btn btn-danger btn-md" translate="CONTACT_WITH_ADMINS" 
@@ -368,9 +368,10 @@
   					<textarea cols="50" rows="20" name="comments" class="form-control input-sm"></textarea></p>
   					<p>
   					<a type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md">Send</a>
+					class="btn btn-danger btn-md" style="margin-bottom: 1%; margin-left: 10px;">Send</a>
 					<a type="button" data-toggle="modal" 
-					class="btn btn-danger btn-md" translate="CLOSE"></a>
+						class="btn btn-danger btn-md" translate="CLOSE" data-dismiss="modal"
+						style="margin-bottom: 1%; margin-left: 390px;"></a>
 					</p>
 				</form>
 				</div>
