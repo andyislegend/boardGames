@@ -15,7 +15,8 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 public interface GameRepository extends JpaRepository<Game, Integer>  {
 
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto"
-				+"(game.id, game.name, game.category.name)from Game game ")
+				+"(gu.game.id, gu.game.name, gu.game.category.name, count(gu)) from GameUser gu "
+				+ "group by gu.game.name")
 	public List<AllGamesDto> getAllGames();
 	
 	public Game findByName(String name);

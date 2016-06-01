@@ -94,6 +94,16 @@ public class Exchange implements Serializable{
 		this.user = user;
 		this.gameUser = gameUser;
 	}
+	
+	public Exchange(Integer userApplierId, Integer dateOfReturn, 
+			String message, User user, GameUser gameUser) {
+		super();
+		this.userApplierId = userApplierId;
+		this.period = dateOfReturn;
+		this.message = message;
+		this.user = user;
+		this.gameUser = gameUser;
+	}
 
 	public Date getApplyingDate() {
 		return applyingDate;

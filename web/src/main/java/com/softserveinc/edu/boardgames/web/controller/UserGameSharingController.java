@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.CommentsForGame;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
-import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
@@ -107,12 +106,8 @@ public class UserGameSharingController {
 		gameUserToUpdate.setStatus(GameUserStatus.AVAILABLE.name());
 		gameUserService.update(gameUserToUpdate);
 					
-		Exchange exchange = new Exchange();
-		exchange.setGameUser(gameUserToUpdate);
-		exchange.setMessage(DEFAULT_MESSAGE);
-		exchange.setPeriod(returnDate);
-		exchange.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
-		exchange.setUserApplierId(NEUTRAL_ID);
+		Exchange exchange = new Exchange(NEUTRAL_ID, returnDate, DEFAULT_MESSAGE, 
+				userService.getUser(WebUtil.getPrincipalUsername()), gameUserToUpdate);
 		exchangeService.update(exchange);			
 		
 	}
@@ -142,12 +137,7 @@ public class UserGameSharingController {
 		exchange.setMessage(message);
 		exchangeService.update(exchange);
 		
-		for (Integer proposition: propositions) {
-			GameProposition gamePropo = new GameProposition();
-			gamePropo.setGameUser(gameUserService.getUserGamesById(proposition));
-			gamePropo.setExchange(exchange);
-			gamePropoService.update(gamePropo);
-		}
+		gamePropoService.updateForExchange(exchange.getId(), GameUserStatus.CONFIRMATION.name());
 		
 		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
 				+ " applies for the game " + gameUserToUpdate.getGame().getName() 
@@ -221,7 +211,8 @@ public class UserGameSharingController {
 				+ gameUserToUpdate.getGame().getName();
 		User userToNotify = userService.findById(exchange.getUserApplierId());
 		User userInvoker = userService.findById(exchange.getUser().getId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		notifyService.update(
+				this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 	}
 	
 	@RequestMapping(value="/giveGameBack/{gameUserId}/{comment}", method = RequestMethod.PUT)
@@ -248,7 +239,8 @@ public class UserGameSharingController {
 		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
 				+ " intends to give " + gameUserToUpdate.getGame().getName() 
 				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.";
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		notifyService.update(
+				this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 				
 		exchangeService.delete(exchange);
 	}

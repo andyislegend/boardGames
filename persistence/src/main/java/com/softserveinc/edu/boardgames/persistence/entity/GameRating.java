@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -38,7 +37,6 @@ public class GameRating implements Serializable{
 	private Integer rating = 0;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=Game.class, cascade=CascadeType.MERGE)
-	@JoinColumn(name = "gameId", referencedColumnName = "id")
 	private Game game;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=User.class, 
