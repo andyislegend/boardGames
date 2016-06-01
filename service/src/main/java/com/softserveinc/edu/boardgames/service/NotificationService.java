@@ -45,4 +45,6 @@ public interface NotificationService {
 	List<Date> getAllNotificationDates();
 	
 	Integer countNotificationsForSpecificDate(Date date);
+	
+	public List<Notification> getAllNotification();
 }

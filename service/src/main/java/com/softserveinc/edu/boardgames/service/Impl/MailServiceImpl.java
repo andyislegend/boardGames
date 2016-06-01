@@ -186,4 +186,32 @@ public class MailServiceImpl implements MailService{
 		logger.info("----Message remainding " + to + " to give " 
 				+ gameName + " to " + ownerUsername + " is late for " + days + "---");
 	}
+	
+	@Async
+	public void sendMailAboutNotification(final String to, final String messages, final String type , final String userName, final Date date){
+		MimeMessagePreparator preparator = new MimeMessagePreparator(){
+
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				
+				
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				
+				message.setTo(to);
+				message.setFrom(new InternetAddress(messageSender, env.getProperty("mail.credentials.title")));
+
+				Map<String, Object> templateVariables = new HashMap<>();
+				templateVariables.put("name", userName);
+				templateVariables.put("type", type);
+				templateVariables.put("message", messages);
+				templateVariables.put("date", date.toString());
+				String body = mergeTemplateIntoString(velocityEngine,
+						env.getProperty("velocity.template.notificationTemplate"), env.getProperty("velocity.template.encoding"), templateVariables);
+				message.setText(body, true);
+				message.setSubject("Notification");
+			}
+			
+		};
+		mailSender.send(preparator);
+	}
 }

@@ -1,0 +1,8 @@
+<html>
+	<body>
+			
+			Dear<b> $name </b>,  <br>
+			You have new <b> $type </b>: <br>
+			$message $date
+	</body>
+</html>
