@@ -142,6 +142,9 @@
             </div>
           </div>
           <div>
+          <progress class="progress-bar progress-bar-info" value="0" max="100"></progress>
+          </div>
+          <div>
             <div style="margin-left: 30%" ng-controller="GlobalSearchCTRL">
               <form data-ng-submit=submit() style="margin-left: 3%;"
                 class="navbar-form navbar-left" role="search">

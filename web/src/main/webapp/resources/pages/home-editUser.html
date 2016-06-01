@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="FIRST_NAME">First Name:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<p ng-hide="myProfile" id="friendProfile">{{userProfile.firstName}}</p>
 							<input ng-model="editableFirstName" class="form-control input-sm" ng-show="myProfile" 
 								name="editUser" maxlength="100" id="inputEdit">
@@ -46,7 +46,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="LAST_NAME">Last Name:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<p ng-hide="myProfile" id="friendProfile">{{userProfile.lastName}}</p>
 							<input ng-model="editableLastName" class="form-control input-sm" ng-show="myProfile" 
 								maxlength="100" id="inputEdit">
@@ -66,7 +66,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="EMAIL">Email:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<p ng-hide="myProfile" id="friendProfile">{{userProfile.email}}</p>
 								<input name="input" type="email" ng-model="editableEmail" class="form-control input-sm" 
 								ng-show="myProfile" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required maxlength="150" id="inputEdit">
@@ -77,7 +77,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="COUNTRY">Country:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<p ng-hide="myProfile" id="friendProfile">{{userProfile.country.name}}</p>
 							<select id="repeatSelectCountry" ng-change="getCitiesByCountry()"
 								ng-model="editableCountry" ng-show="myProfile" class="form-control" 
@@ -91,7 +91,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="CITY">City:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<p ng-hide="myProfile" id="friendProfile">{{userProfile.city.name}}</p>
 							<select id="repeatSelectCity" ng-show="myProfile" data-ng-init="getCitiesByCountry()"
 								ng-model="editableCity" class="form-control" ng-options= "c.name for c in cities" id="inputEdit">
@@ -104,7 +104,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="GENDER">Gender:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<p ng-hide="myProfile" id="friendProfile">{{userProfile.gender}}</p>
 							<select id="gender" name="gender" ng-model="editableGender" class="form-control" 
 								ng-show="myProfile" id="inputEdit">
@@ -118,7 +118,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="AGE">Age:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<p ng-hide="myProfile" id="friendProfile">{{userProfile.age}}</p>
 							<input ng-model="editableAge" class="form-control input-sm" ng-show="myProfile" id="inputEdit">
 						</div>
@@ -129,7 +129,7 @@
 				<div class="row">
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="PHONE_NUMBER">Phone Number:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<input ng-model="editablePhoneNumber" class="form-control input-sm" id="inputEdit">
 						</div>
 					</div>
@@ -159,7 +159,7 @@
 					<div class="row">
 						<div class="form-group col-md-12" >
 							<label class="col-md-3 control-lable" translate="OLD_PASSWORD" maxlength="20">Old password:</label>
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<input type="password" ng-model="editableOldPassword" 
 									class="form-control input-sm" required="required" id="profileDiv">
 							</div>
@@ -168,7 +168,7 @@
 					<div class="row">
 						<div class="form-group col-md-12" >
 							<label class="col-md-3 control-lable" translate="NEW_PASSWORD" maxlength="20">New password:</label>
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<input type="password" ng-model="editableNewPassword" 
 									class="form-control input-sm" required="required" id="profileDiv">
 							</div>
@@ -177,7 +177,7 @@
 					<div class="row">
 						<div class="form-group col-md-12" >
 							<label class="col-md-3 control-lable" translate="CONFIRM_PASSWORD" maxlength="20">Confirm password:</label>
-							<div class="col-md-8">
+							<div class="col-md-6">
 								<input type="password" ng-model="editableConfirmPassword" 
 									class="form-control input-sm" required="required" id="profileDiv">
 							</div>
@@ -185,7 +185,7 @@
 					</div>
 					<span class="col-sm-3"></span>
 						<div class="col-sm-5">
-						<button ng-click="saveNewUserPassword()" id="saveUserUpdate" 
+						<button ng-click="saveNewUserPassword()" id="saveUserUpdatePassword" 
 							class="btn btn-primary btn-bg" translate="SAVE_PASSWORD_BUTTON" 
 							ng-disabled="!passwordChange.$dirty">Save password
 						</button>

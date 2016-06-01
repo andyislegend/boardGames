@@ -181,9 +181,9 @@ public class User implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "users")
 	private Set<Tournament> tournaments;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+/*	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	 @JsonManagedReference
-	private Set<SubscribedUsers> subscribedUsers;
+	private Set<SubscribedUsers> subscribedUsers;*/
 	
 	@Column(name = "is_notificated")
 	private boolean isNotificated = false;
@@ -335,13 +335,13 @@ public class User implements Serializable {
 		this.tournaments = tournaments;
 	}
 
-	public Set<SubscribedUsers> getSubscribedUsers() {
+/*	public Set<SubscribedUsers> getSubscribedUsers() {
 	return subscribedUsers;
 	}
 
 	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
 		this.subscribedUsers = subscribedUsers;
-	}
+	}*/
 
 	public boolean isNotificated() {
 		return isNotificated;
