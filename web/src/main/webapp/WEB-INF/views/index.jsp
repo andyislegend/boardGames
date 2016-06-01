@@ -343,16 +343,36 @@
 
 				<a style="margin-left: 45%; margin-bottom: 5%" type="button" data-dismiss="modal"
 					class="btn btn-danger btn-md" translate="CLOSE"></a>
-				<a style="margin-left: 75%; margin-bottom: 5%" type="button" data-dismiss="modal"
+				<a style="margin-left: 75%; margin-bottom: 5%" type="button" data-toggle="modal" 
 					class="btn btn-danger btn-md" translate="CONTACT_WITH_ADMINS" 
-					ng-click="sendEmail()"></a>
+					data-target="#sendToUnban"></a>
 			</div>
 			<!-- End of Modal Content -->
 
 		</div>
 	</div>
 	<!-- End of BANNED Modal -->
+	<div id="sendToUnban" class="modal fade  col-md-6 col-md-offset-3"
+		role="dialog">
+		<div class="modal-dialog">
 
+			<!-- Modal content-->
+			<div class="modal-content" ng-controller="registerCntrl">
+				<div class="modal-header">
+				</div>
+				<div class="modal-body">
+				<form action="mailto:you@yourdomain" method="get" enctype="text/plain">
+  					<p>Name: <input type="text" name="name" /></p>
+  					<p>Email: <input type="text" name="email" /></p>
+  					<p>Comments:<br />
+  					<textarea cols="30" rows="20" name="comments"></textarea></p>
+  					<p><input type="submit" name="submit" value="Send" />
+  					<input type="reset" name="reset" value="Clear Form" /></p>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Modal ON REGISTRATION SUCCESS -->
 	<div id="myRegSuccess" class="modal fade  col-md-6 col-md-offset-3"
 		role="dialog">
