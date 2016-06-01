@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.service.EventService;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.SubscribedUsersService;
 import com.softserveinc.edu.boardgames.service.TournamentService;

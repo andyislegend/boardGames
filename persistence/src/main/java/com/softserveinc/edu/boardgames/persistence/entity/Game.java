@@ -46,6 +46,9 @@ public class Game implements Serializable{
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="game", fetch=FetchType.LAZY)
 	private Set<GameUser> userGames;
 	
+	@OneToMany(cascade={CascadeType.ALL}, mappedBy="game", fetch=FetchType.LAZY)
+	private Set<GameRating> gameRatings;
+	
 	public Game(){}
 	
 	public Game(String name,Category category) {
@@ -85,6 +88,14 @@ public class Game implements Serializable{
 		this.userGames = userGames;
 	}
 	
+	public Set<GameRating> getGameRatings() {
+		return gameRatings;
+	}
+
+	public void setGameRatings(Set<GameRating> gameRatings) {
+		this.gameRatings = gameRatings;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

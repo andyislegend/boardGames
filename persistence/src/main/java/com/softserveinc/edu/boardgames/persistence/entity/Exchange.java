@@ -18,10 +18,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 /**
  * Represents every exchange operation in system
  * has unique constraint on field gameUserId
@@ -92,6 +88,16 @@ public class Exchange implements Serializable{
 			String message, User user, GameUser gameUser) {
 		super();
 		this.id = id;
+		this.userApplierId = userApplierId;
+		this.period = dateOfReturn;
+		this.message = message;
+		this.user = user;
+		this.gameUser = gameUser;
+	}
+	
+	public Exchange(Integer userApplierId, Integer dateOfReturn, 
+			String message, User user, GameUser gameUser) {
+		super();
 		this.userApplierId = userApplierId;
 		this.period = dateOfReturn;
 		this.message = message;

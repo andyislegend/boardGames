@@ -1,119 +1,48 @@
 package com.softserveinc.edu.boardgames.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
-import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
-import com.softserveinc.edu.boardgames.persistence.repository.NotificationRepository;
 
-/**
- * @author Taras Varvariuk, Vasul Berveckyi
- */
-@Service
-@Transactional
-public class NotificationService {
+public interface NotificationService {
 
-	@Autowired
-	private NotificationRepository notifyRepo;
+	Notification findById(Integer id);
 	
-	public Notification findById(Integer id) {
-		return notifyRepo.findOne(id);
-	}
-	
-	public List<Notification> findAllNotifications() {
-		return notifyRepo.findAll();
-	}
+	List<Notification> findAllNotifications();
 	
 	@Transactional
-	public void update(Notification notification) {
-		notifyRepo.save(notification);
-	}
+	void update(Notification notification);
 	
 	@Transactional
-	public void delete(Notification notification) {
-		notifyRepo.delete(notification);
-	}
+	void delete(Notification notification);
 	
-	public List<GameNotificationDTO> getAllForUser(String username) {
-		return notifyRepo.getAllGamesNotifications(username);
-	}
+	List<GameNotificationDTO> getAllForUser(String username);
 	
-	public Integer getCountOfGameNotifications(String username) {
-		return notifyRepo.countOfUncheckedGameNotifications(username);
-	}
+	Integer getCountOfGameNotifications(String username);
 	
-	public void saveNotification(Notification notification){
-		notifyRepo.saveAndFlush(notification);
-	}
+	void saveNotification(Notification notification);
 	
-	public List<Notification> getAllMessage(String currentUserName, String friendUserName){
-		return notifyRepo.getAllMessage(currentUserName, friendUserName);
-	}
+	List<Notification> getAllMessage(String currentUserName, String friendUserName);
 	
-	public void changeStatusOfReadingOfMessage(Integer messageId){
-		notifyRepo.changeStatusOfReadingOfMessage(messageId);
-	}
+	void changeStatusOfReadingOfMessage(Integer messageId);
 	
-	public Integer findAllNotReadMessage(String currentUserName){
-		return notifyRepo.findAllNotReadMessage(currentUserName);
-	}
+	Integer findAllNotReadMessage(String currentUserName);
 	
-	public Integer findAllNotReadMessageBySpecificFriend(String currentUserName, String friendUserName){
-		return notifyRepo.findAllNotReadMessageBySpecificFriend(currentUserName, friendUserName);
-	}
+	Integer findAllNotReadMessageBySpecificFriend(String currentUserName, String friendUserName);
 	
-	public void addTournamentNotification(List<Tournament> listOfTournament){
-		for(Tournament tournament: listOfTournament){
-				for(User user: tournament.getUsers()){
-					Notification notification = new Notification();
-					notification.setDate(tournament.getDateOfTournament());
-					notification.setUser(user);
-					notification.setMessage("Dear user, you have tournament tomorrow, pleas do not miss it. "
-							+ "Name of tournament is \"" + tournament.getName() + "\" it will be "
-									+ "in " + tournament.getCity() + ", " + tournament.getCountry() + " in ");
-					notification.setType("NOTIFICATION");
-					notifyRepo.save(notification);
-				}
-			}
-	}
+	void addTournamentNotification(List<Tournament> listOfTournament);
 	
-	public void addEventNotification(List<SubscribedUsers> listOfSubsriders){
-		for(SubscribedUsers su: listOfSubsriders){
-			Notification notification = new Notification();
-			notification.setDate(su.getEvent().getDate());
-			notification.setUser(su.getUser());
-			notification.setMessage("Dear user, you have already sent request on \"" + su.getEvent().getName() + "\" event,"
-					+ " we hope you will spend time with pleasure. Feel free, enjoy the game and be happy! Event will "
-					+ "be in " + su.getEvent().getLocation() + " on ");
-			notification.setType("EVENT");
-			notifyRepo.save(notification);
-		}
-	}
+	void addEventNotification(List<SubscribedUsers> listOfSubsriders);
 	
-	public List<Notification> getAllNotificationByUserName(String userName){
-		return notifyRepo.getAllNotificationByUserName(userName);
-	}
+	List<Notification> getAllNotificationByUserName(String userName);
 	
-	public List<Date> getAllNotificationDates() {
-		List<Date> dates = new ArrayList<>();
-		for (Notification n: this.findAllNotifications()) {
-			Date date = n.getDate();
-			if (date != null)
-				dates.add(date);
-		}
-		return dates;
-	}
+	List<Date> getAllNotificationDates();
 	
-	public Integer countNotificationsForSpecificDate(Date date) {
-		return notifyRepo.countNotificationForSpecificDate(date);
-	}
+	Integer countNotificationsForSpecificDate(Date date);
 }

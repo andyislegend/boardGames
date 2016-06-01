@@ -1,7 +1,6 @@
-var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$rootScope', '$http', '$interval','$filter','ngTableParams', function($scope,$rootScope, $http, $interval, $filter, ngTableParams) {
+var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$rootScope', '$http', '$interval','$filter','ngTableParams', '$q', function($scope,$rootScope, $http, $interval, $filter, ngTableParams, $q) {
     
 	$http.get('getAllNotification').success(function(data){
-        console.log(data);
         $scope.allNotification = data;
         $scope.$broadcast('allNotifications', $scope.allNotification);	
     }).error(function(error){
@@ -29,11 +28,41 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
 			     }
 			 });
 		});
-    
-    /*$scope.options =
-        ['EVENT',
+    $scope.option = [
+        'EVENT',
         'NOTIFICATION',
         'MESSAGE',
          ''
-        ]*/
+    ];
+    $scope.typeOfNotification = function(){
+        var option = ['EVENT',
+        'NOTIFICATION',
+        'MESSAGE'
+        ];
+        var def = $q.defer();
+		   var filterData = [];
+		   for(var i = 0; i < option.length; i++){
+			   filterData.push({
+			         id: option[i],
+			         title: option[i]
+	          })
+		   }
+		   
+		   def.resolve(filterData);
+		  return def;
+    };
+    
+    $scope.setNotificationSend = function(option) {
+		$http.post('setNotification', !option).success(function(data){
+         }).error(function(error){
+            console.log(error);
+        });
+	}
+    
+   $http.get('getStatusOfNotification').success(function(option){
+       $scope.checkboxModel = option;
+   }).error(function(error){
+       console.log(error);
+   });
+    
 }]);

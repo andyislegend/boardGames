@@ -1,10 +1,15 @@
+
+<div ng-controller="notificationCtrl" ng-cloak>
+<md-switch ng-model="checkboxModel" ng-click="setNotificationSend(checkboxModel)" aria-label="Switch 1">
+    Switch 1: {{ checkboxModel }}
+  </md-switch>
+
 <h3 style="text-align: center">Notification</h3>
-<div ng-controller="getGamesGlobalController">
-    <!--<div class="option-chosen"><select class="form-control" ng-model="option" ng-options="option for option in options"></select></div>-->
+
     <div class="figna">
     <table ng-table="allNotificationTable" class="table" show-filter="true">
-		<tr ng-repeat="notification in allNotificationDisplay | orderBy: '-date' | filter:option" class="table">
-            <td title="'Type'" class="sign-header">
+		<tr ng-repeat="notification in allNotificationDisplay | orderBy: '-date'" class="table">
+            <td title="'Type'" class="sign-header" filter="{'type': 'select'}" filter-data="typeOfNotification()">
                     <img class="notification-message" uib-tooltip="{{notification.type}}" tooltip-placement="right" src="resources/ico/{{notification.type.toLowerCase()}}2.png"/>
             </td>
 <!--            <td class="notification-line">

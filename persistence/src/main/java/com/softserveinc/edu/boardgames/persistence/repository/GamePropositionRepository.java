@@ -27,6 +27,14 @@ public interface GamePropositionRepository extends JpaRepository<GameProposition
 	@Query("delete from GameProposition gp where gp.exchange.id = :exchangeId")
 	public void deleteForExchange(@Param("exchangeId")Integer id);
 	
+	@Modifying
+	@Query(value = "update proposition gp " 
+		+ "join gameuser gu on gp.gameUser_id = gu.id "
+		+ "join exchnge ex on gp.exchange_id = ex.id "
+		+ "set gu.status = :status "
+		+ "where ex.id = :exchangeId", nativeQuery=true)
+	public void updateForExchange(@Param("exchangeId")Integer id, @Param("status")String status);
+	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO(gp.gameUser.id, "
 			+ "u.username, ex.message , gp.gameUser.game.name, gp.gameUser.game.category.name) "
 			+ "from GameProposition gp, User u "

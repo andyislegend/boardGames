@@ -136,7 +136,26 @@
 	
 	<div class="container-fluid" ng-show="canGiveBack">
 		<p class="boldText">Days remains: {{howManyDaysRemains}}</p>
-		<button class="btn btn-primary" ng-click="giveBackGame(games.id)">Give back to owner</button>
+		<button class="btn btn-primary"  data-toggle="modal" 
+				data-target="#giveBackModal">Return</button>
+		<div id="giveBackModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="text-primary">Return of the game</h4>
+					</div>
+					<div class="modal-body">
+						<br/>
+						<p>Your feedback</p>
+						<textarea class="form-control inlineDisplay" rows="2" 
+							id="message" ng-model="feedbackForGame"></textarea>
+						<br/>
+						<button class="btn btn-primary" ng-click="giveBackGame(games.id, feedbackForGame)">
+							Give back to owner</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
 </div>

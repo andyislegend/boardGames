@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+.sign-header{
+    width: 15%;
+    text-align: center;
+}
+.sign-header img{
+    height: 30px;
+    width: 30px;
+}
+.notification-line{
+    width: 1%;
+    background: #8084FF;
+}
+.notification-head{
+    width: 70%;
+}
+.notification-data{
+    width: 12%;
+    padding-left: 0px;
+}
+.notification-icon{
+    width: 30px;
+    height: 30px;
+}
+.form-control{
+	width: 100%;
+}
+.switchdemoBasicUsage .inset {
+  padding-left: 25px;
+  padding-top: 25px; }

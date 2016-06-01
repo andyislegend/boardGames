@@ -1,27 +1,16 @@
 <div class="container-fluid" ng-controller="statisticsController">
 	<br />
 	<br />
-	<div class="col-xs-2">
-		<ul class="nav nav-pills nav-stacked">
-			<li class="active"><a data-toggle="pill" data-target="#pieChart">Games</a></li>
-			<li ng-click="initColumn()"><a data-toggle="pill"
-				data-target="#columnChart">Ratings</a></li>
-			<li ng-click="initArea()"><a data-toggle="pill"
-				data-target="#areaChart">Dynamics</a></li>
-		</ul>
-	</div>
-	<div class="col-xs-5">
-		<div class="tab-content">
-			<div id="pieChart" class="tab-pane active">
-				<div id="piechart"></div>
-			</div>
-			<div id="columnChart" class="tab-pane">
-				<div id="columnchart"></div>
-			</div>
-			<div id="areaChart" class="tab-pane">
-				<div id="areachart"></div>
-			</div>
-		</div>
-	</div>
-
+	<table ng-init="initCharts()">
+		<tbody>
+			<tr>
+				<td><div id="piechart"></div></td>
+				<td><div id="columnchart"></div></td>
+			</tr>
+			<tr>
+				<td><div id="areachart"></div></td>
+				<td><div id="columnagechart"></div></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
