@@ -341,9 +341,9 @@
 
 				</div>
 
-				<a style="margin-left: 45%; margin-bottom: 5%" type="button" data-dismiss="modal"
+				<a style="margin-bottom: 1%; margin-left: 10px; type="button" data-dismiss="modal"
 					class="btn btn-danger btn-md" translate="CLOSE"></a>
-				<a style="margin-left: 75%; margin-bottom: 5%" type="button" data-toggle="modal" 
+				<a style="margin-bottom: 1%; margin-left: 390px;" type="button" data-toggle="modal" 
 					class="btn btn-danger btn-md" translate="CONTACT_WITH_ADMINS" 
 					data-target="#sendToUnban"></a>
 			</div>
@@ -362,12 +362,16 @@
 				</div>
 				<div class="modal-body">
 				<form action="mailto:you@yourdomain" method="get" enctype="text/plain">
-  					<p>Name: <input type="text" name="name" /></p>
-  					<p>Email: <input type="text" name="email" /></p>
+  					<p>Name: <input type="text" name="name" class="form-control input-sm"/></p>
+  					<p>Email: <input type="email" name="email" class="form-control input-sm"/></p>
   					<p>Comments:<br />
-  					<textarea cols="30" rows="20" name="comments"></textarea></p>
-  					<p><input type="submit" name="submit" value="Send" />
-  					<input type="reset" name="reset" value="Clear Form" /></p>
+  					<textarea cols="50" rows="20" name="comments" class="form-control input-sm"></textarea></p>
+  					<p>
+  					<a type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md">Send</a>
+					<a type="button" data-toggle="modal" 
+					class="btn btn-danger btn-md" translate="CLOSE"></a>
+					</p>
 				</form>
 				</div>
 			</div>
