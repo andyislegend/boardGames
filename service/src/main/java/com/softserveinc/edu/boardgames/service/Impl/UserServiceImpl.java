@@ -359,7 +359,7 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(UserDTO userDTO, String username) {
 		Country country = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)
 				? countryRepository.findOne(userDTO.getCountryId()) : null;
-		City city = (userDTO.getCountryId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)
+		City city = (userDTO.getCityId() != NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER)
 				? cityRepository.findOne(userDTO.getCityId()) : null;
 		User user = findOne(username);
 		UserMapper.toEntity(userDTO, user, country, city);

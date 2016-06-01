@@ -324,10 +324,10 @@
 	<!-- Modal BANNED USER -->
 	<div id="myBanned" class="modal fade  col-md-6 col-md-offset-3"
 		role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" ng-controller="sendEmailToUnban">
 
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content" >
 				<div class="modal-header">
 
 					<h4 style="text-align: center;" class="modal-title" translate="BAN_MODAL_HEADER"></h4>
@@ -343,6 +343,9 @@
 
 				<a style="margin-left: 45%; margin-bottom: 5%" type="button" data-dismiss="modal"
 					class="btn btn-danger btn-md" translate="CLOSE"></a>
+				<a style="margin-left: 75%; margin-bottom: 5%" type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md" translate="CONTACT_WITH_ADMINS" 
+					ng-click="sendEmail()"></a>
 			</div>
 			<!-- End of Modal Content -->
 

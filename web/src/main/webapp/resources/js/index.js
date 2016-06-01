@@ -150,3 +150,10 @@ homeApp.controller('registerCntrl', [ '$scope', '$http',
 			}
 			
 		} ]);
+
+homeApp.controller('sendEmailToUnban', [ '$scope', '$window',
+                                      function($scope, $window) {
+	$scope.sendEmail = function() {
+		$window.open("mailto:boardGamesExchange@gmail.com?subject=subject&body=message");
+	};
+                                      } ]);
