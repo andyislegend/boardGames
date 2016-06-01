@@ -196,6 +196,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllNoConsiderFriendByUser(String userName) {
 		return userRepository.getAllNoConsiderFriendByUser(userName);
 	}
+	
+	@Override
+	public void setNotification(String userName, boolean option){
+		userRepository.setNotification(userName, option);
+	}
 
 	@Override
 	public List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName) {

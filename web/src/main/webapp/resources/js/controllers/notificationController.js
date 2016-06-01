@@ -41,12 +41,6 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
         ];
         var def = $q.defer();
 		   var filterData = [];
-		   /*angular.forEach(option, function (type) {
-		    filterData.push({
-		         id: type.name,
-		         title: type.name
-            })
-		   });*/
 		   for(var i = 0; i < option.length; i++){
 			   filterData.push({
 			         id: option[i],
@@ -57,5 +51,12 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
 		   def.resolve(filterData);
 		  return def;
     };
+    
+    $scope.setNotificationSend = function(option) {
+		$http.post('setNotification', option).success(function(data){
+        }).error(function(error){
+            console.log(error);
+        });
+	}
         
 }]);
