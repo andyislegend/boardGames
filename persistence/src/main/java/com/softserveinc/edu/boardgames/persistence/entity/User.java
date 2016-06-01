@@ -184,6 +184,9 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	 @JsonManagedReference
 	private Set<SubscribedUsers> subscribedUsers;
+	
+	@Column(name = "is_notificated")
+	private boolean isNotificated = false;
 
 	public User() {
 	}
@@ -338,6 +341,14 @@ public class User implements Serializable {
 
 	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
 		this.subscribedUsers = subscribedUsers;
+	}
+
+	public boolean isNotificated() {
+		return isNotificated;
+	}
+
+	public void setNotificated(boolean isNotificated) {
+		this.isNotificated = isNotificated;
 	}
 
 	@PreUpdate

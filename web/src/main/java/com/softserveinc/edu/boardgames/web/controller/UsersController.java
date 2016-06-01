@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
@@ -31,7 +32,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  * @author Volodymyr Terlyha
  *
  */
-@Controller
+@RestController
 public class UsersController {
 	
 	private final Logger logger = Logger.getLogger(UsersController.class);
@@ -173,5 +174,18 @@ public class UsersController {
 	public ResponseEntity<String> unbanUser(@RequestParam("username") String username) {
 		userService.unbanUserByAdministrator(username);
 		return new ResponseEntity<String>(LanguageKeys.USER_UNBAN, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/setNotification", method = RequestMethod.POST)
+	public void setNotification(@RequestBody boolean option) {
+		String userName = WebUtil.getPrincipalUsername();
+		userService.setNotification(userName, option);
+	}
+	
+	@RequestMapping(value = "/getStatusOfNotification", method = RequestMethod.GET)
+	public boolean getStatusOfNotification() {
+		String userName = WebUtil.getPrincipalUsername();
+		boolean option = userService.getStatusOfNotification(userName);
+		return option;
 	}
 }

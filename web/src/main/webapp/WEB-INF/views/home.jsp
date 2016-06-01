@@ -15,6 +15,8 @@
       rel="stylesheet" />
     <link href="resources/bower_components/ng-table/dist/ng-table.min.css"
       rel="stylesheet" />
+    <link href="resources/bower_components/angular-material/angular-material.css"
+      rel="stylesheet" />
     <link rel="stylesheet"
       href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
       integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
@@ -41,6 +43,12 @@
       src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript"
       src="resources/bower_components/angular-utils-pagination/dirPagination.js"></script>
+    <script type="text/javascript"
+      src="resources/bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript"
+      src="resources/bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript"
+      src="resources/bower_components/angular-material/angular-material.js"></script>  
     <script type="text/javascript" src="resources/js/home.js"></script>
     <script type="text/javascript"
       src="resources/js/controllers/gamesGlobalController.js"></script>

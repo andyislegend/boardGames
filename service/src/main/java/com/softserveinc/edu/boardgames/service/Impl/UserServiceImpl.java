@@ -196,6 +196,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllNoConsiderFriendByUser(String userName) {
 		return userRepository.getAllNoConsiderFriendByUser(userName);
 	}
+	
+	@Override
+	public void setNotification(String userName, boolean option){
+		userRepository.setNotification(userName, option);
+	}
 
 	@Override
 	public List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName) {
@@ -488,5 +493,10 @@ public class UserServiceImpl implements UserService {
 		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
 		return userDTO;
+	}
+
+	@Override
+	public boolean getStatusOfNotification(String userName) {
+		return userRepository.getStatusOfNotification(userName);
 	}
 }
