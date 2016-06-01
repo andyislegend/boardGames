@@ -53,8 +53,8 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
     };
     
     $scope.setNotificationSend = function(option) {
-		$http.post('setNotification', option).success(function(data){
-        }).error(function(error){
+		$http.post('setNotification', !option).success(function(data){
+         }).error(function(error){
             console.log(error);
         });
 	}
@@ -64,5 +64,5 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
    }).error(function(error){
        console.log(error);
    });
-        
+    
 }]);

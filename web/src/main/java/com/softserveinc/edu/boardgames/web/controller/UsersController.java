@@ -177,7 +177,8 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = "/setNotification", method = RequestMethod.POST)
-	public void setNotification(@RequestBody Boolean option) {
+	public void setNotification(@RequestBody boolean option) {
+		System.out.println(option);
 		String userName = WebUtil.getPrincipalUsername();
 		userService.setNotification(userName, option);
 	}
