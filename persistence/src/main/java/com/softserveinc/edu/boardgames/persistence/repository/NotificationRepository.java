@@ -78,6 +78,9 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1)) AND (type = 'MESSAGE' OR type = 'NOTIFICATION' OR type = 'EVENT')", nativeQuery = true)
 	public List<Notification> getAllNotificationByUserName(String userName);
 	
+	@Query("SELECT n FROM Notification n WHERE type = 'MESSAGE' OR type = 'NOTIFICATION' OR type = 'EVENT'")
+	public List<Notification> getAllNotification();
+	
 	@Query("select COUNT(n) from Notification n where n.date = :date and n.type='exchange'")
 	public Integer countNotificationForSpecificDate(@Param("date")Date date);
 }

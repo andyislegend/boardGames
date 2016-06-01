@@ -117,4 +117,9 @@ public class NotificationServiceImpl implements NotificationService {
 	public Integer countNotificationsForSpecificDate(Date date) {
 		return notifyRepo.countNotificationForSpecificDate(date);
 	}
+
+	@Override
+	public List<Notification> getAllNotification() {
+		return notifyRepo.getAllNotification();
+	}
 }
