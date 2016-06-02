@@ -245,6 +245,13 @@ homeApp.$inject = ['$modal'];
 			});
 	}
 	
+	$scope.displayPropositions = function() {
+		
+		if ($scope.haveSmthToPropose == false)
+			$scope.haveSmthToPropose = true;
+		else $scope.haveSmthToPropose = false;
+	}
+	
 	$scope.gamesToPropose = [];
 	$scope.addToProposes = function() {
 		$scope.gamesToPropose.push($scope.myGamesModel);
