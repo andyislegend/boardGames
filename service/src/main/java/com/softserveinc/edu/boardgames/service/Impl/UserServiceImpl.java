@@ -494,6 +494,11 @@ public class UserServiceImpl implements UserService {
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
 		return userDTO;
 	}
+	
+	@Override
+	public void sendMessageByBannedUser(String username, String message) {
+		
+	}
 
 	@Override
 	public boolean getStatusOfNotification(String userName) {

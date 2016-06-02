@@ -34,6 +34,7 @@
 <script
 	src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <script type="text/javascript" src="resources/js/localization.js"></script>
+<script type="text/javascript" src="resources/js/controllers/bannedUserCtrl.js"></script>
 <script
 	src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
 <script
@@ -340,12 +341,13 @@
 					<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
 
 				</div>
-
-				<a style="margin-bottom: 1%; margin-left: 10px;" type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md" translate="CLOSE"></a>
-				<a style="margin-bottom: 1%; margin-left: 390px;" type="button" data-toggle="modal" 
+				<p>
+				<a type="button" data-dismiss="modal"
+					class="btn btn-danger btn-md" translate="CLOSE" style="margin-left: 10px;"></a>
+				<a type="button" data-toggle="modal" 
 					class="btn btn-danger btn-md" translate="CONTACT_WITH_ADMINS" 
-					data-target="#sendToUnban"></a>
+					data-target="#sendToUnban" style="margin-left: 380px;"></a>
+				</p>
 			</div>
 			<!-- End of Modal Content -->
 
@@ -357,20 +359,21 @@
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content" ng-controller="registerCntrl">
+			<div class="modal-content" ng-controller="bannedUserCtrl">
 				<div class="modal-header">
 				</div>
 				<div class="modal-body">
-				<form action="mailto:you@yourdomain" method="get" enctype="text/plain">
-  					<p>Name: <input type="text" name="name" class="form-control input-sm"/></p>
-  					<p>Email: <input type="email" name="email" class="form-control input-sm"/></p>
+				<form>
+					<p>Send letter to administrator</p>
   					<p>Comments:<br />
-  					<textarea cols="50" rows="20" name="comments" class="form-control input-sm"></textarea></p>
+  					<textarea cols="50" rows="20" name="comments" class="form-control input-sm"
+  						ng-model="letterOfBannedUser"></textarea></p>
   					<p>
   					<a type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md" style="margin-bottom: 1%; margin-left: 10px;">Send</a>
-					<a type="button" data-toggle="modal" 
-						class="btn btn-danger btn-md" translate="CLOSE" data-dismiss="modal"
+						class="btn btn-danger btn-md" style="margin-bottom: 1%; 
+						margin-left: 10px;" ng-click="sendEmail()">Send</a>
+					<a type="button" data-toggle="modal" translate="CLOSE"
+						class="btn btn-danger btn-md" data-dismiss="modal"
 						style="margin-bottom: 1%; margin-left: 390px;"></a>
 					</p>
 				</form>

@@ -96,8 +96,8 @@ homeApp
 								IMAGE_UPLOAD_FAILED : 'Failed to upload image. Try one more time',
 								IMAGE_UPLOAD : 'Avatar uploaded',
 								FOTO_ISNT_CHOOSED : 'You haven\'t choosed the file',
-								USER_BAN : 'User with {{username}} was banned',
-								USER_UNBAN : 'User with {{username}} was unbanned',
+								USER_BAN : 'User with username {{username}} was banned',
+								USER_UNBAN : 'User with username {{username}} was unbanned',
 								OLD_PASSWORD_ANSWER : 'Sorry, but you typed wrong old password',
 								NEW_PASSWORD_ANSWER : 'Sorry, but Your password must contain at least one lower case symbol, '
 										+ 'one Upper case symbol, one number and be from 6 to 20 chars long',
