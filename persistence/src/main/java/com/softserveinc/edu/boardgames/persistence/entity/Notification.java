@@ -66,6 +66,9 @@ public class Notification implements Serializable {
 	@Column(name="date")
 	private Date date = new Date();
 	
+	@Column(name="is_notificated")
+	private boolean isNotificated = false;
+	
 	public Notification() {}
 
 	public Notification(Integer id, String type, String status, String message,
@@ -151,6 +154,15 @@ public class Notification implements Serializable {
 	public void setStatusOfReading(boolean statusOfReading) {
 		this.statusOfReading = statusOfReading;
 	}
+
+	public boolean isNotificated() {
+		return isNotificated;
+	}
+
+	public void setNotificated(boolean isNotificated) {
+		this.isNotificated = isNotificated;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

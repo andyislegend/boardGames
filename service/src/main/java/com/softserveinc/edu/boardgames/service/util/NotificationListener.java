@@ -54,5 +54,6 @@ public class NotificationListener {
 			final Date date = notification.getDate();
 			mailService.sendMailAboutNotification(to, message, type, username, date);
 		}
+		notificationService.makeNotificationRead(listOfNotification);
 	}
 }
