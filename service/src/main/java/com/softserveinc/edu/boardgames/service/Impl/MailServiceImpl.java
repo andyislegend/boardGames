@@ -190,7 +190,6 @@ public class MailServiceImpl implements MailService{
 				+ gameName + " to " + ownerUsername + " is late for " + days + "---");
 	}
 	
-	@Async
 	public void sendMailAboutNotification(final String to, final String messages, final String type , final String userName, final Date date){
 		MimeMessagePreparator preparator = new MimeMessagePreparator(){
 

@@ -122,4 +122,12 @@ public class NotificationServiceImpl implements NotificationService {
 	public List<Notification> getAllNotification() {
 		return notifyRepo.getAllNotification();
 	}
+	
+	@Override
+	public void makeNotificationRead(List<Notification> listOfNotification){
+		for(Notification notification: listOfNotification){
+			notifyRepo.makeNotificationRead(notification.getId());
+		}
+		
+	}
 }
