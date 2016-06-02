@@ -10,7 +10,7 @@ INSERT INTO city (name, countryId) VALUES ('Chernihiv', 1);
 INSERT INTO city (name, countryId) VALUES ('Chernivtsi', 1);
 INSERT INTO city (name, countryId) VALUES ('Dnipro', 1);
 INSERT INTO city (name, countryId) VALUES ('Donetsk', 1);
-INSERT INTO city (name, countryId) VALUES ('Ivano-Frankivsk', 1);
+INSERT INTO city (name, countryId) VALUES ('Ivano_Frankivsk', 1);
 INSERT INTO city (name, countryId) VALUES ('Kharkiv', 1);
 INSERT INTO city (name, countryId) VALUES ('Kherson', 1);
 INSERT INTO city (name, countryId) VALUES ('Khmelnytskyi', 1);
