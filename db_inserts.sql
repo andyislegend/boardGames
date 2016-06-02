@@ -143,15 +143,15 @@ insert into game (name,categoryId) values ('Uno',4);
 insert into game (name,categoryId) values ('Bridge',4);
 insert into game (name,categoryId) values ('Poker',4);
 
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('10', '1', '2');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('9', '2', '1');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('8', '3', '2');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('7', '4', '1');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('6', '5', '3');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('7', '6', '4');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('8', '7', '1');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('9', '1', '1');
-INSERT INTO `boardgames`.`gamerating` (`rating`, `gameId`, `user_id`) VALUES ('10', '2', '2');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('10', '1', '2');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('9', '2', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('8', '3', '2');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('7', '4', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('6', '5', '3');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('7', '6', '4');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('8', '7', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('9', '1', '1');
+INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('10', '2', '2');
 
 -- inserts to table of users
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '1', '1');
