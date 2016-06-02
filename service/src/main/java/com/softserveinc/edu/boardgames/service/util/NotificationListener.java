@@ -43,7 +43,7 @@ public class NotificationListener {
 		subscribedUsersService.changeStatusOfAllEventNotification(listOfSubsriders);
 	}
 	
-	/*@Scheduled(fixedRate = 24*60*60*1000)
+	@Scheduled(fixedRate = 24*60*60*1000)
 	public void sendNotificationMessage(){
 		List<Notification> listOfNotification = notificationService.getAllNotification();
 		for(Notification notification: listOfNotification){
@@ -54,5 +54,5 @@ public class NotificationListener {
 			final Date date = notification.getDate();
 			mailService.sendMailAboutNotification(to, message, type, username, date);
 		}
-	}*/
+	}
 }
