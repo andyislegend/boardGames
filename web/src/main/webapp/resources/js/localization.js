@@ -177,7 +177,9 @@ homeApp
 								SHARED : 'Open',
 								BORROWED : 'Borrowed',
 								MYGAMES : 'My games',
-								GAMES : 'Games'
+								GAMES : 'Games',
+								male:'male',
+								female:'female'
 							});
 			$translateProvider
 					.translations(
@@ -356,7 +358,9 @@ homeApp
 								SHARED : 'Відкриті',
 								BORROWED : 'Позичені',
 								MYGAMES : 'Мої ігри',
-								GAMES : 'Ігри'
+								GAMES : 'Ігри',
+								male:'чоловік',
+								female:'жінка'
 
 							});
 			$translateProvider.preferredLanguage('en');
