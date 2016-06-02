@@ -10,11 +10,11 @@ homeApp.$inject = ['$modal'];
 		$rootScope.allGame = response.data;
 		});
 	
-	setInterval(function(){
-		for (var i = 0; i < $rootScope.allGame.length; i++) {
-			$rootScope.isNewComments($rootScope.allGame[i].id);
-		}
-}, 3000);
+//	setInterval(function(){
+//		for (var i = 0; i < $rootScope.allGame.length; i++) {
+//			$rootScope.isNewComments($rootScope.allGame[i].id);
+//		}
+//}, 3000);
 	
 	$http({
 		method : "GET",
@@ -247,7 +247,6 @@ homeApp.$inject = ['$modal'];
 	
 	$scope.gamesToPropose = [];
 	$scope.addToProposes = function() {
-		console.log($scope.myGamesModel.id);
 		$scope.gamesToPropose.push($scope.myGamesModel);
 	}
 	
@@ -283,7 +282,6 @@ homeApp.$inject = ['$modal'];
 		
 		var outMessage = message || 'no message';
 		var values = [];
-		
 		if (propositionsList.length > 0) {
 			angular.forEach(propositionsList, function(value, key) {
 				values.push(value.id);
