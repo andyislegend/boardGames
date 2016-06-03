@@ -78,11 +78,11 @@
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="COUNTRY">Country:</label>
 						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile">{{userProfile.country.name}}</p>
+							<p ng-hide="myProfile" id="friendProfile" translate="{{userProfile.country.name}}"></p>
 							<select id="repeatSelectCountry" ng-change="getCitiesByCountry()"
 								ng-model="editableCountry" ng-show="myProfile" class="form-control" 
-								ng-options= "c.name for c in countries" id="inputEdit">
-								<option value="">No country</option>
+								ng-options= "c.name | translate for c in countries" id="inputEdit">
+								<option value="" translate="NO_COUNTRY"></option>
                         	</select>
 						</div>
 					</div>
@@ -92,10 +92,10 @@
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="CITY">City:</label>
 						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile">{{userProfile.city.name}}</p>
+							<p ng-hide="myProfile" id="friendProfile" translate="{{userProfile.city.name}}"></p>
 							<select id="repeatSelectCity" ng-show="myProfile" data-ng-init="getCitiesByCountry()"
-								ng-model="editableCity" class="form-control" ng-options= "c.name for c in cities" id="inputEdit">
-								<option value="">No city</option>
+								ng-model="editableCity" class="form-control" ng-options= "c.name | translate for c in cities" id="inputEdit">
+								<option value="" translate="NO_CITY"></option>
                         	</select>
 						</div>
 					</div>
@@ -105,11 +105,11 @@
 					<div class="form-group col-md-12" id="profileDiv">
 						<label class="col-md-3 control-lable" translate="GENDER">Gender:</label>
 						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile">{{userProfile.gender}}</p>
+							<p ng-hide="myProfile" id="friendProfile" translate="{{userProfile.gender}}">{{userProfile.gender}}</p>
 							<select id="gender" name="gender" ng-model="editableGender" class="form-control" 
 								ng-show="myProfile" id="inputEdit">
-								<option value="male">Male</option>
-								<option value="female">Female</option>
+								<option value="male" translate="REGFORM_GENDER_MALE"></option>
+								<option value="female" translate="REGFORM_GENDER_FEMALE"></option>
 							</select> 
 						</div>
 					</div>

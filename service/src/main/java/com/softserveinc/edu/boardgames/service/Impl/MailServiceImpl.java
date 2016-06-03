@@ -35,6 +35,12 @@ import com.softserveinc.edu.boardgames.service.util.OnRegistrationCompleteEvent;
 @Service
 @PropertySource("classpath:properties/mail.properties")
 public class MailServiceImpl implements MailService{
+	
+	/**
+	 * @param BAN_LETTER_SUBJECT
+	 *            letter subject about banning
+	 */
+	public static final String BAN_LETTER_SUBJECT = "Banning because of negative feedbacks";
 
 	private final Logger logger = Logger.getLogger(MailServiceImpl.class);
 
@@ -93,24 +99,21 @@ public class MailServiceImpl implements MailService{
 
 	@Async
 	public void sendMailToBannedUser(final String to, final String userName) {
-
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 				message.setTo(to);
-				message.setFrom(new InternetAddress("boardGamesExchange@gmail.com", "Board's Game Exchange"));
-
+				message.setFrom(new InternetAddress(messageSender, env.getProperty("mail.credentials.title")));
 				Map<String, Object> templateVariables = new HashMap<>();
 				templateVariables.put("name", userName);
-				String body = mergeTemplateIntoString(velocityEngine, "/velocity/templates/userBanTemplate.vm", "UTF-8",
-						templateVariables);
+				String body = mergeTemplateIntoString(velocityEngine, env.getProperty("velocity.template.banUser"), 
+						env.getProperty("velocity.template.encoding"), templateVariables);
 				message.setText(body, true);
-				message.setSubject("Banning because of negative feedbacks");
+				message.setSubject(BAN_LETTER_SUBJECT);
 			}
-
 		};
 		mailSender.send(preparator);
-		logger.info("----Message about ban to " + to + " send successful---");
+		logger.info("----Message about ban to " + to + " send successfully---");
 	}
 	
 	@Async
@@ -187,7 +190,6 @@ public class MailServiceImpl implements MailService{
 				+ gameName + " to " + ownerUsername + " is late for " + days + "---");
 	}
 	
-	@Async
 	public void sendMailAboutNotification(final String to, final String messages, final String type , final String userName, final Date date){
 		MimeMessagePreparator preparator = new MimeMessagePreparator(){
 
