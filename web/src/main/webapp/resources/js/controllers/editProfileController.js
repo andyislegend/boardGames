@@ -1,4 +1,5 @@
-angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', '$http', '$routeParams', function($rootScope, $scope, $http, $routeParams) {
+angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', '$http', '$routeParams', '$location', '$anchorScroll', '$timeout', 
+                                                         function($rootScope, $scope, $http, $routeParams, $location, $anchorScroll, $timeout) {
 	$scope.userProfile;
 	$scope.showPasswordChange = false;
 	$scope.myProfile = false;
@@ -168,9 +169,13 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 	
 	$scope.showPassword = function() {
 		$scope.showPasswordChange = !$scope.showPasswordChange;
+		$timeout(gotoBottom,100);
 	}
 	
-	
+	function gotoBottom() {
+	      $location.hash('confirmPasswordId');
+	      $anchorScroll();
+	};
 	
 }]);
 

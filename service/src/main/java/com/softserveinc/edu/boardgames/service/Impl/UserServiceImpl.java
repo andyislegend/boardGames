@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -489,6 +491,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public UserDTO getUserDTO(String username) {
+		Pageable topFive = new PageRequest(0, 5);
 		UserDTO userDTO = userRepository.getUserDTO(username);
 		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
