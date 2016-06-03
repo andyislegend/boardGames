@@ -68,8 +68,10 @@
 							</ul>
 						</div>
 				</td>
-				<td class="col-sm-3">					
-							<img ng-src="{{userAvatar}}" id="userAvatar">
+				<td class="col-sm-3">
+							<a href="#edit/{{oneUser.username}}">					
+							<img ng-src="{{userAvatar}}" id="userAvatar" href="#edit/{{oneUser.username}}">
+							</a>
 							<p>Score: {{oneUser.userRating}}</p>
 							<p><a ng-click="banUser(user.username)" id="changeUserStatus" 
 								ng-if="oneUser.state=='ACTIVE'">Ban user</a></p>
