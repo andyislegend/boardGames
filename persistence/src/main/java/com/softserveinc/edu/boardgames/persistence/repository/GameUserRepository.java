@@ -2,6 +2,8 @@ package com.softserveinc.edu.boardgames.persistence.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -52,6 +54,20 @@ public interface GameUserRepository extends JpaRepository<GameUser, Integer> {
 			+ "u.minPlayers) "
 			+ "from GameUser u where u.user.username = :username")   
 	public List<GameUserDTO> getAllGameUserByUsername(@Param("username") String username);
+	
+	/**
+	 * This method get GameUser list by name
+	 * 
+	 * @param username
+	 * @return game user list
+	 */
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO("
+			+ "u.id, u.game.name, u.game.category.name, "
+			+ "u.yearOfProduction, u.edition, u.countOfComments, u.status,"
+			+ "u.description, u.rules, u.maxPlayers, "
+			+ "u.minPlayers) "
+			+ "from GameUser u where u.user.username = :username")   
+	public List<GameUserDTO> get5GameUserByUsername(@Param("username") String username, Pageable five);
 	
 	/**
 	 * Return count of tournamnet by Game

@@ -72,8 +72,8 @@ public class UsersController {
 	 */
 	@RequestMapping(value = { "/getUserDTO" }, method = RequestMethod.GET)
 	@ResponseBody
-	public UserDTO getUserDTO(@RequestParam("username") String username) {
-		return userService.getUserDTO(username);
+	public UserDTO getUserDTOWith5TournamentsAndGames(@RequestParam("username") String username) {
+		return userService.getUserDTOWith5TournamentsAndGames(username);
 	}
 
 	/**

@@ -491,10 +491,18 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public UserDTO getUserDTO(String username) {
-		Pageable topFive = new PageRequest(0, 5);
 		UserDTO userDTO = userRepository.getUserDTO(username);
 		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
+		return userDTO;
+	}
+	
+	@Override
+	public UserDTO getUserDTOWith5TournamentsAndGames(String username) {
+		Pageable five = new PageRequest(0, 5);
+		UserDTO userDTO = userRepository.getUserDTO(username);
+		userDTO.setUserTournaments(userRepository.get5UserTournamentsByUserName(username, five));
+		userDTO.setUserGames(gameUserRepository.get5GameUserByUsername(username, five));
 		return userDTO;
 	}
 	

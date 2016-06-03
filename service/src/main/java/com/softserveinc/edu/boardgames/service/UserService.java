@@ -55,6 +55,7 @@ public interface UserService {
 	String findUsersGender(String username);
 	UserDTO getUserDTO(String username);
 	void sendMessageByBannedUser(String username, String message);
+	public UserDTO getUserDTOWith5TournamentsAndGames(String username);
 	
 	public void setNotification(String userName, boolean option);
 	

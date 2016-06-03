@@ -629,8 +629,8 @@
                             <a href="#edit/{{friend.username}}" type="button"> <img
                               class="ava" src="resources/images/default-avatar.jpg" /></a>
                           </div>
-                          <div class="name">{{ friend.firstName }} {{
-                            friend.lastName}}
+                          <div class="name"><a href="#edit/{{friend.username}}" type="button">
+                          {{ friend.firstName }} {{friend.lastName}}</a>
                           </div>
                           <div class="over-mes">
                             <a href="" type="button"

@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.persistence.repository;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -101,6 +103,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO"
 			+ "(t.id, t.name) from Tournament t Join t.users u where u.username =:username")
 	public List<TournamentsDTO> getUserTournamentsByUserName(@Param("username") String username);
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO"
+			+ "(t.id, t.name) from Tournament t Join t.users u where u.username =:username")
+	public List<TournamentsDTO> get5UserTournamentsByUserName(@Param("username") String username, Pageable five);
 
 	/**
 	 * This method get userDTO by username
