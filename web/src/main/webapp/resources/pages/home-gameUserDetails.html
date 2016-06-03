@@ -1,5 +1,4 @@
-<div ng-controller = "allUsersGameCtrl" class ="container-fluid">
-		
+<div ng-controller = "allUsersGameCtrl" class ="container-fluid">	
 	<div class = "container-fluid">
 		<table class="table table-reflow" id="gameDetailTable">
 			<tbody>
@@ -89,27 +88,30 @@
         				<h4 class="text-primary">Send request</h4>
       				</div>
 					<div class="modal-body">
-						<form name="selectRequiredForm">
+						<form name="selectRequiredForm" ng-init="haveSmthToPropose=false">
 							<p class="boldText">Days: {{howManyDays}}</p>
 				  			<br/>
 				  			<label class="inlineDisplay">Message for owner:  </label>
 				  			<textarea class="form-control inlineDisplay" rows="2" id="message" ng-model="messageToOwner"></textarea>
 				  			<br/><br/>
-				  			<p class="boldText inlineDisplay">Select what you want to propose:  </p>
-			      			<select class="form-control inlineDisplay" ng-model="myGamesModel" name="gamesSelect"
-			      					ng-options="option.name for option in myGames" required></select>
-			      			<button class="btn btn-primary inlineDisplay" ng-click="addToProposes()" 
+				  			<button class="btn btn-primary" ng-click="displayPropositions()">Propose</button>
+				  			<button class="btn btn-primary pull-right" 
+			  					ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)">
+			  					Ask owner</button>
+				  			<div ng-show="haveSmthToPropose">
+				  				<br/>
+				  				<p class="boldText inlineDisplay">Select what you want to propose:  </p>
+			      				<select class="form-control inlineDisplay" ng-model="myGamesModel" name="gamesSelect"
+			      					ng-options="option.name+': '+option.edition+' - '+option.yearOfProduction for option in myGames" 
+			      					required></select>
+			      				<button class="btn btn-primary inlineDisplay" ng-click="addToProposes()" 
 			      					ng-disabled="selectRequiredForm.gamesSelect.$invalid">
-			      					Add proposition</button>  
-			      			<br/>
-			      			<ul class="list-group listCenterd" ng-model="propositionsList">
-			    				<li class="list-group-item" ng-repeat="game in gamesToPropose">{{game.name}}, {{game.edition}}</li>
-			  				</ul>
-			  				<br/>
-			  				<div class="centeredObjects">
-			  					<button class="btn btn-primary" 
-			  							ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)">
-			  							Ask owner</button>
+			      					Add game</button>  
+			      				<br/>
+			      				<br/>
+			      				<ul class="list-group" ng-model="propositionsList">
+			    					<li class="list-group-item" ng-repeat="game in gamesToPropose">{{game.name}}, {{game.edition}}</li>
+			  					</ul>
 			  				</div>
 			  			</form>
 					</div>

@@ -19,7 +19,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, n.userSender.username) "
 			+ "from Notification n "
 			+ "where n.user.username = :username "
-			+ "and n.type = 'exchange'")
+			+ "and n.type = 'exchange' order by n.date desc")
 	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
 	
 	@Query("select COUNT(n) from Notification n "

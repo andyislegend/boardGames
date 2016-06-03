@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.CommentsForGame;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
+import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
@@ -137,7 +138,12 @@ public class UserGameSharingController {
 		exchange.setMessage(message);
 		exchangeService.update(exchange);
 		
-		gamePropoService.updateForExchange(exchange.getId(), GameUserStatus.CONFIRMATION.name());
+		for (Integer proposition: propositions) {		 
+			GameProposition gamePropo = new GameProposition();		
+		 	gamePropo.setGameUser(gameUserService.getUserGamesById(proposition));		
+		 	gamePropo.setExchange(exchange);		
+		 	gamePropoService.update(gamePropo);		
+		 }
 		
 		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
 				+ " applies for the game " + gameUserToUpdate.getGame().getName() 
