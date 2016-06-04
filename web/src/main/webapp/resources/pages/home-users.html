@@ -29,10 +29,13 @@
 				</td>
 				<td title="'EMAIL_TABLE' | translate" sortable="'email'" class="col-sm-3">{{user.email}}</td>
 				<td title="'COUNTRY_TABLE' | translate" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
-					class="col-sm-3" ng-model="country" ng-change="searchCities()" translate={{user.country.name}}>
+					class="col-sm-2" ng-model="country" ng-change="searchCities()" translate={{user.country.name}}>
                 </td>
-				<td title="'CITY_TABLE' | translate" sortable="'cityName'" filter="{'cityName': 'text'}" class="col-sm-3"
+				<td title="'CITY_TABLE' | translate" sortable="'cityName'" filter="{'cityName': 'text'}" class="col-sm-2"
 					translate={{user.city.name}}>					 
+                </td>
+                <td title="'STATE' | translate" sortable="'state'" class="col-sm-2"
+					translate={{user.state}}>					 
                 </td>
                 </tr>
 			<tr ng-show="showUser" ng-repeat-end>
@@ -60,7 +63,7 @@
 							</ul>
 
 				</td>
-				<td class="col-sm-3">
+				<td class="col-sm-2">
 						<div id="backgroundForOneUser">
 							<b id="tournamentsList" translate="USER_TOURNAMENTS"></b>
 							<ul ng-repeat="tournament in oneUser.userTournaments" id="tournamentsList">
@@ -68,15 +71,15 @@
 							</ul>
 						</div>
 				</td>
-				<td class="col-sm-3">
+				<td class="col-sm-2">
 							<a href="#edit/{{oneUser.username}}">					
 							<img ng-src="{{userAvatar}}" id="userAvatar" href="#edit/{{oneUser.username}}">
 							</a>
 							<p>Score: {{oneUser.userRating}}</p>
 							<p><a ng-click="banUser(user.username)" id="changeUserStatus" 
-								ng-if="oneUser.state=='ACTIVE'">Ban user</a></p>
+								ng-if="oneUser.state=='ACTIVE'" translate="TO_BAN"></a></p>
 							<p><a ng-click="unbanUser(user.username)" id="changeUserStatus" 
-								ng-if="oneUser.state=='BANNED'">Unban user</a></p>
+								ng-if="oneUser.state=='BANNED'" translate="TO_UNBAN"></a></p>
 				</td>
 			</tr>
 			</tbody>
