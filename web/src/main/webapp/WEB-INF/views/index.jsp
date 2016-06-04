@@ -202,7 +202,7 @@
 					<h4 style="text-align: center;" class="modal-title"
 						translate="REGFORM_HEADER"></h4>
 					<p style="color: red; font-size: 10pt; text-align: center;"
-						ng-hide="regUserMssg">{{regUserResp}}</p>
+						ng-hide="regUserMssg" translate="{{regUserResp}}"></p>
 				</div>
 				<div class="modal-body">
 

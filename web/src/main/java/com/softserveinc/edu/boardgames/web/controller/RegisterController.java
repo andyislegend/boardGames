@@ -57,21 +57,36 @@ public class RegisterController {
 	 * 
 	 */
 	private final static String INVALID_TOKEN_MAIL_CONFIRMATION = "invalid";
-	
+
 	/**
 	 * @param VALID_TOKEN_MAIL_CONFIRMATION
-	 *            is used as response after successful verification token validation
+	 *            is used as response after successful verification token
+	 *            validation
 	 * 
 	 */
 	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
+
+	/**
+	 * @param SUCCESS_TOKEN_VALIDATION
+	 *            is a flag to mark successful validation of registration token
+	 *            and show message to user
+	 */
+	private final static String SUCCESS_TOKEN_VALIDATION = "success";
+
+	/**
+	 * @param TOKEN_EXPIRED
+	 *            is a flag to mark that registration token has expired
+	 * 
+	 */
+	private final static String TOKEN_EXPIRED = "expired";
 
 	/**
 	 * @param VALID_EMAIL_ADDRESS_REGEX
 	 *            is used to validate the correctness of mail provided by new
 	 *            user during registration
 	 */
-	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
-			.compile("^[A-Z0-9.'_-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9.'_-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+			Pattern.CASE_INSENSITIVE);
 
 	/**
 	 * @param VALID_PSASSWORD_REGEX
@@ -85,19 +100,19 @@ public class RegisterController {
 	 */
 
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
-	
+
 	/**
 	 * @param OLD_PASSWORD_ANSWER
 	 *            is used as a key to choose correct language
 	 */
 	public static final String OLD_PASSWORD_ANSWER = "OLD_PASSWORD_ANSWER";
-	
+
 	/**
 	 * @param NEW_PASSWORD_ANSWER
 	 *            is used as a key to choose correct language
 	 */
 	public static final String NEW_PASSWORD_ANSWER = "NEW_PASSWORD_ANSWER";
-	
+
 	/**
 	 * @param CONFIRM_PASSWORD_ANSWER
 	 *            is used as a key to choose correct language
@@ -131,47 +146,41 @@ public class RegisterController {
 
 		if (username.isEmpty() || gender.isEmpty() || email.isEmpty() || password.isEmpty()) {
 
-			return new ResponseEntity<String>("Fields marked with \"*\" are required. Please enter valid data (only English is allowed).",
-					HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LanguageKeys.REQUIRED_FIELD, HttpStatus.CONFLICT);
 
 		}
 
 		if (!validateUsername(username)) {
 
-			return new ResponseEntity<String>("Sorry, but Username must contain from 3 to 9 symbol and don't have special symbols in it.",
-					HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LanguageKeys.INVALID_USERNAME, HttpStatus.CONFLICT);
 		}
 
 		if (userService.isExistsWithUsername(username)) {
 
-			return new ResponseEntity<String>("Sorry, but this Usernmae is already taken. Choose another one!",
-					HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LanguageKeys.USERNAME_DUPLICATE, HttpStatus.CONFLICT);
 
 		}
 
 		if (!validateMail(email)) {
 
-			return new ResponseEntity<String>("Please enter a valid email address", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LanguageKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
 
 		}
 
 		if (userService.isExistsWithEmail(email)) {
 
-			return new ResponseEntity<String>("Sorry, but this email is already in use!", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LanguageKeys.EMAIL_DUPLICATE, HttpStatus.CONFLICT);
 
 		}
 
 		if (!validatePassword(password)) {
 
-			return new ResponseEntity<String>(
-					"Password must contain from 6 to 20 symbols with at least 1 upper case symbol and 1 number",
-					HttpStatus.CONFLICT);
-
+			return new ResponseEntity<String>(LanguageKeys.INVALID_PASSWORD, HttpStatus.CONFLICT);
 		}
 
 		if (!password.equals(confirmPassword)) {
 
-			return new ResponseEntity<String>("Sorry, but You must confirm Your password", HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LanguageKeys.NOT_CONFIRMED_PASSWORD, HttpStatus.CONFLICT);
 
 		}
 
@@ -202,43 +211,42 @@ public class RegisterController {
 		final String result = userService.validateVerificationToken(token);
 
 		if (result.equals(VALID_TOKEN_MAIL_CONFIRMATION)) {
-			model.addAttribute("success", true);
+			model.addAttribute(SUCCESS_TOKEN_VALIDATION, true);
 		}
 
 		if (result.equals(INVALID_TOKEN_MAIL_CONFIRMATION)) {
-			model.addAttribute("expired", true);
+			model.addAttribute(TOKEN_EXPIRED, true);
 		}
 
 		return "userinfo";
 	}
 
 	/**
-	 * This method that update user password and return
-	 * HttpStatus.CONFLICT with error message if there is invalid data
-	 * in fields provided by user or return HttpStatus.OK if all data
-	 * is correct
+	 * This method that update user password and return HttpStatus.CONFLICT with
+	 * error message if there is invalid data in fields provided by user or
+	 * return HttpStatus.OK if all data is correct
 	 * 
 	 * @author Volodymyr Terlyha
 	 * 
 	 * @param UserPasswordDTO
 	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
 	 * 
-	 *         
+	 * 
 	 */
 	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUserPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
-		if (userPasswordDTO.getOldPassword() == null || userPasswordDTO.getNewPassword() == null 
+		if (userPasswordDTO.getOldPassword() == null || userPasswordDTO.getNewPassword() == null
 				|| userPasswordDTO.getConfirmPassword() == null) {
-				return new ResponseEntity<String>(HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		} else if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
 			return new ResponseEntity<String>(LanguageKeys.OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		} else if (!validatePassword(userPasswordDTO.getNewPassword())) {
 			return new ResponseEntity<String>(LanguageKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		} else if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
 			return new ResponseEntity<String>(LanguageKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
-		}		
+		}
 		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
 		userService.updateUser(user);
 		return new ResponseEntity<String>(LanguageKeys.CHANGES_SAVED, HttpStatus.OK);
