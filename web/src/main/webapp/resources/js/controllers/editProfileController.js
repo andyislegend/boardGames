@@ -19,16 +19,15 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 		$scope.editableGender = $scope.userProfile.gender;
 		$scope.editableAge = $scope.userProfile.age;
 		$scope.editablePhoneNumber = $scope.userProfile.phoneNumber;
-		$scope.editableCity = $scope.userProfile.city;
 		$http.get('getUsersAvatar?username=' + $scope.userProfile.username).then(function(result) {
 			$scope.avatar = result.data;
 		});
 		
 		$http.get('getAllCountries').then(function(result) {
 			$scope.countries = result.data;
-			if ($scope.userProfile.country != null) {
+			if ($scope.userProfile.countryId != null) {
 				for (i = 0; i < $scope.countries.length; i++) {				
-					if ($scope.countries[i].id == $scope.userProfile.country.id) {
+					if ($scope.countries[i].id == $scope.userProfile.countryId) {
 						$scope.editableCountry = $scope.countries[i];
 						break;
 					}
@@ -40,9 +39,9 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 				} else {
 					$http.get('getAllCities?countryId=' + $scope.editableCountry.id).then(function(result) {
 						$scope.cities = result.data;
-						if ($scope.userProfile.city != null) {
+						if ($scope.userProfile.cityId != null) {
 							for (i = 0; i < $scope.cities.length; i++) {
-								if ($scope.cities[i].id == $scope.userProfile.city.id) {
+								if ($scope.cities[i].id == $scope.userProfile.cityId) {
 									$scope.editableCity = $scope.cities[i];
 									break;
 								} 

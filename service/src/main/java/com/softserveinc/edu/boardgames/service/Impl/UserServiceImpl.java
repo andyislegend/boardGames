@@ -55,6 +55,8 @@ public class UserServiceImpl implements UserService {
 	
 	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
 	
+	private final static Integer RATING_TO_BAN_USER = -5;
+	
 	
 
 	@Autowired
@@ -383,11 +385,11 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	@Transactional
-	public User getUserProfile(String username, String loggedInUserUsername) {
+	public UserDTO getUserProfile(String username, String loggedInUserUsername) {
 		if (!username.equals(CHECK_LOGGED_IN_USERNAME)) {
-			return userRepository.findByUsername(username);
+			return getUserDTO(username);
 		}
-		return userRepository.findByUsername(loggedInUserUsername);
+		return getUserDTO(loggedInUserUsername);
 	}
 
 	/**
@@ -464,7 +466,7 @@ public class UserServiceImpl implements UserService {
 	public void unbanUserByAdministrator(String username) {
 		User user = findOne(username);
 		user.setState(UserStatus.ACTIVE.name());
-		if (user.getUserRating() <= -5) {
+		if (user.getUserRating() <= RATING_TO_BAN_USER) {
 			user.setUserRating(User.MINIMAL_RATING_FOR_ACTIVE_USER);
 		}
 		userRepository.saveAndFlush(user);
@@ -489,14 +491,21 @@ public class UserServiceImpl implements UserService {
 	 * @param username
 	 * 
 	 */
-	@Override
-	public UserDTO getUserDTO(String username) {
+	private UserDTO getUserDTO(String username) {
 		UserDTO userDTO = userRepository.getUserDTO(username);
 		userDTO.setUserTournaments(userRepository.getUserTournamentsByUserName(username));
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
 		return userDTO;
 	}
 	
+	/**
+	 * This method returns userDTO by username with
+	 * limit of 5 Games and Tournaments
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 * 
+	 */
 	@Override
 	public UserDTO getUserDTOWith5TournamentsAndGames(String username) {
 		Pageable five = new PageRequest(0, 5);

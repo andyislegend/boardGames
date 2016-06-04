@@ -86,7 +86,7 @@ public class UsersController {
 	 */
 	@RequestMapping(value = { "/getProfile" }, method = RequestMethod.GET)
 	@ResponseBody
-	public User getUserProfile(@RequestParam("username") String username) {
+	public UserDTO getUserProfile(@RequestParam("username") String username) {
 		return userService.getUserProfile(username, WebUtil.getPrincipalUsername());
 	}
 

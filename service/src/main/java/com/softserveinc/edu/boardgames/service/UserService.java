@@ -47,13 +47,12 @@ public interface UserService {
 	User getUser(String username);
 	void updateUserWithBan(User user);
 	void updateUser(UserDTO userDTO, String username);
-	User getUserProfile(String username, String loggedInUserUsername);
+	UserDTO getUserProfile(String username, String loggedInUserUsername);
 	String getAvatarUrl(String username);
 	void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException;
 	void banUserByAdministrator(String username);
 	void unbanUserByAdministrator(String username);
 	String findUsersGender(String username);
-	UserDTO getUserDTO(String username);
 	void sendMessageByBannedUser(String username, String message);
 	public UserDTO getUserDTOWith5TournamentsAndGames(String username);
 	
