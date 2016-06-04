@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserPasswordDTO;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserRegistrationDTO;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.service.util.OnRegistrationCompleteEvent;
 import com.softserveinc.edu.boardgames.web.localization.LanguageKeys;
@@ -138,59 +139,54 @@ public class RegisterController {
 	 */
 	@RequestMapping(value = { "/addNewUser" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> addNewUser(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("email") String email,
-			@RequestParam("gender") String gender, @RequestParam("username") String username,
-			@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,
-			final HttpServletRequest request) {
-
-		if (username.isEmpty() || gender.isEmpty() || email.isEmpty() || password.isEmpty()) {
+	public ResponseEntity<String> addNewUser(@RequestBody UserRegistrationDTO userDTO, final HttpServletRequest request) {
+		if (userDTO.getUsername().isEmpty() || userDTO.getGender().isEmpty() ||userDTO.getEmail().isEmpty() || userDTO.getPassword().isEmpty()) {
 
 			return new ResponseEntity<String>(LanguageKeys.REQUIRED_FIELD, HttpStatus.CONFLICT);
 
 		}
 
-		if (!validateUsername(username)) {
+		if (!validateUsername(userDTO.getUsername().trim())) {
 
 			return new ResponseEntity<String>(LanguageKeys.INVALID_USERNAME, HttpStatus.CONFLICT);
 		}
 
-		if (userService.isExistsWithUsername(username)) {
+		if (userService.isExistsWithUsername(userDTO.getUsername().trim())) {
 
 			return new ResponseEntity<String>(LanguageKeys.USERNAME_DUPLICATE, HttpStatus.CONFLICT);
 
 		}
 
-		if (!validateMail(email)) {
+		if (!validateMail(userDTO.getEmail().trim())) {
 
 			return new ResponseEntity<String>(LanguageKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
 
 		}
 
-		if (userService.isExistsWithEmail(email)) {
+		if (userService.isExistsWithEmail(userDTO.getEmail().trim())) {
 
 			return new ResponseEntity<String>(LanguageKeys.EMAIL_DUPLICATE, HttpStatus.CONFLICT);
 
 		}
 
-		if (!validatePassword(password)) {
+		if (!validatePassword(userDTO.getPassword())) {
 
 			return new ResponseEntity<String>(LanguageKeys.INVALID_PASSWORD, HttpStatus.CONFLICT);
 		}
 
-		if (!password.equals(confirmPassword)) {
+		if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
 
 			return new ResponseEntity<String>(LanguageKeys.NOT_CONFIRMED_PASSWORD, HttpStatus.CONFLICT);
 
 		}
 
 		User newUser = new User();
-		newUser.setEmail(email.trim());
-		newUser.setFirstName(firstName);
-		newUser.setLastName(lastName);
-		newUser.setUsername(username.trim());
-		newUser.setPassword(password);
-		newUser.setGender(gender);
+		newUser.setEmail(userDTO.getEmail().trim());
+		newUser.setFirstName(userDTO.getFirstName());
+		newUser.setLastName(userDTO.getLastName());
+		newUser.setUsername(userDTO.getUsername().trim());
+		newUser.setPassword(userDTO.getPassword().trim());
+		newUser.setGender(userDTO.getGender());
 		userService.createUser(newUser);
 
 		eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newUser, getAppUrl(request)));

@@ -1,4 +1,5 @@
-var homeApp = angular.module('indexModule', ['pascalprecht.translate', 'ngCookies']);
+var homeApp = angular.module('indexModule', [ 'pascalprecht.translate',
+		'ngCookies' ]);
 
 homeApp.controller('loginCntrl', [
 		'$scope',
@@ -54,8 +55,7 @@ homeApp.controller('loginCntrl', [
 				response.error(function(data) {
 					console.dir(data);
 				});
-				
-				
+
 				function redirectByState(state) {
 					var path = undefined;
 
@@ -93,7 +93,7 @@ homeApp.controller('loginCntrl', [
 			$scope.showModalBanned = function() {
 				$('#myBanned').modal('show');
 			}
-			
+
 			$scope.showModalLoading = function() {
 				$('#myLoading').modal('show');
 			}
@@ -105,21 +105,22 @@ homeApp.controller('registerCntrl', [ '$scope', '$http',
 
 			$scope.register = function() {
 
+				var userRegistrationDTO = {
+					username : $scope.regusername,
+					email : $scope.regemail,
+					firstName : $scope.regfirstName,
+					lastName : $scope.reglastName,
+					password : $scope.regpassword,
+					confirmPassword : $scope.regconfirmPassword,
+					gender : $scope.reggender
+				}
 				$http({
 					method : 'POST',
 					url : 'addNewUser',
-					data : $.param({
-						username : $scope.regusername,
-						email : $scope.regemail,
-						firstName : $scope.regfirstName,
-						lastName : $scope.reglastName,
-						password : $scope.regpassword,
-						confirmPassword : $scope.regconfirmPassword,
-						gender : $scope.reggender
-					}),
 					headers : {
-						'Content-Type' : 'application/x-www-form-urlencoded'
-					}
+						'Content-Type' : 'application/json'
+					},
+					data: userRegistrationDTO
 				}).success(function(status) {
 					$scope.closeModal();
 					$scope.showModal();
@@ -148,12 +149,18 @@ homeApp.controller('registerCntrl', [ '$scope', '$http',
 			$scope.showModal = function() {
 				$('#myRegSuccess').modal('show');
 			}
-			
+
 		} ]);
 
-homeApp.controller('sendEmailToUnban', [ '$scope', '$window',
-                                      function($scope, $window) {
-	$scope.sendEmail = function() {
-		$window.open("mailto:boardGamesExchange@gmail.com?subject=subject&body=message");
-	};
-                                      } ]);
+homeApp
+		.controller(
+				'sendEmailToUnban',
+				[
+						'$scope',
+						'$window',
+						function($scope, $window) {
+							$scope.sendEmail = function() {
+								$window
+										.open("mailto:boardGamesExchange@gmail.com?subject=subject&body=message");
+							};
+						} ]);
