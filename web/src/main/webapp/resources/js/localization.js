@@ -179,7 +179,14 @@ homeApp
 								MYGAMES : 'My games',
 								GAMES : 'Games',
 								male:'male',
-								female:'female'
+								female:'female',
+								REQUIRED_FIELDS: 'Fields marked with \"*\" are required',
+								USERNAME_DUPLICATE: 'This Username is already taken. Please choose another one',
+								INVALID_USERNAME: 'Username must be from 3 to 9 symbols long',
+								EMAIL_DUPLICATE: 'This email address is already in use. Please choose another on',
+								INVALID_EMAIL: 'You\'ve enetered not valid email address',
+								INVALID_PASSWORD: 'Password mus be from 6 to 20 and containes at least 1 number and 1 upper case letter',
+								NOT_CONFIRMED_PASSWORD: 'You must confirm Your password'
 							});
 			$translateProvider
 					.translations(
@@ -360,7 +367,14 @@ homeApp
 								MYGAMES : 'Мої ігри',
 								GAMES : 'Ігри',
 								male:'чоловік',
-								female:'жінка'
+								female:'жінка',
+								REQUIRED_FIELDS: 'Поля позначені \"*\" є обов\'язковими до заповнення',
+								USERNAME_DUPLICATE: 'Даний логін уже використовується іншим користувачем. Виберіть інший, будь ласка',
+								INVALID_USERNAME: 'Логін повинен містити не менше 3, але не більше 9 символів',
+								EMAIL_DUPLICATE: 'Дана адреса електронної пошти вже використовується. Вкажіть іншу, будь ласка',
+								INVALID_EMAIL: 'Ви ввели невірний адрес електронної скриньки',
+								INVALID_PASSWORD: 'Пароль повинен бути від 6 до 20 символів у довжину і містити хоча б 1 велику літеру і 1 цифру',
+								NOT_CONFIRMED_PASSWORD: 'Ви повинні підтвердити свій пароль'
 
 							});
 			$translateProvider.preferredLanguage('en');
