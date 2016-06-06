@@ -49,8 +49,7 @@
 								translate-values="{userGender:'{{oneUser.gender}}'}"></p>
 							<p translate="USER_AGE" 
 								translate-values="{userAge:'{{oneUser.age}}'}"></p>
-							<p translate="USER_LEVEL" 
-								translate-values="{userLevel:'{{oneUser.level}}'}"></p>
+							<p translate="{{oneUser.level}}"></p>
 							<p translate="USER_PHONE_NUMBER" 
 								translate-values="{userPhoneNumber:'{{oneUser.phoneNumber}}'}"></p>
 						</div>
@@ -75,7 +74,7 @@
 							<a href="#edit/{{oneUser.username}}">					
 							<img ng-src="{{userAvatar}}" id="userAvatar" href="#edit/{{oneUser.username}}">
 							</a>
-							<p>Score: {{oneUser.userRating}}</p>
+							<p translate="SCORE" translate-values="{rating:'{{oneUser.userRating}}'}"></p>
 							<p><a ng-click="banUser(user.username)" id="changeUserStatus" 
 								ng-if="oneUser.state=='ACTIVE'" translate="TO_BAN"></a></p>
 							<p><a ng-click="unbanUser(user.username)" id="changeUserStatus" 
