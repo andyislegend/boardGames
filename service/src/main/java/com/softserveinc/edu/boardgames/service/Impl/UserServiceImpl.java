@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.service.Impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.softserveinc.edu.boardgames.persistence.entity.City;
 import com.softserveinc.edu.boardgames.persistence.entity.Country;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
+import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
@@ -30,6 +32,7 @@ import com.softserveinc.edu.boardgames.persistence.repository.CityRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.CountryRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.ImageRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.NotificationRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenRepository;
 import com.softserveinc.edu.boardgames.service.ImageService;
@@ -85,6 +88,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private NotificationRepository notifyRepo;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -513,6 +519,16 @@ public class UserServiceImpl implements UserService {
 		userDTO.setUserTournaments(userRepository.get5UserTournamentsByUserName(username, five));
 		userDTO.setUserGames(gameUserRepository.get5GameUserByUsername(username, five));
 		return userDTO;
+	}
+	
+	public void saveNotificationOfBannedUser(String message, String username){
+		Notification notification = new Notification();
+		notification.setDate(new Date());
+		notification.setType("MESSAGE");
+		notification.setUser(userRepository.findById(1));
+		notification.setUserSender(userRepository.findByUsername(username));
+		notification.setMessage(message);
+		notifyRepo.saveAndFlush(notification);
 	}
 	
 	@Override
