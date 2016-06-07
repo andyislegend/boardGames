@@ -323,63 +323,89 @@
 	<!-- End of UNDER_VERIFICATION Modal -->
 
 	<!-- Modal BANNED USER -->
-	<div id="myBanned" class="modal fade  col-md-6 col-md-offset-3"
-		role="dialog">
-		<div class="modal-dialog">
+		<div id="myBanned" class="modal fade  col-md-6 col-md-offset-3"
+			role="dialog">
+			<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content" >
-				<div class="modal-header">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title" translate="BAN_MODAL_HEADER"></h4>
+						<h4 style="text-align: center;" class="modal-title"
+							translate="BAN_MODAL_HEADER"></h4>
 
+					</div>
+					<div class="modal-body">
+
+						<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
+						<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
+						<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
+
+					</div>
+					<p>
+						<button data-toggle="modal" data-dismiss="modal"
+							class="btn btn-primary btn-bg" translate="CONTACT_WITH_ADMINS"
+							data-target="#sendToUnban" id="contactUs"></button>
+						<button data-dismiss="modal" class="btn btn-default"
+							translate="CLOSE" id="closeButton" style="margin-bottom: 1%;"></button>
+					</p>
 				</div>
-				<div class="modal-body">
+				<!-- End of Modal Content -->
 
-					<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
-					<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
-					<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
-
-				</div>
-				<p>
-				<button data-toggle="modal" data-dismiss="modal"
-					class="btn btn-primary btn-bg" translate="CONTACT_WITH_ADMINS" 
-					data-target="#sendToUnban" id="contactUs"></button>
-				<button data-dismiss="modal" class="btn btn-default" 
-				translate="CLOSE" id="closeButton" style="margin-bottom: 1%;"></button>		
-				</p>
-			</div>
-			<!-- End of Modal Content -->
-
-		</div>
-	</div>
-	<!-- End of BANNED Modal -->
-	<div id="sendToUnban" class="modal fade  col-md-6 col-md-offset-3"
-		role="dialog" >
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content" ng-controller = "userToUnbanCtrl">
-				<div class="modal-header">
-				</div>
-				<div class="modal-body">
-					<p translate="SEND_LETTER"></p>
-  					<textarea cols="50" rows="20" name="comments" class="form-control input-sm"
-  						ng-model="emailOfBannedUser"></textarea>
-  					<br>
-  					<p>
-  					<button ng-click="sendmail()" class="btn btn-primary btn-bg" translate="SEND"
-  						id="sendButton" data-dismiss="modal">
-  					</button>
-
-					<button data-toggle="modal" translate="CLOSE" class="btn btn-default" data-dismiss="modal"
-						style="margin-bottom: 1%;" id="closeButton"></a>
-					</button>
-				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Modal ON REGISTRATION SUCCESS -->
+		<div ng-controller="userToUnbanCtrl">
+		<!-- End of BANNED Modal -->
+		<!-- Modal SEND LETTER TO ADMINISTRATOR -->
+		<div id="sendToUnban" class="modal fade  col-md-6 col-md-offset-3"
+			role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header"></div>
+					<div class="modal-body">
+						<p translate="SEND_LETTER"></p>
+						<textarea cols="50" rows="20" name="comments"
+							class="form-control input-sm" ng-model="emailOfBannedUser"></textarea>
+						<br>
+						<p>
+							<button ng-click="sendmail()" class="btn btn-primary btn-bg"
+								translate="SEND" id="sendButton" data-dismiss="modal">
+							</button>
+
+							<button data-toggle="modal" translate="CLOSE"
+								class="btn btn-default" data-dismiss="modal"
+								style="margin-bottom: 1%;" id="closeButton">
+								</a>
+							</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of SEND LETTER TO ADMINISTRATOR -->
+		<!-- Modal CONFIRMATION ABOUT RECEIVED LETTER -->
+
+		<div class="modal fade" id="letterToUnbanReceived" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<div class="modal-body">
+							<p translate="{{letterAboutUnbanReceived}}"></p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							translate="CLOSE"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of CONFIRMATION ABOUT RECEIVED LETTER -->
+		</div>
+		<!-- Modal ON REGISTRATION SUCCESS -->
 	<div id="myRegSuccess" class="modal fade  col-md-6 col-md-offset-3"
 		role="dialog">
 		<div class="modal-dialog">

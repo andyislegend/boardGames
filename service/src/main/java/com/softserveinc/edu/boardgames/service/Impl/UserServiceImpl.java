@@ -524,6 +524,7 @@ public class UserServiceImpl implements UserService {
 		return userDTO;
 	}
 	
+	@Override
 	public void saveNotificationOfBannedUser(String message, String username){
 		Notification notification = new Notification();
 		notification.setDate(new Date());
@@ -532,11 +533,6 @@ public class UserServiceImpl implements UserService {
 		notification.setUserSender(userRepository.findByUsername(username));
 		notification.setMessage(message);
 		notifyRepo.saveAndFlush(notification);
-	}
-	
-	@Override
-	public void sendMessageByBannedUser(String username, String message) {
-		
 	}
 
 	@Override

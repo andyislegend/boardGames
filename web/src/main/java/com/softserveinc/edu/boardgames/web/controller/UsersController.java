@@ -184,9 +184,9 @@ public class UsersController {
 	 *
 	 */
 	@RequestMapping(value = { "/sendEmailOfBannedUser" }, method = RequestMethod.POST)
-	public ResponseEntity<String> sendEmailOfBannedUser(@RequestParam("letter") String message) {
-		userService.saveNotificationOfBannedUser(message, WebUtil.getPrincipalUsername());
-		return new ResponseEntity<String>(LanguageKeys.USER_UNBAN, HttpStatus.OK);
+	public ResponseEntity<String> sendEmailOfBannedUser(@RequestParam("letter") String letter) {
+		userService.saveNotificationOfBannedUser(letter, WebUtil.getPrincipalUsername());
+		return new ResponseEntity<String>(LanguageKeys.LETTER_ABOUT_UNBAN_RECEIVED, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/setNotification", method = RequestMethod.POST)
