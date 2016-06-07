@@ -103,24 +103,6 @@ public class RegisterController {
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
 
 	/**
-	 * @param OLD_PASSWORD_ANSWER
-	 *            is used as a key to choose correct language
-	 */
-	public static final String OLD_PASSWORD_ANSWER = "OLD_PASSWORD_ANSWER";
-
-	/**
-	 * @param NEW_PASSWORD_ANSWER
-	 *            is used as a key to choose correct language
-	 */
-	public static final String NEW_PASSWORD_ANSWER = "NEW_PASSWORD_ANSWER";
-
-	/**
-	 * @param CONFIRM_PASSWORD_ANSWER
-	 *            is used as a key to choose correct language
-	 */
-	public static final String CONFIRM_PASSWORD_ANSWER = "CONFIRM_PASSWORD_ANSWER";
-
-	/**
 	 * 
 	 * @param firstName
 	 * @param lastName
