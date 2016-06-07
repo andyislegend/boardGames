@@ -55,3 +55,29 @@ span.glyphicon-knight {
 	width: 440px;
 	height: 200px;
 }
+a.bg-primary.spannedText {
+	padding: 7px;
+	border-radius: 4px;
+}
+img.iconImage {
+	width:120px;
+	height:120px;
+}
+#wrapper {
+	display: table;
+    width: 100%;
+}
+.cell {
+    display: table-cell;
+    vertical-align: top;
+}
+.content {
+    float: left;
+    height:120px;
+}
+.content2{
+    float: right;
+}
+#availabilityButton {
+	margin-right:20px;
+}
