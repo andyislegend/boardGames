@@ -369,11 +369,10 @@
   					<br>
   					<p>
   					<button ng-click="sendmail()" class="btn btn-primary btn-bg" translate="SEND"
-  						id="sendButton">
+  						id="sendButton" data-dismiss="modal">
   					</button>
 
-					<button data-toggle="modal" translate="CLOSE"
-						class="btn btn-default" data-dismiss="modal"
+					<button data-toggle="modal" translate="CLOSE" class="btn btn-default" data-dismiss="modal"
 						style="margin-bottom: 1%;" id="closeButton"></a>
 					</button>
 				</div>
