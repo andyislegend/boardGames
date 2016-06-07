@@ -7,6 +7,7 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$scope.getInfoAboutUserFunc = function(username) {
 			$http.get('getUserDTO?username='+ username).then(function(result) {
 				$scope.oneUser = result.data;
+				$scope.userRoles = oneUser.userRoles;
 			});
 			$http.get('getUsersAvatar?username=' + username).then(function(result) {
 				$scope.userAvatar = result.data;
