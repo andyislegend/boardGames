@@ -189,3 +189,15 @@ progress::-webkit-progress-value {
 	0% {background-position: 0px 0px, 0 0, 0 0}
 	100% {background-position: -100px 0px, 0 0, 0 0}
 }
+
+#closeButton {
+	background: grey;
+	border: grey;
+	margin-left: 10px;
+	height: 35px;
+	margin-top: 5px;
+}
+
+#sendButton {
+	margin-left: 390px;
+}

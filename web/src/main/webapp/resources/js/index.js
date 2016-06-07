@@ -159,4 +159,4 @@ homeApp.controller('userToUnbanCtrl', ['$scope', '$http', function($scope, $http
 			.success(function(result, status) {
 	        });
 		}
-	} ]);
+}]);

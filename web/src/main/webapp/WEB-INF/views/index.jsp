@@ -363,17 +363,19 @@
 				<div class="modal-header">
 				</div>
 				<div class="modal-body">
-					<p>Send letter to administrator</p>
-  					<p>Comments:<br>
+					<p translate="SEND_LETTER"></p>
   					<textarea cols="50" rows="20" name="comments" class="form-control input-sm"
-  						ng-model="emailOfBannedUser"></textarea></p>
+  						ng-model="emailOfBannedUser"></textarea>
+  					<br>
   					<p>
-  					<button ng-click="sendmail()" class="btn btn-primary btn-bg" translate="SAVE_BUTTON"></button>
+  					<button ng-click="sendmail()" class="btn btn-primary btn-bg" translate="SEND"
+  						id="sendButton">
+  					</button>
 
-					<a type="button" data-toggle="modal" translate="CLOSE"
-						class="btn btn-danger btn-md" data-dismiss="modal"
-						style="margin-bottom: 1%; margin-left: 390px;"></a>
-					</p>
+					<button data-toggle="modal" translate="CLOSE"
+						class="btn btn-primary btn-bg" data-dismiss="modal"
+						style="margin-bottom: 1%;" id="closeButton"></a>
+					</button>
 				</div>
 			</div>
 		</div>
