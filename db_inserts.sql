@@ -154,8 +154,41 @@ INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('
 INSERT INTO `boardgames`.`gamerating` (`rating`, `game_id`, `user_id`) VALUES ('10', '2', '2');
 
 -- inserts to table of users
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '1', '1');
-INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '2', '2');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'Monopoly is a board game that originated in the United States in 1903 
+as a way to demonstrate that an economy which rewards wealth creation is better than one in which monopolists work under few constraints and to promote the economic theories of Henry George and in particular his ideas about taxation.
+The current version was first published by Parker Brothers in 1935. Subtitled "The Fast-Dealing Property Trading Game", the game is named after the economic concept of monopoly—the domination of a market by a single entity. 
+It is now produced by the United States game and toy company Hasbro. Players move around the game-board buying or trading properties, developing their properties with houses and hotels, and collecting rent from their opponents, 
+with the goal being to drive them all into bankruptcy leaving one monopolist in control of the entire economy. Since the board game was first commercially sold in the 1930s, it has become a part of popular world culture, 
+having been locally licensed in more than 103 countries and printed in more than thirty-seven languages.'
+, '2', '4', '2', 'Players take turns in order, with the initial player determined by chance before the game. 
+A typical turn begins with the rolling of the dice and advancing their piece clockwise around the board the 
+corresponding number of squares. If a player rolls doubles, they roll again after completing their turn. 
+If a player rolls three consecutive sets of doubles on one turn, the player has been "caught speeding", 
+and the player is immediately sent to jail instead of moving the amount shown on the dice for the third roll, 
+ending the players turn.
+A player who lands on or passes the Go space collects $200 from the bank. However, 
+when the optional Speed Die is used, a player who rolls a triple and chooses to move to "Go to Jail" 
+does not collect if the move would normally take them past Go.
+Players who land on either Income Tax or Luxury Tax pay the indicated amount to the bank. 
+In older editions of the game, two options were given for Income Tax: either pay a flat fee of $200 or 10% 
+of the players total worth (including the current values of all the properties and buildings owned). 
+Players must choose which option before calculating their total worth, and cannot change their mind if 
+it turns out that the $200 was actually less; in 2008, the 10% option was removed. Luxury Tax was originally 
+$75; in 2008, it was increased to $100. No reward or penalty is given for landing on Free Parking.', 'PRIVATE', '1900', '1', '1');
+INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'Today’s gamers aren’t always perched in front of a video console. 
+They are increasingly sitting around a table rolling dice and moving pieces. 
+And these modern games aren’t just the classic games like Monopoly and Yahtzee, 
+they are innovative new games like the Settlers of Canaan and Qwirkle.
+In case you missed the memo, board games are on the comeback, with sales increasing at a rate of 25 percent 
+or higher annually the past four years. And this weekend, board game enthusiasts from around the globe will 
+converge on the Hyatt Regency in San Francisco for the four-day KublaCon Game Convention. 
+Many gamers will compete in the Optimal Board Game Tournament.'
+, '2', '4', '2', 'Each player in the tournament will rank their preferences to play the 40 available games .
+Factors will be taken into consideration, such as knowledge of the rules, player preferences, and the number of players each game can handle.
+Once the pairings are made the games will begin. Each round will add additional constraints. Players that have won all their matches will be paired with each other. 
+Players cannot play the same game or the same opponents during the tournament.
+By the final round, there will be a single table with all of the undefeated players. 
+If there are less than 3 finalists, the top runner-ups will be invited to the championship table.', 'PRIVATE', '1900', '2', '2');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '3', '3');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '4', '4');
 INSERT INTO `boardgames`.`gameuser` (`countOfComments`, `description`, `edition`, `maxPlayers`, `minPlayers`, `rules`, `status`, `yearOfProduction`, `game_id`, `user_id`) VALUES ('0', 'bla bla', '2', '4', '2', 'no', 'PRIVATE', '1900', '5', '5');
