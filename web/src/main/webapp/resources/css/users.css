@@ -190,18 +190,15 @@ progress::-webkit-progress-value {
 }
 
 #closeButton {
-	background: #696969;
-	border: #3f3f3f;
 	margin-left: 10px;
 	height: 35px;
 	margin-top: 5px;
 }
 
 #sendButton {
-	margin-left: 390px;
+	margin-left: 388px;
 }
 
-
-#closeButton:hover { 
-    background-color: #545454;
+#contactUs {
+	margin-left: 380px;
 }
