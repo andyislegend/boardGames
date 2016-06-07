@@ -160,7 +160,6 @@ progress {
 	height: 14px;
 	margin: 2px auto;
 	display: block;
-	/* Important Thing */
 	-webkit-appearance: none;
 	border: none;
 }
@@ -180,7 +179,7 @@ progress::-webkit-progress-value {
 		-webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
 		-webkit-linear-gradient(left, #ba7448, #428BCA);
 	
-	/* Looks great, now animating it */
+	
 	background-size: 25px 14px, 100% 100%, 100% 100%;
 	-webkit-animation: move 5s linear 0 infinite;
 }
@@ -191,13 +190,15 @@ progress::-webkit-progress-value {
 }
 
 #closeButton {
-	background: grey;
-	border: grey;
 	margin-left: 10px;
 	height: 35px;
 	margin-top: 5px;
 }
 
 #sendButton {
-	margin-left: 390px;
+	margin-left: 388px;
+}
+
+#contactUs {
+	margin-left: 380px;
 }

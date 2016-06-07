@@ -342,11 +342,11 @@
 
 				</div>
 				<p>
-				<a type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md" translate="CLOSE" style="margin-left: 10px;"></a>
-				<a type="button" data-toggle="modal" data-dismiss="modal"
-					class="btn btn-danger btn-md" translate="CONTACT_WITH_ADMINS" 
-					data-target="#sendToUnban" style="margin-left: 380px;"></a>
+				<button data-toggle="modal" data-dismiss="modal"
+					class="btn btn-primary btn-bg" translate="CONTACT_WITH_ADMINS" 
+					data-target="#sendToUnban" id="contactUs"></button>
+				<button data-dismiss="modal" class="btn btn-default" 
+				translate="CLOSE" id="closeButton" style="margin-bottom: 1%;"></button>		
 				</p>
 			</div>
 			<!-- End of Modal Content -->
@@ -373,7 +373,7 @@
   					</button>
 
 					<button data-toggle="modal" translate="CLOSE"
-						class="btn btn-primary btn-bg" data-dismiss="modal"
+						class="btn btn-default" data-dismiss="modal"
 						style="margin-bottom: 1%;" id="closeButton"></a>
 					</button>
 				</div>

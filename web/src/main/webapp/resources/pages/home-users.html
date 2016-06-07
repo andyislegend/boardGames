@@ -15,7 +15,7 @@
                         </div>
                         <div class="modal-footer">
                            <button type="button" class="btn btn-default"
-                              data-dismiss="modal">Close</button>
+                              data-dismiss="modal" translate="CLOSE"></button>
                         </div>
                      </div>
                   </div>
@@ -45,8 +45,8 @@
 								translate-values="{userLastName:'{{oneUser.lastName}}'}"></p>
 							<p translate="USER_FIRST_NAME" 
 								translate-values="{userFirstName:'{{oneUser.firstName}}'}"></p>
-							<p translate="USER_GENDER" 
-								translate-values="{userGender:'{{oneUser.gender}}'}"></p>
+							<p><span translate="USER_GENDER"></span> 
+								<span translate="{{oneUser.gender}}"></span></p>
 							<p translate="USER_AGE" 
 								translate-values="{userAge:'{{oneUser.age}}'}"></p>
 							<p translate="{{oneUser.level}}"></p>
