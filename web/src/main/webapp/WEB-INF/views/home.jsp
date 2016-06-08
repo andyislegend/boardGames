@@ -211,12 +211,14 @@
 				<form data-ng-submit=submit() method="get" class="sidebar-form"
 					ng-controller="GlobalSearchCTRL">
 					<div class="input-group">
-						<input type="text" name="q" class="form-control"
+						<input name="q" class="form-control"
 							placeholder="Search..." ng-model="search" /><span class="input-group-btn">
+								<a ng-href= "#search/{{search}}">
 								<button type="submit" name="search" id="search-btn"
-									class="btn btn-flat" ng-href="#search/{{search}}" ng-click="searchAll()">
+									class="btn btn-flat" ng-click="searchAll()">
 									<i class="fa fa-search"></i>
 								</button>
+								</a>
 						</span>
 					</div>
 				</form>
@@ -227,7 +229,7 @@
 					<li class="header">MENU</li>
 					<!-- Optionally, you can add icons to the links -->
 					<li><a href="#statistics"><i
-							class="fa fa-pie-chart"></i> <span> Statistics </span></a></li>
+							class="fa fa-pie-chart"></i><span> Statistics </span></a></li>
 					<li><a href="#allGames"><i class="fa fa-puzzle-piece"></i>
 							<span> All Games </span></a></li>
 					<li><a href="#events"><i class="fa fa-birthday-cake"></i>
