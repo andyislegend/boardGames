@@ -11,8 +11,6 @@
 
 <!-- CSS -->
 <link rel='stylesheet prefetch'
-	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-<link rel='stylesheet prefetch'
 	href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />
@@ -23,6 +21,9 @@
 <link
 	href="resources/bower_components/angular-material/angular-material.css"
 	rel="stylesheet" />
+<link
+	href="resources/bower_components/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />	
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"

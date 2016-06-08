@@ -4,6 +4,7 @@
 .inlineDisplay {
 	display:inline;
 }
+
 label.inlineDisplay {
 	vertical-align: top;
 }
@@ -66,14 +67,16 @@ img.iconImage {
 #wrapper {
 	display: table;
     width: 100%;
+    height: 200px;
 }
 .cell {
     display: table-cell;
     vertical-align: top;
+    max-height: 180px;
 }
-.content {
+.contentGameUser {
     float: left;
-    height:120px;
+    height:100px;
 }
 .content2{
     float: right;
