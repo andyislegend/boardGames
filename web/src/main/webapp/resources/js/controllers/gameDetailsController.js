@@ -3,6 +3,10 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 		$scope.$on('broadcastingGameId', function(event, data) {
 			$scope.currentGameId = data;
 		});   
+		$scope.$on('broadcastingGameRating', function(event, data) {
+			console.log("Rating is: " + data);
+			$scope.rating = data;
+		});
 		
 		$scope.displayGameUserDetails = function(id) {
 			$location.path('gameUserDetails/' + id);

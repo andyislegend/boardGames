@@ -1,38 +1,19 @@
 <div class="container-fluid">
-	<h2 class="text-primary" id="allGamesHeader">Games</h2>
+	<h2 class="text-primary" id="allGamesHeader">Game details</h2>
 </div>
 <div class="container-fluid" ng-controller="getGameDetailedInfoController">
 
-	<h4>Name: {{gameDetail.name}}</h4>
-	<h4>Rating</h4>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Rate this game</th>
-				<th></th>
-				<th>Your rate</th>
-				<th>General</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<div star-rating rating="starRating" read-only="false"
-						max-rating="10" click="ratingClick(param)"
-						mouse-hover="ratingHover(param)" mouse-leave="ratingLeave(param)"></div>
-					<div></div>
-				</td>
-				<td><p class="text text-success">{{hoverRatingText}}</p>
-				</td>
-				<td><span class="label label-primary">{{gameDetail.userRating}}/10</span>
-				</td>
-				<td><span class="label label-primary">{{gameDetail.generalRating}}/10</span>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<hr />
-	<h4>Owners</h4>
+	<h4><strong>Name:</strong> {{gameDetail.name}}</h4>
+	<h4 class="inlineDisplay"><strong>Rating:</strong></h4>
+	<div class="inlineDisplay" star-rating rating="starRating" read-only="false"
+		max-rating="10" click="ratingClick(param)"
+		mouse-hover="ratingHover(param)" mouse-leave="ratingLeave(param)"></div>
+	<p class="text text-success inlineDisplay">{{hoverRatingText}}</p>
+	<p>Your rating: <span class="label label-primary">{{gameDetail.userRating}}/10</span></p>
+	<p>General rating: <span class="label label-primary">{{gameDetail.generalRating}}/10</span></p>
+	<hr/>
+	<br/>
+	<h4><strong>Owners</strong></h4>
 	<table ng-table="userGamesOfGameTable" show-filter="true" class="table table-striped">
 		<tr ng-repeat="x in userGamesOfGameDisplay" ng-click="displayGameUserDetails(x.id)">
 			<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }">
