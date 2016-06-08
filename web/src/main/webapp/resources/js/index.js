@@ -33,7 +33,7 @@ homeApp.controller('loginCntrl', [
 						$scope.showModalLoading();
 						window.setTimeout(function() {
 							window.location.replace(path);
-						}, 2500)
+						}, 3000)
 
 					}
 

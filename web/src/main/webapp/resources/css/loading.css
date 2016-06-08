@@ -54,21 +54,21 @@ MAIN ELEMENTS
   position: absolute;
   top: 40%;
   opacity: 1;
-  background-image: url("http://biacosta.com/img/loading/starsLoading.png");
+  /* background-image: url("http://biacosta.com/img/loading/starsLoading.png"); */
   width: 100%;
   height: 960px;
 }
 
 .ufo {
   position: absolute;
-  background-image: url("http://biacosta.com/img/loading/ufo.png");
-  width: 130px;
-  height: 256px;
+  /* background-image: url("/resources/images/ufo.png"); */
+  width: 187px;
+  height: 66px;
   top: 55%;
 }
 
-.ufo.light {
-  background-image: url("http://biacosta.com/img/loading/ufoLight.png");
+/* .ufo.light {
+  background-image: url("/resources/images/ufolight.png");
   opacity: 0;
   -webkit-animation: 3s ease-in-out infinite normal running;
   -moz-animation: 3s ease-in-out infinite normal running;
@@ -80,7 +80,7 @@ MAIN ELEMENTS
   -o-animation-name: switch;
   -ms-animation-name: switch;
   animation-name: switch;
-}
+} */
 
 @-webkit-keyframes switch {
   30% {
@@ -125,10 +125,10 @@ MAIN ELEMENTS
   }
 }
 .small-ghost {
-  position: absolute;
-  background-image: url("http://biacosta.com/img/ghost/smallGhost.png");
-  width: 40px;
-  height: 53px;
+  position: relative;
+  background-image: url("/resources/images/gamer.png");
+  width: 135px;
+  height: 200px;
   bottom: 15px;
   right: -130px;
   opacity: 0;
@@ -234,7 +234,7 @@ MAIN ELEMENTS
     opacity: 0;
   }
 }
-.loading-small-cloud {
+/* .loading-small-cloud {
   position: absolute;
   background-image: url("http://biacosta.com/img/loading/cloud.png");
   width: 57px;
@@ -251,9 +251,9 @@ MAIN ELEMENTS
   -o-animation-name: cloudLeft;
   -ms-animation-name: cloudLeft;
   animation-name: cloudLeft;
-}
+} */
 
-.loading-small-cloud.reverse {
+/* .loading-small-cloud.reverse {
   background-image: url("http://biacosta.com/img/loading/cloudReverse.png");
   top: -50px;
   left: 100px;
@@ -262,7 +262,7 @@ MAIN ELEMENTS
   -o-animation-name: cloudRight;
   -ms-animation-name: cloudRight;
   animation-name: cloudRight;
-}
+} */
 
 @-webkit-keyframes cloudLeft {
   from {
