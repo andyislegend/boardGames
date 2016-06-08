@@ -20,6 +20,7 @@ body {
 }
 
 /* .main-footer {
+	width: 100%;
 	position: fixed;
 	left: 0px;
 	bottom: 0px;
@@ -114,13 +115,6 @@ body {
 	min-height: 100%;
 	/* background-color: #ecf0f5; */
 	z-index: 800;
-}
-
-.main-footer {
-	background: #fff;
-	padding: 15px;
-	color: #444;
-	border-top: 1px solid #d2d6de
 }
 
 .fixed .main-header, .fixed .main-sidebar, .fixed .left-side {

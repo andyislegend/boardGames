@@ -253,7 +253,7 @@
 		<!-- Main Footer -->
 		<footer class="main-footer">
 			<!-- To the right -->
-			<div class="pull-right hidden-xs">AP Designs</div>
+			<div style="margin-right: 50px;" class="pull-right hidden-xs">AP Designs</div>
 			<!-- Default to the left -->
 			<strong>Copyright &copy; 2016 <a
 				href="https://github.com/andyislegend/boardGames" target='blank'>LV179-Java</a>.
