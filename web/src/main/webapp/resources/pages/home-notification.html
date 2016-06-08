@@ -1,10 +1,16 @@
 
 <div ng-controller="notificationCtrl" ng-cloak>
-<md-switch class="md-primary" ng-model="checkboxModel" ng-click="setNotificationSend(checkboxModel)" aria-label="Switch 2">
-    Send notification in your e-mail
-  </md-switch>
-
-<h3 style="text-align: center">Notification</h3>
+<div style="display: flex;">
+    <div style="width: 50%; margin-left: 420px;">
+        <h3>Notification</h3>
+    </div>
+    <div style="width: 50%; margin-left: 30px;">
+        <md-switch class="md-primary" ng-model="checkboxModel" 
+               ng-click="setNotificationSend(checkboxModel)" aria-label="Switch 2">
+                    Send notification in e-mail
+        </md-switch>
+    </div>
+</div>
 
     <div class="figna">
     <table ng-table="allNotificationTable" class="table" show-filter="true">
@@ -12,13 +18,17 @@
             <td title="'Type'" class="sign-header" filter="{'type': 'select'}" filter-data="typeOfNotification()">
                     <img class="notification-message" uib-tooltip="{{notification.type}}" tooltip-placement="right" src="resources/ico/{{notification.type.toLowerCase()}}2.png"/>
             </td>
-<!--            <td class="notification-line">
-            </td>-->
-            <td title="'message'" filter="{ 'message': 'text' }" class="notification-head">
-                {{notification.message}}
+               <td title="'message'" filter="{ 'message': 'text' }" class="notification-head-message"
+               ng-if="notification.type == 'MESSAGE'" ng-click="setFriendName(notification.user.username, notification.userSender.username)">
+                    {{notification.message}}
+                  
+               </td>
+            <td title="'message'" filter="{ 'message': 'text' }" class="notification-head"
+               ng-if="notification.type != 'MESSAGE'">
+                    {{notification.message}} 
             </td>
              <td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }" class="notification-data">
-                {{notification.date | date : format : timezone}}
+                {{notification.date | date:'yyyy-MM-dd HH:mm:ss'}}
             </td>
         </tr>
     </table>

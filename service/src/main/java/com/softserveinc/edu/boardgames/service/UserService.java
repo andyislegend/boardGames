@@ -53,7 +53,6 @@ public interface UserService {
 	void banUserByAdministrator(String username);
 	void unbanUserByAdministrator(String username);
 	String findUsersGender(String username);
-	void sendMessageByBannedUser(String username, String message);
 	public UserDTO getUserDTOWith5TournamentsAndGames(String username);
 	public void saveNotificationOfBannedUser(String message, String username);
 	

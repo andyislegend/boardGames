@@ -75,10 +75,12 @@
 							<img ng-src="{{userAvatar}}" id="userAvatar" href="#edit/{{oneUser.username}}">
 							</a>
 							<p translate="SCORE" translate-values="{rating:'{{oneUser.userRating}}'}"></p>
+							<div>
 							<p><a ng-click="banUser(user.username)" id="changeUserStatus" 
-								ng-if="oneUser.state=='ACTIVE'" translate="TO_BAN"></a></p>
+								ng-if="oneUser.state=='ACTIVE' && oneUser.username!='root'" translate="TO_BAN"></a></p>
 							<p><a ng-click="unbanUser(user.username)" id="changeUserStatus" 
-								ng-if="oneUser.state=='BANNED'" translate="TO_UNBAN"></a></p>
+								ng-if="oneUser.state=='BANNED' && oneUser.username!='root'" translate="TO_UNBAN"></a></p>
+							</div>
 				</td>
 			</tr>
 			</tbody>

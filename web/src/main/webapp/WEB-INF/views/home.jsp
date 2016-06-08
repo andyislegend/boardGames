@@ -512,7 +512,7 @@
                               src="resources/images/default-avatar.jpg" /></a>
                           </div>
                           <div class="name">{{ user.firstName }} {{
-                            user.lastName}}
+                            user.lastName}} ({{user.username}})
                           </div>
                           <div class="over-add-remove">
                             <a href="" type="button"
@@ -631,6 +631,7 @@
                           <div class="name"><a href="#edit/{{friend.username}}" type="button">
                           {{ friend.firstName }} {{friend.lastName}}</a>
                           </div>
+                          <div class="function">
                           <div class="over-mes">
                             <a href="" type="button"
                               ng-click="$parent.jmessage = true; 
@@ -643,7 +644,7 @@
                             </a>
                           </div>
                             <a href="" data-toggle="modal" data-target="#myModal" ng-click = "deleteFriemd(friend.firstName, friend.lastName, friend.username)"><img class="delete-user" src="resources/ico/delete_user.png"/></a>
-                            
+                            </div>
                             <div id="myModal" class="modal fade" role="dialog">
                               <div class="modal-dialog">
 
@@ -653,9 +654,6 @@
                                       <div class="delete-message"><span translate="DELETE_FRIEND_MESSAGE"></span> {{deleteFriendName}} {{deleteFriendLastName}}</div>
                                   </div>
                                     <div class="delete-cancel-button"><button class="btn btn-danger" ng-click="deleteFriend()" data-dismiss="modal"><span translate="CONFIRM_YES"></span></button>  <button class="btn btn-primary" data-dismiss="modal"><span translate="CONFIRM_CANCEL"></span></button></div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span translate="CONFIRM_CLOSE"></span></button>
-                                  </div>
                                 </div>
 
                               </div>

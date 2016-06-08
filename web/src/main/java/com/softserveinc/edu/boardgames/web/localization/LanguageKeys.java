@@ -20,4 +20,7 @@ public interface LanguageKeys {
 	public static final String INVALID_EMAIL = "INVALID_EMAIL";
 	public static final String INVALID_PASSWORD = "INVALID_PASSWORD";
 	public static final String NOT_CONFIRMED_PASSWORD = "NOT_CONFIRMED_PASSWORD";
+	
+	// language keys for user unban
+	public static final String LETTER_ABOUT_UNBAN_RECEIVED = "LETTER_ABOUT_UNBAN_RECEIVED";
 }

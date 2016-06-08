@@ -25,6 +25,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
+import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationType;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -58,7 +59,9 @@ public class UserServiceImpl implements UserService {
 	
 	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
 	
-	private final static Integer RATING_TO_BAN_USER = -5;
+	public final static Integer RATING_TO_BAN_USER = -5;
+	
+	public final static Integer ADMIN_ID = 1;
 	
 	
 
@@ -521,19 +524,15 @@ public class UserServiceImpl implements UserService {
 		return userDTO;
 	}
 	
+	@Override
 	public void saveNotificationOfBannedUser(String message, String username){
 		Notification notification = new Notification();
 		notification.setDate(new Date());
-		notification.setType("MESSAGE");
-		notification.setUser(userRepository.findById(1));
+		notification.setType(NotificationType.MESSAGE.name());
+		notification.setUser(userRepository.findById(ADMIN_ID));
 		notification.setUserSender(userRepository.findByUsername(username));
 		notification.setMessage(message);
 		notifyRepo.saveAndFlush(notification);
-	}
-	
-	@Override
-	public void sendMessageByBannedUser(String username, String message) {
-		
 	}
 
 	@Override

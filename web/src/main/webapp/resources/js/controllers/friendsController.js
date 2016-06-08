@@ -1,4 +1,4 @@
-var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$http', '$interval', 'friendService', function($scope,$rootScope, $http, $interval, friendService) {
+var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootScope', '$http', '$interval', 'friendService', function($scope, $rootScope, $http, $interval, friendService) {
     $scope.friends = [];
     var findAllFriend = function(){
         friendService.getAllFriends(function(data){
@@ -181,6 +181,17 @@ var app = angular.module('homeApp').controller("friendsCtrl", ['$scope', '$rootS
         });
     }
     
+   $rootScope.$on('friendName', function(event, data){
+       $scope.jmessage = true;
+       $scope.currentFriend = data;
+       for(var i = 0; i < $scope.friends.length; i++){
+           if($scope.friends[i].username == data){
+               $scope.myfriend = $scope.friends[i].firstName +' ' + $scope.friends[i].lastName
+           }
+       }
+       getUpdate();
+    });
+    
 setInterval(function(){
         findAllFriend();
         getUpdate();
@@ -229,4 +240,3 @@ jQuery(document).ready(function() {
         e.preventDefault();
     });
 });
-
