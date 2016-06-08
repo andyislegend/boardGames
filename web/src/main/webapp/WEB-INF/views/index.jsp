@@ -30,11 +30,10 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
 	src="resources/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
-<script src="resources/js/index.js"></script>
+<script type="text/javascript" src="resources/js/index.js"></script>
 <script
 	src="resources/bower_components/angular-translate/angular-translate.js"></script>
 <script type="text/javascript" src="resources/js/localization.js"></script>
-<script type="text/javascript" src="resources/js/controllers/bannedUserCtrl.js"></script>
 <script
 	src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
 <script
@@ -42,6 +41,7 @@
 
 </head>
 <body ng-app="indexModule" ng-controller="localizationController">
+<div >
 	<header>
 		<nav class="navbar navbar-default">
 			<div class="container">
@@ -323,71 +323,95 @@
 	<!-- End of UNDER_VERIFICATION Modal -->
 
 	<!-- Modal BANNED USER -->
-	<div id="myBanned" class="modal fade  col-md-6 col-md-offset-3"
-		role="dialog">
-		<div class="modal-dialog" ng-controller="sendEmailToUnban">
+		<div id="myBanned" class="modal fade  col-md-6 col-md-offset-3"
+			role="dialog">
+			<div class="modal-dialog">
 
-			<!-- Modal content-->
-			<div class="modal-content" >
-				<div class="modal-header">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
 
-					<h4 style="text-align: center;" class="modal-title" translate="BAN_MODAL_HEADER"></h4>
+						<h4 style="text-align: center;" class="modal-title"
+							translate="BAN_MODAL_HEADER"></h4>
 
-				</div>
-				<div class="modal-body">
+					</div>
+					<div class="modal-body">
 
-					<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
-					<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
-					<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
+						<p style="text-align: center;" translate="BAN_MODAL_FIRST"></p>
+						<p style="text-align: center;" translate="BAN_MODAL_SECOND"></p>
+						<p style="text-align: center;" translate="BAN_MODAL_THIRD"></p>
 
-				</div>
-				<p>
-				<a type="button" data-dismiss="modal"
-					class="btn btn-danger btn-md" translate="CLOSE" style="margin-left: 10px;"></a>
-				<a type="button" data-toggle="modal" 
-					class="btn btn-danger btn-md" translate="CONTACT_WITH_ADMINS" 
-					data-target="#sendToUnban" style="margin-left: 380px;"></a>
-				</p>
-			</div>
-			<!-- End of Modal Content -->
-
-		</div>
-	</div>
-	<!-- End of BANNED Modal -->
-	<div id="sendToUnban" class="modal fade  col-md-6 col-md-offset-3"
-		role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content" ng-controller="bannedUserCtrl">
-				<div class="modal-header">
-				</div>
-				<div class="modal-body">
-				<form>
-					<p>Send letter to administrator</p>
-  					<p>Comments:<br />
-  					<textarea cols="50" rows="20" name="comments" class="form-control input-sm"
-  						ng-model="letterOfBannedUser"></textarea></p>
-  					<p>
-  					<a type="button" data-dismiss="modal"
-						class="btn btn-danger btn-md" style="margin-bottom: 1%; 
-						margin-left: 10px;" ng-click="sendEmail()">Send</a>
-					<a type="button" data-toggle="modal" translate="CLOSE"
-						class="btn btn-danger btn-md" data-dismiss="modal"
-						style="margin-bottom: 1%; margin-left: 390px;"></a>
+					</div>
+					<p>
+						<button data-toggle="modal" data-dismiss="modal"
+							class="btn btn-primary btn-bg" translate="CONTACT_WITH_ADMINS"
+							data-target="#sendToUnban" id="contactUs"></button>
+						<button data-dismiss="modal" class="btn btn-default"
+							translate="CLOSE" id="closeButton" style="margin-bottom: 1%;"></button>
 					</p>
-				</form>
+				</div>
+				<!-- End of Modal Content -->
+
+			</div>
+		</div>
+		<div ng-controller="userToUnbanCtrl">
+		<!-- End of BANNED Modal -->
+		<!-- Modal SEND LETTER TO ADMINISTRATOR -->
+		<div id="sendToUnban" class="modal fade  col-md-6 col-md-offset-3"
+			role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header"></div>
+					<div class="modal-body">
+						<p translate="SEND_LETTER"></p>
+						<textarea cols="50" rows="20" name="comments"
+							class="form-control input-sm" ng-model="emailOfBannedUser"></textarea>
+						<br>
+						<p>
+							<button ng-click="sendmail()" class="btn btn-primary btn-bg"
+								translate="SEND" id="sendButton" data-dismiss="modal">
+							</button>
+
+							<button data-toggle="modal" translate="CLOSE"
+								class="btn btn-default" data-dismiss="modal"
+								style="margin-bottom: 1%;" id="closeButton">
+								</a>
+							</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Modal ON REGISTRATION SUCCESS -->
+		<!-- End of SEND LETTER TO ADMINISTRATOR -->
+		<!-- Modal CONFIRMATION ABOUT RECEIVED LETTER -->
+
+		<div class="modal fade" id="letterToUnbanReceived" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<div class="modal-body">
+							<p translate="{{letterAboutUnbanReceived}}"></p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							translate="CLOSE"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of CONFIRMATION ABOUT RECEIVED LETTER -->
+		</div>
+		<!-- Modal ON REGISTRATION SUCCESS -->
 	<div id="myRegSuccess" class="modal fade  col-md-6 col-md-offset-3"
 		role="dialog">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
-			<div class="modal-content">
+			<div class="modal-content" ng-controller="userToUnbanCtrl">
 				<div class="modal-header">
 
 					<h4 style="text-align: center;" class="modal-title" translate="ON_REGISTRATION_HEADER"></h4>
@@ -435,6 +459,6 @@
 		</div>
 	</div>
 	<!-- End of LOADING -->
-
+</div>
 </body>
 </html>

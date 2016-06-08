@@ -3,6 +3,7 @@ package com.softserveinc.edu.boardgames.service.Impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,11 +19,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.softserveinc.edu.boardgames.persistence.entity.City;
 import com.softserveinc.edu.boardgames.persistence.entity.Country;
 import com.softserveinc.edu.boardgames.persistence.entity.Image;
+import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.VerificationToken;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.mapper.UserMapper;
 import com.softserveinc.edu.boardgames.persistence.entity.util.ConvertSetEnumsToListString;
+import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationType;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserGender;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserRoles;
 import com.softserveinc.edu.boardgames.persistence.enumeration.UserStatus;
@@ -30,6 +33,7 @@ import com.softserveinc.edu.boardgames.persistence.repository.CityRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.CountryRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.GameUserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.ImageRepository;
+import com.softserveinc.edu.boardgames.persistence.repository.NotificationRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.UserRepository;
 import com.softserveinc.edu.boardgames.persistence.repository.VerificationTokenRepository;
 import com.softserveinc.edu.boardgames.service.ImageService;
@@ -55,7 +59,9 @@ public class UserServiceImpl implements UserService {
 	
 	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
 	
-	private final static Integer RATING_TO_BAN_USER = -5;
+	public final static Integer RATING_TO_BAN_USER = -5;
+	
+	public final static Integer ADMIN_ID = 1;
 	
 	
 
@@ -85,6 +91,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private NotificationRepository notifyRepo;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -516,8 +525,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void sendMessageByBannedUser(String username, String message) {
-		
+	public void saveNotificationOfBannedUser(String message, String username){
+		Notification notification = new Notification();
+		notification.setDate(new Date());
+		notification.setType(NotificationType.MESSAGE.name());
+		notification.setUser(userRepository.findById(ADMIN_ID));
+		notification.setUserSender(userRepository.findByUsername(username));
+		notification.setMessage(message);
+		notifyRepo.saveAndFlush(notification);
 	}
 
 	@Override

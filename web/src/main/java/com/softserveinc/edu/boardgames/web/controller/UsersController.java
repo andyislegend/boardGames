@@ -175,6 +175,20 @@ public class UsersController {
 		return new ResponseEntity<String>(LanguageKeys.USER_UNBAN, HttpStatus.OK);
 	}
 	
+	/**
+	 * This method send the email to administrator with
+	 * explanations of a user which was banned.
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param username
+	 *
+	 */
+	@RequestMapping(value = { "/sendEmailOfBannedUser" }, method = RequestMethod.POST)
+	public ResponseEntity<String> sendEmailOfBannedUser(@RequestParam("letter") String letter) {
+		userService.saveNotificationOfBannedUser(letter, WebUtil.getPrincipalUsername());
+		return new ResponseEntity<String>(LanguageKeys.LETTER_ABOUT_UNBAN_RECEIVED, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/setNotification", method = RequestMethod.POST)
 	public void setNotification(@RequestBody boolean option) {
 		String userName = WebUtil.getPrincipalUsername();

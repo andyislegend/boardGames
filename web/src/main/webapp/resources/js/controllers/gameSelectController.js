@@ -9,6 +9,7 @@ angular.module('homeApp').controller('gameSelectController', function($scope, $h
 		}).then(function mySucces(response) {
 			$scope.gameDetail = response.data;
 			$scope.$broadcast('broadcastingGameId', data);
+			$scope.$broadcast('broadcastingGameRating',response.data.userRating);
 		}, function myError(response) {
 			
 		});

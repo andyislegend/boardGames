@@ -152,15 +152,13 @@ homeApp.controller('registerCntrl', [ '$scope', '$http',
 
 		} ]);
 
-homeApp
-		.controller(
-				'sendEmailToUnban',
-				[
-						'$scope',
-						'$window',
-						function($scope, $window) {
-							$scope.sendEmail = function() {
-								$window
-										.open("mailto:boardGamesExchange@gmail.com?subject=subject&body=message");
-							};
-						} ]);
+
+homeApp.controller('userToUnbanCtrl', ['$scope', '$http', function($scope, $http) {
+		$scope.sendmail = function() {
+			$http.post('sendEmailOfBannedUser?letter='+ $scope.emailOfBannedUser)
+			.success(function(result, status) {
+				$("#letterToUnbanReceived").modal('show');
+		    	$scope.letterAboutUnbanReceived = result;
+	        });
+		}
+}]);

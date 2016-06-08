@@ -39,10 +39,10 @@ public class GameUser implements Serializable {
 	@Column(name = "yearOfProduction")
 	private Integer yearOfProduction;
 	
-	@Column(name = "description")
+	@Column(name = "description", length=2000)
 	private String description;
 	
-	@Column(name = "rules")
+	@Column(name = "rules", length=2000)
 	private String rules;
 	
 	@Column(name = "minPlayers")

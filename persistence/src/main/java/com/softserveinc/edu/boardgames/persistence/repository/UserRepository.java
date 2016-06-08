@@ -34,6 +34,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByEmail(String email);
 	
 	User findByUsername(String username);
+	
+	User findById(Integer id);
 
 	public User findByFirstName(String firstName);
 
@@ -60,7 +62,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			+ "SELECT u FROM Friend f RIGHT JOIN f.userId u WHERE f.user.username = ?1 AND (f.status.id = 2 OR f.status.id = 1))"
 			+ "AND u NOT IN("
 			+ "SELECT u FROM Friend f RIGHT JOIN f.user u WHERE f.userId.username = ?1 AND f.status.id = 1)"
-			+ "AND ((u.firstName LIKE ?2 AND u.lastName LIKE ?3) OR (u.firstName LIKE ?3 AND u.lastName LIKE ?2))")
+			+ "AND ((u.firstName LIKE ?2 AND u.lastName LIKE ?3) OR (u.firstName LIKE ?3 AND u.lastName LIKE ?2) OR u.username LIKE ?2)")
 	public List<User> findAllUserByFirstNameAndLastName(String userName, String name, String lastName);
 	
 	/**
