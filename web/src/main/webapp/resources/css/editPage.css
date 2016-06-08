@@ -1,6 +1,6 @@
-body{
+/* body{
 	padding-bottom: 70px;
-}
+} */
 
 .mainContainer {
 	margin-left : 30%;
@@ -9,9 +9,11 @@ body{
 	width: 50%;
 	
 }
+
 .form-control {
 	width: 70%;	
 }
+
 .addGame {
 	margin: auto auto; 
 	width: 80%;

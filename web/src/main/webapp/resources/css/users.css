@@ -23,7 +23,7 @@
 
 #saveUserUpdatePassword {
 	position:relative;
-	 float:right;
+	float:right;
 	left:24%;
 }
 
@@ -78,13 +78,14 @@
     margin-left: -7%;
 }
 
-#userRating {
-	color : white;
+/* #userRating {
+	color : black;
 	width: 220px;
-}
+	text-decoration: none;
+} */
 
 .outerDiv {
-    width: 103%;
+    width: 100%;
     height: 100%;
     text-align:center;
     background: #428BCA;
@@ -92,15 +93,17 @@
 }
 
 .innerDiv {
-    background: #428BCA;
-    font-size:11px;
+    /* background: #428BCA; */
+    font-size:14px;
     margin:0;
+    margin-left: 10px;
 }
 
 #container {
-  width: 190px;
-  height: 30px;
-  position: relative;
+  margin-left: 15px;
+  max-width: 190px;
+  height: 45px;
+  position: inherit;
   cursor:pointer;
 }
 
