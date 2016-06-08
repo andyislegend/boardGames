@@ -7,6 +7,12 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
         console.log(error);
     });
     
+    $http.get('getCurrentUserName').success(function(data){
+        $scope.currentUserName = data;
+    }).error(function(error){
+        console.log(error);
+    });
+    
     $scope.$on('allNotifications',
 		function(event, data) {
 			$scope.allNotificationTable = new ngTableParams({
@@ -64,5 +70,14 @@ var app = angular.module('homeApp').controller("notificationCtrl", ['$scope', '$
    }).error(function(error){
        console.log(error);
    });
+    
+    $scope.setFriendName = function(username1, username2){
+        if($scope.currentUserName == username1){
+            $scope.friendName = username2;
+        }else{
+            $scope.friendName = username1;
+        }
+       $rootScope.$broadcast('friendName',  $scope.friendName);
+    };
     
 }]);

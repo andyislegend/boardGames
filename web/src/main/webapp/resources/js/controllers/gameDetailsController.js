@@ -1,8 +1,16 @@
-angular.module('homeApp').controller('getGameDetailedInfoController', function($scope, $route, $http, $rootScope, $filter, $timeout, ngTableParams) {
+angular.module('homeApp').controller('getGameDetailedInfoController', function($scope, $location, $route, $http, $rootScope, $filter, $timeout, ngTableParams) {
 	
 		$scope.$on('broadcastingGameId', function(event, data) {
 			$scope.currentGameId = data;
 		});   
+		$scope.$on('broadcastingGameRating', function(event, data) {
+			console.log("Rating is: " + data);
+			$scope.rating = data;
+		});
+		
+		$scope.displayGameUserDetails = function(id) {
+			$location.path('gameUserDetails/' + id);
+		};
 		
 		$scope.$on('sharingUserGamesOfGame',
 			function(event, data) {

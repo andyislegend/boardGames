@@ -12,11 +12,18 @@
     width: 1%;
     background: #8084FF;
 }
+.notification-head-message{
+    width: 60%;
+}
+.notification-head-message:hover{
+	background: #D7E0FF;
+	cursor:pointer;
+}
 .notification-head{
-    width: 70%;
+    width: 60%;
 }
 .notification-data{
-    width: 12%;
+    width: 14%;
     padding-left: 0px;
 }
 .notification-icon{
@@ -29,3 +36,16 @@
 .switchdemoBasicUsage .inset {
   padding-left: 25px;
   padding-top: 25px; }
+.message-refer{
+  text-decoration: none;
+}
+/* .btn{
+z-index: 0;
+} */
+
+.btn-group > .btn:hover, .btn-group-vertical > .btn:hover, .btn-group > .btn:focus, .btn-group-vertical > .btn:focus, .btn-group > .btn:active, .btn-group-vertical > .btn:active, .btn-group > .btn.active, .btn-group-vertical > .btn.active{
+	z-index: 0;
+}
+._md-container{
+	z-index: 0;
+}
