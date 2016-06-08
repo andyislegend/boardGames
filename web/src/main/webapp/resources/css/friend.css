@@ -183,8 +183,6 @@ border-radius: 20px;
 .message{
     transition: .1s ease-in-out;
     opacity: .5;
-    margin-top: -6px;
-    margin-left: -25px;
     width: 27px;
     height: 27px;
 }
@@ -193,6 +191,7 @@ border-radius: 20px;
     height: 30px;
     width: 30px;
     margin-top: 10px;
+    margin-right: 25px;
 }
 .over-mes:hover img{
     opacity: 1;
@@ -261,7 +260,7 @@ text-decoration: none;
 transition: .1s ease-in-out;
 }
 .name{
-width: 60%;
+width: 70%;
 height: 20px;
 margin-left: 5px;
 margin-top: 8px;
@@ -447,4 +446,8 @@ word-wrap: break-word;
 .option-chosen{
     margin-left: 20px;
     width: 200px;
+}
+.function{
+	display: inline-flex;
+	margin-left: 60px;
 }
