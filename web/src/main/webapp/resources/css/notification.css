@@ -13,17 +13,17 @@
     background: #8084FF;
 }
 .notification-head-message{
-    width: 70%;
+    width: 60%;
 }
 .notification-head-message:hover{
 	background: #D7E0FF;
 	cursor:pointer;
 }
 .notification-head{
-    width: 70%;
+    width: 60%;
 }
 .notification-data{
-    width: 12%;
+    width: 14%;
     padding-left: 0px;
 }
 .notification-icon{

@@ -28,7 +28,7 @@
                     {{notification.message}} 
             </td>
              <td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }" class="notification-data">
-                {{notification.date | date : format : timezone}}
+                {{notification.date | date:'yyyy-MM-dd HH:mm:ss'}}
             </td>
         </tr>
     </table>
