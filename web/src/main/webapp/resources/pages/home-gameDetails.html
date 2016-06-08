@@ -34,7 +34,7 @@
 	<hr />
 	<h4>Owners</h4>
 	<table ng-table="userGamesOfGameTable" show-filter="true" class="table table-striped">
-		<tr ng-repeat="x in userGamesOfGameDisplay">
+		<tr ng-repeat="x in userGamesOfGameDisplay" ng-click="displayGameUserDetails(x.id)">
 			<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }">
 				{{ x.username }}
 			</td>
