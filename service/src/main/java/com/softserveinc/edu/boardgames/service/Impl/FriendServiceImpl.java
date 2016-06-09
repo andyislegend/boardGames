@@ -58,11 +58,11 @@ public class FriendServiceImpl implements FriendService{
 		friendRepository.changeStatusOfFriendshipToRejected(userId, currentUser);
 	}
 	
-	public List<Friend> getAllMyOffering(String userName){
+	public List<Friend> getAllMyOffering(String userName) {
 		return friendRepository.getAllMyOffering(userName);
 	}
 	
-	public void cancelOffering(User currentUser, User otherUser){
+	public void cancelOffering(User currentUser, User otherUser) {
 		friendRepository.cancelOffering(currentUser, otherUser);
 	}
 
