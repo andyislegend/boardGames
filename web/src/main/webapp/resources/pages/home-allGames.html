@@ -1,18 +1,18 @@
 <div>
-	<h3 style="text-align: center">All Games</h3>
+	<h3 style="text-align: center" translate="ALL_GAMES">All Games</h3>
 	<div ng-controller="getGamesGlobalController">
 		<div class="widget widget_top-posts"></div>
 		<table ng-table="allGamesTable" show-filter="true" class="table table-striped">
 			<tr ng-repeat="x in gamesGlobalDisplay">
-				<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+				<td title="'GAME_NAME' | translate" sortable="'name'" filter="{ 'name': 'text' }">
 					<a href="#gameSelect/{{x.id}}/{{x.name}}">{{ x.name }}</a>
 				</td>
-				<td title="'Category'" sortable="'categoryName'" 
+				<td title="'GAME_CATEGORY' | translate" sortable="'categoryName'" 
 					filter="{ 'categoryName': 'text' }">{{ x.categoryName }}</td>
 					
-				<td title="'Instances'" sortable="'instancesCount'" 
+				<td title="'GAME_INSTANCES_COUNT' | translate" sortable="'instancesCount'" 
 					filter="{ 'instancesCount': 'number' }">{{ x.instancesCount }}</td>
-				<td title="'Available'" sortable="'availableCount'" 
+				<td title="'GAME_AVAILABLE_INSTANCES_COUNT' | translate" sortable="'availableCount'" 
 					filter="{ 'availableCount': 'number' }">{{ x.availableCount }}</td>
 			</tr>
 		</table>
