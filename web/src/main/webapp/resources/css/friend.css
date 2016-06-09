@@ -11,7 +11,7 @@
     border-radius: 5px 5px 0px 0px;
     width: 100%;
     height: 30px;
-    background: #8995E8;
+    background: #000000;
     color: white;
     padding-top: 6px;
     padding-left: 10px;
@@ -19,10 +19,12 @@
 .proba-message-body{
     width: 100%;
     height: 300px;
-    background: #DEDEE4;
+    /* background: #DEDEE4; */
+    background: #585873;
     word-wrap: break-word;
     max-height: 310px;
     overflow: auto;
+    color: white;
 }
 .proba-message-bootom{
      background: #DEDEE4;
@@ -38,6 +40,7 @@
     outline: none;
     width: 100%;
     height: 100%;
+    color: black;
     background: #EEEEEE;
 }
 .close{
@@ -125,7 +128,7 @@ input:focus{
     padding-right: 10px;
     padding-top: 10px;
     margin-bottom: 5px;
-    background: #428BCA;
+    background: #222d32;
     color: white;
 }
 .overInput{
@@ -294,9 +297,9 @@ opacity: 1;
 .search-result{
 background: #F6F7FD;
 border-radius: 5px 5px 0px 0px;
-height: 200px;
+height: 270px;
 width: 300px;
-margin-top: -40px;
+margin-top: -50px;
 margin-left: -340px;
 position: absolute;
 display: inline-table;
@@ -326,8 +329,8 @@ border: 1px solid #FFF;
 }
 .header-search{
 	width: 100%;
-	height: 55px;
-	background: #8995E8;
+	height: 26px;
+	background: #000000;
     border-radius: 5px 5px 0px 0px;
 	color: #FFF;
 	font-size: 15px;
@@ -335,9 +338,9 @@ border: 1px solid #FFF;
 }
 .find-friend-heder{
     padding-left: 5px;
-    padding-top: 33px;
+    padding-top: 2px;
 }
-.content{
+.content-search-friends{
     height: 197px;
 	max-height: 200px;
     overflow: auto;
