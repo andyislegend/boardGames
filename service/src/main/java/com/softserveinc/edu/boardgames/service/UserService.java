@@ -26,34 +26,63 @@ public interface UserService {
 	public static final Integer NO_COUNTRY_OR_NO_CITY_SELECTED_BY_USER = 0;
 	
 	void createUser(User user);
+	
 	boolean isExistsWithUsername(String username);
+	
 	boolean isExistsWithEmail(String email);
+	
 	User findOne(String username);
+	
 	List<String> getRoles(String username);
+	
 	void createAdmin(String username);
+	
 	User findById(int id);
+	
 	List<User> findAllFriends(String userName);
+	
 	List<User> getAllNoConsiderFriendByUser(String userName);
+	
 	List<User> findAllUserByFirstNameAndLastName(String nameAndLastName, String userName);
+	
 	void createVerificationTokenForUser(final User user, final String token);
+	
 	User getUserByToken(final String verificationToken);
+	
 	VerificationToken getVerificationToken(final String VerificationToken);
+	
 	String validateVerificationToken(String token);
+	
 	void removeToken(VerificationToken token);
+	
 	List<VerificationToken> findAllTokens();
+	
 	void deleteUser(User user);
+	
 	List<User> findAll();
+	
 	void updateUser(User user);
+	
 	User getUser(String username);
+	
 	void updateUserWithBan(User user);
+	
 	void updateUser(UserDTO userDTO, String username);
+	
 	UserDTO getUserProfile(String username, String loggedInUserUsername);
+	
 	String getAvatarUrl(String username);
+	
 	void updateAvatar(CommonsMultipartFile fileUpload, String username) throws IOException;
+	
 	void banUserByAdministrator(String username);
+	
 	void unbanUserByAdministrator(String username);
+	
 	String findUsersGender(String username);
+	
 	public UserDTO getUserDTOWith5TournamentsAndGames(String username);
+	
 	public void saveNotificationOfBannedUser(String message, String username);
 	
 	public void setNotification(String userName, boolean option);
