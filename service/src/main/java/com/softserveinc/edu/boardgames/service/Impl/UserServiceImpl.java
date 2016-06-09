@@ -61,10 +61,6 @@ public class UserServiceImpl implements UserService {
 	
 	public final static Integer RATING_TO_BAN_USER = -5;
 	
-	public final static Integer ADMIN_ID = 1;
-	
-	
-
 	@Autowired
 	private CountryRepository countryRepository;
 	
@@ -529,7 +525,7 @@ public class UserServiceImpl implements UserService {
 		Notification notification = new Notification();
 		notification.setDate(new Date());
 		notification.setType(NotificationType.MESSAGE.name());
-		notification.setUser(userRepository.findById(ADMIN_ID));
+		notification.setUser(userRepository.getUserByUserRoleAdmin());
 		notification.setUserSender(userRepository.findByUsername(username));
 		notification.setMessage(message);
 		notifyRepo.saveAndFlush(notification);

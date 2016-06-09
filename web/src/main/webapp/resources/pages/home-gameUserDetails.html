@@ -5,10 +5,10 @@
 			<div id="wrapper">
             	<div class="cell">
                 	<div class="contentGameUser">
-                    	<p><strong>Year of production:</strong> {{games.yearOfProduction}}</p>
-						<p><strong>Edition:</strong> {{games.edition}}</p>
-						<p><strong>Max/Min players:</strong> {{games.maxPlayers}}/{{games.minPlayers}}</p>
-						<p><strong>Status:</strong> <a class="bg-primary spannedText">{{games.status}}</a></p>
+                    	<p><strong translate="YEAR_OF_PRODUCTION_SEMI"></strong> {{games.yearOfProduction}}</p>
+						<p><strong translate="EDITION_SEMI"></strong> {{games.edition}}</p>
+						<p><strong translate="MAX_MIN_PLAYERS_SEMI"></strong> {{games.maxPlayers}}/{{games.minPlayers}}</p>
+						<p><strong translate="STATUS_SEMI"></strong> <a class="bg-primary spannedText">{{games.status}}</a></p>
                 	</div>
             	</div>
             	<div class="cell">
@@ -18,40 +18,41 @@
             	</div>
         	</div>
         	<hr>
-			<p class="boldText">Description: </p>
+			<p><strong translate="DESCRIPTION_SEMI"></strong></p>
 			<div class="well">
 				{{games.description}}
 			</div>
 			<hr>
-			<p class="boldText">Rules</p>
+			<p><strong translate="RULES_SEMI"></strong></p>
 			<div class="well">
 				{{games.rules}}
 			</div>
 			<a class="pull-right" href = "#gameEdit/{{games.id}}" ng-show="isYourGame">
 				<button class="btn btn-info" >
-					<span class = "glyphicon glyphicon-edit"></span> Edit
+					<span class = "glyphicon glyphicon-edit"></span><strong translate="EDIT"></strong>
 				</button>
 			</a>
 		</div>
 		<div ng-show="isYourGame">
 			<button id="availabilityButton" class="btn btn-info pull-right inlineDisplay" data-toggle="modal"
-				data-target="#makeGameAvailable">Make game available</button>
+				data-target="#makeGameAvailable" translate="MAKE_GAME_AVIALABLE"></button>
 			<div id="makeGameAvailable" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="text-primary">Open your game for sharing</h4>
+							<h4 class="text-primary" translate="OPEN_GAME_FOR_SHARING"></h4>
 						</div>
 						<div class="modal-body">
 							<form name="availabilityForm">
-								<p class="inlineDisplay">Enter period of exchange:</p>
+								<p class="inlineDisplay" translate="ENTER_PERIOD_SEMI"></p>
 								<input type="number" name="returnDate" max="360" min="1"
 									class="form-control inlineDisplay" ng-model="returnDate"
 									required />
 								<button class="btn btn-info inlineDisplay"
 									ng-click="makeGameUserAvailable(games.id)"
-									ng-disabled="availabilityForm.returnDate.$invalid">Make available</button>
+									ng-disabled="availabilityForm.returnDate.$invalid"
+									translate="MAKE_AVAILABLE"></button>
 							</form>
 						</div>
 					</div>
@@ -61,40 +62,39 @@
 	</div>	
 	
 	<div class="container-fluid" ng-show="isYourGamePrivate">
-		<button class="btn btn-info" ng-click="keepGameUserPrivate(games.id)">Keep it for me</button>
+		<button class="btn btn-info" ng-click="keepGameUserPrivate(games.id)"
+		translate="KEEP_IT_FOR_ME"></button>
 	</div>
 	
 	<div class="container-fluid" ng-show="isntYourGame">
 		<button class="btn btn-info" 
 				ng-click="displayRequestBlockClick(games.id)" data-toggle="modal" 
-				data-target="#applyForGameModal">Let's make a deal!</button>
+				data-target="#applyForGameModal" translate="LETS_MAKE_A_DEAL"></button>
 		<div id="applyForGameModal" class="modal fade" role="dialog">
 	  		<div class="modal-dialog">
 	  		    <div class="modal-content">
 	  		    	<div class="modal-header">
        	 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-        				<h4 class="text-primary">Send request</h4>
+        				<h4 class="text-primary" translate="SEND_REQUEST"></h4>
       				</div>
 					<div class="modal-body">
 						<form name="selectRequiredForm" ng-init="haveSmthToPropose=false">
-							<p class="boldText">Days: {{howManyDays}}</p>
+							<p><strong translate="DAYS_SEMI"></strong>{{howManyDays}}</p>
 				  			<br/>
-				  			<label class="inlineDisplay">Message for owner:  </label>
+				  			<label class="inlineDisplay" translate="MESSAGE_FOR_OWNER_SEMI"></label>
 				  			<textarea class="form-control inlineDisplay" rows="2" id="message" ng-model="messageToOwner"></textarea>
 				  			<br/><br/>
-				  			<button class="btn btn-primary" ng-click="displayPropositions()">Propose</button>
+				  			<button class="btn btn-primary" ng-click="displayPropositions()" translate="PROPOSE"></button>
 				  			<button class="btn btn-info pull-right" 
-			  					ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)">
-			  					Ask owner</button>
+			  					ng-click="askOwnerToShare(games.id, messageToOwner, gamesToPropose)" translate="ASK_OWNER"></button>
 				  			<div ng-show="haveSmthToPropose">
 				  				<br/>
-				  				<p class="boldText inlineDisplay">Select what you want to propose:  </p>
+				  				<p class="boldText inlineDisplay" translate="SELECT_WHAT_YOU_WANT_TO_PROPOSE_SEMI"></p>
 			      				<select class="form-control inlineDisplay" ng-model="myGamesModel" name="gamesSelect"
 			      					ng-options="option.name+': '+option.edition+' - '+option.yearOfProduction for option in myGames" 
 			      					required></select>
 			      				<button class="btn btn-info inlineDisplay" ng-click="addToProposes()" 
-			      					ng-disabled="selectRequiredForm.gamesSelect.$invalid">
-			      					Add game</button>  
+			      					ng-disabled="selectRequiredForm.gamesSelect.$invalid" translate="ADD_GAME"></button>  
 			      				<br/>
 			      				<br/>
 			      				<ul class="list-group" ng-model="propositionsList">
@@ -110,39 +110,39 @@
 	
 	<div class="container-fluid" ng-show="isThereConfiramtion">
 		<a class="text-primary inlineDisplay" href="#edit/{{applierUsername}}">{{applierUsername}}</a>
-		<p class="inlineDisplay"> asks you to share this game</p>
+		<p class="inlineDisplay" translate="ASKS_YOU_TO_SHARE"></p>
 		<pre>{{messageFromApplier}}</pre>
 		<a class="text-primary inlineDisplay" href="#edit/{{applierUsername}}">{{applierUsername}}</a>
-		<p class="inlineDisplay"> offers: </p>
+		<p class="inlineDisplay" translate="OFFERS_SEMI"></p>
 		<ul class="list-group" ng-model="propositionsFromUser">
     		<li class="list-group-item" ng-repeat="game in propositions">
     			{{game.name}} - {{game.edition}}, {{game.yearOfProduction}}</li>
   		</ul>
   		<div class="centeredObjects">
-			<button class="btn btn-info " ng-click="acceptGameConfirmation(games.id)">Accept</button>
-			<button class="btn btn-info" ng-click="declineGameConfirmation(games.id)">Decline</button>
+			<button class="btn btn-info " ng-click="acceptGameConfirmation(games.id)" translate="ACCEPT"></button>
+			<button class="btn btn-info" ng-click="declineGameConfirmation(games.id)" translate="DECLINE"></button>
 	  	</div>
 	</div>
 	
 	<div class="container-fluid" ng-show="canGiveBack">
-		<p class="boldText">Days remains: {{howManyDaysRemains}}</p>
+		<p><strong translate="DAYS_REMAINS_SEMI"></strong> {{howManyDaysRemains}}</p>
 		<button class="btn btn-info"  data-toggle="modal" 
-				data-target="#giveBackModal">Return</button>
+				data-target="#giveBackModal" translate="RETURN"></button>
 		<div id="giveBackModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="text-primary">Return of the game</h4>
+						<h4 class="text-primary" translate="RETURN_THE_GAME"></h4>
 					</div>
 					<div class="modal-body">
 						<br/>
-						<p>Your feedback</p>
+						<p translate="YOUR_FEEDBACK"></p>
 						<textarea class="form-control inlineDisplay" rows="2" 
 							id="message" ng-model="feedbackForGame"></textarea>
 						<br/>
-						<button class="btn btn-info" ng-click="giveBackGame(games.id, feedbackForGame)">
-							Give back to owner</button>
+						<button class="btn btn-info" ng-click="giveBackGame(games.id, feedbackForGame)"
+							translate="GIVE_BACK_TO_OWNER"></button>
 					</div>
 				</div>
 			</div>

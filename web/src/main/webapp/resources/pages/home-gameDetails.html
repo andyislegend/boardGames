@@ -3,17 +3,23 @@
 </div>
 <div class="container-fluid" ng-controller="getGameDetailedInfoController">
 
-	<h4><strong translate="GAME_NAME"></strong> {{gameDetail.name}}</h4>
+	<h4><strong translate="GAME_NAME_SEMICOLUMN"></strong> {{gameDetail.name}}</h4>
 	<h4 class="inlineDisplay"><strong transalte="GAME_RATING"></strong></h4>
 	<div class="inlineDisplay" star-rating rating="starRating" read-only="false"
 		max-rating="10" click="ratingClick(param)"
 		mouse-hover="ratingHover(param)" mouse-leave="ratingLeave(param)"></div>
 	<p class="text text-success inlineDisplay">{{hoverRatingText}}</p>
-	<p>Your rating: <span class="label label-primary">{{gameDetail.userRating}}/10</span></p>
-	<p>General rating: <span class="label label-primary">{{gameDetail.generalRating}}/10</span></p>
+	<p>
+		<strong translate="GAME_RATING_OF_USER"></strong>
+		<span class="label label-primary">{{gameDetail.userRating}}/10</span>
+	</p>
+	<p>
+		<strong translate="GENERAL_GAME_RATING"></strong>	
+		<span class="label label-primary">{{gameDetail.generalRating}}/10</span>
+	</p>
 	<hr/>
 	<br/>
-	<h4 translate="OWNERS_OF_GAME"><strong></strong></h4>
+	<h4><strong  translate="OWNERS_OF_GAME"></strong></h4>
 	<table ng-table="userGamesOfGameTable" show-filter="true" class="table table-striped">
 		<tr ng-repeat="x in userGamesOfGameDisplay" ng-click="displayGameUserDetails(x.id)">
 			<td title="'USER_OF_USERGAME_USERNAME' | translate" sortable="'username'" filter="{ 'username': 'text' }">
