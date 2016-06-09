@@ -42,6 +42,7 @@ homeApp
 								USER_FIRST_NAME : 'First name: {{userFirstName}}',
 								USER_GENDER : 'Gender: {{userGender}}',
 								USER_AGE : 'Age: {{userAge}}',
+								USER_LEVEL : 'Level: {{userLevel}}',
 								USER_PHONE_NUMBER : 'Phone number: {{userPhoneNumber}}',
 								USER_GAMES : 'Games user owns',
 								USER_TOURNAMENTS : 'Users tournaments',
