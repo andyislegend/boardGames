@@ -5,7 +5,7 @@
 	<div id="eventInfoMain">
 
 		<div id="eventInfoImage">
-			<img src="resources/images/event.png"
+			<img src="resources/images/events-icon.png"
 				style="height: 100px; weight: 100px; margin-left: 50px;">
 		</div>
 
@@ -28,11 +28,11 @@
 				<div id="eventInfoButtons">
 
 					<p>
-						<a type="button" class="btn btn-success btn-block" ng-click="subscribeToEvent(currentEvent.eventId)"
+						<a type="button" class="btn btn-success btn-md" ng-click="subscribeToEvent(currentEvent.eventId)"
 							ng-if="isSub == false"> Subscribe </a>
 					</p>
 					<p>
-						<a type="button" class="btn btn-danger btn-block" ng-click="usnsubscribeFromEvent(currentEvent.eventId)" id="changeUserStatus"
+						<a type="button" class="btn btn-danger btn-md" ng-click="usnsubscribeFromEvent(currentEvent.eventId)" id="changeUserStatus"
 							ng-if="isSub == true"> Unsubscribe </a>
 					</p>
 

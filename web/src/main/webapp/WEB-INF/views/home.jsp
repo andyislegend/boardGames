@@ -548,10 +548,10 @@
 										<span translate="FRIEND_MESSAGE">
 									</div>
 									<a ng-click="click = false"><img class="close"
-										style="margin-top: -55px; margin-right: 0px;"
+										style="margin-top: -22px; margin-right: 0px;"
 										src="resources/ico/close2.png" /></a>
 								</div>
-								<div class="content">
+								<div class="content-search-friends">
 									<div ng-repeat="user in allUsers">
 										<div class="proba">
 											<div class="person">
@@ -560,7 +560,7 @@
 														src="resources/images/default-avatar.jpg" /></a>
 												</div>
 												<div class="name">{{ user.firstName }} {{
-													user.lastName}}</div>
+													user.lastName}} ({{user.username}})</div>
 												<div class="over-add-remove">
 													<a href="" type="button"
 														ng-click="addUserToFriend(user.id)"><img
@@ -584,7 +584,7 @@
 										ng-mouseenter="readMessage(message)">
 										<div>
 											<strong>{{message.userSender.firstName}}
-												{{message.userSender.lastName}}:</strong>
+												{{message.userSender.lastName}}({{message.date | date:'HH:mm:ss'}}):</strong>
 										</div>
 										<div>{{message.message}}</div>
 									</div>
@@ -716,12 +716,12 @@
 																	<span translate="CONFIRM_CANCEL"></span>
 																</button>
 															</div>
-															<div class="modal-footer">
+															<!-- <div class="modal-footer">
 																<button type="button" class="btn btn-default"
 																	data-dismiss="modal">
 																	<span translate="CONFIRM_CLOSE"></span>
 																</button>
-															</div>
+															</div> -->
 														</div>
 
 													</div>
