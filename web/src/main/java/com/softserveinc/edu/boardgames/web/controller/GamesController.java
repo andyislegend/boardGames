@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.edu.boardgames.persistence.entity.GameRating;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserGamesOfGameDTO;
 import com.softserveinc.edu.boardgames.service.GameRatingService;
@@ -21,14 +22,16 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
  * @author Taras Varvariuk
+ * Simple controller performs getting all games
  * Controller getting game of instance
  * getting and displaying rating
  * calculating averege rating
  */
 @RestController
-public class GetGameDetailsController {
+public class GamesController {
 	
 	final int DEFAULT_RATING = 0;
+	
 	@Autowired
 	private GameService gameService;
 	
@@ -40,6 +43,12 @@ public class GetGameDetailsController {
 	
 	@Autowired
 	private GameRatingService gameRateNumService;
+	
+	@RequestMapping(value="/getAllGames", method = RequestMethod.GET)
+	@ResponseBody
+	public List<AllGamesDto> getAllGames(){
+		return gameService.getGamesDTO();
+	}
 	
 	@RequestMapping(value="/getGameDetails/{gameId}", method = RequestMethod.GET)
 	@ResponseBody

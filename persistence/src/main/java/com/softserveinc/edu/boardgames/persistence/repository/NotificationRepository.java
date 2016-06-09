@@ -27,6 +27,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "and n.status = 'UNCHECKED'"
 			+ "and n.type = 'exchange'")
 	public Integer countOfUncheckedGameNotifications(@Param("username")String username);
+	
 	/**
 	 * This method for finding all message with your specific friend
 	 * 
@@ -73,7 +74,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	 * @param userName it's your username
 	 * @return list of Notification
 	 */
-	
 	@Query(value = "SELECT * FROM notification WHERE (userId =(SELECT id FROM users WHERE username = ?1) "
 			+ "OR user_sender = (SELECT id FROM users WHERE username = ?1)) AND (type = 'MESSAGE' OR type = 'NOTIFICATION' OR type = 'EVENT')", nativeQuery = true)
 	public List<Notification> getAllNotificationByUserName(String userName);

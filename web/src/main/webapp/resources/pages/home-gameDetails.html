@@ -1,32 +1,38 @@
 <div class="container-fluid">
-	<h2 class="text-primary" id="allGamesHeader">Game details</h2>
+	<h2 class="text-primary" id="allGamesHeader" translate="GAME_DETAILS"></h2>
 </div>
 <div class="container-fluid" ng-controller="getGameDetailedInfoController">
 
-	<h4><strong>Name:</strong> {{gameDetail.name}}</h4>
-	<h4 class="inlineDisplay"><strong>Rating:</strong></h4>
+	<h4><strong translate="GAME_NAME_SEMICOLUMN"></strong> {{gameDetail.name}}</h4>
+	<h4 class="inlineDisplay"><strong transalte="GAME_RATING"></strong></h4>
 	<div class="inlineDisplay" star-rating rating="starRating" read-only="false"
 		max-rating="10" click="ratingClick(param)"
 		mouse-hover="ratingHover(param)" mouse-leave="ratingLeave(param)"></div>
 	<p class="text text-success inlineDisplay">{{hoverRatingText}}</p>
-	<p>Your rating: <span class="label label-primary">{{gameDetail.userRating}}/10</span></p>
-	<p>General rating: <span class="label label-primary">{{gameDetail.generalRating}}/10</span></p>
+	<p>
+		<strong translate="GAME_RATING_OF_USER"></strong>
+		<span class="label label-primary">{{gameDetail.userRating}}/10</span>
+	</p>
+	<p>
+		<strong translate="GENERAL_GAME_RATING"></strong>	
+		<span class="label label-primary">{{gameDetail.generalRating}}/10</span>
+	</p>
 	<hr/>
 	<br/>
-	<h4><strong>Owners</strong></h4>
+	<h4><strong  translate="OWNERS_OF_GAME"></strong></h4>
 	<table ng-table="userGamesOfGameTable" show-filter="true" class="table table-striped">
 		<tr ng-repeat="x in userGamesOfGameDisplay" ng-click="displayGameUserDetails(x.id)">
-			<td title="'Username'" sortable="'username'" filter="{ 'username': 'text' }">
+			<td title="'USER_OF_USERGAME_USERNAME' | translate" sortable="'username'" filter="{ 'username': 'text' }">
 				{{ x.username }}
 			</td>
-			<td title="'Edition'" sortable="'edition'" filter="{ 'edition': 'text' }">
+			<td title="'GAME_EDITION' | translate" sortable="'edition'" filter="{ 'edition': 'text' }">
 				{{ x.edition }}
 			</td>
-			<td title="'Year of production'" sortable="'yearOfProduction'" 
+			<td title="'GAME_YEAR_OF_PRODUCTION' | translate" sortable="'yearOfProduction'" 
 				filter="{ 'yearOfProduction': 'number' }">
 				{{ x.yearOfProduction }}
 			</td>
-			<td title="'Availability'" sortable="'status'" filter="{ 'status': 'text' }">
+			<td title="'AVAILABILITY' | translate" sortable="'status'" filter="{ 'status': 'text' }">
 				<a href="#gameUserDetails/{{x.id}}">{{x.status}}</a>
 			</td>
 			<td title="'Action'">
