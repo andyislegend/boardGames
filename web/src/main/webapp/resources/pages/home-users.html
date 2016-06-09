@@ -25,7 +25,7 @@
 			<tbody >
 			<tr ng-repeat-start="user in usersByParams">
 				<td title="'USERNAME_TABLE' | translate" sortable="'username'" filter="{ 'username': 'text' }" class="col-sm-3">
-					<a href="" ng-click="getInfoAboutUserFunc(user.username); showUser = !showUser">{{user.username}}</a>
+					<a href="" ng-click="getInfoAboutUserFunc(user.username); changeShow($index)">{{user.username}}</a>
 				</td>
 				<td title="'EMAIL_TABLE' | translate" sortable="'email'" class="col-sm-3">{{user.email}}</td>
 				<td title="'COUNTRY_TABLE' | translate" sortable="'countryName'" filter="{'countryName': 'select'}" filter-data="countries()" 
@@ -38,7 +38,7 @@
 					translate={{user.state}}>					 
                 </td>
                 </tr>
-			<tr ng-show="showUser" ng-repeat-end>
+			<tr ng-show='isShow == $index' ng-repeat-end>
 				<td class="col-sm-3">
 						<div id="backgroundForOneUser">
 							<p translate="USER_LAST_NAME" 

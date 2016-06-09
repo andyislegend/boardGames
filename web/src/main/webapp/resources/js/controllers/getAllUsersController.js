@@ -16,6 +16,14 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		});
 	};
 	
+	$scope.changeShow = function(index){
+		if ($scope.isShow === index) {
+			$scope.isShow = -1;
+			return;
+		}
+		  $scope.isShow = index;
+	}
+	
 	$scope.countries = function () {
 		  var def = $q.defer();
 		  $http.get('getAllCountries').then(function (result) {

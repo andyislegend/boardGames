@@ -13,25 +13,13 @@ import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationStatus;
 import com.softserveinc.edu.boardgames.service.NotificationService;
-import com.softserveinc.edu.boardgames.service.SubscribedUsersService;
-import com.softserveinc.edu.boardgames.service.TournamentService;
-import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @RestController
 public class NotificationController {
 
 	@Autowired
-	UserService userService;
-	
-	@Autowired
-	TournamentService tournamentService;
-	
-	@Autowired
-	SubscribedUsersService subscribedUsersService;
-	
-	@Autowired
-	NotificationService notificationService;
+	private NotificationService notificationService;
 	
 	@RequestMapping(value = "/getAllNotification", method = RequestMethod.GET)
 	public List<Notification> getAllNotification(){

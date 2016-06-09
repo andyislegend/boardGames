@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.ActionsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
-import com.softserveinc.edu.boardgames.service.CategoryService;
 import com.softserveinc.edu.boardgames.service.EventService;
-import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GameService;
-import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 
@@ -34,25 +31,16 @@ import com.softserveinc.edu.boardgames.service.TournamentService;
 public class StatisticsController {
 
 	@Autowired
-	GameUserService gameUserService;
+	private GameService gameService;
 	
 	@Autowired
-	GameService gameService;
+	private TournamentService tournamentService;
 	
 	@Autowired
-	CategoryService categoryService;
+	private EventService eventService;
 	
 	@Autowired
-	ExchangeService exchangeService;
-	
-	@Autowired
-	TournamentService tournamentService;
-	
-	@Autowired
-	EventService eventService;
-	
-	@Autowired
-	NotificationService notificationService;
+	private NotificationService notificationService;
 	
 	@RequestMapping(value="/groupGamesByGameUsers", method = RequestMethod.GET)
 	@ResponseBody
