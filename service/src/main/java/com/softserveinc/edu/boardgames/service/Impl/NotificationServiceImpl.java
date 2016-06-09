@@ -56,15 +56,15 @@ public class NotificationServiceImpl implements NotificationService {
 		notifyRepo.saveAndFlush(notification);
 	}
 	
-	public List<Notification> getAllMessage(String currentUserName, String friendUserName){
+	public List<Notification> getAllMessage(String currentUserName, String friendUserName) {
 		return notifyRepo.getAllMessage(currentUserName, friendUserName);
 	}
 	
-	public void changeStatusOfReadingOfMessage(Integer messageId){
+	public void changeStatusOfReadingOfMessage(Integer messageId) {
 		notifyRepo.changeStatusOfReadingOfMessage(messageId);
 	}
 	
-	public Integer findAllNotReadMessage(String currentUserName){
+	public Integer findAllNotReadMessage(String currentUserName) {
 		return notifyRepo.findAllNotReadMessage(currentUserName);
 	}
 	
@@ -73,8 +73,8 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 	
 	public void addTournamentNotification(List<Tournament> listOfTournament) {
-		for(Tournament tournament: listOfTournament){
-				for(User user: tournament.getUsers()){
+		for(Tournament tournament: listOfTournament) {
+				for(User user: tournament.getUsers()) {
 					Notification notification = new Notification();
 					notification.setDate(tournament.getDateOfTournament());
 					notification.setUser(user);
@@ -88,7 +88,7 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 	
 	public void addEventNotification(List<SubscribedUsers> listOfSubsriders) {
-		for(SubscribedUsers su: listOfSubsriders){
+		for(SubscribedUsers su: listOfSubsriders) {
 			Notification notification = new Notification();
 			notification.setDate(su.getEvent().getDate());
 			notification.setUser(su.getUser());
@@ -124,7 +124,7 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 	
 	@Override
-	public void makeNotificationRead(List<Notification> listOfNotification){
+	public void makeNotificationRead(List<Notification> listOfNotification) {
 		for(Notification notification: listOfNotification){
 			notifyRepo.makeNotificationRead(notification.getId());
 		}

@@ -21,26 +21,26 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @RestController
 public class NotificationController {
 
-	@Autowired
-	UserService userService;
+	/*@Autowired
+	private UserService userService;
 	
 	@Autowired
-	TournamentService tournamentService;
+	private TournamentService tournamentService;
 	
 	@Autowired
-	SubscribedUsersService subscribedUsersService;
+	private SubscribedUsersService subscribedUsersService;*/
 	
 	@Autowired
-	NotificationService notificationService;
+	private NotificationService notificationService;
 	
 	@RequestMapping(value = "/getAllNotification", method = RequestMethod.GET)
-	public List<Notification> getAllNotification(){
+	public List<Notification> getAllNotification() {
 		List<Notification> listOFNotification = notificationService.getAllNotificationByUserName(WebUtil.getPrincipalUsername());
 		return listOFNotification;
 	}
 	
 	@RequestMapping(value = "/getCurrentUserName", method = RequestMethod.GET)
-	public String getCurrentUserName(){
+	public String getCurrentUserName() {
 		return WebUtil.getPrincipalUsername();
 	}
 	
