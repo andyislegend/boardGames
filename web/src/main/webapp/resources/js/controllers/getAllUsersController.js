@@ -4,15 +4,17 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		$scope.users = result.data;
 		$scope.$broadcast('sharingToUsersTable', $scope.users);
 		$scope.showUser = !$scope.showUser;
-		$scope.getInfoAboutUserFunc = function(username) {
-			$http.get('getUserDTO?username='+ username).then(function(result) {
-				$scope.oneUser = result.data;
-			});
-			$http.get('getUsersAvatar?username=' + username).then(function(result) {
-				$scope.userAvatar = result.data;
-			});
-		};
+
 	});
+	
+	$scope.getInfoAboutUserFunc = function(username) {
+		$http.get('getUserDTO?username='+ username).then(function(result) {
+			$scope.oneUser = result.data;
+		});
+		$http.get('getUsersAvatar?username=' + username).then(function(result) {
+			$scope.userAvatar = result.data;
+		});
+	};
 	
 	$scope.countries = function () {
 		  var def = $q.defer();

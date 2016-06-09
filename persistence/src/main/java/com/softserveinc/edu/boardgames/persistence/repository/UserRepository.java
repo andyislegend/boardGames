@@ -24,6 +24,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query("SELECT elements(u.userRoles)" + " FROM User u" + " WHERE u.username =:username")
 	Set<UserRoles> getRolesByUserName(@Param("username") String username);
+	
+	@Query("SELECT u FROM User u where 'ADMIN' in elements(u.userRoles)")
+	User getUserByUserRoleAdmin();
 
 	@Query("Select u.state" + " FROM User u" + " WHERE u.username =:username")
 	String getUsersState(String username); 
