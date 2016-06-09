@@ -584,7 +584,7 @@
 										ng-mouseenter="readMessage(message)">
 										<div>
 											<strong>{{message.userSender.firstName}}
-												{{message.userSender.lastName}}:</strong>
+												{{message.userSender.lastName}}({{message.date | date:'HH:mm:ss'}}):</strong>
 										</div>
 										<div>{{message.message}}</div>
 									</div>
