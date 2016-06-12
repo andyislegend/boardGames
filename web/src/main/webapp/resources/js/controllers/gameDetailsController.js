@@ -1,5 +1,9 @@
 angular.module('homeApp').controller('getGameDetailedInfoController', function($scope, $location, $route, $http, $rootScope, $filter, $timeout, ngTableParams) {
-	
+		
+		$http.get("/getCurentUser").success(function(result) {
+			$scope.currentUser = result;
+		});
+		
 		$scope.$on('broadcastingGameId', function(event, data) {
 			$scope.currentGameId = data;
 		});   
@@ -90,10 +94,11 @@ angular.module('homeApp').controller('getGameDetailedInfoController', function($
 
 		$scope.list = [];
 		$scope.submit = function() {
+			
 		var comment = {
 			"gameID" : '' + $scope.gameuserId,
 			"commentText" : $scope.comment,
-			"username" : "",
+			"username" : $scope.currentUser.username,
 			"date" : new Date()
 		};
 		$http({
