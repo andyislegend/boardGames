@@ -19,29 +19,31 @@
 	</p>
 	<hr/>
 	<br/>
+	<div class = "ownersGameContainer">
+	<div class = "gameTable">
 	<h4><strong  translate="OWNERS_OF_GAME"></strong></h4>
 	<table ng-table="userGamesOfGameTable" show-filter="true" class="table table-striped">
-		<tr ng-repeat="x in userGamesOfGameDisplay" ng-click="displayGameUserDetails(x.id)">
-			<td title="'USER_OF_USERGAME_USERNAME' | translate" sortable="'username'" filter="{ 'username': 'text' }">
+		<tr ng-repeat="x in userGamesOfGameDisplay" >
+			<td ng-click="displayGameUserDetails(x.id)" title="'USER_OF_USERGAME_USERNAME' | translate" sortable="'username'" filter="{ 'username': 'text' }">
 				{{ x.username }}
 			</td>
-			<td title="'GAME_EDITION' | translate" sortable="'edition'" filter="{ 'edition': 'text' }">
+			<td ng-click="displayGameUserDetails(x.id)" title="'GAME_EDITION' | translate" sortable="'edition'" filter="{ 'edition': 'text' }">
 				{{ x.edition }}
 			</td>
-			<td title="'GAME_YEAR_OF_PRODUCTION' | translate" sortable="'yearOfProduction'" 
+			<td ng-click="displayGameUserDetails(x.id)" title="'GAME_YEAR_OF_PRODUCTION' | translate" sortable="'yearOfProduction'" 
 				filter="{ 'yearOfProduction': 'number' }">
 				{{ x.yearOfProduction }}
 			</td>
-			<td title="'AVAILABILITY' | translate" sortable="'status'" filter="{ 'status': 'text' }">
+			<td ng-click="displayGameUserDetails(x.id)" title="'AVAILABILITY' | translate" sortable="'status'" filter="{ 'status': 'text' }">
 				<a href="#gameUserDetails/{{x.id}}">{{x.status}}</a>
 			</td>
 			<td title="'Action'">
-				<button ng-click="showComments(x.id)">Comment</button>
+				<a ng-click="showComments(x.id)">Comment</a>
 			</td>
 		</tr>
 	</table>
-
-	<div>
+	</div>
+	<div class = "commentsWindow">
 		<div ng-show="isShowComment">
 			<table class="table">
 				<tr>
@@ -61,5 +63,6 @@
 				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 </div>

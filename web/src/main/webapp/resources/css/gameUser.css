@@ -84,3 +84,20 @@ img.iconImage {
 #availabilityButton {
 	margin-right:20px;
 }
+.ownersGameContainer {
+	margin-top: 30px;
+    height: 508px;
+    width: 99%; 
+}
+.gameTable {
+	float: left;
+    height: 97%;
+    width:67%;
+    margin: 0.5% 0.5%;
+}
+.commentsWindow {
+	float: left;
+    height: 97%;
+    width: 25%;
+    margin: 0.5% 0.5%;
+}
