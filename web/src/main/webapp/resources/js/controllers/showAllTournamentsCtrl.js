@@ -42,8 +42,9 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    			$scope.joinStatus = false;
     	    			$scope.quitStatus = true;
     	    			
-    	    			if($scope.tournament.tableGenerated === true){
+    	    			if($scope.tournament.tableGenerated === true || $scope.tournament.countOfParticipants === tournamentParticipants.length){
             	        	$scope.quitStatus = false;
+            	        	
             	        }
     	    			break;
     	    		}
