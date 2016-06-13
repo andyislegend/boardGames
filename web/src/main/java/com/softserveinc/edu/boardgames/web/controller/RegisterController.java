@@ -113,6 +113,12 @@ public class RegisterController {
 	 *            is used to validate users age
 	 */
 	private static final Pattern VALID_AGE = Pattern.compile("^[0-9]{0,3}$");
+	
+	/**
+	 * @param VALID_PHONE_NUMBER
+	 *            is used to validate users phone number
+	 */
+	private static final Pattern VALID_PHONE_NUMBER = Pattern.compile("^[+]{1}[0-9]{0,13}$");
 
 	/**
 	 * 
@@ -256,8 +262,12 @@ public class RegisterController {
 		if (!validateFirstNameAndLastName(userDTO.getFirstName()) || 
 				!validateFirstNameAndLastName(userDTO.getLastName())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
-		} else if (!validateUserAge(userDTO.getAge().toString())) {
+		} else if (!validateMail(userDTO.getEmail().trim())) {
+				return new ResponseEntity<String>(LocaleKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
+		} else if (!validateUserAge(userDTO.getAge())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
+		} else if (!validatePhoneNumber(userDTO.getPhoneNumber())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_PHONE_NUMBER, HttpStatus.CONFLICT);
 		} else {
 		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
 		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
@@ -286,6 +296,11 @@ public class RegisterController {
 	
 	private static boolean validateUserAge(String age) {
 		Matcher matcher = VALID_AGE.matcher(age);
+		return matcher.find();
+	}
+	
+	private static boolean validatePhoneNumber(String phoneNumber) {
+		Matcher matcher = VALID_PHONE_NUMBER.matcher(phoneNumber);
 		return matcher.find();
 	}
 
