@@ -11,6 +11,10 @@ public interface LocaleKeys {
 	public static final String OLD_PASSWORD_ANSWER = "OLD_PASSWORD_ANSWER";
 	public static final String NEW_PASSWORD_ANSWER = "NEW_PASSWORD_ANSWER";
 	public static final String CONFIRM_PASSWORD_ANSWER = "CONFIRM_PASSWORD_ANSWER";
+	public static final String INVALID_FIRST_OR_LAST_NAME = "INVALID_FIRST_OR_LAST_NAME";
+	public static final String INVALID_AGE = "INVALID_AGE";
+	public static final String INVALID_PHONE_NUMBER = "INVALID_PHONE_NUMBER";
+	
 	
 	//language keys for registration page
 	public static final String REQUIRED_FIELD = "REQUIRED_FIELD";

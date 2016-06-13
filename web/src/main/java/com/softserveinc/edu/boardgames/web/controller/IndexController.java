@@ -1,13 +1,10 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -20,22 +17,38 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 @Controller
 public class IndexController {
 
-	@Autowired
-	UserService userService;
+	/**
+	 * Represent path to index.jsp page with login and registration options
+	 */
+	private static final String INDEX_PAGE = "index";
 
-	@Autowired
-	MessageSource messageSource;
+	/**
+	 * Represent path to home.jsp page available after successful log in
+	 */
+	private final static String HOME_PAGE = "home";
 
+	/**
+	 * Method which redirects you to index page
+	 * 
+	 * @return index.jsp
+	 */
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public final String getIndexPage() {
-		return "index";
+		return INDEX_PAGE;
 	}
 
+	/**
+	 * Method which redirects you to home page, also add currently logged user
+	 * to model
+	 * 
+	 * @param model
+	 * @return home.jsp
+	 */
 	@RequestMapping(value = "/home**", method = RequestMethod.GET)
 	public final String getUserPage(Model model) {
 		model.addAttribute("user", WebUtil.getPrincipalUsername());
 
-		return "home";
+		return HOME_PAGE;
 	}
 
 }
