@@ -106,15 +106,19 @@ public class RegisterController {
 	 * @param VALID_USERNAME_REGEX
 	 *            is used to validate the safety of username
 	 */
-
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
 
 	/**
-	 * @param VALID_USERNAME_REGEX
-	 *            is used to validate the safety of username
+	 * @param VALID_FIRST_OR_LAST_NAME
+	 *            is used to validate users first and last names
 	 */
-
 	private static final Pattern VALID_FIRST_OR_LAST_NAME = Pattern.compile("^[a-zA-Z'-]{0,30}$");
+
+	/**
+	 * @param VALID_AGE
+	 *            is used to validate users age
+	 */
+	private static final Pattern VALID_AGE = Pattern.compile("^[0-9]{0,3}$");
 
 	/**
 	 * 
@@ -256,10 +260,11 @@ public class RegisterController {
 			return new ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		} else if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
 			return new ResponseEntity<String>(LocaleKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+		} else {
+			user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
+			userService.updateUser(user);
+			return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 		}
-		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
-		userService.updateUser(user);
-		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 	}
 
 	/**
@@ -275,11 +280,10 @@ public class RegisterController {
 		if (!validateFirstNameAndLastName(userDTO.getFirstName())
 				|| !validateFirstNameAndLastName(userDTO.getLastName())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
-			/*
-			 * } else if (true) { return new
-			 * ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER,
-			 * HttpStatus.CONFLICT);
-			 */
+
+		} else if (!validateUserAge(userDTO.getAge().toString())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
+
 		} else {
 			userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
 			return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
@@ -303,6 +307,11 @@ public class RegisterController {
 
 	private static boolean validateFirstNameAndLastName(String firstOrLastName) {
 		Matcher matcher = VALID_FIRST_OR_LAST_NAME.matcher(firstOrLastName);
+		return matcher.find();
+	}
+
+	private static boolean validateUserAge(String age) {
+		Matcher matcher = VALID_AGE.matcher(age);
 		return matcher.find();
 	}
 
