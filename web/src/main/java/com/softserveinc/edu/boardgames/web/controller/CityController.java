@@ -22,7 +22,7 @@ import com.softserveinc.edu.boardgames.service.CityService;
 public class CityController {
 
 	@Autowired
-	CityService citySevice;
+	private CityService citySevice;
 
 	/**
 	 * Returns all cities in a country.
