@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,34 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Event;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO;
-import com.softserveinc.edu.boardgames.service.CityService;
-import com.softserveinc.edu.boardgames.service.CountryService;
 import com.softserveinc.edu.boardgames.service.EventService;
-import com.softserveinc.edu.boardgames.service.GameService;
 import com.softserveinc.edu.boardgames.service.SubscribedUsersService;
-import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 @Controller
 public class EventsController {
 
 	@Autowired
-	EventService eventService;
-
-	@Autowired
-	UserService userService;
-
-	@Autowired
-	CityService cityService;
-
-	@Autowired
-	CountryService countryService;
-
-	@Autowired
-	GameService gameService;
+	private EventService eventService;
 	
 	@Autowired
-	SubscribedUsersService subUsersService;
+	private SubscribedUsersService subUsersService;
 
 
 	@RequestMapping(value = "/allEventsDTO",method = RequestMethod.GET)
@@ -104,8 +90,10 @@ public class EventsController {
 	
 	@RequestMapping(value = "/unsubscribeFromEvent",method = RequestMethod.DELETE)
 	@ResponseBody
-	public void unsubscribeFromEvent(@RequestParam("id") Integer id){
+	public ResponseEntity<String> unsubscribeFromEvent(@RequestParam("id") Integer id){
 		subUsersService.unsubscribeFromEvent(id, WebUtil.getPrincipalUsername());
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 }

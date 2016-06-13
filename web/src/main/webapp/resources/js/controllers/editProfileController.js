@@ -92,10 +92,8 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 			$scope.userProfile.phoneNumber = $scope.editablePhoneNumber;
 			$scope.editProfileMessage = false;
 		}).error(function(result, status) {
-			$scope.editProfileAnswer = result.data;
-			if (result == "") {
-				$scope.editProfileAnswer = "You have typed inappropriate data in email field";
-			}
+			$scope.editProfileAnswer = result;
+
 		})
 
 	}

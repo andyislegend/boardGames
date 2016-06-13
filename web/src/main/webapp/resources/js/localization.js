@@ -102,6 +102,8 @@ homeApp
 								NEW_PASSWORD_ANSWER : 'Sorry, but Your password must contain at least one lower case symbol, '
 										+ 'one Upper case symbol, one number and be from 6 to 20 chars long',
 								CONFIRM_PASSWORD_ANSWER : 'Sorry, but You must confirm Your password',
+								INVALID_FIRST_OR_LAST_NAME:'Sorry, byt you typed incorrect data in first name or last name field',
+								INVALID_AGE:'Sorry, byt you typed incorrect data in age field',
 								TO_BAN:'Ban user',
 								TO_UNBAN:'Unban user',
 								STATE:'State',
@@ -355,6 +357,8 @@ homeApp
 								NEW_PASSWORD_ANSWER : 'Вибачте, але Ваш пароль повинен містити хоча б одну маленьку літеру,'
 										+ 'одну велику літеру, одну цифру та бути від 6 до 20 символів',
 								CONFIRM_PASSWORD_ANSWER : 'Вибачте, але ви маєте підтвердити Ваш пароль',
+								INVALID_FIRST_OR_LAST_NAME:'Вибачте, але Ви ввели некоректну інформацію у поля ім\'я або прізвище',
+								INVALID_AGE:'Вибачте, але Ви ввели некоректну інформацію у полe з зазначенням Вашого віку',
 								TO_BAN:'Заблокувати юзера',
 								TO_UNBAN:'Розблокувати юзера',
 								STATE:'Стан',

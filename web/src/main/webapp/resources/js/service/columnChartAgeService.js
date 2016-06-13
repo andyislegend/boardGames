@@ -16,8 +16,8 @@ function drawColumnAgeChart(dataFrom) {
 	    },
 	    bars: 'horizontal' 
 	};
-	var chart = new google.charts.Bar(document.getElementById('columnagechart'));
-	chart.draw(data, options);
+	var columnAgeChart = new google.charts.Bar(document.getElementById('columnagechart'));
+	columnAgeChart.draw(data, options);
 }
 
 function prepareColumnAgeChartData(dataToPrepare) {
