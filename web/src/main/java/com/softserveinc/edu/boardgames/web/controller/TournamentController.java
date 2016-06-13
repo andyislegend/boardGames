@@ -9,6 +9,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -97,6 +98,9 @@ public class TournamentController {
         tournament.setCountry(countryService.findById(tournamentDTO.getCountryId()));
         tournament.setUserCreator(userService.getUser(WebUtil.getPrincipalUsername()));
         tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getGameId()));
+        Set<User> users = new HashSet<>();
+        users.add(userService.getUser(WebUtil.getPrincipalUsername()));
+        tournament.setUsers(users);
         tournamentService.save(tournament);
     }
     

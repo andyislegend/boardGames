@@ -116,7 +116,7 @@
                      	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
                      </td>
                      <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>   
-                     <td data-title = "'Date'" sortable="'dateOfTournament'" filter="{ 'dateOfTournament': 'text' }">{{ tournament.dateOfTournament|date:'MM/dd/yyyy @ h:mma' }}</td>               
+                     <td data-title = "'Date'" sortable="'dateOfTournament'" filter="{ 'dateOfTournament': 'text' }">{{ tournament.dateOfTournament|date:"MM/dd/yyyy 'at' h:mma"}}</td>               
                   </tr>
              </table>
              </div>
@@ -127,7 +127,8 @@
                      <td data-title = "'Tournament name'" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
                      	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
                      </td>
-                     <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>         
+                     <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>   
+                     <td data-title = "'Date'" sortable="'dateOfTournament'" filter="{ 'dateOfTournament': 'text' }">{{ tournament.dateOfTournament|date:"MM/dd/yyyy 'at' h:mma"}}</td>               
                   </tr>
              </table>
              </div>
