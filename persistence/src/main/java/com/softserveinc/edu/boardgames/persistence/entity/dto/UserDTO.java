@@ -9,7 +9,7 @@ public class UserDTO {
 	private String lastName;
 	private String email;
 	private String gender;
-	private Integer age;
+	private String age;
 	private String phoneNumber;
 	private Integer countryId;
 	private Integer cityId;
@@ -25,7 +25,7 @@ public class UserDTO {
 	}
 
 	public UserDTO(Integer id, String username, String firstName, String lastName, String email, String gender,
-			Integer age, String phoneNumber, Integer userRating, String level, String state) {
+			String age, String phoneNumber, Integer userRating, String level, String state) {
 		this.id = id;
 		this.username = username;
 		this.firstName = firstName;
@@ -40,7 +40,7 @@ public class UserDTO {
 	}
 
 	public UserDTO(Integer id, String username, String firstName, String lastName, String email, String gender,
-			Integer age, String phoneNumber, Integer countryId, Integer cityId, String countryName, String cityName,
+			String age, String phoneNumber, Integer countryId, Integer cityId, String countryName, String cityName,
 			Integer userRating, String level, String state) {
 		this.id = id;
 		this.username = username;
@@ -171,11 +171,11 @@ public class UserDTO {
 		this.gender = gender;
 	}
 
-	public Integer getAge() {
+	public String getAge() {
 		return age;
 	}
 
-	public void setAge(Integer age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 
