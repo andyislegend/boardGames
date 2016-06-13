@@ -45,7 +45,12 @@
 	</div>
 	<div class = "commentsWindow">
 		<div ng-show="isShowComment">
-			<table class="table">
+		
+		<div class="container">
+<div class="chat">
+
+ <div id="chatZone" name="chatZone">
+ <table class="table">
 				<tr>
 					<th></th>
 					<th></th>
@@ -56,12 +61,14 @@
 					<td>{{x.date | date:'medium'}}</td>
 				</tr>
 			</table>
-			<div style="float: bottom">
-				<form data-ng-submit=submit()>
-					<input type="text" data-ng-model="comment" style="width: 80%"><input
-						type="submit" ng-click="addComment" style="width: 20%">
-				</form>
-			</div>
+ </div>
+  <form data-ng-submit=submit() >
+   <input class = "textForCom" type="text" data-ng-model="comment" autofocus="true" placeholder="Type Your Comment Here" />
+   <input class = "inputForSubmit" type="submit" ng-click="addComment"/>
+  </form>
+ </div>
+</div>
+	
 		</div>
 	</div>
 	</div>
