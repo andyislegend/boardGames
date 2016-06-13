@@ -286,19 +286,12 @@ public class RegisterController {
 		if (!validateFirstNameAndLastName(userDTO.getFirstName())
 				|| !validateFirstNameAndLastName(userDTO.getLastName())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
-<<<<<<< HEAD
 		} else if (!validateMail(userDTO.getEmail().trim())) {
 				return new ResponseEntity<String>(LocaleKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
 		} else if (!validateUserAge(userDTO.getAge())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
 		} else if (!validatePhoneNumber(userDTO.getPhoneNumber())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_PHONE_NUMBER, HttpStatus.CONFLICT);
-=======
-
-		} else if (!validateUserAge(userDTO.getAge().toString())) {
-			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
-
->>>>>>> 398e45fe5cd4e0368da2f8d8819fee00b53c40eb
 		} else {
 			userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
 			return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
