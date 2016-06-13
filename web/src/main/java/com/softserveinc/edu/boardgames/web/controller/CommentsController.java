@@ -43,13 +43,13 @@ public class CommentsController {
 	 * @return
 	 */
 	@RequestMapping(value = "newComment", method = RequestMethod.POST)
-	public String addCommentForUserGame(@RequestBody CommentsForGameDTO commentsForGameDTO) {
+	public void addCommentForUserGame(@RequestBody CommentsForGameDTO commentsForGameDTO) {
 		CommentsForGame commentsForGame = new CommentsForGame();
 		commentsForGame = CommentForGameMapper.toEntity(commentsForGameDTO);
 		commentsForGame.setGameUser(gameUserService.getUserGamesById(commentsForGameDTO.getGameID()));
 		commentsForGame.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		commentForGameService.addComment(commentsForGame);
-		return "";
+		
 	}
 	
 	@RequestMapping(value = "/getCommentsForGame/{gameId}", method = RequestMethod.GET)
