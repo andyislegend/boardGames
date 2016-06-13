@@ -53,7 +53,7 @@
 				<tr ng-repeat="x in commentForGame">
 					<td>{{x.username}}</td>
 					<td>{{x.commentText}}</td>
-					<td>{{x.date | date:dateFormat}}</td>
+					<td>{{x.date | date:'medium'}}</td>
 				</tr>
 			</table>
 			<div style="float: bottom">
