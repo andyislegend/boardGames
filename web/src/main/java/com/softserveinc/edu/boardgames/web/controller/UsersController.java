@@ -75,20 +75,6 @@ public class UsersController {
 	}
 
 	/**
-	 * This method updates information about user
-	 * 
-	 * @author Volodymyr Terlyha
-	 * @param userDTO
-	 * 
-	 */
-	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.PUT)
-	@ResponseBody
-	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
-		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
-		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
-	}
-
-	/**
 	 * This method returns needed url to users avatar location.
 	 * 
 	 * @author Volodymyr Terlyha

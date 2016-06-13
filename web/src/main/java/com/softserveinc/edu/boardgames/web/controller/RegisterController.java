@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserPasswordDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserRegistrationDTO;
 import com.softserveinc.edu.boardgames.service.UserService;
@@ -44,7 +45,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
 public class RegisterController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -101,6 +102,13 @@ public class RegisterController {
 	 */
 
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
+	
+	/**
+	 * @param VALID_USERNAME_REGEX
+	 *            is used to validate the safety of username
+	 */
+
+	private static final Pattern VALID_FIRST_OR_LAST_NAME = Pattern.compile("^[a-zA-Z'-]{0,30}$");
 
 	/**
 	 * 
@@ -229,6 +237,27 @@ public class RegisterController {
 		userService.updateUser(user);
 		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 	}
+	
+	/**
+	 * This method updates information about user
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param userDTO
+	 * 
+	 */
+	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
+		if (!validateFirstNameAndLastName(userDTO.getFirstName()) || 
+				!validateFirstNameAndLastName(userDTO.getLastName())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
+/*		} else if (true) {
+			return new ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);*/
+		} else {
+		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
+		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
+		}
+	}
 
 	private static boolean validateMail(String emailStr) {
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
@@ -242,6 +271,11 @@ public class RegisterController {
 
 	private static boolean validateUsername(String username) {
 		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
+		return matcher.find();
+	}
+	
+	private static boolean validateFirstNameAndLastName(String firstOrLastName) {
+		Matcher matcher = VALID_FIRST_OR_LAST_NAME.matcher(firstOrLastName);
 		return matcher.find();
 	}
 
