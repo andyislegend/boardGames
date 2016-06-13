@@ -3,13 +3,15 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 public class GamesChartDTO {
 
 	private String name;
+	private String category;
 	private Integer countOfGames;
 	private Double generalRating;
 	private Integer countOfRates;
 	public GamesChartDTO() {}
-	public GamesChartDTO(String name, Double generalRating, Long countOfRates, Long countOfGames) {
+	public GamesChartDTO(String name, String category, Double generalRating, Long countOfRates, Long countOfGames) {
 		super();
 		this.name = name;
+		this.category = category;
 		this.generalRating = generalRating;
 		this.countOfRates = countOfRates.intValue();
 		this.countOfGames = countOfGames.intValue();
@@ -42,5 +44,11 @@ public class GamesChartDTO {
 	}
 	public void setCountOfRates(Integer countOfRates) {
 		this.countOfRates = countOfRates;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

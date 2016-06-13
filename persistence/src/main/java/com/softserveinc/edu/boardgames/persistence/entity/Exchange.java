@@ -18,6 +18,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Represents every exchange operation in system
  * has unique constraint on field gameUserId
@@ -167,5 +171,46 @@ public class Exchange implements Serializable{
 
 	public void setGamePropositions(Set<GameProposition> gamePropositions) {
 		this.gamePropositions = gamePropositions;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Exchange other = (Exchange) obj;
+		return new EqualsBuilder().append(this.getApplyingDate(), other.getApplyingDate())
+								.append(this.getGameUser(), other.getGameUser())
+								.append(this.getUser(), other.getUser())
+								.append(this.getMessage(), other.getMessage())
+								.append(this.getPeriod(), other.getPeriod())
+								.append(this.getUserApplierId(), other.getUserApplierId())
+								.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.getApplyingDate())
+									.append(this.getGameUser())
+									.append(this.getUser())
+									.append(this.getPeriod())
+									.append(this.getUserApplierId())
+									.append(this.getMessage())
+									.toHashCode();
+	}
+	
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("id", this.getId())
+				.append("applying date", this.getApplyingDate())
+				.append("game_user_id", this.getGameUser().getId())
+				.append("user_id", this.getUser().getId())
+				.append("period", this.getPeriod())
+				.append("user_applier_id", this.getUserApplierId())
+				.append("message", this.getMessage())
+				.toString();
 	}
 }

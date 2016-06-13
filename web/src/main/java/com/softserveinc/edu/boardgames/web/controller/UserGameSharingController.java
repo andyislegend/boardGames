@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -98,9 +100,9 @@ public class UserGameSharingController {
 		return exchangeService.getExchangeDTO(exchange.getId());
 	}
 	
-	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}/{returnDate}", method = RequestMethod.PUT)
+	@RequestMapping(value="/makeGameUserAvailable/{gameUserId}/{returnDate}", method = RequestMethod.POST)
 	@ResponseBody
-	public void makeGameUserAvailable(@PathVariable Integer gameUserId, 
+	public ResponseEntity<String> makeGameUserAvailable(@PathVariable Integer gameUserId, 
 			@PathVariable Integer returnDate) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
@@ -110,23 +112,25 @@ public class UserGameSharingController {
 		Exchange exchange = new Exchange(NEUTRAL_ID, returnDate, DEFAULT_MESSAGE, 
 				userService.getUser(WebUtil.getPrincipalUsername()), gameUserToUpdate);
 		exchangeService.update(exchange);			
-		
+		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/makeGameUserPrivate/{gameUserId}", method = RequestMethod.PUT)
+	@RequestMapping(value="/makeGameUserPrivate/{gameUserId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void makeGameUserPrivate(@PathVariable Integer gameUserId) {
+	public ResponseEntity<String> makeGameUserPrivate(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus(GameUserStatus.PRIVATE.name());
 		gameUserService.update(gameUserToUpdate);
 		
-		exchangeService.delete(exchangeService.getByGameUserId(gameUserId));
+		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
+		exchangeService.delete(exchange);
+		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}/{propositions}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message,
+	public ResponseEntity<String> askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message,
 			@PathVariable List<Integer> propositions) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
@@ -151,11 +155,12 @@ public class UserGameSharingController {
 		User userToNotify = userService.findById(exchange.getUser().getId());
 		User userInvoker = userService.findById(exchange.getUserApplierId());
 		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/askGameUserOwnerToShare/{gameUserId}/{message}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message) {
+	public ResponseEntity<String> askGameUserOwnerToShare(@PathVariable Integer gameUserId, @PathVariable String message) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus(GameUserStatus.CONFIRMATION.name());
@@ -172,11 +177,12 @@ public class UserGameSharingController {
 		User userToNotify = userService.findById(exchange.getUser().getId());
 		User userInvoker = userService.findById(exchange.getUserApplierId());
 		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/acceptGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void acceptGameConfirmation(@PathVariable Integer gameUserId) {
+	public ResponseEntity<String> acceptGameConfirmation(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserOfOwner = gameUserService.getUserGamesById(gameUserId);
 		gameUserOfOwner.setStatus(GameUserStatus.SHARED.name());
@@ -195,11 +201,12 @@ public class UserGameSharingController {
 		User userToNotify = userService.findById(exchange.getUserApplierId());
 		User userInvoker = userService.findById(exchange.getUser().getId());
 		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserOfOwner));
+		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/declineGameConfirmationRequest/{gameUserId}", method = RequestMethod.PUT)
 	@ResponseBody
-	public void declineGameConfirmation(@PathVariable Integer gameUserId) {
+	public ResponseEntity<String> declineGameConfirmation(@PathVariable Integer gameUserId) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus(GameUserStatus.AVAILABLE.name());
@@ -219,11 +226,12 @@ public class UserGameSharingController {
 		User userInvoker = userService.findById(exchange.getUser().getId());
 		notifyService.update(
 				this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/giveGameBack/{gameUserId}/{comment}", method = RequestMethod.PUT)
+	@RequestMapping(value="/giveGameBack/{gameUserId}/{comment}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void giveGameBack(@PathVariable Integer gameUserId, @PathVariable String comment) {
+	public ResponseEntity<String> giveGameBack(@PathVariable Integer gameUserId, @PathVariable String comment) {
 		
 		GameUser gameUserToUpdate = gameUserService.getUserGamesById(gameUserId);
 		gameUserToUpdate.setStatus(GameUserStatus.PRIVATE.name());
@@ -249,6 +257,7 @@ public class UserGameSharingController {
 				this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
 				
 		exchangeService.delete(exchange);
+		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/getHowManyDaysForExchange/{gameUserId}", method = RequestMethod.GET)
