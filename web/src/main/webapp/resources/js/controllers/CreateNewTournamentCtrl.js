@@ -1,14 +1,16 @@
 angular.module('homeApp').controller("CtreateNewTournamentCtrl",function($scope,$http,$route){
 
     $scope.createTournament = function () {
+    	 
+    	console.log();
     	
     	var tournament = {
     			gameId : $scope.selectedGame,
     			name : $scope.tournamentName,
     			countOfParticipants : $scope.countOfParticipants,
     			dateOfTournament : $scope.date,
-    			country : $scope.countryTournament,
-    			city : $scope.cityTournament
+    			countryId :$scope.countryTournament.id,
+    			cityId : $scope.cityTournament.id
     	}
     	
         $http({
@@ -31,5 +33,6 @@ angular.module('homeApp').controller("CtreateNewTournamentCtrl",function($scope,
     	});
     	$route.reload();
     	$http.put('/giveRate/'+2).then(function(result) {
-    	});}
+    	})
+    	;}
 	});

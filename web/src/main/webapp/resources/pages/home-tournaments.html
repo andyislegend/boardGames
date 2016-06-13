@@ -68,7 +68,7 @@
 							style="width: 400px;"
 								class="form-control" aria-describedby="basic-addon7"
 								ng-model="countryTournament" ng-show="myProfile" class="form-control" 
-								ng-options= "c.name | translate for c in countries" id="inputEdit">
+								ng-options= "c.name | translate for c in countries" id="inputEdit" value="{{c.id}}">
 								<option value="" translate="NO_COUNTRY"></option>
                         	</select>
 						</div>
@@ -77,10 +77,10 @@
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon7"> <span>Select city</span><span
 								style="color: red">*</span>
-							</span><select id="repeatSelectCity" ng-show="myProfile"
+							</span><select id="repeatSelectCity"
 							style="width: 400px;"
 								class="form-control" aria-describedby="basic-addon7" data-ng-init="getCitiesByCountry()"
-								ng-model="cityTournament" class="form-control" ng-options= "c.name | translate for c in cities" id="inputEdit">
+								ng-model="cityTournament" class="form-control" ng-options= "c.name | translate for c in cities" value="{{c.id}} id="inputEdit">
 								<option value="" translate="NO_CITY"></option>
                         	</select>
 						</div>
