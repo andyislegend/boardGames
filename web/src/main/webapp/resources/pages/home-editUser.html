@@ -1,220 +1,240 @@
 <div ng-controller="editProfileCtrl" class="col-sm-10" id="editProfile">
-    <h1 id="headerUsers" ng-show="myProfile" translate="EDIT_PROFILE"> Edit Profile </h1>
-    <h1 id="headerUsers" ng-hide="myProfile" translate="USER_PROFILE"> User Profile </h1>
-    <form name="editProfile">
+	<h1 id="headerUsers" ng-show="myProfile" translate="EDIT_PROFILE">
+		Edit Profile</h1>
+	<h1 id="headerUsers" ng-hide="myProfile" translate="USER_PROFILE">
+		User Profile</h1>
+	<form name="editProfile">
 
 		<div class="col-sm-12">
 
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
+			<div class="row">
+				<div class="form-group col-md-12" id="profileDiv">
 					<div class="col-md-3">
-							<img src="#" ng-src="{{avatar}}" id="userAvatar" ng-hide="myProfile"/>
-							<img src="#" ng-src="{{avatar}}" id="avatar" ng-click="myAvatarUpload = !myAvatarUpload"
-								ng-show="myProfile"/>
-								<br>
-								<div ng-show ="myAvatarUpload">
-								<label id="uploadButton" ng-show="myProfile">
-								<input type="file" file-model="myFile" name="fileUpload"
-									class="fileUpload" accept="image/*" onchange="loadFile(event)" >
+						<img src="#" ng-src="{{avatar}}" id="userAvatar"
+							ng-hide="myProfile" /> <img src="#" ng-src="{{avatar}}"
+							id="avatar" ng-click="myAvatarUpload = !myAvatarUpload"
+							ng-show="myProfile" /> <br>
+						<div ng-show="myAvatarUpload">
+							<label id="uploadButton" ng-show="myProfile"> <input
+								type="file" file-model="myFile" name="fileUpload"
+								class="fileUpload" accept="image/*" onchange="loadFile(event)">
 
-								</label>
-								<button ng-click = "uploadAvatar()" id="uploadButton" ng-show="myProfile"
-									class="btn btn-primary btn-bg" translate="UPLOAD_AVATAR"></button>
-								</div>
+							</label>
+							<button ng-click="uploadAvatar()" id="uploadButton"
+								ng-show="myProfile" class="btn btn-primary btn-bg"
+								translate="UPLOAD_AVATAR"></button>
 						</div>
-						<span class="col-sm-3" ng-hide="editProfileMessage" translate="{{editAvatarAnswer}}" 
-							style="color:red" >
-									
-						</span> 
-						
-				</div>
-						
 					</div>
+					<span class="col-sm-3" ng-hide="editProfileMessage"
+						translate="{{editAvatarAnswer}}" style="color: red"> </span>
+
 				</div>
 
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="FIRST_NAME">First Name:</label>
-						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile">{{userProfile.firstName}}</p>
-							<input ng-model="editableFirstName" class="form-control input-sm" ng-show="myProfile" 
-								name="editUser" maxlength="100" id="inputEdit">
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="LAST_NAME">Last Name:</label>
-						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile">{{userProfile.lastName}}</p>
-							<input ng-model="editableLastName" class="form-control input-sm" ng-show="myProfile" 
-								maxlength="100" id="inputEdit">
-						</div>
-					</div>
-				</div>
-				
-				<div class="row" ng-hide="myProfile">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="USERNAME">Username:</label>
-						<div class="col-md-8">
-							<p id="friendProfile">{{userProfile.username}}</p>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="EMAIL">Email:</label>
-						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile">{{userProfile.email}}</p>
-								<input name="input" type="email" ng-model="editableEmail" class="form-control input-sm" 
-								ng-show="myProfile" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required maxlength="150" id="inputEdit">
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="COUNTRY">Country:</label>
-						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile" translate="{{userProfile.countryName}}"></p>
-							<select id="repeatSelectCountry" ng-change="getCitiesByCountry()"
-								ng-model="editableCountry" ng-show="myProfile" class="form-control" 
-								ng-options= "c.name | translate for c in countries" id="inputEdit">
-								<option value="" translate="NO_COUNTRY"></option>
-                        	</select>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="CITY">City:</label>
-						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile" translate="{{userProfile.cityName}}"></p>
-							<select id="repeatSelectCity" ng-show="myProfile" data-ng-init="getCitiesByCountry()"
-								ng-model="editableCity" class="form-control" ng-options= "c.name | translate for c in cities" id="inputEdit">
-								<option value="" translate="NO_CITY"></option>
-                        	</select>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="GENDER">Gender:</label>
-						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile" translate="{{userProfile.gender}}">{{userProfile.gender}}</p>
-							<select id="gender" name="gender" ng-model="editableGender" class="form-control" 
-								ng-show="myProfile" id="inputEdit">
-								<option value="male" translate="REGFORM_GENDER_MALE"></option>
-								<option value="female" translate="REGFORM_GENDER_FEMALE"></option>
-							</select> 
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="AGE">Age:</label>
-						<div class="col-md-6">
-							<p ng-hide="myProfile" id="friendProfile">{{userProfile.age}}</p>
-							<input ng-model="editableAge" class="form-control input-sm" ng-show="myProfile" id="inputEdit">
-						</div>
-					</div>
-				</div>
-				
-				<div ng-show="myProfile">
-				<div class="row">
-					<div class="form-group col-md-12" id="profileDiv">
-						<label class="col-md-3 control-lable" translate="PHONE_NUMBER">Phone Number:</label>
-						<div class="col-md-6">
-							<input ng-model="editablePhoneNumber" class="form-control input-sm" id="inputEdit">
-						</div>
-					</div>
-				</div>
-				
-				
-				<span class="col-sm-3"></span>
-				<div class="col-sm-5">
-					<button ng-click="saveUser()" id="saveUserUpdate" class="btn btn-primary btn-bg" 
-						translate="SAVE_BUTTON" ng-disabled="!editProfile.$dirty">
-						Save</button>
-				</div>
-				<span class="col-sm-3" ng-hide="editProfileMessage" translate="{{editProfileAnswer}}" style="color:red"
-					id="saveUserAnswer">
-				</span> 
-				</div>
-				</form>
+			</div>
+		</div>
 
-				
-				<form name="passwordChange">
-				<div class="col-sm-12" ng-show="myProfile" >
-				
-				<label class="col-md-3 control-lable" id = "ps"><a href="" ng-click="showPassword()" id="passwordChange"
-					translate="CHANGE_PASSWORD"></a></label>
-					</div>
-				<div ng-show="showPasswordChange" id="passwordChange">
-					<div class="row">
-						<div class="form-group col-md-12" >
-							<label class="col-md-3 control-lable" translate="OLD_PASSWORD" maxlength="20">Old password:</label>
-							<div class="col-md-6">
-								<input type="password" ng-model="editableOldPassword" 
-									class="form-control input-sm" required="required" id="profileDiv">
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12" >
-							<label class="col-md-3 control-lable" translate="NEW_PASSWORD" maxlength="20">New password:</label>
-							<div class="col-md-6">
-								<input type="password" ng-model="editableNewPassword" 
-									class="form-control input-sm" required="required" id="profileDiv">
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12" id="confirmPasswordId">
-							<label class="col-md-3 control-lable" translate="CONFIRM_PASSWORD" maxlength="20">Confirm password:</label>
-							<div class="col-md-6">
-								<input type="password" ng-model="editableConfirmPassword" 
-									class="form-control input-sm" required="required" id="profileDiv">
-							</div>
-						</div>
-					</div>
-					<span class="col-sm-3"></span>
-						<div class="col-sm-5">
-						<button ng-click="saveNewUserPassword()" id="saveUserUpdatePassword" 
-							class="btn btn-primary btn-bg" translate="SAVE_PASSWORD_BUTTON" 
-							ng-disabled="!passwordChange.$dirty">Save password
-						</button>
-						</div>
-					<span class="col-sm-4" ng-hide="editProfileMessage" translate="{{editPasswordAnswer}}" style="color:red"
-						id="saveUserAnswer">
-					</span>
-						
-						</div>
-					
-					<div class="row" ng-hide="myProfile">
-						<div class="form-group col-md-12">
-							<b class="col-md-3 control-lable" translate="USER_GAMES" id="profileDiv"></b>
-							<ul id="friendProfile" class="list-inline">
-								<li ng-repeat="game in userProfile.userGames" id="friendProfile">
-									<a href="#gameUserDetails/{{game.id}}">{{game.name}}</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="row" ng-hide="myProfile">
-						<div class="form-group col-md-12">
-							<b class="col-md-3 control-lable" translate="USER_TOURNAMENTS" id="profileDiv"></b>
-							<ul id="friendProfile" class="list-inline">
-								<li ng-repeat="tournament in userProfile.userTournaments" id="friendProfile">
-									<a href="#tournament/{{tournament.tournamentId}}" >{{tournament.tournamentName}}</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</form>
+		<div class="row">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="FIRST_NAME">First
+					Name:</label>
+				<div class="col-md-6">
+					<p ng-hide="myProfile" id="friendProfile">{{userProfile.firstName}}</p>
+					<input ng-model="editableFirstName" class="form-control input-sm"
+						ng-show="myProfile" name="editUser" maxlength="100" id="inputEdit">
 				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="LAST_NAME">Last
+					Name:</label>
+				<div class="col-md-6">
+					<p ng-hide="myProfile" id="friendProfile">{{userProfile.lastName}}</p>
+					<input ng-model="editableLastName" class="form-control input-sm"
+						ng-show="myProfile" maxlength="100" id="inputEdit">
+				</div>
+			</div>
+		</div>
+
+		<div class="row" ng-hide="myProfile">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="USERNAME">Username:</label>
+				<div class="col-md-8">
+					<p id="friendProfile">{{userProfile.username}}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="EMAIL">Email:</label>
+				<div class="col-md-6">
+					<p ng-hide="myProfile" id="friendProfile">{{userProfile.email}}</p>
+					<input name="input" type="email" ng-model="editableEmail"
+						class="form-control input-sm" ng-show="myProfile"
+						ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+						required maxlength="150" id="inputEdit">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="COUNTRY">Country:</label>
+				<div class="col-md-6">
+					<p ng-hide="myProfile" id="friendProfile"
+						translate="{{userProfile.countryName}}"></p>
+					<select id="repeatSelectCountry" ng-change="getCitiesByCountry()"
+						ng-model="editableCountry" ng-show="myProfile"
+						class="form-control"
+						ng-options="c.name | translate for c in countries" id="inputEdit">
+						<option value="" translate="NO_COUNTRY"></option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="CITY">City:</label>
+				<div class="col-md-6">
+					<p ng-hide="myProfile" id="friendProfile"
+						translate="{{userProfile.cityName}}"></p>
+					<select id="repeatSelectCity" ng-show="myProfile"
+						data-ng-init="getCitiesByCountry()" ng-model="editableCity"
+						class="form-control"
+						ng-options="c.name | translate for c in cities" id="inputEdit">
+						<option value="" translate="NO_CITY"></option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="GENDER">Gender:</label>
+				<div class="col-md-6">
+					<p ng-hide="myProfile" id="friendProfile"
+						translate="{{userProfile.gender}}">{{userProfile.gender}}</p>
+					<select id="gender" name="gender" ng-model="editableGender"
+						class="form-control" ng-show="myProfile" id="inputEdit">
+						<option value="male" translate="REGFORM_GENDER_MALE"></option>
+						<option value="female" translate="REGFORM_GENDER_FEMALE"></option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12" id="profileDiv">
+				<label class="col-md-3 control-lable" translate="AGE">Age:</label>
+				<div class="col-md-6">
+					<p ng-hide="myProfile" id="friendProfile">{{userProfile.age}}</p>
+					<input ng-model="editableAge" class="form-control input-sm"
+						ng-show="myProfile" id="inputEdit">
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="myProfile">
+			<div class="row">
+				<div class="form-group col-md-12" id="profileDiv">
+					<label class="col-md-3 control-lable" translate="PHONE_NUMBER">Phone
+						Number:</label>
+					<div class="col-md-6">
+						<input ng-model="editablePhoneNumber"
+							class="form-control input-sm" id="inputEdit">
+					</div>
+				</div>
+			</div>
+
+
+			<span class="col-sm-3"></span>
+			<div class="col-sm-5">
+				<button ng-click="saveUser()" id="saveUserUpdate"
+					class="btn btn-primary btn-bg" translate="SAVE_BUTTON"
+					ng-disabled="!editProfile.$dirty">Save</button>
+			</div>
+			<span class="col-sm-3" ng-hide="editProfileMessage"
+				translate="{{editProfileAnswer}}" style="color: red"
+				id="saveUserAnswer"> </span>
+		</div>
+	</form>
+
+
+	<form name="passwordChange">
+		<div class="col-sm-12" ng-show="myProfile">
+
+			<label class="col-md-3 control-lable" id="ps"><a href=""
+				ng-click="showPassword()" id="passwordChange"
+				translate="CHANGE_PASSWORD"></a></label>
+		</div>
+		<div ng-show="showPasswordChange" id="passwordChange">
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label class="col-md-3 control-lable" translate="OLD_PASSWORD"
+						maxlength="20">Old password:</label>
+					<div class="col-md-6">
+						<input type="password" ng-model="editableOldPassword"
+							class="form-control input-sm" required="required" id="profileDiv">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label class="col-md-3 control-lable" translate="NEW_PASSWORD"
+						maxlength="20">New password:</label>
+					<div class="col-md-6">
+						<input type="password" ng-model="editableNewPassword"
+							class="form-control input-sm" required="required" id="profileDiv">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12" id="confirmPasswordId">
+					<label class="col-md-3 control-lable" translate="CONFIRM_PASSWORD"
+						maxlength="20">Confirm password:</label>
+					<div class="col-md-6">
+						<input type="password" ng-model="editableConfirmPassword"
+							class="form-control input-sm" required="required" id="profileDiv">
+					</div>
+				</div>
+			</div>
+			<span class="col-sm-3"></span>
+			<div style="margin-bottom: 55px;" class="col-sm-5">
+				<button ng-click="saveNewUserPassword()" id="saveUserUpdatePassword"
+					class="btn btn-primary btn-bg" translate="SAVE_PASSWORD_BUTTON"
+					ng-disabled="!passwordChange.$dirty">Save password</button>
+			</div>
+			<span class="col-sm-4" ng-hide="editProfileMessage"
+				translate="{{editPasswordAnswer}}" style="color: red"
+				id="saveUserAnswer"> </span>
+
+		</div>
+
+		<div class="row" ng-hide="myProfile">
+			<div class="form-group col-md-12">
+				<b class="col-md-3 control-lable" translate="USER_GAMES"
+					id="profileDiv"></b>
+				<ul id="friendProfile" class="list-inline">
+					<li ng-repeat="game in userProfile.userGames" id="friendProfile">
+						<a href="#gameUserDetails/{{game.id}}">{{game.name}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row" ng-hide="myProfile">
+			<div class="form-group col-md-12">
+				<b class="col-md-3 control-lable" translate="USER_TOURNAMENTS"
+					id="profileDiv"></b>
+				<ul id="friendProfile" class="list-inline">
+					<li ng-repeat="tournament in userProfile.userTournaments"
+						id="friendProfile"><a
+						href="#tournament/{{tournament.tournamentId}}">{{tournament.tournamentName}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
