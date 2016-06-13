@@ -31,7 +31,7 @@ angular.module('homeApp').controller("CtreateNewTournamentCtrl",function($scope,
     		  $scope.neededRating = ratingInterval - $scope.user.userRating % 10;
     		  document.getElementById("ratingBar").value= $scope.user.userRating;
     	});
-    	$route.reload();
+    	//$route.reload();
     	$http.put('/giveRate/'+2).then(function(result) {
     	})
     	;}

@@ -49,7 +49,7 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private Integer countOfParticipants;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.ALL })
     private Set<User> users;
     
     @Column(nullable = false)

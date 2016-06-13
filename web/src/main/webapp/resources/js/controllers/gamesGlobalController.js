@@ -14,7 +14,7 @@ angular.module('homeApp').controller('getGamesGlobalController', function($scope
 		function(event, data) {
 		$scope.allGamesTable = new ngTableParams({
 		    page: 1,
-		    count: 8
+		    count: 10
 		 }, {
 		     total: data.length, 
 		     getData: function ($defer, params) {
