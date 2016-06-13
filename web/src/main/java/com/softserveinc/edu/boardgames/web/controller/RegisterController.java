@@ -54,6 +54,12 @@ public class RegisterController {
 	private ApplicationEventPublisher eventPublisher;
 
 	/**
+	 * Represent path to userinfo.jsp which appear after successful registration
+	 * confirmation
+	 */
+	private final static String USERINFO_PAGE = "userinfo";
+
+	/**
 	 * @param INVALID_TOKEN_MAIL_CONFIRMATION
 	 *            is used to validate verification token
 	 * 
@@ -102,7 +108,7 @@ public class RegisterController {
 	 */
 
 	private static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-z0-9 _@!-]{3,9}");
-	
+
 	/**
 	 * @param VALID_USERNAME_REGEX
 	 *            is used to validate the safety of username
@@ -129,8 +135,10 @@ public class RegisterController {
 	 */
 	@RequestMapping(value = { "/addNewUser" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> addNewUser(@RequestBody UserRegistrationDTO userDTO, final HttpServletRequest request) {
-		if (userDTO.getUsername().isEmpty() || userDTO.getGender().isEmpty() ||userDTO.getEmail().isEmpty() || userDTO.getPassword().isEmpty()) {
+	public ResponseEntity<String> addNewUser(@RequestBody UserRegistrationDTO userDTO,
+			final HttpServletRequest request) {
+		if (userDTO.getUsername().isEmpty() || userDTO.getGender().isEmpty() || userDTO.getEmail().isEmpty()
+				|| userDTO.getPassword().isEmpty()) {
 
 			return new ResponseEntity<String>(LocaleKeys.REQUIRED_FIELD, HttpStatus.CONFLICT);
 
@@ -170,6 +178,22 @@ public class RegisterController {
 
 		}
 
+		if (userDTO.getFirstName() != null) {
+
+			if (!validateFirstNameAndLastName(userDTO.getFirstName().trim())) {
+
+				return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
+			}
+		}
+
+		if (userDTO.getLastName() != null) {
+
+			if (!validateFirstNameAndLastName(userDTO.getLastName().trim())) {
+
+				return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
+			}
+		}
+
 		User newUser = new User();
 		newUser.setEmail(userDTO.getEmail().trim());
 		newUser.setFirstName(userDTO.getFirstName());
@@ -204,7 +228,7 @@ public class RegisterController {
 			model.addAttribute(TOKEN_EXPIRED, true);
 		}
 
-		return "userinfo";
+		return USERINFO_PAGE;
 	}
 
 	/**
@@ -237,7 +261,7 @@ public class RegisterController {
 		userService.updateUser(user);
 		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * This method updates information about user
 	 * 
@@ -248,14 +272,17 @@ public class RegisterController {
 	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
-		if (!validateFirstNameAndLastName(userDTO.getFirstName()) || 
-				!validateFirstNameAndLastName(userDTO.getLastName())) {
+		if (!validateFirstNameAndLastName(userDTO.getFirstName())
+				|| !validateFirstNameAndLastName(userDTO.getLastName())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
-/*		} else if (true) {
-			return new ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);*/
+			/*
+			 * } else if (true) { return new
+			 * ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER,
+			 * HttpStatus.CONFLICT);
+			 */
 		} else {
-		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
-		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
+			userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
+			return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 		}
 	}
 
@@ -273,7 +300,7 @@ public class RegisterController {
 		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
 		return matcher.find();
 	}
-	
+
 	private static boolean validateFirstNameAndLastName(String firstOrLastName) {
 		Matcher matcher = VALID_FIRST_OR_LAST_NAME.matcher(firstOrLastName);
 		return matcher.find();
