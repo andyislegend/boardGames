@@ -8,8 +8,8 @@ function drawBubbleChart(dataFrom) {
 	data.addColumn('string', 'Game');
 	data.addColumn('number', 'Rating');
 	data.addColumn('number', 'Count of rates');
-	data.addColumn('string', 'Info');
-	data.addColumn('number', 'Count')
+	data.addColumn('string', 'Category');
+	data.addColumn('number', 'Instances count')
 	data.addRows(chartData);
 
 	var options = {
@@ -29,7 +29,7 @@ function prepareBubbleChartData(dataToPrepare) {
 		var temp = [dataToPrepare[i].name,
 		            parseInt(dataToPrepare[i].generalRating),
 		            parseInt(dataToPrepare[i].countOfRates),
-		            "Instances",
+		            dataToPrepare[i].category,
 		            parseInt(dataToPrepare[i].countOfGames)];
 		chartData.push(temp);
 	}
