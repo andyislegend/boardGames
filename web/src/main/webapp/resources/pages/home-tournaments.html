@@ -1,5 +1,6 @@
 <div ng-controller="showAllTournamentsCtrl">
    <div ng-controller="allUsersGameCtrl">
+   <div ng-controller="editProfileCtrl">
       <h1 style="text-align: center"><span translate="USER_TOURNAMENTS"></span>
       <a href="" data-toggle="modal" data-target="#myModalTournament">
       	<span class="glyphicon glyphicon-plus"></span>
@@ -58,22 +59,32 @@
 								class="form-control" aria-describedby="basic-addon3" required>      
 						</div>
 						<br>
-						<div class="input-group"  ng-class="{ 'has-error' : tournamentCreate.Country.$invalid && !tournamentCreate.Country.$pristine }">       	
+						
+						<div class="input-group" ng-class="{ 'has-error' : tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament.$pristine }">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon4"><span> Enter Country</span>
-								<span style="color: red">*</span></span> <input
-								data-ng-model="countryTournament" name = "Country" style="width: 400px;" type="text"
-								class="form-control" aria-describedby="basic-addon4" required>
+								id="basic-addon7"> <span>Select Country</span><span
+								style="color: red">*</span>
+							</span><select  ng-change="getCitiesByCountry()"
+							style="width: 400px;"
+								class="form-control" aria-describedby="basic-addon7"
+								ng-model="countryTournament" ng-show="myProfile" class="form-control" 
+								ng-options= "c.name | translate for c in countries" id="inputEdit">
+								<option value="" translate="NO_COUNTRY"></option>
+                        	</select>
 						</div>
 						<br>
-						
-						<div class="input-group"  ng-class="{ 'has-error' : tournamentCreate.city.$invalid && !tournamentCreate.Country.$pristine }">       	
+						<div class="input-group" ng-class="{ 'has-error' : tournamentCreate.gameForTournament.$invalid && !tournamentCreate.gameForTournament.$pristine }">
 							<span style="width: 200px;" class="input-group-addon"
-								id="basic-addon4"><span> Enter City</span>
-								<span style="color: red">*</span></span> <input
-								data-ng-model="cityTournament" name = "city" style="width: 400px;" type="text"
-								class="form-control" aria-describedby="basic-addon4" required>
+								id="basic-addon7"> <span>Select city</span><span
+								style="color: red">*</span>
+							</span><select id="repeatSelectCity" ng-show="myProfile"
+							style="width: 400px;"
+								class="form-control" aria-describedby="basic-addon7" data-ng-init="getCitiesByCountry()"
+								ng-model="cityTournament" class="form-control" ng-options= "c.name | translate for c in cities" id="inputEdit">
+								<option value="" translate="NO_CITY"></option>
+                        	</select>
 						</div>
+				</div>
 						<br>
 						<button style="margin-left: 30%;"
 							ng-click="createTournament()" ng-disabled="tournamentCreate.$invalid" value="Close" data-dismiss="modal"
@@ -123,4 +134,5 @@
          </div>
       </div>
    </div>
+  </div>
 </div>
