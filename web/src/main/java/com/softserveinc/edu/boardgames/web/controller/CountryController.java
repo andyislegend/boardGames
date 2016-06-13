@@ -21,7 +21,7 @@ import com.softserveinc.edu.boardgames.service.CountryService;
 public class CountryController {
 
 	@Autowired
-	CountryService countrySevice;
+	private CountryService countrySevice;
 
 	/**
 	 * Returns all countries.

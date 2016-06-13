@@ -17,12 +17,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserDTO;
-import com.softserveinc.edu.boardgames.service.CityService;
-import com.softserveinc.edu.boardgames.service.CountryService;
-import com.softserveinc.edu.boardgames.service.ImageService;
-import com.softserveinc.edu.boardgames.service.TournamentService;
 import com.softserveinc.edu.boardgames.service.UserService;
-import com.softserveinc.edu.boardgames.web.localization.LanguageKeys;
+import com.softserveinc.edu.boardgames.web.localization.LocaleKeys;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -37,19 +33,7 @@ public class UsersController {
 	private final Logger logger = Logger.getLogger(UsersController.class);
 
 	@Autowired
-	ImageService imageService;
-
-	@Autowired
-	UserService userService;
-
-	@Autowired
-	CountryService countryService;
-
-	@Autowired
-	CityService cityService;
-
-	@Autowired
-	TournamentService tournamentService;
+	private UserService userService;
 
 	/**
 	 * This method returns all users
@@ -101,7 +85,7 @@ public class UsersController {
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
 		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
-		return new ResponseEntity<String>(LanguageKeys.CHANGES_SAVED, HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 	}
 
 	/**
@@ -130,10 +114,10 @@ public class UsersController {
 		try {
 			userService.updateAvatar(fileUpload, WebUtil.getPrincipalUsername());
 		} catch (IOException e) {
-			logger.error(LanguageKeys.IMAGE_UPLOAD_FAILED, e);
-			return new ResponseEntity<String>(LanguageKeys.IMAGE_UPLOAD_FAILED, HttpStatus.CONFLICT);
+			logger.error(LocaleKeys.IMAGE_UPLOAD_FAILED, e);
+			return new ResponseEntity<String>(LocaleKeys.IMAGE_UPLOAD_FAILED, HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<String>(LanguageKeys.IMAGE_UPLOAD, HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.IMAGE_UPLOAD, HttpStatus.OK);
 	}
 
 	/**
@@ -159,7 +143,7 @@ public class UsersController {
 	@ResponseBody
 	public ResponseEntity<String> banUser(@RequestParam("username") String username) {
 		userService.banUserByAdministrator(username);
-		return new ResponseEntity<String>(LanguageKeys.USER_BAN, HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.USER_BAN, HttpStatus.OK);
 	}
 
 	/**
@@ -172,7 +156,7 @@ public class UsersController {
 	@RequestMapping(value = { "/unbanUser" }, method = RequestMethod.PUT)
 	public ResponseEntity<String> unbanUser(@RequestParam("username") String username) {
 		userService.unbanUserByAdministrator(username);
-		return new ResponseEntity<String>(LanguageKeys.USER_UNBAN, HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.USER_UNBAN, HttpStatus.OK);
 	}
 	
 	/**
@@ -186,7 +170,7 @@ public class UsersController {
 	@RequestMapping(value = { "/sendEmailOfBannedUser" }, method = RequestMethod.POST)
 	public ResponseEntity<String> sendEmailOfBannedUser(@RequestParam("letter") String letter) {
 		userService.saveNotificationOfBannedUser(letter, WebUtil.getPrincipalUsername());
-		return new ResponseEntity<String>(LanguageKeys.LETTER_ABOUT_UNBAN_RECEIVED, HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.LETTER_ABOUT_UNBAN_RECEIVED, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/setNotification", method = RequestMethod.POST)

@@ -23,7 +23,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.UserPasswordDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UserRegistrationDTO;
 import com.softserveinc.edu.boardgames.service.UserService;
 import com.softserveinc.edu.boardgames.service.util.OnRegistrationCompleteEvent;
-import com.softserveinc.edu.boardgames.web.localization.LanguageKeys;
+import com.softserveinc.edu.boardgames.web.localization.LocaleKeys;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -124,41 +124,41 @@ public class RegisterController {
 	public ResponseEntity<String> addNewUser(@RequestBody UserRegistrationDTO userDTO, final HttpServletRequest request) {
 		if (userDTO.getUsername().isEmpty() || userDTO.getGender().isEmpty() ||userDTO.getEmail().isEmpty() || userDTO.getPassword().isEmpty()) {
 
-			return new ResponseEntity<String>(LanguageKeys.REQUIRED_FIELD, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.REQUIRED_FIELD, HttpStatus.CONFLICT);
 
 		}
 
 		if (!validateUsername(userDTO.getUsername().trim())) {
 
-			return new ResponseEntity<String>(LanguageKeys.INVALID_USERNAME, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.INVALID_USERNAME, HttpStatus.CONFLICT);
 		}
 
 		if (userService.isExistsWithUsername(userDTO.getUsername().trim())) {
 
-			return new ResponseEntity<String>(LanguageKeys.USERNAME_DUPLICATE, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.USERNAME_DUPLICATE, HttpStatus.CONFLICT);
 
 		}
 
 		if (!validateMail(userDTO.getEmail().trim())) {
 
-			return new ResponseEntity<String>(LanguageKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
 
 		}
 
 		if (userService.isExistsWithEmail(userDTO.getEmail().trim())) {
 
-			return new ResponseEntity<String>(LanguageKeys.EMAIL_DUPLICATE, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.EMAIL_DUPLICATE, HttpStatus.CONFLICT);
 
 		}
 
 		if (!validatePassword(userDTO.getPassword())) {
 
-			return new ResponseEntity<String>(LanguageKeys.INVALID_PASSWORD, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.INVALID_PASSWORD, HttpStatus.CONFLICT);
 		}
 
 		if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
 
-			return new ResponseEntity<String>(LanguageKeys.NOT_CONFIRMED_PASSWORD, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.NOT_CONFIRMED_PASSWORD, HttpStatus.CONFLICT);
 
 		}
 
@@ -219,15 +219,15 @@ public class RegisterController {
 				|| userPasswordDTO.getConfirmPassword() == null) {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		} else if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
-			return new ResponseEntity<String>(LanguageKeys.OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		} else if (!validatePassword(userPasswordDTO.getNewPassword())) {
-			return new ResponseEntity<String>(LanguageKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		} else if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
-			return new ResponseEntity<String>(LanguageKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+			return new ResponseEntity<String>(LocaleKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		}
 		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
 		userService.updateUser(user);
-		return new ResponseEntity<String>(LanguageKeys.CHANGES_SAVED, HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 	}
 
 	private static boolean validateMail(String emailStr) {
