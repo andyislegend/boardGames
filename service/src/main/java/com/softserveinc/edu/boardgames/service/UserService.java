@@ -79,11 +79,9 @@ public interface UserService {
 	
 	void unbanUserByAdministrator(String username);
 	
-	String findUsersGender(String username);
-	
 	public UserDTO getUserDTOWith5TournamentsAndGames(String username);
 	
-	public void saveNotificationOfBannedUser(String message, String username);
+	public void sendLetterOfBannedUser(String message, String username);
 	
 	public void setNotification(String userName, boolean option);
 	

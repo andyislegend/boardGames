@@ -40,13 +40,13 @@ public class MailServiceImpl implements MailService{
 	 * @param BAN_LETTER_SUBJECT
 	 *            letter subject about banning
 	 */
-	public static final String BAN_LETTER_SUBJECT = "Banning because of negative feedbacks";
+	private static final String BAN_LETTER_SUBJECT = "Banning because of negative feedbacks";
 	
 	/**
 	 * @param BAN_LETTER_SUBJECT
 	 *            letter subject about unbanning
 	 */
-	public static final String UNBAN_LETTER_SUBJECT = "User asks to unban him. Username - ";
+	private static final String UNBAN_LETTER_SUBJECT = "User asks to unban him. Username - ";
 
 	private final Logger logger = Logger.getLogger(MailServiceImpl.class);
 
@@ -106,6 +106,7 @@ public class MailServiceImpl implements MailService{
 		logger.info("----Message about registration to " + to + " send successful---");
 	}
 
+	@Override
 	@Async
 	public void sendMailToBannedUser(final String to, final String userName) {
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
@@ -115,7 +116,7 @@ public class MailServiceImpl implements MailService{
 				message.setFrom(new InternetAddress(messageSender, env.getProperty("mail.credentials.title")));
 				Map<String, Object> templateVariables = new HashMap<>();
 				templateVariables.put("name", userName);
-				String body = mergeTemplateIntoString(velocityEngine, env.getProperty("velocity.template.banUser"), 
+				String body = mergeTemplateIntoString(velocityEngine, env.getProperty("velocity.template.banUser"),
 						env.getProperty("velocity.template.encoding"), templateVariables);
 				message.setText(body, true);
 				message.setSubject(BAN_LETTER_SUBJECT);
@@ -124,7 +125,7 @@ public class MailServiceImpl implements MailService{
 		mailSender.send(preparator);
 		logger.info("----Message about ban to " + to + " sent successfully---");
 	}
-	
+
 	@Override
 	@Async
 	public void sendMailByBannedUserToAdministrator(final String userName, final String letter) {
