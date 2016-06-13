@@ -62,9 +62,11 @@
 				</tr>
 			</table>
  </div>
-  <form data-ng-submit=submit() >
+  <form data-ng-submit=submit() style="width: 73%" > 
+   <button class = "inputForSubmit"  ng-click="addComment" style="float: right"><span class = "glyphicon glyphicon-send"></span></button>
+   <div style="overflow: hidden; padding-right: .5em;">
    <input class = "textForCom" type="text" data-ng-model="comment" autofocus="true" placeholder="Type Your Comment Here" />
-   <input class = "inputForSubmit" type="submit" ng-click="addComment"/>
+  	</div>
   </form>
  </div>
 </div>
