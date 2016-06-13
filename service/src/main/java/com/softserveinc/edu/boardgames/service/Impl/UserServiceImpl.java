@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 	
 	private final static String VALID_TOKEN_MAIL_CONFIRMATION = "success";
 	
-	public final static Integer RATING_TO_BAN_USER = -5;
+	private final static Integer RATING_TO_BAN_USER = -5;
 	
 	@Autowired
 	private CountryRepository countryRepository;
@@ -409,7 +409,7 @@ public class UserServiceImpl implements UserService {
 	public String getAvatarUrl(String username) {
 		String avatarUrl = imageConfiguration.getAvatarUrl(username);
 		if (imageRepository.findImageNameByUsername(username) == null) {
-			if (findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
+			if (userRepository.findUsersGender(username).equalsIgnoreCase(UserGender.MALE.name())) {
 				avatarUrl = imageConfiguration.getDefaultMaleAvatarUrl();
 			} else {
 				avatarUrl = imageConfiguration.getDefaultFemaleAvatarUrl();
@@ -478,18 +478,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * This method gets user gender by username
-	 * 
-	 * @author Volodymyr Terlyha
-	 * @param username
-	 * 
-	 */
-	@Override
-	public String findUsersGender(String username) {
-		return userRepository.findUsersGender(username);
-	}
-
-	/**
 	 * This method returns userDTO by username
 	 * 
 	 * @author Volodymyr Terlyha
@@ -502,10 +490,10 @@ public class UserServiceImpl implements UserService {
 		userDTO.setUserGames(gameUserRepository.getAllGameUserByUsername(username));
 		return userDTO;
 	}
-	
+
 	/**
-	 * This method returns userDTO by username with
-	 * limit of 5 Games and Tournaments
+	 * This method returns userDTO by username with limit of 5 Games and
+	 * Tournaments
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
@@ -519,9 +507,9 @@ public class UserServiceImpl implements UserService {
 		userDTO.setUserGames(gameUserRepository.get5GameUserByUsername(username, five));
 		return userDTO;
 	}
-	
+
 	@Override
-	public void saveNotificationOfBannedUser(String message, String username){
+	public void sendLetterOfBannedUser(String message, String username) {
 		Notification notification = new Notification();
 		notification.setDate(new Date());
 		notification.setType(NotificationType.MESSAGE.name());

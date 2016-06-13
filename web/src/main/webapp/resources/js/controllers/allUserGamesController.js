@@ -259,7 +259,7 @@ homeApp.$inject = ['$modal'];
 	
 	$scope.$on('changingGameStatus', function(event, data) {
 		$http({
-			method : "PUT",
+			method : data.type,
 			url : data.url + data.userGameId
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');
@@ -270,7 +270,7 @@ homeApp.$inject = ['$modal'];
 	
 	$scope.makeGameUserAvailable = function(id) {
 		$http({
-			method : "PUT",
+			method : "POST",
 			url : 'makeGameUserAvailable/' + id + '/' + $scope.returnDate 
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');
@@ -281,6 +281,7 @@ homeApp.$inject = ['$modal'];
 	}
 	$scope.keepGameUserPrivate = function(id) {
 		$scope.$emit('changingGameStatus', {
+			type:'DELETE',
 			url:'makeGameUserPrivate/',
 			userGameId: id
 		});
@@ -318,12 +319,14 @@ homeApp.$inject = ['$modal'];
 	}
 	$scope.acceptGameConfirmation = function(id) {
 		$scope.$emit('changingGameStatus', {
+			type:'PUT',
 			url:'acceptGameConfirmationRequest/',
 			userGameId: id
 		});
 	}
 	$scope.declineGameConfirmation = function(id) {
 		$scope.$emit('changingGameStatus', {
+			type:'PUT',
 			url:'declineGameConfirmationRequest/',
 			userGameId: id
 		});
@@ -333,7 +336,7 @@ homeApp.$inject = ['$modal'];
 		var outComment = comment || 'no comment';
 
 		$http({
-			method : "PUT",
+			method : "DELETE",
 			url : 'giveGameBack/' + id + '/' + outComment
 		}).then(function mySucces(response) {
 			$scope.$emit('refreshingPage');

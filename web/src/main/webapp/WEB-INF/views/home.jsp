@@ -827,7 +827,7 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="resources/js/controllers/statisticsController.js"></script>
 <script src="resources/js/service/pieChartService.js"></script>
-<script src="resources/js/service/columnChartService.js"></script>
+<script src="resources/js/service/bubbleChartService.js"></script>
 <script src="resources/js/service/areaChartService.js"></script>
 <script src="resources/js/service/columnChartAgeService.js"></script>
 <!-- End of Scripts -->

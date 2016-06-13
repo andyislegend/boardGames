@@ -47,11 +47,11 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2966070992511907457L;
-	
+
 	/**
 	 * @param CHECK_LOGGED_IN_USERNAME
-	 *            is used to set unbanned user rating to minimal with which
-	 *            he can access the website a not be automatically banned again
+	 *            is used to set unbanned user rating to minimal with which he
+	 *            can access the website a not be automatically banned again
 	 */
 	public static final Integer MINIMAL_RATING_FOR_ACTIVE_USER = -4;
 
@@ -138,13 +138,13 @@ public class User implements Serializable {
 	@NotEmpty
 	@Column(name = "state", nullable = false)
 	private String state = UserStatus.UNDER_VERIFICATION.name();
-	
+
 	@Column(name = "tournamentRatingStatus")
 	private boolean tournamentRatingStatus;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Exchange> exchanges;
-	
+
 	/**
 	 * Describes the country where user lives.
 	 */
@@ -176,13 +176,9 @@ public class User implements Serializable {
 	private Set<GameRating> gameRatingNumeric;
 
 	@ElementCollection
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "users")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
 	private Set<Tournament> tournaments;
-	
-/*	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	 @JsonManagedReference
-	private Set<SubscribedUsers> subscribedUsers;*/
-	
+
 	@Column(name = "is_notificated")
 	private boolean isNotificated = false;
 
@@ -300,7 +296,7 @@ public class User implements Serializable {
 	public void setCity(City city) {
 		this.city = city;
 	}
-	
+
 	public boolean isTournamentRatingStatus() {
 		return tournamentRatingStatus;
 	}
@@ -324,7 +320,7 @@ public class User implements Serializable {
 	public void setGameRatingNumeric(Set<GameRating> gameRatingNumeric) {
 		this.gameRatingNumeric = gameRatingNumeric;
 	}
-	
+
 	public Set<Tournament> getTournaments() {
 		return tournaments;
 	}
@@ -332,14 +328,6 @@ public class User implements Serializable {
 	public void setTournaments(Set<Tournament> tournaments) {
 		this.tournaments = tournaments;
 	}
-
-/*	public Set<SubscribedUsers> getSubscribedUsers() {
-	return subscribedUsers;
-	}
-
-	public void setSubscribedUsers(Set<SubscribedUsers> subscribedUsers) {
-		this.subscribedUsers = subscribedUsers;
-	}*/
 
 	public boolean isNotificated() {
 		return isNotificated;
@@ -351,7 +339,7 @@ public class User implements Serializable {
 
 	@PreUpdate
 	public void changeUserLevelOrStatus() {
-		if(getUserRating() < MINIMAL_RATING_FOR_ACTIVE_USER) {
+		if (getUserRating() < MINIMAL_RATING_FOR_ACTIVE_USER) {
 			setState(UserStatus.BANNED.name());
 		} else if (isBetween(this.getUserRating(), 0, 10)) {
 			setLevel(UserLevel.NOOB.name());
@@ -371,9 +359,9 @@ public class User implements Serializable {
 			this.setLevel(UserLevel.GODLIKE.name());
 		}
 	}
-	
+
 	private boolean isBetween(int usersRating, int lower, int upper) {
-		  return lower <= usersRating && usersRating <= upper;
+		return lower <= usersRating && usersRating <= upper;
 	}
 
 	@Override

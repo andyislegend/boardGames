@@ -119,6 +119,12 @@ public class RegisterController {
 	 *            is used to validate users age
 	 */
 	private static final Pattern VALID_AGE = Pattern.compile("^[0-9]{0,3}$");
+	
+	/**
+	 * @param VALID_PHONE_NUMBER
+	 *            is used to validate users phone number
+	 */
+	private static final Pattern VALID_PHONE_NUMBER = Pattern.compile("^[+]{1}[0-9]{0,12}$");
 
 	/**
 	 * 
@@ -236,7 +242,7 @@ public class RegisterController {
 	}
 
 	/**
-	 * This method that update user password and return HttpStatus.CONFLICT with
+	 * This method updates user password and returns HttpStatus.CONFLICT with
 	 * error message if there is invalid data in fields provided by user or
 	 * return HttpStatus.OK if all data is correct
 	 * 
@@ -244,7 +250,6 @@ public class RegisterController {
 	 * 
 	 * @param UserPasswordDTO
 	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
-	 * 
 	 * 
 	 */
 	@RequestMapping(value = { "/updateUserPassword" }, method = RequestMethod.PUT)
@@ -268,10 +273,13 @@ public class RegisterController {
 	}
 
 	/**
-	 * This method updates information about user
+	 * This method updates information about userand returns HttpStatus.CONFLICT with
+	 * error message if there is invalid data in fields provided by user or
+	 * return HttpStatus.OK if all data is correct
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param userDTO
+	 * @return ResponseEntity with HttpStatus.CONFLICT or HttpStatus.OK
 	 * 
 	 */
 	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.PUT)
@@ -280,10 +288,12 @@ public class RegisterController {
 		if (!validateFirstNameAndLastName(userDTO.getFirstName())
 				|| !validateFirstNameAndLastName(userDTO.getLastName())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
-
-		} else if (!validateUserAge(userDTO.getAge().toString())) {
+		} else if (!validateMail(userDTO.getEmail().trim())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
+		} else if (!validateUserAge(userDTO.getAge())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
-
+		} else if (!validatePhoneNumber(userDTO.getPhoneNumber())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_PHONE_NUMBER, HttpStatus.CONFLICT);
 		} else {
 			userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
 			return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
@@ -312,6 +322,11 @@ public class RegisterController {
 
 	private static boolean validateUserAge(String age) {
 		Matcher matcher = VALID_AGE.matcher(age);
+		return matcher.find();
+	}
+	
+	private static boolean validatePhoneNumber(String phoneNumber) {
+		Matcher matcher = VALID_PHONE_NUMBER.matcher(phoneNumber);
 		return matcher.find();
 	}
 

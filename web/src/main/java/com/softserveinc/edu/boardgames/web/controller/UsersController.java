@@ -29,7 +29,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  */
 @RestController
 public class UsersController {
-	
+
 	private final Logger logger = Logger.getLogger(UsersController.class);
 
 	@Autowired
@@ -48,7 +48,8 @@ public class UsersController {
 	}
 
 	/**
-	 * This method returns userDTO by username
+	 * This method returns userDTO by username, but with only 5 games 
+	 * and 5 tournaments
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
@@ -61,8 +62,7 @@ public class UsersController {
 	}
 
 	/**
-	 * This method returns user profile to edit or finding friends profile
-	 * page
+	 * This method returns user profile to edit or friends profile page
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
@@ -114,7 +114,7 @@ public class UsersController {
 	 */
 	@RequestMapping(value = { "/getUser" }, method = RequestMethod.GET)
 	@ResponseBody
-	public User getOneUser() {	
+	public User getOneUser() {
 		return userService.findOne(WebUtil.getPrincipalUsername());
 	}
 
@@ -144,10 +144,10 @@ public class UsersController {
 		userService.unbanUserByAdministrator(username);
 		return new ResponseEntity<String>(LocaleKeys.USER_UNBAN, HttpStatus.OK);
 	}
-	
+
 	/**
-	 * This method send the email to administrator with
-	 * explanations of a user which was banned.
+	 * This method sends the email to administrator with explanations of a user
+	 * which was banned.
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param username
@@ -155,7 +155,7 @@ public class UsersController {
 	 */
 	@RequestMapping(value = { "/sendEmailOfBannedUser" }, method = RequestMethod.POST)
 	public ResponseEntity<String> sendEmailOfBannedUser(@RequestParam("letter") String letter) {
-		userService.saveNotificationOfBannedUser(letter, WebUtil.getPrincipalUsername());
+		userService.sendLetterOfBannedUser(letter, WebUtil.getPrincipalUsername());
 		return new ResponseEntity<String>(LocaleKeys.LETTER_ABOUT_UNBAN_RECEIVED, HttpStatus.OK);
 	}
 	

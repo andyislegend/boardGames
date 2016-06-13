@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,7 +75,7 @@ public class GamesController {
 	
 	@RequestMapping(value="/calculateRatings/{gameId}/{rating}", method = RequestMethod.POST)
 	@ResponseBody
-	public void reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
+	public ResponseEntity<String> reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
 		User curUser = userService.findOne(WebUtil.getPrincipalUsername());
 		if (gameRateNumService.checkIfUserRated(gameId, curUser.getId())) {
 			gameRateNumService.deleteCustom(gameId, curUser.getId());;
@@ -83,5 +85,7 @@ public class GamesController {
 		gameRating.setGame(gameService.findById(gameId));
 		gameRating.setUser(curUser);
 		gameRateNumService.update(gameRating);
+		
+		return new ResponseEntity<String>(gameRating.toString(), HttpStatus.OK);
 	}
 }
