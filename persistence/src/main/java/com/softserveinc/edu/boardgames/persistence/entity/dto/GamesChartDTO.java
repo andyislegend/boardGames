@@ -7,11 +7,12 @@ public class GamesChartDTO {
 	private Double generalRating;
 	private Integer countOfRates;
 	public GamesChartDTO() {}
-	public GamesChartDTO(String name, Double generalRating, Long countOfRates) {
+	public GamesChartDTO(String name, Double generalRating, Long countOfRates, Long countOfGames) {
 		super();
 		this.name = name;
 		this.generalRating = generalRating;
 		this.countOfRates = countOfRates.intValue();
+		this.countOfGames = countOfGames.intValue();
 	}
 	public GamesChartDTO(String name, Integer countOfGames) {
 		super();

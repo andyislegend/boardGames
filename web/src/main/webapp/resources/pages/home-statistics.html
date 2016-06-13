@@ -1,16 +1,8 @@
 <div style="margin-top: 20px;" class="container-fluid" ng-controller="statisticsController">
 	<br />
 	<br />
-	<table ng-init="initCharts()">
-		<tbody>
-			<tr>
-				<td><div id="piechart"></div></td>
-				<td><div id="columnchart"></div></td>
-			</tr>
-			<tr>
-				<td><div id="areachart"></div></td>
-				<td><div id="columnagechart"></div></td>
-			</tr>
-		</tbody>
-	</table>
+	<div id="piechart" ng-init="initPieChart()"></div>
+	<div id="bubblechart" ng-init="initBubbleChart()"></div>
+	<div id="areachart" ng-init="initAreaChart()"></div>
+	<div id="columnagechart" ng-init="initColumnAgeChart()"></div>
 </div>
