@@ -41,6 +41,12 @@ public class MailServiceImpl implements MailService{
 	 *            letter subject about banning
 	 */
 	public static final String BAN_LETTER_SUBJECT = "Banning because of negative feedbacks";
+	
+	/**
+	 * @param BAN_LETTER_SUBJECT
+	 *            letter subject about unbanning
+	 */
+	public static final String UNBAN_LETTER_SUBJECT = "User asks to unban him. Username - ";
 
 	private final Logger logger = Logger.getLogger(MailServiceImpl.class);
 
@@ -55,6 +61,9 @@ public class MailServiceImpl implements MailService{
 
 	@Value("${mail.credentials.username}")
 	private String messageSender;
+	
+	@Value("${mail.credentials.admin}")
+	private String adminMail;
 
 	/**
 	 * 
@@ -113,7 +122,23 @@ public class MailServiceImpl implements MailService{
 			}
 		};
 		mailSender.send(preparator);
-		logger.info("----Message about ban to " + to + " send successfully---");
+		logger.info("----Message about ban to " + to + " sent successfully---");
+	}
+	
+	@Override
+	@Async
+	public void sendMailByBannedUserToAdministrator(final String userName, final String letter) {
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+				message.setTo(adminMail);
+				message.setFrom(new InternetAddress(messageSender, env.getProperty("mail.credentials.title")));
+				message.setText(letter, true);
+				message.setSubject(UNBAN_LETTER_SUBJECT + userName);
+			}
+		};
+		mailSender.send(preparator);
+		logger.info("----Message about unban from " + userName + " sent successfully---");
 	}
 	
 	@Async

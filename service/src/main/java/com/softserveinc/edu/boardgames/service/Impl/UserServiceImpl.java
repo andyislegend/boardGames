@@ -529,6 +529,7 @@ public class UserServiceImpl implements UserService {
 		notification.setUserSender(userRepository.findByUsername(username));
 		notification.setMessage(message);
 		notifyRepo.saveAndFlush(notification);
+		mailService.sendMailByBannedUserToAdministrator(username, message);
 	}
 
 	@Override

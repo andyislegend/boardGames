@@ -1,6 +1,6 @@
 package com.softserveinc.edu.boardgames.web.localization;
 
-public interface LanguageKeys {
+public interface LocaleKeys {
 	
 	// language keys for edit profile page
 	public static final String CHANGES_SAVED = "CHANGES_SAVED";

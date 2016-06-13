@@ -20,4 +20,6 @@ public interface MailService {
 			final String gameName, final String ownerUsername);
 	
 	public void sendMailAboutNotification(final String to, final String message, final String type ,final String username, final Date date);
+	
+	public void sendMailByBannedUserToAdministrator(final String userName, final String letter);
 }

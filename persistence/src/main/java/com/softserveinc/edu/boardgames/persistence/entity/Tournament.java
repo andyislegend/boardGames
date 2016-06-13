@@ -55,11 +55,11 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private Date dateOfTournament;
 
-    @Column(nullable = false)
-    private String country;
-
-    @Column(nullable = false)
-    private String city;
+    @ManyToOne (fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+    private Country country;
+    
+    @ManyToOne (fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+    private City city;
     
     @Column(name = "isTableGenerated")
     private boolean isTableGenerated;
@@ -124,19 +124,19 @@ public class Tournament implements Serializable {
 		this.dateOfTournament = dateOfTournament;
 	}
 
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 
-	public String getCity() {
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 

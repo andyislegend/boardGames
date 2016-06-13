@@ -15,8 +15,6 @@ public class TournamentMapper {
 		tournament.setName(dto.getName());
 		tournament.setCountOfParticipants(dto.getCountOfParticipants());
 		tournament.setDateOfTournament(dto.getDateOfTournament());
-		tournament.setCountry(dto.getCountry());
-		tournament.setCity(dto.getCity());
 		
 		return tournament;
 	}

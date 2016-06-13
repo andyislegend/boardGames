@@ -51,7 +51,8 @@ homeApp.config(function($routeProvider) {
 	
 	.when('/edit/', {
 		templateUrl : 'resources/pages/home-editUser.html',
-		controller : 'editProfileCtrl'
+		controller : 'editProfileCtrl',
+		reloadOnSearch: false
 	})
 	.when('/notification', {
 		templateUrl : 'resources/pages/home-notification.html',
