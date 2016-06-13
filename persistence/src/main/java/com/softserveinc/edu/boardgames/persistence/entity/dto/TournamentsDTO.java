@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 import java.util.Date;
 import java.util.Set;
 
+import com.softserveinc.edu.boardgames.persistence.entity.City;
+import com.softserveinc.edu.boardgames.persistence.entity.Country;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 
 /**
@@ -17,8 +19,8 @@ public class TournamentsDTO {
     private String userCreatorName;
     private Date dateOfTournament;
     private Set<User> users;
-    private String country;
-    private String city;
+    private Country country;
+    private City city;
     private boolean isTableGenerated;
 
     public TournamentsDTO() {
@@ -100,19 +102,19 @@ public class TournamentsDTO {
 		this.users = users;
 	}
 
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 
-	public String getCity() {
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 

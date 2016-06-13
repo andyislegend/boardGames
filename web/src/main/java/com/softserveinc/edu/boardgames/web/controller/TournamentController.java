@@ -35,6 +35,12 @@ public class TournamentController {
     
     @Autowired
     private GameUserService gameUserService;
+    
+    @Autowired
+    private CountryService countryService;
+    
+    @Autowired
+    private CityService cityService;
    
     /**
      * This method return all tournaments
@@ -87,6 +93,8 @@ public class TournamentController {
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
     public void addTournament(@RequestBody TournamentCreateDTO tournamentDTO) {
         Tournament tournament = TournamentMapper.toEntity(tournamentDTO);
+        tournament.setCity(cityService.findById(tournamentDTO.getCityId()));
+        tournament.setCountry(countryService.findById(tournamentDTO.getCountryId()));
         tournament.setUserCreator(userService.getUser(WebUtil.getPrincipalUsername()));
         tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getGameId()));
         tournamentService.save(tournament);
