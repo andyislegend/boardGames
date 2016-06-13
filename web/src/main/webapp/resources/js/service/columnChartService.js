@@ -1,32 +1,36 @@
-google.load("visualization", "1", {packages:["bar"]});
-google.charts.setOnLoadCallback(drawColumnChart);
+google.load("visualization", "1", {packages:["corechart"]});
+google.charts.setOnLoadCallback(drawBubbleChart);
 
-function drawColumnChart(dataFrom) {
+function drawBubbleChart(dataFrom) {
 	
-	var chartData = prepareColumnChartData(dataFrom);
+	var chartData = prepareBubbleChartData(dataFrom);
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Game');
 	data.addColumn('number', 'Rating');
 	data.addColumn('number', 'Count of rates');
+	data.addColumn('string', 'Info');
+	data.addColumn('number', 'Count')
 	data.addRows(chartData);
 
 	var options = {
-	    chart: {
-	        title: 'Game rating',
-	        subtitle: 'Average rating for each game',
-	    }
+	    title: 'Game ratings according to count of rates and instances of games',
+	    hAxis: {title: 'Rating'},
+	    vAxis: {title: 'Count of rates'},
+	    bubble: {textStyle: {fontSize: 11}}
 	};
-	var chart = new google.charts.Bar(document.getElementById('columnchart'));
+	var chart = new google.visualization.BubbleChart(document.getElementById('bubblechart'));
 	chart.draw(data, options);
 }
 
-function prepareColumnChartData(dataToPrepare) {
+function prepareBubbleChartData(dataToPrepare) {
 	
 	var chartData = [];
 	for (i = 0; i < dataToPrepare.length; i++) {
 		var temp = [dataToPrepare[i].name,
 		            parseInt(dataToPrepare[i].generalRating),
-		            parseInt(dataToPrepare[i].countOfRates)];
+		            parseInt(dataToPrepare[i].countOfRates),
+		            "Instances",
+		            parseInt(dataToPrepare[i].countOfGames)];
 		chartData.push(temp);
 	}
 	return chartData;

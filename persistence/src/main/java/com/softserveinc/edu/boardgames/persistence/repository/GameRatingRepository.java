@@ -40,8 +40,9 @@ public interface GameRatingRepository extends JpaRepository<GameRating, Integer>
 	public Integer getCountOfRatingsForGame(@Param("id") Integer id);
 	
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO"
-			+"(gr.game.name, AVG(gr.rating), COUNT(gr)) "
+			+ "(gr.game.name, AVG(gr.rating), COUNT(gr), "
+			+ "(select COUNT(gu) from GameUser gu where gu.game.id = gr.game.id)) "
 			+ "from GameRating gr "
-			+ "group by gr.game.name")
+			+ "group by gr.game.name ")
 	public List<GamesChartDTO> getAllRatings();
 }

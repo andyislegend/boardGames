@@ -28,7 +28,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 	 * @return list of tournaments
 	 */
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username,t.dateOfTournament, t.isTableGenerated"
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username,t.dateOfTournament,t.country.name, t.city.name, t.isTableGenerated"
             + ") from Tournament t")
     public List<TournamentsDTO> getAllTournaments();
     
@@ -48,7 +48,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
 	 * @return tournament
 	 */
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament, t.isTableGenerated"
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament,t.country.name, t.city.name, t.isTableGenerated"
             + ") from Tournament t where t.id = :id")
     public TournamentsDTO getTournamentsById(@Param("id") Integer id);
     
@@ -59,7 +59,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
      * @return list of tournamnet
      */
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament, t.isTableGenerated"
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament,t.country.name, t.city.name, t.isTableGenerated"
             + ") from Tournament t where t.name like %:name%")
     public List<TournamentsDTO> findAllTournamentsByWord(@Param("name") String name);
     
@@ -70,7 +70,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
      * @return list of tournament
      */
     @Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO" +
-            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament, t.isTableGenerated"
+            "(t.id, t.name,t.countOfParticipants, t.userCreator.id,t.userCreator.username, t.dateOfTournament,t.country.name, t.city.name, t.isTableGenerated"
             + ") from Tournament t where t.userCreator.username = :username")
     public List<TournamentsDTO> getAllTournamentsByUserCreator(@Param("username")String username);
     

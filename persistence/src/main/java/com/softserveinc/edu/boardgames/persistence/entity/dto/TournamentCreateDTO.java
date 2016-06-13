@@ -7,8 +7,8 @@ public class TournamentCreateDTO {
 	private String name;
 	private Integer countOfParticipants;
 	private Date dateOfTournament;
-	private String country;
-	private String city;
+	private Integer countryId;
+	private Integer cityId;
 	
 	public Integer getGameId() {
 		return gameId;
@@ -34,16 +34,16 @@ public class TournamentCreateDTO {
 	public void setDateOfTournament(Date dateOfTournament) {
 		this.dateOfTournament = dateOfTournament;
 	}
-	public String getCountry() {
-		return country;
+	public Integer getCountryId() {
+		return countryId;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCountryId(Integer countryId) {
+		this.countryId = countryId;
 	}
-	public String getCity() {
-		return city;
+	public Integer getCityId() {
+		return cityId;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
 	}	
 }

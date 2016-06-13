@@ -235,12 +235,12 @@ INSERT INTO `boardgames`.`friends` (`status`, `user`, `userId`) VALUES ('2', '4'
 
 -- inserts to table tournaments
 
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`,`isTableGenerated` ) VALUES ('Lviv', '4', 'Ukraine', '2016-05-17 00:00:00', 'Chess Tournamnet', '4', '1',FALSE);
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`,`isTableGenerated`) VALUES ('Lviv', '6', 'Ukraine', '2016-05-27 00:00:00', 'Monopoly Championship', '1', '3',FALSE);
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`,`isTableGenerated`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-26 00:00:00', 'Scrable Cup', '1', '3',FALSE);
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isTableGenerated`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-27 00:00:00', 'Mafia tournament', '3', '3', FALSE);
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isTableGenerated`) VALUES ('Lviv', '8', 'Ukraine', '2016-05-27 00:00:00', 'Cup of MONOPOLY', '1', '1', FALSE);
-INSERT INTO `boardgames`.`tournament` (`city`, `countOfParticipants`, `country`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isTableGenerated`) VALUES ('Lviv', '4', 'Ukraine', '2016-05-25 00:00:00', 'Memo Cup', '2', '1', FALSE);
+INSERT INTO `boardgames`.`tournament` (`city_id`, `countOfParticipants`, `country_id`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`,`isTableGenerated` ) VALUES (1, '4', 1, '2016-05-17 00:00:00', 'Chess Tournamnet', '4', '1',FALSE);
+INSERT INTO `boardgames`.`tournament` (`city_id`, `countOfParticipants`, `country_id`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`,`isTableGenerated`) VALUES (4, '6', 1, '2016-05-27 00:00:00', 'Monopoly Championship', '1', '3',FALSE);
+INSERT INTO `boardgames`.`tournament` (`city_id`, `countOfParticipants`, `country_id`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`,`isTableGenerated`) VALUES (2, '4', 1, '2016-05-26 00:00:00', 'Scrable Cup', '1', '3',FALSE);
+INSERT INTO `boardgames`.`tournament` (`city_id`, `countOfParticipants`, `country_id`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isTableGenerated`) VALUES (3, '4', 1, '2016-05-27 00:00:00', 'Mafia tournament', '3', '3', FALSE);
+INSERT INTO `boardgames`.`tournament` (`city_id`, `countOfParticipants`, `country_id`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isTableGenerated`) VALUES (2, '8', 1, '2016-05-27 00:00:00', 'Cup of MONOPOLY', '1', '1', FALSE);
+INSERT INTO `boardgames`.`tournament` (`city_id`, `countOfParticipants`, `country_id`, `dateOfTournament`, `name`, `game_id`, `userCreator_id`, `isTableGenerated`) VALUES (2, '4', 1, '2016-05-25 00:00:00', 'Memo Cup', '2', '1', FALSE);
 
 INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('4', '2');
 INSERT INTO `boardgames`.`tournament_users` (`Tournament_id`, `users_id`) VALUES ('4', '3');
