@@ -270,7 +270,11 @@ homeApp
 								EVENT_DETAILS: 'Event Details',
 								EVENT_NAME_DETAILS: 'Event name:',
 								SUB: 'Subscribe',
-								UNSUB: 'Unsubsubscribe'
+								UNSUB: 'Unsubsubscribe',
+								DESC: 'Description',
+								CREATE_NEW_EVENT: 'Create New Event',
+								ALL_FIELDS_REQ: 'all fields are required',
+								ADD_NEW: 'ADD NEW'
 							});
 			$translateProvider
 					.translations(
@@ -543,7 +547,11 @@ homeApp
 								EVENT_DETAILS: 'Деталі події',
 								EVENT_NAME_DETAILS: 'Назва події:',
 								SUB: 'Підписатись',
-								UNSUB: 'Відписатись'
+								UNSUB: 'Відписатись',
+								DESC: 'Опис події',
+								CREATE_NEW_EVENT: 'Створити нову подію',
+								ALL_FIELDS_REQ: 'усі поля є обов\'\язковими',
+								ADD_NEW: 'Додати'
 
 							});
 			$translateProvider.preferredLanguage('en');
