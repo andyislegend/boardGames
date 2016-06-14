@@ -147,7 +147,6 @@ public class RegisterController {
 	@ResponseBody
 	public ResponseEntity<String> addNewUser(@RequestBody UserRegistrationDTO userDTO,
 			final HttpServletRequest request) {
-		
 		if (userDTO.getUsername().isEmpty() || userDTO.getGender().isEmpty() || userDTO.getEmail().isEmpty()
 				|| userDTO.getPassword().isEmpty()) {
 
@@ -257,19 +256,24 @@ public class RegisterController {
 	@ResponseBody
 	public ResponseEntity<String> updateUserPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
 		User user = userService.findOne(WebUtil.getPrincipalUsername());
+		
 		if (userPasswordDTO.getOldPassword() == null || userPasswordDTO.getNewPassword() == null
 				|| userPasswordDTO.getConfirmPassword() == null) {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
+		
 		if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
 			return new ResponseEntity<String>(LocaleKeys.OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		}
+		
 		if (!validatePassword(userPasswordDTO.getNewPassword())) {
 			return new ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		}
+		
 		if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
 			return new ResponseEntity<String>(LocaleKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
 		}
+		
 		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
 		userService.updateUser(user);
 		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
@@ -289,24 +293,24 @@ public class RegisterController {
 	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
-		
+
 		if (!validateFirstNameAndLastName(userDTO.getFirstName())
 				|| !validateFirstNameAndLastName(userDTO.getLastName())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
 		}
-		
+
 		if (!validateMail(userDTO.getEmail().trim())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
 		}
-		
+
 		if (!validateUserAge(userDTO.getAge())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
 		}
-		
+
 		if (!validatePhoneNumber(userDTO.getPhoneNumber())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_PHONE_NUMBER, HttpStatus.CONFLICT);
 		}
-		
+
 		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
 		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 
