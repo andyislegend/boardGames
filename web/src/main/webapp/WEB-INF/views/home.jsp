@@ -450,11 +450,11 @@
 												</form>
 											</div>
 											<div class="modal fade" id="modalCantToDelete" role="dialog">
-												<div class="modal-dialog modal-sm">
+												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-body">
-															<p style="color: black;">Sorry, but you can't delete this game, because
-																this game use in tournaments</p>
+															<h3 style="color: black;">Sorry, but you can't delete this game, because
+																this game use in tournaments</h3>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-default"
@@ -464,10 +464,10 @@
 												</div>
 											</div>
 											<div class="modal fade" id="modalDelete" role="dialog">
-												<div class="modal-dialog modal-sm">
+												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-body">
-															<p style="color: black;">Are you really want to delete this Game?</p>
+															<h3 style="color: black;">Are you really want to delete this Game?</h3>
 														</div>
 														<div class="modal-footer">
 															<button type="button" ng-click="confirmationToDelete()"
