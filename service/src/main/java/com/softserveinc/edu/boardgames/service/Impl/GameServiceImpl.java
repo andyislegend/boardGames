@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 import com.softserveinc.edu.boardgames.persistence.repository.GameRatingRepository;
@@ -49,7 +50,7 @@ public class GameServiceImpl implements GameService{
 	public List<AllGamesDto> getGamesDTO(){
 		return gameRepo.getAllGames();
 	}
-
+	
 	public Game findByName(String name){
         return gameRepo.findByName(name);
     }
@@ -71,5 +72,17 @@ public class GameServiceImpl implements GameService{
 	
 	public List<UsersAgeChartDTO> countOfUsersOfAge(){
 		return gameRepo.countOfUsersOfAge();
+	}
+
+	public GameDetailsDTO getGameDetails(Integer gameId, Integer userId) {
+		GameDetailsDTO game = gameRepo.getGameDetails(gameId, userId);
+		game.setGeneralRating(gameRatingRepo.getAverageRatingForGame(gameId));
+		if (game.getUserRating() == null) {
+			game.setUserRating(0);
+		}
+		if (game.getGeneralRating() == null) {
+			game.setGeneralRating(0.0);
+		}
+		return game;
 	}
 }

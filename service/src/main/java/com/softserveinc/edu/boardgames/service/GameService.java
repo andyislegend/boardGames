@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 
@@ -30,4 +31,6 @@ public interface GameService {
 	List<GamesChartDTO> getRatingsForGame();
 	
 	List<UsersAgeChartDTO> countOfUsersOfAge();
+	
+	GameDetailsDTO getGameDetails(Integer gameId, Integer userId);
 }

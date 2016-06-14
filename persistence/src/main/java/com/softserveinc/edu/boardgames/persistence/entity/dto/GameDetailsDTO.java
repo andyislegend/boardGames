@@ -3,17 +3,17 @@ package com.softserveinc.edu.boardgames.persistence.entity.dto;
 public class GameDetailsDTO {
 	
 	String name;
-	Double userRating;
+	Integer userRating;
 	Double generalRating;
 	
 	public GameDetailsDTO() {}
 	
-	public GameDetailsDTO(String name, Double userRating) {
+	public GameDetailsDTO(String name, Integer userRating) {
 		super();
 		this.name = name;
-		this.userRating = userRating;
+		this.userRating = userRating.intValue();
 	}
-	public GameDetailsDTO(String name, Double userRating, Double generalRating) {
+	public GameDetailsDTO(String name, Integer userRating, Double generalRating) {
 		super();
 		this.name = name;
 		this.userRating = userRating;
@@ -26,11 +26,11 @@ public class GameDetailsDTO {
 		this.name = name;
 	}
 
-	public Double getUserRating() {
+	public Integer getUserRating() {
 		return userRating;
 	}
 
-	public void setUserRating(Double userRating) {
+	public void setUserRating(Integer userRating) {
 		this.userRating = userRating;
 	}
 
