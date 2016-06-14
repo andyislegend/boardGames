@@ -6,6 +6,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * @author Volodymyr Krokhmalyuk
  * 
@@ -49,7 +53,7 @@ public class Tournament implements Serializable {
     @Column(nullable = false)
     private Integer countOfParticipants;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.ALL })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE})
     private Set<User> users;
     
     @Column(nullable = false)
@@ -147,4 +151,49 @@ public class Tournament implements Serializable {
 	public void setTableGenerated(boolean isTableGenerated) {
 		this.isTableGenerated = isTableGenerated;
 	}	
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Tournament other = (Tournament) obj;
+	    return new EqualsBuilder()
+	                              .append(getName(), other.getName())
+	                              .append(getUserCreator(), other.getUserCreator())
+	                              .append(getGame(), other.getGame())
+	                              .append(getCountry(), other.getCountry())
+	                              .append(getCountOfParticipants(), other.getCountOfParticipants())
+	                              .append(getCity(), other.getCity())
+	                              .isEquals();
+	}
+	
+	@Override
+	public int hashCode() {
+		 return new HashCodeBuilder().append(getId())
+				 .append(getName())
+				 .append(getCity())
+				 .append(getCountry())
+				 .append(getCountOfParticipants())
+				 .append(getDateOfTournament())
+				 .append(getGame())
+				 .append(getUserCreator())
+                 .toHashCode();
+	}
+	
+	@Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", getId())
+                .append("name", getName())
+                .append("city", getCity().getName())
+                .append("country", getCountry().getName())
+                .append("count of participants", getCountOfParticipants())
+                .append("game", getGame())
+                .append("user creator", getUserCreator())
+                .toString();
+    }	
 }

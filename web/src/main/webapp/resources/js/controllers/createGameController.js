@@ -65,4 +65,9 @@ angular.module('homeApp').controller("CreateGameCtrl", function($scope, $http, $
 		}		
 		);	
 	};
+	
+	$scope.closeModal = function() {
+		$('#myModalHorizontal').modal('hide');
+	}
+	
 });

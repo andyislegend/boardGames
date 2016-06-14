@@ -393,11 +393,11 @@
 																<input type="submit" value="ADD"
 																	ng-disabled="addGame.$invalid"
 																	class="btn btn-info btn-md"
-																	style="width: 30%; margin-bottom: 10px"> <input
-																	type="submit" value="Close"
-																	class="btn btn-danger btn-md data-dismiss="
+																	style="width: 30%; margin-bottom: 10px; margin-left: 210px"> <input
+																	type="button" value="Close"
+																	class="btn btn-info btn-md" ng-click = "closeModal()" data-dismiss="
 																	modal"
-                                      style="width: 30%; margin-bottom: 10px">
+                                      style="width: 30%; margin-bottom: 10px;">
 															</div>
 														</form>
 													</div>
@@ -422,7 +422,7 @@
 													<td title="'NAME_OF_GAME' | translate"><a
 														href="#gameUserDetails/{{game.id}}"> {{game.name}}</a></td>
 													<td title=" 'CATEGORY' | translate">{{game.category}}</td>
-													<td title="'Comments'"><a href=""
+													<td title="'COMMENTS' | translate"><a href=""
 														ng-click="showComments(game.id)"> <span
 															id="UserGameNum{{game.id}}"
 															class="glyphicon glyphicon-comment"></span>
@@ -450,11 +450,11 @@
 												</form>
 											</div>
 											<div class="modal fade" id="modalCantToDelete" role="dialog">
-												<div class="modal-dialog modal-sm">
+												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-body">
-															<p>Sorry, but you can't delete this game, becouse
-																this game use in tournaments</p>
+															<h3 style="color: black;">Sorry, but you can't delete this game, because
+																this game use in tournaments</h3>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-default"
@@ -464,10 +464,10 @@
 												</div>
 											</div>
 											<div class="modal fade" id="modalDelete" role="dialog">
-												<div class="modal-dialog modal-sm">
+												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-body">
-															<p>Are you really want to delete this Game?</p>
+															<h3 style="color: black;">Are you really want to delete this Game?</h3>
 														</div>
 														<div class="modal-footer">
 															<button type="button" ng-click="confirmationToDelete()"
@@ -822,6 +822,7 @@
 	src="resources/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
 <script
 	src="resources/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

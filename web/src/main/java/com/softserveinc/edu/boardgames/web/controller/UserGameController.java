@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -92,11 +94,12 @@ public class UserGameController {
 	 * @return
 	 */
 	@RequestMapping(value = "NewGame", method = RequestMethod.POST)
-	public void addNewGame(@RequestBody GameUserDTO gameUserDTO){	
+	public ResponseEntity<String> addNewGame(@RequestBody GameUserDTO gameUserDTO){	
 		GameUser gameUser = new GameUser();
 		gameUser = GameUserMapper.toEntity(gameUserDTO);
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.add(gameUser);
+		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
 	}
 	
 	/**
@@ -105,7 +108,7 @@ public class UserGameController {
 	 * @param gameUserDTO
 	 */
 	@RequestMapping(value = "updateGameDetails", method = RequestMethod.PUT)
-	public void updateGame(@RequestBody GameUserDTO gameUserDTO){
+	public ResponseEntity<String> updateGame(@RequestBody GameUserDTO gameUserDTO){
 		GameUser gameUser = gameUserService.getUserGamesById(gameUserDTO.getId());
 		gameUser.setEdition(gameUserDTO.getEdition());
 		gameUser.setYearOfProduction(gameUserDTO.getYearOfProduction());
@@ -115,6 +118,8 @@ public class UserGameController {
 		gameUser.setMaxPlayers(gameUserDTO.getMaxPlayers());
 		gameUser.setStatus(gameUserDTO.getStatus());
 		gameUserService.update(gameUser);
+		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
+
 	}
 	
 	/**
@@ -135,8 +140,10 @@ public class UserGameController {
 	 * @param id
 	 */
 	@RequestMapping(value = "/deleteUserGame/{id}",method = RequestMethod.DELETE)
-	public void deleteGame(@PathVariable Integer id){
+	public ResponseEntity<String> deleteGame(@PathVariable Integer id){
 		gameUserService.deleteById(id);
+		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
+
 	}
 	
 	@RequestMapping(value = "/gameUserDetail/{userGameId}", method = RequestMethod.GET)
@@ -153,10 +160,12 @@ public class UserGameController {
 	 * @param countOfComment
 	 */
 	@RequestMapping(value = "/updateCountOfComment/{idGame}/{countOfComment}",method = RequestMethod.PUT)
-	public void updateCounOfComments(@PathVariable Integer idGame, @PathVariable Integer countOfComment){
+	public ResponseEntity<String> updateCounOfComments(@PathVariable Integer idGame, @PathVariable Integer countOfComment){
 		GameUser gameUser = gameUserService.getUserGamesById(idGame);
 		gameUser.setCountOfComments(countOfComment);
 		gameUserService.update(gameUser);
+		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
+
 	}
 	
 	@RequestMapping(value = "/getCountOfTournamentsByGame/{gameId}", method = RequestMethod.GET)
