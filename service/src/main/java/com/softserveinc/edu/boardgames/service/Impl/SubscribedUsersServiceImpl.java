@@ -16,27 +16,27 @@ import com.softserveinc.edu.boardgames.service.SubscribedUsersService;
 
 @Service
 @Transactional
-public class SubscribedUsersServiceImpl implements SubscribedUsersService{
+public class SubscribedUsersServiceImpl implements SubscribedUsersService {
 
 	@Autowired
-	SubscribedUsersRepository subscribedUsersRepository;
-	
+	private SubscribedUsersRepository subscribedUsersRepository;
+
 	@Autowired
-	EventRepository eventRepository;
-	
+	private EventRepository eventRepository;
+
 	@Autowired
-	UserRepository userRepository;
-	
+	private UserRepository userRepository;
+
 	public List<SubscribedUsers> getAllNewUserSubscriber() {
 		return subscribedUsersRepository.getAllNewUserSubscriber();
 	}
 
 	@Override
 	public void changeStatusOfAllEventNotification(List<SubscribedUsers> listOfSubscribedUsers) {
-		
-		for(SubscribedUsers su: listOfSubscribedUsers){
+
+		for (SubscribedUsers su : listOfSubscribedUsers) {
 			subscribedUsersRepository.changeStatusOfState(su.getId());
-		}		
+		}
 	}
 
 	@Override
@@ -54,18 +54,13 @@ public class SubscribedUsersServiceImpl implements SubscribedUsersService{
 		subUser.setEvent(event);
 		subUser.setUser(user);
 		subscribedUsersRepository.save(subUser);
-		
 	}
-	
+
 	@Override
 	public boolean isUserSubscribed(Integer eventId, String username) {
 		User user = userRepository.findByUsername(username);
-		if (subscribedUsersRepository.getCountOfSubscribedUsers(eventId, user.getId()) > 0) {
-			return true;
-		} else {
-			return false;	
-		}
-		
+
+		return (subscribedUsersRepository.getCountOfSubscribedUsers(eventId, user.getId()) > 0);
 	}
 
 	@Override
