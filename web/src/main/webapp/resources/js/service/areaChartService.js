@@ -7,7 +7,6 @@ function drawAreaChart(dataFrom) {
 	data.addColumn('string', 'date');
 	data.addColumn('number', 'tournaments');
 	data.addColumn('number', 'events');
-	data.addColumn('number', 'exchanges');
 	data.addRows(chartData);
 
 	var options = {
@@ -29,10 +28,9 @@ function prepareAreaChartData(dataToPrepare) {
 
 	var chartData = [];
 	for (i = 0; i < dataToPrepare.length; i++) {
-		var temp = [ dataToPrepare[i].date,
+		var temp = [dataToPrepare[i].date,
 				parseInt(dataToPrepare[i].tournaments),
-				parseInt(dataToPrepare[i].events),
-				parseInt(dataToPrepare[i].exchanges)
+				parseInt(dataToPrepare[i].events)
 				];
 		chartData.push(temp);
 	}

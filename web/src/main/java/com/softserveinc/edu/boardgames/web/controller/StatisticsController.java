@@ -19,7 +19,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 import com.softserveinc.edu.boardgames.service.EventService;
 import com.softserveinc.edu.boardgames.service.GameService;
-import com.softserveinc.edu.boardgames.service.NotificationService;
 import com.softserveinc.edu.boardgames.service.TournamentService;
 
 /**
@@ -39,9 +38,6 @@ public class StatisticsController {
 	@Autowired
 	private EventService eventService;
 	
-	@Autowired
-	private NotificationService notificationService;
-	
 	@RequestMapping(value="/groupGamesByGameUsers", method = RequestMethod.GET)
 	@ResponseBody
 	public List<GamesChartDTO> groupGamesByGameUsers() {
@@ -60,14 +56,12 @@ public class StatisticsController {
 		List<ActionsDTO> actionsSet = new ArrayList<>();
 		Set<Date> dates = new TreeSet<>();
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		dates.addAll(notificationService.getAllNotificationDates());
 		dates.addAll(tournamentService.getAllTournamentsDates());
 		dates.addAll(eventService.getAllDatesOfEvents());
 		for (Date date : dates) {
 			ActionsDTO actionsDto = new ActionsDTO();
 			actionsDto.setDate(formatter.format(date).toString());
 			actionsDto.setEvents(eventService.countEventsOnDate(date));
-			actionsDto.setExchanges(notificationService.countNotificationsForSpecificDate(date));
 			actionsDto.setTournaments(tournamentService.countTournamentsOnDate(date));
 			actionsSet.add(actionsDto);
 		}

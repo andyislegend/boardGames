@@ -43,9 +43,7 @@ public interface NotificationService {
 	void addEventNotification(List<SubscribedUsers> listOfSubsriders);
 	
 	List<Notification> getAllNotificationByUserName(String userName);
-	
-	List<Date> getAllNotificationDates();
-	
+		
 	Integer countNotificationsForSpecificDate(Date date);
 	
 	List<Notification> getAllNotification();

@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.service.Impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -105,16 +104,6 @@ public class NotificationServiceImpl implements NotificationService {
 	
 	public List<Notification> getAllNotificationByUserName(String userName) {
 		return notifyRepo.getAllNotificationByUserName(userName);
-	}
-	
-	public List<Date> getAllNotificationDates() {
-		List<Date> dates = new ArrayList<>();
-		for (Notification n: this.findAllNotifications()) {
-			Date date = n.getDate();
-			if (date != null)
-				dates.add(date);
-		}
-		return dates;
 	}
 	
 	public Integer countNotificationsForSpecificDate(Date date) {
