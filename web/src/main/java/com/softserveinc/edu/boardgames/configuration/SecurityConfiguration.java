@@ -1,7 +1,5 @@
 package com.softserveinc.edu.boardgames.configuration;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -30,10 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	@Qualifier("customUserDetailsService")
-	UserDetailsService userDetailsService;
-
-	@Autowired
-	DataSource dataSource;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
