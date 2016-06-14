@@ -41,20 +41,20 @@ span.glyphicon-knight {
    left: -15px;
 }
 #piechart {
-	width: 440px;
-	height: 200px;
+	width: 550px;
+	height: 270px;
 }
 #areachart {
-	width: 440px;
-	height: 200px;
+	width: 550px;
+	height: 270px;
 }
-#columnchart {
-	width: 440px;
-	height: 200px;
+#bubblechart {
+	width: 550px;
+	height: 270px;
 }
 #columnagechart {
-	width: 440px;
-	height: 200px;
+	width: 550px;
+	height: 270px;
 }
 a.bg-primary.spannedText {
 	padding: 7px;
