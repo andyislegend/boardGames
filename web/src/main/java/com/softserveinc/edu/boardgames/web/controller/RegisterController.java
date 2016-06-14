@@ -259,23 +259,26 @@ public class RegisterController {
 		if (userPasswordDTO.getOldPassword() == null || userPasswordDTO.getNewPassword() == null
 				|| userPasswordDTO.getConfirmPassword() == null) {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
-		} else if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
-			return new ResponseEntity<String>(LocaleKeys.OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
-		} else if (!validatePassword(userPasswordDTO.getNewPassword())) {
-			return new ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
-		} else if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
-			return new ResponseEntity<String>(LocaleKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
-		} else {
-			user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
-			userService.updateUser(user);
-			return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 		}
+		if (!passwordEncoder.matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
+			return new ResponseEntity<String>(LocaleKeys.OLD_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+		}
+		if (!validatePassword(userPasswordDTO.getNewPassword())) {
+			return new ResponseEntity<String>(LocaleKeys.NEW_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+		}
+		if (!userPasswordDTO.getNewPassword().equals(userPasswordDTO.getConfirmPassword())) {
+			return new ResponseEntity<String>(LocaleKeys.CONFIRM_PASSWORD_ANSWER, HttpStatus.CONFLICT);
+		}
+		user.setPassword(passwordEncoder.encode(userPasswordDTO.getNewPassword()));
+		userService.updateUser(user);
+		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
+
 	}
 
 	/**
-	 * This method updates information about user and returns HttpStatus.CONFLICT with
-	 * error message if there is invalid data in fields provided by user or
-	 * return HttpStatus.OK if all data is correct
+	 * This method updates information about user and returns
+	 * HttpStatus.CONFLICT with error message if there is invalid data in fields
+	 * provided by user or return HttpStatus.OK if all data is correct
 	 * 
 	 * @author Volodymyr Terlyha
 	 * @param userDTO
@@ -285,19 +288,27 @@ public class RegisterController {
 	@RequestMapping(value = { "/updateUser" }, method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO) {
+		
 		if (!validateFirstNameAndLastName(userDTO.getFirstName())
 				|| !validateFirstNameAndLastName(userDTO.getLastName())) {
 			return new ResponseEntity<String>(LocaleKeys.INVALID_FIRST_OR_LAST_NAME, HttpStatus.CONFLICT);
-		} else if (!validateMail(userDTO.getEmail().trim())) {
-			return new ResponseEntity<String>(LocaleKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
-		} else if (!validateUserAge(userDTO.getAge())) {
-			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
-		} else if (!validatePhoneNumber(userDTO.getPhoneNumber())) {
-			return new ResponseEntity<String>(LocaleKeys.INVALID_PHONE_NUMBER, HttpStatus.CONFLICT);
-		} else {
-			userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
-			return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
 		}
+		
+		if (!validateMail(userDTO.getEmail().trim())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_EMAIL, HttpStatus.CONFLICT);
+		}
+		
+		if (!validateUserAge(userDTO.getAge())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_AGE, HttpStatus.CONFLICT);
+		}
+		
+		if (!validatePhoneNumber(userDTO.getPhoneNumber())) {
+			return new ResponseEntity<String>(LocaleKeys.INVALID_PHONE_NUMBER, HttpStatus.CONFLICT);
+		}
+		
+		userService.updateUser(userDTO, WebUtil.getPrincipalUsername());
+		return new ResponseEntity<String>(LocaleKeys.CHANGES_SAVED, HttpStatus.OK);
+
 	}
 
 	private boolean validateMail(String emailStr) {
