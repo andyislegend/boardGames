@@ -474,7 +474,7 @@ homeApp
 								COMMENTS : 'Коментарі',
 								DELETE : 'Видалити',
 								SHARED : 'Я позичив',
-								BORROWED : 'Мені позичили',
+								BORROWED : 'Позичені',
 								MYGAMES : 'Мої ігри',
 								GAMES : 'Ігри',
 								ALL_GAMES : 'Всі ігри',
