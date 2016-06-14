@@ -159,12 +159,24 @@ public class UsersController {
 		return new ResponseEntity<String>(LocaleKeys.LETTER_ABOUT_UNBAN_RECEIVED, HttpStatus.OK);
 	}
 	
+	/**
+	 * This method sets notification.
+	 * 
+	 * @param option
+	 *
+	 */
 	@RequestMapping(value = "/setNotification", method = RequestMethod.POST)
 	public void setNotification(@RequestBody boolean option) {
 		String userName = WebUtil.getPrincipalUsername();
 		userService.setNotification(userName, option);
 	}
 	
+	/**
+	 * This method gets status of notification.
+	 * 
+	 * @param option
+	 *
+	 */
 	@RequestMapping(value = "/getStatusOfNotification", method = RequestMethod.GET)
 	public boolean getStatusOfNotification() {
 		String userName = WebUtil.getPrincipalUsername();

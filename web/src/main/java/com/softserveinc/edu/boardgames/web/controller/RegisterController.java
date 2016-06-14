@@ -273,7 +273,7 @@ public class RegisterController {
 	}
 
 	/**
-	 * This method updates information about userand returns HttpStatus.CONFLICT with
+	 * This method updates information about user and returns HttpStatus.CONFLICT with
 	 * error message if there is invalid data in fields provided by user or
 	 * return HttpStatus.OK if all data is correct
 	 * 
@@ -300,32 +300,32 @@ public class RegisterController {
 		}
 	}
 
-	private static boolean validateMail(String emailStr) {
+	private boolean validateMail(String emailStr) {
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
 		return matcher.find();
 	}
 
-	private static boolean validatePassword(String password) {
+	private boolean validatePassword(String password) {
 		Matcher matcher = VALID_PASSWORD_REGEX.matcher(password);
 		return matcher.find();
 	}
 
-	private static boolean validateUsername(String username) {
+	private boolean validateUsername(String username) {
 		Matcher matcher = VALID_USERNAME_REGEX.matcher(username);
 		return matcher.find();
 	}
 
-	private static boolean validateFirstNameAndLastName(String firstOrLastName) {
+	private boolean validateFirstNameAndLastName(String firstOrLastName) {
 		Matcher matcher = VALID_FIRST_OR_LAST_NAME.matcher(firstOrLastName);
 		return matcher.find();
 	}
 
-	private static boolean validateUserAge(String age) {
+	private boolean validateUserAge(String age) {
 		Matcher matcher = VALID_AGE.matcher(age);
 		return matcher.find();
 	}
 	
-	private static boolean validatePhoneNumber(String phoneNumber) {
+	private boolean validatePhoneNumber(String phoneNumber) {
 		Matcher matcher = VALID_PHONE_NUMBER.matcher(phoneNumber);
 		return matcher.find();
 	}
