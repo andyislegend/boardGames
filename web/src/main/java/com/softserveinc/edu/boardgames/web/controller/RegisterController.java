@@ -273,7 +273,7 @@ public class RegisterController {
 	}
 
 	/**
-	 * This method updates information about userand returns HttpStatus.CONFLICT with
+	 * This method updates information about user and returns HttpStatus.CONFLICT with
 	 * error message if there is invalid data in fields provided by user or
 	 * return HttpStatus.OK if all data is correct
 	 * 
