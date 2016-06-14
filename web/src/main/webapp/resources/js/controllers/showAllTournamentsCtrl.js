@@ -4,7 +4,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
       $scope.tournaments = result;
       $scope.$broadcast('allTournament', $scope.tournaments);
 	});
-     
+	
     $http.get('/tournament/'+ $routeParams.id).success(function(result) {
     	$scope.tournament = result;
     	today = new Date();
