@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +19,6 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameUserStatus;
-import com.softserveinc.edu.boardgames.persistence.enumeration.TimeEnum;
 import com.softserveinc.edu.boardgames.service.CommentForGameService;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
@@ -252,19 +250,8 @@ public class UserGameSharingController {
 	@RequestMapping(value="/getHowManyDaysRemains/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
-		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		Date localDate = new Date();
-		
-		Date deadLine = exchange.getApplyingDate();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(deadLine);
-		calendar.add(Calendar.DATE, exchange.getPeriod()); 
-		deadLine = calendar.getTime();
-		Long days = (deadLine.getTime() - localDate.getTime())/ 
-				(TimeEnum.HOURS.getValue() * TimeEnum.MINUTES.getValue() 
-						* TimeEnum.SECONDS.getValue() * TimeEnum.MILISECONDS.getValue());
-		return days.intValue();
+		return exchangeService.getHowManyDaysRemains(exchange.getApplyingDate(), exchange.getPeriod());
 	}
 	
 	@RequestMapping(value="/getPropositionsOfExchange/{gameUserId}", method = RequestMethod.GET)
