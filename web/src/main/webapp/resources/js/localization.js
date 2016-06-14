@@ -261,7 +261,16 @@ homeApp
 								MODERATE_EVENTS: 'Moderate events',
 								HI: 'Hi,',
 								MENU: 'MENU',
-								SEARCH: 'Search ...'
+								SEARCH: 'Search ...',
+								UPCOMING_EVENTS: 'UPCOMING EVENTS',
+								LOCATION: 'Location:',
+								NAME_EVENT: 'Name',
+								DATE_EVENT: 'Date',
+								DESCRIPTION_EVENT: 'Description:',
+								EVENT_DETAILS: 'Event Details',
+								EVENT_NAME_DETAILS: 'Event name:',
+								SUB: 'Subscribe',
+								UNSUB: 'Unsubsubscribe'
 							});
 			$translateProvider
 					.translations(
@@ -525,7 +534,16 @@ homeApp
 								MODERATE_EVENTS: 'Модерувати події',
 								HI: 'Привіт,',
 								MENU: 'МЕНЮ',
-								SEARCH: 'Пошук ...'
+								SEARCH: 'Пошук ...',
+								UPCOMING_EVENTS: 'ПРИЙДЕШНІ ПОДІЇ',
+								LOCATION: 'Локація:',
+								NAME_EVENT: 'Назва',
+								DATE_EVENT: 'Дата події',
+								DESCRIPTION_EVENT: 'Опис події:',
+								EVENT_DETAILS: 'Деталі події',
+								EVENT_NAME_DETAILS: 'Назва події:',
+								SUB: 'Підписатись',
+								UNSUB: 'Відписатись'
 
 							});
 			$translateProvider.preferredLanguage('en');
