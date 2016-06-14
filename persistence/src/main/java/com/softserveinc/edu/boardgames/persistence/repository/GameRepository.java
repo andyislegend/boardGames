@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.softserveinc.edu.boardgames.persistence.entity.Game;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.AllGamesDto;
+import com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
 
 @Repository
@@ -22,6 +23,12 @@ public interface GameRepository extends JpaRepository<Game, Integer>  {
 				+ "from GameUser gu "
 				+ "group by gu.game.name ")
 	public List<AllGamesDto> getAllGames();
+	
+	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.GameDetailsDTO"
+			+ "(g.name, 0, 0.0) "
+			+ "from Game g "
+			+ "where g.id = :gameId")
+	public GameDetailsDTO getGameDetails(@Param("gameId")Integer gameId);
 	
 	public Game findByName(String name);
 	

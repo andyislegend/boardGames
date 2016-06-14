@@ -54,17 +54,8 @@ public class GamesController {
 	
 	@RequestMapping(value="/getGameDetails/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
-	public GameDetailsDTO getGameDetails(@PathVariable Integer gameId){
-		GameDetailsDTO gameDetails = new GameDetailsDTO();
-		gameDetails.setName(gameService.findById(gameId).getName());
-		gameDetails.setUserRating(gameRateNumService.getForGameAndUser(gameId, 
-				userService.findOne(WebUtil.getPrincipalUsername()).getId()));
-		if (gameDetails.getUserRating() == null)
-			gameDetails.setUserRating(new Double(DEFAULT_RATING));
-		gameDetails.setGeneralRating(gameRateNumService.getAverageRating(gameId));
-		if (gameDetails.getGeneralRating() == null)
-			gameDetails.setGeneralRating(new Double(DEFAULT_RATING));
-		return gameDetails;
+	public GameDetailsDTO getGameDetails(@PathVariable Integer gameId) {
+		return gameService.getGameDetails(gameId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
 	}
 	
 	@RequestMapping(value="/getUserGamesOfGame/{name}", method = RequestMethod.GET)
@@ -77,9 +68,7 @@ public class GamesController {
 	@ResponseBody
 	public ResponseEntity<String> reCalculateRaings(@PathVariable Integer gameId, @PathVariable Integer rating) {
 		User curUser = userService.findOne(WebUtil.getPrincipalUsername());
-		if (gameRateNumService.checkIfUserRated(gameId, curUser.getId())) {
-			gameRateNumService.deleteCustom(gameId, curUser.getId());;
-		}
+		gameRateNumService.checkIfUserRated(gameId, curUser.getId());
 		GameRating gameRating = new GameRating();
 		gameRating.setRating(rating);
 		gameRating.setGame(gameService.findById(gameId));
