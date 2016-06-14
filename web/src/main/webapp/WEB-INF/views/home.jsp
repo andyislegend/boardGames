@@ -393,9 +393,9 @@
 																<input type="submit" value="ADD"
 																	ng-disabled="addGame.$invalid"
 																	class="btn btn-info btn-md"
-																	style="width: 30%; margin-bottom: 10px;"> <input
-																	type="submit" value="Close"
-																	class="btn btn-info btn-md" data-dismiss="
+																	style="width: 30%; margin-bottom: 10px; margin-left: 210px"> <input
+																	type="button" value="Close"
+																	class="btn btn-info btn-md" ng-click = "closeModal()" data-dismiss="
 																	modal"
                                       style="width: 30%; margin-bottom: 10px;">
 															</div>
@@ -453,7 +453,7 @@
 												<div class="modal-dialog modal-sm">
 													<div class="modal-content">
 														<div class="modal-body">
-															<p>Sorry, but you can't delete this game, becouse
+															<p style="color: black;">Sorry, but you can't delete this game, because
 																this game use in tournaments</p>
 														</div>
 														<div class="modal-footer">
@@ -467,7 +467,7 @@
 												<div class="modal-dialog modal-sm">
 													<div class="modal-content">
 														<div class="modal-body">
-															<p>Are you really want to delete this Game?</p>
+															<p style="color: black;">Are you really want to delete this Game?</p>
 														</div>
 														<div class="modal-footer">
 															<button type="button" ng-click="confirmationToDelete()"
