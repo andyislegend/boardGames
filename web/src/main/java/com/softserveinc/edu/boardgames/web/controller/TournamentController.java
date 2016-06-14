@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,8 +74,9 @@ public class TournamentController {
      * @param tournamentId
      */
     @RequestMapping(value = "/joinToTournament/{tournamentId}", method = RequestMethod.PUT)
-    public void joinToTournament(@PathVariable Integer tournamentId){
+    public ResponseEntity<String> joinToTournament(@PathVariable Integer tournamentId){
     	tournamentService.addParticipantToTournament(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
+    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
     }
     
     /**
@@ -82,8 +85,10 @@ public class TournamentController {
      * @param tournamentId
      */
     @RequestMapping(value = "/leaveTournament/{tournamentId}", method = RequestMethod.PUT)
-    public void leaveTournament(@PathVariable Integer tournamentId){
+    public ResponseEntity<String> leaveTournament(@PathVariable Integer tournamentId){
     	tournamentService.deleteParticipantsFromTournamnet(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
+    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	   
     }
     
     /**
@@ -92,7 +97,7 @@ public class TournamentController {
      * @param tournamentDTO
      */
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
-    public void addTournament(@RequestBody TournamentCreateDTO tournamentDTO) {
+    public ResponseEntity<String> addTournament(@RequestBody TournamentCreateDTO tournamentDTO) {
         Tournament tournament = TournamentMapper.toEntity(tournamentDTO);
         tournament.setCity(cityService.findById(tournamentDTO.getCityId()));
         tournament.setCountry(countryService.findById(tournamentDTO.getCountryId()));
@@ -103,6 +108,8 @@ public class TournamentController {
         users.add(user);
         tournament.setUsers(users);
         tournamentService.save(tournament);
+        return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+        
     }
     
     /**
@@ -111,8 +118,10 @@ public class TournamentController {
      * @param tournamentId
      */
     @RequestMapping(value = "/deleteTournament/{tournamentId}", method = RequestMethod.DELETE)
-    public void deleteTournament(@PathVariable Integer tournamentId) {
+    public ResponseEntity<String> deleteTournament(@PathVariable Integer tournamentId) {
     	tournamentService.deleteTournament(tournamentId);
+    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+        
     }
      
     /**
@@ -145,10 +154,12 @@ public class TournamentController {
      * @param mark
      */
     @RequestMapping(value = "giveRate/{mark}", method = RequestMethod.PUT)
-    public void giveRateForAddToSystem(@PathVariable Integer mark) {
+    public ResponseEntity<String> giveRateForAddToSystem(@PathVariable Integer mark) {
     	User user = userService.findById(userService.getUser(WebUtil.getPrincipalUsername()).getId());
     	user.setUserRating(user.getUserRating()+mark);
     	userService.updateUser(user);
+    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+        
     }
     
     /**
@@ -158,11 +169,12 @@ public class TournamentController {
      * @param rate
      */
     @RequestMapping(value = "/giveUser/{idUser}/rate/{rate}", method = RequestMethod.PUT)
-    public void giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
+    public ResponseEntity<String> giveRateToUser(@PathVariable Integer idUser, @PathVariable Integer rate) {
     	User user = userService.findById(idUser);
     	user.setUserRating(user.getUserRating()+rate);
     	user.setTournamentRatingStatus(true);
     	userService.updateUserWithBan(user);
+    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
     }
     
     /**
@@ -171,10 +183,11 @@ public class TournamentController {
      * @param tournamentId
      */
     @RequestMapping(value = "/generateTournamentTable/{tournamentId}",method = RequestMethod.PUT)
-    public void generateTournamentTable(@PathVariable Integer tournamentId){
+    public ResponseEntity<String> generateTournamentTable(@PathVariable Integer tournamentId){
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setTableGenerated(true);
     	tournamentService.update(tournament);
+    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
     } 
     
     /**
@@ -183,10 +196,11 @@ public class TournamentController {
      * @param tournamentId
      */
     @RequestMapping(value = "/updateDateOfTournament/{date}/{tournamentId}", method = RequestMethod.PUT)
-    public void updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){
+    public ResponseEntity<String> updateDateOfTournamnets(@PathVariable("date") Date date, @PathVariable("tournamentId")Integer tournamentId){
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setDateOfTournament(date);
     	tournamentService.update(tournament);
+    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
     }
     
     /**

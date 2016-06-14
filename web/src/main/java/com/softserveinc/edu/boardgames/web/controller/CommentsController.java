@@ -3,6 +3,8 @@ package com.softserveinc.edu.boardgames.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,12 +45,14 @@ public class CommentsController {
 	 * @return
 	 */
 	@RequestMapping(value = "newComment", method = RequestMethod.POST)
-	public void addCommentForUserGame(@RequestBody CommentsForGameDTO commentsForGameDTO) {
+	public ResponseEntity<String> addCommentForUserGame(@RequestBody CommentsForGameDTO commentsForGameDTO) {
 		CommentsForGame commentsForGame = new CommentsForGame();
 		commentsForGame = CommentForGameMapper.toEntity(commentsForGameDTO);
 		commentsForGame.setGameUser(gameUserService.getUserGamesById(commentsForGameDTO.getGameID()));
 		commentsForGame.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		commentForGameService.addComment(commentsForGame);
+		return new ResponseEntity<String>(new CommentsForGame().toString(), HttpStatus.OK);
+		   
 		
 	}
 	
