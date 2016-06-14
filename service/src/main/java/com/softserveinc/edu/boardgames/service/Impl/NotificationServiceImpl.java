@@ -13,6 +13,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
+import com.softserveinc.edu.boardgames.persistence.enumeration.NotificationType;
 import com.softserveinc.edu.boardgames.persistence.repository.NotificationRepository;
 import com.softserveinc.edu.boardgames.service.NotificationService;
 
@@ -22,8 +23,6 @@ import com.softserveinc.edu.boardgames.service.NotificationService;
 @Service
 @Transactional
 public class NotificationServiceImpl implements NotificationService {
-
-	final String NOTIFICATION_TYPE = "exchange";
 
 	@Autowired
 	private NotificationRepository notifyRepo;
@@ -123,7 +122,7 @@ public class NotificationServiceImpl implements NotificationService {
 	public void processNotificationForExchange(String message, User forWhoom,
 			User fromWhoom, GameUser gameUser) {
 		Notification notification = new Notification();
-		notification.setType(NOTIFICATION_TYPE);
+		notification.setType(NotificationType.EXCHANGE.name());
 		notification.setMessage(message);
 		notification.setUserSender(fromWhoom);
 		notification.setUser(forWhoom);

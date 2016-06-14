@@ -31,9 +31,7 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  */
 @RestController
 public class GamesController {
-	
-	final int DEFAULT_RATING = 0;
-	
+		
 	@Autowired
 	private GameService gameService;
 	

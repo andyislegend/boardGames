@@ -20,7 +20,7 @@ import com.softserveinc.edu.boardgames.service.CommentForGameService;
 @Transactional
 public class CommentForGameServiceImpl implements CommentForGameService {
 	
-	final String DEFAULT_COMMENT = "no comment";
+	private static final String DEFAULT_COMMENT = "no comment";
 
 	@Autowired
 	private CommentsForGameRepository commentsForGameRepository;
@@ -57,7 +57,7 @@ public class CommentForGameServiceImpl implements CommentForGameService {
 
 	public void processCommentForExchange(GameUser gameUser, User userInvoker, String comment) {
 		
-		if (comment != this.DEFAULT_COMMENT) {
+		if (comment != DEFAULT_COMMENT) {
 			CommentsForGame commentToSend = new CommentsForGame(
 					gameUser, userInvoker, comment, new Date());
 			this.addComment(commentToSend);

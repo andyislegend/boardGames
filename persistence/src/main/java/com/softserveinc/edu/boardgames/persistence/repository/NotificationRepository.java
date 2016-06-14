@@ -19,13 +19,13 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "n.id, n.type, n.status, n.message, n.user.username, n.date, n.gameUser.id, n.userSender.username) "
 			+ "from Notification n "
 			+ "where n.user.username = :username "
-			+ "and n.type = 'exchange' order by n.date desc")
+			+ "and n.type = 'EXCHANGE' order by n.date desc")
 	public List<GameNotificationDTO> getAllGamesNotifications(@Param("username")String username);
 	
 	@Query("select COUNT(n) from Notification n "
 			+ "where n.user.username = :username "
 			+ "and n.status = 'UNCHECKED'"
-			+ "and n.type = 'exchange'")
+			+ "and n.type = 'EXCHANGE'")
 	public Integer countOfUncheckedGameNotifications(@Param("username")String username);
 	
 	/**
@@ -86,6 +86,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 			+ "n.id = ?1")
 	public void makeNotificationRead(Integer id);
 	
-	@Query("select COUNT(n) from Notification n where n.date = :date and n.type='exchange'")
+	@Query("select COUNT(n) from Notification n where n.date = :date and n.type='EXCHANGE'")
 	public Integer countNotificationForSpecificDate(@Param("date")Date date);
 }

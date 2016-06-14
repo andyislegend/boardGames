@@ -35,13 +35,9 @@ import com.softserveinc.edu.boardgames.web.util.WebUtil;
  */
 @RestController
 public class UserGameSharingController {
-	
-	final int NEUTRAL_ID = 0;
-	
-	final String DEFAULT_MESSAGE = "No message";
 		
-	final String DEFAULT_COMMENT = "no comment";
-	
+	private static final String DEFAULT_MESSAGE = "No message";
+			
 	@Autowired
 	private GameUserService gameUserService;
 	
@@ -91,7 +87,7 @@ public class UserGameSharingController {
 		gameUserToUpdate.setStatus(GameUserStatus.AVAILABLE.name());
 		gameUserService.update(gameUserToUpdate);
 					
-		Exchange exchange = new Exchange(NEUTRAL_ID, returnDate, DEFAULT_MESSAGE, 
+		Exchange exchange = new Exchange(returnDate, DEFAULT_MESSAGE, 
 				userService.getUser(WebUtil.getPrincipalUsername()), gameUserToUpdate);
 		exchangeService.update(exchange);			
 		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
@@ -198,7 +194,6 @@ public class UserGameSharingController {
 		gameUserService.update(gameUserToUpdate);
 		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		exchange.setUserApplierId(NEUTRAL_ID);
 		exchange.setMessage(DEFAULT_MESSAGE);
 		exchangeService.update(exchange);
 		
