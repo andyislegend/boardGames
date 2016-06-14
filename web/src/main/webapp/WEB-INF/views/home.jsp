@@ -135,7 +135,7 @@
 							<!-- The user image in the navbar-->
 								<img ng-src="{{avatar}}" class="user-image" alt="Avatar" />
 								<!-- hidden-xs hides the username on small devices so only the image appears. -->
-								<span class="hidden-xs">Hi, <em><b>${user}</b></em></span>
+								<span class="hidden-xs"><span translate="HI"></span><em><b> ${user}</b></em></span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- The user image in the menu -->
@@ -165,10 +165,10 @@
 									<li class="user-body">
 									
 										<div class="col-xs-4 text-center">
-											<a href="#moderateEvent"> Moderate Events </a>
+											<a href="#moderateEvent" translate="MODERATE_EVENTS"></a>
 										</div>
 										<div class="col-xs-4 text-center">
-											<a href="#users"> Moderate Users </a>
+											<a href="#users" translate="MODERATE_USERS"></a>
 										</div>
 									</li>
 								</sec:authorize>
@@ -176,10 +176,10 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#/edit" class="btn btn-default btn-flat">Profile</a>
+										<a href="#/edit" class="btn btn-default btn-flat" translate="PROFILE"></a>
 									</div>
 									<div class="pull-right">
-										<a href="logout" class="btn btn-default btn-flat">Sign out</a>
+										<a href="logout" class="btn btn-default btn-flat" translate="SIGN_OUT">Sign out</a>
 									</div>
 								</li>
 							</ul>

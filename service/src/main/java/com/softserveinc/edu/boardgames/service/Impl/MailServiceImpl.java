@@ -51,7 +51,7 @@ public class MailServiceImpl implements MailService{
 	private final Logger logger = Logger.getLogger(MailServiceImpl.class);
 
 	@Autowired
-	Environment env;
+	private Environment env;
 
 	@Autowired
 	private VelocityEngine velocityEngine;

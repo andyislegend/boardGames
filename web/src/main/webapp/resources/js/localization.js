@@ -254,7 +254,12 @@ homeApp
 								EMAIL_DUPLICATE: 'This email address is already in use. Please choose another on',
 								INVALID_EMAIL: 'You\'ve enetered not valid email address',
 								INVALID_PASSWORD: 'Password mus be from 6 to 20 and containes at least 1 number and 1 upper case letter',
-								NOT_CONFIRMED_PASSWORD: 'You must confirm Your password'
+								NOT_CONFIRMED_PASSWORD: 'You must confirm Your password',
+								PROFILE: 'Profile',
+								SIGN_OUT: 'Sign out',
+								MODERATE_USERS: 'Moserate users',
+								MODERATE_EVENTS: 'Moderate events',
+								HI: 'Hi,'
 							});
 			$translateProvider
 					.translations(
@@ -511,7 +516,12 @@ homeApp
 								EMAIL_DUPLICATE: 'Дана адреса електронної пошти вже використовується. Вкажіть іншу, будь ласка',
 								INVALID_EMAIL: 'Ви ввели невірний адрес електронної скриньки',
 								INVALID_PASSWORD: 'Пароль повинен бути від 6 до 20 символів у довжину і містити хоча б 1 велику літеру і 1 цифру',
-								NOT_CONFIRMED_PASSWORD: 'Ви повинні підтвердити свій пароль'
+								NOT_CONFIRMED_PASSWORD: 'Ви повинні підтвердити свій пароль',
+								PROFILE: 'Профіль',
+								SIGN_OUT: 'Вихід',
+								MODERATE_USERS: 'Модерувати користувачів',
+								MODERATE_EVENTS: 'Модерувати події',
+								HI: 'Привіт,'
 
 							});
 			$translateProvider.preferredLanguage('en');
