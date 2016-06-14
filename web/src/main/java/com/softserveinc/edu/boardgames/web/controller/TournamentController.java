@@ -99,7 +99,8 @@ public class TournamentController {
         tournament.setUserCreator(userService.getUser(WebUtil.getPrincipalUsername()));
         tournament.setGame(gameUserService.getUserGamesById(tournamentDTO.getGameId()));
         Set<User> users = new HashSet<>();
-        users.add(userService.getUser(WebUtil.getPrincipalUsername()));
+        User user = userService.getUser(WebUtil.getPrincipalUsername());
+        users.add(user);
         tournament.setUsers(users);
         tournamentService.save(tournament);
     }
