@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
@@ -22,6 +23,8 @@ import com.softserveinc.edu.boardgames.service.NotificationService;
 @Service
 @Transactional
 public class NotificationServiceImpl implements NotificationService {
+
+	final String NOTIFICATION_TYPE = "exchange";
 
 	@Autowired
 	private NotificationRepository notifyRepo;
@@ -118,16 +121,24 @@ public class NotificationServiceImpl implements NotificationService {
 		return notifyRepo.countNotificationForSpecificDate(date);
 	}
 
-	@Override
 	public List<Notification> getAllNotification() {
 		return notifyRepo.getAllNotification();
 	}
 	
-	@Override
 	public void makeNotificationRead(List<Notification> listOfNotification) {
 		for(Notification notification: listOfNotification){
 			notifyRepo.makeNotificationRead(notification.getId());
-		}
-		
+		}		
+	}
+
+	public void processNotificationForExchange(String message, User forWhoom,
+			User fromWhoom, GameUser gameUser) {
+		Notification notification = new Notification();
+		notification.setType(NOTIFICATION_TYPE);
+		notification.setMessage(message);
+		notification.setUserSender(fromWhoom);
+		notification.setUser(forWhoom);
+		notification.setGameUser(gameUser);
+		this.update(notification);
 	}
 }
