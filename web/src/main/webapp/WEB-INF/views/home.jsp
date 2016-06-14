@@ -144,8 +144,7 @@
 
 
 
-								<li style="margin-left: 24%" id="userRating" translate="USER_LEVEL"
-									translate-values="{userLevel:'{{user.level}}'}"></li>
+								<li style="margin-left: 24%" id="userRating" translate="{{user.level}}"></li>
 								<li>
 									<progress value="0" max="100" id=ratingBar></progress>
 								</li>
