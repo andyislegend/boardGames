@@ -60,7 +60,9 @@ public class GameRatingServiceImpl implements GameRatingService {
 		return gameRatingNumericRepo.getAverageRatingForGame(gameId);
 	}
 	
-	public boolean checkIfUserRated(Integer gameId, Integer userId) {
-		return (gameRatingNumericRepo.checkIfUserRated(gameId, userId).size() >= 1);
+	public void checkIfUserRated(Integer gameId, Integer userId) {
+		if (gameRatingNumericRepo.checkIfUserRated(gameId, userId).size() >= 1) {
+			this.deleteCustom(gameId, userId);
+		}
 	}
 }

@@ -75,13 +75,13 @@ public class GameServiceImpl implements GameService{
 	}
 
 	public GameDetailsDTO getGameDetails(Integer gameId, Integer userId) {
-		GameDetailsDTO game = gameRepo.getGameDetails(gameId, userId);
-		game.setGeneralRating(gameRatingRepo.getAverageRatingForGame(gameId));
-		if (game.getUserRating() == null) {
-			game.setUserRating(0);
+		GameDetailsDTO game = gameRepo.getGameDetails(gameId);
+		
+		if (gameRatingRepo.getAverageRatingForGame(gameId) != null) {
+			game.setGeneralRating(gameRatingRepo.getAverageRatingForGame(gameId));
 		}
-		if (game.getGeneralRating() == null) {
-			game.setGeneralRating(0.0);
+		if (gameRatingRepo.getForGameAndUser(gameId, userId) != null) {
+			game.setUserRating(gameRatingRepo.getForGameAndUser(gameId, userId).intValue());
 		}
 		return game;
 	}

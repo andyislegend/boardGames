@@ -29,5 +29,5 @@ public interface GameRatingService {
 	
 	Double getAverageRating(Integer gameId);
 	
-	boolean checkIfUserRated(Integer gameId, Integer userId);
+	void checkIfUserRated(Integer gameId, Integer userId);
 }
