@@ -23,10 +23,10 @@ import com.softserveinc.edu.boardgames.service.UserService;
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@Autowired
-	MailService mailService;
+	private MailService mailService;
 
 	@Override
 	public void onApplicationEvent(final OnRegistrationCompleteEvent event) {

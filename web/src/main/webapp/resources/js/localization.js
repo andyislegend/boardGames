@@ -259,7 +259,9 @@ homeApp
 								SIGN_OUT: 'Sign out',
 								MODERATE_USERS: 'Moserate users',
 								MODERATE_EVENTS: 'Moderate events',
-								HI: 'Hi,'
+								HI: 'Hi,',
+								MENU: 'MENU',
+								SEARCH: 'Search ...'
 							});
 			$translateProvider
 					.translations(
@@ -521,7 +523,9 @@ homeApp
 								SIGN_OUT: 'Вихід',
 								MODERATE_USERS: 'Модерувати користувачів',
 								MODERATE_EVENTS: 'Модерувати події',
-								HI: 'Привіт,'
+								HI: 'Привіт,',
+								MENU: 'МЕНЮ',
+								SEARCH: 'Пошук ...'
 
 							});
 			$translateProvider.preferredLanguage('en');

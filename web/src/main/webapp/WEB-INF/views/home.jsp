@@ -179,7 +179,7 @@
 										<a href="#/edit" class="btn btn-default btn-flat" translate="PROFILE"></a>
 									</div>
 									<div class="pull-right">
-										<a href="logout" class="btn btn-default btn-flat" translate="SIGN_OUT">Sign out</a>
+										<a href="logout" class="btn btn-default btn-flat" translate="SIGN_OUT"></a>
 									</div>
 								</li>
 							</ul>
@@ -212,7 +212,7 @@
 					ng-controller="GlobalSearchCTRL">
 					<div class="input-group">
 						<input name="q" class="form-control"
-							placeholder="Search..." ng-model="search" /><span class="input-group-btn">
+							placeholder="{{'SEARCH' | translate}}" ng-model="search" /><span class="input-group-btn">
 								<a ng-href= "#search/{{search}}">
 								<button type="submit" name="search" id="search-btn"
 									class="btn btn-flat" ng-click="searchAll()">
@@ -226,16 +226,16 @@
 
 				<!-- Sidebar Menu -->
 				<ul class="sidebar-menu">
-					<li class="header">MENU</li>
+					<li class="header" translate="MENU"></li>
 					<!-- Optionally, you can add icons to the links -->
 					<li><a href="#statistics"><i
-							class="fa fa-pie-chart"></i><span> Statistics </span></a></li>
+							class="fa fa-pie-chart"></i><span translate="STATISTICS"></span></a></li>
 					<li><a href="#allGames"><i class="fa fa-puzzle-piece"></i>
-							<span> All Games </span></a></li>
+							<span translate="ALL_GAMES"></span></a></li>
 					<li><a href="#events"><i class="fa fa-birthday-cake"></i>
-							<span> Events </span></a></li>
-					<li><a href="#tournaments"><i class="fa fa-trophy"></i> <span>
-								Tournaments </span></a></li>
+							<span translate="EVENTS"></span></a></li>
+					<li><a href="#tournaments"><i class="fa fa-trophy"></i> <span translate="TOURNAMENTS"></span>
+					</a></li>
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>
