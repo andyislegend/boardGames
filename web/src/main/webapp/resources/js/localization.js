@@ -274,7 +274,10 @@ homeApp
 								DESC: 'Description',
 								CREATE_NEW_EVENT: 'Create New Event',
 								ALL_FIELDS_REQ: 'all fields are required',
-								ADD_NEW: 'ADD NEW'
+								ADD_NEW: 'ADD NEW',
+								UPD_EVENT: 'Update event',
+								CANCEL_EVENT: 'Cancel event',
+								EDIT_EVENT: 'Edit Event'
 							});
 			$translateProvider
 					.translations(
@@ -551,7 +554,10 @@ homeApp
 								DESC: 'Опис події',
 								CREATE_NEW_EVENT: 'Створити нову подію',
 								ALL_FIELDS_REQ: 'усі поля є обов\'\язковими',
-								ADD_NEW: 'Додати'
+								ADD_NEW: 'Додати',
+								UPD_EVENT: 'Поновити подію',
+								CANCEL_EVENT: 'Скасувати подію',
+								EDIT_EVENT: 'Редагувати подію'
 
 							});
 			$translateProvider.preferredLanguage('en');
