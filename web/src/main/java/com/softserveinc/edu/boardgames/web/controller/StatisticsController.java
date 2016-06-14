@@ -1,12 +1,6 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.ActionsDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GamesChartDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.UsersAgeChartDTO;
-import com.softserveinc.edu.boardgames.service.EventService;
 import com.softserveinc.edu.boardgames.service.GameService;
-import com.softserveinc.edu.boardgames.service.TournamentService;
+import com.softserveinc.edu.boardgames.service.StatisticsService;
 
 /**
  * @author Taras Varvariuk
@@ -33,10 +26,7 @@ public class StatisticsController {
 	private GameService gameService;
 	
 	@Autowired
-	private TournamentService tournamentService;
-	
-	@Autowired
-	private EventService eventService;
+	private StatisticsService statisticsService;
 	
 	@RequestMapping(value="/groupGamesByGameUsers", method = RequestMethod.GET)
 	@ResponseBody
@@ -53,19 +43,8 @@ public class StatisticsController {
 	@RequestMapping(value="/getCountOfActions", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ActionsDTO> getCountOfActions() {
-		List<ActionsDTO> actionsSet = new ArrayList<>();
-		Set<Date> dates = new TreeSet<>();
-		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		dates.addAll(tournamentService.getAllTournamentsDates());
-		dates.addAll(eventService.getAllDatesOfEvents());
-		for (Date date : dates) {
-			ActionsDTO actionsDto = new ActionsDTO();
-			actionsDto.setDate(formatter.format(date).toString());
-			actionsDto.setEvents(eventService.countEventsOnDate(date));
-			actionsDto.setTournaments(tournamentService.countTournamentsOnDate(date));
-			actionsSet.add(actionsDto);
-		}
-		return actionsSet;
+		
+		return statisticsService.getActionsStatistics();
 	}
 	
 	@RequestMapping(value="/getUsersAvgAge", method = RequestMethod.GET)
