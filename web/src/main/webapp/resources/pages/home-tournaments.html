@@ -7,6 +7,7 @@
       </a>
        </h1>
       <div class="column-5">
+      
          <div>
               <div id="myModalTournament" class="modal fade" role="dialog" ng-controller="CtreateNewTournamentCtrl">
                            <div class="modal-dialog" style="height: 100%">
@@ -64,7 +65,7 @@
 							<span style="width: 200px;" class="input-group-addon"
 								id="basic-addon7"> <span>Select Country</span><span
 								style="color: red">*</span>
-							</span><select  ng-change="getCitiesByCountry()"
+							</span><select id="repeatSelectCountry"  ng-change="getCitiesByCountry()"
 							style="width: 400px;"
 								class="form-control" aria-describedby="basic-addon7"
 								ng-model="countryTournament" ng-show="myProfile" class="form-control" 
@@ -86,14 +87,20 @@
 						</div>
 				</div>
 						<br>
-						<button style="margin-left: 30%;"
-							ng-click="createTournament()" ng-disabled="tournamentCreate.$invalid" value="Close" data-dismiss="modal"
-							class="btn btn-info btn-md">ADD NEW</button>
-
-						<button style="margin-left: 15%;" type="submit"
-							class="btn btn-danger btn-md" class="btn btn-default" ng-click="modalClose()"
-                                             data-dismiss="modal">
-							Cancel</button>
+						
+						<div>
+																<input type="submit" value="ADD"
+																	ng-disabled="tournamentCreate.$invalid"
+																	ng-click="createTournament()"
+																	class="btn btn-info btn-md" data-dismiss="modal"
+																	style="width: 30%; margin-bottom: 10px; margin-left: 220px;">
+																	 <input
+																	type="submit" value="Close"
+																	class="btn btn-info btn-md" ng-click="modalClose()" data-dismiss="modal"
+																	
+                                      style="width: 30%; margin-bottom: 10px;">
+															</div>
+	
                                     </form>                                                
                                  </div>
                              
