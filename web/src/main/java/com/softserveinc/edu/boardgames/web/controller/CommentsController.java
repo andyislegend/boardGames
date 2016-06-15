@@ -18,6 +18,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.mapper.CommentForGameM
 import com.softserveinc.edu.boardgames.service.CommentForGameService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.localization.LocaleKeys;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -51,7 +52,7 @@ public class CommentsController {
 		commentsForGame.setGameUser(gameUserService.getUserGamesById(commentsForGameDTO.getGameID()));
 		commentsForGame.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		commentForGameService.addComment(commentsForGame);
-		return new ResponseEntity<String>(new CommentsForGame().toString(), HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.COMMENT_ADDED, HttpStatus.OK);
 		   
 		
 	}

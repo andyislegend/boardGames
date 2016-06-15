@@ -44,4 +44,7 @@ public interface LocaleKeys {
 	public static final String GAME_UPDATED = "GAME UPDATED";
 	public static final String GAME_DELETE = "GAME DELETE";
 	public static final String UPDATE_COUNT_OF_COMMENTS = "COUNT OF COMMETS UPDATED";
+	
+	// language keys for comments
+	public static final String COMMENT_ADDED = "COMMENT ADED";
 }
