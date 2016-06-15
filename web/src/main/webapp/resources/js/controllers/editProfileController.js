@@ -63,15 +63,15 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 		var noCountryOrCitySelected = 0;
 		$scope.countryId = ($scope.editableCountry == null) ? noCountryOrCitySelected : $scope.editableCountry.id;
 		$scope.cityId = ($scope.editableCity == null) ? noCountryOrCitySelected : $scope.editableCity.id;
-	var userDTO = {
-		firstName : $scope.editableFirstName,
-		lastName : $scope.editableLastName,
-		email : $scope.editableEmail,
-		gender : $scope.editableGender,
-		age : $scope.editableAge,
-		phoneNumber : $scope.editablePhoneNumber,
-		countryId:$scope.countryId,
-		cityId:$scope.cityId
+		var userDTO = {
+			firstName : $scope.editableFirstName,
+			lastName : $scope.editableLastName,
+			email : $scope.editableEmail,
+			gender : $scope.editableGender,
+			age : $scope.editableAge,
+			phoneNumber : $scope.editablePhoneNumber,
+			countryId:$scope.countryId,
+			cityId:$scope.cityId
 		};
 		$http({
 			method : 'PUT',
@@ -100,10 +100,10 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 
 	$scope.saveNewUserPassword = function() {
 		var userPasswordDTO = {
-				oldPassword : $scope.editableOldPassword,
-				newPassword : $scope.editableNewPassword,
-				confirmPassword : $scope.editableConfirmPassword
-				};
+			oldPassword : $scope.editableOldPassword,
+			newPassword : $scope.editableNewPassword,
+			confirmPassword : $scope.editableConfirmPassword
+		};
 		$http({
 			method : 'PUT',
 			url : 'updateUserPassword',
@@ -117,26 +117,26 @@ angular.module('homeApp').controller("editProfileCtrl", ['$rootScope','$scope', 
 		}).error(function(result, status) {
 			$scope.editPasswordAnswer = result;
 			$scope.editableOldPassword = '';
-			 $scope.editableNewPassword = '';
-			 $scope.editableConfirmPassword = '';
+			$scope.editableNewPassword = '';
+			$scope.editableConfirmPassword = '';
 		})
 	}
 	
 	homeApp.directive('fileModel', ['$parse', function ($parse) {
          return {
-            restrict: 'A',
-            link: function(scope, element, attrs) {
-               var model = $parse(attrs.fileModel);
-               var modelSetter = model.assign;
+        	 restrict: 'A',
+        	 link: function(scope, element, attrs) {
+        		 var model = $parse(attrs.fileModel);
+        		 var modelSetter = model.assign;
                
-               element.bind('change', function() {
-                  scope.$apply(function() {
-                     modelSetter(scope, element[0].files[0]);
-                  });
-               });
-            }
+        		 element.bind('change', function() {
+        			 scope.$apply(function() {
+        				 modelSetter(scope, element[0].files[0]);
+        			 });
+        		 });
+        	 }
          };
-      }]);
+    }]);
 
 	$scope.uploadAvatar = function() {
 		var maxFileSize = 5242880;

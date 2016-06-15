@@ -1,20 +1,16 @@
 package com.softserveinc.edu.boardgames.persistence.entity.dto;
 
-import java.util.Date;
-
 public class ActionsDTO {
 
 	private String date;
 	private Integer tournaments;
 	private Integer events;
-	private Integer exchanges;
 	public ActionsDTO() {}
-	public ActionsDTO(String date, Integer tournaments, Integer events, Integer exchanges) {
+	public ActionsDTO(String date, Integer tournaments, Integer events) {
 		super();
 		this.date = date;
 		this.tournaments = tournaments;
 		this.events = events;
-		this.exchanges = exchanges;
 	}
 	public String getDate() {
 		return date;
@@ -33,11 +29,5 @@ public class ActionsDTO {
 	}
 	public void setEvents(Integer events) {
 		this.events = events;
-	}
-	public Integer getExchanges() {
-		return exchanges;
-	}
-	public void setExchanges(Integer exchanges) {
-		this.exchanges = exchanges;
 	}
 }

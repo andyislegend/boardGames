@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
 import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.SubscribedUsers;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
+import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameNotificationDTO;
 
 public interface NotificationService {
@@ -41,12 +43,13 @@ public interface NotificationService {
 	void addEventNotification(List<SubscribedUsers> listOfSubsriders);
 	
 	List<Notification> getAllNotificationByUserName(String userName);
-	
-	List<Date> getAllNotificationDates();
-	
+		
 	Integer countNotificationsForSpecificDate(Date date);
 	
-	public List<Notification> getAllNotification();
+	List<Notification> getAllNotification();
 	
-	public void makeNotificationRead(List<Notification> listOfNotification);
+	void makeNotificationRead(List<Notification> listOfNotification);
+	
+	void processNotificationForExchange(String message, User forWhoom, 
+			User fromWhoom, GameUser gameUser);
 }

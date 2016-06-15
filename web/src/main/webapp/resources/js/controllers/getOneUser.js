@@ -14,13 +14,5 @@ angular.module('homeApp').controller("getUser", ['$rootScope','$scope', '$http',
 		$http.get('getUsersAvatar?username=' + $scope.user.username).then(function(result) {
 			$scope.avatar = result.data;
 		});
-	});
-	
-	$scope.hovering = false;
-    $scope.showIt = function () {
-            $scope.hovering = true;
-    };
-    $scope.hideIt = function () {
-        $scope.hovering = false;
-    };
+	});   
 }]);

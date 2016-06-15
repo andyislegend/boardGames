@@ -1,5 +1,5 @@
 <div>
-	<h1 style="text-align: center">Upcoming Events</h1>
+	<h1 style="text-align: center" translate="UPCOMING_EVENTS"></h1>
 	<!-- EVENTS -->
 	<div>
 
@@ -9,13 +9,13 @@
 				class="table table-striped">
 				<tr ng-repeat="x in allEventsDisplay">
 
-					<td title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">{{
+					<td title="'DATE_EVENT' | translate" sortable="'date'" filter="{ 'date': 'text' }">{{
 						x.date | date:'MM/dd/yyyy' }}</td>
 
-					<td title="'Name'" sortable="'name'" filter="{ 'name': 'text' }"><a href="#eventInfo/{{x.eventId}}">
+					<td title="'NAME_EVENT' | translate" sortable="'name'" filter="{ 'name': 'text' }"><a href="#eventInfo/{{x.eventId}}">
 							{{ x.name }} </a></td>
 
-					<td title="'Location'" sortable="'location'"
+					<td title="'LOCATION' | translate" sortable="'location'"
 						filter="{ 'location': 'text' }">{{ x.location }}</td>
 
 				</tr>

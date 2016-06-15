@@ -24,13 +24,13 @@ import com.softserveinc.edu.boardgames.service.UserService;
 public class ScheduledTasks {
 	
 	@Autowired
-	MailService mailService;
+	private MailService mailService;
 	
 	@Autowired
-	ExchangeService exchangeService;
+	private ExchangeService exchangeService;
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	private final Logger logger = Logger.getLogger(MailService.class);
 

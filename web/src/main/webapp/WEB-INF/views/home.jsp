@@ -23,7 +23,10 @@
 	rel="stylesheet" />
 <link
 	href="resources/bower_components/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />	
+	rel="stylesheet" />
+<link 
+	href="resources/bower_components/jquery-bracket/dist/jquery.bracket.min.css" 
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
@@ -79,19 +82,19 @@
 						<li class="dropdown messages-menu">
 							<!-- Menu toggle button --> <a href class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
-								class="label label-success">10</span>
+								class="label label-success">1</span>
 						</a>
 							<ul class="dropdown-menu">
-								<li class="header">You have 10 messages</li>
+								<li class="header">You have 1 message</li>
 								<li>
 									<!-- inner menu: contains the messages -->
 									<ul class="menu">
 										<li>
 											<!-- start message --> <a href="#"> 
 											<!-- Message title -->
-												<h4>??WHO SEND LATEST MESSAGE??</h4> 
+												<h4>FROM: Bill Gates</h4> 
 												<!-- The message -->
-												<p>--- latest message text ---</p>
+												<p> Don't you mind working for Microsoft?</p>
 										</a>
 										</li>
 										<!-- end message -->
@@ -116,7 +119,7 @@
 									<ul class="menu">
 										<li>
 											<!-- start notification --> <a href="#"> <i
-												class="fa fa-users text-aqua"></i> ??LATEST NOTIFICATION??
+												class="fa fa-users text-aqua"></i> SERVER SHUTDOWN THIS WEEKEND
 										</a>
 										</li>
 										<!-- end notification -->
@@ -135,7 +138,7 @@
 							<!-- The user image in the navbar-->
 								<img ng-src="{{avatar}}" class="user-image" alt="Avatar" />
 								<!-- hidden-xs hides the username on small devices so only the image appears. -->
-								<span class="hidden-xs">Hi, <em><b>${user}</b></em></span>
+								<span class="hidden-xs"><span translate="HI"></span><em><b> ${user}</b></em></span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- The user image in the menu -->
@@ -144,8 +147,7 @@
 
 
 
-								<li style="margin-left: 24%" id="userRating" translate="USER_LEVEL"
-									translate-values="{userLevel:'{{user.level}}'}"></li>
+								<li style="margin-left: 24%" id="userRating" translate="{{user.level}}"></li>
 								<li>
 									<progress value="0" max="100" id=ratingBar></progress>
 								</li>
@@ -165,10 +167,10 @@
 									<li class="user-body">
 									
 										<div class="col-xs-4 text-center">
-											<a href="#moderateEvent"> Moderate Events </a>
+											<a href="#moderateEvent" translate="MODERATE_EVENTS"></a>
 										</div>
 										<div class="col-xs-4 text-center">
-											<a href="#users"> Moderate Users </a>
+											<a href="#users" translate="MODERATE_USERS"></a>
 										</div>
 									</li>
 								</sec:authorize>
@@ -176,10 +178,10 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#/edit" class="btn btn-default btn-flat">Profile</a>
+										<a href="#/edit" class="btn btn-default btn-flat" translate="PROFILE"></a>
 									</div>
 									<div class="pull-right">
-										<a href="logout" class="btn btn-default btn-flat">Sign out</a>
+										<a href="logout" class="btn btn-default btn-flat" translate="SIGN_OUT"></a>
 									</div>
 								</li>
 							</ul>
@@ -212,7 +214,7 @@
 					ng-controller="GlobalSearchCTRL">
 					<div class="input-group">
 						<input name="q" class="form-control"
-							placeholder="Search..." ng-model="search" /><span class="input-group-btn">
+							placeholder="{{'SEARCH' | translate}}" ng-model="search" /><span class="input-group-btn">
 								<a ng-href= "#search/{{search}}">
 								<button type="submit" name="search" id="search-btn"
 									class="btn btn-flat" ng-click="searchAll()">
@@ -226,16 +228,16 @@
 
 				<!-- Sidebar Menu -->
 				<ul class="sidebar-menu">
-					<li class="header">MENU</li>
+					<li class="header" translate="MENU"></li>
 					<!-- Optionally, you can add icons to the links -->
 					<li><a href="#statistics"><i
-							class="fa fa-pie-chart"></i><span> Statistics </span></a></li>
+							class="fa fa-pie-chart"></i><span translate="STATISTICS"></span></a></li>
 					<li><a href="#allGames"><i class="fa fa-puzzle-piece"></i>
-							<span> All Games </span></a></li>
+							<span translate="ALL_GAMES"></span></a></li>
 					<li><a href="#events"><i class="fa fa-birthday-cake"></i>
-							<span> Events </span></a></li>
-					<li><a href="#tournaments"><i class="fa fa-trophy"></i> <span>
-								Tournaments </span></a></li>
+							<span translate="EVENTS"></span></a></li>
+					<li><a href="#tournaments"><i class="fa fa-trophy"></i> <span translate="TOURNAMENTS"></span>
+					</a></li>
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>
@@ -754,6 +756,7 @@
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.js"></script>
+<script src="resources/bower_components/jquery-bracket/dist/jquery.bracket.min.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript"
@@ -807,7 +810,6 @@
 	src="resources/js/controllers/getOneUser.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/notificationController.js"></script>
-<script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
 <script type="text/javascript"
@@ -831,6 +833,7 @@
 <script src="resources/js/service/bubbleChartService.js"></script>
 <script src="resources/js/service/areaChartService.js"></script>
 <script src="resources/js/service/columnChartAgeService.js"></script>
+
 <!-- End of Scripts -->
 
 </html>

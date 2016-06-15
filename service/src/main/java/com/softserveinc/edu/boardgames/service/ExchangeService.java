@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -29,4 +30,6 @@ public interface ExchangeService {
 	boolean checkIfBorrowed(Integer userId, Integer gameUserId);
 	
 	List<GameUserDTO> selectAllConfirmationsForUser(Integer id);
+	
+	Integer getHowManyDaysRemains(Date applyingDate, Integer period);
 }

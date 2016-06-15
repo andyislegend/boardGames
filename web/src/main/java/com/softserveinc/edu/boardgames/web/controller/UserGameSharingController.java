@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.web.controller;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softserveinc.edu.boardgames.persistence.entity.CommentsForGame;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.GameProposition;
 import com.softserveinc.edu.boardgames.persistence.entity.GameUser;
-import com.softserveinc.edu.boardgames.persistence.entity.Notification;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
 import com.softserveinc.edu.boardgames.persistence.enumeration.GameUserStatus;
-import com.softserveinc.edu.boardgames.persistence.enumeration.TimeEnum;
 import com.softserveinc.edu.boardgames.service.CommentForGameService;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
@@ -43,9 +39,7 @@ public class UserGameSharingController {
 	final int NEUTRAL_ID = 0;
 	
 	final String DEFAULT_MESSAGE = "No message";
-	
-	final String NOTIFICATION_TYPE = "exchange";
-	
+		
 	final String DEFAULT_COMMENT = "no comment";
 	
 	@Autowired
@@ -65,18 +59,6 @@ public class UserGameSharingController {
 	
 	@Autowired
 	private CommentForGameService commentService;
-	
-	public Notification processNotification(String message, User forWhoom, 
-			User fromWhoom, GameUser gameUser) {
-		
-		Notification notification = new Notification();
-		notification.setType(NOTIFICATION_TYPE);
-		notification.setMessage(message);
-		notification.setUserSender(fromWhoom);
-		notification.setUser(forWhoom);
-		notification.setGameUser(gameUser);
-		return notification;
-	}
 	
 	@RequestMapping(value="/checkIfGameBelongsToUser/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
@@ -154,7 +136,8 @@ public class UserGameSharingController {
 				+ ". Go to game manue and give your answer.";
 		User userToNotify = userService.findById(exchange.getUser().getId());
 		User userInvoker = userService.findById(exchange.getUserApplierId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		notifyService.processNotificationForExchange(messageForNotification, 
+				userToNotify, userInvoker, gameUserToUpdate);
 		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
@@ -176,7 +159,8 @@ public class UserGameSharingController {
 				+ ". Go to game manue and give your answer.";
 		User userToNotify = userService.findById(exchange.getUser().getId());
 		User userInvoker = userService.findById(exchange.getUserApplierId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		notifyService.processNotificationForExchange(messageForNotification, 
+				userToNotify, userInvoker, gameUserToUpdate);		
 		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
@@ -200,7 +184,8 @@ public class UserGameSharingController {
 		+ ". Please contact the owner about further details";
 		User userToNotify = userService.findById(exchange.getUserApplierId());
 		User userInvoker = userService.findById(exchange.getUser().getId());
-		notifyService.update(this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserOfOwner));
+		notifyService.processNotificationForExchange(messageForNotification, 
+				userToNotify, userInvoker, gameUserOfOwner);
 		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
@@ -224,8 +209,8 @@ public class UserGameSharingController {
 				+ gameUserToUpdate.getGame().getName();
 		User userToNotify = userService.findById(exchange.getUserApplierId());
 		User userInvoker = userService.findById(exchange.getUser().getId());
-		notifyService.update(
-				this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
+		notifyService.processNotificationForExchange(messageForNotification, 
+				userToNotify, userInvoker, gameUserToUpdate);
 		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
 	
@@ -244,18 +229,13 @@ public class UserGameSharingController {
 		gamePropoService.updateForExchange(exchange.getId(), GameUserStatus.PRIVATE.name());
 		gamePropoService.deleteForExchange(exchange.getId());
 		
-		if (comment != this.DEFAULT_COMMENT) {
-			CommentsForGame commentToSend = new CommentsForGame(
-					gameUserToUpdate,userInvoker,comment,new Date());
-			commentService.addComment(commentToSend);
-		}
+		commentService.processCommentForExchange(gameUserToUpdate, userInvoker, comment);
 		
 		String messageForNotification = userService.findById(exchange.getUserApplierId()).getUsername() 
 				+ " intends to give " + gameUserToUpdate.getGame().getName() 
 				+ " back. Contact " + WebUtil.getPrincipalUsername() + " about giving the game back.";
-		notifyService.update(
-				this.processNotification(messageForNotification, userToNotify, userInvoker, gameUserToUpdate));
-				
+		notifyService.processNotificationForExchange(messageForNotification, 
+				userToNotify, userInvoker, gameUserToUpdate);
 		exchangeService.delete(exchange);
 		return new ResponseEntity<String>(exchange.toString(), HttpStatus.OK);
 	}
@@ -270,19 +250,8 @@ public class UserGameSharingController {
 	@RequestMapping(value="/getHowManyDaysRemains/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
-		
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		Date localDate = new Date();
-		
-		Date deadLine = exchange.getApplyingDate();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(deadLine);
-		calendar.add(Calendar.DATE, exchange.getPeriod()); 
-		deadLine = calendar.getTime();
-		Long days = (deadLine.getTime() - localDate.getTime())/ 
-				(TimeEnum.HOURS.getValue() * TimeEnum.MINUTES.getValue() 
-						* TimeEnum.SECONDS.getValue() * TimeEnum.MILISECONDS.getValue());
-		return days.intValue();
+		return exchangeService.getHowManyDaysRemains(exchange.getApplyingDate(), exchange.getPeriod());
 	}
 	
 	@RequestMapping(value="/getPropositionsOfExchange/{gameUserId}", method = RequestMethod.GET)
