@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.service.Impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -150,11 +149,7 @@ public class TournamentServiceImpl implements TournamentService {
     }
     
     public List<Date> getAllTournamentsDates() {
-    	List<Date> dates = new ArrayList<>();
-    	for (TournamentsDTO t: tournamentRepository.getTournamentDate()) {
-    		dates.add(t.getDateOfTournament());
-    	}
-    	return dates;
+    	return tournamentRepository.getAllTournamentsDates();
     }
     
     public Integer countTournamentsOnDate(Date date) {

@@ -27,4 +27,24 @@ public interface LocaleKeys {
 	
 	// language keys for user unban
 	public static final String LETTER_ABOUT_UNBAN_RECEIVED = "LETTER_ABOUT_UNBAN_RECEIVED";
+	
+	
+	// language keys for tournaments
+	public static final String JOIN_TO_TOURNAMENT =  "JOIN TO TOURNAMENT";
+	public static final String LEAVE_TOURNAMENT = "LEAVE TOURNAMENT";
+	public static final String TOURNAMENT_CREATED = "TOURNAMENT CREATED";
+	public static final String TOURNAMENT_DELETED = "TOURNAMENT DELETED";
+	public static final String GIVE_A_MARK = "GIVE A MARK";
+	public static final String GIVE_A_RATE = "GIVE A RATE";
+	public static final String UPDATE_DATE = "UPDATE DATE";
+	
+	
+	// language keys for usergames
+	public static final String GAME_CREATED = "GAME CREATED";
+	public static final String GAME_UPDATED = "GAME UPDATED";
+	public static final String GAME_DELETE = "GAME DELETE";
+	public static final String UPDATE_COUNT_OF_COMMENTS = "COUNT OF COMMETS UPDATED";
+	
+	// language keys for comments
+	public static final String COMMENT_ADDED = "COMMENT ADED";
 }

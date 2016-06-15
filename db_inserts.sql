@@ -60,7 +60,7 @@ insert into users (age, email, firstName, lastName, password, phoneNumber, userR
 (25, 'kravets@gmail.com', 'Artem', 'Kravets', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', 0,'NOOB', 'male', 'ACTIVE', 'kravets', 1, 2,FALSE, FALSE);
 
 INSERT INTO `boardgames`.`users` (`id`, `age`, `email`, `firstName`, `gender`, `lastName`, `password`, `phoneNumber`, `rating`, `state`, `userRating`, `username`, `countryId`, `cityId`,tournamentRatingStatus, is_notificated) 
-VALUES (NULL, '45', 'prosinecki@pl.net', 'Vladislav', 'male', 'Prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '2', '33',FALSE, FALSE);
+VALUES (NULL, '45', 'prosinecki@pl.net', 'Helena', 'female', 'Prosinecki', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+37986574545', 'NOOB', 'ACTIVE', '0', 'prosinecki', '2', '33',FALSE, FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber,userRating, rating, gender, state, username, countryId, cityId,tournamentRatingStatus, is_notificated) values
 (28, 'vterlyha@gmail.com', 'Volodymyr', 'Terlyha', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380935787496', 23,'PRO', 'male', 'ACTIVE', 'vterlyha', 1, 13,FALSE, FALSE);
@@ -69,7 +69,7 @@ insert into users (age, email, firstName, lastName, password, phoneNumber, userR
 (37, 'volodymyr_terlyha@ukr.net', 'Body', 'Khariv', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987654', -4, 'NOOB', 'male', 'ACTIVE', 'khariv', 2, 33,FALSE, FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus, is_notificated) values
-(23, 'winston@root.com', 'Taras', 'Winston', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  55,'WICKED_SICK', 'male', 'BANNED', 'winston', 2, 32,FALSE, FALSE);
+(23, 'winston@root.com', 'Olga', 'Winston', '$2a$10$e2qEa0wunoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380000700000',  55,'WICKED_SICK', 'female', 'BANNED', 'winston', 2, 32,FALSE, FALSE);
 
 insert into users (age, email, firstName, lastName, password, phoneNumber, userRating,rating, gender, state, username, countryId, cityId,tournamentRatingStatus, is_notificated) values
 (25, 'borodin@gmail.com', 'Vitalik', 'Borodin', '$2a$10$e2qEa0wusdfoicRAGky9Kd7O..A5YpXbUy3TDMhtrQ3FG3tkYsOpPmW', '+380957987454', 0,'NOOB', 'male', 'ACTIVE', 'borodin', 1, 13,FALSE, FALSE);

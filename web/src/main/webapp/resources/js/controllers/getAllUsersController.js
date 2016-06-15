@@ -24,31 +24,31 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 		  $scope.isShow = index;
 	}
 	
-	$scope.countries = function () {
-		  var def = $q.defer();
-		  $http.get('getAllCountries').then(function (result) {
-		   var filterData = [];
-		   angular.forEach(result.data, function (country) {
-		    filterData.push({
-		         id: country.name,
-		         title: country.name
-		        })
-		   });
-		   def.resolve(filterData);
-		  });
+	$scope.countries = function() {
+		var def = $q.defer();
+		$http.get('getAllCountries').then(function(result) {
+			var filterData = [];
+			angular.forEach(result.data, function(country) {
+				filterData.push({
+					id : country.name,
+					title : country.name
+				})
+			});
+			def.resolve(filterData);
+		});
 
-		  return def;
+		return def;
 	};
 
 	$scope.$on('sharingToUsersTable', function(event, data) {
-	$scope.usersTable = new ngTableParams({
-		page: 1,
-		total:7,
-		count: 7
-	}, {
-		defaultSort: "asc",
-		total: data.length,
-		getData: function ($defer, params) {
+		$scope.usersTable = new ngTableParams({
+			page: 1,
+			total:7,
+			count: 7
+		}, {
+			defaultSort: "asc",
+			total: data.length,
+			getData: function ($defer, params) {
 				  for (var i = 0; i < data.length; i++) {
 					  data[i].countryName = "";
 					  if (data[i].country != null) {
@@ -59,16 +59,14 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 						  data[i].cityName = data[i].city.name;
 					  }	
 				  }
-		    	 $scope.usersByParams = params.sorting() ? 
-		      			$filter('orderBy')(data, params.orderBy()) 
-		       			: data;
-		       	 $scope.usersByParams = params.filter() ? 
-		       			$filter('filter')($scope.usersByParams, params.filter()) 
-		       			: $scope.usersByParams;
-		       			params.total( $scope.usersByParams.length);
-		         $scope.usersByParams = $scope.usersByParams.slice((params.page() - 1) 
-		            	* params.count(), params.page() * params.count());
-		         $defer.resolve($scope.usersByParams);
+				  $scope.usersByParams = params.sorting() ? 
+						  $filter('orderBy')(data, params.orderBy()) : data;
+				  $scope.usersByParams = params.filter() ? 
+						  $filter('filter')($scope.usersByParams, params.filter()) : $scope.usersByParams;
+				  params.total( $scope.usersByParams.length);
+				  $scope.usersByParams = $scope.usersByParams.slice((params.page() - 1) 
+						  * params.count(), params.page() * params.count());
+				  $defer.resolve($scope.usersByParams);
 		     }
 		 });
 	});
@@ -95,10 +93,5 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 				$scope.oneUser = result.data;
 			});
         });
-	}
-	
-	$scope.getUser = function() {
-		$('#myReg').modal('hide');
-		$scope.eraseForm();
 	}
 });

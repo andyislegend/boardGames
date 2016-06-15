@@ -22,6 +22,7 @@ import com.softserveinc.edu.boardgames.service.ExchangeService;
 import com.softserveinc.edu.boardgames.service.GamePropositionService;
 import com.softserveinc.edu.boardgames.service.GameUserService;
 import com.softserveinc.edu.boardgames.service.UserService;
+import com.softserveinc.edu.boardgames.web.localization.LocaleKeys;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 /**
@@ -99,7 +100,7 @@ public class UserGameController {
 		gameUser = GameUserMapper.toEntity(gameUserDTO);
 		gameUser.setUser(userService.getUser(WebUtil.getPrincipalUsername()));
 		gameUserService.add(gameUser);
-		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.GAME_CREATED, HttpStatus.OK);
 	}
 	
 	/**
@@ -118,7 +119,7 @@ public class UserGameController {
 		gameUser.setMaxPlayers(gameUserDTO.getMaxPlayers());
 		gameUser.setStatus(gameUserDTO.getStatus());
 		gameUserService.update(gameUser);
-		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.GAME_UPDATED, HttpStatus.OK);
 
 	}
 	
@@ -142,7 +143,7 @@ public class UserGameController {
 	@RequestMapping(value = "/deleteUserGame/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<String> deleteGame(@PathVariable Integer id){
 		gameUserService.deleteById(id);
-		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.GAME_DELETE, HttpStatus.OK);
 
 	}
 	
@@ -164,7 +165,7 @@ public class UserGameController {
 		GameUser gameUser = gameUserService.getUserGamesById(idGame);
 		gameUser.setCountOfComments(countOfComment);
 		gameUserService.update(gameUser);
-		return new ResponseEntity<String>(new GameUser().toString(), HttpStatus.OK);
+		return new ResponseEntity<String>(LocaleKeys.UPDATE_COUNT_OF_COMMENTS, HttpStatus.OK);
 
 	}
 	

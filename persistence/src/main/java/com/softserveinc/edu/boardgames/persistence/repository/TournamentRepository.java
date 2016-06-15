@@ -18,7 +18,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
  */
 @Repository
 public interface TournamentRepository extends JpaRepository<Tournament,Integer> {
-
+	
     public Tournament findById(Integer id); 
 	public Tournament findByName(String name);
 	
@@ -91,4 +91,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Integer> 
     
     @Query("select COUNT(t) from Tournament t where t.dateOfTournament = :date")
 	public Integer countTournamentForSpecificDate(@Param("date")Date date);
+    
+    @Query(value="select dateOfTournament from tournament", nativeQuery=true)
+	public List<Date> getAllTournamentsDates();
 }

@@ -6,6 +6,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.mapper.TournamentMappe
 import com.softserveinc.edu.boardgames.service.*;
 import com.softserveinc.edu.boardgames.persistence.entity.Tournament;
 import com.softserveinc.edu.boardgames.persistence.entity.User;
+import com.softserveinc.edu.boardgames.web.localization.LocaleKeys;
 import com.softserveinc.edu.boardgames.web.util.WebUtil;
 
 import java.util.Date;
@@ -76,7 +77,7 @@ public class TournamentController {
     @RequestMapping(value = "/joinToTournament/{tournamentId}", method = RequestMethod.PUT)
     public ResponseEntity<String> joinToTournament(@PathVariable Integer tournamentId){
     	tournamentService.addParticipantToTournament(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
-    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	return new ResponseEntity<String>(LocaleKeys.JOIN_TO_TOURNAMENT, HttpStatus.OK);
     }
     
     /**
@@ -87,7 +88,7 @@ public class TournamentController {
     @RequestMapping(value = "/leaveTournament/{tournamentId}", method = RequestMethod.PUT)
     public ResponseEntity<String> leaveTournament(@PathVariable Integer tournamentId){
     	tournamentService.deleteParticipantsFromTournamnet(tournamentId, userService.getUser(WebUtil.getPrincipalUsername()).getId());
-    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	return new ResponseEntity<String>(LocaleKeys.LEAVE_TOURNAMENT, HttpStatus.OK);
     	   
     }
     
@@ -98,7 +99,7 @@ public class TournamentController {
      */
     @RequestMapping(value = "/addTournament", method = RequestMethod.POST)
     public ResponseEntity<String> addTournament(@RequestBody TournamentCreateDTO tournamentDTO) {
-        Tournament tournament = TournamentMapper.toEntity(tournamentDTO);
+    	Tournament tournament = TournamentMapper.toEntity(tournamentDTO);
         tournament.setCity(cityService.findById(tournamentDTO.getCityId()));
         tournament.setCountry(countryService.findById(tournamentDTO.getCountryId()));
         tournament.setUserCreator(userService.getUser(WebUtil.getPrincipalUsername()));
@@ -108,7 +109,7 @@ public class TournamentController {
         users.add(user);
         tournament.setUsers(users);
         tournamentService.save(tournament);
-        return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+        return new ResponseEntity<String>(LocaleKeys.TOURNAMENT_CREATED, HttpStatus.CREATED);
         
     }
     
@@ -120,7 +121,7 @@ public class TournamentController {
     @RequestMapping(value = "/deleteTournament/{tournamentId}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteTournament(@PathVariable Integer tournamentId) {
     	tournamentService.deleteTournament(tournamentId);
-    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	return new ResponseEntity<String>(LocaleKeys.TOURNAMENT_DELETED, HttpStatus.OK);
         
     }
      
@@ -158,7 +159,7 @@ public class TournamentController {
     	User user = userService.findById(userService.getUser(WebUtil.getPrincipalUsername()).getId());
     	user.setUserRating(user.getUserRating()+mark);
     	userService.updateUser(user);
-    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	return new ResponseEntity<String>(LocaleKeys.GIVE_A_MARK, HttpStatus.OK);
         
     }
     
@@ -174,7 +175,7 @@ public class TournamentController {
     	user.setUserRating(user.getUserRating()+rate);
     	user.setTournamentRatingStatus(true);
     	userService.updateUserWithBan(user);
-    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	return new ResponseEntity<String>(LocaleKeys.GIVE_A_RATE, HttpStatus.OK);
     }
     
     /**
@@ -187,7 +188,7 @@ public class TournamentController {
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setTableGenerated(true);
     	tournamentService.update(tournament);
-    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	return new ResponseEntity<String>("Table generated", HttpStatus.OK);
     } 
     
     /**
@@ -200,7 +201,7 @@ public class TournamentController {
     	Tournament tournament = tournamentService.getTournamenById(tournamentId);
     	tournament.setDateOfTournament(date);
     	tournamentService.update(tournament);
-    	return new ResponseEntity<String>(new Tournament().toString(), HttpStatus.OK);
+    	return new ResponseEntity<String>(LocaleKeys.UPDATE_DATE, HttpStatus.OK);
     }
     
     /**

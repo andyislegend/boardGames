@@ -43,4 +43,6 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	@Query("select COUNT(e) from Event e where e.date = :date")
 	public Integer countEventsForSpecificDate(@Param("date")Date date);
 	
+	@Query(value="select date from events", nativeQuery=true)
+	public List<Date> getAllEventDates();
 }

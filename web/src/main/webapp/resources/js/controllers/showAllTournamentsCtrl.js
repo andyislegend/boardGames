@@ -173,4 +173,34 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    $scope.tournament = result;});
     	} 	
     }
+    
+    $scope.getTournamentParticipants = function(){
+    	$http.get('/getAllParticipants/'+$routeParams.id).success(function(result) {
+  		  $scope.tournamentParticipants = result;
+  		  var teams = [];
+  		  var team = [];
+  		  for(var i = 0; i<$scope.tournamentParticipants.length; i++){
+  			  if (team.length > 1) {
+  				teams.push(team);
+  				team = [];
+  			  }
+  			  team.push($scope.tournamentParticipants[i].username)
+  		  }
+  		  teams.push(team);
+  		
+    var singleElimination = {
+    	teams:   teams,
+    	results : []
+    }
+    		 
+    $(function() {
+    	$('.demo').bracket({
+    		init: singleElimination,
+    	    save: function(){}, 
+    	})
+    	$('.tools').hide();
+    })
+    
+    });
+  }
 });

@@ -98,17 +98,12 @@ public class EventServiceImpl implements EventService{
     		if (!(event.getDate().compareTo(calendar.getTime()) < 0)) {
 				notExpired.add(event);
 			}
-		}	
-    	
+		}	 	
     	return notExpired;
     }
     
     public List<Date> getAllDatesOfEvents() {
-    	List<Date> dates = new ArrayList<>();
-    	for (EventsDTO e: this.getAllEvents()) {
-    		dates.add(e.getDate());
-    	}
-    	return dates;
+    	return eventRepository.getAllEventDates();
     }
     
     public Integer countEventsOnDate(Date date) {

@@ -23,7 +23,10 @@
 	rel="stylesheet" />
 <link
 	href="resources/bower_components/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />	
+	rel="stylesheet" />
+<link 
+	href="resources/bower_components/jquery-bracket/dist/jquery.bracket.min.css" 
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
@@ -79,19 +82,19 @@
 						<li class="dropdown messages-menu">
 							<!-- Menu toggle button --> <a href class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
-								class="label label-success">10</span>
+								class="label label-success">1</span>
 						</a>
 							<ul class="dropdown-menu">
-								<li class="header">You have 10 messages</li>
+								<li class="header">You have 1 message</li>
 								<li>
 									<!-- inner menu: contains the messages -->
 									<ul class="menu">
 										<li>
 											<!-- start message --> <a href="#"> 
 											<!-- Message title -->
-												<h4>??WHO SEND LATEST MESSAGE??</h4> 
+												<h4>FROM: Bill Gates</h4> 
 												<!-- The message -->
-												<p>--- latest message text ---</p>
+												<p> Don't you mind working for Microsoft?</p>
 										</a>
 										</li>
 										<!-- end message -->
@@ -116,7 +119,7 @@
 									<ul class="menu">
 										<li>
 											<!-- start notification --> <a href="#"> <i
-												class="fa fa-users text-aqua"></i> ??LATEST NOTIFICATION??
+												class="fa fa-users text-aqua"></i> SERVER SHUTDOWN THIS WEEKEND
 										</a>
 										</li>
 										<!-- end notification -->
@@ -144,8 +147,7 @@
 
 
 
-								<li style="margin-left: 24%" id="userRating" translate="USER_LEVEL"
-									translate-values="{userLevel:'{{user.level}}'}"></li>
+								<li style="margin-left: 24%" id="userRating" translate="{{user.level}}"></li>
 								<li>
 									<progress value="0" max="100" id=ratingBar></progress>
 								</li>
@@ -754,6 +756,7 @@
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.js"></script>
+<script src="resources/bower_components/jquery-bracket/dist/jquery.bracket.min.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript"
@@ -807,7 +810,6 @@
 	src="resources/js/controllers/getOneUser.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/notificationController.js"></script>
-<script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
 <script type="text/javascript"
@@ -831,6 +833,7 @@
 <script src="resources/js/service/bubbleChartService.js"></script>
 <script src="resources/js/service/areaChartService.js"></script>
 <script src="resources/js/service/columnChartAgeService.js"></script>
+
 <!-- End of Scripts -->
 
 </html>
