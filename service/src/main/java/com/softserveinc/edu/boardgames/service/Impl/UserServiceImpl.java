@@ -509,7 +509,16 @@ public class UserServiceImpl implements UserService {
 		userDTO.setUserGames(gameUserRepository.get5GameUserByUsername(username, five));
 		return userDTO;
 	}
-
+	
+	/**
+	 * This method returns send letter from a banned user
+	 * to administrator and also saves this message as notification
+	 * 
+	 * @author Volodymyr Terlyha
+	 * @param message
+	 * @param username
+	 * 
+	 */
 	@Override
 	public void sendLetterOfBannedUser(String message, String username) {
 		Notification notification = new Notification();
