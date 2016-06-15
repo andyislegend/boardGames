@@ -277,7 +277,11 @@ homeApp
 								ADD_NEW: 'ADD NEW',
 								UPD_EVENT: 'Update event',
 								CANCEL_EVENT: 'Cancel event',
-								EDIT_EVENT: 'Edit Event'
+								EDIT_EVENT: 'Edit Event',
+								TOURNAMENT_NAME : 'Tournament name',
+								USER_CREATOR : 'User creator',
+								DATES : 'Date',
+								MY_TOURNAMENTS : 'My Tournaments'
 							});
 			$translateProvider
 					.translations(
@@ -557,7 +561,11 @@ homeApp
 								ADD_NEW: 'Додати',
 								UPD_EVENT: 'Поновити подію',
 								CANCEL_EVENT: 'Скасувати подію',
-								EDIT_EVENT: 'Редагувати подію'
+								EDIT_EVENT: 'Редагувати подію',
+								TOURNAMENT_NAME : 'Назва турніру',
+								USER_CREATOR : 'Власник',
+								DATES : 'Дата',
+								MY_TOURNAMENTS : 'Мої турніри'
 
 							});
 			$translateProvider.preferredLanguage('en');

@@ -98,21 +98,21 @@
                         </div>
         <ul class="nav nav-tabs nav-justified">
           <li class="active">
-          	<a data-toggle="tab" ng-click = "getAllTournaments()"  data-target="#Alltournaments">All tournaments</a>         
+          	<a data-toggle="tab" ng-click = "getAllTournaments()"  data-target="#Alltournaments"><span translate="TOURNAMENT_NAME"></span></a>         
           </li>
           <li>
-          	<a data-toggle="tab" ng-click = "getAllTournamentsSuchUserCreated()" data-target="#Mycreated"> My tournaments </a>
+          	<a data-toggle="tab" ng-click = "getAllTournamentsSuchUserCreated()" data-target="#Mycreated"><span translate="MY_TOURNAMENTS"></span></a>
           </li>
         </ul> 
           <div class="tab-content">      
             <div id = "Alltournaments" class="tab-pane fade in active">
             <table ng-table="allTournaments" show-filter="true" class="table table-striped">
                   <tr ng-repeat="tournament in tournamentDisplay">
-                     <td data-title = "'Tournament name'" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
+                     <td data-title = "'TOURNAMENT_NAME' | translate" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
                      	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
                      </td>
-                     <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>   
-                     <td data-title = "'Date'" sortable="'dateOfTournament'" filter="{ 'dateOfTournament': 'text' }">{{ tournament.dateOfTournament|date:"MM/dd/yyyy 'at' h:mma"}}</td>               
+                     <td data-title = "'USER_CREATOR' | translate" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>   
+                     <td data-title = "'DATES' | translate" sortable="'dateOfTournament'" filter="{ 'dateOfTournament': 'text' }">{{ tournament.dateOfTournament|date:"MM/dd/yyyy 'at' h:mma"}}</td>               
                   </tr>
              </table>
              </div>
@@ -120,11 +120,11 @@
              <div id = "Mycreated" class="tab-pane fade">
             <table ng-table="allTournaments" show-filter="true" class="table table-striped">
                   <tr ng-repeat="tournament in tournamentDisplay">
-                     <td data-title = "'Tournament name'" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
+                     <td data-title = "'TOURNAMENT_NAME' | translate" sortable="'tournamentName'" filter="{ 'tournamentName': 'text' }">
                      	<a href = "#tournament/{{tournament.tournamentId}}"  ng-click = "getTournamentDetails(x.tournamentId)">{{ tournament.tournamentName }}</a>
                      </td>
-                     <td data-title = "'User creator'" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>   
-                     <td data-title = "'Date'" sortable="'dateOfTournament'" filter="{ 'dateOfTournament': 'text' }">{{ tournament.dateOfTournament|date:"MM/dd/yyyy 'at' h:mma"}}</td>               
+                     <td data-title = "'USER_CREATOR' | translate" sortable="'userCreatorName'" filter="{ 'userCreatorName': 'text' }">{{ tournament.userCreatorName }}</td>   
+                     <td data-title = "'DATES' | translate" sortable="'dateOfTournament'" filter="{ 'dateOfTournament': 'text' }">{{ tournament.dateOfTournament|date:"MM/dd/yyyy 'at' h:mma"}}</td>               
                   </tr>
              </table>
              </div>
