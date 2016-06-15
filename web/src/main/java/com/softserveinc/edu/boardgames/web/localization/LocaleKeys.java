@@ -37,4 +37,11 @@ public interface LocaleKeys {
 	public static final String GIVE_A_MARK = "GIVE A MARK";
 	public static final String GIVE_A_RATE = "GIVE A RATE";
 	public static final String UPDATE_DATE = "UPDATE DATE";
+	
+	
+	// language keys for usergames
+	public static final String GAME_CREATED = "GAME CREATED";
+	public static final String GAME_UPDATED = "GAME UPDATED";
+	public static final String GAME_DELETE = "GAME DELETE";
+	public static final String UPDATE_COUNT_OF_COMMENTS = "COUNT OF COMMETS UPDATED";
 }
