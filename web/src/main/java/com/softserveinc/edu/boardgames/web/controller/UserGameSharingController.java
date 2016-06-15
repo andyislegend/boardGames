@@ -246,7 +246,7 @@ public class UserGameSharingController {
 	@ResponseBody
 	public Integer getHowManyDaysRemains(@PathVariable Integer gameUserId) {
 		Exchange exchange = exchangeService.getByGameUserId(gameUserId);
-		return exchangeService.getHowManyDaysRemains(exchange.getApplyingDate(), exchange.getPeriod());
+		return exchangeService.getApplyingDateDiffrence(exchange.getApplyingDate(), exchange.getPeriod());
 	}
 	
 	@RequestMapping(value="/getPropositionsOfExchange/{gameUserId}", method = RequestMethod.GET)

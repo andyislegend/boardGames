@@ -1,5 +1,6 @@
 package com.softserveinc.edu.boardgames.persistence.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -47,4 +48,10 @@ public interface ExchangeRepository extends JpaRepository<Exchange, Integer>{
 			+ "where gu.status='SHARED' "
 			+ "and e.userApplierId=:userId")
 	public List<GameUserDTO> selectAllConfiramtionsForUser(@Param("userId")Integer id);
+	
+	@Query(value="select datediff(now(), applyingDate) from exchnge where id = 1", nativeQuery=true)
+	public Integer getExchangeDateDiffrence(@Param("id")Integer id);
+	
+	@Query(value="select datediff(DATE_ADD(:applyingDate, INTERVAL :period DAY), now()) from exchnge ", nativeQuery=true)
+	public Integer getApplyingDateDiffrence(@Param("applyingDate")Date applyingDate, @Param("period")Integer period);
 }

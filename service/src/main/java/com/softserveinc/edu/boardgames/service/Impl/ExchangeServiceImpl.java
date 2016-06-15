@@ -1,6 +1,5 @@
 package com.softserveinc.edu.boardgames.service.Impl;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.edu.boardgames.persistence.entity.Exchange;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 import com.softserveinc.edu.boardgames.persistence.entity.dto.InfoFromApplierDTO;
-import com.softserveinc.edu.boardgames.persistence.enumeration.TimeEnum;
 import com.softserveinc.edu.boardgames.persistence.repository.ExchangeRepository;
 import com.softserveinc.edu.boardgames.service.ExchangeService;
 
@@ -63,16 +61,11 @@ public class ExchangeServiceImpl implements ExchangeService{
 		return eRepo.selectAllConfiramtionsForUser(id);
 	}
 
-	public Integer getHowManyDaysRemains(Date applyingDate, Integer period) {
-		
-		Date localDate = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(applyingDate);
-		calendar.add(Calendar.DATE, period); 
-		applyingDate = calendar.getTime();
-		Long days = (applyingDate.getTime() - localDate.getTime())/ 
-				(TimeEnum.HOURS.getValue() * TimeEnum.MINUTES.getValue() 
-						* TimeEnum.SECONDS.getValue() * TimeEnum.MILISECONDS.getValue());
-		return days.intValue();
+	public Integer getExchangeDateDiffrence(Integer id) {
+		return eRepo.getExchangeDateDiffrence(id);
+	}
+
+	public Integer getApplyingDateDiffrence(Date date, Integer period) {
+		return eRepo.getApplyingDateDiffrence(date, period);
 	}
 }

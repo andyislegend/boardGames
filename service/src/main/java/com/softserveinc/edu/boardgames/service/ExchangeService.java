@@ -30,6 +30,8 @@ public interface ExchangeService {
 	boolean checkIfBorrowed(Integer userId, Integer gameUserId);
 	
 	List<GameUserDTO> selectAllConfirmationsForUser(Integer id);
+		
+	Integer getExchangeDateDiffrence(Integer id);
 	
-	Integer getHowManyDaysRemains(Date applyingDate, Integer period);
+	Integer getApplyingDateDiffrence(Date date, Integer period);
 }
