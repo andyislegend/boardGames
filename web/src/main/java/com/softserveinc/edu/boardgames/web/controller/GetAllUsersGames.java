@@ -23,7 +23,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.GameUserDTO;
 public class GetAllUsersGames {
 
 	@Autowired
-	GameUserService gameUserService;
+	private GameUserService gameUserService;
 
 	/**
 	 * Returns needed information about games that user owns.
