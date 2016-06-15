@@ -188,25 +188,19 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
   		  }
   		  teams.push(team);
   		
-    
-    
-
-    	var singleElimination = {
-    			  teams:   teams,
-    			  results : []
-    	}
-    	
-
-    	 
+    var singleElimination = {
+    	teams:   teams,
+    	results : []
+    }
+    		 
     $(function() {
-    	    $('.demo').bracket({
-    	      init: singleElimination,
-    	      save: function(){}, 
-    	    })
-    	    $('.tools').hide();
+    	$('.demo').bracket({
+    		init: singleElimination,
+    	    save: function(){}, 
+    	})
+    	$('.tools').hide();
     })
     
-
-    	});
-    }
+    });
+  }
 });
