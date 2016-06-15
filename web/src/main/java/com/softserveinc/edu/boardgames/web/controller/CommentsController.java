@@ -56,7 +56,12 @@ public class CommentsController {
 		   
 		
 	}
-	
+	/**
+	 * This method get comments for game
+	 * 
+	 * @param gameId
+	 * @return
+	 */
 	@RequestMapping(value = "/getCommentsForGame/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CommentsForGameDTO> getCommentsForGame(@PathVariable Integer gameId ){
@@ -64,6 +69,12 @@ public class CommentsController {
 		return commentsForGameDTOs ;
 	}
 	
+	/**
+	 * 
+	 * This method get all Comments
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/comment", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CommentsForGameDTO> getAllComments() {
@@ -71,6 +82,12 @@ public class CommentsController {
 		return commentsForGames;
 	}
 	
+	/**
+	 * This method get comments by game id
+	 * 
+	 * @param gameUserId
+	 * @return
+	 */
 	@RequestMapping(value = "/getCountOfCommentsByGameId/{gameUserId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer getCountOfCommentsForGameById(@PathVariable Integer gameUserId){

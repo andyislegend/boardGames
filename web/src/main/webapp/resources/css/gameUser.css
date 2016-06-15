@@ -109,6 +109,7 @@ img.iconImage {
 .chat-zone{
  padding: 20px;
  height: 400px;
+
 }
 .chatmsg {
 margin: 0 5px;
@@ -128,7 +129,7 @@ border-radius: 7px;
 overflow-y: scroll;
 color: black;
 margin-bottom: 20px;
-
+background-color: #B8B8B8;
 }
 .chat form{
  margin: 10px 0 0 0;

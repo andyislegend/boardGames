@@ -168,7 +168,13 @@ public class UserGameController {
 		return new ResponseEntity<String>(LocaleKeys.UPDATE_COUNT_OF_COMMENTS, HttpStatus.OK);
 
 	}
-	
+	/**
+	 * 
+	 * This method get count of game by tournament
+	 * 
+	 * @param gameId
+	 * @return
+	 */
 	@RequestMapping(value = "/getCountOfTournamentsByGame/{gameId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer getCountOfTournamentByGame(@PathVariable Integer gameId) {

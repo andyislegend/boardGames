@@ -22,9 +22,8 @@
         		<div id="down_wrapper" ng-show = "isCreator" style=" width: 80%; height: 15%">
 			<div class="form-group">
 				
-			<button  type="button" class="btn btn-default" ng-disabled = "!isOpenGiveRate" data-toggle="modal" ng-click = "updateTournamentParticipantsInfo()" data-target="#giveRateModal">Give a rate</button>
+			<button  type="button" class="btn btn-default" ng-disabled = "isCansRate" data-toggle="modal" ng-click = "updateTournamentParticipantsInfo()" data-target="#giveRateModal">Give a rate</button>
 			<button type ="button" class="btn btn-default" data-toggle="modal" data-target = "#deleteTournament">Delete this tournament</button>
-			<button type ="button" class="btn btn-default" ng-disabled = "tournament.tableGenerated" ng-click = "generateTournamentTable()">Generete this tournament</button>
 			<button  type="button" class="btn btn-default"  data-toggle="modal" data-target="#setDate">Change date</button>
 			
 		</div>      		

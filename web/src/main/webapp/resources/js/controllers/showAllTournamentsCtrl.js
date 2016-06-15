@@ -63,6 +63,10 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	    	if($scope.tournamentParticipants.length === 0) {
     	    		$scope.joinStatus = true;
     	    		$scope.quitStatus = false;
+    	    		$scope.isCansRate = true;
+    	    	}
+    	    	if($scope.tournamentParticipants.length === 1) {
+    	    		$scope.isCansRate = true;
     	    	}
     	  
     	    	if($scope.tournamentParticipants.length >= $scope.tournament.countOfParticipants) {
