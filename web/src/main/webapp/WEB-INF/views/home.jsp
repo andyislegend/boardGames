@@ -23,7 +23,10 @@
 	rel="stylesheet" />
 <link
 	href="resources/bower_components/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />	
+	rel="stylesheet" />
+<link 
+	href="resources/bower_components/jquery-bracket/dist/jquery.bracket.min.css" 
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
 	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
@@ -753,6 +756,7 @@
 	src="resources/bower_components/angular/angular.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.js"></script>
 <script src="resources/bower_components/jquery/dist/jquery.js"></script>
+<script src="resources/bower_components/jquery-bracket/dist/jquery.bracket.min.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript"

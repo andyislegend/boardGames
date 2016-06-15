@@ -94,9 +94,4 @@ angular.module('homeApp').controller("getAllUsersCtrl", function($scope, $http, 
 			});
         });
 	}
-	
-	$scope.getUser = function() {
-		$('#myReg').modal('hide');
-		$scope.eraseForm();
-	}
 });
