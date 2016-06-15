@@ -1,6 +1,6 @@
 <div ng-controller="eventInfoCtrl">
 
-	<h1 style="text-align: center;">Event Details</h1>
+	<h1 style="text-align: center;" translate="EVENT_DETAILS"></h1>
 
 	<div id="eventInfoMain">
 
@@ -10,30 +10,30 @@
 		</div>
 
 		<div id="eventInfoName">
-			<h5 style="text-align: center;">Event Name:</h5>
+			<h5 style="text-align: center;" translate="EVENT_NAME_DETAILS"></h5>
 			<h3 style="text-align: center;">{{currentEvent.name}}</h3>
 		</div>
 
 		<div id="eventInfoDetails">
 
 			<div id="eventInfoDetailsLeft">
-				<h5 style="text-align: center;">Description:</h5>
+				<h5 style="text-align: center;" translate="DESCRIPTION_EVENT"></h5>
 				<h4>{{currentEvent.description}}</h4>
 			</div>
 
 			<div id="eventInfoDetailsRight">
-				<h4>Location: {{currentEvent.location}}</h4>
-				<h4>Date: {{currentEvent.date | date:'MM/dd/yyyy'}}</h4>
+				<h4><span translate="LOCATION"></span>  {{currentEvent.location}}</h4>
+				<h4><span translate="DATE_EVENT"></span>  {{currentEvent.date | date:'MM/dd/yyyy'}}</h4>
 
 				<div id="eventInfoButtons">
 
 					<p>
 						<a type="button" class="btn btn-success btn-md" ng-click="subscribeToEvent(currentEvent.eventId)"
-							ng-if="isSub == false"> Subscribe </a>
+							ng-if="isSub == false" translate="SUB"></a>
 					</p>
 					<p>
 						<a type="button" class="btn btn-danger btn-md" ng-click="usnsubscribeFromEvent(currentEvent.eventId)" id="changeUserStatus"
-							ng-if="isSub == true"> Unsubscribe </a>
+							ng-if="isSub == true" translate="UNSUB"></a>
 					</p>
 
 				</div>

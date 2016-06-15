@@ -261,7 +261,23 @@ homeApp
 								MODERATE_EVENTS: 'Moderate events',
 								HI: 'Hi,',
 								MENU: 'MENU',
-								SEARCH: 'Search ...'
+								SEARCH: 'Search ...',
+								UPCOMING_EVENTS: 'UPCOMING EVENTS',
+								LOCATION: 'Location:',
+								NAME_EVENT: 'Name',
+								DATE_EVENT: 'Date',
+								DESCRIPTION_EVENT: 'Description:',
+								EVENT_DETAILS: 'Event Details',
+								EVENT_NAME_DETAILS: 'Event name:',
+								SUB: 'Subscribe',
+								UNSUB: 'Unsubsubscribe',
+								DESC: 'Description',
+								CREATE_NEW_EVENT: 'Create New Event',
+								ALL_FIELDS_REQ: 'all fields are required',
+								ADD_NEW: 'ADD NEW',
+								UPD_EVENT: 'Update event',
+								CANCEL_EVENT: 'Cancel event',
+								EDIT_EVENT: 'Edit Event'
 							});
 			$translateProvider
 					.translations(
@@ -458,7 +474,7 @@ homeApp
 								COMMENTS : 'Коментарі',
 								DELETE : 'Видалити',
 								SHARED : 'Я позичив',
-								BORROWED : 'Мені позичили',
+								BORROWED : 'Позичені',
 								MYGAMES : 'Мої ігри',
 								GAMES : 'Ігри',
 								ALL_GAMES : 'Всі ігри',
@@ -525,7 +541,23 @@ homeApp
 								MODERATE_EVENTS: 'Модерувати події',
 								HI: 'Привіт,',
 								MENU: 'МЕНЮ',
-								SEARCH: 'Пошук ...'
+								SEARCH: 'Пошук ...',
+								UPCOMING_EVENTS: 'ПРИЙДЕШНІ ПОДІЇ',
+								LOCATION: 'Локація:',
+								NAME_EVENT: 'Назва',
+								DATE_EVENT: 'Дата події',
+								DESCRIPTION_EVENT: 'Опис події:',
+								EVENT_DETAILS: 'Деталі події',
+								EVENT_NAME_DETAILS: 'Назва події:',
+								SUB: 'Підписатись',
+								UNSUB: 'Відписатись',
+								DESC: 'Опис події',
+								CREATE_NEW_EVENT: 'Створити нову подію',
+								ALL_FIELDS_REQ: 'усі поля є обов\'\язковими',
+								ADD_NEW: 'Додати',
+								UPD_EVENT: 'Поновити подію',
+								CANCEL_EVENT: 'Скасувати подію',
+								EDIT_EVENT: 'Редагувати подію'
 
 							});
 			$translateProvider.preferredLanguage('en');

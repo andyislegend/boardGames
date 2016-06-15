@@ -147,6 +147,7 @@ public class RegisterController {
 	@ResponseBody
 	public ResponseEntity<String> addNewUser(@RequestBody UserRegistrationDTO userDTO,
 			final HttpServletRequest request) {
+		
 		if (userDTO.getUsername().isEmpty() || userDTO.getGender().isEmpty() || userDTO.getEmail().isEmpty()
 				|| userDTO.getPassword().isEmpty()) {
 

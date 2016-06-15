@@ -277,20 +277,22 @@ public class UserServiceImpl implements UserService {
 	public String validateVerificationToken(String token) {
 		final VerificationToken verificationToken = tokenRepository.findByToken(token);
 		
-		if (verificationToken == null) {
+		final Calendar cal = Calendar.getInstance();
+		
+		if (verificationToken == null || (verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
 			return INVALID_TOKEN_MAIL_CONFIRMATION;
 		}
 
 		final User user = verificationToken.getUser();
-		final Calendar cal = Calendar.getInstance();
 
-		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-			return INVALID_TOKEN_MAIL_CONFIRMATION;
-		}
+//		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+//			return INVALID_TOKEN_MAIL_CONFIRMATION;
+//		}
 
 		user.setState(UserStatus.ACTIVE.name());
 		userRepository.save(user);
 		tokenRepository.delete(verificationToken);
+		
 		return VALID_TOKEN_MAIL_CONFIRMATION;
 	}
 	

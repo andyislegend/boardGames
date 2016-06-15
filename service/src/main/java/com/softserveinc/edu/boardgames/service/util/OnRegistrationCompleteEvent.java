@@ -14,9 +14,13 @@ import com.softserveinc.edu.boardgames.persistence.entity.User;
  *         such as current host of application and user, who has been register
  *
  */
-@SuppressWarnings("serial")
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1084995844303191241L;
+	
 	private final String appUrl;
 	private final User user;
 
