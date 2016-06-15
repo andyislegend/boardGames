@@ -810,7 +810,6 @@
 	src="resources/js/controllers/getOneUser.js"></script>
 <script type="text/javascript"
 	src="resources/js/controllers/notificationController.js"></script>
-<script type="text/javascript" src="resources/js/menu.js"></script>
 <script type="text/javascript"
 	src="resources/bower_components/ng-table/dist/ng-table.min.js"></script>
 <script type="text/javascript"
@@ -834,6 +833,7 @@
 <script src="resources/js/service/bubbleChartService.js"></script>
 <script src="resources/js/service/areaChartService.js"></script>
 <script src="resources/js/service/columnChartAgeService.js"></script>
+
 <!-- End of Scripts -->
 
 </html>
