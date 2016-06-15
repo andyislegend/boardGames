@@ -203,6 +203,7 @@ angular.module('homeApp').controller("showAllTournamentsCtrl", function ($scope,
     	      init: singleElimination,
     	      save: function(){}, 
     	    })
+    	    $('.tools').hide();
     })
     
 
