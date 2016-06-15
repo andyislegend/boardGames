@@ -79,19 +79,19 @@
 						<li class="dropdown messages-menu">
 							<!-- Menu toggle button --> <a href class="dropdown-toggle"
 							data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
-								class="label label-success">10</span>
+								class="label label-success">1</span>
 						</a>
 							<ul class="dropdown-menu">
-								<li class="header">You have 10 messages</li>
+								<li class="header">You have 1 message</li>
 								<li>
 									<!-- inner menu: contains the messages -->
 									<ul class="menu">
 										<li>
 											<!-- start message --> <a href="#"> 
 											<!-- Message title -->
-												<h4>??WHO SEND LATEST MESSAGE??</h4> 
+												<h4>FROM: Bill Gates</h4> 
 												<!-- The message -->
-												<p>--- latest message text ---</p>
+												<p> Don't you mind working for Microsoft?</p>
 										</a>
 										</li>
 										<!-- end message -->
@@ -116,7 +116,7 @@
 									<ul class="menu">
 										<li>
 											<!-- start notification --> <a href="#"> <i
-												class="fa fa-users text-aqua"></i> ??LATEST NOTIFICATION??
+												class="fa fa-users text-aqua"></i> SERVER SHUTDOWN THIS WEEKEND
 										</a>
 										</li>
 										<!-- end notification -->
