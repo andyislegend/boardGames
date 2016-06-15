@@ -18,7 +18,7 @@ import com.softserveinc.edu.boardgames.persistence.entity.dto.TournamentsDTO;
  */
 @Repository
 public interface TournamentRepository extends JpaRepository<Tournament,Integer> {
-
+	
     public Tournament findById(Integer id); 
 	public Tournament findByName(String name);
 	
