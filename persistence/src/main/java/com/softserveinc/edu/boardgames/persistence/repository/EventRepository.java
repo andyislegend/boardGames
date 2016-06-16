@@ -25,9 +25,6 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 	@Override
 	void delete(Event event);
 
-//	@Query(value = "INSERT INTO subscribed_events(event_id, user_id) VALUES (?1,?2)", nativeQuery = true)
-//	public void subscribeToEvent(Integer eventId, Integer userId);
-
 	@Query("select new com.softserveinc.edu.boardgames.persistence.entity.dto.EventsDTO"
 			+ "(e.id, e.name, e.description, e.location, e.date) from Event e")
 	public List<EventsDTO> getAllEvents();
